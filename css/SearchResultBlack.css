@@ -1,0 +1,46 @@
+﻿@charset "utf-8";
+/* CSS Document */
+#SearchResult{
+	width:700px;
+	height:610px;
+	display:block;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+li.ubutton{
+	padding:15px 15px 15px 15px;
+	text-align:left;
+	height: 35px;
+	vertical-align: middle;	
+	margin-bottom: 30px;	
+	list-style-type: none;
+	font-size: x-large;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+}
+li.ubutton>img{
+	vertical-align:bottom;
+}
+#SearchResult ul{	
+	float:left;
+	margin:0;
+	padding:0;
+	margin-right:10px;	
+}
+
+.name {
+	position: relative;
+	left: 5px;
+	;
+	/*text-shadow: 1px 1px 5px #fff;*/
+		
+}
+.unit {
+	position: relative;
+	float: right;
+	right: 20px;
+	
+	
+	
+}

@@ -1,0 +1,22 @@
+.PageContent .ubutton{
+    border: solid thick #ffffff;
+    border-radius: 15px;;
+    box-shadow: 0 0 15px #333;
+    min-height: 550px;
+    margin: 6px 0 0 6px;
+}
+.PageContent th{
+    text-align: center;
+    text-decoration: underline;
+}
+.PageContent table{
+    color: inherit;
+    font-size: 1.3em;
+}
+.PageContent td{
+    width: 50%;
+}
+.PageContent tr>td:first-child{
+    font-weight: bold;
+    font-size: smaller;
+}

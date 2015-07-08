@@ -1,0 +1,332 @@
+<style>
+    #DetailsEditor #DetailsList-list .item-header{
+        margin-left: 3px;
+        background-color: #eff1f1
+    }
+    #DetailsEditor #DetailsList-list .item-header>div{
+        display: inline-block;
+        text-align: center;
+        border-right: dashed 1px #AAAAAA;
+        padding: 0.5em;
+        line-height: 30px;
+        vertical-align: middle;
+        font-weight: bold;
+
+    }
+
+
+
+    #DetailsEditor #txtFilter{
+        width: 5em;
+    }
+
+
+    /*#Destinations #lstDests ul li:nth-child(even){
+        background-color: #eff1f1;
+    }*/
+    #DetailsList .nano {
+        height: 600px;
+        overflow-y: auto;
+    }
+
+
+    #details-categories-list>div{
+        display: inline-block;
+        margin: 1em;
+
+    }
+    #details-categories-list label{
+        font-weight: normal;
+        margin: 0.5em;
+    }
+    #details-table td{
+        border: dashed 1px #245269;
+    }
+
+    #details-pages, #details-table{
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .relative{
+        position: relative;
+    }
+
+
+</style>
+
+<div id="DetailsEditor">
+        <div class="row">
+         <section id="DetailsList" class="panel panel-default">
+             <div class="panel-heading">
+
+                     <span>
+                         By Category: <select data-id="select"></select>
+                     </span>
+                     <span>
+                         &nbsp;&nbsp; &nbsp; &nbsp;<div class="fa fa-search"></div> <input data-id="search" id="txtFilter" type="text" />
+                     </span>
+                     <div class="btn" data-id="btnAdd">
+                         <div class="fa fa-plus"></div><span> Add</span>
+                     </div>
+                     <div class="btn" data-id="btnEdit">
+                         <div class="fa fa-edit"></div><span> Edit</span>
+                     </div>
+                     <div class="btn" data-id="btnDel">
+                         <div class="fa fa-close"></div><span> Delete</span>
+                     </div>
+                     <span class="pull-right">
+                         <span>Total:</span><span data-id="total">334</span>
+                     </span>
+
+             </div>
+             <div id="DetailsList-list" class="nano panel-body">
+
+             </div>
+
+         </section>
+        </div>
+
+         
+         <!-------new ----------->
+    <div class="row">
+         <section id="DetailsForm" class="panel panel-default relative" >
+
+             <div class="panel-heading">
+                 <div class="btn fa fa-close pull-right"></div>
+                 <h1 class="panel-title">Details Editor</h1>
+
+             </div>
+
+  			<section id="details-form" role="form" class="panel-body">
+
+                    <div class="form-group col-md-8">
+                        <label>Name:</label>
+                        <input  data-id="tiName" type="text"  placeholder="name is reqired"  class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Unit:</label>
+                        <input  data-id="tiUnit" type="text"  class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>More Info in one line</label>
+                        <input  data-id="info" type="text"  class="form-control" />
+                    </div>
+
+
+
+                <div  class="form-group col-md-12">
+                    <label>More info in table:</label><div data-id="btnAddRow" class="btn"><span class="fa fa-plus"></span> Add row </div><div data-id="btnDeleteRow" class="btn"><span class="fa fa-close"></span> Delete row </div>
+                    <table id="details-table" class="table" >
+                        <tbody data-id="details"  contenteditable="true">
+                        <tr>
+                            <td>Phone</td>
+                            <td>4446677000</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div  id="DetailsImages" class="form-group col-md-12">
+                    <label>Images</label>
+
+                    <div data-id="btnEfit" class="btn"><span class="fa fa-edit"></span> Edit Images </div>
+
+                    <div id="images-container" class="table nano" >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group col-md-12">
+                    <label>Categories:</label>
+                    <input data-id="categories" class="form-control"  readonly  />
+                    <div id="details-categories-list"></div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>Keywords</label>
+                    <input  data-id="keywords" type="text"  class="form-control" />
+                </div>
+
+                <!--META DATA -->
+
+                <div class="form-group col-md-6">
+                    <label>Metadata</label>
+                    <input  data-id="meta" type="text"  class="form-control" />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>UID (Client ID)</label>
+                    <input  data-id="uid" type="text"  placeholder="unique client ID"  class="form-control" />
+                </div>
+
+
+
+                <div class="form-group col-md-2">
+                    <label>Database ID</label>
+                    <div  data-id="dbid" ></div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr/>
+                </div>
+                <div class="form-group col-md-4">
+                </div>
+                <div class="form-group col-md-4">
+                    <button type="button" data-id="btnSave" class="btn btn-primary form-control">Save</button>
+                </div>
+                <div class="form-group col-md-4">
+                </div>
+
+
+                <div class="col-md-12">
+                        <label>More Info in HTML Page</label>
+                        <div id="myNicPanel"></div>
+                        <div id="details-pages"></div>
+                    </div>
+
+
+			</section>
+         </section>
+
+    </div>
+
+    <div class="row">
+         <section id="DetailsImagesEdit"  class="panel panel-default relative">
+             <style>
+                 #DetailsImages .nano  .item{
+                     max-height: 70px;
+                 }
+                 #DetailsImages ul>li{
+                     display: inline-block;
+
+                 }
+                 #DetailsImages .nano{
+                     height: 85px;
+                     overflow-x: auto;
+                     overflow-y: hidden;
+                     width: 100%;
+                     white-space:nowrap;
+                     *zoom:1;/* For IE7*/
+                     vertical-align:top;
+                 }
+                 #DetailsImagesEdit .nano{
+                     height: 150px;
+                     overflow-x: scroll;
+                     overflow-y: hidden;
+                     width: 600px;
+                     white-space:nowrap;
+                     *zoom:1;/* For IE7*/
+                     vertical-align:top;
+                 }#DetailsImagesEdit .nano .item{
+                      box-shadow: 1px 1px 10px #999;
+                      margin: 2px;
+                      max-height: 128px;
+                      cursor: pointer;
+                  }
+                 #DetailsImagesEdit .content{
+                     width: 600px;
+                     height: 400px;
+                     position: relative;
+                 }
+                 #DetailsImagesEdit .content>*{
+                    display: block;
+                     position: absolute;
+                    width: 100%;
+                     height: 100%;
+                     left: 0;
+                     right: 0;
+                     top: 0;
+                     bottom: 0;
+                 }
+                 #DetailsImagesEdit .content .item{
+                     position: absolute;
+                     left: 0;
+                     right: 0;
+                     top: 0;
+                     bottom: 0;
+                     margin: auto;
+                 }
+
+                 #DetailsImagesEdit .content .upload{
+                     position: absolute;
+                     top: 0;
+                     left: 0;
+                     z-index: 100;
+                 }
+                 #DetailsImagesEdit .panel-body{
+                     width: 700px;
+                     height: 700px;
+                     left: 0;
+                     right: 0;
+                     margin: auto;
+
+                 }
+                 #DetailsImagesEdit .panel-body>div{
+                     margin: 2em;
+                 }
+
+                 #DetailsImagesEdit .form{
+                     width: 600px;
+                     text-align: center;
+                 }
+
+                 #DetailsImagesEdit input{
+                     display: inline;
+                 }
+                 #DetailsImagesEdit ul>li{
+                     display: inline-block;
+                 }
+
+                 #DetailsImagesEdit .title{
+                     text-align: center;
+                     margin-bottom: -30px;
+                 }
+
+             </style>
+                 <div class="panel-heading" >
+                     <div data-id="btnAdd" class="btn"><span class="fa fa-plus"></span> Add Image </span></div>
+                     <div data-id="btnEdit" class="btn"><span class="fa fa-edit"></span> Replace Image </div>
+                     <div data-id="btnDel" class="btn"><span class="fa fa-close"></span> Delete Image </div>
+
+                     <span class="btn pull-right fa fa-close">&nbsp;</span>
+                 </div>
+
+             <h3 data-id="title" class="title"></h3>
+             <div class="panel-body">
+
+
+                         <div data-id="content" class="content border">
+                             <img>
+                         </div>
+
+                         <div class="border nano" >
+
+                         </div>
+                         <div class="form">
+
+                            <button type="button" data-id="btnDone" class="btn btn-primary">Done</button>
+
+                         </div>
+
+
+
+
+             </div>
+         </section>
+
+    </div>
+
+
+	</section>
+</div>         
+
+ 

@@ -1,0 +1,43 @@
+CREATE TABLE "categories" (catid INTEGER PRIMARY KEY AUTOINCREMENT,   label TEXT,   icon TEXT,  type INTEGER,  enable INTEGER,  sort INTEGER);
+
+INSERT INTO categories (catid,label,icon,type,enable,sort) VALUES (1,'List Tenants','',1,1,2);
+INSERT INTO categories (catid,label,icon,type,enable,sort) VALUES (2,'All People','',2,0,1);
+INSERT INTO categories (catid,label,icon,type,enable,sort) VALUES (4,'Category 3','',0,0,6);
+INSERT INTO categories (catid,label,icon,type,enable,sort) VALUES (23,'Category 2','',null,0,5);
+INSERT INTO categories (catid,label,icon,type,enable,sort) VALUES (25,'Category 1 ( Lawyers ) ','',null,1,4);
+
+
+CREATE TABLE destinations (destid INTEGER PRIMARY KEY,name TEXT,unit TEXT,phone TEXT,email TEXT,website TEXT,cats TEXT,advanced INTEGER);
+
+
+
+CREATE TABLE "pages" (id INTEGER PRIMARY KEY AUTOINCREMENT,  label TEXT,  url TEXT,  enable BOOLEAN,  sort INTEGER);
+
+INSERT INTO pages (id,label,url,enable,sort) VALUES (1,'Amenities ','data/pages/Admin Welcome_.htm',true,1);
+INSERT INTO pages (id,label,url,enable,sort) VALUES (2,'Background Manager','data/pages/Background Manager.mtm',false,2);
+INSERT INTO pages (id,label,url,enable,sort) VALUES (6,'Property & Leasing Information','data/pages/Manage Categories.htm',true,0);
+INSERT INTO pages (id,label,url,enable,sort) VALUES (7,'Manage Details Disabled','data/pages/Manage Details.mtm',false,5);
+INSERT INTO pages (id,label,url,enable,sort) VALUES (12,'One page  Page',null,false,3);
+INSERT INTO pages (id,label,url,enable,sort) VALUES (16,'Time scheduler',null,true,10);
+
+
+CREATE TABLE "personal" (destid INTEGER, info TEXT);
+
+INSERT INTO personal (destid,info) VALUES (1401,'{"Phone":"89707","Email":"jhkkjh","Website":"nnn,mn"}');
+INSERT INTO personal (destid,info) VALUES (1402,'{"Email":"yoiyy"}');
+INSERT INTO personal (destid,info) VALUES (1403,'{"Phone":"80980","Email":"uuou","Website":"uou"}');
+INSERT INTO personal (destid,info) VALUES (6,'{"Phone":"909","Email":"email","Website":"websitr"}');
+INSERT INTO personal (destid,info) VALUES (3,'{"Phone":"98888"}');
+INSERT INTO personal (destid,info) VALUES (1404,'{"Phone":"jljlj","Email":"hkjhhkj"}');
+INSERT INTO personal (destid,info) VALUES (4,'{"Phone":"888899","Email":"hkhh","Website":"hhhkh"}');
+INSERT INTO personal (destid,info) VALUES (7,'{"Phone":"8888888"}');
+INSERT INTO personal (destid,info) VALUES (11,'{"Phone":"-09-09","Email":"jkljkljklj","Website":"lkjllhjkljljlkj"}');
+
+
+CREATE TABLE "users" (usersid INTEGER PRIMARY KEY AUTOINCREMENT,   username TEXT,   password TEXT,   role TEXT,   folder TEXT,   url TEXT);
+
+INSERT INTO users (usersid,username,password,role,folder,url) VALUES (1,'admin','novotouch','admin','1920','screen1920.xml');
+INSERT INTO users (usersid,username,password,role,folder,url) VALUES (2,'1366','novotouch','admin','1366','screen1366.xml');
+INSERT INTO users (usersid,username,password,role,folder,url) VALUES (3,'vlad','vlad','admin','','AdminTest.php');
+
+

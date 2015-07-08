@@ -1,0 +1,11 @@
+{
+  "name": "application-name",
+  "version": "0.0.1"
+  "kiosks":{
+    "kiosk_1":{
+      "name":"Kiosk 1",
+      "stamp":1234567,
+      "status":"normal"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+ <style type="text/css">	
+
+ #editRow {
+	float:right; 
+ }
+  #editRow img{
+	  width:1.0em;
+	  height:1.0em;
+	  margin:0;
+	  padding:0;
+	  cursor:pointer; 
+  }
+.catname{
+	width:200px;
+}
+ #CategoriesList-list{
+     height: 20em;
+     overflow: auto;
+
+ }
+#panel2>img{
+	margin:0;
+}
+#panel2>a{
+	margin:0;
+}
+
+.header>div{
+    display: inline-block;;
+}
+
+
+ #CategoriesList .item{
+         cursor: pointer;
+     }
+ #CategoriesList tr,th{
+     text-align: center;
+ }
+
+
+
+ #CategoriesList .table .id{
+        width: 2em;
+ }
+ #CategoriesList .table .icon{
+     width: 2em;
+ }
+ #CategoriesList .item .name{
+     text-align: left;
+ }
+ #CategoriesList .table  .table .seq{
+         width: 6em;
+ }
+ #CategoriesList .table .recs{
+     width: 6em;
+ }
+
+     .list>.fa{
+         margin: 1em;
+     }
+
+     .preview .fa{
+         font-size: 3em;
+         background: white;
+
+     }
+
+     #CategoryForm [data-id=icon]{
+         font-size: 1.5em;
+     }
+</style>
+ 
+<section class="container">
+    <section id="CategoriesManager" class="row">
+
+        <section id="CategoriesView" class="panel panel-default">
+                <div class="panel-heading">
+                       <div id="addremove">
+                           <a  data-id="btnAdd" class="btn" title="Create new Category" ><div class="fa fa-plus"></div> Add</a>
+                           <a  data-id="btnEdit" class="btn" title="Edit selected Category" > <div class="fa fa-edit"></div>Edit</a>
+                           <a  data-id="btnDel" class="btn" title="Delete selected Category" > <div class="fa fa-minus"></div> Delete</a>
+                          <!-- <a  data-id="btnSave" href="javascript:void(0)" class="uplight" title="Save Category" > <img src="css/icons/save.png" />Save</a>    -->
+                        </div>
+
+                </div>
+
+                <div id="CategoriesList" class="panel-body">
+                       <h5>Categories in Menu list</h5>
+
+
+                         <table  class="table">
+
+                         </table>
+
+                </div>
+            </section>
+
+
+    </section>
+    <section class="row">
+        <section id="CategoryForm" class="panel panel-default">
+            <div class="panel-heading">
+                <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
+                <h1 class="panel-title">Category Editor</h1>
+
+            </div>
+            <br/>
+            <section id="details-form" role="form" class="panel-body">
+
+                <div class="form-group col-sm-1">
+                    <label>Icon</label> <!--<label class="btn"> <div class="fa fa-edit"> </div>Edit</label>-->
+                    <div  class="form-control">
+                        <div title="Click on Icon in Library to change" class="fa fa-plus" data-id="icon"> </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-8">
+                    <label>Name:</label>
+                    <input  type="text"  placeholder="name is reqired"  class="form-control"  data-id="tiName" />
+                </div>
+
+                <div class="form-group col-sm-2">
+                    <label>Sequence</label>
+                    <select  class="form-control"  data-id="selectSeq" ></select>
+                </div>
+                <div class="form-group col-sm-1">
+                    <label>Enable</label>
+                    <input  type="checkbox"   class="form-control" data-id="chkEnable" />
+                </div>
+
+
+
+                <div class="col-md-12">
+                    <hr/>
+                </div>
+                <div class="btn col-sm-2" data-id="btnEditIcon" title="Open/Close icons Library">
+                    <span class="fa fa-edit"> </span>
+                    <span>Change Icon</span>
+                </div>
+                <div class="form-group col-sm-2">
+                </div>
+                <div class="form-group col-sm-4">
+                    <button type="button" class="btn btn-primary form-control"  data-id="save">Save</button>
+                </div>
+                <div class="form-group col-sm-4">
+                </div>
+
+
+                <div class="form-group col-sm-12">
+                    <label >Icons Library</label>
+                    <div class="panel-body" data-id="iconsLibrary"></div>
+                </div>
+
+            </section>
+        </section>
+    </section>
+</section>
+<!-- end manage categories -->    
+       		
+         <!--  <script type="text/javascript" src="js/lists/DetailsList.js"></script>   -->
+           
+          <!-- <script type="text/javascript" src="js/lists/ManageCategoriesListing.js"></script>-->
+
+       <!-- ////////////////////////////////// -->

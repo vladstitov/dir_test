@@ -1,0 +1,45 @@
+  <style type="text/css">	
+
+ #editRow {
+	float:right; 
+ }
+  #editRow img{
+	  width:1.0em;
+	  height:1.0em;
+	  margin:0;
+	  padding:0;
+	  cursor:pointer; 
+  }
+.catname{
+	width:200px;
+}
+
+li.uplight>div{
+	display:inline-block;
+}
+		</style>
+<div id="EditeCategories">
+    <div id="CategoriesView" class="view">      
+   			<div class="tools">
+            <a  data-id="btnEdit" href="javascript:void(0)" class="uplight" title="Edit Categories" > <img  src="css/icons/edit.png" />Edit</a>
+               <a  data-id="btnAdd" href="javascript:void(0)" class="uplight" title="Create new Category" ><img src="css/icons/plus.png" />Add</a>              
+               <a  data-id="btnDel" href="javascript:void(0)" class="uplight" title="Delete selected Category" > <img  src="css/icons/minus.png" />Delete</a> 
+               <a  data-id="btnSave" href="javascript:void(0)" class="uplight" title="Save Category" > <img src="css/icons/save.png" />Save</a>      
+     		</div>
+               <h5>Categories List</h5>    		         
+             <ul class="uplight" id="lstCats" style="height:315px;" >
+             </ul>
+             <div id="editRow" class="uplight">            
+             <input id="chkEnable" type="checkbox" /> Enabled &nbsp;&nbsp;              
+              <img  data-id="btnDown" class="uplight" title="Move category down"  src="css/icons/down.png" /> 
+               <img data-id="btnUp" class="uplight" title="Move category up" src="css/icons/up.png" />
+                             
+      </div>
+</div> 
+      
+
+<!-- end edit categories -->    
+       		
+                      
+           <script type="text/javascript" src="js/admin/EditCategories.js"></script>          
+       <!-- ////////////////////////////////// -->

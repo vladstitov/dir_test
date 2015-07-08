@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+/* CSS Document */
+#SearchResult{
+	width:700px;
+	height:650px;
+}
+#SearchResult ul{	
+	float:left;
+	margin:0;
+	padding:0;
+	margin-right:10px;	
+}
+
+
+ul li{
+	padding:25px 15px 15px 25px;
+	text-align:left;
+	height: 40px;
+	vertical-align: middle;
+	border-radius: 10px;	
+	margin-bottom: 20px;	
+	list-style-type: none;
+	font-size: x-large;	
+	text-decoration: none;	
+}
+
+.name {
+	position: relative;
+	left: 20px;
+	;
+	/*text-shadow: 1px 1px 5px #fff;*/
+		
+}
+.unit {
+	position: relative;
+	float: right;
+	right: 20px;
+	
+	
+	
+}

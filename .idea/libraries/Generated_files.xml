@@ -1,0 +1,79 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/js/admin/models.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/RegA.js" />
+        <item url="file://$PROJECT_DIR$/js/lists/ManageCategoriesListing.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/DirsAdmin.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/EditCategories.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/CategoriesManager.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/screen/ColorTheme.js" />
+        <item url="file://$PROJECT_DIR$/js/ads/TextTicker.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/screen/ScreenSaverManager.js" />
+        <item url="file://$PROJECT_DIR$/js/arch/modelsold.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/screen/BackgroundManager.js" />
+        <item url="file://$PROJECT_DIR$/js/ads/Messages.js" />
+        <item url="file://$PROJECT_DIR$/js/ads/TextTicker2.js" />
+        <item url="file://$PROJECT_DIR$/js/ads/RSSReader.js" />
+        <item url="file://$PROJECT_DIR$/js/kiosk/Kiosk.js" />
+        <item url="file://$PROJECT_DIR$/js/kiosk/Registry.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/ImportExport.js" />
+        <item url="file://$PROJECT_DIR$/js/kiosk/Connector.js" />
+        <item url="file://$PROJECT_DIR$/js/admin/net.js" />
+        <item url="file://$PROJECT_DIR$/js/page/PageEditor.js" />
+        <item url="file://$PROJECT_DIR$/js/mobile/InfoPage.js" />
+        <item url="file://$PROJECT_DIR$/js/mobile/DetailsPage.js" />
+        <item url="file://$PROJECT_DIR$/js/page/PagesList.js" />
+        <item url="file://$PROJECT_DIR$/js/kiosk/Banner.js" />
+        <item url="file://$PROJECT_DIR$/js/kiosk/models.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/js/kiosk/views/MainView.js" />
+      <root url="file://$PROJECT_DIR$/js/lists/ManageDetails.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/TestScript.js" />
+      <root url="file://$PROJECT_DIR$/js/lists/DestinationsList.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/mods/models.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/utils/net.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/views/ViewPort.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/utils/InfoPage.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/comps/HeaderEditor.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/views/Banner.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/menu/Menu.js" />
+      <root url="file://$PROJECT_DIR$/js/lists/CategoriesList.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/ss/ScreenSaver.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/sr/Details.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/sr/SearchResultold.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/sr/SearchResult.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/kb/KeyboardView.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/kb/Keyboard.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/models.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/RegA.js" />
+      <root url="file://$PROJECT_DIR$/js/lists/ManageCategoriesListing.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/DirsAdmin.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/categories/CategoryForm.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/categories/CategoriesManager.js" />
+      <root url="file://$PROJECT_DIR$/js/arch/ColorTheme.js" />
+      <root url="file://$PROJECT_DIR$/js/ads/TextTicker.js" />
+      <root url="file://$PROJECT_DIR$/js/arch/ScreenSaverManager.js" />
+      <root url="file://$PROJECT_DIR$/js/arch/modelsold.js" />
+      <root url="file://$PROJECT_DIR$/js/arch/BackgroundManager.js" />
+      <root url="file://$PROJECT_DIR$/js/ads/Messages.js" />
+      <root url="file://$PROJECT_DIR$/js/ads/TextTicker2.js" />
+      <root url="file://$PROJECT_DIR$/js/ads/RSSReader.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/Kiosk.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/Registry.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/impexp/ImportExport.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/Connector.js" />
+      <root url="file://$PROJECT_DIR$/js/admin/net.js" />
+      <root url="file://$PROJECT_DIR$/js/page/PageEditor.js" />
+      <root url="file://$PROJECT_DIR$/js/mobile/InfoPage.js" />
+      <root url="file://$PROJECT_DIR$/js/mobile/DetailsPage.js" />
+      <root url="file://$PROJECT_DIR$/js/page/PagesList.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/Banner.js" />
+      <root url="file://$PROJECT_DIR$/js/kiosk/models.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

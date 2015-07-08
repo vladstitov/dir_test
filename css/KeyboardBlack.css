@@ -1,0 +1,155 @@
+﻿@charset "utf-8";
+/* CSS Document */
+#KeyboardView{
+	position:relative;
+}
+
+#KeyboardView .redbutton{
+    position:absolute;
+    width:120px;
+    height:120px;
+   left:170px;
+   top:130px;
+    line-height: 120px;
+}
+
+
+#Keyboard {
+    position: absolute;
+    background-color: rgba(255, 255, 255,0.5);
+   -webkit-box-shadow:  2px 2px 5px 5px rgba(0, 0, 0, 0.5);        
+        box-shadow:  2px 2px 5px 5px rgba(0, 0, 0, 0.5);
+    width: 670px;
+    height: 330px;
+    -webkit-border-radius: 10px;    
+    border-radius: 10px;
+    border: 5px solid white;
+    display: table;
+    text-align: left;   
+}
+
+
+#kb_text{
+    float:left;
+    width:413px;
+    height:35px;
+	margin:5px;
+    background-color:#333333;
+   color:white;
+   
+    padding-left:10px;
+	padding-top:15px;
+    text-align:left;  
+    border:1px solid #cccccc;
+}
+#kb_top{
+    position:absolute;
+    top:10px;
+    left:22px;   
+}
+#kb_keys{
+    position:absolute;
+    left:22px;
+    top:69px;
+    width:630px;
+    height:255px;
+display:table;
+}
+#kb_enter{
+	position:absolute;
+    width:45px;
+    height:45px;    
+    right:22px;
+	top:15px;
+	/*background-image:url(/cms/vlad/images/kb_enter.png)*/
+}
+#kb_close {
+    width: 50px;
+    height: 50px;
+    background-image: url(img/kb_close.png);
+    background-repeat: no-repeat;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    -webkit-background-size: contain;
+    background-size: contain;
+    float: left;
+    margin: 5px;
+     border-radius:5px;
+     border: 1px solid white;   
+    /*text-align:center;*/  
+    box-shadow: 1px 1px 3px #000000;
+    
+}
+.kb_button{
+    background: rgb(125,126,125); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+ 	color:white;
+   border-radius:5px;
+     border: 1px solid white;   
+    /*text-align:center;*/  
+    box-shadow: 1px 1px 3px #000000;
+
+
+    float:left;   
+    width:50px;
+    height:50px;
+    margin:5px;   
+  
+}
+.kb_button:active{	
+	-webkit-filter: brightness(2);	
+}
+.kb_button span{
+    float:none;    
+    display:table-cell;
+    vertical-align:middle;
+    width:inherit;
+    height:inherit;
+    text-align:center;
+    font-weight:600;
+    font-size:18px;
+}
+.kb_space span{
+    width:inherit;
+	text-align:center; 
+}
+.kb_space{
+    width:112px;
+	text-align:center;  
+}
+#kb_hints{
+	height:100px;
+	position:relative;
+	top:0;
+}
+#kb_hints ul{
+	position:absolute;	
+	margin:0;
+	padding:0;	
+	width:550px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;	
+	background-color:#E2C3AF;
+	list-style-type: none;
+	list-style-position:inside;	
+}
+#kb_hints_list{
+	bottom:0;
+}
+#kb_hints li{
+	color:#51423F;
+	padding-left:15px;
+	border-style:solid;
+    border-width:0 0 1px 0;
+    border-color:#788d8b;
+	height:20px;
+	list-style:circle;
+	list-style-position:inside;
+}
+
