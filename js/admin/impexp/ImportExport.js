@@ -5,7 +5,7 @@ var uplight;
         function ImportExport(container) {
             var _this = this;
             this.R = uplight.RegA.getInstance();
-            // if(!this.R.model)this.R.model = new DestinantionsModel();
+            // if(!this.R.vo)this.R.vo = new DestinantionsModel();
             container.load('js/admin/impexp/ImportExport.htm', function () {
                 _this.init();
             });

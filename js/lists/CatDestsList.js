@@ -13,11 +13,11 @@ var lists;
             trace(cat);
             var data;
             if (cat.type == 1 || cat.type == 2) {
-                data = R.model.getAllByType(cat.type.toString());
+                data = R.vo.getAllByType(cat.type.toString());
                 $('#arrows button').prop('disabled', true);
                 $('#CatDestsList input[type="button"]').prop('disabled', true);
             } else {
-                data = R.model.getAllByCat(cat);
+                data = R.vo.getAllByCat(cat);
                 $('#arrows button').prop('disabled', false);
                 $('#CatDestsList input[type="button"]').prop('disabled', false);
             }
@@ -78,7 +78,7 @@ var lists;
             });
 
             this.cat.dests = out;
-            R.model.eraseCat(this.cat);
+            R.vo.eraseCat(this.cat);
         };
 
         CatDestsList.prototype.onCatChange = function (cat) {

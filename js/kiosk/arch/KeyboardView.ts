@@ -1,4 +1,4 @@
-﻿/// <reference path="Registry.ts" />
+﻿/// <reference path="../Registry.ts" />
 module kiosk {
     export class KeyboardView {   
 

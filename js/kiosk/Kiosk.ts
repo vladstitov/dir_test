@@ -1,24 +1,24 @@
-﻿/// <reference path="details.ts" />
+﻿/// <reference path="arch/Details.ts" />
 /// <reference path="mainview.ts" />
 /// <reference path="banner.ts" />
 /// <reference path="screensaver.ts" />
 /// <reference path="infopage.ts" />
 
-/// <reference path="keyboardview.ts" />
+/// <reference path="arch/KeyboardView.ts" />
 /// <reference path="keyboard.ts" />
 /// <reference path="searchresult.ts" />
 /// <reference path="Registry.ts" />
 /// <reference path="models.ts" />
-/// <reference path="Menu.ts" />
+/// <reference path="Categories.ts" />
 /// <reference path="Connector.ts" />
-declare var settings:any;
-
+/// <reference path="keywords.ts" />
+declare var u_settings:any;
+declare var kiosk_id:number;
 
 module uplight {
    export class Kiosk {     
        private searchResult: SearchResult;
        private R: uplight.Registry;
-       private menu:Menu;
        private btnBack: JQuery;
        private keyboard: Keyboard;
        private keyboardView: kiosk.KeyboardView;
@@ -36,21 +36,25 @@ module uplight {
 
 
        constructor() {
+           Registry.getInstance().connector = new Connector();
+           Registry.getInstance().model = new Model();
+           Registry.getInstance().settings = u_settings;
+           Registry.getInstance().dispatcher = $({});
+
            var kb = new Keyboard($('#Keyboard'));
            var si = new SearchInput($('#searchinput'));
            var kw = new Keywords($('#kw-container'));
-           var model:Model = new Model();
+           var cats= new Categories($('#Categories'));
 
-           var conn= new Connector();
+         var sr:SearchResult = new SearchResult($('#the-list'));
 
-           conn.getSettings().done(function(data){
-               Registry.getInstance().setSettings(data);
-               var p1= conn.getDestinations();
-               $.when(p1).then(function(v1){
-                   //console.log('v1',v1);
-                   Registry.getInstance().setData(v1);
-               })
-           });
+           var delay:number = u_settings.timer;
+           if(isNaN(delay) || delay<2000) delay =2000;
+
+           setInterval(()=>this.relay(),delay);
+
+
+
 
 
 
@@ -90,6 +94,32 @@ module uplight {
          */
            
        }
+
+       private stamp:number=0;
+       private let:number=0;
+       private timer:number=(new Date()).getTime();
+       private relay():void{
+           var that=this;
+           var now=(new Date()).getTime();
+           var timer=now- this.timer;
+           this.timer=now;
+
+           Registry.getInstance().connector.relay(kiosk_id,this.stamp,Math.round(now/1000),this.let,timer).done(function(res:VOResult){
+
+               that.let=(new Date()).getTime()-now;
+
+               switch(res.success){
+                   case 'reload':
+                       window.location.reload();
+                       break;
+                   case 'stamp':
+                       that.stamp = Number(res.result);
+                       break;
+               }
+
+
+           })
+       }
        private prevHash;
        private isBlocked: boolean;
        private unblock(): void {
@@ -107,13 +137,13 @@ module uplight {
            var hash: string[] = this.prevHash.split('='); 
            switch (hash[0]) {
                case '#category':
-                   this.keyboardView.hideKeyboard();
-                   var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));                  
-                   this.maiView.showView(this.searchResult.getListByCategory(cat));
+                 //  this.keyboardView.hideKeyboard();
+                  // var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));
+                  // this.maiView.showView(this.searchResult.getListByCategory(cat));
                    break;
                case '#destid': 
-                   this.keyboardView.hideKeyboard();                 
-                   this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
+                 //  this.keyboardView.hideKeyboard();
+                 //  this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
                    break;
                case '#screensaver':
                    if (hash[1] == 'start') setTimeout(() => {
@@ -124,8 +154,8 @@ module uplight {
                    break;
                case '#page':
                    this.keyboardView.hideKeyboard();
-                   var page: VOItem = this.menu.getPageById(Number(hash[1]));
-                   this.maiView.showView(this.infoPage.getPage(page));
+                 //  var page: VOItem = this.menu.getPageById(Number(hash[1]));
+                 //  this.maiView.showView(this.infoPage.getPage(page));
                    break;
               // case '#search':
                   // this.keyboard.reset();
@@ -146,21 +176,19 @@ module uplight {
 
        }      
       
-      
 
        private resetScreen(): void { 
           console.log('reset Screen')
-
-           this.keyboardView.hideKeyboard();
-           this.keyboard.reset();    
-           this.menu.reset(); 
-           this.maiView.reset();
+          // this.keyboardView.hideKeyboard();
+           //this.keyboard.reset();
+         //  this.menu.reset();
+           //this.maiView.reset();
 
        }
        private onKeyboardTyping(patt: string): void {
 
-           var el: JQuery = this.searchResult.getListByPattern(patt);
-           this.maiView.showView(el);
+           //var el: JQuery = this.searchResult.getListByPattern(patt);
+           //this.maiView.showView(el);
 
        }          
 

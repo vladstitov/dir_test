@@ -1,8 +1,8 @@
 /// <reference path="Registry.ts" />
 var uplight;
 (function (uplight) {
-    var Keyboard = (function () {
-        function Keyboard(view) {
+    var Keyboard2 = (function () {
+        function Keyboard2(view) {
             var _this = this;
             this.arHints = [];
             //private kb_enter: HTMLDivElement;
@@ -50,7 +50,7 @@ var uplight;
             // $(this.hints).on(CLICK, '.hint', (evt) => this.onHintClick(evt));
             this.reset();
         }
-        Keyboard.prototype.reset = function () {
+        Keyboard2.prototype.reset = function () {
             if (!this.isReset) {
                 // this.btnClose.removeClass(DISABLED);
                 // setTimeout(() => {
@@ -63,31 +63,31 @@ var uplight;
                 this.isReset = true;
             }
         };
-        Keyboard.prototype.initSettings = function (obj) {
+        Keyboard2.prototype.initSettings = function (obj) {
             this.settings = obj;
             this.alpabet = obj.keys;
             this._startText = obj.starttext;
             this.showHints = obj.showHints;
         };
-        Keyboard.prototype.onHintClick = function (evt) {
+        Keyboard2.prototype.onHintClick = function (evt) {
             var tag = evt.target;
             if ($(tag).is('li')) {
                 this._pattern = $(tag).text();
                 this.blink();
             }
         };
-        Keyboard.prototype.insertHints = function (ar) {
+        Keyboard2.prototype.insertHints = function (ar) {
             for (var i = 0, n = ar.length; i < n; i++) {
                 this.arHints[i].innerText = ar[i];
             }
         };
-        Keyboard.prototype.renderHints = function (ar) {
+        Keyboard2.prototype.renderHints = function (ar) {
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++)
                 out += '<li class="hint" >' + ar[i] + '</li>';
             return out;
         };
-        Keyboard.prototype.hideHintsView = function () {
+        Keyboard2.prototype.hideHintsView = function () {
             if (this.hintsHidden)
                 return;
             this.hintsHidden = true;
@@ -100,7 +100,7 @@ var uplight;
                 }
             });
         };
-        Keyboard.prototype.showHintView = function (num) {
+        Keyboard2.prototype.showHintView = function (num) {
             //trace(num);          
             this.hintsHidden = false;
             this.hintsInTransition = true;
@@ -112,7 +112,7 @@ var uplight;
                 }
             });
         };
-        Keyboard.prototype._showHints = function () {
+        Keyboard2.prototype._showHints = function () {
             var _this = this;
             // var _this = this;
             clearTimeout(this.showHintsTimeout);
@@ -136,14 +136,14 @@ var uplight;
             //trace('getHints: '+str)
             // this.connector.getHints((resp) => this.onGetHints(resp), str);
         };
-        Keyboard.prototype.releaseClose = function () {
+        Keyboard2.prototype.releaseClose = function () {
         };
-        Keyboard.prototype.onCloseClick = function (evt) {
+        Keyboard2.prototype.onCloseClick = function (evt) {
             var _this = this;
             this.view.triggerHandler(CLOSE);
             setTimeout(function () { return _this.reset(); }, 500);
         };
-        Keyboard.prototype.itemRenderer = function (item) {
+        Keyboard2.prototype.itemRenderer = function (item) {
             var cl = 'Plastic031';
             if (item == 'SPACE')
                 cl += ' space';
@@ -151,14 +151,14 @@ var uplight;
                 cl += ' back fa fa-caret-square-o-left';
             return '<div class="kb-key ' + cl + '"><span>' + item + '</span></div>';
         };
-        Keyboard.prototype.onKeyPressed = function (evt) {
+        Keyboard2.prototype.onKeyPressed = function (evt) {
             // trace(evt.target);
             var tag = evt.target;
             // alert(tag.tagName);
             if (tag.tagName == 'SPAN')
                 this.typeLetter(tag.innerHTML);
         };
-        Keyboard.prototype.typeLetter = function (str) {
+        Keyboard2.prototype.typeLetter = function (str) {
             this.isReset = false;
             if (str == 'SPACE')
                 str = ' ';
@@ -184,15 +184,15 @@ var uplight;
             if (this.onKeyboardTyping)
                 this.onKeyboardTyping(this._pattern);
         };
-        Keyboard.prototype.blink = function () {
+        Keyboard2.prototype.blink = function () {
             var _this = this;
             clearInterval(this._interval);
             this._interval = setTimeout(function () { return _this.blink(); }, 500);
             this.cursor = this.cursor == '' ? '_' : '';
             this.text.text(this._pattern + this.cursor);
         };
-        return Keyboard;
+        return Keyboard2;
     })();
-    uplight.Keyboard = Keyboard;
+    uplight.Keyboard2 = Keyboard2;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=keyboard.js.map

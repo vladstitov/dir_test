@@ -90,12 +90,12 @@ class Screen{
 			return $out;
 			
 			break;
-			
-			case 'upload_temp_image':
-			header('Content-type: application/json');
-			return $this->uploadTempImage($_FILES["file"]);
-			break;
 			*/
+			case 'upload_image':
+			header('Content-type: application/json');
+			return $this->uploadImage($_FILES["file"]);
+			break;
+			
 		}
 		
 		
@@ -108,7 +108,7 @@ class Screen{
 	}
 	
 	
-	private function uploadTempImage($file){
+	private function uploadImage($file){
 			$out=new stdClass();
 			
 		if ($file["error"] > 0){

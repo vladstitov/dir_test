@@ -1,4 +1,4 @@
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var kiosk;
 (function (kiosk) {
     var KeyboardView = (function () {
@@ -58,4 +58,4 @@ var kiosk;
     })();
     kiosk.KeyboardView = KeyboardView;
 })(kiosk || (kiosk = {}));
-//# sourceMappingURL=keyboardview.js.map
+//# sourceMappingURL=KeyboardView.js.map

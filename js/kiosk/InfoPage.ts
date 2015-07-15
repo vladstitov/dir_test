@@ -10,6 +10,7 @@ module uplight {
            
 
         }
+        /*
         getPage(page:VOItem): JQuery {
             if (!this.cache[page.id]) this.cache[page.id] = this.createPage(page);           
             return this.cache[page.id];
@@ -23,6 +24,7 @@ module uplight {
 
         }
 
+        */
         private loadPage(id: string): void {        
             this.connector.getPage((res) => this.onPageLoaded(res), id);
 

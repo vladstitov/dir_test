@@ -19,7 +19,7 @@ var uplight;
                 _this.R.settings = resp;
                 _this.init();
                 _this.onHashChange();
-                //this.R.model.dispatcher.on(this.R.model.READY,()=>this.test());
+                //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
             this.R.alert = function (text, cont) { return _this.myMsg(text, cont); };
             // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
@@ -54,6 +54,7 @@ var uplight;
             switch (hash) {
                 case '#RestartKi':
                     this.showPreview();
+                    this.content.hide();
                     this.restartKiosks = new uplight.RestartKiosk(this.content);
                     this.restartKiosks.restart();
                     break;

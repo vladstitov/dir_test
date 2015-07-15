@@ -20,7 +20,7 @@ var lists;
             //   $('#arrows button').prop('disabled', false)
             //   $('#CatDestsList input[type="button"]').prop('disabled', false)
             // }
-            data = R.model.getAllByCat(cat.catid);
+            data = R.vo.getAllByCat(cat.catid);
 
             this.renderData(data);
             $('#txtInCategory').text('In Category:' + cat.label);
@@ -95,13 +95,13 @@ var lists;
         ManageCategoriesListing.prototype.saveListing = function () {
             var _this = this;
             this.btnSaveListing.prop('disabled', true);
-            R.model.saveCatDest(function (res) {
+            R.vo.saveCatDest(function (res) {
                 return _this.onSaveCatDest(res);
             });
         };
         ManageCategoriesListing.prototype.onSaveCatDest = function (res) {
             this.haveChanges = false;
-            R.model.deleteChanges();
+            R.vo.deleteChanges();
         };
 
 
@@ -133,7 +133,7 @@ var lists;
             $(lst).each(function (id, el) {
                 var num = Number($(el).data('id'));
                 if (!isNaN(num))
-                    R.model.removeCategory(num, cat);
+                    R.vo.removeCategory(num, cat);
             });
             lst.remove();
             this.btnRemove.prop('disabled', true);
@@ -151,7 +151,7 @@ var lists;
             $(lst).each(function (id, el) {
                 var num = $(el).data('id');
                 if (!isNaN(num))
-                    R.model.addCategory(num, cat);
+                    R.vo.addCategory(num, cat);
             });
 
             this.addListing(lst);
@@ -165,7 +165,7 @@ var lists;
         this.lstDests.children().each(function (ind, val) { total = ind; out += val.getAttribute('data-id') + ','; });
         
         this.cat.dests = out;
-        R.model.eraseCat(this.cat);
+        R.vo.eraseCat(this.cat);
         }
         */
         ManageCategoriesListing.prototype.onCatChange = function (cat) {

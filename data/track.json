@@ -1,11 +1,1 @@
-{
-  "name": "application-name",
-  "version": "0.0.1"
-  "kiosks":{
-    "kiosk_1":{
-      "name":"Kiosk 1",
-      "stamp":1234567,
-      "status":"normal"
-    }
-  }
-}
+{"kiosk_1":{"status":"started","start_at":0,"stamp":1436929344,"K_time":1436929342,"S_time":1436929342,"let":13,"timer":5000,"ip":"::1"}}

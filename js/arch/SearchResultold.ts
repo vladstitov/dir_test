@@ -2,7 +2,7 @@
 /// <reference path="../typing/jquery.d.ts" />
 module kiosk {
     export class SearchResultold {
-        // private model: models.ListViewModel;
+        // private vo: models.ListViewModel;
        // onSelect: Function;
        // view: JQuery;
         list: JQuery;

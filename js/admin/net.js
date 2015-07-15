@@ -221,9 +221,9 @@ var uplight;
             return $.get(this.service, data);
         };
         Connector.prototype.uploadTempImage = function (data) {
-            //  var data: FormData = new FormData(form);
+            //console.log('uploadTempImage    ',data);
             return $.ajax({
-                url: this.service + '?a=screen.upload_temp_image',
+                url: this.service + '?a=screen.upload_image',
                 type: 'POST',
                 dataType: 'json',
                 data: data,

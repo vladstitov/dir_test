@@ -53,6 +53,7 @@ module uplight {
 
                     case '#RestartKi':
                         this.showPreview();
+                        this.content.hide();
                         this.restartKiosks = new RestartKiosk(this.content);
                         this.restartKiosks.restart();
 
@@ -118,7 +119,7 @@ module uplight {
                 this.R.settings = resp;
                 this.init();
                 this.onHashChange();
-                //this.R.model.dispatcher.on(this.R.model.READY,()=>this.test());
+                //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
 
             this.R.alert=(text,cont)=>this.myMsg(text,cont);

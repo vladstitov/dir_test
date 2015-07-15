@@ -16,7 +16,7 @@ module uplight{
           constructor(public view:JQuery){
               this.dispatcher=$({});
               this.R=RegA.getInstance();
-              //console.log(this.R.model);
+              //console.log(this.R.vo);
              // view.find('[data-id=header]:first').html('<div class="icon">Icon</div><div class="name">Name</div>');
               this.list=$('<ul>').on(CLICK,'li',(evt)=>this.onItemClick($(evt.currentTarget))).appendTo(this.view.find('[data-id=list]:first'));
              if(this.R.model.getCategories())this.render();

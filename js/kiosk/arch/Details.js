@@ -1,5 +1,4 @@
-/// <reference path="Registry.ts" />
-/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Details = (function () {
@@ -11,11 +10,9 @@ var uplight;
         }
         Details.prototype.setData = function (dest) {
             this.current = dest;
-            if (dest.details)
-                this.content.html(this.renderDetails(dest.details));
-            this.pages.empty();
-            if (dest.pages)
-                this.loadPages(dest.pages);
+            //if(dest.details)   this.content.html(this.renderDetails(dest.details))
+            //this.pages.empty();
+            //if(dest.pages) this.loadPages(dest.pages);
         };
         Details.prototype.renderItem = function (item) {
             return '<tr><td>' + item.label + '</td><td>' + item.value + '</td></tr>';

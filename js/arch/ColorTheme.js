@@ -18,7 +18,7 @@ var uplight;
             var msg = 'Color saved on server';
             if (isNaN(Number(resp)))
                 msg = resp;
-            uplight.myMsg(msg, this.btnSave);
+            myMsg(msg, this.btnSave);
         };
         ColorTheme.prototype.getPanel = function () {
             var _this = this;

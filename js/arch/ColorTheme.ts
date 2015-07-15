@@ -122,7 +122,7 @@ module uplight {
             console.log('Menu arr ',ar);
 
             this._dataMenu = ar;
-            this._dataDest = R.model.getData();
+            this._dataDest = R.vo.getData();
 
             this.drawDests();
             this.drawMenu();

@@ -1,4 +1,4 @@
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="Registry.ts" />
 var uplight;
 (function (uplight) {
     var Connector = (function () {
@@ -12,7 +12,16 @@ var uplight;
             $.get(this.service + 'get_updates&stamp=' + stamp).done(callBack).fail(onError);
         };
         Connector.prototype.Log = function (msg) {
+            $.post(this.service + 'log_log', msg);
+        };
+        Connector.prototype.relay = function (kiosk_id, stamp, now, let, timer) {
+            return $.get(this.service + 'get_stamp&kiosk_id=' + kiosk_id + '&stamp=' + stamp + '&now=' + now + '&let=' + let + '&timer=' + timer);
+        };
+        Connector.prototype.Error = function (msg) {
             $.post(this.service + 'log_error', msg);
+        };
+        Connector.prototype.Stat = function (msg) {
+            $.post(this.service + 'log_stat', msg);
         };
         Connector.prototype.getCategories = function (callBack) {
             $.get(this.service + 'get_categories').done(callBack);
@@ -36,7 +45,7 @@ var uplight;
             $.ajax(this.service + 'get_advanced&id=' + adv).done(callBack);
         };
         Connector.prototype.getDestinations = function () {
-            return $.get(this.service + 'get_dests_list');
+            return $.get(this.service + 'get_dests');
         };
         return Connector;
     })();

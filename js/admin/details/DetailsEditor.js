@@ -83,7 +83,7 @@ var uplight;
             this.detailsForm.setDestibation(null);
         };
         // private onDeleteConfirmed(): void {
-        // this.R.model.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
+        // this.R.vo.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
         //}
         DetailsEditor.prototype.onBtnDelClick = function () {
             var _this = this;

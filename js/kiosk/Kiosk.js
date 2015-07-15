@@ -1,33 +1,38 @@
-/// <reference path="details.ts" />
+/// <reference path="arch/Details.ts" />
 /// <reference path="mainview.ts" />
 /// <reference path="banner.ts" />
 /// <reference path="screensaver.ts" />
 /// <reference path="infopage.ts" />
-/// <reference path="keyboardview.ts" />
+/// <reference path="arch/KeyboardView.ts" />
 /// <reference path="keyboard.ts" />
 /// <reference path="searchresult.ts" />
 /// <reference path="Registry.ts" />
 /// <reference path="models.ts" />
-/// <reference path="Menu.ts" />
+/// <reference path="Categories.ts" />
 /// <reference path="Connector.ts" />
+/// <reference path="keywords.ts" />
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
         function Kiosk() {
+            var _this = this;
             this.home = '#category=2';
+            this.stamp = 0;
+            this.let = 0;
+            this.timer = (new Date()).getTime();
+            uplight.Registry.getInstance().connector = new uplight.Connector();
+            uplight.Registry.getInstance().model = new uplight.Model();
+            uplight.Registry.getInstance().settings = u_settings;
+            uplight.Registry.getInstance().dispatcher = $({});
             var kb = new uplight.Keyboard($('#Keyboard'));
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
-            var model = new uplight.Model();
-            var conn = new uplight.Connector();
-            conn.getSettings().done(function (data) {
-                uplight.Registry.getInstance().setSettings(data);
-                var p1 = conn.getDestinations();
-                $.when(p1).then(function (v1) {
-                    //console.log('v1',v1);
-                    uplight.Registry.getInstance().setData(v1);
-                });
-            });
+            var cats = new uplight.Categories($('#Categories'));
+            var sr = new uplight.SearchResult($('#the-list'));
+            var delay = u_settings.timer;
+            if (isNaN(delay) || delay < 2000)
+                delay = 2000;
+            setInterval(function () { return _this.relay(); }, delay);
             /*
             this.R = uplight.Registry.getInstance();
             var conn: Connector = new uplight.Connector();
@@ -62,6 +67,23 @@ var uplight;
  
           */
         }
+        Kiosk.prototype.relay = function () {
+            var that = this;
+            var now = (new Date()).getTime();
+            var timer = now - this.timer;
+            this.timer = now;
+            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.let, timer).done(function (res) {
+                that.let = (new Date()).getTime() - now;
+                switch (res.success) {
+                    case 'reload':
+                        window.location.reload();
+                        break;
+                    case 'stamp':
+                        that.stamp = Number(res.result);
+                        break;
+                }
+            });
+        };
         Kiosk.prototype.unblock = function () {
             this.isBlocked = false;
         };
@@ -77,13 +99,8 @@ var uplight;
             var hash = this.prevHash.split('=');
             switch (hash[0]) {
                 case '#category':
-                    this.keyboardView.hideKeyboard();
-                    var cat = this.menu.getCategoryById(Number(hash[1]));
-                    this.maiView.showView(this.searchResult.getListByCategory(cat));
                     break;
                 case '#destid':
-                    this.keyboardView.hideKeyboard();
-                    this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
                     break;
                 case '#screensaver':
                     if (hash[1] == 'start')
@@ -94,8 +111,6 @@ var uplight;
                     break;
                 case '#page':
                     this.keyboardView.hideKeyboard();
-                    var page = this.menu.getPageById(Number(hash[1]));
-                    this.maiView.showView(this.infoPage.getPage(page));
                     break;
                 case '#back':
                     this.maiView.showHistory();
@@ -104,14 +119,14 @@ var uplight;
         };
         Kiosk.prototype.resetScreen = function () {
             console.log('reset Screen');
-            this.keyboardView.hideKeyboard();
-            this.keyboard.reset();
-            this.menu.reset();
-            this.maiView.reset();
+            // this.keyboardView.hideKeyboard();
+            //this.keyboard.reset();
+            //  this.menu.reset();
+            //this.maiView.reset();
         };
         Kiosk.prototype.onKeyboardTyping = function (patt) {
-            var el = this.searchResult.getListByPattern(patt);
-            this.maiView.showView(el);
+            //var el: JQuery = this.searchResult.getListByPattern(patt);
+            //this.maiView.showView(el);
         };
         return Kiosk;
     })();

@@ -1,6 +1,22 @@
-﻿<!DOCTYPE html>
+﻿<?php
+session_start();
+$device=1;
+if(isset($_GET['device']))$device=$_GET['device'];
+$s=file_get_contents('data/settings.json');
+$settings = json_decode($s);
+$l=file_get_contents('data/labels.json');
+$labels = json_decode($l);
+
+?>
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script>
+        var u_settings = <?php echo $s; ?>;
+        var kiosk_id=1;
+        var u_labels = <?php echo $l; ?>;
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,14 +42,14 @@
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
 
 </head>
-<body style="background-image: url('css/img/Directories%20Portrait%20White5.jpg')">
+<body style="background-image: url('<?= $labels->background; ?>')">
 <div id="container">
     <section id="u-header" class="main-color">
         <div id="brand-logo" >
-            <img src="data/images/logo.png" />
+            <img src="<?= $labels->logo; ?>" />
         </div>
         <div id="brand-name" >
-                Business Directories
+               <?= $labels->header; ?>
         </div>
         <div id="brand-more">
             <div id="Clock">
@@ -41,12 +57,12 @@
 
         </div>
         <p id="brand-slogan">
-                Company slogan goes here
+            <?= $labels->slogan; ?>
         </p>
     </section>
 
 
-    <section id="mainview">
+    <section id="mainview" data-ctr="SearchResult">
         <div id="mainport" class="mainbg u-glow">
             <div class="view-port">
                 <section id="list-header">
@@ -55,99 +71,20 @@
                     </div>
                 </section>
                 <hr/>
-                <section id="list-main">
-                    <div id="list-main-main">
-                        <div id="the-list">
-                            <ul id="scroll-list">
-                                <li class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Tenant Name 1 has letter in name</div>
-                                    <div class="unit">1202</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords"></div>
-                                    <div class="info"></div>
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Tenant Name</div>
-                                    <div class="unit">308</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords"></div>
-                                    <div class="info"></div>
-
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><sapan class="fa fa-user"></sapan></div>
-                                    <div class="more"> </div>
-                                    <div class="name">Person name</div>
-                                    <div class="unit">
-                                       608
-                                    </div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords"></div>
-                                    <div class="info">Smail infor available here</div>
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Tenant Name 1 has letter in name</div>
-                                    <div class="unit">743</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords"></div>
-                                    <div class="info"></div>
-                                </li>
-                                <li  class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"> </div>
-                                    <div class="name">Name has keyword</div>
-                                    <div class="unit">121</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords">word</div>
-                                    <div class="info"></div>
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Tenant Name 1 has keyword</div>
-                                    <div class="unit">1002</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords">word</div>
-                                    <div class="info"></div>
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><span class="fa fa-briefcase"></span></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Tenant Name 1 has letter in name</div>
-                                    <div class="unit">806</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords">word3</div>
-                                    <div class="info"></div>
-                                </li>
-                                <li class="Plastic031">
-                                    <div class="icon"><sapan class="fa fa-user"></sapan></div>
-                                    <div class="more"><span class="fa fa-plus"></span> </div>
-                                    <div class="name">Person Name has keyword</div>
-                                    <div class="unit">451</div>
-                                    <div class="unittype">unit</div>
-                                    <div class="keywords">word2</div>
-                                    <div class="info"></div>
-                                </li>
-
-                            </ul>
+                <section id="list-main" class="nano">
+                        <div id="the-list" class="nanp-content">
                         </div>
-                    </div>
-
                 </section>
                 <hr/>
                 <section id="list-footer">
                     <div id="list-footer-main">
                         <div class="more">( <span class="fa fa-plus"></span> More Info Available ) </div>
                         <div id="searchinput">
+                           <!-- <span class="fa fa-search"></span>-->
                             <input type="text" class="Plastic031" />
-                            <div class="icon"><span class="fa fa-search"></span></div>
+                            <span class="fa fa-times-circle" data-id="btnClear"></span>
                         </div>
+
 
                     </div>
                 </section>
@@ -166,51 +103,18 @@
                 </section>
                 <section class="view1">
                     <div id="Categories">
-                        <ul>
-                            <li>
-                                <div><input type="checkbox" /></div>
-                                <div class="icon fa fa-briefcase"></div>
-                                <div class="name">Tenats</div>
-                            </li>
-                            <li>
-                                <div><input type="checkbox" /></div>
-                                <div class="icon fa fa-user"></div>
-                                <div class="name">People</div>
-                            </li>
-                        </ul>
+                        <h3>Categories</h3>
+
                     </div>
                 </section>
 
                 <section class="view3">
                     <div id="keywords">
-                        <div id="kw-container">
-                            <ul class="nano-content">
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                                <li>kwyword     </li>
-                            </ul>
+                        <h3>Keywords</h3>
+
+                        <div id="kw-container" class="nano">
                         </div>
+
                     </div>
                 </section>
             </div>
@@ -231,14 +135,14 @@
 <link href="css/kiosk/Keyboard.css" rel="stylesheet" />
 <script src="js/kiosk/KeyboardSimple.js" ></script>
 
-<script src="js/kiosk/KeyboardView.js" ></script>
+<script src="js/kiosk/Keywords.js" ></script>
 <script src="js/kiosk/SearchResult.js"></script>
+<script src="js/kiosk/Categories.js"></script>
 <script src="js/kiosk/InfoPage.js"></script>
-<script src="js/kiosk/Menu.js"></script>
-
-<script src="js/kiosk/MainView.js"></script>
+<!--<script src="js/kiosk/MainView.js"></script>
 <script src="js/kiosk/Details.js"></script>
-<script src="js/kiosk/ScreenSaver.js"></script>
+<script src="js/kiosk/ScreenSaver.js"></script>-->
+
 <script src="js/kiosk/Banner.js" ></script>
 <script src="js/kiosk/Kiosk.js" ></script>
 

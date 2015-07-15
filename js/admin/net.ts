@@ -268,9 +268,9 @@ module uplight {
             return $.get(this.service,data);
         }
        uploadTempImage(data:FormData): JQueryPromise<VOCategory[]> {
-            //  var data: FormData = new FormData(form);
+           //console.log('uploadTempImage    ',data);
            return  $.ajax({
-                url: this.service+'?a=screen.upload_temp_image',  //Server script to process data
+                url: this.service+'?a=screen.upload_image',  //Server script to process data
                 type: 'POST',
                 dataType: 'json',
                 data: data,

@@ -1,5 +1,5 @@
-﻿/// <reference path="Registry.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+﻿/// <reference path="../Registry.ts" />
+
 
 module uplight {
     export class Details {
@@ -13,9 +13,9 @@ module uplight {
 
         setData(dest:VODestination):void{
             this.current = dest;
-           if(dest.details)   this.content.html(this.renderDetails(dest.details))
-            this.pages.empty();
-            if(dest.pages) this.loadPages(dest.pages);
+           //if(dest.details)   this.content.html(this.renderDetails(dest.details))
+            //this.pages.empty();
+            //if(dest.pages) this.loadPages(dest.pages);
         }
 
 

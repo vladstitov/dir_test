@@ -28,7 +28,7 @@ module uplight {
         R:RegA
         constructor(container:JQuery) {
             this.R=RegA.getInstance();
-           // if(!this.R.model)this.R.model = new DestinantionsModel();
+           // if(!this.R.vo)this.R.vo = new DestinantionsModel();
             container.load('js/admin/impexp/ImportExport.htm',()=>{this.init()});
 
 

@@ -1,7 +1,7 @@
 ﻿/// <reference path="Registry.ts" />
 
 module uplight{
-    export class Keyboard {
+    export class Keyboard2 {
         onKeyboardTyping: Function;
         private keys: JQuery;
         private text: JQuery;

@@ -11,7 +11,7 @@ var uplight;
             this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
             this.dispatcher = $({});
             this.R = uplight.RegA.getInstance();
-            //console.log(this.R.model);
+            //console.log(this.R.vo);
             // view.find('[data-id=header]:first').html('<div class="icon">Icon</div><div class="name">Name</div>');
             this.list = $('<ul>').on(CLICK, 'li', function (evt) { return _this.onItemClick($(evt.currentTarget)); }).appendTo(this.view.find('[data-id=list]:first'));
             if (this.R.model.getCategories())

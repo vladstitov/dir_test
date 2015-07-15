@@ -1,4 +1,4 @@
-﻿/// <reference path="../typing/jquery.d.ts" />
+﻿/// <reference path="Registry.ts" />
 module uplight {
     export class Connector {
         private service = 'rem/kiosk.php?a='
@@ -15,8 +15,21 @@ module uplight {
             $.get(this.service + 'get_updates&stamp='+stamp).done(callBack).fail(onError);
         }
         Log(msg:string): void {
+            $.post(this.service + 'log_log',msg);
+        }
+
+        relay(kiosk_id,stamp:number,now:number,let:number,timer:number):JQueryPromise<VOResult>{
+
+            return $.get(this.service+'get_stamp&kiosk_id='+kiosk_id+'&stamp='+stamp+'&now='+now+'&let='+let+'&timer='+timer);
+
+        }
+        Error(msg:string): void {
             $.post(this.service + 'log_error',msg);
         }
+        Stat(msg:string): void {
+            $.post(this.service + 'log_stat',msg);
+        }
+
 
         getCategories(callBack:Function) {
             $.get(this.service + 'get_categories').done(callBack);
@@ -43,7 +56,7 @@ module uplight {
             $.ajax(this.service + 'get_advanced&id=' + adv).done(callBack);
         }
         getDestinations():JQueryPromise <JSON> {
-            return $.get(this.service + 'get_dests_list');
+            return $.get(this.service + 'get_dests');
         }
       
     }

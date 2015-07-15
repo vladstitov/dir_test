@@ -115,7 +115,7 @@ module uplight{
             this.detailsForm.setDestibation(null);
         }
        // private onDeleteConfirmed(): void {
-           // this.R.model.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
+           // this.R.vo.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
         //}
 
         private onBtnDelClick(): void {

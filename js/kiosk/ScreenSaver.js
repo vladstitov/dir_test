@@ -1,5 +1,5 @@
 /// <reference path="Registry.ts" />
-/// <reference path="../../typing/svgjs.d.ts" />
+/// <reference path="../typing/svgjs.d.ts" />
 var uplight;
 (function (uplight) {
     var ScreenSaver = (function () {

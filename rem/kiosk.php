@@ -59,12 +59,20 @@ switch(array_shift($a)){
 	echo file_get_contents('../data/settings.json');
 	break;
 		
-	case 'get_dests_list':
+	case 'get_dests':
 	include 'cl/DbConnector.php';	
 		$con=new DbConnector();
+		$out=new stdClass();
 		header('Content-type: application/json');
-		$sql='SELECT * FROM destinations ORDER by name'	;	
-		echo json_encode($con->query($sql));
+		$cats = $con->query('SELECT * FROM categories WHERE enable=1 ORDER BY sort');
+		foreach($cats as $val) $val->id=(int)$val->id;		
+		$out->cats = $cats;
+		
+		$dests = $con->query('SELECT * FROM destinations ORDER by LOWER(name)');
+		foreach($dests as $val) $val->id=(int)$val->id;		
+		$out->dests = $dests;
+		
+		echo json_encode($out);
 
 
 	break;
@@ -83,7 +91,11 @@ switch(array_shift($a)){
 		$ctr= new Screen();
 		$result=$ctr->getBackground();
 	break;	
-	
+	case 'get_stamp':
+		header('Content-type: application/json');
+		echo json_encode(trackController($get));	
+		
+	break;	
 
 	case 'get_rss':
 	
@@ -97,6 +109,54 @@ switch(array_shift($a)){
 	break;
 }
 
+
+
+function trackController($get){
+		$out=new stdClass();
+		$out->success='success';
+			if(isset($get['stamp']) && isset($get['kiosk_id'])){
+					$file_name='../data/track.json';
+					$id='kiosk_'.$get['kiosk_id'];
+					$track= json_decode(file_get_contents($file_name));
+					if(!isset($track->$id))	$track->$id = new stdClass();			
+					$kiosk = $track->$id;					
+					$stamp=(int)$get['stamp'];
+					$k_time=(int)$get['now'];
+					$timer=(int)$get['timer'];
+					if($stamp==0) {
+						$stamp=time();
+						$kiosk->status='started';
+						$kiosk ->start_at=$k_time;
+						$kiosk->stamp=$stamp;
+						$kiosk->ip=$_SERVER['REMOTE_ADDR'];
+						$out->success='stamp';
+						$out->result = $stamp;
+						$out->ktime=$k_time;
+						$track->$id=$kiosk;
+						file_put_contents($file_name,json_encode($track));
+						return $out;
+					}
+										
+					if($kiosk->status=='restart'){
+							$out->success='restart';
+							$out->result='Kiosk1080.php?kiosk_id='.$id;
+					}
+					
+					$kiosk->status='working';
+					$kiosk->K_time=$k_time;
+					$kiosk->let=(int)$get['let'];
+					$kiosk->S_time = time();
+					$kiosk->timer=$timer;
+					$track->$id=$kiosk;
+					file_put_contents($file_name,json_encode($track));
+					
+					
+					
+			}
+			
+			return $out;
+		
+}
 
 //if(is_string($result))  echo($result);
 //else  echo json_encode($result);

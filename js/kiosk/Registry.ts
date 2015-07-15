@@ -1,5 +1,7 @@
 ﻿/// <reference path="Connector.ts" />
 /// <reference path="KeyboardSimple.ts" />
+/// <reference path="SearchResult.ts" />
+/// <reference path="SearchController.ts" />
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
@@ -42,9 +44,10 @@ module uplight {
     export class Registry {
         KEY_PRESSED:string='KEY_PRESSED';
         KEYWORD_PRESSED:string='KEYWORD_PRESSED';
-        SEARCH_CANGED:string='SEARCH_CANGED';
         ON_SETTINGS:string='ON_SETTINGS';
         ON_DATA:string='ON_DATA';
+        CATEGORIES_CHANGE:string='CATEGORIES_CHANGE';
+        SEARCH_CHANGED:string='SEARCH_CHANGED';
         modelDests: Model;
        // connector: kiosk.Connector;
         settings: any;
@@ -53,11 +56,21 @@ module uplight {
         data:any[];
        // mainView: ViewPort;
         dispatcher: JQuery;
+        connector:Connector;
+        model:Model;
         onKeyboardTyping: Function;
         onMenuPageClicked: Function;
 
        // onSearchResultClick2: Function;
 
+        errors:string='';
+        error(str:string):void{
+            this.errors+=str+"\n";
+        }
+        warns:string='';
+        warn(str:string):void{
+            this.warns+=str+"\n";
+        }
         public device: {} = { device: 'kiosk1', ln: 'en' };
 
         setSettings(data:any):void{
@@ -84,25 +97,51 @@ module uplight {
 
 
     }
-    export class VOItem {
-        public catid: number;
-        public id: number;
-        public label: string;
-        public a: string;
-    }
-    export class VODestination {
-
+    export class VOCategory {
+        constructor(obj:any){
+            for(var str in obj) this[str]=obj[str];
+            if(!this.dests) this.dests=[];
+        }
 
         id: number;
-        uid:string
-        name: string;        
-        unit: string;
-        info:string;
-        icon:string;
-        cats: string;
-        keywords:string;
-        pages: string;
-        details: string;
+        sort: number;
+        label: string;
+        icon: string;
+        enable: number;
+        type:number;
+        dests:number[];
     }
-   
+    export  class VOResult{
+        result:string;
+        success:string;
+        error:string;
+    }
+
+    export class VODestination {
+        constructor(obj:any){
+            for(var str in obj) this[str]=obj[str];
+            if(obj.cats=='0') this.cats=[];
+            else  if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
+            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
+        }
+        uid:string;
+        unit: string;
+        id: number;
+        destid:string;
+        info:string;
+        imgs:string[];
+        imgsD:string[];
+        name: string;
+        cats: number[];
+        categories:string[];
+        pgs: string;
+        more: any;
+        meta:string;
+        kws:string;
+        icon:string;
+
+    }
+
+
+
 }

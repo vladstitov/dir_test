@@ -52,6 +52,7 @@ module uplight{
         }
 
         private onFileSelected(files:FileList):void{
+
             if(files.length){
                 var file:any = files[0];
                 var form:FormData = new FormData();

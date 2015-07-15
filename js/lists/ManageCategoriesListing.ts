@@ -100,7 +100,7 @@ module uplight {
         }
         private onSaveCatDest(res): void {
             this.haveChanges(false);
-           // this.R.model.deleteChanges();
+           // this.R.vo.deleteChanges();
         }
 
         private haveChanges(b: boolean) {
@@ -143,7 +143,7 @@ module uplight {
             var cat: number = this.cat.catid;
             $(lst).each(function (id, el) {
                 var num: number = $(el).data('id');               
-                if (!isNaN(num))  R.model.addCategory(num, cat);
+                if (!isNaN(num))  R.vo.addCategory(num, cat);
             });
                  
             this.addListing(lst);
@@ -157,7 +157,7 @@ module uplight {
             this.lstDests.children().each(function (ind, val) { total = ind; out += val.getAttribute('data-id') + ','; });
 
             this.cat.dests = out;
-            R.model.eraseCat(this.cat);                        
+            R.vo.eraseCat(this.cat);
         }
         */
         private onCatChange(cat:VOCategory): void {
