@@ -14,6 +14,12 @@ var uplight;
             this.R.dispatcher.on(this.R.CATEGORIES_CHANGE, function (evt, cats) { return _this.onCategoriesChange(cats); });
             this.R.dispatcher.on(this.R.SEARCH_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
+            console.log('listeners');
+        };
+        SearchResult.prototype.onListClick = function (evt) {
+            var id = $(evt.currentTarget).data('id');
+            console.log(id);
+            this.R.connector.Stat('sr', id.toString());
         };
         SearchResult.prototype.onSearchChange = function (pattern) {
             this.currentPattern = pattern.toLowerCase();
@@ -52,12 +58,14 @@ var uplight;
                 ar[i].setCats(cats).render();
         };
         SearchResult.prototype.render = function () {
+            var _this = this;
             var ar = this.result;
             // console.log(this.data.length);
             var list = this.list.remove().html('');
             for (var i = 0, n = ar.length; i < n; i++)
                 list.append(ar[i].getView());
             this.list.appendTo(this.view);
+            this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
         };
         SearchResult.prototype.onDataReady = function () {
             var ar = this.model.getData();
@@ -181,7 +189,7 @@ var uplight;
             var utype = '<div class="unittype">unit</div>';
             var kws = '<div class="kws">' + vo.kws + '</div>';
             var info = '<div class="info">' + vo.cats + '</div>';
-            return $('<li>').addClass('Plastic031').html(icon + more + name + unit + utype + kws + info);
+            return $('<li>').data('id', vo.id).addClass('Plastic031').html(icon + more + name + unit + utype + kws + info);
         };
         return DestModel;
     })();

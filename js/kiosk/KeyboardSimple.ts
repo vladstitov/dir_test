@@ -75,7 +75,8 @@ module uplight{
             this.R.dispatcher.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
         }
         private onKeyword(str:string):void{
-            //this.isKw=true;
+            //this.isKw=true
+            this.R.connector.Stat('kw',str);
             this.setText(str);
         }
         private onClearClick():void{
@@ -87,6 +88,7 @@ module uplight{
             this.R.dispatcher.triggerHandler(this.R.SEARCH_CHANGED,this.data);
         }
 
+        private timeout:number
         private onKeyPressed(txt:string):void{
             var str:string = this.data;
             if(str.length==0) str=txt.toUpperCase();
@@ -97,6 +99,8 @@ module uplight{
 
 
             this.setText(str);
+            clearTimeout(this.timeout)
+            this.timeout = setTimeout(function(){ Registry.getInstance().connector.Stat('sr',str);},1500);
             this.input.focus();
         }
 

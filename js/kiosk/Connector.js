@@ -4,6 +4,7 @@ var uplight;
     var Connector = (function () {
         function Connector() {
             this.service = 'rem/kiosk.php?a=';
+            this.serv = 'rem/kiosk.php';
         }
         Connector.prototype.getMessages = function (callBack, onError) {
             $.get(this.service + 'get_messages&device=' + this.device).done(callBack).fail(onError);
@@ -12,16 +13,20 @@ var uplight;
             $.get(this.service + 'get_updates&stamp=' + stamp).done(callBack).fail(onError);
         };
         Connector.prototype.Log = function (msg) {
+            msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_log', msg);
         };
         Connector.prototype.relay = function (kiosk_id, stamp, now, let, timer) {
             return $.get(this.service + 'get_stamp&kiosk_id=' + kiosk_id + '&stamp=' + stamp + '&now=' + now + '&let=' + let + '&timer=' + timer);
         };
         Connector.prototype.Error = function (msg) {
+            msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_error', msg);
         };
-        Connector.prototype.Stat = function (msg) {
-            $.post(this.service + 'log_stat', msg);
+        Connector.prototype.Stat = function (type, val) {
+            var who = this.who;
+            var stamp = Date.now();
+            $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&stamp=' + stamp);
         };
         Connector.prototype.getCategories = function (callBack) {
             $.get(this.service + 'get_categories').done(callBack);

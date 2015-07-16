@@ -24,9 +24,16 @@ module uplight {
             this.R.dispatcher.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
             this.R.dispatcher.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
 
-            this.model.dispatcher.on(this.model.READY,()=>this.onDataReady())
+            this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
+
+            console.log('listeners');
         }
 
+        private onListClick(evt:JQueryEventObject):void{
+            var id:number = $(evt.currentTarget).data('id');
+console.log(id);
+            this.R.connector.Stat('sr',id.toString());
+        }
         private onSearchChange(pattern:string):void{
             this.currentPattern = pattern.toLowerCase();
           //  console.log(pattern);
@@ -72,6 +79,7 @@ module uplight {
             var list:JQuery = this.list.remove().html('');
             for(var i=0,n=ar.length;i<n;i++) list.append(ar[i].getView());
             this.list.appendTo(this.view);
+            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
         }
 
         private onDataReady():void{
@@ -201,7 +209,7 @@ module uplight {
             var utype='<div class="unittype">unit</div>';
             var kws = '<div class="kws">'+vo.kws+'</div>';
             var info = '<div class="info">'+vo.cats+'</div>';
-            return $('<li>').addClass('Plastic031').html(icon+more+name+unit+utype+kws+info);
+            return $('<li>').data('id',vo.id).addClass('Plastic031').html(icon+more+name+unit+utype+kws+info);
         }
     }
 }

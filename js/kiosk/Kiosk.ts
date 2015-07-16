@@ -26,17 +26,16 @@ module uplight {
       // private viewPort: ViewPort;
        private screenSaver: ScreenSaver;
       // private viewPort1: kiosk.ViewPort1;
-
        private maiView: MainView;
 
        private home: string = '#category=2';
-       private infoPage:InfoPage
-
+       private infoPage:InfoPage;
        private data: any;
 
 
        constructor() {
            Registry.getInstance().connector = new Connector();
+           Registry.getInstance().connector.who=kiosk_id.toString();
            Registry.getInstance().model = new Model();
            Registry.getInstance().settings = u_settings;
            Registry.getInstance().dispatcher = $({});
@@ -52,6 +51,10 @@ module uplight {
            if(isNaN(delay) || delay<2000) delay =2000;
 
            setInterval(()=>this.relay(),delay);
+
+          // Registry.getInstance().connector.Log('kiosk started succesguly');
+         // Registry.getInstance().connector.Error('kiosk started succesguly');
+
 
 
 

@@ -21,6 +21,7 @@ var uplight;
             this.let = 0;
             this.timer = (new Date()).getTime();
             uplight.Registry.getInstance().connector = new uplight.Connector();
+            uplight.Registry.getInstance().connector.who = kiosk_id.toString();
             uplight.Registry.getInstance().model = new uplight.Model();
             uplight.Registry.getInstance().settings = u_settings;
             uplight.Registry.getInstance().dispatcher = $({});
@@ -33,6 +34,8 @@ var uplight;
             if (isNaN(delay) || delay < 2000)
                 delay = 2000;
             setInterval(function () { return _this.relay(); }, delay);
+            // Registry.getInstance().connector.Log('kiosk started succesguly');
+            // Registry.getInstance().connector.Error('kiosk started succesguly');
             /*
             this.R = uplight.Registry.getInstance();
             var conn: Connector = new uplight.Connector();

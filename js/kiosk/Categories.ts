@@ -28,6 +28,7 @@ module uplight{
             var ind= this.selected.indexOf(id);
             if(ind==-1){
                 this.selected.push(id);
+                this.R.connector.Stat('cp',id.toString());
                 this.R.dispatcher.triggerHandler(this.R.CATEGORIES_CHANGE,[this.selected]);
             }
         }
@@ -36,6 +37,7 @@ module uplight{
             if(ind!==-1){
                 this.selected.splice(ind,1);
                 //console.log(this.selected);
+                this.R.connector.Stat('cm',id.toString());
                 this.R.dispatcher.triggerHandler(this.R.CATEGORIES_CHANGE,[this.selected]);
             }
         }

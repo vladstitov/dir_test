@@ -74,7 +74,8 @@ var uplight;
             });
         };
         SearchInput.prototype.onKeyword = function (str) {
-            //this.isKw=true;
+            //this.isKw=true
+            this.R.connector.Stat('kw', str);
             this.setText(str);
         };
         SearchInput.prototype.onClearClick = function () {
@@ -98,6 +99,10 @@ var uplight;
             else
                 str += txt;
             this.setText(str);
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(function () {
+                uplight.Registry.getInstance().connector.Stat('sr', str);
+            }, 1500);
             this.input.focus();
         };
         return SearchInput;

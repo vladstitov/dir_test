@@ -1,7 +1,9 @@
 ﻿/// <reference path="Registry.ts" />
 module uplight {
     export class Connector {
-        private service = 'rem/kiosk.php?a='
+        private service = 'rem/kiosk.php?a=';
+        private serv= 'rem/kiosk.php';
+        who:string;
         public device: string;
         public lang: string;
 
@@ -15,6 +17,7 @@ module uplight {
             $.get(this.service + 'get_updates&stamp='+stamp).done(callBack).fail(onError);
         }
         Log(msg:string): void {
+            msg=(new Date()).toString()+'||'+msg;
             $.post(this.service + 'log_log',msg);
         }
 
@@ -24,10 +27,13 @@ module uplight {
 
         }
         Error(msg:string): void {
+            msg=(new Date()).toString()+'||'+msg;
             $.post(this.service + 'log_error',msg);
         }
-        Stat(msg:string): void {
-            $.post(this.service + 'log_stat',msg);
+        Stat(type:string,val:string): void {
+            var who = this.who;
+            var stamp= Date.now();
+            $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&stamp='+stamp);
         }
 
 
