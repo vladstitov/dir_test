@@ -2,84 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81e37bf7-890c-4f49-a4c6-28da95441a21" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/Keywords.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/SearchController.ts" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\Menu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\Menu.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\Menu.ts" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\banner.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\details.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\infopage.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\keyboardview.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\mainview.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\screensaver.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\js\kiosk\searchresult.js.map" afterPath="" />
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\js\kiosk\Details.js" afterPath="$PROJECT_DIR$/js/kiosk/arch/Details.js" />
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\js\kiosk\Details.ts" afterPath="$PROJECT_DIR$/js/kiosk/arch/Details.ts" />
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\js\kiosk\KeyboardView.js" afterPath="$PROJECT_DIR$/js/kiosk/arch/KeyboardView.js" />
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\js\kiosk\KeyboardView.ts" afterPath="$PROJECT_DIR$/js/kiosk/arch/KeyboardView.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/directories.db" afterPath="$PROJECT_DIR$/data/directories.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lists/CatDestsList.js" afterPath="$PROJECT_DIR$/js/lists/CatDestsList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryList.js.map" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryList.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryList.js" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryList.ts" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryList.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/ColorTheme.js" afterPath="$PROJECT_DIR$/js/arch/ColorTheme.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/ColorTheme.ts" afterPath="$PROJECT_DIR$/js/arch/ColorTheme.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Connector.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Connector.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Connector.js" afterPath="$PROJECT_DIR$/js/kiosk/Connector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Connector.ts" afterPath="$PROJECT_DIR$/js/kiosk/Connector.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/InfoPage.js" afterPath="$PROJECT_DIR$/js/kiosk/InfoPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/InfoPage.ts" afterPath="$PROJECT_DIR$/js/kiosk/InfoPage.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Keyboard.js" afterPath="$PROJECT_DIR$/js/kiosk/Keyboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Keyboard.ts" afterPath="$PROJECT_DIR$/js/kiosk/Keyboard.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.js.map" afterPath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.js" afterPath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts" afterPath="$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kiosk1080.php" afterPath="$PROJECT_DIR$/Kiosk1080.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lists/ManageCategories.js" afterPath="$PROJECT_DIR$/js/lists/ManageCategories.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.js.map" afterPath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.js" afterPath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.ts" afterPath="$PROJECT_DIR$/js/lists/ManageCategoriesListing.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.ts" afterPath="$PROJECT_DIR$/js/kiosk/Registry.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/cl/Screen.php" afterPath="$PROJECT_DIR$/rem/cl/Screen.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" afterPath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/SearchResult.js" afterPath="$PROJECT_DIR$/js/kiosk/SearchResult.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/SearchResult.ts" afterPath="$PROJECT_DIR$/js/kiosk/SearchResult.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/SearchResultold.js.map" afterPath="$PROJECT_DIR$/js/arch/SearchResultold.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/SearchResultold.js" afterPath="$PROJECT_DIR$/js/arch/SearchResultold.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/SearchResultold.ts" afterPath="$PROJECT_DIR$/js/arch/SearchResultold.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/arch/colortheme.js.map" afterPath="$PROJECT_DIR$/js/arch/colortheme.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/control.json" afterPath="$PROJECT_DIR$/data/control.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/keyboard.js.map" afterPath="$PROJECT_DIR$/js/kiosk/keyboard.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/kiosk.php" afterPath="$PROJECT_DIR$/rem/kiosk.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/kiosk1080.css" afterPath="$PROJECT_DIR$/css/kiosk1080.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/labels.json" afterPath="$PROJECT_DIR$/data/labels.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/models.js.map" afterPath="$PROJECT_DIR$/js/kiosk/models.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/models.js" afterPath="$PROJECT_DIR$/js/kiosk/models.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/models.ts" afterPath="$PROJECT_DIR$/js/kiosk/models.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js.map" afterPath="$PROJECT_DIR$/js/admin/net.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js" afterPath="$PROJECT_DIR$/js/admin/net.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.ts" afterPath="$PROJECT_DIR$/js/admin/net.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/settings.json" afterPath="$PROJECT_DIR$/data/settings.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/track.json" afterPath="$PROJECT_DIR$/data/track.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <list id="ca78c8c6-571e-4922-a9ec-9699f589a7f2" name="Failed commit: Default" comment="statistics">
+      <change type="MOVED" beforePath="C:\wamp\www\dir_test\js\kiosk\searchresult.js.map" afterPath="$PROJECT_DIR$/js/kiosk/SearchResult.js.map" />
     </list>
     <ignored path="LPP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,8 +34,8 @@
       <file leaf-file-name="Kiosk1080.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -114,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Connector.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Connector.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/kiosk/Connector.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.055314533">
-              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -128,10 +58,30 @@
         <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KeyboardSimple.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Categories.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/kiosk/Categories.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchResult.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SearchResult.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/kiosk/SearchResult.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="120" column="43" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.6084599">
+              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -201,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/admin/impexp/ImportExport.htm" />
         <option value="$PROJECT_DIR$/data/assets/labels.json" />
         <option value="$PROJECT_DIR$/js/admin/screen/Preview.ts" />
         <option value="$PROJECT_DIR$/js/page/PagesList.ts" />
@@ -234,24 +183,25 @@
         <option value="$PROJECT_DIR$/admin/Menu.html" />
         <option value="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/Keyboard.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/Categories.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/models.ts" />
         <option value="$PROJECT_DIR$/css/kiosk1080.css" />
         <option value="$PROJECT_DIR$/js/kiosk/SearchController.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/Keywords.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/SearchResult.ts" />
         <option value="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
         <option value="$PROJECT_DIR$/js/admin/net.ts" />
         <option value="$PROJECT_DIR$/data/labels.json" />
         <option value="$PROJECT_DIR$/js/kiosk/Registry.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/arch/Details.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/InfoPage.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/Connector.ts" />
         <option value="$PROJECT_DIR$/Kiosk1080.php" />
-        <option value="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
         <option value="$PROJECT_DIR$/data/settings.json" />
         <option value="$PROJECT_DIR$/data/track.json" />
+        <option value="$PROJECT_DIR$/data/logs/kiosk07-15.log" />
+        <option value="$PROJECT_DIR$/js/kiosk/Connector.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/Categories.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/SearchResult.ts" />
       </list>
     </option>
   </component>
@@ -295,7 +245,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -311,6 +260,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,23 +327,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LPP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dir_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -513,28 +481,40 @@
       <option name="project" value="LOCAL" />
       <updated>1436654849507</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="tracking kiosk">
+      <created>1436929346868</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1436929346868</updated>
+    </task>
+    <task id="LOCAL-00003" summary="statistics">
+      <created>1437010663550</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1437010663550</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21202531" sideWeight="0.48903155" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2132753" sideWeight="0.5088282" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26054853" sideWeight="0.49117175" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27529925" sideWeight="0.4951246" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26054853" sideWeight="0.49117175" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31991294" sideWeight="0.4951246" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -559,7 +539,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Categories work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Categories work" />
+    <MESSAGE value="tracking kiosk" />
+    <MESSAGE value="statistics" />
+    <option name="LAST_COMMIT_MESSAGE" value="statistics" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -571,27 +553,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsCategory.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rem/kiosk.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6115108">
-          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsEditor.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="289" column="40" selection-start-line="289" selection-start-column="40" selection-end-line="289" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rem/cl/Categories.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5381295">
@@ -782,26 +743,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Categories.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Keyboard.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kiosk/Keywords.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -824,13 +769,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3633842">
-          <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -841,21 +780,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchController.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!doc;n#uplight#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/admin/labels/LabelsManager.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,7 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -889,15 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33009708">
           <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchResult.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="120" column="43" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -909,32 +827,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/settings.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -942,14 +838,88 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/logs/k_error07-15.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07375271">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/logs/kiosk07-15.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rem/cl/DbConnector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63597125">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/Keyboard.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="163" column="36" selection-start-line="163" selection-start-column="36" selection-end-line="163" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/kiosk/Connector.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.055314533">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/Categories.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchResult.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6084599">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding />
         </state>
       </provider>

@@ -26,10 +26,24 @@ switch(array_shift($a)){
 	
 	break;
 	case 'log_error':
-		$result=file_put_contents("../data/error_kiosk.log",file_get_contents("php://input")."\n\r", FILE_APPEND);		
+		error_log(file_get_contents("php://input")."|\n\r|", 3,'../data/logs/k_error'.date('m-y').'.log');			
+	echo 'OK';		
 	break;
-	case 'log_data':
-		$result=file_put_contents("../data/kiosk.log", file_get_contents("php://input"), FILE_APPEND);		
+	case 'log_log':
+		file_put_contents('../data/logs/kiosk'.date("m-y").'.log', file_get_contents("php://input")."|\n\r|", FILE_APPEND);	
+		echo 'OK';
+	break;
+	case 'log_stat':
+		$type=$get['type'];		
+		$val=$get['val'];
+		$who=$get['who'];
+		$stamp= $get['stamp'];		
+		include('cl/DbConnector.php');		
+		$db= new DbConnector();
+		$res= $db->insertRow('INSERT INTO stats (type,stamp,val,who) VALUES (?,?,?,?)',array($type,$stamp,$val,$who));
+		if($res) echo 'OK';
+		else echo 'ERROR';	
+			
 	break;
 	case 'get_pages_list':
 		include_once('cl/DbConnector.php');
@@ -95,7 +109,7 @@ switch(array_shift($a)){
 		header('Content-type: application/json');
 		echo json_encode(trackController($get));	
 		
-	break;	
+	break;
 
 	case 'get_rss':
 	

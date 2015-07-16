@@ -31,7 +31,8 @@ module uplight {
 
         private onListClick(evt:JQueryEventObject):void{
             var id:number = $(evt.currentTarget).data('id');
-console.log(id);
+///console.log(id);
+            if(isNaN(Number(id))) return;
             this.R.connector.Stat('sr',id.toString());
         }
         private onSearchChange(pattern:string):void{
@@ -56,6 +57,8 @@ console.log(id);
            }
 
             return out1.concat(out2,out3);
+
+
 
         }
 
