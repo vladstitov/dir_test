@@ -22,8 +22,12 @@ module uplight{
         }
         private addListeners():void{
             this.list.on(CLICK,'input',(evt)=>this.onListChanged($(evt.currentTarget)));
+            this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
         }
 
+        reset():void{
+            this.render();
+        }
         private addCategory(id:number):void{
             var ind= this.selected.indexOf(id);
             if(ind==-1){
@@ -55,7 +59,7 @@ module uplight{
             this.render();
         }
         renderItem(vo:VOCategory,i):string{
-            return '<li><div><input type="checkbox" data-id="'+vo.id+'" checked="true" /></div><div class="icon '+vo.icon+'"></div><div class="name">'+vo.id+'   '+vo.label+'</div></li>';
+            return '<li><div><input type="checkbox" data-id="'+vo.id+'" checked="true" /></div><div class="icon '+vo.icon+'"></div> <div class="name">'+vo.label+'</div></li>';
 
         }
         private render():void{

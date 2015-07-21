@@ -16,6 +16,10 @@ var uplight;
         Categories.prototype.addListeners = function () {
             var _this = this;
             this.list.on(CLICK, 'input', function (evt) { return _this.onListChanged($(evt.currentTarget)); });
+            this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
+        };
+        Categories.prototype.reset = function () {
+            this.render();
         };
         Categories.prototype.addCategory = function (id) {
             var ind = this.selected.indexOf(id);
@@ -48,7 +52,7 @@ var uplight;
             this.render();
         };
         Categories.prototype.renderItem = function (vo, i) {
-            return '<li><div><input type="checkbox" data-id="' + vo.id + '" checked="true" /></div><div class="icon ' + vo.icon + '"></div><div class="name">' + vo.id + '   ' + vo.label + '</div></li>';
+            return '<li><div><input type="checkbox" data-id="' + vo.id + '" checked="true" /></div><div class="icon ' + vo.icon + '"></div> <div class="name">' + vo.label + '</div></li>';
         };
         Categories.prototype.render = function () {
             console.log('render');

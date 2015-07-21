@@ -20,11 +20,12 @@ var uplight;
             this.stamp = 0;
             this.let = 0;
             this.timer = (new Date()).getTime();
-            uplight.Registry.getInstance().connector = new uplight.Connector();
-            uplight.Registry.getInstance().connector.who = kiosk_id.toString();
-            uplight.Registry.getInstance().model = new uplight.Model();
-            uplight.Registry.getInstance().settings = u_settings;
-            uplight.Registry.getInstance().dispatcher = $({});
+            var r = uplight.Registry.getInstance();
+            r.connector = new uplight.Connector();
+            r.connector.who = kiosk_id.toString();
+            r.model = new uplight.Model();
+            r.settings = u_settings;
+            r.dispatcher = $({});
             var kb = new uplight.Keyboard($('#Keyboard'));
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
@@ -34,6 +35,10 @@ var uplight;
             if (isNaN(delay) || delay < 2000)
                 delay = 2000;
             setInterval(function () { return _this.relay(); }, delay);
+            var ss = new uplight.ScreenSaver($('#container'));
+            r.dispatcher.on(r.SS_START, function () {
+                r.dispatcher.triggerHandler(r.RESET_ALL);
+            });
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
             /*

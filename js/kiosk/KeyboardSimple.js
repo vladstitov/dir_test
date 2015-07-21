@@ -63,6 +63,10 @@ var uplight;
             this.btnClear = view.find('[data-id=btnClear]:first');
             this.addListeners();
         }
+        SearchInput.prototype.reset = function () {
+            this.input.val('');
+            this.data = '';
+        };
         SearchInput.prototype.addListeners = function () {
             var _this = this;
             this.btnClear.on(CLICK, function () { return _this.onClearClick(); });
@@ -72,6 +76,7 @@ var uplight;
             this.R.dispatcher.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
                 _this.onKeyword(txt);
             });
+            this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
         };
         SearchInput.prototype.onKeyword = function (str) {
             //this.isKw=true

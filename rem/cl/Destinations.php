@@ -135,7 +135,7 @@ class Destinations{
 	}
 	private function overwriteDestsinations($data){
 		$this->con->queryPure("DROP TABLE destinations");
-		$this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT,locations TEXT,labels TEXT)");
+		$this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,tmb TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT,locations TEXT,labels TEXT)");
 		return $this->insertDestinationsArray($data);
 	}
 	
@@ -154,27 +154,27 @@ class Destinations{
 
 		return $this->con ->query('DELETE FROM destinations WHERE id='.(int)$id);
 	}
+	/*
 	private function updateDest($id,$dest){
 			$adv=$this->updateAdvanced($id,stripslashes($dest['advanced']));
 		return $this->con->updateRow('UPDATE destinations SET name=?,unit=?,phone=?,email=?,website=?,cats=?,advanced=? WHERE destid=?',array($dest['name'],$dest['unit'],$dest['phone'],$dest['email'],$dest['website'],$dest['cats'],$adv,$id));
 	}
-
+*/
 		private function updateDestination($dest){
 				$out = new stdClass();
 				$res=false;
 				$cats='';
+				$imgs='';
 				if(isset($dest->cats))$cats = implode(',',$dest->cats);
-				if(isset($dest->imgs))$imgs = implode(',',$dest->imgs);
+				if(isset($dest->imgs))$imgs = implode(',',$dest->imgs);	
 				
-				$more = json_encode($dest->more);
-
-				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$dest->kws,$more,$dest->info,$dest->meta,$dest->pgs,$imgs);
+				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$dest->kws,$dest->more,$dest->tmb,$dest->info,$dest->meta,$dest->pgs,$imgs);
 				$id=(int) $dest->id;
 				if($id){				
-					$res= $this->con->updateRow('UPDATE destinations SET uid=?,name=?,unit=?,cats=?,kws=?,more=?,info=?,meta=?,pgs=?,imgs=? WHERE id='.$id,$ar);
+					$res= $this->con->updateRow('UPDATE destinations SET uid=?,name=?,unit=?,cats=?,kws=?,more=?,tmb=?,info=?,meta=?,pgs=?,imgs=? WHERE id='.$id,$ar);
 					if($res)$out->success='update';					
 				}else {				
-					$res = $this->con->insert('INSERT INTO destinations (uid,name,unit,cats,kws,more,info,meta,pgs,imgs) VALUES (?,?,?,?,?,?,?,?,?,?)',$ar);
+					$res = $this->con->insert('INSERT INTO destinations (uid,name,unit,cats,kws,more,tmb,info,meta,pgs,imgs) VALUES (?,?,?,?,?,?,?,?,?,?)',$ar);
 					$out->success='insert';
 				}
 				

@@ -37,12 +37,12 @@ switch(array_shift($a)){
 		$type=$get['type'];		
 		$val=$get['val'];
 		$who=$get['who'];
-		$stamp= $get['stamp'];		
-		include('cl/DbConnector.php');		
-		$db= new DbConnector();
-		$res= $db->insertRow('INSERT INTO stats (type,stamp,val,who) VALUES (?,?,?,?)',array($type,$stamp,$val,$who));
+		$stamp= $get['stamp'];
+		$db=new PDO('sqlite:statistics.db');
+		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),stamp INTEGER)');				
+		$res= $db->query("INSERT INTO stats (type,val,who,stamp) VALUES ('$type','$val','$who',$stamp)");
 		if($res) echo 'OK';
-		else echo 'ERROR';	
+		else echo json_encode($db->errorInfo());		
 			
 	break;
 	case 'get_pages_list':

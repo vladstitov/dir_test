@@ -1,6 +1,6 @@
 /**
-* Created by VladHome on 5/12/2014.
-*/
+ * Created by VladHome on 5/12/2014.
+ */
 var uplight;
 (function (uplight) {
     var BlackScreen = (function () {
@@ -10,10 +10,7 @@ var uplight;
             this.off = blank.start;
             this.location = url;
             console.log(blank);
-
-            this.timer = setInterval(function () {
-                return _this.testTime();
-            }, 5000);
+            this.timer = setInterval(function () { return _this.testTime(); }, 5000);
         }
         BlackScreen.prototype.testTime = function () {
             var now = new Date();
@@ -31,7 +28,6 @@ var uplight;
     })();
     uplight.BlackScreen = BlackScreen;
 })(uplight || (uplight = {}));
-
 window.onload = function () {
     var screen = new uplight.BlackScreen();
 };

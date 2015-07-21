@@ -6,7 +6,6 @@ $s=file_get_contents('data/settings.json');
 $settings = json_decode($s);
 $l=file_get_contents('data/labels.json');
 $labels = json_decode($l);
-
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +13,7 @@ $labels = json_decode($l);
 <head>
     <script>
         var u_settings = <?php echo $s; ?>;
-        var kiosk_id=1;
+        var kiosk_id='<?php echo $device; ?>';
         var u_labels = <?php echo $l; ?>;
     </script>
     <meta charset="utf-8">
@@ -26,7 +25,7 @@ $labels = json_decode($l);
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
-    <link href="css/kiosk/mainview.css" rel="stylesheet" />
+   <link href="css/kiosk/mainview.css" rel="stylesheet" />
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
     <!--
     <link href="css/KeyboardBlack.css" rel="stylesheet" type="text/css"/>
@@ -67,7 +66,7 @@ $labels = json_decode($l);
             <div class="view-port">
                 <section id="list-header">
                     <div id="list-header-main">
-                        Tenants and People Listing
+                        <?= $labels->list_header; ?>
                     </div>
                 </section>
                 <hr/>
@@ -78,7 +77,10 @@ $labels = json_decode($l);
                 <hr/>
                 <section id="list-footer">
                     <div id="list-footer-main">
-                        <div class="more">( <span class="fa fa-plus"></span> More Info Available ) </div>
+                        <div class="more">
+                            <?= ($labels->list_footer!='default')?$labels->list_footer:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?>
+
+                        </div>
                         <div id="searchinput">
                            <!-- <span class="fa fa-search"></span>-->
                             <input type="text" class="Plastic031" />
@@ -122,7 +124,7 @@ $labels = json_decode($l);
         <hr/>
     </section>
 <section id="footer">
-            Address
+    <?= $labels->footer; ?>
 </section>
 </div>
 
@@ -137,11 +139,14 @@ $labels = json_decode($l);
 
 <script src="js/kiosk/Keywords.js" ></script>
 <script src="js/kiosk/SearchResult.js"></script>
+<script src="js/kiosk/SearchDetails.js"></script>
+<script src="js/kiosk/SearchModel.js"></script>
 <script src="js/kiosk/Categories.js"></script>
 <script src="js/kiosk/InfoPage.js"></script>
 <!--<script src="js/kiosk/MainView.js"></script>
-<script src="js/kiosk/Details.js"></script>
-<script src="js/kiosk/ScreenSaver.js"></script>-->
+<script src="js/kiosk/SearchDetails.js"></script>
+-->
+<script src="js/kiosk/ScreenSaver.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
 <script src="js/kiosk/Kiosk.js" ></script>

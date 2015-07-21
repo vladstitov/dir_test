@@ -6,6 +6,7 @@
     color: #333333;
     background-color: #ffffff;
 }
+
 #u-header {
     display: block;
     height: 170px;
@@ -14,10 +15,14 @@
     width: 100%;
     top: 0;
     left: 0;
+    /*z-index: 100;*/
 }
+
 #u-header>div{
     display: inline-block;
 }
+
+
 #brand-logo{
     position: absolute;
     left: 30px;
@@ -28,12 +33,16 @@
 
 
 }
+
+
 #brand-more{
     position: absolute;
     right: 5px;
     height: 170px;
     width: 170px;
 }
+
+
 #Clock{
     position: absolute;
     top:0;
@@ -50,9 +59,11 @@
 
 
 }
+
 #Clock>span{
     margin: 0;
 }
+
 #Clock>span:first-child{
     font-size:40px;
 }
@@ -147,19 +158,34 @@ a:active{
 }
 
 #list-main li{
-    position: relative;
-    height: 102px;
+   /* position: relative;*/
     border-radius: 20px;
     margin: 12px 0 12px 0;
-    display: table;
-    width: 99%;
+    padding: 12px;
+  /*  display: table;
+   */
+    width: 96%;
 }
-#list-main li>div{
+/*#list-main li>.main{
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 102px;
+}*/
+/*#list-main li>div>div{
     vertical-align: middle;
     display: inline;
     display: table-cell;
     vertical-align: middle;
     padding-top: 10px;
+}*/
+
+#list-main li .row>div{
+    display: inline-block;
+}
+#list-main li>div.details{
+
+    display: none;
 }
 .fa-briefcase{
     color:#D96D00;
@@ -169,22 +195,20 @@ a:active{
 }
 #list-main li .icon{
     width: 25px;
-
     font-size: 25px;
-    padding-left: 12px;
-
+   /* padding-left: 12px;*/
     text-align: center;
+    margin-right: 0.5em;
 }
-#list-main li .icon>div{
 
-
-}
-#list-main li .more{
-    width: 18px;
+#list-main li .main>.row>.more{
+  /*  width: 18px;
     text-align: center;
     color: #666;
-    padding-right: 5px;
+    padding-right: 5px;*/
 
+    margin-left: 1em;
+    margin-right: 1em;
 
 }
 #list-main li .name{
@@ -192,25 +216,64 @@ font-size: 25px;
    /* padding-left: 12px;*/
 }
 #list-main li .unit{
-position: relative;
+    font-size: 25px;
+/*position: relative;
     right: 15px;
     text-align:right;
-    font-size: 22px;
+    font-size: 22px;*/
+    float: right;
+
 }
 #list-main li .unittype{
-    position: absolute;
+   /* position: absolute;
     right: 20px;
-    top: 14px;
+    top: 14px;*/
+    float: right;
+    margin-right: 35px;
 }
 #list-main li .kws{
-    position: absolute;
+  /*  position: absolute;
     right: 60px;
-    bottom: 5px;
+    bottom: 5px;*/
+height: 1em;
+    width: 100px;
+    margin-left: 100px;
+
 }
 #list-main li .info{
-position: absolute;
+/*position: absolute;
     left: 60px;
-    bottom: 5px;
+    bottom: 5px;*/
+}
+#list-main li>.details>.tmb{
+display: inline-block;
+    float: right;
+
+}
+#list-main li>.details>.tmb>img{
+    width: 128px;
+    height: 128px;
+    vertical-align: top;
+}
+
+#list-main li.img>.details>.more{
+    min-height: 128px;
+    margin-top: 10px;
+}
+#list-main li.img>.details>.more>table{
+    border-spacing: 10px;
+}
+#list-main li>.details>.more>table> tbody>tr> td:first-child{
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+#list-main li>.details>.more{
+    display: inline-block;
+   /* min-height: 128px;*/
+    min-width: 2px;
+    display: inline-block;
+
 }
 
 #list-footer-main{
@@ -218,6 +281,8 @@ position: absolute;
     height: 95px;
 
  }
+
+
 #list-footer-main .more{
     position: absolute;
     bottom: 20px;
@@ -295,4 +360,21 @@ position: absolute;
    text-align: left;
     text-decoration: underline;
     margin: 0.5em;
+}
+
+#Screensaver{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#Touchclip{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 1080px;
+    height: 200px;
 }

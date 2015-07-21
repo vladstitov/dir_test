@@ -106,6 +106,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 
         #Message{
             position: relative;
+            z-index: 100;
 
         }
         #Message>div{
@@ -122,6 +123,9 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
         }
         .inline{
             display: inline-block;
+        }
+        .disabled{
+            opacity: 0.5;
         }
 
     </style>

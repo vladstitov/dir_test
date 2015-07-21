@@ -33,12 +33,14 @@ module uplight {
        private data: any;
 
 
+
        constructor() {
-           Registry.getInstance().connector = new Connector();
-           Registry.getInstance().connector.who=kiosk_id.toString();
-           Registry.getInstance().model = new Model();
-           Registry.getInstance().settings = u_settings;
-           Registry.getInstance().dispatcher = $({});
+           var r:Registry = Registry.getInstance();
+           r.connector = new Connector();
+           r.connector.who=kiosk_id.toString();
+           r.model = new Model();
+           r.settings = u_settings;
+           r.dispatcher = $({});
 
            var kb = new Keyboard($('#Keyboard'));
            var si = new SearchInput($('#searchinput'));
@@ -51,6 +53,10 @@ module uplight {
            if(isNaN(delay) || delay<2000) delay =2000;
 
            setInterval(()=>this.relay(),delay);
+
+           var ss:ScreenSaver = new ScreenSaver($('#container'));
+          r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
+
 
           // Registry.getInstance().connector.Log('kiosk started succesguly');
          // Registry.getInstance().connector.Error('kiosk started succesguly');

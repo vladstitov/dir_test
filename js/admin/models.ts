@@ -336,9 +336,9 @@ module uplight{
         saveCategory(vo:VOCategory,callBack):void{
             var that= this;
             this.R.connector.saveCategory(vo).done(function(res){
-
                 that.setCategories(res);
                 that.mapCategories();
+                callBack({success:true});
 
              that.dispatcher.triggerHandler(that.CATEGORIES_CAHANGE,res);
          });

@@ -61,18 +61,25 @@ module uplight{
         R:Registry;
         private isKw:boolean;
         constructor(view:JQuery){
+
             this.view=view;
             this.data='';
             this.input = this.view.find('input');
             this.R=Registry.getInstance();
             this.btnClear = view.find('[data-id=btnClear]:first');
             this.addListeners();
+
         }
 
+        reset(){
+            this.input.val('');
+            this.data='';
+        }
         private addListeners():void{
             this.btnClear.on(CLICK,()=>this.onClearClick());
             this.R.dispatcher.on(this.R.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
             this.R.dispatcher.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
+            this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
         }
         private onKeyword(str:string):void{
             //this.isKw=true

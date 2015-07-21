@@ -28,6 +28,7 @@ module uplight {
             vo.meta = this.meta.val() || '';
             vo.kws = this.keywords.val() || '';
             vo.uid = this.uid.val() || '';
+            vo.tmb= this.tmbImg.attr('src');
             var pages = this.pages.html();
             if (pages.length > 20) {
                 vo.pgs = 'pages';
@@ -65,6 +66,7 @@ module uplight {
             this.dbid.text('');
             this.keywords.val('');
             this.pages.html('');
+            this.tmbImg.attr('src',null);
             // this.showItemCategories();
 
         }
@@ -97,6 +99,8 @@ module uplight {
         R:RegA
 
         private pages:JQuery;
+        private tmbImg:JQuery;
+        private tmbInput:JQuery
         private btnAddRow:JQuery;
         private btnDeleteRow:JQuery;
         private selectedRow:JQuery;
@@ -118,6 +122,11 @@ module uplight {
             this.details = form.find('[data-id=details]:first');
 
             this.keywords = form.find('[data-id=keywords]:first');
+
+            this.tmbImg=form.find('[data-id=imgThumbnail]:first');
+            this.tmbInput = form.find('[data-id=tmbInput]:first');
+            this.tmbInput.on(CHANGE,(evt)=>this.onTmbInputChange(evt));
+
             this.meta = form.find('[data-id=meta]:first');
             this.uid = form.find('[data-id=uid]:first');
             this.dbid = form.find('[data-id=dbid]:first');
@@ -141,6 +150,20 @@ module uplight {
             $('#DetailsImages [data-id=btnEfit]:first').on(CLICK,()=>this.onEditImagesClick());
         }
 
+        private onUploadTumb(res:VOResult):void{
+            this.tmbImg.attr('src',res.result);
+            console.log(res);
+        }
+        private onTmbInputChange(evt:JQueryEventObject):void{
+            var input:any =evt.target;
+            var files:FileList = input.files;
+            if(files.length){
+                var form:FormData = new FormData();
+                form.append('file',files[0])
+                this.R.connector.uploadDestinationImage(form,this.current.uid).done((res:VOResult)=>this.onUploadTumb(res))
+
+            }
+        }
         private onImageEditorDoneClick():void{
             this.imagesEditor.render();
             this.view.show();
@@ -239,6 +262,7 @@ module uplight {
                 this.dbid.text(vo.id);
                 this.keywords.val(vo.kws);
                 this.pages.html('');
+                this.tmbImg.attr('src',vo.tmb);
                 if(vo.pgs=='pages') this.pages.load('data/pages/'+vo.uid+'.htm');
                 // this.showItemCategories();
 

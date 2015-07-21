@@ -101,6 +101,10 @@ var uplight;
                 this.showLibrary();
         };
         CategoryForm.prototype.onSaveResult = function (res) {
+            if (res.success)
+                this.R.alert('Record Saved', this.btnSave.parent());
+            else
+                this.R.alert('ERROR ', this.btnSave.parent());
             console.log(res);
         };
         CategoryForm.prototype.onSaveClicked = function () {
@@ -108,6 +112,11 @@ var uplight;
             var vo = this.getCurrent();
             if (!vo)
                 return;
+            var btn = this.btnSave;
+            btn.prop('disabled', true);
+            setTimeout(function () {
+                btn.prop('disabled', false);
+            }, 1500);
             this.R.model.saveCategory(vo, function (res) { return _this.onSaveResult(res); });
         };
         CategoryForm.prototype.onCategorySelected = function (cat) {

@@ -41,11 +41,19 @@ var uplight;
             this.notInListing.show();
         };
         CategoryListing.prototype.onSave = function (res) {
+            if (res.success)
+                this.R.alert('Records Saved', this.btnSave.parent());
+            else
+                this.R.alert('ERROR ', this.btnSave.parent());
             console.log(res);
         };
         CategoryListing.prototype.onSaveClicked = function () {
             var _this = this;
-            console.log('save');
+            var btn = this.btnSave;
+            btn.prop('disabled', true);
+            setTimeout(function () {
+                btn.prop('disabled', false);
+            }, 1500);
             var ids = this.inListing.getAllIds();
             var catid = this.inListing.getCatId();
             this.R.model.saveCategoryListing(catid, ids, function (res) { return _this.onSave(res); });

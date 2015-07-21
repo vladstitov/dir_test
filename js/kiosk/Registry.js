@@ -1,7 +1,8 @@
 /// <reference path="Connector.ts" />
 /// <reference path="KeyboardSimple.ts" />
 /// <reference path="SearchResult.ts" />
-/// <reference path="SearchController.ts" />
+/// <reference path="SearchDetails.ts" />
+/// <reference path="SearchModel.ts" />
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
@@ -39,6 +40,9 @@ var uplight;
             this.ON_DATA = 'ON_DATA';
             this.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
             this.SEARCH_CHANGED = 'SEARCH_CHANGED';
+            this.RESET_ALL = 'RESET_ALL';
+            this.SS_START = 'SS_START';
+            this.SS_STOP = 'SS_STOP';
             this.all = [];
             // onSearchResultClick2: Function;
             this.errors = '';

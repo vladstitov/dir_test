@@ -70,7 +70,11 @@ var uplight;
         DetailsEditor.prototype.onBtnSaveClick = function () {
             var _this = this;
             // if (this.btnSave.hasClass(DISABLED)) return;
-            console.log('click');
+            var btn = this.btnSave;
+            btn.prop('disabled', true);
+            setTimeout(function () {
+                btn.prop('disabled', false);
+            }, 1500);
             var dest = this.detailsForm.getDestination();
             if (!dest)
                 return;

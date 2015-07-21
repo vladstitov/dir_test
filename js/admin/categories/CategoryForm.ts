@@ -127,12 +127,17 @@ module uplight{
             else this.showLibrary();
         }
         private onSaveResult(res):void {
-                console.log(res);
+            if(res.success) this.R.alert('Record Saved', this.btnSave.parent());
+             else this.R.alert('ERROR ', this.btnSave.parent());
 
+            console.log(res);
         }
         private onSaveClicked(){
             var vo:VOCategory = this.getCurrent();
             if(!vo) return
+            var btn = this.btnSave
+            btn.prop('disabled',true);
+            setTimeout(function(){btn.prop('disabled',false);},1500);
             this.R.model.saveCategory(vo,(res)=>this.onSaveResult(res));
 
         }

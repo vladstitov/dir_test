@@ -195,4 +195,4 @@ var uplight;
     })();
     uplight.Keyboard2 = Keyboard2;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=Keyboard.js.map
+//# sourceMappingURL=keyboard.js.map

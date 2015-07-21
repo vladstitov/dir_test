@@ -1,7 +1,9 @@
 ﻿/// <reference path="Connector.ts" />
 /// <reference path="KeyboardSimple.ts" />
 /// <reference path="SearchResult.ts" />
-/// <reference path="SearchController.ts" />
+/// <reference path="SearchDetails.ts" />
+/// <reference path="SearchModel.ts" />
+
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
@@ -48,6 +50,9 @@ module uplight {
         ON_DATA:string='ON_DATA';
         CATEGORIES_CHANGE:string='CATEGORIES_CHANGE';
         SEARCH_CHANGED:string='SEARCH_CHANGED';
+        RESET_ALL:string='RESET_ALL';
+        SS_START:string='SS_START';
+        SS_STOP:string='SS_STOP';
         modelDests: Model;
        // connector: kiosk.Connector;
         settings: any;
@@ -135,10 +140,12 @@ module uplight {
         cats: number[];
         categories:string[];
         pgs: string;
-        more: any;
+        more: string;
+        tmb:string
         meta:string;
         kws:string;
         icon:string;
+
 
     }
 

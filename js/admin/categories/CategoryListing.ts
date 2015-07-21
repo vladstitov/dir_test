@@ -71,11 +71,15 @@ module uplight{
            this.notInListing.show();
        }
 
-       private onSave(res):void{
+       private onSave(res:VOResult):void{
+           if(res.success) this.R.alert('Records Saved', this.btnSave.parent());
+            else this.R.alert('ERROR ', this.btnSave.parent());
            console.log(res);
        }
        private onSaveClicked():void{
-           console.log('save');
+           var btn = this.btnSave
+           btn.prop('disabled',true);
+           setTimeout(function(){btn.prop('disabled',false);},1500);
            var ids:number[] = this.inListing.getAllIds();
            var catid:number = this.inListing.getCatId();
            this.R.model.saveCategoryListing(catid,ids,(res)=>this.onSave(res))

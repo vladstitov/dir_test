@@ -179,8 +179,10 @@ module uplight{
         categories:string[];
         pgs: string;
         more: any;
+        tmb:string;
         meta:string;
         kws:string;
     }
+
 
 }

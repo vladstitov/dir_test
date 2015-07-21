@@ -8,17 +8,42 @@ var uplight;
             this.model = uplight.Registry.getInstance().model;
             this.list = $('<ul>');
             this.addListeners();
+            this.cache = {};
+            //this.details = new Details(view);
         }
+        SearchResult.prototype.reset = function () {
+            this.result = this.data;
+            this.render(true);
+        };
         SearchResult.prototype.addListeners = function () {
             var _this = this;
             this.R.dispatcher.on(this.R.CATEGORIES_CHANGE, function (evt, cats) { return _this.onCategoriesChange(cats); });
             this.R.dispatcher.on(this.R.SEARCH_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
+            this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
             console.log('listeners');
         };
+        SearchResult.prototype.getModelById = function (id) {
+            if (this.cache[id])
+                return this.cache[id];
+            var ar = this.data;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                if (ar[i].id == id) {
+                    return this.cache[id] = ar[i];
+                    return ar[i];
+                }
+            }
+            return null;
+        };
         SearchResult.prototype.onListClick = function (evt) {
+            // console.log(evt.currentTarget);
             var id = $(evt.currentTarget).data('id');
             console.log(id);
+            if (isNaN(Number(id)))
+                return;
+            var mod = this.getModelById(id);
+            if (mod)
+                mod.togleDetails();
             this.R.connector.Stat('sr', id.toString());
         };
         SearchResult.prototype.onSearchChange = function (pattern) {
@@ -28,7 +53,7 @@ var uplight;
                 this.result = this.filterSearch();
             else
                 this.result = this.data;
-            this.render();
+            this.render(false);
         };
         SearchResult.prototype.filterSearch = function () {
             var out1 = [];
@@ -37,6 +62,7 @@ var uplight;
             var ar = this.data;
             var str = this.currentPattern;
             for (var i = 0, n = ar.length; i < n; i++) {
+                ar[i].clearKeyword();
                 var ind = ar[i].filterStr(str);
                 if (ind === 1)
                     out1.push(ar[i]);
@@ -57,13 +83,13 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++)
                 ar[i].setCats(cats).render();
         };
-        SearchResult.prototype.render = function () {
+        SearchResult.prototype.render = function (reset) {
             var _this = this;
             var ar = this.result;
             // console.log(this.data.length);
             var list = this.list.remove().html('');
             for (var i = 0, n = ar.length; i < n; i++)
-                list.append(ar[i].getView());
+                list.append(ar[i].getView(reset));
             this.list.appendTo(this.view);
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
         };
@@ -71,128 +97,14 @@ var uplight;
             var ar = this.model.getData();
             var list = this.list, out = [];
             for (var i = 0, n = ar.length; i < n; i++)
-                out.push(new DestModel(ar[i]));
+                out.push(new uplight.DestModel(ar[i]));
             this.data = out;
             this.result = out;
-            this.render();
+            this.render(false);
             // this.searchController = new SearchController());
         };
         return SearchResult;
     })();
     uplight.SearchResult = SearchResult;
-    var DestModel = (function () {
-        function DestModel(vo) {
-            this.vo = vo;
-            this.byCat = true;
-            this.byPat = true;
-            this.cache = {};
-            this.view = this.renderVo(vo);
-            this.name = ' ' + vo.name.toLowerCase();
-            this.unit = ' ' + vo.unit.toLowerCase();
-            this.kws = ',' + vo.kws;
-            this.kw = this.view.find('.kws:first');
-        }
-        DestModel.prototype.tryName = function (pat) {
-            var out = 0;
-            var ind = this.name.indexOf(pat);
-            if (ind === 0)
-                out = 1;
-            else if (ind !== -1)
-                out = 2;
-            return out;
-        };
-        DestModel.prototype.tryUnit = function (pat) {
-            var out = 0;
-            var ind = this.unit.indexOf(pat);
-            if (ind == 0)
-                out = 1;
-            else if (ind !== -1)
-                out = 2;
-            return out;
-        };
-        DestModel.prototype.tryKw = function (pat) {
-            var out;
-            var kws = this.kws;
-            if (this.kws.indexOf(pat) !== -1) {
-                var ind = kws.indexOf(pat);
-                var end = kws.indexOf(',', ind + 1);
-                if (end === -1)
-                    out = kws.substr(ind + 1);
-                else
-                    out = this.kws.substring(ind + 1, end);
-            }
-            return out;
-        };
-        DestModel.prototype.filterStr = function (pat) {
-            if (this.iskw)
-                this.clearKeyword();
-            var out = 0;
-            if (isNaN(Number(pat))) {
-                out = this.tryName(' ' + pat);
-                if (out === 0)
-                    out = this.tryUnit(' ' + pat);
-            }
-            else {
-                out = this.tryUnit(' ' + pat);
-                if (out === 0)
-                    out = this.tryName(' ' + pat);
-            }
-            if (out === 0) {
-                var kw = this.tryKw(',' + pat);
-                if (kw) {
-                    this.showKeyword(kw);
-                    out = 3;
-                }
-            }
-            this.ind = out;
-            return out;
-        };
-        DestModel.prototype.showKeyword = function (str) {
-            console.log('showKeyword  ' + str);
-            this.kw.text(str);
-            this.iskw = 1;
-        };
-        DestModel.prototype.clearKeyword = function () {
-            this.kw.text('');
-            this.iskw = 0;
-        };
-        DestModel.prototype.setCats = function (cats) {
-            this.cats = ar;
-            var ar = this.vo.cats;
-            if (!ar) {
-                this.byCat = false;
-                return this;
-            }
-            var dif = ar.filter(function (n) {
-                return cats.indexOf(n) != -1;
-            });
-            if (dif.length === 0)
-                this.byCat = false;
-            else
-                this.byCat = true;
-            return this;
-        };
-        DestModel.prototype.render = function () {
-            if (this.byCat && this.byPat)
-                this.view.show();
-            else
-                this.view.hide();
-        };
-        DestModel.prototype.getView = function () {
-            return this.view;
-        };
-        DestModel.prototype.renderVo = function (vo) {
-            var more = '<div class="more"><span class="fa fa-plus"></span></div>';
-            var icon = '<div class="icon"><span class="' + vo.icon + '"></span></div>';
-            var name = '<div class="name">' + vo.name + '</div>';
-            var unit = '<div class="unit">' + vo.unit + '</div>';
-            var utype = '<div class="unittype">unit</div>';
-            var kws = '<div class="kws">' + vo.kws + '</div>';
-            var info = '<div class="info">' + vo.cats + '</div>';
-            return $('<li>').data('id', vo.id).addClass('Plastic031').html(icon + more + name + unit + utype + kws + info);
-        };
-        return DestModel;
-    })();
-    uplight.DestModel = DestModel;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=SearchResult.js.map

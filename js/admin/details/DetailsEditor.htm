@@ -20,6 +20,9 @@
         width: 5em;
     }
 
+    #DetailsList .panel-heading>div {
+       display: inline;
+    }
 
     /*#Destinations #lstDests ul li:nth-child(even){
         background-color: #eff1f1;
@@ -56,19 +59,28 @@
     }
 
 
+#Thumbnail{
+    text-align: center;
+
+ }
+    #Thumbnail input{
+        display: inline !important;
+       box-shadow: 1px 1px 1px gray;
+        margin: 5px;
+    }
+
 </style>
 
 <div id="DetailsEditor">
         <div class="row">
          <section id="DetailsList" class="panel panel-default">
              <div class="panel-heading">
-
-                     <span>
+                     <div>
                          By Category: <select data-id="select"></select>
-                     </span>
-                     <span>
+                     </div>
+                     <div>
                          &nbsp;&nbsp; &nbsp; &nbsp;<div class="fa fa-search"></div> <input data-id="search" id="txtFilter" type="text" />
-                     </span>
+                     </div>
                      <div class="btn" data-id="btnAdd">
                          <div class="fa fa-plus"></div><span> Add</span>
                      </div>
@@ -120,7 +132,7 @@
 
 
 
-                <div  class="form-group col-md-12">
+                <div  class="form-group col-md-8">
                     <label>More info in table:</label><div data-id="btnAddRow" class="btn"><span class="fa fa-plus"></span> Add row </div><div data-id="btnDeleteRow" class="btn"><span class="fa fa-close"></span> Delete row </div>
                     <table id="details-table" class="table" >
                         <tbody data-id="details"  contenteditable="true">
@@ -130,6 +142,13 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+
+
+                <div id="Thumbnail" class="form-group col-md-4">
+                    <label>Thumbnail 128x128</label>
+                    <div ><img width="128" height="128" data-id="imgThumbnail" /></div>
+                    <div><input  data-id="tmbInput" type="file"   /></div>
                 </div>
 
                 <div  id="DetailsImages" class="form-group col-md-12">

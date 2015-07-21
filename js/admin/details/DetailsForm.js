@@ -19,6 +19,9 @@ var uplight;
             this.info = form.find('[data-id=info]:first');
             this.details = form.find('[data-id=details]:first');
             this.keywords = form.find('[data-id=keywords]:first');
+            this.tmbImg = form.find('[data-id=imgThumbnail]:first');
+            this.tmbInput = form.find('[data-id=tmbInput]:first');
+            this.tmbInput.on(CHANGE, function (evt) { return _this.onTmbInputChange(evt); });
             this.meta = form.find('[data-id=meta]:first');
             this.uid = form.find('[data-id=uid]:first');
             this.dbid = form.find('[data-id=dbid]:first');
@@ -54,6 +57,7 @@ var uplight;
             vo.meta = this.meta.val() || '';
             vo.kws = this.keywords.val() || '';
             vo.uid = this.uid.val() || '';
+            vo.tmb = this.tmbImg.attr('src');
             var pages = this.pages.html();
             if (pages.length > 20) {
                 vo.pgs = 'pages';
@@ -87,6 +91,7 @@ var uplight;
             this.dbid.text('');
             this.keywords.val('');
             this.pages.html('');
+            this.tmbImg.attr('src', null);
             // this.showItemCategories();
         };
         DetailsForm.prototype.setDestibation = function (vo) {
@@ -97,6 +102,20 @@ var uplight;
         DetailsForm.prototype.setID = function (num) {
             this.current.id = num;
             this.dbid.text(num);
+        };
+        DetailsForm.prototype.onUploadTumb = function (res) {
+            this.tmbImg.attr('src', res.result);
+            console.log(res);
+        };
+        DetailsForm.prototype.onTmbInputChange = function (evt) {
+            var _this = this;
+            var input = evt.target;
+            var files = input.files;
+            if (files.length) {
+                var form = new FormData();
+                form.append('file', files[0]);
+                this.R.connector.uploadDestinationImage(form, this.current.uid).done(function (res) { return _this.onUploadTumb(res); });
+            }
         };
         DetailsForm.prototype.onImageEditorDoneClick = function () {
             this.imagesEditor.render();
@@ -181,6 +200,7 @@ var uplight;
                 this.dbid.text(vo.id);
                 this.keywords.val(vo.kws);
                 this.pages.html('');
+                this.tmbImg.attr('src', vo.tmb);
                 if (vo.pgs == 'pages')
                     this.pages.load('data/pages/' + vo.uid + '.htm');
                 // this.showItemCategories();
