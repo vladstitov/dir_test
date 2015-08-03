@@ -21,9 +21,9 @@ module uplight {
             $.post(this.service + 'log_log',msg);
         }
 
-        relay(kiosk_id,stamp:number,now:number,let:number,timer:number):JQueryPromise<VOResult>{
+        relay(kiosk_id,stamp:number,now:number,ping:number,timer:number,status:string):JQueryPromise<VOResult>{
 
-            return $.get(this.service+'get_stamp&kiosk_id='+kiosk_id+'&stamp='+stamp+'&now='+now+'&let='+let+'&timer='+timer);
+            return $.get(this.service+'get_stamp&id='+kiosk_id+'&stamp='+stamp+'&now='+now+'&ping='+ping+'&timer='+timer+'&status='+status);
 
         }
         Error(msg:string): void {

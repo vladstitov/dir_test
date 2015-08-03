@@ -123,6 +123,7 @@ module uplight{
         }
         private renderLabels(ar:any[]):void{
             this.labels = ar;
+            console.log(ar);
             var out='';
            for(var i=0,n=ar.length;i<n;i++){
                out+= this.renderItem(ar[i],i);
@@ -135,8 +136,9 @@ module uplight{
 
         private onEditClick(el:JQuery): void {
            var row= el.parent().parent();
-            var i:string = row.data('i');
-            var item= this.labels[row.data('i')];
+            var i:number = Number(row.data('i'));
+            if(isNaN(i)) return;
+            var item= this.labels[i];
             if(!item) return;
            this.selectedItem =  item;
             if(item.type=='image'){

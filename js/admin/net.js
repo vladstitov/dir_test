@@ -141,11 +141,11 @@ var uplight;
             ;
         };
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
-        Connector.prototype.getRSSs = function (callBack) {
-            $.get(this.service + '?a=screen.get_rsss').done(callBack);
+        Connector.prototype.getData = function (filename) {
+            return $.get(this.service + '?a=screen.get_data&file_name=' + filename);
         };
-        Connector.prototype.saveRSSs = function (data, callBack) {
-            $.post(this.service + '?a=screen.save_rsss', JSON.stringify(data)).done(callBack);
+        Connector.prototype.saveData = function (data, filename) {
+            return $.post(this.service + '?a=screen.save_data&file_name=' + filename, data);
         };
         Connector.prototype.getLabels = function () {
             return $.get(this.service + '?a=screen.get_labels', 'application/json');

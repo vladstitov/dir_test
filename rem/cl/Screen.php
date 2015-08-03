@@ -65,14 +65,24 @@ class Screen{
 						return $out;
 					}		
 			
-			case 'save_messages':			
-			 return file_put_contents('../data/messages.json',file_get_contents('php://input'));			
+			case 'save_data':
+					if(!isset($get['file_name'])) die('ERROR');
+					
+					header('Content-type: application/json');
+					$res = file_put_contents('../data/'.$get['file_name'],file_get_contents('php://input'));	
+					if($res){
+						$out->success='file saved';
+						$out->result= 'data/'.$get['file_name'];
+					}
+					else $out->error='cant save file';	
 			break;	
 			
-			case 'get_rsss':
-			$obj=json_decode( file_get_contents('../data/rss.json'));
-			break;
-			
+			case 'get_data':
+			if(!isset($get['file_name'])) return 'ERROR';
+			$file_name= '../data/'.$get['file_name'];
+			if(file_exists($file_name)) return file_get_contents($file_name);
+
+			break;			
 			case 'save_rsss':
 			return file_put_contents('../data/rss.json',file_get_contents('php://input'));
 			break;			

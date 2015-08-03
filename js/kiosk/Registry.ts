@@ -56,6 +56,7 @@ module uplight {
         modelDests: Model;
        // connector: kiosk.Connector;
         settings: any;
+        status:string;
         isServer: boolean;
         all:any=[];
         data:any[];

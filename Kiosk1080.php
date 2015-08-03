@@ -2,8 +2,10 @@
 session_start();
 $device=1;
 if(isset($_GET['device']))$device=$_GET['device'];
-$s=file_get_contents('data/settings.json');
-$settings = json_decode($s);
+$settings = json_decode(file_get_contents('data/settings.json'));
+$s= array();
+foreach($settings as $val) $s[$val->id]=$val->value;
+//
 $l=file_get_contents('data/labels.json');
 $labels = json_decode($l);
 ?>
@@ -12,7 +14,7 @@ $labels = json_decode($l);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <script>
-        var u_settings = <?php echo $s; ?>;
+        var u_settings = <?php echo json_encode($s); ?>;
         var kiosk_id='<?php echo $device; ?>';
         var u_labels = <?php echo $l; ?>;
     </script>
@@ -126,6 +128,9 @@ $labels = json_decode($l);
 <section id="footer">
     <?= $labels->footer; ?>
 </section>
+    <section id="cover">
+
+    </section>
 </div>
 
 <div id="History" style="display:none;"></div>
@@ -139,6 +144,7 @@ $labels = json_decode($l);
 
 <script src="js/kiosk/Keywords.js" ></script>
 <script src="js/kiosk/SearchResult.js"></script>
+<script src="js/kiosk/SearchDetailsLarge.js"></script>
 <script src="js/kiosk/SearchDetails.js"></script>
 <script src="js/kiosk/SearchModel.js"></script>
 <script src="js/kiosk/Categories.js"></script>

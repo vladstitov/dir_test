@@ -2,6 +2,7 @@
  * Created by VladHome on 7/18/2015.
  */
 /// <reference path="Registry.ts" />
+/// <reference path="SearchDetailsLarge.ts" />
 var uplight;
 (function (uplight) {
     var DestModel = (function () {
@@ -13,8 +14,6 @@ var uplight;
             this.haveMore = 0;
             var more = vo.more.split('\n');
             var img = '';
-            if (vo.id == 11)
-                console.log(vo);
             if (more.length !== 1 || (vo.tmb && vo.tmb.length)) {
                 var det = new uplight.SearchDetails($('<div>').addClass('details'));
                 if (more.length !== 1)
@@ -24,13 +23,18 @@ var uplight;
                 this.details = det;
                 this.haveMore = 1;
             }
+            var det2 = new uplight.SearchDetailsLarge(vo);
+            if (det2.haveData)
+                this.detailsLarge = det2.setDetailsSmall(det);
             this.id = vo.id;
             this.view = $('<li>').addClass(img + ' item Plastic031').attr('data-id', vo.id).append(this.renderVo(vo, this.haveMore));
             this.name = ' ' + vo.name.toLowerCase();
             this.unit = ' ' + vo.unit.toLowerCase();
             this.kws = ',' + vo.kws;
             this.kw = this.view.find('.kws:first');
-            if (this.haveMore) {
+            if (this.detailsLarge) {
+            }
+            else if (this.haveMore == 1) {
                 this.view.append(det.view);
             }
             // console.log(vo.more);
@@ -54,8 +58,11 @@ var uplight;
             this.show();
         };
         DestModel.prototype.togleDetails = function () {
+            if (this.detailsLarge) {
+                return this.detailsLarge.getView();
+            }
             if (!this.details)
-                return;
+                return null;
             if (this.isDetails) {
                 this.isDetails = false;
                 this.details.view.hide('fast');
@@ -69,6 +76,7 @@ var uplight;
                 this.details.view.show('fast');
                 this.btnMore.html('<span class="fa fa-minus"></span> Less...');
             }
+            return null;
         };
         DestModel.prototype.hideDetails = function () {
             if (this.isDetails) {

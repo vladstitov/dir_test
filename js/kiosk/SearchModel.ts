@@ -2,6 +2,8 @@
  * Created by VladHome on 7/18/2015.
  */
     /// <reference path="Registry.ts" />
+    /// <reference path="SearchDetailsLarge.ts" />
+
 module uplight{
     export class DestModel{
         view:JQuery
@@ -19,19 +21,22 @@ module uplight{
         details:SearchDetails;
         haveMore:number=0;
         btnMore:JQuery;
+        detailsLarge:SearchDetailsLarge;
         constructor(private vo:VODestination){
             var more =  vo.more.split('\n');
             var img=''
-            if(vo.id==11) console.log(vo);
+
+
             if(more.length!==1 || (vo.tmb && vo.tmb.length)){
                 var det:SearchDetails = new SearchDetails( $('<div>').addClass('details'));
                 if(more.length!==1) det.createTable(more);
                 if(vo.tmb && vo.tmb.length) img= det.createImage(vo.tmb);
-
                 this.details = det;
                 this.haveMore=1;
             }
 
+            var det2:SearchDetailsLarge = new SearchDetailsLarge(vo);
+            if(det2.haveData) this.detailsLarge = det2.setDetailsSmall(det);
             this.id=vo.id;
             this.view = $('<li>').addClass(img+' item Plastic031').attr('data-id',vo.id).append(this.renderVo(vo,this.haveMore));
             this.name=' '+vo.name.toLowerCase();
@@ -39,8 +44,8 @@ module uplight{
             this.kws=','+vo.kws;
             this.kw=this.view.find('.kws:first');
 
-
-            if(this.haveMore){
+            if(this.detailsLarge){}
+            else if(this.haveMore==1){
                 this.view.append(det.view);
 
             }
@@ -76,8 +81,11 @@ module uplight{
 
         private isDetails;
 
-        togleDetails():void{
-            if(!this.details) return;
+        togleDetails():JQuery{
+            if(this.detailsLarge){
+                return this.detailsLarge.getView()
+            }
+            if(!this.details) return null;
             if(this.isDetails) {
                 this.isDetails = false;
                 this.details.view.hide('fast');
@@ -91,6 +99,7 @@ module uplight{
                 this.details.view.show('fast');
                 this.btnMore.html('<span class="fa fa-minus"></span> Less...');
             }
+            return null;
         }
         hideDetails():void{
             if(this.isDetails) {

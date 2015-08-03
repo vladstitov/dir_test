@@ -97,6 +97,7 @@ var uplight;
         };
         LabelsManager.prototype.renderLabels = function (ar) {
             this.labels = ar;
+            console.log(ar);
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += this.renderItem(ar[i], i);
@@ -105,8 +106,10 @@ var uplight;
         };
         LabelsManager.prototype.onEditClick = function (el) {
             var row = el.parent().parent();
-            var i = row.data('i');
-            var item = this.labels[row.data('i')];
+            var i = Number(row.data('i'));
+            if (isNaN(i))
+                return;
+            var item = this.labels[i];
             if (!item)
                 return;
             this.selectedItem = item;

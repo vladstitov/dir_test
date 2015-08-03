@@ -106,7 +106,9 @@ switch(array_shift($a)){
 		$result=$ctr->getBackground();
 	break;	
 	case 'get_stamp':
+		if(!isset($get['id']) || !isset($get['stamp'])) die('ERROR');
 		header('Content-type: application/json');
+		
 		echo json_encode(trackController($get));	
 		
 	break;
@@ -126,47 +128,54 @@ switch(array_shift($a)){
 
 
 function trackController($get){
+		
 		$out=new stdClass();
-		$out->success='success';
-			if(isset($get['stamp']) && isset($get['kiosk_id'])){
-					$file_name='../data/track.json';
-					$id='kiosk_'.$get['kiosk_id'];
-					$track= json_decode(file_get_contents($file_name));
-					if(!isset($track->$id))	$track->$id = new stdClass();			
-					$kiosk = $track->$id;					
-					$stamp=(int)$get['stamp'];
-					$k_time=(int)$get['now'];
-					$timer=(int)$get['timer'];
-					if($stamp==0) {
-						$stamp=time();
-						$kiosk->status='started';
-						$kiosk ->start_at=$k_time;
-						$kiosk->stamp=$stamp;
-						$kiosk->ip=$_SERVER['REMOTE_ADDR'];
-						$out->success='stamp';
-						$out->result = $stamp;
-						$out->ktime=$k_time;
-						$track->$id=$kiosk;
-						file_put_contents($file_name,json_encode($track));
-						return $out;
-					}
-										
-					if($kiosk->status=='restart'){
-							$out->success='restart';
-							$out->result='Kiosk1080.php?kiosk_id='.$id;
-					}
+		$out->success='success';			
+		$file_name='../data/track.json';
+		
+		$id=$get['id'];
+		$track = json_decode(file_get_contents($file_name));
+		if(!isset($track->$id))	$track->$id = new stdClass();			
+		$kiosk = $track->$id;					
+		$stamp=(int)$get['stamp'];
+		$k_time=(int)@$get['now'];
+		$timer=(int)@$get['timer'];
+		$status=@$get['status'];
+		
+		if($stamp==0) {
+			$stamp=time();
+			$kiosk->status='started';// 1 status started;  2 status working ; 3 status screensaver; 100 restart with url; 99 reload
+			$kiosk ->start_at = $k_time;
+			$kiosk->stamp = $stamp;
+			$kiosk->ip = $_SERVER['REMOTE_ADDR'];
+			$out->success = 'stamp';
+			$out->result = $stamp;
+			$out->ktime = $k_time;
+			$track->$id = $kiosk;
+			file_put_contents($file_name,json_encode($track));
+			return $out;
+		}
+							
+		if($kiosk->status=='restart'){
+			$out->success='restart';
+			$out->result='Kiosk1080.php?device='.$id;
+		}
+		if($kiosk->status=='reload'){
+			$out->success='reload';
+			$out->result=''.$id;
+		}
+		
+		$kiosk->status=$status;
+		$kiosk->K_time=$k_time;
+		$kiosk->ping=(int)@$get['ping'];
+		$kiosk->S_time = time();
+		$kiosk->timer=$timer;
+		$track->$id=$kiosk;
+		file_put_contents($file_name,json_encode($track));
+		
 					
-					$kiosk->status='working';
-					$kiosk->K_time=$k_time;
-					$kiosk->let=(int)$get['let'];
-					$kiosk->S_time = time();
-					$kiosk->timer=$timer;
-					$track->$id=$kiosk;
-					file_put_contents($file_name,json_encode($track));
 					
-					
-					
-			}
+		
 			
 			return $out;
 		

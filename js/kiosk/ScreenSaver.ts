@@ -10,7 +10,7 @@ module uplight {
         constructor(private container:JQuery) {
             this.R=Registry.getInstance();
            this.timeout = Number(this.R.settings.ss_timeout)*1000;
-            if(isNaN(this.timeout) || this.timeout<20000)this.timeout=20000;
+            if(isNaN(this.timeout) || this.timeout<10000)this.timeout=10000;
             this.view = $('<div>').attr('id','Screensaver');
             document.addEventListener(CLICK, (evt: MouseEvent) => this.onClick(evt));
             this.startTimer();

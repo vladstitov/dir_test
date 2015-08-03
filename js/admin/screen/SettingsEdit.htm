@@ -1,0 +1,101 @@
+
+<style type="text/css">
+
+/*#SettingsEdit tr>td:first-child{
+        width: 20%;
+}*/
+#SettingsEdit tr>td:last-child{
+    width: 10%;
+}
+#SettingsEdit tr>td{
+    display: table-cell;
+    vertical-align: middle;
+}
+#SettingsEdit table{
+    display: table;
+}
+#SettingsEdit .value>img{
+    max-height: 5em;
+    max-width: 5em;
+}
+#SettingsEdit .nano{
+    max-height: 60em;
+    overflow-y: auto;
+}
+#SettingsEdit .editor{
+    width: 50em;
+    height: 20em;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#SettingsEdit .editor.large{
+    height: 50em;
+}
+#SettingsEdit .footer{
+    width: 100%;
+    position: absolute;
+    bottom: 2em;
+    background-color: white;
+    text-align: center;
+}
+
+#SettingsEditorr .panel-body>*{
+    text-align: center;
+}
+#SettingsEditor input{
+    display: inline-block;
+}
+
+</style>
+<div id="SettingsEdit" class="row">
+    <section class="panel panel-default">
+        <section class="panel-heading">
+            <h3 class="panel-title">Settings Editor </h3>
+               <!-- <a class="btn" data-id="btnAdd" ><span class="fa fa-plus"></span>Add</a>
+                 <a class="btn" data-id="btnEdit" ><span class="fa fa-edit"></span>Edit</a>
+                <a class="btn" data-id="btnDel" ><span class="fa fa-minus"></span>Delete</a>
+            <button type="button" data-id="btnSave" class="btn btn-primary">Save</button>-->
+
+        </section>
+        <section class="panel-body">
+            <div data-id="list" role="form" class="nano">
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <section id="SettingsEditor" data-id="labelEditor" class="panel panel-default editor" >
+        <div class="panel-heading">
+            <span class="fa fa-close pull-right btn"></span>
+            <h3 class="panel-title">Label Editor</h3>
+        </div>
+        <section class="panel-body">
+            <br/>
+            <br/>
+            <div class="form">
+                <div class="form-group">
+                    <label data-id="lblIndex"></label>
+
+                    <input  data-id="value" type="text"  class="form-control" />
+                </div>
+                <!--<img data-id="value"  />-->
+                <select data-id="selTime" class="form-control">
+
+                </select>
+
+            </div>
+        </section>
+            <div class="footer">
+               <!-- <input data-id="btnUpload" type="file" name="file" class="btn btn-warning" value="Upload New"/>-->
+                <button type="button" data-id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+
+    </section>
+</div>

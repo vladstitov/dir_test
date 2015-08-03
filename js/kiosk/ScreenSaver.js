@@ -9,8 +9,8 @@ var uplight;
             this.tt = new TouchClip();
             this.R = uplight.Registry.getInstance();
             this.timeout = Number(this.R.settings.ss_timeout) * 1000;
-            if (isNaN(this.timeout) || this.timeout < 20000)
-                this.timeout = 20000;
+            if (isNaN(this.timeout) || this.timeout < 10000)
+                this.timeout = 10000;
             this.view = $('<div>').attr('id', 'Screensaver');
             document.addEventListener(CLICK, function (evt) { return _this.onClick(evt); });
             this.startTimer();
@@ -92,4 +92,4 @@ var uplight;
     })();
     uplight.TouchClip = TouchClip;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=ScreenSaver.js.map
+//# sourceMappingURL=screensaver.js.map

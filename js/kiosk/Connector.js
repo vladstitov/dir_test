@@ -16,8 +16,8 @@ var uplight;
             msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_log', msg);
         };
-        Connector.prototype.relay = function (kiosk_id, stamp, now, let, timer) {
-            return $.get(this.service + 'get_stamp&kiosk_id=' + kiosk_id + '&stamp=' + stamp + '&now=' + now + '&let=' + let + '&timer=' + timer);
+        Connector.prototype.relay = function (kiosk_id, stamp, now, ping, timer, status) {
+            return $.get(this.service + 'get_stamp&id=' + kiosk_id + '&stamp=' + stamp + '&now=' + now + '&ping=' + ping + '&timer=' + timer + '&status=' + status);
         };
         Connector.prototype.Error = function (msg) {
             msg = (new Date()).toString() + '||' + msg;

@@ -189,7 +189,7 @@ include ('admin/Menu.html');
 
 </div>
 <hr/>
-
+<script type="text/javascript" src="js/admin/screen/SettingsEdit.js"></script>
 <script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoryForm.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoryListing.js"></script>

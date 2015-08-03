@@ -179,11 +179,11 @@ module uplight {
 
         
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
-        getRSSs(callBack: Function): void {
-            $.get(this.service + '?a=screen.get_rsss').done(callBack);
+        getData(filename:string) :JQueryPromise<string> {
+            return $.get(this.service + '?a=screen.get_data&file_name='+filename);
         }
-        saveRSSs(data: any, callBack: Function): void {
-            $.post(this.service + '?a=screen.save_rsss', JSON.stringify(data)).done(callBack);
+        saveData(data:string, filename:string):JQueryPromise<VOResult>{
+           return $.post(this.service + '?a=screen.save_data&file_name='+filename,data);
         }
         getLabels():any {
             return $.get(this.service + '?a=screen.get_labels','application/json');

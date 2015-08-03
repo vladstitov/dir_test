@@ -13,7 +13,7 @@
 /// <reference path="Connector.ts" />
 /// <reference path="keywords.ts" />
 declare var u_settings:any;
-declare var kiosk_id:number;
+declare var kiosk_id:string;
 
 module uplight {
    export class Kiosk {     
@@ -31,17 +31,18 @@ module uplight {
        private home: string = '#category=2';
        private infoPage:InfoPage;
        private data: any;
-
+        R:Registry;
 
 
        constructor() {
            var r:Registry = Registry.getInstance();
            r.connector = new Connector();
-           r.connector.who=kiosk_id.toString();
+           r.connector.who=kiosk_id;
            r.model = new Model();
            r.settings = u_settings;
            r.dispatcher = $({});
 
+           this.R=r;
            var kb = new Keyboard($('#Keyboard'));
            var si = new SearchInput($('#searchinput'));
            var kw = new Keywords($('#kw-container'));
@@ -50,9 +51,9 @@ module uplight {
          var sr:SearchResult = new SearchResult($('#the-list'));
 
            var delay:number = u_settings.timer;
-           if(isNaN(delay) || delay<2000) delay =2000;
+           if(isNaN(delay) || delay<2) delay =2;
 
-           setInterval(()=>this.relay(),delay);
+           setInterval(()=>this.relay(),delay*1000);
 
            var ss:ScreenSaver = new ScreenSaver($('#container'));
           r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
@@ -105,7 +106,7 @@ module uplight {
        }
 
        private stamp:number=0;
-       private let:number=0;
+       private ping:number=0;
        private timer:number=(new Date()).getTime();
        private relay():void{
            var that=this;
@@ -113,13 +114,16 @@ module uplight {
            var timer=now- this.timer;
            this.timer=now;
 
-           Registry.getInstance().connector.relay(kiosk_id,this.stamp,Math.round(now/1000),this.let,timer).done(function(res:VOResult){
+           Registry.getInstance().connector.relay(kiosk_id,this.stamp,Math.round(now/1000),this.ping,timer,this.R.status).done(function(res:VOResult){
 
-               that.let=(new Date()).getTime()-now;
+               that.ping=(new Date()).getTime()-now;
 
                switch(res.success){
                    case 'reload':
                        window.location.reload();
+                       break;
+                   case 'restart':
+                      // window.location.href=res.result;
                        break;
                    case 'stamp':
                        that.stamp = Number(res.result);

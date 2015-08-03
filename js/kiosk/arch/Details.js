@@ -36,4 +36,4 @@ var uplight;
     })();
     uplight.Details = Details;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=SearchDetails.js.mapjs.map
+//# sourceMappingURL=Details.js.map

@@ -155,11 +155,12 @@ module uplight{
         error:string;
     }
     export class VOItem {
-        public catid: number;
-        public id: number;
-        public label: string;
-        public a: string;
+        id: string;
+        value: string;
+        label: string;
+        type:string;
     }
+
     export class VODestination {
         constructor(obj:any){
             for(var str in obj) this[str]=obj[str];

@@ -18,23 +18,24 @@ var uplight;
             var _this = this;
             this.home = '#category=2';
             this.stamp = 0;
-            this.let = 0;
+            this.ping = 0;
             this.timer = (new Date()).getTime();
             var r = uplight.Registry.getInstance();
             r.connector = new uplight.Connector();
-            r.connector.who = kiosk_id.toString();
+            r.connector.who = kiosk_id;
             r.model = new uplight.Model();
             r.settings = u_settings;
             r.dispatcher = $({});
+            this.R = r;
             var kb = new uplight.Keyboard($('#Keyboard'));
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
             var cats = new uplight.Categories($('#Categories'));
             var sr = new uplight.SearchResult($('#the-list'));
             var delay = u_settings.timer;
-            if (isNaN(delay) || delay < 2000)
-                delay = 2000;
-            setInterval(function () { return _this.relay(); }, delay);
+            if (isNaN(delay) || delay < 2)
+                delay = 2;
+            setInterval(function () { return _this.relay(); }, delay * 1000);
             var ss = new uplight.ScreenSaver($('#container'));
             r.dispatcher.on(r.SS_START, function () {
                 r.dispatcher.triggerHandler(r.RESET_ALL);
@@ -80,11 +81,13 @@ var uplight;
             var now = (new Date()).getTime();
             var timer = now - this.timer;
             this.timer = now;
-            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.let, timer).done(function (res) {
-                that.let = (new Date()).getTime() - now;
+            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.ping, timer, this.R.status).done(function (res) {
+                that.ping = (new Date()).getTime() - now;
                 switch (res.success) {
                     case 'reload':
                         window.location.reload();
+                        break;
+                    case 'restart':
                         break;
                     case 'stamp':
                         that.stamp = Number(res.result);

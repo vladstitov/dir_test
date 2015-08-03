@@ -6,6 +6,7 @@
 ///<reference path="impexp/ImportExport.ts" />
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
+///<reference path="screen/SettingsEdit.ts" />
 
 
 module uplight {
@@ -18,10 +19,12 @@ module uplight {
         private importExport:ImportExport
         private restartKiosks:RestartKiosk
         private labels:LabelsManager;
+        private settingsEdit:SettingsEdit
         private menu:Menu;
         private newindow:Window;
         private preview:JQuery;
         private content:JQuery;
+
 
 
        createPop() {
@@ -77,6 +80,10 @@ module uplight {
                     case '#Import-Ex':
                         this.hidePreview();
                         this.importExport = new ImportExport(this.content);
+                        break;
+                    case '#Settings-':
+                        this.hidePreview();
+                        this.settingsEdit = new SettingsEdit(this.content)
                         break;
                     case '#Heading-S':
                     case '#Backgroun':

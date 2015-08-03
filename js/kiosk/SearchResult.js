@@ -3,12 +3,16 @@ var uplight;
 (function (uplight) {
     var SearchResult = (function () {
         function SearchResult(view) {
+            var _this = this;
             this.view = view;
             this.R = uplight.Registry.getInstance();
             this.model = uplight.Registry.getInstance().model;
             this.list = $('<ul>');
             this.addListeners();
             this.cache = {};
+            this.mainport = $('#mainport');
+            this.cover = $('#cover');
+            this.cover.on(CLICK, function (evt) { return _this.onCoverClick(evt); });
             //this.details = new Details(view);
         }
         SearchResult.prototype.reset = function () {
@@ -38,13 +42,30 @@ var uplight;
         SearchResult.prototype.onListClick = function (evt) {
             // console.log(evt.currentTarget);
             var id = $(evt.currentTarget).data('id');
-            console.log(id);
+            // console.log(id);
             if (isNaN(Number(id)))
                 return;
             var mod = this.getModelById(id);
-            if (mod)
-                mod.togleDetails();
+            if (mod) {
+                var det = mod.togleDetails();
+                if (det)
+                    this.showDetailsLarge(det);
+            }
             this.R.connector.Stat('sr', id.toString());
+        };
+        SearchResult.prototype.onCoverClick = function (evt) {
+            // console.log($(evt.target));
+            if ($(evt.target).attr('id') == 'cover' || $(evt.target).hasClass('fa-close')) {
+                this.cover.hide();
+                this.cover.html('');
+            }
+        };
+        SearchResult.prototype.showDetailsLarge = function (det) {
+            var cov = this.cover;
+            cov.html('');
+            cov.append(det);
+            // console.log(det);
+            this.cover.show();
         };
         SearchResult.prototype.onSearchChange = function (pattern) {
             this.currentPattern = pattern.toLowerCase();

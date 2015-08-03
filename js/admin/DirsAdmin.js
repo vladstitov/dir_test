@@ -6,6 +6,7 @@
 ///<reference path="impexp/ImportExport.ts" />
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
+///<reference path="screen/SettingsEdit.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -77,6 +78,10 @@ var uplight;
                 case '#Import-Ex':
                     this.hidePreview();
                     this.importExport = new uplight.ImportExport(this.content);
+                    break;
+                case '#Settings-':
+                    this.hidePreview();
+                    this.settingsEdit = new uplight.SettingsEdit(this.content);
                     break;
                 case '#Heading-S':
                 case '#Backgroun':

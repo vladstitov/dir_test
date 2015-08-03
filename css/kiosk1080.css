@@ -6,7 +6,14 @@
     color: #333333;
     background-color: #ffffff;
 }
-
+#cover{
+    position: absolute;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    display: none;
+}
 #u-header {
     display: block;
     height: 170px;
@@ -184,9 +191,10 @@ a:active{
     display: inline-block;
 }
 #list-main li>div.details{
-
     display: none;
 }
+
+
 .fa-briefcase{
     color:#D96D00;
 }
@@ -245,37 +253,112 @@ height: 1em;
     left: 60px;
     bottom: 5px;*/
 }
-#list-main li>.details>.tmb{
+
+/*START Details  */
+.details>.tmb{
 display: inline-block;
     float: right;
 
 }
-#list-main li>.details>.tmb>img{
+.details>.tmb>img{
     width: 128px;
     height: 128px;
     vertical-align: top;
 }
 
-#list-main li.img>.details>.more{
+.details>.more{
     min-height: 128px;
     margin-top: 10px;
 }
-#list-main li.img>.details>.more>table{
+.details>.more>table{
     border-spacing: 10px;
 }
-#list-main li>.details>.more>table> tbody>tr> td:first-child{
+.details>.more>table> tbody>tr> td:first-child{
     font-weight: 600;
     padding-right: 10px;
 }
-
-#list-main li>.details>.more{
+.details>.more{
     display: inline-block;
    /* min-height: 128px;*/
     min-width: 2px;
     display: inline-block;
 
 }
+/*END Details */
+/*START Details Large */
+.detailsL>.fa-close{
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50%;
+    border: double thick #999999;
+    font-size: 30px;
+    text-align: center;
+    background-color:lightgray;
+    color: #666666;
+    box-shadow:0 0 5px #999999;
+}
 
+.detailsL>.content{
+    width: 95%;
+    height: 95%;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.detailsL>.content>.gallery{
+    height: 600px;
+    width: 620px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.detailsL>.content>.gallery>.preview{
+    height: 420px;
+    width: 620px;
+    position: absolute;
+    border: thin #999999 solid;
+}
+.detailsL>.content>.gallery>.nano{
+    position: relative;
+    top: 450px;
+    width: 620px;
+    height: 138px;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.detailsL>.content>.gallery>.nano li {
+    display: inline-block;
+
+}
+.detailsL>.content>.gallery>.nano li>* {
+    max-width: 128px;
+    max-height: 128px;
+
+}
+.detailsL>.content>.gallery>.nano .nano-content{
+    white-space: nowrap;
+}
+.detailsL>.content>.gallery>.preview>.img>*{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    max-height: 400px;
+    max-width: 600px;
+}
+.detailsL>.content>.gallery{
+
+}
+/* END  Details Large */
 #list-footer-main{
     position: relative;
     height: 95px;

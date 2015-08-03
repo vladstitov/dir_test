@@ -13,12 +13,19 @@ module uplight {
         currentPattern:string;
         //details:Details;
         R:Registry
+        mainport:JQuery
+        cover:JQuery
         constructor(private view:JQuery){
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
             this.list=$('<ul>');
             this.addListeners();
             this.cache={};
+            this.mainport = $('#mainport');
+            this.cover= $('#cover');
+            this.cover.on(CLICK,(evt)=>this.onCoverClick(evt));
+
+
             //this.details = new Details(view);
         }
 
@@ -50,14 +57,33 @@ module uplight {
         private onListClick(evt:JQueryEventObject):void{
            // console.log(evt.currentTarget);
             var id:number = $(evt.currentTarget).data('id');
-console.log(id);
+       // console.log(id);
             if(isNaN(Number(id))) return;
 
             var mod= this.getModelById(id);
-               if(mod) mod.togleDetails();
+               if(mod){
+                   var det:JQuery =  mod.togleDetails();
+                   if(det)this.showDetailsLarge(det);
+               }
 
             this.R.connector.Stat('sr',id.toString());
 
+        }
+
+        private onCoverClick(evt:JQueryEventObject):void{
+           // console.log($(evt.target));
+            if($(evt.target).attr('id')=='cover' || $(evt.target).hasClass('fa-close')){
+                this.cover.hide();
+                this.cover.html('');
+            }
+        }
+        private showDetailsLarge(det:JQuery):void{
+
+            var cov = this.cover
+           cov.html('');
+            cov.append(det);
+           // console.log(det);
+            this.cover.show();
         }
         private onSearchChange(pattern:string):void{
             this.currentPattern = pattern.toLowerCase();
