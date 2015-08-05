@@ -55,10 +55,13 @@ module uplight {
                 switch (hash){
 
                     case '#RestartKi':
-                        this.showPreview();
+                       // this.showPreview();
+                        this.hidePreview();
                         this.content.hide();
+                        this.content.empty();
                         this.restartKiosks = new RestartKiosk(this.content);
-                        this.restartKiosks.restart();
+                        this.content.show();
+                       // this.restartKiosks.restart();
 
                         break;
                     case '#Listing-V':

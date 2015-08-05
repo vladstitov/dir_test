@@ -179,6 +179,9 @@ module uplight {
 
         
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
+        getServerTime():JQueryPromise<string>{
+            return $.get(this.service + '?a=screen.get_server_time');
+        }
         getData(filename:string) :JQueryPromise<string> {
             return $.get(this.service + '?a=screen.get_data&file_name='+filename);
         }

@@ -54,10 +54,12 @@ var uplight;
             console.log(hash);
             switch (hash) {
                 case '#RestartKi':
-                    this.showPreview();
+                    // this.showPreview();
+                    this.hidePreview();
                     this.content.hide();
+                    this.content.empty();
                     this.restartKiosks = new uplight.RestartKiosk(this.content);
-                    this.restartKiosks.restart();
+                    this.content.show();
                     break;
                 case '#Listing-V':
                     this.hidePreview();

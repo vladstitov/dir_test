@@ -23,6 +23,9 @@ class Screen{
 			
 			return $xml->asXML();
 			break;
+			case 'get_server_time':
+			return time();
+			break;
 			case 'get_images':
 			header('Content-type: application/json');
 			$ar = scandir('../data/images');

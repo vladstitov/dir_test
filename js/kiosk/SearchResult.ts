@@ -32,9 +32,8 @@ module uplight {
         reset():void{
             this.result = this.data;
             this.render(true);
-
-
         }
+
         addListeners():void{
             this.R.dispatcher.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
             this.R.dispatcher.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
@@ -54,6 +53,7 @@ module uplight {
             }
             return null;
         }
+
         private onListClick(evt:JQueryEventObject):void{
            // console.log(evt.currentTarget);
             var id:number = $(evt.currentTarget).data('id');
@@ -77,6 +77,7 @@ module uplight {
                 this.cover.html('');
             }
         }
+
         private showDetailsLarge(det:JQuery):void{
 
             var cov = this.cover
@@ -85,6 +86,7 @@ module uplight {
            // console.log(det);
             this.cover.show();
         }
+
         private onSearchChange(pattern:string):void{
             this.currentPattern = pattern.toLowerCase();
           //  console.log(pattern);

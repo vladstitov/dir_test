@@ -141,6 +141,9 @@ var uplight;
             ;
         };
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
+        Connector.prototype.getServerTime = function () {
+            return $.get(this.service + '?a=screen.get_server_time');
+        };
         Connector.prototype.getData = function (filename) {
             return $.get(this.service + '?a=screen.get_data&file_name=' + filename);
         };

@@ -38,7 +38,7 @@ switch(array_shift($a)){
 		$val=$get['val'];
 		$who=$get['who'];
 		$stamp= $get['stamp'];
-		$db=new PDO('sqlite:statistics.db');
+		$db=new PDO('sqlite:../data/statistics.db');
 		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),stamp INTEGER)');				
 		$res= $db->query("INSERT INTO stats (type,val,who,stamp) VALUES ('$type','$val','$who',$stamp)");
 		if($res) echo 'OK';

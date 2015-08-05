@@ -1,6 +1,6 @@
 ﻿<?php
 session_start();
-$device=1;
+$device=0;
 if(isset($_GET['device']))$device=$_GET['device'];
 $settings = json_decode(file_get_contents('data/settings.json'));
 $s= array();
@@ -9,7 +9,6 @@ foreach($settings as $val) $s[$val->id]=$val->value;
 $l=file_get_contents('data/labels.json');
 $labels = json_decode($l);
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
