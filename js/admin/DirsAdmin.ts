@@ -4,6 +4,7 @@
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
+///<reference path="impexp/Statistics.ts" />
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
@@ -20,6 +21,7 @@ module uplight {
         private restartKiosks:RestartKiosk
         private labels:LabelsManager;
         private settingsEdit:SettingsEdit
+        private statistics:Statistics;
         private menu:Menu;
         private newindow:Window;
         private preview:JQuery;
@@ -54,6 +56,15 @@ module uplight {
 
                 switch (hash){
 
+                    case '#Statistic':
+                        // this.showPreview();
+                        this.hidePreview();
+                       // this.content.hide();
+                        this.statistics = new Statistics(this.content);
+                        this.content.show();
+                        // this.restartKiosks.restart();
+
+                        break;
                     case '#RestartKi':
                        // this.showPreview();
                         this.hidePreview();
@@ -125,14 +136,14 @@ module uplight {
             this.R = RegA.getInstance();
             this.R.dispatcher=$({});
             this.R.connector = new Connector();
-            this.R.connector.getSettings((resp) => {
+            this.R.connector.getData('settings.json').done((resp) => {
                 this.R.settings = resp;
                 this.init();
                 this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
 
-            this.R.alert=(text,cont)=>this.myMsg(text,cont);
+           // this.R.alert=(text,cont)=>this.myMsg(text,cont);
 
 
 

@@ -4,6 +4,7 @@
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
+///<reference path="impexp/Statistics.ts" />
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
@@ -16,13 +17,13 @@ var uplight;
             this.R = uplight.RegA.getInstance();
             this.R.dispatcher = $({});
             this.R.connector = new uplight.Connector();
-            this.R.connector.getSettings(function (resp) {
+            this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = resp;
                 _this.init();
                 _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
-            this.R.alert = function (text, cont) { return _this.myMsg(text, cont); };
+            // this.R.alert=(text,cont)=>this.myMsg(text,cont);
             // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
             // this.R.dispatcher.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
             // this.R.dispatcher.on(RegA.VIEW_LISTING,()=>{
@@ -53,6 +54,13 @@ var uplight;
             var hash = window.location.hash.substr(0, 10);
             console.log(hash);
             switch (hash) {
+                case '#Statistic':
+                    // this.showPreview();
+                    this.hidePreview();
+                    // this.content.hide();
+                    this.statistics = new uplight.Statistics(this.content);
+                    this.content.show();
+                    break;
                 case '#RestartKi':
                     // this.showPreview();
                     this.hidePreview();

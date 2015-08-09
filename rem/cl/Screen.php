@@ -70,12 +70,15 @@ class Screen{
 			
 			case 'save_data':
 					if(!isset($get['file_name'])) die('ERROR');
-					
+					$file_name = $get['file_name'];
 					header('Content-type: application/json');
-					$res = file_put_contents('../data/'.$get['file_name'],file_get_contents('php://input'));	
+					$filename='../data/'.$get['file_name'];
+					if(!file_exists($filename))  die('ERROR 2');					
+					rename($filename,'../data/arch/'.time().$file_name);					
+					$res = file_put_contents($filename,file_get_contents('php://input'));	
 					if($res){
 						$out->success='file saved';
-						$out->result= 'data/'.$get['file_name'];
+						$out->result= 'data/'.$file_name;
 					}
 					else $out->error='cant save file';	
 			break;	

@@ -13,7 +13,7 @@
 /// <reference path="Connector.ts" />
 /// <reference path="keywords.ts" />
 declare var u_settings:any;
-declare var kiosk_id:string;
+declare var kiosk_id:number;
 
 module uplight {
    export class Kiosk {     
@@ -31,13 +31,14 @@ module uplight {
        private home: string = '#category=2';
        private infoPage:InfoPage;
        private data: any;
-        R:Registry;
+
 
 
        constructor() {
            var r:Registry = Registry.getInstance();
            r.connector = new Connector();
-           r.connector.who=kiosk_id;
+           r.connector.id=kiosk_id;
+           r.connector.who='kiosk';
            r.model = new Model();
            r.settings = u_settings;
            r.dispatcher = $({});

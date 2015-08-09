@@ -1,8 +1,26 @@
 ﻿<?php
 session_start();
-$device=0;
-if(isset($_GET['device']))$device=$_GET['device'];
+$kiosk_id=0;
+$file_name='data/kiosks.json';
+$kiosks =  json_decode(file_get_contents($file_name));
+if(isset($_GET['kiosk'])) $kiosk_id=$_GET['kiosk'];
+/*
+$res=0;
+foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id){
+		$kiosk->status='loaded';
+		$kiosk->S_time = time();
+		$res = file_put_contents($file_name,json_encode($kiosks));
+		break;
+}
+	
+if($res===0) exit;
+*/
+
 $settings = json_decode(file_get_contents('data/settings.json'));
+
+
+
+
 $s= array();
 foreach($settings as $val) $s[$val->id]=$val->value;
 //
@@ -14,7 +32,7 @@ $labels = json_decode($l);
 <head>
     <script>
         var u_settings = <?php echo json_encode($s); ?>;
-        var kiosk_id='<?php echo $device; ?>';
+        var kiosk_id='<?php echo $kiosk_id; ?>';
         var u_labels = <?php echo $l; ?>;
     </script>
     <meta charset="utf-8">
@@ -31,10 +49,10 @@ $labels = json_decode($l);
     <!--
     <link href="css/KeyboardBlack.css" rel="stylesheet" type="text/css"/>
 -->
-    <script src="Scripts/jquery-2.1.0.min.js"></script>
-    <script src="Scripts/svgjs.js"></script>
-    <!--<script src="/Scripts/TweenMax.min.js"></script>
-    <script src="/Scripts/easeljs-0.7.1.min.js"></script>-->
+    <script src="libs/jquery-2.1.0.min.js"></script>
+    <script src="libs/svgjs.js"></script>
+    <!--<script src="/libs/TweenMax.min.js"></script>
+    <script src="/libs/easeljs-0.7.1.min.js"></script>-->
     <script type="text/javascript">
 
     </script>

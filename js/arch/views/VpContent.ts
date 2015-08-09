@@ -1,6 +1,6 @@
 ﻿/// <reference path="registry.ts" />
 /// <reference path="listview.ts" />
-/// <reference path="../../../Scripts/typings/jquery.d.ts" />
+/// <reference path="../../../libs/typings/jquery.d.ts" />
 module app{
    export  class VpContent { 
 

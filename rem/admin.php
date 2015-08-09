@@ -18,10 +18,13 @@ $result= false;
 
 
 switch(array_shift($a)){	
-	case 'restart_kiosks':
-	$control= json_decode(file_get_contents('../data/control.json'));
-	$control->reload=time();
-	file_put_contents('../data/control.json',json_encode($control));
+	case 'get_statistics':
+	$from=strtotime($get['from']);//1437096651492;
+	$to=strtotime($get['to']);	
+	////echo'   from '.$from.'  '.$get['from'];
+	//echo'   to '.$to.'  '.$get['to'];
+	$db = new PDO('sqlite:../data/statistics.db');
+	 $result = $db->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
 	break;
 	case 'saveTitle':	
 		saveSettings('title',$post['title']);

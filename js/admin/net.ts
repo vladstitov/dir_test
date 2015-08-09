@@ -10,22 +10,22 @@ module uplight {
         public device:any
         public onData: Function;
 
-        getContentData(callBack: Function, href: string): void {
-            $.ajax(this.service + href).done(callBack);
-        }
+       //// getContentData(callBack: Function, href: string): void {
+       //     $.ajax(this.service + href).done(callBack);
+      //  }
 
-        loadFile(filename):JQueryPromise<string>{
-            return $.get('data/'+filename);
-        }
+       // loadFile(filename):JQueryPromise<string>{
+        //    return $.get('data/'+filename);
+       // }
        // saveTitle(title: string): void {
 
           //  $.post(this.service + '?a=saveTitle', { title: title });
        // }
 
 
-        restartKiosks():JQueryPromise<VOResult> {
-            return $.get(this.service, { a: 'screen.kiosks_restart' });
-        }
+        //restartKiosks():JQueryPromise<VOResult> {
+         //   return $.get(this.service, { a: 'screen.kiosks_restart' });
+       // }
 
 
 
@@ -61,6 +61,7 @@ module uplight {
 
 
       //////////////////////////////////////Pages/////////////////////////////////////////
+
         savePageInfo(page:VOPage, callBack): void {
             $.post(this.service + '?a=pages.save_info&pageid=' + page.id,page.content).done(callBack);
         }
@@ -86,10 +87,18 @@ module uplight {
 
             $.post(this.service + '?a=pages.update', page).done(callBack);
         }
+
         ///////////////////////////////////
 
         ////////////////////ImportExport////////////////////
 
+        getStatistics(from:string,to:string):JQueryPromise<any[]>{
+            var q:any={};
+            q.a='get_statistics';
+            q.from=from;
+            q.to=to;
+            return $.get(this.service ,q);
+        }
         exportDestination() :JQueryPromise<any[]> {
             return $.get(this.service + '?a=importexport.get_all');
         }
@@ -182,12 +191,15 @@ module uplight {
         getServerTime():JQueryPromise<string>{
             return $.get(this.service + '?a=screen.get_server_time');
         }
+
+
         getData(filename:string) :JQueryPromise<string> {
             return $.get(this.service + '?a=screen.get_data&file_name='+filename);
         }
         saveData(data:string, filename:string):JQueryPromise<VOResult>{
            return $.post(this.service + '?a=screen.save_data&file_name='+filename,data);
         }
+
         getLabels():any {
             return $.get(this.service + '?a=screen.get_labels','application/json');
         }
@@ -212,37 +224,37 @@ module uplight {
         //    $.post(this.service + '?a=screen.save_color', data).done(callBack);
        // }
 
-        getMessages(callBack): void {
-            $.get(this.service + '?a=screen.get_messages').done(callBack);
-        }
-        saveMessages(data: string, callBack): void {
-            $.post(this.service + '?a=screen.save_messages', data).done(callBack);
-        }
+       // getMessages(callBack): void {
+        //    $.get(this.service + '?a=screen.get_messages').done(callBack);
+       // }
+       // saveMessages(data: string, callBack): void {
+       //     $.post(this.service + '?a=screen.save_messages', data).done(callBack);
+       // }
        // getBanner(callBack: Function): void {
          //   $.get(this.service + '?a=screen.get_banner').done(callBack);
        // }
        // saveBanner(data: any, callBack: Function): void {
         //    $.post(this.service + '?a=screen.save_header', data).done(callBack);
        // }
-        getSettings(callBack: Function): void {
-            $.get(this.serviceK+'?a=get_settings').done(callBack);
-        }
+       /// getSettings(callBack: Function): void {
+       //     $.get(this.serviceK+'?a=get_settings').done(callBack);
+       // }
        // saveSettings(callBack: Function,data:string): void {
 
          //   $.post(this.service + '?a=screen.save_settings',data).done(callBack);
        // }
 
 
-        uploadAttractLoop(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function) {
-            this.uploadFile(form, '?a=screen.upload_al', completeHandler, errorHandler, onProgress);
-        }
-        getAllAttractLoopss(callBack: Function): void {
-            $.get(this.service + '?a=screen.get_all_AL').done(callBack);
-        }
+       /// uploadAttractLoop(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function) {
+        //    this.uploadFile(form, '?a=screen.upload_al', completeHandler, errorHandler, onProgress);
+      //  }
+      ///  getAllAttractLoopss(callBack: Function): void {
+      //      $.get(this.service + '?a=screen.get_all_AL').done(callBack);
+      //  }
 
-        saveSetting(sett: string, data: any, callBack: Function): void {
-            $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
-        }
+        //saveSetting(sett: string, data: any, callBack: Function): void {
+        //    $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
+        //}
         ////////////////////////////////Labels////////////////////////////
      
 
@@ -271,6 +283,7 @@ module uplight {
             data.index=index;
             return $.get(this.service,data);
         }
+
        uploadTempImage(data:FormData): JQueryPromise<VOCategory[]> {
            //console.log('uploadTempImage    ',data);
            return  $.ajax({

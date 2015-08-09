@@ -1,7 +1,7 @@
 ﻿var uplight;
 (function (uplight) {
     /// <reference path="../../typing/jquery.d.ts" />
-    /// <reference path="../../../Scripts/typings/easeljs/easeljs.d.ts" />
+    /// <reference path="../../../libs/typings/easeljs/easeljs.d.ts" />
     (function (ads) {
         var c = createjs;
         var SS_1920 = (function () {

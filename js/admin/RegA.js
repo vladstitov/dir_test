@@ -76,6 +76,8 @@ var uplight;
         };
         RegA.prototype.alert = function (message, container) {
         };
+        RegA.prototype.message = function (msg) {
+        };
         RegA.getInstance = function () {
             return RegA._instance;
         };

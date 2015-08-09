@@ -3,7 +3,8 @@ module uplight {
     export class Connector {
         private service = 'rem/kiosk.php?a=';
         private serv= 'rem/kiosk.php';
-        who:string;
+        id:number;
+        who:string='kiosk';
         public device: string;
         public lang: string;
 
@@ -33,9 +34,8 @@ module uplight {
         Stat(type:string,val:string): void {
             var who = this.who;
             var stamp= Date.now();
-            $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&stamp='+stamp);
+            $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&id='+this.id+'&stamp='+stamp);
         }
-
 
         getCategories(callBack:Function) {
             $.get(this.service + 'get_categories').done(callBack);

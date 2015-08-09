@@ -9,18 +9,18 @@ var uplight;
             this.service = 'rem/admin.php';
             this.serviceK = 'rem/kiosk.php';
         }
-        Connector.prototype.getContentData = function (callBack, href) {
-            $.ajax(this.service + href).done(callBack);
-        };
-        Connector.prototype.loadFile = function (filename) {
-            return $.get('data/' + filename);
-        };
+        //// getContentData(callBack: Function, href: string): void {
+        //     $.ajax(this.service + href).done(callBack);
+        //  }
+        // loadFile(filename):JQueryPromise<string>{
+        //    return $.get('data/'+filename);
+        // }
         // saveTitle(title: string): void {
         //  $.post(this.service + '?a=saveTitle', { title: title });
         // }
-        Connector.prototype.restartKiosks = function () {
-            return $.get(this.service, { a: 'screen.kiosks_restart' });
-        };
+        //restartKiosks():JQueryPromise<VOResult> {
+        //   return $.get(this.service, { a: 'screen.kiosks_restart' });
+        // }
         //////////////////////////Categories/////////////////////////////////////
         Connector.prototype.getCategories = function () {
             return $.get(this.service, { a: 'cats.get_all' }, 'application/json');
@@ -69,6 +69,13 @@ var uplight;
         };
         ///////////////////////////////////
         ////////////////////ImportExport////////////////////
+        Connector.prototype.getStatistics = function (from, to) {
+            var q = {};
+            q.a = 'get_statistics';
+            q.from = from;
+            q.to = to;
+            return $.get(this.service, q);
+        };
         Connector.prototype.exportDestination = function () {
             return $.get(this.service + '?a=importexport.get_all');
         };
@@ -171,33 +178,33 @@ var uplight;
         // saveColor(data: {}, callBack): void {
         //    $.post(this.service + '?a=screen.save_color', data).done(callBack);
         // }
-        Connector.prototype.getMessages = function (callBack) {
-            $.get(this.service + '?a=screen.get_messages').done(callBack);
-        };
-        Connector.prototype.saveMessages = function (data, callBack) {
-            $.post(this.service + '?a=screen.save_messages', data).done(callBack);
-        };
+        // getMessages(callBack): void {
+        //    $.get(this.service + '?a=screen.get_messages').done(callBack);
+        // }
+        // saveMessages(data: string, callBack): void {
+        //     $.post(this.service + '?a=screen.save_messages', data).done(callBack);
+        // }
         // getBanner(callBack: Function): void {
         //   $.get(this.service + '?a=screen.get_banner').done(callBack);
         // }
         // saveBanner(data: any, callBack: Function): void {
         //    $.post(this.service + '?a=screen.save_header', data).done(callBack);
         // }
-        Connector.prototype.getSettings = function (callBack) {
-            $.get(this.serviceK + '?a=get_settings').done(callBack);
-        };
+        /// getSettings(callBack: Function): void {
+        //     $.get(this.serviceK+'?a=get_settings').done(callBack);
+        // }
         // saveSettings(callBack: Function,data:string): void {
         //   $.post(this.service + '?a=screen.save_settings',data).done(callBack);
         // }
-        Connector.prototype.uploadAttractLoop = function (form, completeHandler, errorHandler, onProgress) {
-            this.uploadFile(form, '?a=screen.upload_al', completeHandler, errorHandler, onProgress);
-        };
-        Connector.prototype.getAllAttractLoopss = function (callBack) {
-            $.get(this.service + '?a=screen.get_all_AL').done(callBack);
-        };
-        Connector.prototype.saveSetting = function (sett, data, callBack) {
-            $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
-        };
+        /// uploadAttractLoop(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function) {
+        //    this.uploadFile(form, '?a=screen.upload_al', completeHandler, errorHandler, onProgress);
+        //  }
+        ///  getAllAttractLoopss(callBack: Function): void {
+        //      $.get(this.service + '?a=screen.get_all_AL').done(callBack);
+        //  }
+        //saveSetting(sett: string, data: any, callBack: Function): void {
+        //    $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
+        //}
         ////////////////////////////////Labels////////////////////////////
         Connector.prototype.deleteImage = function (url, callBack) {
             var data = uplight.RegA.getInstance().device;

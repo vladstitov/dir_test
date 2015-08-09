@@ -16,7 +16,7 @@ $bg= $settings->main->background;
 
   <<link rel="stylesheet" href="css/mobile.css" />
     <link href="css/<?php echo $settings->main->color; ?>.css" rel="stylesheet" type="text/css"/>
-	 <script src="Scripts/jquery-2.1.0.min.js"></script>
+	 <script src="libs/jquery-2.1.0.min.js"></script>
     <script src="js/kiosk/Registry.js"></script>
     <script src="js/kiosk/Connector.js"></script>
     <script src="js/kiosk/models.js"></script>

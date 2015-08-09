@@ -116,6 +116,9 @@ module uplight{
 
         alert(message:string,container:JQuery){
 
+       }
+        message(msg:string):void{
+
         }
         model: DestinantionsModel;
         connector: Connector;

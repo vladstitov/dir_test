@@ -5,54 +5,151 @@
     ///<reference path="../RegA"/>
 module uplight {
     export class RestartKiosk {
-
         R:RegA
-
         view:JQuery
-        data:any;
+       // data:any;
+        kiosks:VOKiosk[];
+        templates:any[];
+
         btnRestart:JQuery
+        editHeader:JQuery
+        selTemplate:JQuery
+        private dialogName:JQuery;
+        private tiName:JQuery;
+        private list:JQuery;
+
+        private selectedItem:VOKiosk;
+
+        private filename:string ='kiosks.json';
         private s_time:number;
 
         constructor(private container:JQuery) {
             this.R = RegA.getInstance();
-            this.R.connector.getServerTime().done((res)=>this.onServerTime(res));
-
+            container.load('js/admin/screen/KiosksEdit.html',()=>this.init());
         }
 
-        private onServerTime(res):void{
-            this.s_time= Number(res);
-            console.log(this.s_time);
-            this.R.connector.getData('track.json').done((res)=>this.onData(res));
-        }
-        private onData(res:string):void{
-            //console.log(res);
-            var out='<div class="panel panel-default">' +
-                '<div class="panel-heading">' +
-                '<div class="btn" data-id="btnRestart"><div class="fa fa-refresh"></div> <span> Restart</span></div>' +
-                '<div class="btn" data-id="btnDelete"><div class="fa fa-minus"></div> <span> Delete</span></div>' +
-                '</div>' +
-                '<div class="panel-body"><table class="table"><thead><tr>' +
-                '<th class="btn" data-id="btnAll">All</th>' +
-                '<th>Name</th>' +
-                '<th>Status</th>' +
-                '<th>Icon</th>' +
-                '<th>IP</th>' +
-                '<th>Ping</th>' +
-                '<th class="text-center">Started At</th>' +
-                '<th class="text-center">Last ping at</th>' +
-                '</tr></thead><tbody>';
-            var s_time=this.s_time;
-           var data= JSON.parse(res);
-            for(var str in data) out+=this.createDevice(str,data[str],s_time);
-            out+='</tbody></table></div></div>';
-            this.data= data;
-            this.view = $('<div>').attr('id','Devices').addClass('row').html(out).appendTo(this.container);
-            console.log(this.view);
+        private init():void{
+             this.R.connector.getServerTime().done((res)=>this.onServerTime(res));
+            this.view = $('#KiosksEdit');
             this.view.find('[data-id=btnAll]:first').on(CLICK,()=>this.onAllClick());
             this.view.find('[data-id=btnRestart]:first').on(CLICK,()=>this.onRestartClick());
             this.view.find('[data-id=btnDelete]:first').on(CLICK,()=>this.onDeleteClick());
+            this.view.find('[data-id=btnCreate]:first').on(CLICK,()=>this.onCreateClick());
+            this.view.find('[data-id=btnEdit]:first').on(CLICK,()=>this.onEditClick());
+            this.view.find('[data-id=btnClose]').on(CLICK,()=>this.onCloseClick());
+            this.view.find('[data-id=btnSave]:first').on(CLICK,()=>this.onSaveClick());
+            this.editHeader = this.view.find('[data-id=editHeader]:first');
+            this.selTemplate = this.view.find('[data-id=selTemplate]:first');
+            this.tiName = this.view.find('[data-id=tiName]:first');
+            this.list = this.view.find('[data-id=list]:first');
+
+            console.log(this.selTemplate);
+        }
 
 
+
+
+
+        private onSaveClick():void{
+            if(!this.selectedItem) {
+                    var k= new VOKiosk({});
+               var ar = this.kiosks;
+                var max=1;
+               for(var i=0,n=ar.length;i<n;i++) if(ar[i].id>max) max=ar[i].id;
+               k.id=max+1;
+                k.name = this.tiName.val();
+                k.template=this.selTemplate.val();
+                k.status='new';
+                this.kiosks.push(k);
+            }else{
+                this.selectedItem.name = this.tiName.val();
+                this.selectedItem.template=this.selTemplate.val();
+            }
+
+            this.save();
+            this.hidePanel();
+        }
+        private hidePanel():void{
+            $('#kioskEditPanel').fadeOut();
+        }
+        private showPanel():void{
+            $('#kioskEditPanel').fadeIn();
+        }
+        private onCloseClick():void{
+            this.hidePanel();
+        }
+        private onServerTime(res):void{
+            this.s_time= Number(res);
+           this.loadData();
+        }
+
+        private loadData():void{
+            this.R.connector.getData(this.filename).done((res)=>this.onData(res));
+        }
+        private makeTemplates(ar:any[]):void{
+            var out:string='';
+            for(var i=0,n=ar.length;i<n;i++){
+                out+='<option value="'+ar[i].value+'">' +ar[i].label+'</option>';
+            }
+            this.selTemplate.html(out);
+        }
+        private onData(res:string):void{
+           console.log(res);
+            var data = JSON.parse(res);
+            var s_time=this.s_time;
+
+            var ar =  data.kiosks ||[]
+            var out='';
+            var ks:VOKiosk[]=[];
+            for(var i=0,n=ar.length;i<n;i++){
+                var k:VOKiosk = new VOKiosk(ar[i]);
+                ks.push(k);
+                out+=this.createDevice(k,s_time);
+            }
+            this.kiosks = ks;
+            this.templates = data.templates;
+            this.makeTemplates(data.templates);
+            this.list.html(out) ;
+        }
+
+
+        private onEditClick():void{
+            var ar = this.collectChecked();
+            if(ar.length ===0 ){
+                alert('Please select checkbox in line you want to edit');
+                return;
+            }
+
+            this.selectedItem = this.getKioskById(ar[0]);
+
+            this.editHeader.text('Edit Kiosk');
+            this.tiName.val(this.selectedItem.name);
+            this.selTemplate.val(this.selectedItem.template);
+            this.showPanel();
+
+        }
+
+        private onCreateClick():void{
+            this.selectedItem=null;
+            this.editHeader.text('New Kiosk');
+            this.tiName.val('');
+            this.showPanel();
+
+        }
+
+        private onDataSaved(res):void{
+            console.log(res);
+            this.loadData();
+
+        }
+
+        private save():void{
+
+            var out:any={};
+            out.kiosks= this.kiosks;
+            out.templates=this.templates;
+
+            this.R.connector.saveData(JSON.stringify(out),this.filename).done((res)=>this.onDataSaved(res));
         }
 
         private collectChecked():any[]{
@@ -64,13 +161,53 @@ module uplight {
         }
         private onRestartClick():void{
             var ar = this.collectChecked();
-            console.log('Restart ',ar);
 
+            if(ar.length ===0 ){
+                alert('Please select checkbox in line you want to Restart');
+                return;
+            }
+            if(confirm('You want to Restart '+this.getKioskNames(ar).toString()+'?')){
+                this.restartKiosks(ar);
+            }
+        }
+        private restartKiosks(ids:number[]):void{
+            var ar:VOKiosk[] = this.kiosks;
+            for(var i=ar.length-1;i>=0;i--){
+                if(ids.indexOf(ar[i].id)!==-1) ar[i].status='restart';
+            }
+            this.save();
         }
 
+       private getKioskById(id:number):VOKiosk{
+           var ar = this.kiosks;
+           for(var i=0,n=ar.length;i<n;i++) if(ar[i].id==id) return ar[i] ;
+           return null;
+       }
+        private deleteKiosks(ids:number[]):void{
+            var ar:VOKiosk[] = this.kiosks;
+            for(var i=ar.length-1;i>=0;i--){
+                if(ids.indexOf(ar[i].id)!==-1) ar.splice(i,1);
+            }
+            this.save();
+        }
+        private getKioskNames(ar:number[]):string[]{
+            var out=[];
+            for(var i=0,n=ar.length;i<n;i++){
+                var k:VOKiosk = this.getKioskById(ar[i]);
+                if(k)  out.push(k.name);
+            }
+            return out
+        }
         private onDeleteClick():void{
             var ar = this.collectChecked();
-            console.log('Delete',ar);
+
+            if(ar.length ===0 ){
+                alert('Please select checkbox in line you want to delete');
+                return;
+            }
+            if(confirm('You want to Delete '+this.getKioskNames(ar).toString()+'?')){
+                        this.deleteKiosks(ar);
+            }
         }
 
         private onAllClick(){
@@ -83,7 +220,7 @@ module uplight {
 
         }
 
-        private createDevice(id:string,obj:any,s_time:number):string{
+        private createDevice(obj:VOKiosk,s_time:number):string{
                // console.log(obj);
            var timer= (obj.timer/1000);
             timer+=timer*0.1;
@@ -92,8 +229,9 @@ module uplight {
             var isOK=0;
             if(delta<timer)isOK=1;
             return '<tr>' +
-                '<td><input type="checkbox" data-id="'+id+'" /> </td>' +
+                '<td><input type="checkbox" data-id="'+obj.id+'" /> </td>' +
                 '<td>'+obj.name+'</td>' +
+                '<td><a target="_blank" href="'+obj.template+'?kiosk='+obj.id+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
                 '<td>'+obj.status+'</td>' +
                 '<td>'+isOK+'</td>' +
                 '<td>'+obj.ip+'</td>' +
@@ -105,17 +243,32 @@ module uplight {
 
         }
 
-        restart():void{
-            var yes:boolean = confirm('Tou want to restart kiosks?');
-            if(yes) this.R.connector.restartKiosks().done((res)=>this.onResult(res))
-        }
+        //restart():void{
+         /////   var yes:boolean = confirm('Tou want to restart kiosks?');
+          //  if(yes) this.R.connector.restartKiosks().done((res)=>this.onResult(res))
+       // }
 
-        private onResult(res:VOResult):void{
-            console.log(res);
-        }
+       // private onResult(res:VOResult):void{
+       //     console.log(res);
+       // }
 
 
 
     }
+
+     class VOKiosk{
+         constructor(obj:any){for(var str in obj ) this[str] = obj[str];}
+         id:number;
+         name:string;
+         status:string;
+         S_time:number=0;
+         K_time:number=0;
+         ip:string='';
+         ping:number=0;
+         start_at:number=0;
+         timer:number=15000;
+         template:string;
+
+     }
 
 }

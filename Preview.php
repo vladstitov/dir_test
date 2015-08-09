@@ -33,7 +33,7 @@
 </head>
 <body>
 <div id="Preview">
-<iframe src="Kiosk1080.php" scrolling="no" frameborder="0">
+<iframe src="" scrolling="no" frameborder="0">
 
 </iframe>
 </div>

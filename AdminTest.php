@@ -14,14 +14,15 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Admin panel">
     <meta name="author" content="ulight Vlad">
-    <link href="css/reset.css" rel="stylesheet" type="text/css"/>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+   <!-- <link href="css/reset.css" rel="stylesheet" type="text/css"/>-->
+
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="Scripts/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="Scripts/underscore-min.js"></script>
-<script type="text/javascript" src="Scripts/nicEdit.js"></script>
-
+<script type="text/javascript" src="libs/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="libs/underscore-min.js"></script>
+<script type="text/javascript" src="libs/nicEdit.js"></script>
+    <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="js/admin/RegA.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>  
@@ -205,6 +206,7 @@ include ('admin/Menu.html');
 <script type="text/javascript" src="js/admin/details/DetailsEditor.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsImages.js"></script>
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
+<script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
 
 
 <script type="text/javascript" src="js/admin/Menu.js"></script>

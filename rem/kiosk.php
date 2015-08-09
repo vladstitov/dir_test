@@ -37,10 +37,12 @@ switch(array_shift($a)){
 		$type=$get['type'];		
 		$val=$get['val'];
 		$who=$get['who'];
+		$id = $get['id'];		
 		$stamp= $get['stamp'];
+		if(strlen($stamp)>10)$stamp= substr($stamp,0,10);
 		$db=new PDO('sqlite:../data/statistics.db');
-		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),stamp INTEGER)');				
-		$res= $db->query("INSERT INTO stats (type,val,who,stamp) VALUES ('$type','$val','$who',$stamp)");
+		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),did INTEGER,stamp INTEGER)');				
+		$res= $db->query("INSERT INTO stats (type,val,who,did,stamp) VALUES ('$type','$val','$who',$id,$stamp)");
 		if($res) echo 'OK';
 		else echo json_encode($db->errorInfo());		
 			
@@ -109,7 +111,7 @@ switch(array_shift($a)){
 		if(!isset($get['id']) || !isset($get['stamp'])) die('ERROR');
 		header('Content-type: application/json');
 		
-		echo json_encode(trackController($get));	
+		echo json_encode(trackKiosk($get));	
 		
 	break;
 
@@ -127,15 +129,17 @@ switch(array_shift($a)){
 
 
 
-function trackController($get){
-		
+function trackKiosk($get){		
 		$out=new stdClass();
 		$out->success='success';			
-		$file_name='../data/track.json';
+		$file_name='../data/kiosks.json';
 		
 		$id=$get['id'];
 		$track = json_decode(file_get_contents($file_name));
-		if(!isset($track->$id))	$track->$id = new stdClass();			
+		if(!isset($track->$id)){
+			$out->success='nothing';
+		return $out;
+		}		
 		$kiosk = $track->$id;					
 		$stamp=(int)$get['stamp'];
 		$k_time=(int)@$get['now'];

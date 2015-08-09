@@ -106,7 +106,7 @@ var uplight;
             this.setText(str);
             clearTimeout(this.timeout);
             this.timeout = setTimeout(function () {
-                uplight.Registry.getInstance().connector.Stat('sr', str);
+                uplight.Registry.getInstance().connector.Stat('kb', str);
             }, 1500);
             this.input.focus();
         };
