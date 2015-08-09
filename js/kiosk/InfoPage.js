@@ -1,5 +1,5 @@
 /// <reference path="Registry.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var uplight;
 (function (uplight) {
     var InfoPage = (function () {
@@ -33,4 +33,4 @@ var uplight;
     })();
     uplight.InfoPage = InfoPage;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=infopage.js.map
+//# sourceMappingURL=InfoPage.js.map

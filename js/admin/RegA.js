@@ -1,7 +1,7 @@
 /// <reference path="net.ts" />
 /// <reference path="models.ts" />
-/// <reference path="../typing/jquery.d.ts" />
-/// <reference path="../typing/underscore.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/underscore.d.ts" />
 var LISTVIEW = 'ListView';
 var DETAILSVIEV = 'DetailsView';
 var MENUVIEW = 'MenuView';
@@ -136,4 +136,4 @@ var uplight;
     })();
     uplight.VODestination = VODestination;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RegA.js.map
+//# sourceMappingURL=rega.js.map

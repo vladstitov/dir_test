@@ -1,5 +1,5 @@
 /// <reference path="Registry.ts" />
-/// <reference path="../typing/svgjs.d.ts" />
+/// <reference path="../../libs/typing/svgjs.d.ts" />
 var uplight;
 (function (uplight) {
     var ScreenSaver = (function () {
@@ -92,4 +92,4 @@ var uplight;
     })();
     uplight.TouchClip = TouchClip;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=screensaver.js.map
+//# sourceMappingURL=ScreenSaver.js.map

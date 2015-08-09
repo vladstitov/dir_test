@@ -3,7 +3,7 @@
  */
 
  /// <reference path="regA.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 module uplight{
 
     export class Menu{

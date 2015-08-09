@@ -1,5 +1,5 @@
 ﻿/// <reference path="../kiosk/Registry.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 module kiosk {
     export class SearchResultold {
         // private vo: models.ListViewModel;

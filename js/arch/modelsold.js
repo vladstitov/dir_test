@@ -1,13 +1,11 @@
-﻿/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var models;
 (function (models) {
     var ListViewModel = (function () {
         function ListViewModel(name) {
             var _this = this;
             this.name = name;
-            $.get('rem/data.' + name + 's').done(function (data) {
-                return _this.onServerData(data);
-            });
+            $.get('rem/data.' + name + 's').done(function (data) { return _this.onServerData(data); });
         }
         ListViewModel.prototype.getData = function () {
             return this._model;
@@ -20,12 +18,9 @@ var models;
                 this._patterns[pattern] = this._toString(this.filter(pattern));
             return this._patterns[pattern];
         };
-
         ListViewModel.prototype.filter = function (pattern) {
             pattern = ' ' + pattern.toLowerCase();
-
             var data = this._labels_units;
-
             var out = [];
             for (var i = 0, n = data.length; i < n; i++) {
                 if (data[i].indexOf(pattern) > -1)
@@ -34,7 +29,6 @@ var models;
             this.amount = out.length;
             return out;
         };
-
         ListViewModel.prototype.setData = function (data) {
             var ar = [];
             for (var i = 0, n = data.length; i < n; i++) {
@@ -64,17 +58,15 @@ var models;
             return false;
         };
         ListViewModel.prototype.selectedItem = function (id) {
-            if (typeof id === "undefined") { id = -1; }
+            if (id === void 0) { id = -1; }
             if (id < 0)
                 return this._selectedItem;
-
             for (var i = 0, n = this._model.length; i < n; i++) {
                 if (this._model[i].mid == id)
                     this._selectedItem = this._model[i];
             }
             return this._selectedItem;
         };
-
         ListViewModel.prototype.onServerData = function (data) {
             if (data.result == 'success') {
                 this.type = data.type;
@@ -91,7 +83,6 @@ var models;
         return ListViewModel;
     })();
     models.ListViewModel = ListViewModel;
-
     var VOItem = (function () {
         function VOItem(obj) {
         }
@@ -99,7 +90,6 @@ var models;
     })();
     models.VOItem = VOItem;
 })(models || (models = {}));
-
 var trace = trace || function (data) {
     console.log(data);
 };

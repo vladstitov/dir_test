@@ -1,5 +1,5 @@
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var ads;
 (function (ads) {
     var TextTicker2 = (function () {

@@ -20,7 +20,10 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 
 <script type="text/javascript" src="libs/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="libs/underscore-min.js"></script>
-<script type="text/javascript" src="libs/nicEdit.js"></script>
+
+    <script type="text/javascript" src="libs/nicEdit.js"></script>
+    <script type="text/javascript" src="libs/Chart.js"></script>
+
     <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="libs/bootstrap.min.js"></script>
 

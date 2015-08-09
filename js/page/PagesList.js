@@ -1,5 +1,5 @@
 /// <reference path="../admin/rega.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var uplight;
 (function (uplight) {
     var PagesList = (function () {

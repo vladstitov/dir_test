@@ -1,5 +1,5 @@
-﻿/// <reference path="../kiosk/registry.ts" />
-/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../kiosk/registry.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var mobile;
 (function (mobile) {
     var DetailsPage = (function () {
@@ -7,7 +7,6 @@ var mobile;
             //////////////////////////////////////////////////////////////////////////////////
             this.cache = {};
             this.view = $(id);
-
             // this.details = $(id + ' [data-id=details]');
             // this.advanced = $(id + ' [data-id=advanced]');
             this.connector = conn;
@@ -17,7 +16,6 @@ var mobile;
         DetailsPage.prototype.reset = function () {
             this.cache = {};
         };
-
         //  private current: kiosk.VODestination;
         DetailsPage.prototype.getDetails = function (dest) {
             // console.log('DetailsPage', page);
@@ -33,26 +31,25 @@ var mobile;
                 $('<div></div>').load(dest.advanced).appendTo(p);
             return p;
         };
-
         /*
-        private loadAdvanced(dest: kiosk.VODestination): string {
-        if (dest.advanced.length < 40) {
-        this.current = dest;
-        this.connector.getAdvanced((res) => this.onPageLoaded(res), dest.destid.toString());
-        return '';
-        } else return dest.advanced;
-        
-        }
-        
-        
-        
-        
-        private onPageLoaded(res: string): void {
-        this.current.advanced = res;
-        this.advanced.html(res);
-        
-        }
-        */
+         private loadAdvanced(dest: kiosk.VODestination): string {
+             if (dest.advanced.length < 40) {
+                 this.current = dest;
+                 this.connector.getAdvanced((res) => this.onPageLoaded(res), dest.destid.toString());
+                 return '';
+             } else return dest.advanced;
+ 
+         }
+ 
+ 
+         
+ 
+         private onPageLoaded(res: string): void {
+             this.current.advanced = res;
+             this.advanced.html(res);
+           
+         }
+         */
         DetailsPage.prototype.renderDetails = function (dest) {
             var out = '<p class="xlarge"><span class="left">' + dest.name + '</span><span class="right">' + dest.unit + '</span></p>';
             if (dest.email || dest.phone || dest.website) {
@@ -71,4 +68,4 @@ var mobile;
     })();
     mobile.DetailsPage = DetailsPage;
 })(mobile || (mobile = {}));
-//# sourceMappingURL=detailspage.js.map
+//# sourceMappingURL=DetailsPage.js.map

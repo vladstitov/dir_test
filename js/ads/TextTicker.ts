@@ -1,4 +1,4 @@
-﻿/// <reference path="../typing/jquery.d.ts" />
+﻿/// <reference path="../../libs/typing/jquery.d.ts" />
 
 module ads{
     export class TextTicker{

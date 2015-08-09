@@ -1,4 +1,4 @@
-﻿/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 var ads;
 (function (ads) {
     var TextTicker = (function () {
@@ -22,14 +22,12 @@ var ads;
             console.log(this.timer);
             clearTimeout(this.timer);
             this.timer = null;
-
             // console.log(this.timer);
             // this.view = null;
             //this._data = null;
             this.current = 0;
             this.top = 100;
         };
-
         TextTicker.prototype.onTimer2 = function () {
             this.isMove = true;
         };
@@ -59,17 +57,13 @@ var ads;
             if (this.view.children().length > 1)
                 this.removeFirst(this.view);
             clearTimeout(this.timer);
-            this.timer = setTimeout(function () {
-                return _this.playNext();
-            }, this.delay * 1000);
+            this.timer = setTimeout(function () { return _this.playNext(); }, this.delay * 1000);
         };
-
         TextTicker.prototype.removeFirst = function (cont) {
             // var vp: JQuery = cont;
             this.top += 95;
             if (this.top > 800)
                 this.top = 100;
-
             cont.animate({ scrollTop: 95, top: this.top }, 500, 'linear', function () {
                 cont.scrollTop(0);
                 cont.children().first().remove();

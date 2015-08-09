@@ -1,7 +1,7 @@
 ﻿/// <reference path="net.ts" />
 /// <reference path="models.ts" />
-/// <reference path="../typing/jquery.d.ts" />
-/// <reference path="../typing/underscore.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/underscore.d.ts" />
 
 
 
@@ -151,6 +151,7 @@ module uplight{
         enable: number;
         type:number;
         dests:number[];
+        color:string;
     }
     export  class VOResult{
         result:string;

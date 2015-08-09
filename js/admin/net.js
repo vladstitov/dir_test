@@ -1,6 +1,6 @@
 /// <reference path="models.ts" />
 /// <reference path="rega.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 /// <reference path="../page/PagesList.ts" />
 var uplight;
 (function (uplight) {

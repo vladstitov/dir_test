@@ -6,7 +6,7 @@
 
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
-/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../../libs/typing/jquery.d.ts" />
 
 
 var LISTVIEW: string = 'ListView';
