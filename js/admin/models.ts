@@ -237,7 +237,7 @@ module uplight{
 
 
            var p1:JQueryPromise<VOCategory[]> = this.R.connector. getCategories();
-            var p2 :JQueryPromise<VODestination[]> = this.R.connector.getDestinations((data) => {});
+            var p2 :JQueryPromise<VODestination[]> = this.R.connector.getDestinations();
 
 
 

@@ -143,9 +143,8 @@ var uplight;
         Connector.prototype.getAdvanced = function (callBack, destid) {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);
         };
-        Connector.prototype.getDestinations = function (callBack) {
-            return $.get(this.service + '?a=dests.get_dests').done(callBack);
-            ;
+        Connector.prototype.getDestinations = function () {
+            return $.get(this.service + '?a=dests.get_dests'); //.done(callBack);;
         };
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
         Connector.prototype.getServerTime = function () {

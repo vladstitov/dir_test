@@ -165,6 +165,10 @@ module uplight{
         type:string;
     }
 
+    export class VOStat{
+        type:string;
+        val:string;
+    }
     export class VODestination {
         constructor(obj:any){
             for(var str in obj) this[str]=obj[str];

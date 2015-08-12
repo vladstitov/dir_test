@@ -179,8 +179,7 @@ var uplight;
             console.log('DestinantionsModel refresh');
             this.cache = {};
             var p1 = this.R.connector.getCategories();
-            var p2 = this.R.connector.getDestinations(function (data) {
-            });
+            var p2 = this.R.connector.getDestinations();
             var self = this;
             $.when(p1, p2).then(function (v1, v2) {
                 //  console.log(v1[0],v2[0]);

@@ -41,11 +41,11 @@ $labels = json_decode($l);
     <meta name="description" content="Kiosk 1080">
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
-    <link href="css/reset.css" rel="stylesheet" />
+    <link href="libs/reset.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
    <link href="css/kiosk/mainview.css" rel="stylesheet" />
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/font-awesome.css" rel="stylesheet" type="text/css"/>
     <!--
     <link href="css/KeyboardBlack.css" rel="stylesheet" type="text/css"/>
 -->

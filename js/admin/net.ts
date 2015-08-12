@@ -182,8 +182,8 @@ module uplight {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);
         }              
        
-        getDestinations(callBack: Function): JQueryPromise<VODestination[]> {
-           return $.get(this.service+'?a=dests.get_dests').done(callBack);;
+        getDestinations(): JQueryPromise<VODestination[]> {
+           return $.get(this.service+'?a=dests.get_dests');//.done(callBack);;
         }
 
         

@@ -121,6 +121,12 @@ var uplight;
         return VOItem;
     })();
     uplight.VOItem = VOItem;
+    var VOStat = (function () {
+        function VOStat() {
+        }
+        return VOStat;
+    })();
+    uplight.VOStat = VOStat;
     var VODestination = (function () {
         function VODestination(obj) {
             for (var str in obj)
@@ -136,4 +142,4 @@ var uplight;
     })();
     uplight.VODestination = VODestination;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=rega.js.map
+//# sourceMappingURL=RegA.js.map

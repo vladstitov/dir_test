@@ -14,9 +14,9 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Admin panel">
     <meta name="author" content="ulight Vlad">
-   <!-- <link href="css/reset.css" rel="stylesheet" type="text/css"/>-->
+    <link href="libs/reset.css" rel="stylesheet" type="text/css"/>
 
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
 <script type="text/javascript" src="libs/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="libs/underscore-min.js"></script>
