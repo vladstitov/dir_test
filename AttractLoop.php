@@ -20,16 +20,13 @@ $sett=$_GET['settings'];
     <div  class="cover" data-id="Body">
     </div>
     <link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" />
+    <script src="js/kiosk/Registry.js"></script>
     <script src="js/kiosk/als/AttractLoop.js"></script>
 
 </div>
 <script>
     $(document).ready(function(){
-	
-	var al = settings.attract_loop;
-	
         var ts = new uplight.AttractLoop();
-       
 
     })
 

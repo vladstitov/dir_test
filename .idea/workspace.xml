@@ -2,223 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81e37bf7-890c-4f49-a4c6-28da95441a21" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439083378.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439132735.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439252233.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439334203.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439419245.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439507194.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439656552.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439735210.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439851138.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439942042.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440037781.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440118960.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440258892.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440331302.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440375764.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680235.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680258.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680311.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_CD Drive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Closed Folder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Control Panel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Desktop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Entire Network.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Floppy 5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_My Computer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-GoLive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Illustrator.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Production-Bundle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Control Panel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Director.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-GoLive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Version-Cue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Internet Explorer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_JPG.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Shared Videos.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_WAV.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_ZIP.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-GoLive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-ImageReady.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-InDesign.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Photoshop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Version-Cue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Folder-GoLive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742166img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742339img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742399img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742562img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742697img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742706img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742747img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742838img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439744575img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439744978img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439745384img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439772456img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439772606img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439851547img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860100settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860232settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860371settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860661settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860809settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862186settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862195settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862224settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439865459settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439948390settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440261870img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440262044img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440270121img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272484img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272822img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272835img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272837img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272840img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272867img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272870img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272872img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440278550img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279337img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279348img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279355img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279359img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279364img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279369img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279375img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279381img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279429img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279544img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279550img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279555img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279559img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279564img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279568img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279572img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279578img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279582img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279648img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279662img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279689img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279787img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279790img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279793img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279822img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279826img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279830img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279906img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279909img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279947img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284907img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284915img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284918img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440285938img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286057img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286060img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286141img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286288img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286293img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286357img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286369img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286395img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440287792img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440300580settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332583settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332902settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332918settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440349469img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440353438img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440353484img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356063settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356094img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356096settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356216settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356226settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356235settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356244settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356257settings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357876img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357884img_center.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357888img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AttractLoop.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/Chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_Messages.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_RSS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_img_bottom.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_img_center.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/typing/chart.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/img_bottom.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/img_center.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/directories.db" afterPath="$PROJECT_DIR$/data/directories.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/statistics.db" afterPath="$PROJECT_DIR$/data/statistics.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AdminTest.php" afterPath="$PROJECT_DIR$/AdminTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js.map" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js.map" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js.map" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.js.map" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.js" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/InfoPage.js" afterPath="$PROJECT_DIR$/js/kiosk/InfoPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kiosk1080.php" afterPath="$PROJECT_DIR$/Kiosk1080.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/Menu.html" afterPath="$PROJECT_DIR$/admin/Menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.js.map" afterPath="$PROJECT_DIR$/js/admin/RegA.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.js" afterPath="$PROJECT_DIR$/js/admin/RegA.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.ts" afterPath="$PROJECT_DIR$/js/admin/RegA.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.ts" afterPath="$PROJECT_DIR$/js/kiosk/Registry.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" afterPath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" afterPath="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/admin.json" afterPath="$PROJECT_DIR$/data/admin.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/admin.php" afterPath="$PROJECT_DIR$/rem/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/infopage.js.map" afterPath="$PROJECT_DIR$/js/kiosk/infopage.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/kiosk.php" afterPath="$PROJECT_DIR$/rem/kiosk.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js.map" afterPath="$PROJECT_DIR$/js/admin/net.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js" afterPath="$PROJECT_DIR$/js/admin/net.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.ts" afterPath="$PROJECT_DIR$/js/admin/net.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/screensaver.js.map" afterPath="$PROJECT_DIR$/js/kiosk/screensaver.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/settings.json" afterPath="$PROJECT_DIR$/data/settings.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AttractLoop.php" afterPath="$PROJECT_DIR$/AttractLoop.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/als/Gallery.js.map" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/als/Gallery.js" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ca78c8c6-571e-4922-a9ec-9699f589a7f2" name="Failed commit: Default" comment="statistics" />
@@ -242,64 +29,7 @@
     <favorites_list name="LPP" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Kiosk1080.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5829726">
-              <caret line="154" column="24" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="24" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AttractLoop.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AttractLoop.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.730769">
-              <caret line="21" column="65" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Admin.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/Admin.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AttractLoop.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc;n#uplight#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Registry.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/kiosk/Registry.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -366,13 +96,13 @@
         <option value="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.html" />
         <option value="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/Registry.ts" />
-        <option value="$PROJECT_DIR$/AttractLoop.php" />
         <option value="$PROJECT_DIR$/Kiosk1080.php" />
         <option value="$PROJECT_DIR$/js/kiosk/als/AttractLoop.css" />
         <option value="$PROJECT_DIR$/js/kiosk/als/TouchClip.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" />
+        <option value="$PROJECT_DIR$/AttractLoop.php" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
       </list>
     </option>
   </component>
@@ -738,16 +468,23 @@
       <option name="project" value="LOCAL" />
       <updated>1439344306129</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="AttractLoop done">
+      <created>1440383052326</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1440383052326</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18997912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18997912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21330518" sideWeight="0.48903155" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2132753" sideWeight="0.5088282" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -758,7 +495,6 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31991294" sideWeight="0.4951246" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -792,7 +528,8 @@
     <MESSAGE value="Statistics start" />
     <MESSAGE value="Statistics done" />
     <MESSAGE value="AttractLoop started" />
-    <option name="LAST_COMMIT_MESSAGE" value="AttractLoop started" />
+    <MESSAGE value="AttractLoop done" />
+    <option name="LAST_COMMIT_MESSAGE" value="AttractLoop done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -829,6 +566,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47844228">
           <caret line="245" column="17" selection-start-line="245" selection-start-column="17" selection-end-line="245" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1034,6 +772,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.153846">
           <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,6 +780,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="45" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,6 +798,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1065,6 +806,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="64" selection-start-line="0" selection-start-column="64" selection-end-line="0" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1072,6 +814,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="251" selection-start-line="0" selection-start-column="251" selection-end-line="0" selection-end-column="251" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1120,22 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/Admin.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AttractLoop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="21" column="65" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kiosk/als/TouchClip.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1162,16 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/als/Gallery.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12517385">
-          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc;n#uplight#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6147427">
@@ -1188,10 +905,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/als/Gallery.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.87482613">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc;n#uplight#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/Admin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AttractLoop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53968257">
+          <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5829726">
-          <caret line="154" column="24" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.14141414">
+          <caret line="127" column="26" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
           <folding>
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>

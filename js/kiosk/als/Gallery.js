@@ -27,6 +27,7 @@ var uplight;
         function GalleryDisplay(url) {
             var _this = this;
             this.current = -1;
+            this.interval = 0;
             this.view = $('<div>');
             this.list = $('<div>').appendTo(this.view);
             $.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(JSON.parse(res)); });
@@ -47,8 +48,6 @@ var uplight;
                 this.timeout = 20;
             this.view.addClass('x' + this.props.size);
             this.start();
-        };
-        GalleryDisplay.prototype.render = function () {
         };
         GalleryDisplay.prototype.goNext = function () {
             var _this = this;

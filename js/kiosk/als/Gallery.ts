@@ -24,18 +24,18 @@ module uplight{
 
 }
     class GalleryDisplay{
-        selector:string
+        private selector:string
         view:JQuery
-        list:JQuery;
+       private list:JQuery;
 
-        data:any;
-        galley:JQuery[];
-        props:VOAL;
-        timeout:number;
+        private data:any;
+       private galley:JQuery[];
+       private props:VOAL;
+       private timeout:number;
         private current=-1;
-        interval:number;
-        prev:JQuery;
-        next:JQuery;
+       private  interval:number=0;
+        private prev:JQuery;
+        private next:JQuery;
 
         constructor(url:string){
             this.view = $('<div>');
@@ -56,15 +56,8 @@ module uplight{
             this.props=data.props;
             this.timeout = Number(this.props.delay);
             if(isNaN(this.timeout))this.timeout=20;
-
-
-
             this.view.addClass('x'+this.props.size);
-
             this.start();
-        }
-        private render():void{
-
         }
 
         private goNext():void{
