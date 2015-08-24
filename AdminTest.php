@@ -33,6 +33,15 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 <title>Interactive Directories Admin</title>
 
     <style>
+        .umsg{
+            position: absolute;
+            z-index: 1000;
+            background-color: ivory;
+            padding: 0.3em;
+            border-radius: 7px;
+            box-shadow: 0 0 5px gray;
+
+        }
         #menubar{
             position: absolute;
             left:0.5em;
@@ -193,8 +202,11 @@ include ('admin/Menu.html');
 
 </div>
 <hr/>
+<script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>
 <script type="text/javascript" src="js/admin/screen/SettingsEdit.js"></script>
 <script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>
+<script type="text/javascript" src="js/admin/screen/AttractLoopEdit.js"></script>
+
 <script type="text/javascript" src="js/admin/categories/CategoryForm.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoryListing.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoryList.js"></script>
@@ -202,14 +214,18 @@ include ('admin/Menu.html');
 <script type="text/javascript" src="js/admin/categories/CategoriesList.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoryNotListing.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoriesManager.js"></script>
+
 <script type="text/javascript" src="js/admin/labels/LabelsManager.js"></script>
+
 <script type="text/javascript" src="js/admin/details/DetailsList.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsCategory.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsForm.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsEditor.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsImages.js"></script>
+
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
+
 
 
 <script type="text/javascript" src="js/admin/Menu.js"></script>

@@ -14,12 +14,28 @@
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
+        /*  private onTimeout():void{
+              Registry.getInstance().dispatcher.triggerHandler(Registry.getInstance().RESET_ALL);
+              $('#AttractLoop').show();
+          }*/
         function Kiosk() {
             var _this = this;
             this.home = '#category=2';
             this.stamp = 0;
             this.ping = 0;
             this.timer = (new Date()).getTime();
+            /*  document.addEventListener('click',()=>{
+                  clearTimeout(this.timeout)
+                  this.timeout = setTimeout(()=>this.onTimeout(),20000);
+              })
+              $('#AttractLoop').click(()=>{
+                  $('#AttractLoop').hide();
+                  console.log('Attracloop click');
+   
+   
+   
+              })*/
+            //  var mode = mode
             var r = uplight.Registry.getInstance();
             r.connector = new uplight.Connector();
             r.connector.id = kiosk_id;
@@ -37,10 +53,14 @@ var uplight;
             if (isNaN(delay) || delay < 2)
                 delay = 2;
             setInterval(function () { return _this.relay(); }, delay * 1000);
-            var ss = new uplight.ScreenSaver($('#container'));
-            r.dispatcher.on(r.SS_START, function () {
-                r.dispatcher.triggerHandler(r.RESET_ALL);
-            });
+            if (typeof mode !== 'undefined' && mode === 'preview') {
+            }
+            else {
+                var ss = new uplight.ScreenSaver();
+                r.dispatcher.on(r.SS_START, function () {
+                    r.dispatcher.triggerHandler(r.RESET_ALL);
+                });
+            }
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
             /*

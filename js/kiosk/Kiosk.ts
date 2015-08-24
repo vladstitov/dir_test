@@ -14,7 +14,7 @@
 /// <reference path="keywords.ts" />
 declare var u_settings:any;
 declare var kiosk_id:number;
-
+declare var mode;
 module uplight {
    export class Kiosk {     
        private searchResult: SearchResult;
@@ -32,9 +32,28 @@ module uplight {
        private infoPage:InfoPage;
        private data: any;
 
+       private timeout:number
 
+
+     /*  private onTimeout():void{
+           Registry.getInstance().dispatcher.triggerHandler(Registry.getInstance().RESET_ALL);
+           $('#AttractLoop').show();
+       }*/
 
        constructor() {
+
+         /*  document.addEventListener('click',()=>{
+               clearTimeout(this.timeout)
+               this.timeout = setTimeout(()=>this.onTimeout(),20000);
+           })
+           $('#AttractLoop').click(()=>{
+               $('#AttractLoop').hide();
+               console.log('Attracloop click');
+
+
+
+           })*/
+         //  var mode = mode
            var r:Registry = Registry.getInstance();
            r.connector = new Connector();
            r.connector.id=kiosk_id;
@@ -56,8 +75,14 @@ module uplight {
 
            setInterval(()=>this.relay(),delay*1000);
 
-           var ss:ScreenSaver = new ScreenSaver($('#container'));
-          r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
+           if (typeof mode !=='undefined' && mode === 'preview'){
+
+
+           }else{
+             var ss:ScreenSaver = new ScreenSaver();
+               r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
+           }
+
 
 
           // Registry.getInstance().connector.Log('kiosk started succesguly');

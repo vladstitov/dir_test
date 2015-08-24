@@ -42,9 +42,9 @@ var uplight;
         };
         CategoryListing.prototype.onSave = function (res) {
             if (res.success)
-                this.R.alert('Records Saved', this.btnSave.parent());
+                this.R.msg('Records Saved', this.btnSave);
             else
-                this.R.alert('ERROR ', this.btnSave.parent());
+                this.R.msg('ERROR ', this.btnSave);
             console.log(res);
         };
         CategoryListing.prototype.onSaveClicked = function () {

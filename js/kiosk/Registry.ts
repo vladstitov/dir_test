@@ -3,6 +3,9 @@
 /// <reference path="SearchResult.ts" />
 /// <reference path="SearchDetails.ts" />
 /// <reference path="SearchModel.ts" />
+/// <reference path="als/TouchClip.ts" />
+/// <reference path="als/AttractLoop.ts" />
+/// <reference path="als/Gallery.ts" />'
 
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
@@ -39,6 +42,7 @@ var CLICK: string = 'click';
 var SHOW: string = 'show';
 var HIDE: string = 'hide';
 //var trace = function (data) { console.log(data); }
+declare  var u_settings:any;
 module uplight {
 
 
@@ -150,6 +154,17 @@ module uplight {
 
     }
 
+    export class VOAL {
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
+        id: number;
+        name: string;
+        src: string;
+        data_url:string;
+        delay:number;
+        size:string;
+        type:string;
+        TC:boolean
+    }
 
 
 }

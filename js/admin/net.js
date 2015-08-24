@@ -147,14 +147,26 @@ var uplight;
             return $.get(this.service + '?a=dests.get_dests'); //.done(callBack);;
         };
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
+        Connector.prototype.uploadFile = function (form, folder, prefix) {
+            return $.ajax({
+                url: this.service + '?a=upload_file&folder=' + folder + '&prefix=' + prefix,
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        };
         Connector.prototype.getServerTime = function () {
             return $.get(this.service + '?a=screen.get_server_time');
         };
         Connector.prototype.getData = function (filename) {
-            return $.get(this.service + '?a=screen.get_data&file_name=' + filename);
+            return $.get(this.service + '?a=get_data&file_name=' + filename);
         };
         Connector.prototype.saveData = function (data, filename) {
-            return $.post(this.service + '?a=screen.save_data&file_name=' + filename, data);
+            console.log('save data ' + filename);
+            return $.post(this.service + '?a=save_data&file_name=' + filename, data);
         };
         Connector.prototype.getLabels = function () {
             return $.get(this.service + '?a=screen.get_labels', 'application/json');
@@ -205,34 +217,41 @@ var uplight;
         //    $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
         //}
         ////////////////////////////////Labels////////////////////////////
-        Connector.prototype.deleteImage = function (url, callBack) {
-            var data = uplight.RegA.getInstance().device;
+        /*
+
+        deleteImage(url: string, callBack: Function): void {
+            var data: any = RegA.getInstance().device;
             data.deleteMediaUrl = url;
             // data.a = 'screen.deleteMedia';
             $.post(this.service + '?a=screen.deleteMedia', data).done(callBack);
-        };
-        Connector.prototype.saveBackground = function (url, callBack) {
-            var data = uplight.RegA.getInstance().device;
+        }
+
+        saveBackground(url: string, callBack: Function): void {
+            var data: any = RegA.getInstance().device;
             data.newBackground = url;
             $.post(this.service + '?a=screen.newBackground', data, 'application/json').done(callBack);
-        };
-        Connector.prototype.uploadBackgroundLibrary = function (form, completeHandler, errorHandler, onProgress) {
-            this.uploadFile(form, '?a=screen.bg_upload', completeHandler, errorHandler, onProgress);
-        };
-        Connector.prototype.uploadTempFile = function (formname, completeHandler, errorHandler, onProgress) {
-            this.uploadFile(document.getElementById(formname), '?a=screen.upload_temp', completeHandler, errorHandler, onProgress);
-        };
-        Connector.prototype.saveImageIndex = function (filename, index) {
-            var data = {};
-            data.a = 'screen.save_image_index';
-            data.file_name = filename;
-            data.index = index;
-            return $.get(this.service, data);
-        };
-        Connector.prototype.uploadTempImage = function (data) {
-            //console.log('uploadTempImage    ',data);
-            return $.ajax({
-                url: this.service + '?a=screen.upload_image',
+        }
+
+       // uploadBackgroundLibrary(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
+           // this.uploadFile(form, '?a=screen.bg_upload', completeHandler, errorHandler, onProgress);
+       // }
+
+       // uploadTempFile(formname: string, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
+        //    this.uploadFile(<HTMLFormElement>document.getElementById(formname),'?a=screen.upload_temp' , completeHandler, errorHandler, onProgress);
+       //}
+
+        saveImageIndex(filename:string,index:string):JQueryPromise<VOCategory[]>{
+            var data:any={};
+            data.a='screen.save_image_index';
+            data.file_name=filename;
+            data.index=index;
+            return $.get(this.service,data);
+        }
+
+       uploadTempImage(data:FormData): JQueryPromise<VOCategory[]> {
+           //console.log('uploadTempImage    ',data);
+           return  $.ajax({
+                url: this.service+'?a=screen.upload_image',  //Server script to process data
                 type: 'POST',
                 dataType: 'json',
                 data: data,
@@ -240,8 +259,10 @@ var uplight;
                 contentType: false,
                 processData: false
             });
-        };
-        Connector.prototype.uploadFile = function (form, service, completeHandler, errorHandler, onProgress) {
+
+        }
+*/
+        Connector.prototype.uploadFile2 = function (form, service, completeHandler, errorHandler, onProgress) {
             //  var data: FormData = new FormData(form);
             $.ajax({
                 url: this.service + service,

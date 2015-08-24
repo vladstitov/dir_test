@@ -8,6 +8,7 @@
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
+///<reference path="screen/AttractLoopEdit.ts" />
 
 
 module uplight {
@@ -22,6 +23,9 @@ module uplight {
         private labels:LabelsManager;
         private settingsEdit:SettingsEdit
         private statistics:Statistics;
+        private attractLoop:AttractLoopEdit;
+
+
         private menu:Menu;
         private newindow:Window;
         private preview:JQuery;
@@ -55,6 +59,15 @@ module uplight {
          //  if(hash!=='#PreviewKi') this.hidePreview();
 
                 switch (hash){
+                    case '#Attract-L':
+                        // this.showPreview();
+                        this.hidePreview();
+                        // this.content.hide();
+                        this.attractLoop = new AttractLoopEdit(this.content);
+                        this.content.show();
+                        // this.restartKiosks.restart();
+
+                        break;
 
                     case '#Statistic':
                         // this.showPreview();
@@ -143,7 +156,7 @@ module uplight {
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
 
-           // this.R.alert=(text,cont)=>this.myMsg(text,cont);
+            this.R.msg=(text,cont)=>this.myMsg(text,cont);
 
 
 
@@ -164,13 +177,16 @@ module uplight {
         }
 
 
-        myMsg(text:string,container:JQuery){
+        myMsg(text:string,DO:JQuery){
 
-            this.messageText.text(text);
-
-                 var alert =  this.message.prependTo(container);
-                alert.show();
-                    setTimeout(function(){  alert.hide('fast');  },3000);
+           var msg =  $('<div>').addClass('umsg').css(DO.offset()).text(text).appendTo('body');
+            msg.hide();
+            msg.show('fast');
+                   setTimeout(function(){
+                        msg.hide('fast',function(){
+                            msg.remove();
+                        })
+                        },3000);
         }
 
 

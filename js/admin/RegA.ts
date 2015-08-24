@@ -2,7 +2,7 @@
 /// <reference path="models.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
 /// <reference path="../../libs/typing/underscore.d.ts" />
-
+/// <reference path="com/GalleryAdmin.ts" />
 
 
 declare class nicEditor {
@@ -59,27 +59,6 @@ var myAlertMsg: JQuery;
 
 
 
-
-
-
-
-/*
-
-
-var myMsg2 = function (msg, ref: JQuery) {
-
-    var mymsg = $('<div class="mymsg2"></div>').appendTo(ref.parent());
-
-    //var obj: any = ref.position();
-    // obj.top += 20;
-    // msg.css(obj);
-    mymsg.text(msg).show('fast').delay(2100).hide('fast');
-    setTimeout(function () { mymsg.remove(); },2500);
-}
-*/
-
-
-
 module uplight{
 
     export class RegA {
@@ -114,7 +93,7 @@ module uplight{
             return this[id];
         }
 
-        alert(message:string,container:JQuery){
+        msg(message:string,container:JQuery){
 
        }
         message(msg:string):void{
@@ -159,10 +138,23 @@ module uplight{
         error:string;
     }
     export class VOItem {
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
         id: string;
         value: string;
         label: string;
         type:string;
+    }
+
+    export class VOAL {
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
+        id: number;
+        name: string;
+        src: string;
+        data_url:string;
+        delay:number;
+        size:number;
+        type:string;
+        TC:boolean
     }
 
     export class VOStat{
@@ -192,6 +184,7 @@ module uplight{
         meta:string;
         kws:string;
     }
+
 
 
 }

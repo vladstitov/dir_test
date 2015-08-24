@@ -188,7 +188,7 @@ var uplight;
         ImportExport.prototype.onUploadComplete = function (res) {
             console.log(res);
             if (res.result) {
-                this.R.alert('Complete', this.btnUpload);
+                this.R.msg('Complete', this.btnUpload);
                 this._data = null;
                 //this.reset();
                 this.getData();
@@ -236,9 +236,8 @@ var uplight;
  */
         //   }
         ImportExport.prototype.onImportClick = function (evt) {
-            var _this = this;
-            this.R.connector.uploadTempFile('uploadFile', function (res) { return _this.onUploadComplete(res); }, null, this.onProgress);
-            $('#ImportExport progress').show();
+            // this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
+            //$('#ImportExport progress').show();
         };
         ImportExport.prototype.onProgress = function (evt) {
             console.log(evt);

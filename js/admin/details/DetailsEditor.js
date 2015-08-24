@@ -62,10 +62,10 @@ var uplight;
                     var dest = this.detailsForm.getDestination();
                     this.list.setSelectedItem(dest);
                 }
-                this.R.alert('Record Saved', this.btnSave.parent());
+                this.R.msg('Record Saved', this.btnSave);
             }
             else
-                this.R.alert('ERROR ', this.btnSave.parent());
+                this.R.msg('ERROR ', this.btnSave.parent());
         };
         DetailsEditor.prototype.onBtnSaveClick = function () {
             var _this = this;
@@ -82,7 +82,7 @@ var uplight;
         };
         ////////////////////////////////////////////////////////////////////////////////////////////////
         DetailsEditor.prototype.onDelete = function (res) {
-            this.R.alert('Record deleted', this.btnDel);
+            this.R.msg('Record deleted', this.btnDel);
             this.list.selectedItem = null;
             this.detailsForm.setDestibation(null);
         };

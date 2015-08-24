@@ -91,9 +91,9 @@ module uplight{
                     var dest= this.detailsForm.getDestination();
                     this.list.setSelectedItem(dest);
                 }
-                this.R.alert('Record Saved', this.btnSave.parent());
+                this.R.msg('Record Saved', this.btnSave);
 
-            }  else this.R.alert('ERROR ', this.btnSave.parent());
+            }  else this.R.msg('ERROR ', this.btnSave.parent());
 
 
 
@@ -112,7 +112,7 @@ module uplight{
         }
       ////////////////////////////////////////////////////////////////////////////////////////////////
         private onDelete(res): void {
-            this.R.alert('Record deleted', this.btnDel);
+            this.R.msg('Record deleted', this.btnDel);
             this.list.selectedItem=null;
             this.detailsForm.setDestibation(null);
         }

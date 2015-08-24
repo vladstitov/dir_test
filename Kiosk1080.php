@@ -16,14 +16,11 @@ foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id){
 if($res===0) exit;
 */
 
-$settings = json_decode(file_get_contents('data/settings.json'));
+$settings = file_get_contents('data/settings.json');
 
 
 
 
-$s= array();
-foreach($settings as $val) $s[$val->id]=$val->value;
-//
 $l=file_get_contents('data/labels.json');
 $labels = json_decode($l);
 ?>
@@ -31,7 +28,8 @@ $labels = json_decode($l);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <script>
-        var u_settings = <?php echo json_encode($s); ?>;
+       
+        var u_settings = <?php echo $settings; ?>;
         var kiosk_id='<?php echo $kiosk_id; ?>';
         var u_labels = <?php echo $l; ?>;
     </script>
@@ -145,10 +143,51 @@ $labels = json_decode($l);
 <section id="footer">
     <?= $labels->footer; ?>
 </section>
+
     <section id="cover">
 
+
     </section>
+
+
 </div>
+
+<section id="AttractLoop">
+    <div  class="cover" data-id="Body">
+    </div>
+    <style>
+        #AttractLoop {
+            position: absolute;
+            top: 170px;
+
+        }
+
+
+        /*
+         #AttractLoop{
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: 0;
+         }
+         #AttractLoop .overlay{
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: 0*
+          }/;
+
+     </style>
+    <!-- <iframe src="AttractLoop.php?settings=settings.json" width="1080" height="1920">
+
+     </iframe>
+    <div class="overlay">
+
+    </div>-->
+-->
+</section>
 
 <div id="History" style="display:none;"></div>
 
@@ -169,6 +208,8 @@ $labels = json_decode($l);
 <!--<script src="js/kiosk/MainView.js"></script>
 <script src="js/kiosk/SearchDetails.js"></script>
 -->
+<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" />
+<script src="js/kiosk/als/AttractLoop.js"></script>
 <script src="js/kiosk/ScreenSaver.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>

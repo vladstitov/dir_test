@@ -3,6 +3,9 @@
 /// <reference path="SearchResult.ts" />
 /// <reference path="SearchDetails.ts" />
 /// <reference path="SearchModel.ts" />
+/// <reference path="als/TouchClip.ts" />
+/// <reference path="als/AttractLoop.ts" />
+/// <reference path="als/Gallery.ts" />'
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
@@ -29,7 +32,6 @@ var SHOW_DATA_VIEW_BACK = 'SHOW_DATA_VIEW_BACK';
 var CLICK = 'click';
 var SHOW = 'show';
 var HIDE = 'hide';
-//var trace = function (data) { console.log(data); }
 var uplight;
 (function (uplight) {
     var Registry = (function () {
@@ -104,5 +106,13 @@ var uplight;
         return VODestination;
     })();
     uplight.VODestination = VODestination;
+    var VOAL = (function () {
+        function VOAL(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOAL;
+    })();
+    uplight.VOAL = VOAL;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=Registry.js.map

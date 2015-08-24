@@ -47,16 +47,13 @@ switch(array_shift($a)){
 		else echo json_encode($db->errorInfo());		
 			
 	break;
-	case 'get_pages_list':
-		include_once('cl/DbConnector.php');
-		$con= new DbConnector();
-		
-		$sql='SELECT id,label FROM pages WHERE enable=1 ORDER BY sort';
-		$result=json_encode($con->query($sql));	
-		//header('Content-type: application/json'); 
+	case 'get_data':
+		$fn='../data/'.$get['file_name'];
+		echo file_exists($fn)?file_get_contents($fn):'NO';
 			      
 	break;
-	case 'get_page':		
+	case 'get_page':
+		
 		$fn='../data/pages/p'.$get['id'].'.htm';
 		$result= file_exists($fn)?file_get_contents($fn):'NO';			      
 	break;
@@ -185,6 +182,5 @@ function trackKiosk($get){
 		
 }
 
-//if(is_string($result))  echo($result);
-//else  echo json_encode($result);
+
 

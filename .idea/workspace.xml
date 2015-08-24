@@ -2,24 +2,223 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81e37bf7-890c-4f49-a4c6-28da95441a21" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\css\font-awesome.css" afterPath="$PROJECT_DIR$/libs/font-awesome.css" />
-      <change type="MOVED" beforePath="C:\wamp\www\dir_test\css\reset.css" afterPath="$PROJECT_DIR$/libs/reset.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439083378.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439132735.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439252233.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439334203.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439419245.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439507194.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439656552.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439735210.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439851138.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1439942042.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440037781.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440118960.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440258892.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440331302.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bk/1440375764.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680235.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680258.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/details/img/a4_1439680311.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_CD Drive.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Closed Folder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Control Panel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Desktop.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Entire Network.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_Floppy 5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al1_My Computer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Flash.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-GoLive.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Illustrator.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Adobe-Production-Bundle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Control Panel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Director.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Flash.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-GoLive.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Folder-Version-Cue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Internet Explorer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_JPG.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_Shared Videos.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_WAV.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al2_ZIP.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Flash.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-GoLive.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-ImageReady.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-InDesign.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Photoshop.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Adobe-Version-Cue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/media/al_Folder-GoLive.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742166img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742339img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742399img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742562img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742697img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742706img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742747img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439742838img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439744575img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439744978img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439745384img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439772456img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439772606img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439851547img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860100settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860232settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860371settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860661settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439860809settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862186settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862195settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439862224settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439865459settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1439948390settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440261870img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440262044img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440270121img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272484img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272822img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272835img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272837img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272840img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272867img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272870img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440272872img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440278550img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279337img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279348img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279355img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279359img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279364img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279369img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279375img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279381img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279429img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279544img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279550img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279555img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279559img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279564img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279568img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279572img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279578img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279582img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279648img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279662img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279689img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279787img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279790img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279793img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279822img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279826img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279830img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279906img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279909img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440279947img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284907img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284915img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440284918img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440285938img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286057img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286060img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286141img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286288img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286293img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286357img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286369img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440286395img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440287792img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440300580settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332583settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332902settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440332918settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440349469img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440353438img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440353484img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356063settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356094img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356096settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356216settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356226settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356235settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356244settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440356257settings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357876img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357884img_center.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/arch/1440357888img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AttractLoop.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/Chart.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/admin/com/GalleryAdmin.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/kiosk/als/TouchClip.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_Messages.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_RSS.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_img_bottom.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/al_img_center.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/typing/chart.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/img_bottom.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/img_center.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/directories.db" afterPath="$PROJECT_DIR$/data/directories.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/statistics.db" afterPath="$PROJECT_DIR$/data/statistics.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AdminTest.php" afterPath="$PROJECT_DIR$/AdminTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js.map" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" afterPath="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js.map" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js.map" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" afterPath="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" afterPath="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.js.map" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.js" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" afterPath="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.js" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" afterPath="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" afterPath="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/InfoPage.js" afterPath="$PROJECT_DIR$/js/kiosk/InfoPage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.js" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" afterPath="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kiosk1080.php" afterPath="$PROJECT_DIR$/Kiosk1080.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" afterPath="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/Menu.html" afterPath="$PROJECT_DIR$/admin/Menu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.js.map" afterPath="$PROJECT_DIR$/js/admin/RegA.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.js" afterPath="$PROJECT_DIR$/js/admin/RegA.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/RegA.ts" afterPath="$PROJECT_DIR$/js/admin/RegA.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/Statistics.html" afterPath="$PROJECT_DIR$/js/admin/impexp/Statistics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/Statistics.js.map" afterPath="$PROJECT_DIR$/js/admin/impexp/Statistics.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/Statistics.js" afterPath="$PROJECT_DIR$/js/admin/impexp/Statistics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/impexp/Statistics.ts" afterPath="$PROJECT_DIR$/js/admin/impexp/Statistics.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/models.js.map" afterPath="$PROJECT_DIR$/js/admin/models.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/models.js" afterPath="$PROJECT_DIR$/js/admin/models.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/models.ts" afterPath="$PROJECT_DIR$/js/admin/models.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js.map" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.js" afterPath="$PROJECT_DIR$/js/kiosk/Registry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/Registry.ts" afterPath="$PROJECT_DIR$/js/kiosk/Registry.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" afterPath="$PROJECT_DIR$/js/kiosk/ScreenSaver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" afterPath="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/admin.json" afterPath="$PROJECT_DIR$/data/admin.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/admin.php" afterPath="$PROJECT_DIR$/rem/admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/infopage.js.map" afterPath="$PROJECT_DIR$/js/kiosk/infopage.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rem/kiosk.php" afterPath="$PROJECT_DIR$/rem/kiosk.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js.map" afterPath="$PROJECT_DIR$/js/admin/net.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.js" afterPath="$PROJECT_DIR$/js/admin/net.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/admin/net.ts" afterPath="$PROJECT_DIR$/js/admin/net.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kiosk/screensaver.js.map" afterPath="$PROJECT_DIR$/js/kiosk/screensaver.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/settings.json" afterPath="$PROJECT_DIR$/data/settings.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ca78c8c6-571e-4922-a9ec-9699f589a7f2" name="Failed commit: Default" comment="statistics" />
@@ -44,12 +243,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AdminTest.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AdminTest.php">
+      <file leaf-file-name="Kiosk1080.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26984128">
-              <caret line="140" column="22" selection-start-line="140" selection-start-column="22" selection-end-line="140" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.5829726">
+              <caret line="154" column="24" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="24" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AttractLoop.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AttractLoop.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="21" column="65" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="65" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Admin.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/Admin.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AttractLoop.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc;n#uplight#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Registry.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/kiosk/Registry.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,10 +304,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="package_json" />
         <option value="Html5" />
         <option value="TypeScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -77,34 +322,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
-        <option value="$PROJECT_DIR$/js/admin/categories/CategoriesManager.ts" />
-        <option value="$PROJECT_DIR$/data/control.json" />
-        <option value="$PROJECT_DIR$/js/kiosk/Keyboard.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/models.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/SearchController.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/Keywords.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/arch/Details.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/InfoPage.ts" />
-        <option value="$PROJECT_DIR$/data/logs/kiosk07-15.log" />
-        <option value="$PROJECT_DIR$/js/kiosk/Details.ts" />
-        <option value="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/SearchDetails.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/Categories.ts" />
-        <option value="$PROJECT_DIR$/data/labels.json" />
-        <option value="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" />
-        <option value="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
-        <option value="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" />
-        <option value="$PROJECT_DIR$/js/admin/details/DetailsEditor.htm" />
-        <option value="$PROJECT_DIR$/js/kiosk/Registry.ts" />
-        <option value="$PROJECT_DIR$/js/admin/settings/SettingsEdit.ts" />
-        <option value="$PROJECT_DIR$/admin/Menu.html" />
-        <option value="$PROJECT_DIR$/js/admin/labels/LabelsManager.htm" />
-        <option value="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" />
-        <option value="$PROJECT_DIR$/js/admin/screen/SettingsEdit.htm" />
         <option value="$PROJECT_DIR$/js/admin/screen/SettingsEdit.ts" />
-        <option value="$PROJECT_DIR$/data/settings.json" />
         <option value="$PROJECT_DIR$/js/kiosk/SearchDeatailsLarge.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/SearchModel.ts" />
         <option value="$PROJECT_DIR$/css/kiosk/mainview.css" />
@@ -113,21 +331,48 @@
         <option value="$PROJECT_DIR$/js/kiosk/SearchResult.ts" />
         <option value="$PROJECT_DIR$/rem/cl/Screen.php" />
         <option value="$PROJECT_DIR$/data/track.json" />
-        <option value="$PROJECT_DIR$/Kiosk1080.php" />
         <option value="$PROJECT_DIR$/data/kiosks.json" />
         <option value="$PROJECT_DIR$/Preview.php" />
         <option value="$PROJECT_DIR$/js/admin/screen/KiosksEdit.html" />
         <option value="$PROJECT_DIR$/js/admin/screen/RestartKiosk.ts" />
-        <option value="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
-        <option value="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/Connector.ts" />
-        <option value="$PROJECT_DIR$/js/admin/RegA.ts" />
-        <option value="$PROJECT_DIR$/AdminTest.php" />
-        <option value="$PROJECT_DIR$/js/admin/net.ts" />
         <option value="$PROJECT_DIR$/js/admin/models.ts" />
         <option value="$PROJECT_DIR$/js/admin/impexp/Statistics.html" />
         <option value="$PROJECT_DIR$/js/admin/impexp/Statistics.ts" />
+        <option value="$PROJECT_DIR$/js/admin/screen/AttractLoop.ts" />
+        <option value="$PROJECT_DIR$/admin/Menu.html" />
+        <option value="$PROJECT_DIR$/data/als/al_empty.html" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/al_RSS.html" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/al_empty.php" />
+        <option value="$PROJECT_DIR$/al_img_center.php" />
+        <option value="$PROJECT_DIR$/al_empty.php" />
+        <option value="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
+        <option value="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" />
+        <option value="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" />
+        <option value="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
+        <option value="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" />
+        <option value="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
+        <option value="$PROJECT_DIR$/AdminTest.php" />
+        <option value="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
+        <option value="$PROJECT_DIR$/js/admin/net.ts" />
+        <option value="$PROJECT_DIR$/js/admin/RegA.ts" />
+        <option value="$PROJECT_DIR$/data/settings.json" />
+        <option value="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/AttracLoop.ts" />
+        <option value="$PROJECT_DIR$/data/img_center.json" />
+        <option value="$PROJECT_DIR$/js/admin/com/GalleryAdmin.ts" />
+        <option value="$PROJECT_DIR$/data/admin.json" />
+        <option value="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.html" />
+        <option value="$PROJECT_DIR$/js/kiosk/Kiosk.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/Registry.ts" />
+        <option value="$PROJECT_DIR$/AttractLoop.php" />
+        <option value="$PROJECT_DIR$/Kiosk1080.php" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/AttractLoop.css" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/TouchClip.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/als/Gallery.ts" />
+        <option value="$PROJECT_DIR$/js/kiosk/ScreenSaver.ts" />
       </list>
     </option>
   </component>
@@ -140,9 +385,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="-4" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1932" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -171,8 +416,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,8 +448,92 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kiosk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kiosk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="als" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LPP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dir_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,18 +559,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\dir_test\data\arch" />
       <recent name="C:\wamp\www\dir_test\data" />
+      <recent name="C:\wamp\www\dir_test" />
       <recent name="C:\wamp\www\dir_test\js\admin\screen" />
       <recent name="C:\wamp\www\LPP\js\admin\labels" />
-      <recent name="C:\wamp\www\LPP\js\admin\categories" />
-      <recent name="C:\wamp\www\LPP\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\dir_test\data" />
+      <recent name="C:\wamp\www\dir_test" />
+      <recent name="C:\wamp\www\dir_test\js\kiosk\als" />
       <recent name="C:\wamp\www\dir_test\libs" />
       <recent name="C:\wamp\www\dir_test\fonts" />
-      <recent name="C:\wamp\www\dir_test\Scripts" />
-      <recent name="C:\wamp\www\dir_test\js\admin\screen" />
-      <recent name="C:\wamp\www\dir_test\js\kiosk\arch" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.Kiosk1080.php">
@@ -399,16 +726,28 @@
       <option name="project" value="LOCAL" />
       <updated>1439146966901</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Statistics done">
+      <created>1439340949787</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1439340949787</updated>
+    </task>
+    <task id="LOCAL-00010" summary="AttractLoop started">
+      <created>1439344306129</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1439344306129</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-4" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18997912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21413502" sideWeight="0.48903155" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21330518" sideWeight="0.48903155" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2132753" sideWeight="0.5088282" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -427,7 +766,7 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897604" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2889835" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2596154" sideWeight="0.49117175" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25871173" sideWeight="0.49117175" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -451,7 +790,9 @@
     <MESSAGE value="Details Gallery in kiosk" />
     <MESSAGE value="Kiosk manager" />
     <MESSAGE value="Statistics start" />
-    <option name="LAST_COMMIT_MESSAGE" value="Statistics start" />
+    <MESSAGE value="Statistics done" />
+    <MESSAGE value="AttractLoop started" />
+    <option name="LAST_COMMIT_MESSAGE" value="AttractLoop started" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -463,280 +804,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsImages.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="168" column="57" selection-start-line="168" selection-start-column="57" selection-end-line="168" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Categories.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoryInListing.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5520111">
-          <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsForm.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0277393">
-          <caret line="270" column="32" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoriesManager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoryListing.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62274617">
-          <caret line="81" column="68" selection-start-line="79" selection-start-column="10" selection-end-line="81" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/labels.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsEditor.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11609195">
-          <caret line="278" column="24" selection-start-line="278" selection-start-column="24" selection-end-line="278" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/control.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="71" selection-start-line="0" selection-start-column="71" selection-end-line="0" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/ScreenSaver.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/settings.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="322" selection-start-line="0" selection-start-column="322" selection-end-line="0" selection-end-column="322" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/screen/SettingsEdit.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51872396">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/labels/LabelsManager.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/labels/LabelsManager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19833565">
-          <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Registry.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="23" selection-start-line="138" selection-start-column="23" selection-end-line="138" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/kiosk1080.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28239202">
-          <caret line="341" column="22" selection-start-line="341" selection-start-column="22" selection-end-line="341" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/kiosk/mainview.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09966777">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchDetails.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19767442">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchModel.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="20" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/SearchDetailsLarge.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33887044">
-          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/block.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8405316">
-          <caret line="225" column="16" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsEditor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rem/kiosk.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5260417">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rem/cl/Screen.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19912152">
-          <caret line="8" column="59" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/track.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="71" selection-start-line="0" selection-start-column="71" selection-end-line="0" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/kiosks.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Preview.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoriesManager.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="22" selection-start-line="138" selection-start-column="15" selection-end-line="144" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoryForm.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="28" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/screen/SettingsEdit.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/screen/KiosksEdit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/logs/kiosk07-15.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/page/PagesList.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rem/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8169839">
-          <caret line="22" column="71" selection-start-line="22" selection-start-column="71" selection-end-line="22" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/DirsAdmin.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kiosk/KeyboardSimple.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -748,7 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="68" column="54" selection-start-line="68" selection-start-column="54" selection-end-line="68" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -756,7 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.4768362">
           <caret line="4" column="1218" selection-start-line="4" selection-start-column="1218" selection-end-line="4" selection-end-column="1218" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,7 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47844228">
           <caret line="245" column="17" selection-start-line="245" selection-start-column="17" selection-end-line="245" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -772,23 +836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52155775">
           <caret line="806" column="0" selection-start-line="806" selection-start-column="0" selection-end-line="806" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/RegA.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33240613">
-          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/net.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="184" column="59" selection-start-line="184" selection-start-column="59" selection-end-line="184" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,7 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="239" column="88" selection-start-line="239" selection-start-column="88" selection-end-line="239" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -804,12 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.0806675">
           <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <marker date="1439340157490" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1439340157490" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1439340157490" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1439340157490" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -817,15 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/admin/impexp/Statistics.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7849928">
-          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -833,15 +864,337 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8344923">
           <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/labels/LabelsManager.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.024531025">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.692308">
+          <caret line="43" column="69" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/impexp/Statistics.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60714287">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/control.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="71" selection-start-line="0" selection-start-column="71" selection-end-line="0" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/messages.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/screen/SettingsEdit.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4798331">
+          <caret line="121" column="32" selection-start-line="121" selection-start-column="32" selection-end-line="121" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/al_img_bottom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/al_Messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.230769">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/al_RSS.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/rss.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/al_img_center.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.076923">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/block.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40890124">
+          <caret line="225" column="16" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/screen/KiosksEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25252524">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsImages.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17246175">
+          <caret line="148" column="65" selection-start-line="148" selection-start-column="65" selection-end-line="148" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/labels/LabelsManager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoryForm.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="129" column="61" selection-start-line="129" selection-start-column="61" selection-end-line="129" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsEditor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="54" selection-start-line="114" selection-start-column="54" selection-end-line="114" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/details/DetailsForm.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/categories/CategoryListing.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17246175">
+          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/impexp/ImportExport.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="245" column="55" selection-start-line="245" selection-start-column="55" selection-end-line="245" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/net.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="202" column="9" selection-start-line="202" selection-start-column="9" selection-end-line="202" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/DirsAdmin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3310153">
+          <caret line="169" column="15" selection-start-line="169" selection-start-column="15" selection-end-line="169" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AdminTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26984128">
-          <caret line="140" column="22" selection-start-line="140" selection-start-column="22" selection-end-line="140" selection-end-column="22" />
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/settings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="45" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/RegA.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4158523">
+          <caret line="136" column="23" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/arch/1440287792img_bottom.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/img_bottom.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="64" selection-start-line="0" selection-start-column="64" selection-end-line="0" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/img_center.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="251" selection-start-line="0" selection-start-column="251" selection-end-line="0" selection-end-column="251" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/com/GalleryAdmin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/admin.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="609" selection-start-line="0" selection-start-column="609" selection-end-line="0" selection-end-column="609" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="225" column="36" selection-start-line="225" selection-start-column="36" selection-end-line="225" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/Registry.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/Admin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AttractLoop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="21" column="65" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/als/TouchClip.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/als/AttractLoop.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36161336">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/als/AttractLoop.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#uplight#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/als/Gallery.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12517385">
+          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc;n#uplight#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/Kiosk.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6147427">
+          <caret line="81" column="52" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kiosk/ScreenSaver.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11821975">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kiosk1080.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5829726">
+          <caret line="154" column="24" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

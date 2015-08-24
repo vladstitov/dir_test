@@ -243,7 +243,7 @@ module uplight {
 
             console.log(res);
             if (res.result) {
-                this.R.alert('Complete', this.btnUpload);
+                this.R.msg('Complete', this.btnUpload);
                 this._data = null;
                 //this.reset();
                 this.getData(); 
@@ -294,8 +294,8 @@ module uplight {
 
         private onImportClick(evt): void {
 
-            this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
-            $('#ImportExport progress').show();
+           // this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
+            //$('#ImportExport progress').show();
         }
 
      

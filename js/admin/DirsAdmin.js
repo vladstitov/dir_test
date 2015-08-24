@@ -8,6 +8,7 @@
 ///<reference path="labels/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
+///<reference path="screen/AttractLoopEdit.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -23,7 +24,7 @@ var uplight;
                 _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
-            // this.R.alert=(text,cont)=>this.myMsg(text,cont);
+            this.R.msg = function (text, cont) { return _this.myMsg(text, cont); };
             // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
             // this.R.dispatcher.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
             // this.R.dispatcher.on(RegA.VIEW_LISTING,()=>{
@@ -54,6 +55,13 @@ var uplight;
             var hash = window.location.hash.substr(0, 10);
             console.log(hash);
             switch (hash) {
+                case '#Attract-L':
+                    // this.showPreview();
+                    this.hidePreview();
+                    // this.content.hide();
+                    this.attractLoop = new uplight.AttractLoopEdit(this.content);
+                    this.content.show();
+                    break;
                 case '#Statistic':
                     // this.showPreview();
                     this.hidePreview();
@@ -118,12 +126,14 @@ var uplight;
             this.message = $('<div>').attr('id', 'Message');
             this.messageText = $('<div>').appendTo(this.message);
         };
-        Admin.prototype.myMsg = function (text, container) {
-            this.messageText.text(text);
-            var alert = this.message.prependTo(container);
-            alert.show();
+        Admin.prototype.myMsg = function (text, DO) {
+            var msg = $('<div>').addClass('umsg').css(DO.offset()).text(text).appendTo('body');
+            msg.hide();
+            msg.show('fast');
             setTimeout(function () {
-                alert.hide('fast');
+                msg.hide('fast', function () {
+                    msg.remove();
+                });
             }, 3000);
         };
         Admin.prototype.showPreview = function () {

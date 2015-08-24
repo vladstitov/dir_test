@@ -26,10 +26,27 @@ switch(array_shift($a)){
 	$db = new PDO('sqlite:../data/statistics.db');
 	 $result = $db->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
 	break;
-	case 'saveTitle':	
-		saveSettings('title',$post['title']);
+	case 'upload_file':
+	
+	$result = uploadFile($_FILES["file"],$get['folder'],$get['prefix']);
+	
+	break;
+	case 'get_data':
+			if(!isset($get['file_name'])){
+				$result =  'ERROR';
+				break;
+			}
+			$file_name= '../data/'.$get['file_name'];
+			
+			if(file_exists($file_name)) $result = file_get_contents($file_name);
+			else $result='ERROR';
+	break;
+	case 'save_data':	
+			if(!isset($get['file_name'])) die('ERROR 1');
+			$result = saveData($get['file_name'],file_get_contents('php://input'));					
+					
 	break;	
-		
+	
 	case 'pages':
 	include 'cl/Pages.php';	
 		$ctr=new Pages();		
@@ -91,4 +108,45 @@ function saveSettings($prop,$value){
 	return file_put_contents($filename,json_encode($sett));
 }
 
+function saveData($file_name,$data){
+		$out=new stdClass();				
+		$filename='../data/'.$file_name;
+					
+		if(!file_exists($filename)) {
+					$out->error='hacker';
+					return $out;				
+		}
+		
+		rename($filename,'../data/arch/'.time().$file_name);
+		
+		$res = file_put_contents($filename,$data);	
+			
+		if($res){
+			$out->success='file saved';
+			$out->result= 'data/'.$file_name;
+		} else $out->error='cant save file';
+		
+		return $out;
+		
+}
+
+function uploadFile($file,$folder,$prefix){
+			$out=new stdClass();
+			
+		if ($file["error"] > 0){
+			$out->error= $file["error"];
+			return $out;
+		}
+		
+		if (!file_exists('../data/'.$folder)) mkdir('../data/'.$folder, 0777, true);
+		
+		$filename = $folder.'/'.$prefix.'_'.$file["name"];
+		
+		if(move_uploaded_file($file["tmp_name"],'../data/'.$filename)){
+			$out->success='success';
+			$out->result='data/'.$filename;
+		}		
+		return $out;
+		
+		}
 ?>

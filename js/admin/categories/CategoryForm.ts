@@ -127,8 +127,8 @@ module uplight{
             else this.showLibrary();
         }
         private onSaveResult(res):void {
-            if(res.success) this.R.alert('Record Saved', this.btnSave.parent());
-             else this.R.alert('ERROR ', this.btnSave.parent());
+            if(res.success) this.R.msg('Record Saved', this.btnSave);
+             else this.R.msg('ERROR ', this.btnSave);
 
             console.log(res);
         }

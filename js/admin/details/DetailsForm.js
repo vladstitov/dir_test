@@ -45,7 +45,7 @@ var uplight;
             var vo = this.current;
             vo.name = this.name.val();
             if (vo.name.length < 2) {
-                this.R.alert('Name is required', this.name.parent());
+                this.R.msg('Name is required', this.name);
                 return null;
             }
             vo.unit = this.unit.val() || '';

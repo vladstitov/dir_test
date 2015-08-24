@@ -72,8 +72,8 @@ module uplight{
        }
 
        private onSave(res:VOResult):void{
-           if(res.success) this.R.alert('Records Saved', this.btnSave.parent());
-            else this.R.alert('ERROR ', this.btnSave.parent());
+           if(res.success) this.R.msg('Records Saved', this.btnSave);
+            else this.R.msg('ERROR ', this.btnSave);
            console.log(res);
        }
        private onSaveClicked():void{

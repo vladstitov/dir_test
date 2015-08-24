@@ -33,16 +33,10 @@ var uplight;
             this.refreshData();
         };
         LabelsManager.prototype.onFileSelected = function (files) {
-            var _this = this;
             if (files.length) {
                 var file = files[0];
                 var form = new FormData();
                 form.append('file', file);
-                this.R.connector.uploadTempImage(form).done(function (res) {
-                    console.log(res);
-                    if (res.success)
-                        _this.imgValue.attr('src', res.result);
-                });
             }
         };
         LabelsManager.prototype.refreshData = function () {

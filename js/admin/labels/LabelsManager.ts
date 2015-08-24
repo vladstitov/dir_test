@@ -57,11 +57,11 @@ module uplight{
                 var file:any = files[0];
                 var form:FormData = new FormData();
                 form.append('file',file);
-                this.R.connector.uploadTempImage(form).done((res)=>{
-                    console.log(res);
-                   if(res.success) this.imgValue.attr('src',res.result);
+               // this.R.connector.uploadTempImage(form).done((res)=>{
+                  //  console.log(res);
+                  // if(res.success) this.imgValue.attr('src',res.result);
 
-                });
+               // });
 
 
             }

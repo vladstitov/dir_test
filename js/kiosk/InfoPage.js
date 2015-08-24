@@ -33,4 +33,4 @@ var uplight;
     })();
     uplight.InfoPage = InfoPage;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=InfoPage.js.map
+//# sourceMappingURL=infopage.js.map

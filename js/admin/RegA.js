@@ -2,6 +2,7 @@
 /// <reference path="models.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
 /// <reference path="../../libs/typing/underscore.d.ts" />
+/// <reference path="com/GalleryAdmin.ts" />
 var LISTVIEW = 'ListView';
 var DETAILSVIEV = 'DetailsView';
 var MENUVIEW = 'MenuView';
@@ -36,20 +37,6 @@ var onAlertYes;
 var myAlert;
 var myAlertTitle;
 var myAlertMsg;
-/*
-
-
-var myMsg2 = function (msg, ref: JQuery) {
-
-    var mymsg = $('<div class="mymsg2"></div>').appendTo(ref.parent());
-
-    //var obj: any = ref.position();
-    // obj.top += 20;
-    // msg.css(obj);
-    mymsg.text(msg).show('fast').delay(2100).hide('fast');
-    setTimeout(function () { mymsg.remove(); },2500);
-}
-*/
 var uplight;
 (function (uplight) {
     var RegA = (function () {
@@ -74,7 +61,7 @@ var uplight;
         RegA.prototype.getObject = function (id) {
             return this[id];
         };
-        RegA.prototype.alert = function (message, container) {
+        RegA.prototype.msg = function (message, container) {
         };
         RegA.prototype.message = function (msg) {
         };
@@ -116,11 +103,21 @@ var uplight;
     })();
     uplight.VOResult = VOResult;
     var VOItem = (function () {
-        function VOItem() {
+        function VOItem(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
         }
         return VOItem;
     })();
     uplight.VOItem = VOItem;
+    var VOAL = (function () {
+        function VOAL(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOAL;
+    })();
+    uplight.VOAL = VOAL;
     var VOStat = (function () {
         function VOStat() {
         }

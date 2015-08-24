@@ -102,9 +102,9 @@ var uplight;
         };
         CategoryForm.prototype.onSaveResult = function (res) {
             if (res.success)
-                this.R.alert('Record Saved', this.btnSave.parent());
+                this.R.msg('Record Saved', this.btnSave);
             else
-                this.R.alert('ERROR ', this.btnSave.parent());
+                this.R.msg('ERROR ', this.btnSave);
             console.log(res);
         };
         CategoryForm.prototype.onSaveClicked = function () {
