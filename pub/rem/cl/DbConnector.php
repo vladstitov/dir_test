@@ -3,8 +3,8 @@ class DbConnector{
     var  $dbpdo;
 	var $stmt;
 	var $file = 'directories.db';
-	var $folder ='../data/';
-	var $arch ='../data/arch/';
+	var $folder ='../../data/';
+	var $arch ='../../data/arch/';
 
 
 	public function backup(){

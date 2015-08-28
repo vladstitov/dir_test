@@ -1,5 +1,7 @@
 <?php
 session_start();
+define('DATA','../data/');
+define('MEDIA','media/');
 if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admin'){
 	echo 'please login';	
 	exit;
@@ -23,12 +25,12 @@ switch(array_shift($a)){
 	$to=strtotime($get['to']);	
 	////echo'   from '.$from.'  '.$get['from'];
 	//echo'   to '.$to.'  '.$get['to'];
-	$db = new PDO('sqlite:../data/statistics.db');
+	$db = new PDO('sqlite:'.DATA.'statistics.db');
 	 $result = $db->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
 	break;
-	case 'upload_file':
+	case 'upload_media':
 	
-	$result = uploadFile($_FILES["file"],$get['folder'],$get['prefix']);
+	$result = uploadMedia($_FILES["file"],$get['folder'],$get['prefix']);
 	
 	break;
 	case 'get_data':
@@ -36,7 +38,7 @@ switch(array_shift($a)){
 				$result =  'ERROR';
 				break;
 			}
-			$file_name= '../data/'.$get['file_name'];
+			$file_name= DATA.$get['file_name'];
 			
 			if(file_exists($file_name)) $result = file_get_contents($file_name);
 			else $result='ERROR';
@@ -96,7 +98,7 @@ if($result){
 		echo json_encode($result);
 	}
 }else echo'no result no errors';
-
+/*
 function getSettings(){
 	$filename=	'../data/settings.json';
 	return json_decode(file_get_contents($filename));
@@ -107,30 +109,31 @@ function saveSettings($prop,$value){
 	$sett->$prop=$value;
 	return file_put_contents($filename,json_encode($sett));
 }
+*/
 
 function saveData($file_name,$data){
 		$out=new stdClass();				
-		$filename='../data/'.$file_name;
+		$filename=DATA.$file_name;
 					
 		if(!file_exists($filename)) {
 					$out->error='hacker';
 					return $out;				
 		}
 		
-		rename($filename,'../data/arch/'.time().$file_name);
+		rename($filename,DATA.'arch/'.time().$file_name);
 		
 		$res = file_put_contents($filename,$data);	
 			
 		if($res){
 			$out->success='file saved';
-			$out->result= 'data/'.$file_name;
+			$out->result= DATA.$file_name;
 		} else $out->error='cant save file';
 		
 		return $out;
 		
 }
 
-function uploadFile($file,$folder,$prefix){
+function uploadMedia($file,$folder,$prefix){
 			$out=new stdClass();
 			
 		if ($file["error"] > 0){
@@ -138,13 +141,13 @@ function uploadFile($file,$folder,$prefix){
 			return $out;
 		}
 		
-		if (!file_exists('../data/'.$folder)) mkdir('../data/'.$folder, 0777, true);
+		if (!file_exists(MEDIA.$folder)) mkdir(MEDIA.$folder, 0777, true);
 		
 		$filename = $folder.'/'.$prefix.'_'.$file["name"];
 		
-		if(move_uploaded_file($file["tmp_name"],'../data/'.$filename)){
+		if(move_uploaded_file($file["tmp_name"],MEDIA.$filename)){
 			$out->success='success';
-			$out->result='data/'.$filename;
+			$out->result=MEDIA.$filename;
 		}		
 		return $out;
 		

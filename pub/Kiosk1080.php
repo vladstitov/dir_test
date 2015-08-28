@@ -1,7 +1,8 @@
 ﻿<?php
 session_start();
+define('DATA','../data/');
 $kiosk_id=0;
-$file_name='data/kiosks.json';
+$file_name=DATA.'kiosks.json';
 $kiosks =  json_decode(file_get_contents($file_name));
 if(isset($_GET['kiosk'])) $kiosk_id=$_GET['kiosk'];
 /*
@@ -16,12 +17,12 @@ foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id){
 if($res===0) exit;
 */
 
-$settings = file_get_contents('data/settings.json');
+$settings = file_get_contents(DATA.'settings.json');
 
 
 
 
-$l=file_get_contents('data/labels.json');
+$l=file_get_contents(DATA.'labels.json');
 $labels = json_decode($l);
 ?>
 <!DOCTYPE html>

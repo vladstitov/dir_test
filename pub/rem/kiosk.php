@@ -1,5 +1,7 @@
 <?php
+define('DATA','../../data/');
 session_start();
+
 $get=$_GET;
 $post=$_POST;
 //$a=explode('.',strtok(basename($_SERVER['REQUEST_URI']),'?'));
@@ -13,24 +15,15 @@ $result= false;
 
 
 switch(array_shift($a)){
-	case 'get_updates':
-	$result=new stdClass();
-	$stapm=(int)$get['stamp'];
-
-	$mystamp=filemtime('../data/control.json');
-	if($stapm==0) $result->stamp=$mystamp;
-	else if($mystamp>$stapm){				
-		 $result=json_decode(file_get_contents('../data/control.json'));
-		// $result->stamp=$mystamp;
-	}
-	
+	case 'get_stamp':
+	echo json_encode(trackKiosk($get));	
 	break;
 	case 'log_error':
-		error_log(file_get_contents("php://input")."|\n\r|", 3,'../data/logs/k_error'.date('m-y').'.log');			
+		error_log(file_get_contents("php://input")."|\n\r|", 3,DATA.'logs/k_error'.date('m-y').'.log');			
 	echo 'OK';		
 	break;
 	case 'log_log':
-		file_put_contents('../data/logs/kiosk'.date("m-y").'.log', file_get_contents("php://input")."|\n\r|", FILE_APPEND);	
+		file_put_contents(DATA.'logs/kiosk'.date("m-y").'.log', file_get_contents("php://input")."|\n\r|", FILE_APPEND);	
 		echo 'OK';
 	break;
 	case 'log_stat':
@@ -40,7 +33,7 @@ switch(array_shift($a)){
 		$id = $get['id'];		
 		$stamp= $get['stamp'];
 		if(strlen($stamp)>10)$stamp= substr($stamp,0,10);
-		$db=new PDO('sqlite:../data/statistics.db');
+		$db=new PDO('sqlite:'.DATA.'statistics.db');
 		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),did INTEGER,stamp INTEGER)');				
 		$res= $db->query("INSERT INTO stats (type,val,who,did,stamp) VALUES ('$type','$val','$who',$id,$stamp)");
 		if($res) echo 'OK';
@@ -48,15 +41,10 @@ switch(array_shift($a)){
 			
 	break;
 	case 'get_data':
-		$fn='../data/'.$get['file_name'];
+		$fn=DATA.$get['file_name'];
 		echo file_exists($fn)?file_get_contents($fn):'NO';
 			      
-	break;
-	case 'get_page':
-		
-		$fn='../data/pages/p'.$get['id'].'.htm';
-		$result= file_exists($fn)?file_get_contents($fn):'NO';			      
-	break;
+	break;	
 	
 	case 'get_categories':
 		include_once('cl/DbConnector.php');
@@ -65,12 +53,7 @@ switch(array_shift($a)){
 		$result=json_encode($con->query($sql));	
 		//header('Content-type: application/json'); 
 			      
-	break;
-	
-	case 'get_settings':
-	header('Content-type: application/json');
-	echo file_get_contents('../data/settings.json');
-	break;
+	break;	
 		
 	case 'get_dests':
 	include 'cl/DbConnector.php';	
@@ -86,42 +69,7 @@ switch(array_shift($a)){
 		$out->dests = $dests;
 		
 		echo json_encode($out);
-
-
-	break;
-	case 'get_messages':
-		$fn='../data/messages.json';
-		$result= file_exists($fn)?file_get_contents($fn):'NO';	
-	break;
-	case 'get_advanced':
-        if(!isset($get['id'])) break;
-		$fn='../data/details/a'.$get['id'].'.htm';
-		$result = file_exists($fn)?file_get_contents($fn):'NO';	
-	break;
-	
-	case 'get_background':
-	include 'cl/Screen.php';		
-		$ctr= new Screen();
-		$result=$ctr->getBackground();
 	break;	
-	case 'get_stamp':
-		if(isset($get['id']) && isset($get['stamp'])){		
-			header('Content-type: application/json');		
-			echo json_encode(trackKiosk($get));
-		}		
-		
-	break;
-
-	case 'get_rss':
-	
-	$id=json_decode(file_get_contents('../data/settings.json'))->screensaver->rss;
-	
-	$rss=json_decode(file_get_contents('../data/rss.json'));
-	$rss = $rss[$id]->url;
-	if($rss) $result= curl_exec(curl_init($rss)); 
-	exit();
-	
-	break;
 }
 
 
@@ -130,7 +78,7 @@ function trackKiosk($get){
 	
 		$out=new stdClass();
 		$out->success='success';			
-		$file_name='../data/kiosks.json';
+		$file_name=DATA.'kiosks.json';
 		
 		$id=(int)$get['id'];
 		$track = json_decode(file_get_contents($file_name));
