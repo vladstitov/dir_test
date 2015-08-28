@@ -6,6 +6,7 @@
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
 /// <reference path="als/Gallery.ts" />'
+/// <reference path="Kiosk.ts" />
 
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
@@ -93,6 +94,7 @@ module uplight {
         }
         constructor(){
             this.dispatcher=$('<div>');
+            this.settings = u_settings;
         }
 
         public add(obj:any):void{

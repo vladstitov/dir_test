@@ -48,19 +48,17 @@ var uplight;
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
             var cats = new uplight.Categories($('#Categories'));
-            var sr = new uplight.SearchResult($('#the-list'));
+            var sr = new uplight.SearchResult();
             var delay = u_settings.timer;
             if (isNaN(delay) || delay < 2)
                 delay = 2;
             setInterval(function () { return _this.relay(); }, delay * 1000);
-            if (typeof mode !== 'undefined' && mode === 'preview') {
-            }
-            else {
-                var ss = new uplight.ScreenSaver();
-                r.dispatcher.on(r.SS_START, function () {
-                    r.dispatcher.triggerHandler(r.RESET_ALL);
-                });
-            }
+            // if(typeof ScreenSaver !== 'undefined'){
+            // var ss:ScreenSaver = new ScreenSaver();
+            r.dispatcher.on(r.SS_START, function () {
+                r.dispatcher.triggerHandler(r.RESET_ALL);
+            });
+            //  }
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
             /*

@@ -32,6 +32,8 @@ $labels = json_decode($l);
         var u_settings = <?php echo $settings; ?>;
         var kiosk_id='<?php echo $kiosk_id; ?>';
         var u_labels = <?php echo $l; ?>;
+		var u_get = <?php echo json_encode($_GET); ?>;
+       
     </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +42,7 @@ $labels = json_decode($l);
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
     <link href="libs/reset.css" rel="stylesheet" />
+    <link href="libs/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
    <link href="css/kiosk/mainview.css" rel="stylesheet" />
@@ -56,9 +59,30 @@ $labels = json_decode($l);
     </script>
 
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
+<style>
+    .hidden{
+        display: none;
+    }
 
+</style>
 </head>
 <body style="background-image: url('<?= $labels->background; ?>')">
+<section id="Templates" class="hidden">
+    <section id="AttractLoop">
+        <div  class="cover" data-id="Body">
+        </div>
+        <style>
+            #AttractLoop {
+                position: absolute;
+                top: 170px;
+
+            }
+        </style>
+
+
+    </section>
+
+</section>
 <div id="container">
     <section id="u-header" class="main-color">
         <div id="brand-logo" >
@@ -86,12 +110,15 @@ $labels = json_decode($l);
                         <?= $labels->list_header; ?>
                     </div>
                 </section>
+                <br>
+
                 <hr/>
                 <section id="list-main" class="nano">
-                        <div id="the-list" class="nanp-content">
-                        </div>
+
                 </section>
                 <hr/>
+                <br>
+
                 <section id="list-footer">
                     <div id="list-footer-main">
                         <div class="more">
@@ -149,45 +176,28 @@ $labels = json_decode($l);
 
     </section>
 
+   <section id="DetailsLarge" class="modal" data-id="btnClose"  style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content Plastic031 central">
+                    <div class="fa fa-close pull-right" data-id="btnClose"></div>
+                <div class="modal-body content">
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button class="btn btn-default pull-right" data-id="btnClose">Close</button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
 
 </div>
 
-<section id="AttractLoop">
-    <div  class="cover" data-id="Body">
-    </div>
-    <style>
-        #AttractLoop {
-            position: absolute;
-            top: 170px;
-
-        }
-
-
-        /*
-         #AttractLoop{
-             position: absolute;
-             width: 100%;
-             height: 100%;
-             top: 0;
-             left: 0;
-         }
-         #AttractLoop .overlay{
-             position: absolute;
-             width: 100%;
-             height: 100%;
-             top: 0;
-             left: 0*
-          }/;
-
-     </style>
-    <!-- <iframe src="AttractLoop.php?settings=settings.json" width="1080" height="1920">
-
-     </iframe>
-    <div class="overlay">
-
-    </div>-->
--->
-</section>
 
 <div id="History" style="display:none;"></div>
 
@@ -205,15 +215,25 @@ $labels = json_decode($l);
 <script src="js/kiosk/SearchModel.js"></script>
 <script src="js/kiosk/Categories.js"></script>
 <script src="js/kiosk/InfoPage.js"></script>
+<script src="js/kiosk/Banner.js" ></script>
 <!--<script src="js/kiosk/MainView.js"></script>
 <script src="js/kiosk/SearchDetails.js"></script>
 -->
-<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" />
-<script src="js/kiosk/als/AttractLoop.js"></script>
-<script src="js/kiosk/ScreenSaver.js"></script>
+<?php 
+if(!isset($_GET['no-ss'])) echo '<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/ScreenSaver.js"></script>';
+if(!isset($_GET['no-kiosk'])) echo '<script src="js/kiosk/Kiosk.js" ></script>';
+?>
 
-<script src="js/kiosk/Banner.js" ></script>
-<script src="js/kiosk/Kiosk.js" ></script>
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $(document).triggerHandler('DOCUMENT_READY');
+
+    })
+</script>
 
 </body>
 </html>

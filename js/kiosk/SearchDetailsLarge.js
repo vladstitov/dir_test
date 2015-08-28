@@ -10,6 +10,7 @@ var uplight;
                 this.createGallery(vo.imgs);
             if (vo.pgs && vo.pgs.length)
                 this.createPages(vo.pgs);
+            this.vo = vo;
         }
         SearchDetailsLarge.prototype.createGallery = function (imgs) {
             this.haveData = true;
@@ -42,16 +43,15 @@ var uplight;
             this.haveData = true;
         };
         SearchDetailsLarge.prototype.createView = function () {
-            var view = $('<div>').addClass('detailsL  Plastic031');
-            var content = $('<div>').addClass('content').appendTo(view);
-            view.append('<div class="fa fa-close" data-id="btnClose">');
+            var det = $('<div>').addClass('detailsL');
+            det.append('<h2><span>' + this.vo.name + '</span><span class="pull-right">' + this.vo.unit + '</span></h2>');
             if (this.detSm)
-                content.append(this.detSm.view);
+                det.append(this.detSm.view);
             if (this.gall)
-                content.append(this.gall);
+                det.append(this.gall);
             if (this.pages)
-                content.append(this.pages);
-            return view;
+                det.append(this.pages);
+            return det;
         };
         SearchDetailsLarge.prototype.setDetailsSmall = function (det) {
             this.detSm = det;

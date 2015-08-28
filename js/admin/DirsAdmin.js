@@ -14,6 +14,7 @@ var uplight;
     var Admin = (function () {
         function Admin() {
             var _this = this;
+            this.previewUrl = 'Kiosk1080.php?id=0';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
             this.R.dispatcher = $({});
@@ -125,6 +126,9 @@ var uplight;
             this.content = $('#content');
             this.message = $('<div>').attr('id', 'Message');
             this.messageText = $('<div>').appendTo(this.message);
+            this.btnFullView = this.preview.find('[data-id=btnFullView]').click(function () {
+                window.open(_this.previewUrl, "_blank");
+            });
         };
         Admin.prototype.myMsg = function (text, DO) {
             var msg = $('<div>').addClass('umsg').css(DO.offset()).text(text).appendTo('body');
@@ -136,13 +140,17 @@ var uplight;
                 });
             }, 3000);
         };
-        Admin.prototype.showPreview = function () {
+        Admin.prototype.showPreview = function (url) {
+            if (url)
+                this.previewUrl = url;
+            this.preview.find('iframe:first').attr('src', this.previewUrl);
             this.preview.show();
             this.isPreview = true;
             this.preview.show();
         };
         Admin.prototype.hidePreview = function () {
             if (this.isPreview) {
+                this.preview.find('iframe:first').attr('src', '');
                 this.preview.hide();
                 this.isPreview = false;
             }

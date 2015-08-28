@@ -101,6 +101,7 @@ module uplight{
             }
             return null;
         }
+
         hideDetails():void{
             if(this.isDetails) {
                 this.isDetails = false;
@@ -199,16 +200,16 @@ module uplight{
 
 
         private renderVo(vo:VODestination,ismore:number):JQuery{
-            var more =ismore?'<div class="more"><span class="fa fa-plus"> More...</span></div>':'';
-            var icon ='<div class="icon"><span class="'+vo.icon+'"></span></div>';
-            var name='<div class="name">'+vo.name+'</div>';
-            var unit='<div class="unit">'+vo.unit+'</div>';
-            var utype='<div class="unittype">unit</div>';
-            var kws = '<div class="kws">'+'</div>';
-            var info = '<div class="info">'+vo.info+'</div>';
-            var row1='<div class="row">'+kws+utype+'</div>';
-            var row2='<div class="row">'+icon+name+unit+'</div>';
-            var row3='<div class="row">'+more+info+'</div>';
+            var more =ismore?'<span class="more"><span class="fa fa-plus"> More...</span></span>':'';
+            var icon ='<span class="icon '+vo.icon+'"></span>';
+            var name='<span class="name">'+vo.name+'</span>';
+            var unit='<span class="unit">'+vo.unit+'</span>';
+            var utype='<span class="unittype">unit</span>';
+            var kws = '<span class="kws">'+'</span>';
+            var info = '<span class="info">'+vo.info+'</span>';
+            var row1='<div class="urow">'+kws+utype+'</div>';
+            var row2='<div class="urow">'+icon+name+unit+'</div>';
+            var row3='<div class="urow">'+more+info+'</div>';
             return $('<div>').addClass('main').html(row1+row2+row3);
         }
     }

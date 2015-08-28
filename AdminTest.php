@@ -82,28 +82,6 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
             left: 0;
             right: 0;
         }*/
-        #Preview .table-bordered{
-            padding: 0.5em;
-            width: 560px;
-            height: 1020px;
-            margin: auto;
-            left: 0;
-            right: 0;
-            text-align: center;
-
-        }
-        #Preview iframe{
-          /*  -ms-zoom: 0.5;
-            -moz-transform: scale(0.5);
-            -moz-transform-origin: 0 0;
-            -o-transform: scale(0.5);
-            -o-transform-origin: 0 0;
-            -webkit-transform: scale(0.5);
-            -webkit-transform-origin: 0 0;*/
-            width: 540px;
-            height: 960px;
-
-        }
 
         /*    colors      */
         #menubar{
@@ -176,11 +154,42 @@ include ('admin/Menu.html');
  <!------------------------------------------------------------------------------------------------>
 	  </div>
 <div id="Preview" class="view">
+    <style>
+        #Preview .table-bordered{
+            padding: 0.5em;
+            width: 560px;
+            height: 1020px;
+            margin: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+            overflow: hidden;
+
+        }
+
+        #Preview iframe{
+             -ms-zoom: 0.5;
+              -moz-transform: scale(0.5);
+              -moz-transform-origin: 0 0;
+              -o-transform: scale(0.5);
+              -o-transform-origin: 0 0;
+              -webkit-transform: scale(0.5);
+              -webkit-transform-origin: 0 0;
+            width: 1080px;
+            height: 1920px;
+
+        }
+
+    </style>
     <div class="table-bordered">
+        <a data-id="btnFullView"  class="btn pull-right"><span class="fa fa-external-link"></span><span> Open full view</span></a>
         <h4>Kiosk view</h4>
-        <iframe src="Preview.php" scrolling="no" frameborder="0">
+        <div class="viewport">
+            <iframe src="" scrolling="no" frameborder="0">
+
 
         </iframe>
+        </div>
     </div>
 </div>
 	  <!------ End of Content---->

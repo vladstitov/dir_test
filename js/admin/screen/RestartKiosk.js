@@ -9,12 +9,21 @@ var uplight;
             var _this = this;
             this.container = container;
             this.filename = 'kiosks.json';
+            this.connector = uplight.RegA.getInstance().connector;
             this.R = uplight.RegA.getInstance();
-            container.load('js/admin/screen/KiosksEdit.html', function () { return _this.init(); });
+            var p1 = this.connector.getData('admin.json').done(function (res) {
+                _this.admin = JSON.parse(res);
+            });
+            var p2 = container.load('js/admin/screen/KiosksEdit.html');
+            var p3 = this.connector.getServerTime().done(function (res) {
+                _this.s_time = Number(res);
+            });
+            var p4 = this.loadData();
+            $.when(p1, p2, p3, p4).then(function () { return _this.init(); });
         }
         RestartKiosk.prototype.init = function () {
             var _this = this;
-            this.R.connector.getServerTime().done(function (res) { return _this.onServerTime(res); });
+            console.log('admin', this.admin);
             this.view = $('#KiosksEdit');
             this.view.find('[data-id=btnAll]:first').on(CLICK, function () { return _this.onAllClick(); });
             this.view.find('[data-id=btnRestart]:first').on(CLICK, function () { return _this.onRestartClick(); });
@@ -27,7 +36,8 @@ var uplight;
             this.selTemplate = this.view.find('[data-id=selTemplate]:first');
             this.tiName = this.view.find('[data-id=tiName]:first');
             this.list = this.view.find('[data-id=list]:first');
-            console.log(this.selTemplate);
+            this.makeTemplates(this.admin.templates);
+            this.render();
         };
         RestartKiosk.prototype.onSaveClick = function () {
             if (!this.selectedItem) {
@@ -59,13 +69,9 @@ var uplight;
         RestartKiosk.prototype.onCloseClick = function () {
             this.hidePanel();
         };
-        RestartKiosk.prototype.onServerTime = function (res) {
-            this.s_time = Number(res);
-            this.loadData();
-        };
         RestartKiosk.prototype.loadData = function () {
             var _this = this;
-            this.R.connector.getData(this.filename).done(function (res) { return _this.onData(res); });
+            return this.R.connector.getData(this.filename).done(function (res) { return _this.onData(res); });
         };
         RestartKiosk.prototype.makeTemplates = function (ar) {
             var out = '';
@@ -75,10 +81,11 @@ var uplight;
             this.selTemplate.html(out);
         };
         RestartKiosk.prototype.onData = function (res) {
-            console.log(res);
-            var data = JSON.parse(res);
+            this.data = JSON.parse(res);
+        };
+        RestartKiosk.prototype.render = function () {
             var s_time = this.s_time;
-            var ar = data.kiosks || [];
+            var ar = this.data;
             var out = '';
             var ks = [];
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -87,8 +94,6 @@ var uplight;
                 out += this.createDevice(k, s_time);
             }
             this.kiosks = ks;
-            this.templates = data.templates;
-            this.makeTemplates(data.templates);
             this.list.html(out);
         };
         RestartKiosk.prototype.onEditClick = function () {
@@ -110,15 +115,13 @@ var uplight;
             this.showPanel();
         };
         RestartKiosk.prototype.onDataSaved = function (res) {
+            var _this = this;
             console.log(res);
-            this.loadData();
+            this.loadData().then(function () { return _this.render(); });
         };
         RestartKiosk.prototype.save = function () {
             var _this = this;
-            var out = {};
-            out.kiosks = this.kiosks;
-            out.templates = this.templates;
-            this.R.connector.saveData(JSON.stringify(out), this.filename).done(function (res) { return _this.onDataSaved(res); });
+            this.R.connector.saveData(JSON.stringify(this.kiosks), this.filename).done(function (res) { return _this.onDataSaved(res); });
         };
         RestartKiosk.prototype.collectChecked = function () {
             var out = [];

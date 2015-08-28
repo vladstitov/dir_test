@@ -129,6 +129,7 @@ module uplight {
         }
 
         isPreview:boolean
+        btnFullView:JQuery
         message:JQuery
         messageText:JQuery;
         private init(): void {
@@ -142,6 +143,7 @@ module uplight {
             this.content=$('#content');
             this.message =$('<div>').attr('id','Message');
             this.messageText = $('<div>').appendTo(this.message);
+            this.btnFullView = this.preview.find('[data-id=btnFullView]').click(()=>{window.open(this. previewUrl, "_blank");})
         }
 
         constructor() {
@@ -191,13 +193,18 @@ module uplight {
 
 
 
-        private showPreview():void{
+        private previewUrl:string ='Kiosk1080.php?id=0'
+        private showPreview(url?:string):void{
+
+            if(url)this. previewUrl = url;
+                this.preview.find('iframe:first').attr('src',this. previewUrl);
             this.preview.show();
             this.isPreview=true;
            this.preview.show();
         }
         hidePreview():void{
             if(this.isPreview){
+                this.preview.find('iframe:first').attr('src','');
                 this.preview.hide();
                 this.isPreview=false;
             }

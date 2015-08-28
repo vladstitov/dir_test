@@ -6,13 +6,13 @@
     color: #333333;
     background-color: #ffffff;
 }
-#cover{
+.cover{
     position: absolute;
-    top: 170px;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 90%;
-    display: none;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
 }
 #u-header {
     display: block;
@@ -156,9 +156,20 @@ a:active{
 }
 #list-main{
     width:100%;
-    height: 910px;
+    height: 880px;
     overflow-y: scroll;
 }
+#list-main .main{
+    width: 100%;
+    height: 100%;
+
+}
+.view-port>hr{
+    margin: 0;
+   /* margin-top:0 !important;
+    margin-bottom: 0 !important;*/
+}
+
 #list-footer{
     width:100%;
 
@@ -171,7 +182,8 @@ a:active{
     padding: 12px;
   /*  display: table;
    */
-    width: 96%;
+    width: 98%;
+    min-height: 95px;
 }
 /*#list-main li>.main{
     position: relative;
@@ -187,9 +199,9 @@ a:active{
     padding-top: 10px;
 }*/
 
-#list-main li .row>div{
+/*#list-main li .urow>div{
     display: inline-block;
-}
+}*/
 #list-main li>div.details{
     display: none;
 }
@@ -209,16 +221,16 @@ a:active{
     margin-right: 0.5em;
 }
 
-#list-main li .main>.row>.more{
-  /*  width: 18px;
+/*#list-main li .main>.urow>.more{
+  /!*  width: 18px;
     text-align: center;
     color: #666;
-    padding-right: 5px;*/
+    padding-right: 5px;*!/
 
     margin-left: 1em;
     margin-right: 1em;
 
-}
+}*/
 #list-main li .name{
 font-size: 25px;
    /* padding-left: 12px;*/
@@ -286,6 +298,41 @@ display: inline-block;
 }
 /*END Details */
 /*START Details Large */
+#DetailsLarge>.modal-dialog{
+    width: 730px;
+    top:380px;
+    margin-top: 0;
+
+}
+#DetailsLarge .modal-content{
+    height: 1100px;
+}
+.central .fa-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: x-large;
+    color: #666666;
+    z-index: 100;
+}
+.central .content{
+    margin: 20px;
+}
+#DetailsLarge .modal-footer{
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+}
+/*.detailsL{
+    width:650px;
+    height: 1024px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+   right: 0;
+    top:230px
+}*/
 .detailsL>.fa-close{
     position: absolute;
     bottom: -15px;
@@ -301,31 +348,21 @@ display: inline-block;
     box-shadow:0 0 5px #999999;
 }
 
-.detailsL>.content{
-    width: 95%;
-    height: 95%;
 
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-.detailsL>.content>.gallery{
+.detailsL>.gallery{
     height: 600px;
     width: 620px;
     left: 0;
     right: 0;
     margin: auto;
 }
-.detailsL>.content>.gallery>.preview{
+.detailsL>.gallery>.preview{
     height: 420px;
     width: 620px;
     position: absolute;
     border: thin #999999 solid;
 }
-.detailsL>.content>.gallery>.nano{
+.detailsL>.gallery>.nano{
     position: relative;
     top: 450px;
     width: 620px;
@@ -333,19 +370,19 @@ display: inline-block;
     overflow-y: hidden;
     overflow-x: auto;
 }
-.detailsL>.content>.gallery>.nano li {
+.detailsL>.gallery>.nano li {
     display: inline-block;
 
 }
-.detailsL>.content>.gallery>.nano li>* {
+.detailsL>.gallery>.nano li>* {
     max-width: 128px;
     max-height: 128px;
 
 }
-.detailsL>.content>.gallery>.nano .nano-content{
+.detailsL>.gallery>.nano .nano-content{
     white-space: nowrap;
 }
-.detailsL>.content>.gallery>.preview>.img>*{
+.detailsL>.gallery>.preview>.img>*{
     position: absolute;
     margin: auto;
     left: 0;
@@ -355,7 +392,7 @@ display: inline-block;
     max-height: 400px;
     max-width: 600px;
 }
-.detailsL>.content>.gallery{
+.detailsL>.gallery{
 
 }
 /* END  Details Large */
@@ -394,7 +431,7 @@ display: inline-block;
 #searchinput input{
     border-radius: 30px;
     font-size: 30px;
-    width: 100px;
+    width: 200px;
 
     border: none;
 

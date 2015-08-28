@@ -8,12 +8,18 @@ module uplight {
         private attratLoop:AttractLoop;
         R:Registry;
         constructor() {
+          this.init();
+        }
+
+        init():void{
+            this.view = $('#AttractLoop').appendTo('body');
+            if(!this.view.get(0)) return;
             this.R=Registry.getInstance();
             this.timeout = Number(this.R.settings.ss_timeout)*1000;
             if(isNaN(this.timeout) || this.timeout<10000)this.timeout=10000;
-            this.view = $('#AttractLoop');
+
             this.attratLoop = new AttractLoop();
-            this.addListeners();
+           if(typeof Kiosk !== 'undefined') this.addListeners();
             this.isActive= true;
         }
 
@@ -39,7 +45,7 @@ module uplight {
         }
 
         private isActive;
-        private startScreenSaver(): void {
+       startScreenSaver(): void {
             if(this.isActive) return;
             this.isActive=true;
             console.log('start ss');
@@ -59,6 +65,12 @@ module uplight {
        
     }
 
+$(document).on('DOCUMENT_READY',function(){
+    var ss = new ScreenSaver();
+    ss.startScreenSaver();
 
+})
 }
+
+
 

@@ -12,6 +12,8 @@
 /// <reference path="Categories.ts" />
 /// <reference path="Connector.ts" />
 /// <reference path="keywords.ts" />
+
+
 declare var u_settings:any;
 declare var kiosk_id:number;
 declare var mode;
@@ -68,20 +70,21 @@ module uplight {
            var kw = new Keywords($('#kw-container'));
            var cats= new Categories($('#Categories'));
 
-         var sr:SearchResult = new SearchResult($('#the-list'));
+         var sr:SearchResult = new SearchResult();
 
            var delay:number = u_settings.timer;
            if(isNaN(delay) || delay<2) delay =2;
 
            setInterval(()=>this.relay(),delay*1000);
 
-           if (typeof mode !=='undefined' && mode === 'preview'){
+
+       // if(typeof ScreenSaver !== 'undefined'){
+           // var ss:ScreenSaver = new ScreenSaver();
+            r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
+      //  }
 
 
-           }else{
-             var ss:ScreenSaver = new ScreenSaver();
-               r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
-           }
+
 
 
 

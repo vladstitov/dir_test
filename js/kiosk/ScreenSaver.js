@@ -4,15 +4,21 @@ var uplight;
 (function (uplight) {
     var ScreenSaver = (function () {
         function ScreenSaver() {
+            this.init();
+        }
+        ScreenSaver.prototype.init = function () {
+            this.view = $('#AttractLoop').appendTo('body');
+            if (!this.view.get(0))
+                return;
             this.R = uplight.Registry.getInstance();
             this.timeout = Number(this.R.settings.ss_timeout) * 1000;
             if (isNaN(this.timeout) || this.timeout < 10000)
                 this.timeout = 10000;
-            this.view = $('#AttractLoop');
             this.attratLoop = new uplight.AttractLoop();
-            this.addListeners();
+            if (typeof uplight.Kiosk !== 'undefined')
+                this.addListeners();
             this.isActive = true;
-        }
+        };
         ScreenSaver.prototype.startTimer = function () {
             var _this = this;
             clearTimeout(this.timer);
@@ -49,5 +55,9 @@ var uplight;
         return ScreenSaver;
     })();
     uplight.ScreenSaver = ScreenSaver;
+    $(document).on('DOCUMENT_READY', function () {
+        var ss = new ScreenSaver();
+        ss.startScreenSaver();
+    });
 })(uplight || (uplight = {}));
-//# sourceMappingURL=ScreenSaver.js.map
+//# sourceMappingURL=screensaver.js.map

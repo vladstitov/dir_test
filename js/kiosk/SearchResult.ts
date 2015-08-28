@@ -14,24 +14,27 @@ module uplight {
         //details:Details;
         R:Registry
         mainport:JQuery
-        cover:JQuery
-        constructor(private view:JQuery){
+      //  cover:JQuery
+        view:JQuery
+        viewDetails:JQuery
+        detailsContent:JQuery;
+        constructor(){
+            this.view = $('#list-main');
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
-            this.list=$('<ul>');
+            this.list=$('<ul>').addClass('nano-content');
             this.addListeners();
             this.cache={};
             this.mainport = $('#mainport');
-            this.cover= $('#cover');
-            this.cover.on(CLICK,(evt)=>this.onCoverClick(evt));
+            this.viewDetails = $('#DetailsLarge').click((evt)=>this.onCoverClick(evt))
+            this.detailsContent = this.viewDetails.find('.content:first');
 
-
-            //this.details = new Details(view);
         }
 
         reset():void{
             this.result = this.data;
             this.render(true);
+            this.hideDetails();
         }
 
         addListeners():void{
@@ -70,21 +73,27 @@ module uplight {
 
         }
 
+        private isDetails:boolean;
+        private hideDetails():void{
+            if(this.isDetails){
+                this.viewDetails.hide();
+                this.detailsContent.empty();
+                this.isDetails = false;
+            }
+        }
         private onCoverClick(evt:JQueryEventObject):void{
            // console.log($(evt.target));
-            if($(evt.target).attr('id')=='cover' || $(evt.target).hasClass('fa-close')){
-                this.cover.hide();
-                this.cover.html('');
+            if($(evt.target).data('id')=='btnClose'){
+                this.hideDetails();
             }
         }
 
         private showDetailsLarge(det:JQuery):void{
 
-            var cov = this.cover
-           cov.html('');
-            cov.append(det);
-           // console.log(det);
-            this.cover.show();
+            this.viewDetails.show();
+            this.detailsContent.append(det);
+            this.isDetails = true;
+
         }
 
         private onSearchChange(pattern:string):void{
@@ -110,9 +119,6 @@ module uplight {
            }
 
             return out1.concat(out2,out3);
-
-
-
         }
 
 

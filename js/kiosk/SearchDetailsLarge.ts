@@ -19,6 +19,7 @@ module uplight{
        constructor(vo:VODestination){
            if(vo.imgs && vo.imgs.length) this.createGallery(vo.imgs);
            if(vo.pgs && vo.pgs.length)this.createPages(vo.pgs);
+           this.vo=vo;
        }
 
         private  createGallery(imgs:string[]):void{
@@ -53,14 +54,15 @@ module uplight{
        }
 
        private createView():JQuery{
-           var view:JQuery= $('<div>').addClass('detailsL  Plastic031');
 
-           var content = $('<div>').addClass('content').appendTo(view);
-           view.append('<div class="fa fa-close" data-id="btnClose">');
-           if(this.detSm) content.append(this.detSm.view);
-           if(this.gall) content.append(this.gall);
-           if(this.pages) content.append(this.pages);
-           return view;
+           var det = $('<div>').addClass('detailsL');
+
+
+           det.append('<h2><span>'+this.vo.name+'</span><span class="pull-right">'+this.vo.unit+'</span></h2>');
+           if(this.detSm) det.append(this.detSm.view);
+           if(this.gall) det.append(this.gall);
+           if(this.pages) det.append(this.pages);
+           return det;
        }
 
        setDetailsSmall(det:SearchDetails):SearchDetailsLarge{

@@ -2,22 +2,22 @@
 var uplight;
 (function (uplight) {
     var SearchResult = (function () {
-        function SearchResult(view) {
+        function SearchResult() {
             var _this = this;
-            this.view = view;
+            this.view = $('#list-main');
             this.R = uplight.Registry.getInstance();
             this.model = uplight.Registry.getInstance().model;
-            this.list = $('<ul>');
+            this.list = $('<ul>').addClass('nano-content');
             this.addListeners();
             this.cache = {};
             this.mainport = $('#mainport');
-            this.cover = $('#cover');
-            this.cover.on(CLICK, function (evt) { return _this.onCoverClick(evt); });
-            //this.details = new Details(view);
+            this.viewDetails = $('#DetailsLarge').click(function (evt) { return _this.onCoverClick(evt); });
+            this.detailsContent = this.viewDetails.find('.content:first');
         }
         SearchResult.prototype.reset = function () {
             this.result = this.data;
             this.render(true);
+            this.hideDetails();
         };
         SearchResult.prototype.addListeners = function () {
             var _this = this;
@@ -53,19 +53,23 @@ var uplight;
             }
             this.R.connector.Stat('sr', id.toString());
         };
+        SearchResult.prototype.hideDetails = function () {
+            if (this.isDetails) {
+                this.viewDetails.hide();
+                this.detailsContent.empty();
+                this.isDetails = false;
+            }
+        };
         SearchResult.prototype.onCoverClick = function (evt) {
             // console.log($(evt.target));
-            if ($(evt.target).attr('id') == 'cover' || $(evt.target).hasClass('fa-close')) {
-                this.cover.hide();
-                this.cover.html('');
+            if ($(evt.target).data('id') == 'btnClose') {
+                this.hideDetails();
             }
         };
         SearchResult.prototype.showDetailsLarge = function (det) {
-            var cov = this.cover;
-            cov.html('');
-            cov.append(det);
-            // console.log(det);
-            this.cover.show();
+            this.viewDetails.show();
+            this.detailsContent.append(det);
+            this.isDetails = true;
         };
         SearchResult.prototype.onSearchChange = function (pattern) {
             this.currentPattern = pattern.toLowerCase();

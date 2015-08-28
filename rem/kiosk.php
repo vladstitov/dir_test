@@ -105,10 +105,10 @@ switch(array_shift($a)){
 		$result=$ctr->getBackground();
 	break;	
 	case 'get_stamp':
-		if(!isset($get['id']) || !isset($get['stamp'])) die('ERROR');
-		header('Content-type: application/json');
-		
-		echo json_encode(trackKiosk($get));	
+		if(isset($get['id']) && isset($get['stamp'])){		
+			header('Content-type: application/json');		
+			echo json_encode(trackKiosk($get));
+		}		
 		
 	break;
 
@@ -126,18 +126,22 @@ switch(array_shift($a)){
 
 
 
-function trackKiosk($get){		
+function trackKiosk($get){	
+	
 		$out=new stdClass();
 		$out->success='success';			
 		$file_name='../data/kiosks.json';
 		
-		$id=$get['id'];
+		$id=(int)$get['id'];
 		$track = json_decode(file_get_contents($file_name));
-		if(!isset($track->$id)){
-			$out->success='nothing';
-		return $out;
+		
+		foreach($track as $kiosk) if($kiosk->id===$id) break;
+		
+		if($kiosk->id!==$id){
+				$out->success='nothing '.$id;
+				return $out;		
 		}		
-		$kiosk = $track->$id;					
+					
 		$stamp=(int)$get['stamp'];
 		$k_time=(int)@$get['now'];
 		$timer=(int)@$get['timer'];
@@ -151,8 +155,7 @@ function trackKiosk($get){
 			$kiosk->ip = $_SERVER['REMOTE_ADDR'];
 			$out->success = 'stamp';
 			$out->result = $stamp;
-			$out->ktime = $k_time;
-			$track->$id = $kiosk;
+			$out->ktime = $k_time;			
 			file_put_contents($file_name,json_encode($track));
 			return $out;
 		}
@@ -171,7 +174,7 @@ function trackKiosk($get){
 		$kiosk->ping=(int)@$get['ping'];
 		$kiosk->S_time = time();
 		$kiosk->timer=$timer;
-		$track->$id=$kiosk;
+		
 		file_put_contents($file_name,json_encode($track));
 		
 					

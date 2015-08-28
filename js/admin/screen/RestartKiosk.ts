@@ -21,15 +21,28 @@ module uplight {
         private selectedItem:VOKiosk;
 
         private filename:string ='kiosks.json';
+
         private s_time:number;
+        private connector:Connector
+        private admin:any;
+        private data:any;
 
         constructor(private container:JQuery) {
+            this.connector = RegA.getInstance().connector;
             this.R = RegA.getInstance();
-            container.load('js/admin/screen/KiosksEdit.html',()=>this.init());
+
+            var p1 = this.connector.getData('admin.json').done((res)=>{this.admin= JSON.parse(res)});
+            var p2 = container.load('js/admin/screen/KiosksEdit.html');
+            var p3 =  this.connector.getServerTime().done((res)=>{ this.s_time = Number(res);});
+            var p4 = this.loadData();
+
+            $.when(p1,p2,p3,p4).then(()=>this.init());
         }
 
         private init():void{
-             this.R.connector.getServerTime().done((res)=>this.onServerTime(res));
+
+            console.log('admin',this.admin);
+
             this.view = $('#KiosksEdit');
             this.view.find('[data-id=btnAll]:first').on(CLICK,()=>this.onAllClick());
             this.view.find('[data-id=btnRestart]:first').on(CLICK,()=>this.onRestartClick());
@@ -42,13 +55,9 @@ module uplight {
             this.selTemplate = this.view.find('[data-id=selTemplate]:first');
             this.tiName = this.view.find('[data-id=tiName]:first');
             this.list = this.view.find('[data-id=list]:first');
-
-            console.log(this.selTemplate);
+            this.makeTemplates(this.admin.templates);
+            this.render();
         }
-
-
-
-
 
         private onSaveClick():void{
             if(!this.selectedItem) {
@@ -78,14 +87,11 @@ module uplight {
         private onCloseClick():void{
             this.hidePanel();
         }
-        private onServerTime(res):void{
-            this.s_time= Number(res);
-           this.loadData();
+
+        private loadData():JQueryPromise<any>{
+            return this.R.connector.getData(this.filename).done((res)=>this.onData(res));
         }
 
-        private loadData():void{
-            this.R.connector.getData(this.filename).done((res)=>this.onData(res));
-        }
         private makeTemplates(ar:any[]):void{
             var out:string='';
             for(var i=0,n=ar.length;i<n;i++){
@@ -93,12 +99,14 @@ module uplight {
             }
             this.selTemplate.html(out);
         }
-        private onData(res:string):void{
-           console.log(res);
-            var data = JSON.parse(res);
-            var s_time=this.s_time;
 
-            var ar =  data.kiosks ||[]
+        private onData(res:string):void {
+            this.data = JSON.parse(res);
+        }
+
+        private render():void {
+            var s_time=this.s_time;
+            var ar =  this.data
             var out='';
             var ks:VOKiosk[]=[];
             for(var i=0,n=ar.length;i<n;i++){
@@ -107,8 +115,7 @@ module uplight {
                 out+=this.createDevice(k,s_time);
             }
             this.kiosks = ks;
-            this.templates = data.templates;
-            this.makeTemplates(data.templates);
+
             this.list.html(out) ;
         }
 
@@ -139,17 +146,11 @@ module uplight {
 
         private onDataSaved(res):void{
             console.log(res);
-            this.loadData();
-
+            this.loadData().then(()=>this.render());
         }
 
         private save():void{
-
-            var out:any={};
-            out.kiosks= this.kiosks;
-            out.templates=this.templates;
-
-            this.R.connector.saveData(JSON.stringify(out),this.filename).done((res)=>this.onDataSaved(res));
+            this.R.connector.saveData(JSON.stringify(this.kiosks),this.filename).done((res)=>this.onDataSaved(res));
         }
 
         private collectChecked():any[]{

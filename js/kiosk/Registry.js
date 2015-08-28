@@ -6,6 +6,7 @@
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
 /// <reference path="als/Gallery.ts" />'
+/// <reference path="Kiosk.ts" />
 /// <reference path="models.ts" />
 /// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
@@ -51,6 +52,7 @@ var uplight;
             this.warns = '';
             this.device = { device: 'kiosk1', ln: 'en' };
             this.dispatcher = $('<div>');
+            this.settings = u_settings;
         }
         Registry.prototype.error = function (str) {
             this.errors += str + "\n";
