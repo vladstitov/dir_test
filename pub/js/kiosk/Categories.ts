@@ -8,13 +8,14 @@ module uplight{
         private list:JQuery
         R:Registry
 
+        view:JQuery
         private data:VOCategory[];
 
         private selected:number[];
-        constructor(public view:JQuery){
+        constructor(){
+            this.view =$('#Categories');
             this.R=Registry.getInstance();
-
-            this.list=$('<ul>').appendTo(view);
+            this.list=$('<ul>').appendTo(this.view);
             this.R.model.dispatcher.on(this.R.model.READY,()=>this.onDataReady());
 
             this.addListeners();

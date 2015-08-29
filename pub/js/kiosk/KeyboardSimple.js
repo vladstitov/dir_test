@@ -5,9 +5,9 @@
 var uplight;
 (function (uplight) {
     var Keyboard = (function () {
-        function Keyboard(view) {
+        function Keyboard() {
             this.alphabet = '1,2,3,4,5,6,7,8,9,0,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,&nbsp;,Z,X,C,V,SPACE,B,N,M';
-            this.view = view;
+            this.view = $('#Keyboard');
             this.R = uplight.Registry.getInstance();
             // if(set && set.keyboard) this.initSettings(set.keyboard);
             this.keys = $('<div>');

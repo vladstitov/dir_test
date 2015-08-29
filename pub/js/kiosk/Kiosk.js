@@ -14,28 +14,9 @@
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
-        /*  private onTimeout():void{
-              Registry.getInstance().dispatcher.triggerHandler(Registry.getInstance().RESET_ALL);
-              $('#AttractLoop').show();
-          }*/
         function Kiosk() {
             var _this = this;
-            this.home = '#category=2';
-            this.stamp = 0;
-            this.ping = 0;
-            this.timer = (new Date()).getTime();
-            /*  document.addEventListener('click',()=>{
-                  clearTimeout(this.timeout)
-                  this.timeout = setTimeout(()=>this.onTimeout(),20000);
-              })
-              $('#AttractLoop').click(()=>{
-                  $('#AttractLoop').hide();
-                  console.log('Attracloop click');
-   
-   
-   
-              })*/
-            //  var mode = mode
+            document.addEventListener('mousedown', function (evt) { return _this.onMouseDown(evt); }, true);
             var r = uplight.Registry.getInstance();
             r.connector = new uplight.Connector();
             r.connector.id = kiosk_id;
@@ -44,75 +25,29 @@ var uplight;
             r.settings = u_settings;
             r.dispatcher = $({});
             this.R = r;
-            var kb = new uplight.Keyboard($('#Keyboard'));
+            this.keyboard = new uplight.Keyboard();
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
-            var cats = new uplight.Categories($('#Categories'));
-            var sr = new uplight.SearchResult();
-            var delay = u_settings.timer;
-            if (isNaN(delay) || delay < 2)
-                delay = 2;
-            setInterval(function () { return _this.relay(); }, delay * 1000);
-            // if(typeof ScreenSaver !== 'undefined'){
-            // var ss:ScreenSaver = new ScreenSaver();
+            var cats = new uplight.Categories();
+            this.searchResult = new uplight.SearchResult();
+            var relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START, function () {
                 r.dispatcher.triggerHandler(r.RESET_ALL);
             });
-            //  }
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
-            /*
-            this.R = uplight.Registry.getInstance();
-            var conn: Connector = new uplight.Connector();
-            //this.R.connector = conn;
-            
-            this.R.settings=settings
-           
-            var w: number = 700;
-            var h: number = 700;
-            this.menu = new Menu($('#Menu'), 500, 350,conn);
-            this.maiView = new MainView('#MainView', w, h);
- 
- 
-            var mod: DestinantionsModel = new DestinantionsModel(conn);
-            mod.onReady = () => {
-                $(window).on('hashchange', (evt) => this.onHachChange());
-                document.location.hash=this.home;
-            };
-            this.R.modelDests = mod
-                   
-            this.searchResult = new SearchResult(mod);
-            this.details = new Details(mod, conn);
-            this.infoPage = new InfoPage(conn);
- 
-            var banner: Banner = new Banner();
-           
-            this.keyboard = new Keyboard();
-            this.keyboard.onKeyboardTyping = (patt: string) => this.onKeyboardTyping(patt);
- 
-            this.keyboardView = new kiosk.KeyboardView('#KeyboardView');
-            this.screenSaver = new ScreenSaver(conn);
- 
-          */
         }
-        Kiosk.prototype.relay = function () {
-            var that = this;
-            var now = (new Date()).getTime();
-            var timer = now - this.timer;
-            this.timer = now;
-            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.ping, timer, this.R.status).done(function (res) {
-                that.ping = (new Date()).getTime() - now;
-                switch (res.success) {
-                    case 'reload':
-                        window.location.reload();
-                        break;
-                    case 'restart':
-                        break;
-                    case 'stamp':
-                        that.stamp = Number(res.result);
-                        break;
-                }
-            });
+        Kiosk.prototype.onMouseDown = function (evt) {
+            var _this = this;
+            if (this.isBlocked) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.stopImmediatePropagation();
+            }
+            else {
+                setTimeout(function () { return _this.unblock(); }, 500);
+                this.isBlocked = true;
+            }
         };
         Kiosk.prototype.unblock = function () {
             this.isBlocked = false;
@@ -132,35 +67,52 @@ var uplight;
                     break;
                 case '#destid':
                     break;
-                case '#screensaver':
-                    if (hash[1] == 'start')
-                        setTimeout(function () {
-                            _this.resetScreen();
-                            // document.location.hash = this.home;
-                        }, 1000);
-                    break;
-                case '#page':
-                    this.keyboardView.hideKeyboard();
-                    break;
-                case '#back':
-                    this.maiView.showHistory();
-                    break;
             }
-        };
-        Kiosk.prototype.resetScreen = function () {
-            console.log('reset Screen');
-            // this.keyboardView.hideKeyboard();
-            //this.keyboard.reset();
-            //  this.menu.reset();
-            //this.maiView.reset();
-        };
-        Kiosk.prototype.onKeyboardTyping = function (patt) {
-            //var el: JQuery = this.searchResult.getListByPattern(patt);
-            //this.maiView.showView(el);
         };
         return Kiosk;
     })();
     uplight.Kiosk = Kiosk;
+    var Relay = (function () {
+        function Relay(delay) {
+            var _this = this;
+            this.stamp = 0;
+            this.ping = 0;
+            if (isNaN(delay) || delay < 2)
+                delay = 2;
+            this.timer = (new Date()).getTime();
+            setInterval(function () { return _this.relay(); }, delay * 1000);
+        }
+        Relay.prototype.relay = function () {
+            var that = this;
+            var now = (new Date()).getTime();
+            var timer = now - this.timer;
+            this.timer = now;
+            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.ping, timer, uplight.Registry.status).done(function (res) {
+                that.ping = (new Date()).getTime() - now;
+                var vo;
+                try {
+                    vo = JSON.parse(res);
+                }
+                catch (e) {
+                    console.warn('relay doesnt work ' + res);
+                    return;
+                }
+                switch (vo.success) {
+                    case 'reload':
+                        window.location.reload();
+                        break;
+                    case 'load':
+                        window.location.href = vo.result;
+                        break;
+                    case 'stamp':
+                        that.stamp = Number(vo.result);
+                        break;
+                }
+            });
+        };
+        return Relay;
+    })();
+    uplight.Relay = Relay;
 })(uplight || (uplight = {}));
 $(document).ready(function () {
     var k = new uplight.Kiosk();

@@ -2,24 +2,20 @@
 session_start();
 define('DATA','../data/');
 $kiosk_id=0;
-$file_name=DATA.'kiosks.json';
-$kiosks =  json_decode(file_get_contents($file_name));
-if(isset($_GET['kiosk'])) $kiosk_id=$_GET['kiosk'];
-/*
-$res=0;
-foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id){
-		$kiosk->status='loaded';
-		$kiosk->S_time = time();
-		$res = file_put_contents($file_name,json_encode($kiosks));
-		break;
+
+$sett_file= 'settings.json';
+
+if(isset($_GET['kiosk'])) {
+		$kiosks = json_decode(file_get_contents(DATA.'kiosks.json'));
+		$kiosk_id=(int)$_GET['kiosk'];
+		foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id) break;
+		if($kiosk->id==$kiosk_id){
+			if(isset($kiosk->settings) && $kiosk->settings) $sett_file = $kiosk->settings;
+		}		
 }
-	
-if($res===0) exit;
-*/
 
-$settings = file_get_contents(DATA.'settings.json');
-
-
+if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
+$settings = file_get_contents(DATA.$sett_file);
 
 
 $l=file_get_contents(DATA.'labels.json');
@@ -33,7 +29,7 @@ $labels = json_decode($l);
         var u_settings = <?php echo $settings; ?>;
         var kiosk_id='<?php echo $kiosk_id; ?>';
         var u_labels = <?php echo $l; ?>;
-		var u_get = <?php echo json_encode($_GET); ?>;
+		var u_params = <?php echo json_encode($_GET); ?>;
        
     </script>
     <meta charset="utf-8">

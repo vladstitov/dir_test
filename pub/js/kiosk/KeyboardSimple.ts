@@ -2,6 +2,7 @@
  * Created by VladHome on 6/9/2015.
  */
     /// <reference path="Registry.ts" />
+
 module uplight{
     export class Keyboard {
         private keys:JQuery;
@@ -9,8 +10,8 @@ module uplight{
         view:JQuery
         private alphabet:string = '1,2,3,4,5,6,7,8,9,0,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,&nbsp;,Z,X,C,V,SPACE,B,N,M';
         R:Registry
-        constructor(view:JQuery) {
-            this.view = view;
+        constructor() {
+            this.view = $('#Keyboard');
             this.R=Registry.getInstance();
            // if(set && set.keyboard) this.initSettings(set.keyboard);
             this.keys = $('<div>');

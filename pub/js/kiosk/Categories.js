@@ -5,11 +5,11 @@
 var uplight;
 (function (uplight) {
     var Categories = (function () {
-        function Categories(view) {
+        function Categories() {
             var _this = this;
-            this.view = view;
+            this.view = $('#Categories');
             this.R = uplight.Registry.getInstance();
-            this.list = $('<ul>').appendTo(view);
+            this.list = $('<ul>').appendTo(this.view);
             this.R.model.dispatcher.on(this.R.model.READY, function () { return _this.onDataReady(); });
             this.addListeners();
         }

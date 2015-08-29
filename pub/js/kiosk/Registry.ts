@@ -9,7 +9,7 @@
 /// <reference path="Kiosk.ts" />
 
 /// <reference path="models.ts" />
-/// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
+/// <reference path="../../libs/typing/greensock.d.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
 
 
@@ -61,7 +61,7 @@ module uplight {
         modelDests: Model;
        // connector: kiosk.Connector;
         settings: any;
-        status:string;
+        static status:string;
         isServer: boolean;
         all:any=[];
         data:any[];
