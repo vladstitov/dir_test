@@ -53,6 +53,7 @@ var uplight;
                 'view listing': RegA.VIEW_LISTING,
                 'show-menu': RegA.SHOW_MENU
             };
+            this.settingsURL = 'settings.json';
             this.device = { device: 'admin', ln: 'en' };
         }
         RegA.prototype.register = function (obj) {

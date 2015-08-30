@@ -1,7 +1,8 @@
 <?php
 session_start();
 define('DATA','../../data/');
-define('MEDIA','media/');
+define('IMG','images/');
+
 
 if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admin'){
 	echo 'please login';	
@@ -29,9 +30,9 @@ switch(array_shift($a)){
 	$db = new PDO('sqlite:'.DATA.'statistics.db');
 	 $result = $db->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
 	break;
-	case 'upload_media':
+	case 'upload_image':
 	
-	$result = uploadMedia($_FILES["file"],$get['folder'],$get['prefix']);
+	$result = uploadImage($_FILES["file"],$get['folder'],$get['prefix']);
 	
 	break;
 	case 'get_data':
@@ -134,7 +135,7 @@ function saveData($file_name,$data){
 		
 }
 
-function uploadMedia($file,$folder,$prefix){
+function uploadImage($file,$folder,$prefix){
 			$out=new stdClass();
 			
 		if ($file["error"] > 0){
@@ -142,13 +143,13 @@ function uploadMedia($file,$folder,$prefix){
 			return $out;
 		}
 		
-		if (!file_exists('../'.MEDIA.$folder)) mkdir(MEDIA.$folder, 0777, true);
+		if (!file_exists('../'.IMG.$folder)) mkdir('../'.IMG.$folder, 0777, true);
 		
 		$filename = $folder.'/'.$prefix.'_'.$file["name"];
 		
-		if(move_uploaded_file($file["tmp_name"],'../'.MEDIA.$filename)){
+		if(move_uploaded_file($file["tmp_name"],'../'.IMG.$filename)){
 			$out->success='success';
-			$out->result=MEDIA.$filename;
+			$out->result=IMG.$filename;
 		}		
 		return $out;
 		

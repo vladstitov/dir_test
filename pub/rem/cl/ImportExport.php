@@ -83,12 +83,32 @@ class ImportExport{
 			return $out;
 		}	
 		
+		private  function toArray($data){
+				$out=[];
+				foreach($data as $v)if(isset($v->name)) $out[]=array( 
+				(isset($v->uid)?$v->uid:''),
+				$v->name,
+				(isset($v->unit)?$v->unit:''),
+				(isset($v->cats)?$v->cats:''),
+				(isset($v->kws)?$v->kws:''),
+				(isset($v->meta)?$v->meta:''),
+				(isset($v->more)?$v->more:''),
+				(isset($v->info)?$v->info:''),
+				(isset($v->pgs)?$v->pgs:'')
+				);
+				return $out;
+		}
 		private function insertDestinations($data){
+			$data = $this->toArray($data);
 			$out= new stdClass();
 			$this->con->beginTransaction('INSERT INTO destinations (uid,name,unit,cats,kws,meta,more,info,pgs) VALUES (?,?,?,?,?,?,?,?,?)');
-			foreach($data as $v) $this->con->execute(array($v->uid,$v->name,$v->unit,$v->cats,$v->kws,$v->meta,$v->more,$v->info,$v->pgs));
+			//foreach($data as $v)$this->con->execute(array($v->uid,$v->name,$v->unit,$v->cats,$v->kws,$v->meta,$v->more,$v->info,$v->pgs));
+			foreach($data as $v)$this->con->execute($v);
 			$res= $this->con-> commit();
-			if($res) $out->success='success';
+			if($res){
+				$out->success='success';
+				$out->msg='inserted '.count($data);
+			}
 			else  $out->error=$this->con->errorInfo();
 			return $out;
 		}

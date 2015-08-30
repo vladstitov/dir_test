@@ -36,7 +36,6 @@ module uplight {
         }
 
         private init(): void {
-          ///  trace('ImportExport init');
 
             this.view = $('#ImportExport');
             this.tableView = $('#ImportExport #table-container');
@@ -59,9 +58,9 @@ module uplight {
             this.btnDownload.attr('href',this.R.connector.service+'?a=importexport.export_CSV');
 
 
-            var self = this;
-            this.btnSelect = this.view.find('[data-id=btnImport]').on(CHANGE, function () {
-                self.onFileSelected(this.files);
+
+            this.btnSelect = this.view.find('[data-id=btnImport]').change((evt)=> {
+                this.onFileSelected(evt.target.files);
                 });
 
             this.table.append(this.renderHead());
@@ -71,8 +70,11 @@ module uplight {
 
 
 
+       // private catInd:any;
         private onCategories(res):void{
             this.categories=res;
+           // this.catInd = _.indexBy(res,'label');
+
         }
         getData(): void {
             this.R.connector.getCategories().done((res)=>this.onCategories(res));
@@ -95,9 +97,10 @@ module uplight {
 
         private onDataComplete(ar:any[]): void {
                 this._data = ar;
-                console.log(ar);
+            //    console.log(ar);
                 this.renderData();
-
+                this.isNewData = false;
+                this.btnUpload.prop('disabled',true);
         }
 
         private renderData():void{
@@ -114,7 +117,8 @@ module uplight {
         private checkHeaders(ar:string[]){
 
         }
-        private getCategoryId(label:string):number{
+
+        private getCategoryIdbyLabel(label:string):number{
             var ar = this.categories
             for(var i=0,n=ar.length;i<n;i++){
                 if(ar[i].label==label) return ar[i].id;
@@ -130,23 +134,28 @@ module uplight {
             if(str.length<3) return;
             var ar = str.split(',');
             for(var i=0,n=ar.length;i<n;i++){
-                if(this.getCategoryId(ar[i])) ;
+                if(this.getCategoryIdbyLabel(ar[i])) ;
                 else this.addNewCategory(ar[i]);
             }
         }
 
-        private onUploadTempComplete(res): void {
+        private isNewData:boolean
+
+        private onCSVComplete(res): void {
             var ar = res
+            //console.log('onCSVComplete ',res);
             var out=[];
             this.checkHeaders(res.shift());
             this.newCategories =[];
             for(var i=1,n=ar.length;i<n;i++){
                 var item = ar[i];
-                this.checkCatigories(item[4]);
+                if(item[4]) this.checkCatigories(item[4]);
                 out.push({uid:item[0],name:item[1],unit:item[2],info:item[3],cats:item[4],kws:item[5],more:item[6],pgs:item[7],meta:item[8]});
             }
             this._data=out;
             this.renderData();
+            this.isNewData = true;
+            this.btnUpload.prop('disabled',false);
 
             if(this.newCategories.length) alert('New categories will be added: '+"\n"+this.newCategories.join("\n"));
 
@@ -155,13 +164,10 @@ module uplight {
         private onFileSelected(files: FileList): void {
             //  var file: File = files[0];
             console.log(files);
-            if (files.length != 1) {}
-            else {
-
+            if (files.length === 1) {
                 var form: FormData = new FormData();
                 form.append('file',files[0]);
-
-               this.R.connector.uploadCSV(form, (res) => this.onUploadTempComplete(res), this.onError, this.onProgress);
+               this.R.connector.uploadCSV(form, (res) => this.onCSVComplete(res), this.onError, this.onProgress);
             }
           // console.log(file);
         }
@@ -183,7 +189,6 @@ module uplight {
         }
         private  collectCategories():VOCategory[]{
             var cats:string[]=[];
-
             var ar = this._data
             for(var i=0,n=ar.length;i<n;i++){
                 if(ar[i].cats.length<4) continue;
@@ -199,7 +204,7 @@ module uplight {
         private convertCategories(ar:string[]):number[]{
             var out:number[]=[];
             for(var i=0,n=ar.length;i<n;i++){
-                out.push(this.getCategoryId(ar[i]));
+                out.push(this.getCategoryIdbyLabel(ar[i]));
             }
             return out;
         }
@@ -210,14 +215,18 @@ module uplight {
         }
 
         private sendData():void{
-            var ar = this._data
+            var ar = this._data;
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                item.cats = this.convertCategories(item.categories);
+                if(item.categories)item.cats = this.convertCategories(item.categories);
             }
 
             var is_overwrite:boolean = this.rdOver.prop(CHECKED);
-            this.R.connector.insertdDestinations(ar,is_overwrite);
+            console.log('sendData total '+ar.length +' is_overwrite '+is_overwrite);
+            this.R.connector.insertdDestinations(JSON.stringify(ar),is_overwrite).done((res)=>{
+               // console.log(res);
+               this.getData();
+            });
         }
         private uploadNewCategories():void{
             var is_overwrite:boolean = this.rdOver.prop(CHECKED);
@@ -234,6 +243,9 @@ module uplight {
         }
         private onUploadClicked(): void {
             console.log('uploding');
+            this.btnUpload.prop('disabled',true)
+            this.R.msg('Uploading...',this.btnUpload);
+            setTimeout(()=>{this.btnUpload.prop('disabled',false)},3000);
             if(this.newCategories.length) this.uploadNewCategories();
             else this.sendData();
 

@@ -2,10 +2,20 @@
 session_start();
 if(isset($_POST['credetials'])){
 	$cred = $_POST['credetials'];
+	$out = new stdClass();
+	if($cred=='logout'){
+				$_SESSION['directories_user']=NULL;
+				$_SESSION['directories_folder']=NULL;
+				$out->success='logout';
+				$out->msg='User Logout';
+				echo json_encode($out);
+				exit();
+	}
+	
 	$ar = explode(',',$cred);	
 	$filename='../../data/directories.db';
 	
-	$out = new stdClass();
+	
 	
 		$db = new PDO('sqlite:'.$filename);
 		
@@ -31,6 +41,7 @@ if(isset($_POST['credetials'])){
 		echo json_encode($out);
 		
 }
+
 
 
 ?>

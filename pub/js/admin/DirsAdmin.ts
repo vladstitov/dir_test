@@ -5,7 +5,7 @@
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
 ///<reference path="impexp/Statistics.ts" />
-///<reference path="labels/LabelsManager.ts" />
+///<reference path="screen/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
@@ -144,20 +144,37 @@ module uplight {
             this.message =$('<div>').attr('id','Message');
             this.messageText = $('<div>').appendTo(this.message);
             this.btnFullView = this.preview.find('[data-id=btnFullView]').click(()=>{window.open(this. previewUrl, "_blank");})
+
+
+
         }
 
+        private logout():void{
+            this.R.connector.logout().done((res)=>{
+                window.location.reload();
+                console.log(res);
+                });
+        }
         constructor() {
             //  $.ajaxSetup({ cache: false });
             this.R = RegA.getInstance();
             this.R.dispatcher=$({});
             this.R.connector = new Connector();
             this.R.connector.getData('settings.json').done((resp) => {
-                this.R.settings = resp;
+                this.R.settings = JSON.parse(resp);
                 this.init();
                 this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
+            $('#btnLogout').click(()=>{
+                if( $('#btnLogout').hasClass('disabled')) return;
+                this.logout();
+                $('#btnLogout').addClass('disabled');
+                setTimeout(()=>{
+                    $('#btnLogout').removeClass('disabled');
+                },3000);
 
+            })
             this.R.msg=(text,cont)=>this.myMsg(text,cont);
 
 

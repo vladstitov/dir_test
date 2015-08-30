@@ -5,7 +5,7 @@
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
 ///<reference path="impexp/Statistics.ts" />
-///<reference path="labels/LabelsManager.ts" />
+///<reference path="screen/LabelsManager.ts" />
 ///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
@@ -20,10 +20,19 @@ var uplight;
             this.R.dispatcher = $({});
             this.R.connector = new uplight.Connector();
             this.R.connector.getData('settings.json').done(function (resp) {
-                _this.R.settings = resp;
+                _this.R.settings = JSON.parse(resp);
                 _this.init();
                 _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
+            });
+            $('#btnLogout').click(function () {
+                if ($('#btnLogout').hasClass('disabled'))
+                    return;
+                _this.logout();
+                $('#btnLogout').addClass('disabled');
+                setTimeout(function () {
+                    $('#btnLogout').removeClass('disabled');
+                }, 3000);
             });
             this.R.msg = function (text, cont) { return _this.myMsg(text, cont); };
             // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
@@ -128,6 +137,12 @@ var uplight;
             this.messageText = $('<div>').appendTo(this.message);
             this.btnFullView = this.preview.find('[data-id=btnFullView]').click(function () {
                 window.open(_this.previewUrl, "_blank");
+            });
+        };
+        Admin.prototype.logout = function () {
+            this.R.connector.logout().done(function (res) {
+                window.location.reload();
+                console.log(res);
             });
         };
         Admin.prototype.myMsg = function (text, DO) {

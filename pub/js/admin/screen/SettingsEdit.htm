@@ -71,31 +71,59 @@
     </section>
 
 
-    <section id="SettingsEditor" data-id="labelEditor" class="panel panel-default editor" >
-        <div class="panel-heading">
-            <span class="fa fa-close pull-right btn"></span>
-            <h3 class="panel-title">Label Editor</h3>
-        </div>
-        <section class="panel-body">
-            <br/>
-            <br/>
-            <div class="form">
-                <div class="form-group">
-                    <label data-id="lblIndex"></label>
-
-                    <input  data-id="value" type="text"  class="form-control" />
+    <section data-ctr="ValueEditor" class="modal" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-id="btnClose" class="fa fa-close pull-right btn"></span>
+                    <h3 class="modal-title">Label Editor</h3>
                 </div>
-                <!--<img data-id="value"  />-->
-                <select data-id="selTime" class="form-control">
+                <section class="modal-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <label data-id="lblInfo"></label>
+                            <input  data-id="tiValue" type="text"  class="form-control" />
+                        </div>
 
-                </select>
+                    </div>
+                </section>
+                    <div class="modal-footer">
+                       <!-- <input data-id="btnUpload" type="file" name="file" class="btn btn-warning" value="Upload New"/>-->
+                        <button type="button" data-id="btnSave" class="btn btn-primary">Save</button>
+                        <button type="button" data-id="btnClose" class="btn btn-default">Close</button>
+                    </div>
 
             </div>
-        </section>
-            <div class="footer">
-               <!-- <input data-id="btnUpload" type="file" name="file" class="btn btn-warning" value="Upload New"/>-->
-                <button type="button" data-id="btnSave" class="btn btn-primary">Save</button>
-            </div>
+        </div>
+    </section>
 
+
+
+    <section  data-ctr="TimeEditor" class="modal" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span data-id="btnClose" class="fa fa-close pull-right btn"></span>
+                    <h3 class="modal-title">Label Editor</h3>
+                </div>
+                <section class="modal-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <label data-id="lblInfo"></label>
+                            <select data-id="selTime" class="form-control">
+
+                            </select>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="modal-footer">
+                    <!-- <input data-id="btnUpload" type="file" name="file" class="btn btn-warning" value="Upload New"/>-->
+                    <button type="button" data-id="btnSave" class="btn btn-primary">Save</button>
+                    <button type="button" data-id="btnClose" class="btn btn-default">Close</button>
+                </div>
+
+            </div>
+        </div>
     </section>
 </div>

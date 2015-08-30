@@ -1,1 +1,0 @@
-{"kiosks":[{"S_time":0,"K_time":0,"ip":"","ping":0,"start_at":0,"timer":15000,"id":4,"name":"Lobby Kiosk 3","template":"Kiosk1080.php","status":"restart"},{"S_time":0,"K_time":0,"ip":"","ping":0,"start_at":0,"timer":15000,"id":6,"name":"Kiosk hallway","template":"Kiosk1080.php","status":"restart"}],"templates":[{"label":"Kiosk 1080x1920","value":"Kiosk1080.php"}]}

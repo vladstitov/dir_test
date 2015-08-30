@@ -10,23 +10,11 @@ module uplight {
         public device:any
         public onData: Function;
 
-       //// getContentData(callBack: Function, href: string): void {
-       //     $.ajax(this.service + href).done(callBack);
-      //  }
-
-       // loadFile(filename):JQueryPromise<string>{
-        //    return $.get('data/'+filename);
-       // }
-       // saveTitle(title: string): void {
-
-          //  $.post(this.service + '?a=saveTitle', { title: title });
-       // }
 
 
-        //restartKiosks():JQueryPromise<VOResult> {
-         //   return $.get(this.service, { a: 'screen.kiosks_restart' });
-       // }
-
+        logout(){
+           return  $.post('rem/login.php', {credetials:'logout'});
+        }
 
 
 
@@ -103,10 +91,10 @@ module uplight {
             return $.get(this.service + '?a=importexport.get_all');
         }
 
-        insertdDestinations(data:VODestination[],overwrite:boolean):JQueryPromise<VOResult>{
+        insertdDestinations(data:string,overwrite:boolean):JQueryPromise<VOResult>{
             var and:string=overwrite?'&overwrite=true':'';
 
-            return $.post(this.service + '?a=importexport.insert_destinations'+and,JSON.stringify(data));
+            return $.post(this.service + '?a=importexport.insert_destinations'+and,data);
         }
 
         insertCategories(data:VOCategory[],overwrite:boolean):JQueryPromise<VOResult>{
@@ -190,9 +178,9 @@ module uplight {
 
         
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
-        uploadFile(form: FormData, folder:string,prefix:string): JQueryPromise<VOResult> {
+        uploadImage(form: FormData, folder:string,prefix:string): JQueryPromise<VOResult> {
             return  $.ajax({
-                url: this.service+'?a=upload_file&folder='+folder+'&prefix='+prefix,  //Server script to process data
+                url: this.service+'?a=upload_image&folder='+folder+'&prefix='+prefix,  //Server script to process data
                 type: 'POST',
                 dataType: 'json',
                 data: form,
@@ -317,7 +305,7 @@ module uplight {
 
         }
 */
-        private uploadFile2(form:HTMLElement, service: string, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
+       /* private uploadFile2(form:HTMLElement, service: string, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
           //  var data: FormData = new FormData(form);
             $.ajax({
                 url: this.service + service,  //Server script to process data
@@ -338,7 +326,7 @@ module uplight {
             }).done(completeHandler).fail(errorHandler);
 
         }
-
+*/
 
     }
 }

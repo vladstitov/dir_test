@@ -275,7 +275,7 @@ module uplight{
             if(files.length){
                 var form:FormData = new FormData();
                 form.append('file',files[0])
-                this.connector.uploadFile(form,'media',('al'+this.props.id)).done((res:VOResult)=>this.onUploadResult(res))
+                this.connector.uploadImage(form,'al',('al'+this.props.id)).done((res:VOResult)=>this.onUploadResult(res))
 
             }
             this.reset();

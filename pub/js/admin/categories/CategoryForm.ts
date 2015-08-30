@@ -88,6 +88,7 @@ module uplight{
             for(var i=0,n=ar.length;i<n;i++){
                out+=this.renderIconsTopic(ar[i]);
             }
+
             this.iconsLibrary.html(out);
             this.iconsLibrary.on(CLICK,'.fa',(evt)=>this.onIcionLibraryClick($(evt.currentTarget)))
             this.iconsLibrary.on(MOUSE_OVER,'.fa',(evt)=>this.onIcionLibraryOver($(evt.currentTarget)))
@@ -126,12 +127,14 @@ module uplight{
             if(this.isLibraryVisible)this.hideLibrary();
             else this.showLibrary();
         }
+
         private onSaveResult(res):void {
             if(res.success) this.R.msg('Record Saved', this.btnSave);
              else this.R.msg('ERROR ', this.btnSave);
 
             console.log(res);
         }
+
         private onSaveClicked(){
             var vo:VOCategory = this.getCurrent();
             if(!vo) return

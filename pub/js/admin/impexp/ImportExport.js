@@ -12,7 +12,6 @@ var uplight;
             // this.init();
         }
         ImportExport.prototype.init = function () {
-            ///  trace('ImportExport init');
             var _this = this;
             this.view = $('#ImportExport');
             this.tableView = $('#ImportExport #table-container');
@@ -27,15 +26,16 @@ var uplight;
             this.btnUpload = this.view.find('[data-id=btnUpload]').on(CLICK, function () { return _this.onUploadClicked(); });
             this.btnDownload = this.view.find('[data-id=btnDownload]'); //.on(CLICK,()=>this.onDownloadClick());
             this.btnDownload.attr('href', this.R.connector.service + '?a=importexport.export_CSV');
-            var self = this;
-            this.btnSelect = this.view.find('[data-id=btnImport]').on(CHANGE, function () {
-                self.onFileSelected(this.files);
+            this.btnSelect = this.view.find('[data-id=btnImport]').change(function (evt) {
+                _this.onFileSelected(evt.target.files);
             });
             this.table.append(this.renderHead());
             this.getData();
         };
+        // private catInd:any;
         ImportExport.prototype.onCategories = function (res) {
             this.categories = res;
+            // this.catInd = _.indexBy(res,'label');
         };
         ImportExport.prototype.getData = function () {
             var _this = this;
@@ -52,8 +52,10 @@ var uplight;
         };
         ImportExport.prototype.onDataComplete = function (ar) {
             this._data = ar;
-            console.log(ar);
+            //    console.log(ar);
             this.renderData();
+            this.isNewData = false;
+            this.btnUpload.prop('disabled', true);
         };
         ImportExport.prototype.renderData = function () {
             var out = '';
@@ -65,7 +67,7 @@ var uplight;
         };
         ImportExport.prototype.checkHeaders = function (ar) {
         };
-        ImportExport.prototype.getCategoryId = function (label) {
+        ImportExport.prototype.getCategoryIdbyLabel = function (label) {
             var ar = this.categories;
             for (var i = 0, n = ar.length; i < n; i++) {
                 if (ar[i].label == label)
@@ -82,24 +84,28 @@ var uplight;
                 return;
             var ar = str.split(',');
             for (var i = 0, n = ar.length; i < n; i++) {
-                if (this.getCategoryId(ar[i]))
+                if (this.getCategoryIdbyLabel(ar[i]))
                     ;
                 else
                     this.addNewCategory(ar[i]);
             }
         };
-        ImportExport.prototype.onUploadTempComplete = function (res) {
+        ImportExport.prototype.onCSVComplete = function (res) {
             var ar = res;
+            //console.log('onCSVComplete ',res);
             var out = [];
             this.checkHeaders(res.shift());
             this.newCategories = [];
             for (var i = 1, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                this.checkCatigories(item[4]);
+                if (item[4])
+                    this.checkCatigories(item[4]);
                 out.push({ uid: item[0], name: item[1], unit: item[2], info: item[3], cats: item[4], kws: item[5], more: item[6], pgs: item[7], meta: item[8] });
             }
             this._data = out;
             this.renderData();
+            this.isNewData = true;
+            this.btnUpload.prop('disabled', false);
             if (this.newCategories.length)
                 alert('New categories will be added: ' + "\n" + this.newCategories.join("\n"));
         };
@@ -107,12 +113,10 @@ var uplight;
             var _this = this;
             //  var file: File = files[0];
             console.log(files);
-            if (files.length != 1) {
-            }
-            else {
+            if (files.length === 1) {
                 var form = new FormData();
                 form.append('file', files[0]);
-                this.R.connector.uploadCSV(form, function (res) { return _this.onUploadTempComplete(res); }, this.onError, this.onProgress);
+                this.R.connector.uploadCSV(form, function (res) { return _this.onCSVComplete(res); }, this.onError, this.onProgress);
             }
             // console.log(file);
         };
@@ -146,7 +150,7 @@ var uplight;
         ImportExport.prototype.convertCategories = function (ar) {
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
-                out.push(this.getCategoryId(ar[i]));
+                out.push(this.getCategoryIdbyLabel(ar[i]));
             }
             return out;
         };
@@ -155,13 +159,19 @@ var uplight;
             this.sendData();
         };
         ImportExport.prototype.sendData = function () {
+            var _this = this;
             var ar = this._data;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                item.cats = this.convertCategories(item.categories);
+                if (item.categories)
+                    item.cats = this.convertCategories(item.categories);
             }
             var is_overwrite = this.rdOver.prop(CHECKED);
-            this.R.connector.insertdDestinations(ar, is_overwrite);
+            console.log('sendData total ' + ar.length + ' is_overwrite ' + is_overwrite);
+            this.R.connector.insertdDestinations(JSON.stringify(ar), is_overwrite).done(function (res) {
+                // console.log(res);
+                _this.getData();
+            });
         };
         ImportExport.prototype.uploadNewCategories = function () {
             var _this = this;
@@ -179,7 +189,13 @@ var uplight;
             });
         };
         ImportExport.prototype.onUploadClicked = function () {
+            var _this = this;
             console.log('uploding');
+            this.btnUpload.prop('disabled', true);
+            this.R.msg('Uploading...', this.btnUpload);
+            setTimeout(function () {
+                _this.btnUpload.prop('disabled', false);
+            }, 3000);
             if (this.newCategories.length)
                 this.uploadNewCategories();
             else

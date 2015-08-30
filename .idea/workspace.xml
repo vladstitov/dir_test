@@ -2,128 +2,171 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81e37bf7-890c-4f49-a4c6-28da95441a21" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pub/DirLogin.html" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\DbConnector2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\KeywordsManager.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\Kiosk.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\MyDatabase.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\MyDatabase2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreenRemote.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreenRemote2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreenRemote3.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreenRemote\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreenRemote\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreensAdmin.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\ScreensAdmin2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\SearchTenants.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\TenantDetails.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\amfphp\DiscoveryService.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\archive\amfphp\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\AC_OETags.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\history.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\history.swf" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\playerProductInstall.swf" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\servicebrowser.swf" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\browser\services-config.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\cl\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\app\Actions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\app\Filters.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\app\Gateway.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\app\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\io\AMFBaseDeserializer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\io\AMFBaseSerializer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\io\AMFDeserializer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\io\AMFSerializer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\io\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\AMFObject.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\DateWrapper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\DescribeService.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\PageAbleResult.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\TraceHeader.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\WrapperClasses.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\amf\util\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\json\app\Actions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\json\app\Gateway.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\json\app\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\RecordSetAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\adodbAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\doctrineAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\fbsqlAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\informixAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\mssqlAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\oci8Adapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\odbcAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\pdoAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\peardbAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\pgsqlAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\plainrecordsetAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\sqliteAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\sqliteobjectAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\zendrowAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\adapters\zendrowsetAdapter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\BasicActions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\BasicGateway.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\Constants.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\Globals.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\php4Executive.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\app\php5Executive.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\exception\MessageException.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\exception\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\exception\php4Exception.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\exception\php5Exception.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\Authenticate.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\CharsetHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\CompatPhp4.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\CompatPhp5.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\Headers.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\JSON.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\MessageBody.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\MessageHeader.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\MethodTable.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\NetDebug.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\shared\util\functions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\xmlrpc\app\Actions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\xmlrpc\app\Gateway.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\core\xmlrpc\app\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\gateway.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\geturl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\json.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\Login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\amfphp\DiscoveryService.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\amfphp\_notes\dwsync.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\convert.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\services\uploadImage.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\statistics.db" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\rem\xmlrpc.php" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.js.map" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1438914805kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1438985656kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439003252kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439004961kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439004971kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439005055kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439005577kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439005824kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007275kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007287kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007294kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007301kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007306kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007317kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007409kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007415kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007760kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007801kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007820kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007839kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439007848kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439010023kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742166img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742339img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742399img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742562img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742697img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742706img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742747img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439742838img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439744575img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439744978img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439745384img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439772456img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439772606img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439851547img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439860100settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439860232settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439860371settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439860661settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439860809settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439862186settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439862195settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439862224settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439865459settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1439948390settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440261870img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440262044img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440270121img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272484img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272822img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272835img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272837img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272840img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272867img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272870img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440272872img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440278550img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279337img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279348img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279355img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279359img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279364img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279369img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279375img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279381img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279429img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279544img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279550img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279555img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279559img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279564img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279568img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279572img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279578img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279582img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279648img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279662img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279689img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279787img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279790img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279793img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279822img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279826img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279830img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279906img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279909img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440279947img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440284907img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440284915img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440284918img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440285938img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286057img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286060img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286141img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286288img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286293img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286357img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286369img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440286395img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440287792img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440300580settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440332583settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440332902settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440332918settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440349469img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440353438img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440353484img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356063settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356094img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356096settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356216settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356226settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356235settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356244settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440356257settings.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440357876img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440357884img_center.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440357888img_bottom.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440638562kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440638679kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440638828kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\data\arch\1440645404kiosks.json" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\images\1080.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\images\logo.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\dir_test\pub\js\admin\labels\LabelsManager.js.map" afterPath="" />
+      <change type="MOVED" beforePath="C:\wamp\www\dir_test\pub\js\admin\labels\LabelsManager.htm" afterPath="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.htm" />
+      <change type="MOVED" beforePath="C:\wamp\www\dir_test\pub\js\admin\labels\LabelsManager.js" afterPath="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.js" />
+      <change type="MOVED" beforePath="C:\wamp\www\dir_test\pub\js\admin\labels\LabelsManager.ts" afterPath="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/directories.db" afterPath="$PROJECT_DIR$/data/directories.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/statistics.db" afterPath="$PROJECT_DIR$/data/statistics.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/AdminTest.php" afterPath="$PROJECT_DIR$/pub/AdminTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Categories.js.map" afterPath="$PROJECT_DIR$/pub/js/kiosk/Categories.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Categories.js" afterPath="$PROJECT_DIR$/pub/js/kiosk/Categories.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Categories.ts" afterPath="$PROJECT_DIR$/pub/js/kiosk/Categories.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.js.map" afterPath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.js" afterPath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.ts" afterPath="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.js.map" afterPath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.js" afterPath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.ts" afterPath="$PROJECT_DIR$/pub/js/kiosk/Kiosk.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/rem/cl/Categories.php" afterPath="$PROJECT_DIR$/pub/rem/cl/Categories.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.ts" afterPath="$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.js" afterPath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.ts" afterPath="$PROJECT_DIR$/pub/js/admin/DirsAdmin.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.js" afterPath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.ts" afterPath="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.htm" afterPath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.js" afterPath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/rem/cl/ImportExport.php" afterPath="$PROJECT_DIR$/pub/rem/cl/ImportExport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.ts" afterPath="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/Kiosk1080.php" afterPath="$PROJECT_DIR$/pub/Kiosk1080.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Registry.js.map" afterPath="$PROJECT_DIR$/pub/js/kiosk/Registry.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Registry.js" afterPath="$PROJECT_DIR$/pub/js/kiosk/Registry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/kiosk/Registry.ts" afterPath="$PROJECT_DIR$/pub/js/kiosk/Registry.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/RegA.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/RegA.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/RegA.js" afterPath="$PROJECT_DIR$/pub/js/admin/RegA.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/RegA.ts" afterPath="$PROJECT_DIR$/pub/js/admin/RegA.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.htm" afterPath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.js" afterPath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.ts" afterPath="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/rem/admin.php" afterPath="$PROJECT_DIR$/pub/rem/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/rem/globals.php" afterPath="$PROJECT_DIR$/pub/rem/globals.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/img_bottom.json" afterPath="$PROJECT_DIR$/data/img_bottom.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/img_center.json" afterPath="$PROJECT_DIR$/data/img_center.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/kiosks.json" afterPath="$PROJECT_DIR$/data/kiosks.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/labels.json" afterPath="$PROJECT_DIR$/data/labels.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/rem/login.php" afterPath="$PROJECT_DIR$/pub/rem/login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/net.js.map" afterPath="$PROJECT_DIR$/pub/js/admin/net.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/net.js" afterPath="$PROJECT_DIR$/pub/js/admin/net.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pub/js/admin/net.ts" afterPath="$PROJECT_DIR$/pub/js/admin/net.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/settings.json" afterPath="$PROJECT_DIR$/data/settings.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ca78c8c6-571e-4922-a9ec-9699f589a7f2" name="Failed commit: Default" comment="statistics" />
@@ -148,93 +191,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Kiosk.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pub/js/kiosk/Kiosk.ts">
+      <file leaf-file-name="ImportExport.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45062587">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="net.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pub/js/admin/net.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kiosks.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/kiosks.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="52" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+              <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DirLogin.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pub/DirLogin.html">
+      <file leaf-file-name="ImportExport.htm" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.htm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="globals.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pub/rem/globals.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17171717">
-              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminTest.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pub/AdminTest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="img_bottom.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/img_bottom.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="245" selection-start-line="0" selection-start-column="245" selection-end-line="0" selection-end-column="245" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="img_center.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/img_center.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="174" selection-start-line="0" selection-start-column="174" selection-end-line="0" selection-end-column="174" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Categories.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pub/js/kiosk/Categories.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KeyboardSimple.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+            <state vertical-scroll-proportion="-14.384615">
+              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -263,23 +244,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/admin/impexp/Statistics.ts" />
-        <option value="$PROJECT_DIR$/js/admin/screen/AttractLoop.ts" />
-        <option value="$PROJECT_DIR$/admin/Menu.html" />
-        <option value="$PROJECT_DIR$/data/als/al_empty.html" />
-        <option value="$PROJECT_DIR$/js/kiosk/als/al_RSS.html" />
-        <option value="$PROJECT_DIR$/js/kiosk/als/al_empty.php" />
-        <option value="$PROJECT_DIR$/al_img_center.php" />
-        <option value="$PROJECT_DIR$/al_empty.php" />
-        <option value="$PROJECT_DIR$/js/admin/labels/LabelsManager.ts" />
-        <option value="$PROJECT_DIR$/js/admin/categories/CategoryForm.ts" />
-        <option value="$PROJECT_DIR$/js/admin/categories/CategoryListing.ts" />
-        <option value="$PROJECT_DIR$/js/admin/details/DetailsEditor.ts" />
-        <option value="$PROJECT_DIR$/js/admin/details/DetailsForm.ts" />
         <option value="$PROJECT_DIR$/js/admin/impexp/ImportExport.ts" />
         <option value="$PROJECT_DIR$/js/admin/net.ts" />
         <option value="$PROJECT_DIR$/js/admin/RegA.ts" />
-        <option value="$PROJECT_DIR$/data/settings.json" />
         <option value="$PROJECT_DIR$/js/admin/screen/AttractLoopEdit.ts" />
         <option value="$PROJECT_DIR$/js/kiosk/als/AttracLoop.ts" />
         <option value="$PROJECT_DIR$/js/admin/com/GalleryAdmin.ts" />
@@ -301,7 +268,6 @@
         <option value="$PROJECT_DIR$/js/admin/DirsAdmin.ts" />
         <option value="$PROJECT_DIR$/AdminTest.php" />
         <option value="$PROJECT_DIR$/js/kiosk/SearchResult.ts" />
-        <option value="$PROJECT_DIR$/data/labels.json" />
         <option value="$PROJECT_DIR$/pub/rem/admin.php" />
         <option value="$PROJECT_DIR$/pub/js/kiosk/Registry.ts" />
         <option value="$PROJECT_DIR$/pub/js/kiosk/KeyboardSimple.ts" />
@@ -309,11 +275,26 @@
         <option value="$PROJECT_DIR$/data/kiosks.json" />
         <option value="$PROJECT_DIR$/data/DirLogin.html" />
         <option value="$PROJECT_DIR$/pub/js/kiosk/Kiosk.ts" />
-        <option value="$PROJECT_DIR$/pub/AdminTest.php" />
         <option value="$PROJECT_DIR$/data/img_bottom.json" />
         <option value="$PROJECT_DIR$/data/img_center.json" />
         <option value="$PROJECT_DIR$/pub/DirLogin.html" />
         <option value="$PROJECT_DIR$/pub/rem/globals.php" />
+        <option value="$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.ts" />
+        <option value="$PROJECT_DIR$/data/settings.json" />
+        <option value="$PROJECT_DIR$/pub/js/admin/labels/LabelsManager.ts" />
+        <option value="$PROJECT_DIR$/pub/AdminTest.php" />
+        <option value="$PROJECT_DIR$/data/labels.json" />
+        <option value="$PROJECT_DIR$/pub/Kiosk1080.php" />
+        <option value="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/RegA.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.htm" />
+        <option value="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.htm" />
+        <option value="$PROJECT_DIR$/pub/js/admin/DirsAdmin.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.htm" />
+        <option value="$PROJECT_DIR$/pub/js/admin/net.ts" />
+        <option value="$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.ts" />
       </list>
     </option>
   </component>
@@ -357,6 +338,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -375,42 +358,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LPP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dir_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pub" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LPP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dir_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pub" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -443,11 +392,11 @@
       <recent name="C:\wamp\www\LPP\js\admin\labels" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\dir_test\pub\js\admin\screen" />
       <recent name="C:\wamp\www\dir_test\pub" />
       <recent name="C:\wamp\www\dir_test" />
       <recent name="C:\wamp\www\dir_test\data" />
       <recent name="C:\wamp\www\dir_test\js\kiosk\als" />
-      <recent name="C:\wamp\www\dir_test\libs" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.Kiosk1080.php">
@@ -633,14 +582,26 @@
       <option name="project" value="LOCAL" />
       <updated>1440728396151</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="betta version">
+      <created>1440861031640</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1440861031640</updated>
+    </task>
+    <task id="LOCAL-00015" summary="betta version">
+      <created>1440861059037</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1440861059037</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18997912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18997912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21330518" sideWeight="0.48903155" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2132753" sideWeight="0.5088282" order="11" side_tool="true" content_ui="tabs" />
@@ -701,11 +662,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="26" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/labels.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="54" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -739,7 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -747,7 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="245" selection-start-line="0" selection-start-column="245" selection-end-line="0" selection-end-column="245" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,7 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,7 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,7 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="54" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -821,7 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -829,7 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,14 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40890124">
           <caret line="225" column="16" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/labels.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="54" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -861,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -877,15 +826,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31890333">
           <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/img_bottom.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="245" selection-start-line="0" selection-start-column="245" selection-end-line="0" selection-end-column="245" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/img_center.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="174" selection-start-line="0" selection-start-column="174" selection-end-line="0" selection-end-column="174" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/rem/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.017316">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/fa-icons.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7027417">
+          <caret line="202" column="7" selection-start-line="202" selection-start-column="7" selection-end-line="202" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/fa-icons1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.49652296">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/rem/globals.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12265512">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/categories/CategoryForm.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36161336">
+          <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/kiosks.json">
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/categories/CategoriesManager.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="52" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
-          <folding />
+        <state vertical-scroll-proportion="0.3310153">
+          <caret line="14" column="65" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/DirLogin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3924964">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -899,50 +903,153 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/AttractLoopEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="261" column="39" selection-start-line="261" selection-start-column="39" selection-end-line="261" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/AttractLoopEdit.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18614718">
+          <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pub/AdminTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding />
+        <state vertical-scroll-proportion="-14.884615">
+          <caret line="213" column="75" selection-start-line="213" selection-start-column="75" selection-end-line="213" selection-end-column="75" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/img_bottom.json">
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/com/GalleryAdmin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.230769">
+          <caret line="272" column="37" selection-start-line="272" selection-start-column="10" selection-end-line="272" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/labels.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="245" selection-start-line="0" selection-start-column="245" selection-end-line="0" selection-end-column="245" />
-          <folding />
+          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/img_center.json">
+    <entry file="file://$PROJECT_DIR$/data/control.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="174" selection-start-line="0" selection-start-column="174" selection-end-line="0" selection-end-column="174" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pub/DirLogin.html">
+    <entry file="file://$PROJECT_DIR$/data/admin.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="207" column="53" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pub/rem/admin.php">
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/LabelsManager.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.017316">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state vertical-scroll-proportion="-10.961538">
+          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="26" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pub/rem/globals.php">
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/RegA.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17171717">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="36" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/DirsAdmin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="41" selection-start-line="203" selection-start-column="41" selection-end-line="203" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/screen/SettingsEdit.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49652296">
+          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/settings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/kiosks.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="52" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/Kiosk1080.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31890333">
+          <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.384615">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/net.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pub/js/admin/impexp/ImportExport.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45062587">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding />
         </state>
       </provider>

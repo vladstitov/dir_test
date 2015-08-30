@@ -35,7 +35,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <style>
         .umsg{
             position: absolute;
-            z-index: 1000;
+            z-index: 2000;
             background-color: ivory;
             padding: 0.3em;
             border-radius: 7px;
@@ -125,7 +125,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 
 
 <div id="adminHeader" >
-    <h4 >Interactive Directory Admin Panel  <a class="btn pull-right">LogOut</a></h4>
+    <h4 >Interactive Directory Admin Panel  <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a></h4>
 
 </div>
 <hr/>
@@ -224,7 +224,7 @@ include ('admin/Menu.html');
 <script type="text/javascript" src="js/admin/categories/CategoryNotListing.js"></script>
 <script type="text/javascript" src="js/admin/categories/CategoriesManager.js"></script>
 
-<script type="text/javascript" src="js/admin/labels/LabelsManager.js"></script>
+<script type="text/javascript" src="js/admin/screen/LabelsManager.js"></script>
 
 <script type="text/javascript" src="js/admin/details/DetailsList.js"></script>
 <script type="text/javascript" src="js/admin/details/DetailsCategory.js"></script>
@@ -234,8 +234,6 @@ include ('admin/Menu.html');
 
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
-
-
 
 <script type="text/javascript" src="js/admin/Menu.js"></script>
 

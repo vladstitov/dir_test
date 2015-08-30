@@ -1,1 +1,0 @@
-[{"S_time":1440645368,"K_time":1440645369,"ip":"::1","ping":12,"start_at":1440645092,"timer":2001,"id":4,"name":"Lobby Kiosk 3","template":"Kiosk1080.php","status":"undefined","stamp":1440645092},{"S_time":0,"K_time":0,"ip":"","ping":0,"start_at":0,"timer":15000,"id":6,"name":"Kiosk hallway 2","template":"Kiosk1080.php?settings=settings","status":"restart"}]

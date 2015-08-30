@@ -208,7 +208,7 @@ var uplight;
             if (files.length) {
                 var form = new FormData();
                 form.append('file', files[0]);
-                this.connector.uploadFile(form, 'media', ('al' + this.props.id)).done(function (res) { return _this.onUploadResult(res); });
+                this.connector.uploadImage(form, 'al', ('al' + this.props.id)).done(function (res) { return _this.onUploadResult(res); });
             }
             this.reset();
         };

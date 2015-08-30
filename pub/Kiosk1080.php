@@ -16,20 +16,30 @@ if(isset($_GET['kiosk'])) {
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
 $settings = file_get_contents(DATA.$sett_file);
+$sett=json_decode($settings);
 
 
-$l=file_get_contents(DATA.'labels.json');
-$labels = json_decode($l);
+$l=file_get_contents(DATA.$sett->labels);
+
+
+$lbs = json_decode($l);
+$labels = array();
+foreach($lbs as $label) $labels[$label->index] = $label->value;
+
+
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <script>
-       
-        var u_settings = <?php echo $settings; ?>;
-        var kiosk_id='<?php echo $kiosk_id; ?>';
-        var u_labels = <?php echo $l; ?>;
-		var u_params = <?php echo json_encode($_GET); ?>;
+       <?php
+			$out = ' var u_settings ='.$settings.";\n";
+            $out.= ' var kiosk_id='.$kiosk_id.";\n";
+            $out.=' var u_labels = '. $l.";\n";
+			$out.=' var u_params = '.json_encode($_GET).";\r\n";
+			echo $out;
+       ?>;		
        
     </script>
     <meta charset="utf-8">
@@ -63,7 +73,7 @@ $labels = json_decode($l);
 
 </style>
 </head>
-<body style="background-image: url('<?= $labels->background; ?>')">
+<body style="background-image: url('<?= $labels['background']; ?>')">
 <section id="Templates" class="hidden">
     <section id="AttractLoop">
         <div  class="cover" data-id="Body">
@@ -83,10 +93,10 @@ $labels = json_decode($l);
 <div id="container">
     <section id="u-header" class="main-color">
         <div id="brand-logo" >
-            <img src="<?= $labels->logo; ?>" />
+            <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>"
         </div>
         <div id="brand-name" >
-               <?= $labels->header; ?>
+               <?= isset($labels['header'])?$labels['header']:''; ?>
         </div>
         <div id="brand-more">
             <div id="Clock">
@@ -94,7 +104,7 @@ $labels = json_decode($l);
 
         </div>
         <p id="brand-slogan">
-            <?= $labels->slogan; ?>
+            <?= isset($labels['slogan'])?$labels['slogan']:''; ?>
         </p>
     </section>
 
@@ -104,7 +114,7 @@ $labels = json_decode($l);
             <div class="view-port">
                 <section id="list-header">
                     <div id="list-header-main">
-                        <?= $labels->list_header; ?>
+                        <?= isset($labels['list-header'])?$labels['list-header']:''; ?>
                     </div>
                 </section>
                 <br>
@@ -119,7 +129,7 @@ $labels = json_decode($l);
                 <section id="list-footer">
                     <div id="list-footer-main">
                         <div class="more">
-                            <?= ($labels->list_footer!='default')?$labels->list_footer:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?>
+                            <?=  isset($labels['list_footer'])?$labels['list_footer']:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?>
 
                         </div>
                         <div id="searchinput">
@@ -146,14 +156,18 @@ $labels = json_decode($l);
                 </section>
                 <section class="view1">
                     <div id="Categories">
-                        <h3>Categories</h3>
+                        <h3>
+                            <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
+                        </h3>
 
                     </div>
                 </section>
 
                 <section class="view3">
                     <div id="keywords">
-                        <h3>Keywords</h3>
+                        <h3>
+                            <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
+                        </h3>
 
                         <div id="kw-container" class="nano">
                         </div>
@@ -165,7 +179,7 @@ $labels = json_decode($l);
         <hr/>
     </section>
 <section id="footer">
-    <?= $labels->footer; ?>
+    <?= isset($labels['footer'])?$labels['footer']:''; ?>
 </section>
 
     <section id="cover">

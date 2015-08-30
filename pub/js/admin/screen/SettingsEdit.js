@@ -4,36 +4,42 @@
 ///<reference path="../RegA"/>
 var uplight;
 (function (uplight) {
-    var SettingsEdit = (function () {
-        function SettingsEdit(container) {
-            var _this = this;
-            this.container = container;
-            container.load('js/admin/screen/SettingsEdit.htm', function () {
-                setTimeout(function () {
-                    _this.init();
-                }, 50);
-            });
-            this.R = uplight.RegA.getInstance();
+    var TimeEditor = (function () {
+        function TimeEditor(view) {
+            this.view = view;
+            this.init();
         }
-        SettingsEdit.prototype.init = function () {
+        TimeEditor.prototype.setData = function (item) {
+            this.current = item;
+            return this;
+        };
+        TimeEditor.prototype.hide = function () {
+            this.view.hide();
+        };
+        TimeEditor.prototype.show = function () {
+            this.view.show();
+        };
+        TimeEditor.prototype.render = function () {
+            this.lblInfo.text(this.current.label);
+            this.selTime.val(this.current.value);
+            return this;
+        };
+        TimeEditor.prototype.init = function () {
             var _this = this;
-            this.view = $('#SettingsEdit');
-            var table = $('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
-            this.list = $('<tbody>').on(CLICK, 'tr .fa-edit', function (evt) { return _this.onEditClick(evt); }).appendTo(table);
-            var editor = this.view.find('[data-id=labelEditor]:first');
-            editor.hide();
-            editor.find('.fa-close').on(CLICK, function () {
-                $('#cover').hide();
-                _this.editor.hide();
-                _this.selectedItem = null;
+            this.lblInfo = this.view.find('[data-id=lblInfo]:first');
+            this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
+                _this.btnSave.prop('disabled', true);
+                setTimeout(function () {
+                    _this.btnSave.prop('disabled', false);
+                }, 3000);
+                if (_this.onSave)
+                    _this.onSave(_this.current);
             });
-            this.editor = editor;
-            this.btnSave = editor.find('[data-id=btnSave]').on(CLICK, function () { return _this.onSaveClick(); });
-            ;
-            this.tiValue = editor.find('input:first');
-            this.lblIndex = editor.find('[data-id=lblIndex]');
-            var self = this;
-            this.selTime = editor.find('[data-id=selTime]');
+            this.view.find('[data-id=btnClose]').click(function () {
+                _this.hide();
+                _this.current = null;
+            });
+            this.selTime = this.view.find('[data-id=selTime]');
             var out = '';
             var ampm = 'AM';
             var m = -1;
@@ -53,35 +59,105 @@ var uplight;
                 out += '<option>' + h + ':30 ' + ampm + '</option>';
             }
             this.selTime.html(out).on(CHANGE, function () {
-                _this.tiValue.val(_this.selTime.val());
+                _this.current.value = _this.selTime.val();
             });
+        };
+        return TimeEditor;
+    })();
+    uplight.TimeEditor = TimeEditor;
+    var ValueEditor = (function () {
+        function ValueEditor(view) {
+            var _this = this;
+            this.view = view;
+            this.view.find('[data-id=btnClose]').click(function () {
+                _this.hide();
+                _this.current = null;
+            });
+            this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
+                _this.btnSave.prop('disabled', true);
+                setTimeout(function () {
+                    _this.btnSave.prop('disabled', false);
+                }, 3000);
+                _this.current.value = _this.tiValue.val();
+                if (_this.onSave)
+                    _this.onSave(_this.current);
+            });
+            this.tiValue = this.view.find('[data-id=tiValue]');
+            this.lblInfo = this.view.find('[data-id=lblInfo]');
+        }
+        ValueEditor.prototype.show = function () {
+            this.view.show();
+            console.log(this.view);
+        };
+        ValueEditor.prototype.render = function () {
+            var item = this.current;
+            if (!item)
+                return this;
+            this.tiValue.val(item.value);
+            this.lblInfo.text(item.label);
+            return this;
+        };
+        ValueEditor.prototype.hide = function () {
+            this.view.hide();
+        };
+        ValueEditor.prototype.setData = function (item) {
+            this.current = item;
+            return this;
+        };
+        return ValueEditor;
+    })();
+    uplight.ValueEditor = ValueEditor;
+    var SettingsEdit = (function () {
+        // data:VOItem[];
+        function SettingsEdit(container) {
+            var _this = this;
+            this.container = container;
+            container.load('js/admin/screen/SettingsEdit.htm', function () {
+                setTimeout(function () {
+                    _this.init();
+                }, 50);
+            });
+            this.R = uplight.RegA.getInstance();
+        }
+        SettingsEdit.prototype.init = function () {
+            var _this = this;
+            this.view = $('#SettingsEdit');
+            var table = $('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
+            //this.list = $('<tbody>').on(CLICK, 'tr .fa-edit', (evt) => this.onEditClick(evt)).appendTo(table);
+            this.list = $('<tbody>').on(CLICK, '[data-id=btnEdit]', function (evt) { return _this.onEditClick(evt); }).appendTo(table);
             this.refreshData();
         };
         SettingsEdit.prototype.onEditClick = function (evt) {
             var el = $(evt.currentTarget).parent().parent();
             var i = Number(el.data('i'));
+            console.log(i);
             if (isNaN(i))
                 return;
-            var item = this.data[i];
-            if (!item)
-                return;
-            this.selectedItem = item;
+            this.selectedIndex = i;
             this.openEditor();
         };
         SettingsEdit.prototype.openEditor = function () {
-            switch (this.selectedItem.type) {
+            var _this = this;
+            var item = this.data[this.selectedIndex];
+            switch (item.type) {
                 case 'time':
-                    this.tiValue.hide();
-                    this.selTime.val(this.selectedItem.value);
-                    this.selTime.show();
+                    if (!this.timeEditor)
+                        this.timeEditor = new TimeEditor(this.view.find('[data-ctr=TimeEditor]:first'));
+                    this.editor = this.timeEditor;
                     break;
                 default:
-                    this.tiValue.val(this.selectedItem.value);
-                    this.tiValue.show();
-                    this.selTime.hide();
+                    if (!this.valueEditor)
+                        this.valueEditor = new ValueEditor(this.view.find('[data-ctr=ValueEditor]:first'));
+                    this.editor = this.valueEditor;
                     break;
             }
-            this.lblIndex.text(this.selectedItem.label);
+            console.log(this.editor);
+            this.editor.setData(item).render().show();
+            this.editor.onSave = function (item) {
+                _this.data[_this.selectedIndex] = item;
+                _this.save();
+            };
+            //this.lblIndex.text(this.selectedItem.label);
             this.editor.show();
         };
         SettingsEdit.prototype.hideEditor = function () {
@@ -89,14 +165,15 @@ var uplight;
         };
         SettingsEdit.prototype.refreshData = function () {
             var _this = this;
-            this.R.connector.getData('settings.json').done(function (res) {
-                _this.data = JSON.parse(res);
+            this.R.connector.getData(this.R.settingsURL).done(function (res) {
+                _this.R.settings = JSON.parse(res);
+                _this.data = _this.R.settings.props;
                 _this.render();
             });
         };
         SettingsEdit.prototype.renderItem = function (item, i) {
             var img = 0;
-            return '<tr  data-id="' + item.id + '" data-i="' + i + '" class="' + item.type + '" ><td class="index">' + item.label + '</td><td class="value">' + item.value + '</td><td><span class=" btn fa fa-edit"></span></td></tr>';
+            return '<tr  data-id="' + item.id + '" data-i="' + i + '" class="' + item.type + '" ><td class="index">' + item.label + '</td><td class="value">' + item.value + '</td><td><span data-id="btnEdit" class=" btn fa fa-edit"></span></td></tr>';
         };
         SettingsEdit.prototype.render = function () {
             var ar = this.data;
@@ -106,15 +183,16 @@ var uplight;
             }
             // console.log(out);
             this.list.html(out);
-            this.container.show();
         };
-        SettingsEdit.prototype.onSaveClick = function () {
+        SettingsEdit.prototype.save = function () {
             var _this = this;
-            console.log('save');
-            this.selectedItem.value = this.tiValue.val();
-            this.R.connector.saveData(JSON.stringify(this.data), 'settings.json').done(function (res) {
-                _this.render();
-                console.log(res);
+            var sett = this.R.settings;
+            sett.props = this.data;
+            this.R.connector.saveData(JSON.stringify(sett), this.R.settingsURL).done(function (res) {
+                if (res.success) {
+                    _this.R.msg('Data saved', _this.editor.btnSave);
+                }
+                _this.refreshData();
             });
         };
         return SettingsEdit;

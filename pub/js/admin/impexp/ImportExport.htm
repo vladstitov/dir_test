@@ -1,61 +1,39 @@
  <style type="text/css">
 
-
-
      input[type="file"] {
-    display: inline;
-    width: 15em;
-}
-#ImportExport form{
-	display:inline;
-}
-#table-container{
-    height:50em;
-    overflow-y:scroll;
-}
-     #ImportExport h5{
-         padding: 1em;
+        display: inline;
+        width: 15em;
+    }
+
+     #table-container{
+         height:50em;
+         overflow-y:scroll;
      }
-#ImportExport table{
-    width: 100%;
 
-}
+    div.group{
+        display: inline-block;
+        border: inset 1px gray;
+        border-radius: 5px;
+        padding: 0.5em;
+    }
 
-#ImportExport tbody, thead, tr{
-    width: 98%;
-}
-#importWizard{
-	border:thin #CCC solid;
-	border-radius:5px;
-	padding:2px;
-	display:inline;
-}
-div.group{
-    display: inline-block;
-    border: inset 1px gray;
-    border-radius: 5px;
-    padding: 0.5em;
-}
-tr.selected {
-background-color: #FFC;
-}
+    tr.selected {
+    background-color: #FFC;
+    }
 </style>
 
 <section id="ImportExport" class="row">
     <div data-id="tabelView" class="panel panel-default">
             <section class="panel-heading">
-
             <!--  <a  data-id="btnImport" href="javascript:void(0)" class="uplight" title="Import Data from File" > <img  src="css/icons/import.png" />Import</a>-->
-
-
-
                 <div class="group">
                     <span>Import</span>
-                        <a class="btn group" >
-                            <form data-id="formImport" enctype="multipart/form-data"  >
-                                <input data-id="btnImport" name="file" type="file" title="Choose file on local filesystem" />
-                            </form>
-                        </a>
+                    <a class="btn group" >
+                        <form data-id="formImport" enctype="multipart/form-data"  >
+                            <input data-id="btnImport" name="file" type="file" title="Choose file on local filesystem" />
+                        </form>
+                    </a>
+
 
                     <a  data-id="btnDel" title="Remove selected records from table" class="btn" ><span class="fa fa-minus"></span> Remove selected</a>
 
@@ -73,8 +51,7 @@ background-color: #FFC;
 
 
                 </div>
-&nbsp;&nbsp;&nbsp;
-
+                        &nbsp;&nbsp;&nbsp;
                 <div class="group">
                     <span>Export</span>
                     <!--<a class="btn">
@@ -86,10 +63,13 @@ background-color: #FFC;
                     <a data-id="btnDownload"   href="" class="btn btn-primary">Download</a>
                 </div>
             </section><!-- end tools -->
-        <section id="ImportExport-table" class="panel-body">
-                      <h5>Destinations List <span class="right">Total:<span data-id="total"></span></span></h5>
 
+        <section id="ImportExport-table" class="panel-body">
+            <h5>Destinations List <span class="right">Total:<span data-id="total"></span></span></h5>
             <div id="table-container">
+
+                <!--Table data goes here      -->
+
             </div>
         </section>
     </div>

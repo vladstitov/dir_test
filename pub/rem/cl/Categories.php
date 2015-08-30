@@ -89,7 +89,7 @@ class Categories{
 			return $out;
 	}
 	private function getIcons(){
-	$icons = file_get_contents('../data/fa-icons.txt');
+	$icons = file_get_contents('../../data/fa-icons.txt');
 	$topics = explode('*',$icons);
 	$out = [];
 	
