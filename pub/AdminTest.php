@@ -14,6 +14,8 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Admin panel">
     <meta name="author" content="ulight Vlad">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="libs/reset.css" rel="stylesheet" type="text/css"/>
 
     <link href="libs/font-awesome.css" rel="stylesheet" type="text/css"/>
