@@ -1,4 +1,4 @@
-﻿/// <reference path="../kiosk/models.ts" />
+﻿/// <reference path="../kiosk/search/models.ts" />
 module mobile {
     export class SearchResult  {   
         view: JQuery

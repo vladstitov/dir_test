@@ -19,7 +19,7 @@ $settings=json_decode($strSettings);
         var blank = <?=json_encode($settings->blank)?>
 
     </script>
-    <script src="js/BlackScreen.js"></script>
+    <script src="js/kiosk/BlackScreen.js"></script>
     <body>
 
     </body>

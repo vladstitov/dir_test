@@ -31,17 +31,17 @@ $settings=json_decode($strSettings);
     </script>
     <script src="js/kiosk/Registry.js"></script>
     <script src="js/kiosk/Connector.js"></script>
-    <script src="js/kiosk/models.js"></script>
+    <script src="js/kiosk/search/models.js"></script>
     <script src="js/kiosk/Banner.js" ></script>
-    <script src="js/kiosk/Keyboard.js" ></script>
+    <script src="js/kiosk/search/Keyboard.js" ></script>
     <script src="js/kiosk/KeyboardView.js" ></script>
-    <script src="js/kiosk/SearchResult.js"></script>
+    <script src="js/kiosk/search/SearchResult.js"></script>
     <script src="js/kiosk/InfoPage.js"></script>
     <script src="js/kiosk/Menu.js"></script>
 
     <script src="js/kiosk/MainView.js"></script>
     <script src="js/kiosk/Details.js"></script>
-    <script src="js/kiosk/ScreenSaver.js"></script>
+    <script src="js/kiosk/als/ScreenSaver.js"></script>
     <script src="js/kiosk/Kiosk.js"></script>
 </head>
 <body>

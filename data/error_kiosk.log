@@ -1,15 +1,0 @@
-ERROR MEMORY LEAK interval should be: 5 but it is: 5.008ERROR MEMORY LEAK interval should be: 5 but it is: 5.011ERROR MEMORY LEAK interval should be: 5 but it is: 5.007ERROR MEMORY LEAK interval should be: 5 but it is: 5.005ERROR MEMORY LEAK interval should be: 5 but it is: 5.007ERROR MEMORY LEAK interval should be: 5 but it is: 5.006ERROR MEMORY LEAK interval should be: 5 but it is: 5.008ERROR MEMORY LEAK interval should be: 5 but it is: 5.0082014-04-08 00:03:49  ERROR MEMORY LEAK interval should be: 5 but it is: 5.009
-2014-04-08 00:03:54  ERROR MEMORY LEAK interval should be: 5 but it is: 5.011
-2014-04-08 00:04:04  ERROR MEMORY LEAK interval should be: 5 but it is: 5.009
-2014-04-08 00:04:09    ERROR MEMORY LEAK interval should be: 5 but it is: 5.008
-2014-04-08 00:04:14    ERROR MEMORY LEAK interval should be: 5 but it is: 5.009
-  ERROR MEMORY LEAK interval should be: 5 but it is: 27.804
-1396918696435  ERROR MEMORY LEAK interval should be: 5 but it is: 33.086
-1396918755343  ERROR MEMORY LEAK interval should be: 5 but it is: 31.35
-1396918836422  ERROR MEMORY LEAK interval should be: 5 but it is: 22.207
-1396918914502  ERROR MEMORY LEAK interval should be: 5 but it is: 22.918
-1396919023086  ERROR MEMORY LEAK interval should be: 5 but it is: 23.425
-1396919159213  ERROR MEMORY LEAK interval should be: 5 but it is: 24.969
-1396919193060  ERROR MEMORY LEAK interval should be: 5 but it is: 22.702
-1396919237826  ERROR MEMORY LEAK interval should be: 5 but it is: 21.68
-

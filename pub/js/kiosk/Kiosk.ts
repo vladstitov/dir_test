@@ -1,17 +1,17 @@
 ﻿/// <reference path="arch/Details.ts" />
 /// <reference path="mainview.ts" />
 /// <reference path="banner.ts" />
-/// <reference path="screensaver.ts" />
+/// <reference path="als/ScreenSaver.ts" />
 /// <reference path="infopage.ts" />
 
 /// <reference path="arch/KeyboardView.ts" />
-/// <reference path="keyboard.ts" />
-/// <reference path="searchresult.ts" />
+/// <reference path="search/Keyboard.ts" />
+/// <reference path="search/SearchResult.ts" />
 /// <reference path="Registry.ts" />
-/// <reference path="models.ts" />
-/// <reference path="Categories.ts" />
+/// <reference path="search/models.ts" />
+/// <reference path="search/Categories.ts" />
 /// <reference path="Connector.ts" />
-/// <reference path="keywords.ts" />
+/// <reference path="search/Keywords.ts" />
 
 
 declare var u_settings:any;

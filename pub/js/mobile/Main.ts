@@ -1,7 +1,7 @@
 ﻿/// <reference path="detailspage.ts" />
 /// <reference path="infopage.ts" />
-/// <reference path="../kiosk/models.ts" />
-/// <reference path="../kiosk/searchresult.ts" />
+/// <reference path="../kiosk/search/models.ts" />
+/// <reference path="../kiosk/search/SearchResult.ts" />
 /// <reference path="filterpage.ts" />
 /// <reference path="mainview.ts" />
 

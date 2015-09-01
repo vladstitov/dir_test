@@ -144,7 +144,7 @@ $a->addAttribute('href','#Menu-'.urlencode ($str));
 }
 echo $xml->asXML();
 */
-include ('admin/Menu.html');
+include ('js/admin/Menu.html');
 ?>
 
 

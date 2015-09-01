@@ -52,15 +52,11 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <link href="libs/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
-   <link href="css/kiosk/mainview.css" rel="stylesheet" />
+   
     <link href="libs/font-awesome.css" rel="stylesheet" type="text/css"/>
-    <!--
-    <link href="css/KeyboardBlack.css" rel="stylesheet" type="text/css"/>
--->
+
     <script src="libs/jquery-2.1.0.min.js"></script>
     <script src="libs/svgjs.js"></script>
-    <!--<script src="/libs/TweenMax.min.js"></script>
-    <script src="/libs/easeljs-0.7.1.min.js"></script>-->
     <script type="text/javascript">
 
     </script>
@@ -208,30 +204,28 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
 
 </div>
-
-
 <div id="History" style="display:none;"></div>
 
 <script src="js/kiosk/Registry.js"></script>
 <script src="js/kiosk/Connector.js"></script>
-<script src="js/kiosk/models.js"></script>
+<script src="js/kiosk/search/models.js"></script>
 
-<link href="css/kiosk/Keyboard.css" rel="stylesheet" />
-<script src="js/kiosk/KeyboardSimple.js" ></script>
+<link href="js/kiosk/search/Keyboard.css" rel="stylesheet" />
+<script src="js/kiosk/search/KeyboardSimple.js" ></script>
 
-<script src="js/kiosk/Keywords.js" ></script>
-<script src="js/kiosk/SearchResult.js"></script>
-<script src="js/kiosk/SearchDetailsLarge.js"></script>
-<script src="js/kiosk/SearchDetails.js"></script>
-<script src="js/kiosk/SearchModel.js"></script>
-<script src="js/kiosk/Categories.js"></script>
+<script src="js/kiosk/search/Keywords.js" ></script>
+<script src="js/kiosk/search/SearchResult.js"></script>
+<script src="js/kiosk/search/SearchDetailsLarge.js"></script>
+<script src="js/kiosk/search/SearchDetails.js"></script>
+<script src="js/kiosk/search/SearchModel.js"></script>
+<script src="js/kiosk/search/Categories.js"></script>
 <script src="js/kiosk/InfoPage.js"></script>
 <script src="js/kiosk/Banner.js" ></script>
 <!--<script src="js/kiosk/MainView.js"></script>
 <script src="js/kiosk/SearchDetails.js"></script>
 -->
 <?php 
-if(!isset($_GET['no-ss'])) echo '<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/ScreenSaver.js"></script>';
+if(!isset($_GET['no-ss'])) echo '<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/als/ScreenSaver.js"></script>';
 if(!isset($_GET['no-kiosk'])) echo '<script src="js/kiosk/Kiosk.js" ></script>';
 ?>
 
