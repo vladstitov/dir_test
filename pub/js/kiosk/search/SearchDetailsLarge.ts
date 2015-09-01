@@ -2,7 +2,7 @@
  * Created by VladHome on 7/23/2015.
  */
 
-    /// <reference path="Registry.ts" />
+    /// <reference path="../Registry.ts" />
 
 module uplight{
    export class  SearchDetailsLarge{

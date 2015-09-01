@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 7/9/2015.
  */
-    /// <reference path="Registry.ts" />
+    /// <reference path="../Registry.ts" />
 module uplight{
     export class Categories{
 

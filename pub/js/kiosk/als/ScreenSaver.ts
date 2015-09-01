@@ -1,4 +1,4 @@
-﻿/// <reference path="Registry.ts" />
+﻿/// <reference path="../Registry.ts" />
 /// <reference path="../../libs/typing/svgjs.d.ts" />
 module uplight {
     export class ScreenSaver {

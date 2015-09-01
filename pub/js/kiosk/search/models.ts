@@ -1,4 +1,4 @@
-﻿/// <reference path="Registry.ts" />
+﻿/// <reference path="../Registry.ts" />
 /// <reference path="../../libs/typing/jquery.d.ts" />
 
 module uplight{
