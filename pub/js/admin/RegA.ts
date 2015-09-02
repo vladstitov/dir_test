@@ -99,6 +99,7 @@ module uplight{
         message(msg:string):void{
 
         }
+        isSuper:boolean;
         model: DestinantionsModel;
         connector: Connector;
         dispatcher:JQuery

@@ -28,6 +28,9 @@ class DbConnector{
 	function deleteRecord($sql){
 		return  $this->db()->query($sql);
 	}
+	function getAllAsObj($sql){
+		return  $this->db()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+	}
 	function query($sql){
 		return  $this->db()->query($sql)->fetchAll(PDO::FETCH_OBJ);
 	}

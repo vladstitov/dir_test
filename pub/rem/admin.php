@@ -18,7 +18,7 @@ if(!isset($get['a'])) {
 	exit;
 }
 $a=explode('.',$get['a']);
-$result= false;
+$result = false;
 
 
 switch(array_shift($a)){	
@@ -50,13 +50,13 @@ switch(array_shift($a)){
 			$result = saveData($get['file_name'],file_get_contents('php://input'));					
 					
 	break;	
-	
+	/*
 	case 'pages':
 	include 'cl/Pages.php';	
 		$ctr=new Pages();		
 		$result = $ctr->process($a,$post,$get);		
 	break;
-	
+	*/
 	case 'cats':				
 	include 'cl/Categories.php';
 		$ctr=new Categories();
@@ -93,7 +93,7 @@ switch(array_shift($a)){
 }
 
 
-if($result){
+if($result!==false){
 	if(is_string($result)) echo($result);
 	else{
 		header('Content-type: application/json');

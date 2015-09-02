@@ -140,4 +140,4 @@ var uplight;
     })();
     uplight.VODestination = VODestination;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RegA.js.map
+//# sourceMappingURL=regA.js.map

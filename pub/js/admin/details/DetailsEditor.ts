@@ -8,10 +8,12 @@ module uplight{
 
         R:RegA
 
+
         constructor(container:JQuery) {
             container.load('js/admin/details/DetailsEditor.htm',()=>this.init());
             this.R=RegA.getInstance();
             if (!this.R.model) this.R.model = new DestinantionsModel();
+
 
         }
 
@@ -23,9 +25,10 @@ module uplight{
         private btnEdit: JQuery;
         private btnSave: JQuery;
 
-        private detailsForm:DetailsForm
+        private detailsForm:DetailsForm;
         private list:DetailsList;
 
+        private btnDrop:JQuery;
 
         private init(): void {
             this.view = $('#DetailsEditor');
@@ -34,13 +37,16 @@ module uplight{
             this.detailsForm = new DetailsForm($('#DetailsForm'));
             this.detailsForm.view.find('.panel-heading .fa-close:first').on(CLICK,()=>{
                this.hideForm();
-            })
+            });
             this.detailsForm.hide();
             this.list.dispatcher.on(this.list.SELECTED,(evt,data)=>{
                 this.detailsForm.setDestibation(data);
 
-            })
+            });
 
+            if(this.R.isSuper) this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(()=>this.onDrop());
+
+                //= this.view.find('[data-id=btnDrop]:first').click(()=>this.onDrop())
             this.btnAdd = this.view.find('[data-id=btnAdd]:first').on(CLICK, () => this.onBtnAddClick());
             this.btnDel = this.view.find('[data-id=btnDel]:first').on(CLICK, () => this.onBtnDelClick());
 
@@ -49,10 +55,13 @@ module uplight{
             //this.showForm();
         }
 
-        private showForm(){
-            this.detailsForm.show();
-            this.list.hide();
+        private onDrop():void{
+            if(confirm('You want to delete whole table tenats?')) this.R.connector.dropTable('tenants').done(()=>{this.R.model.refreshData()});
         }
+       // private showForm(){
+          ///  this.detailsForm.show();
+           // this.list.hide();
+     //   }
 
         private hideForm():void{
             this.detailsForm.hide();

@@ -1,26 +1,26 @@
 ﻿/// <reference path="../RegA.ts" />
 module uplight{
     export class LabelEditor{
-        view:JQuery
-        private select:JQuery
+        view:JQuery;
+        private select:JQuery;
         private btnSaveLabel: JQuery;
-        private btnUpload:JQuery
+        private btnUpload:JQuery;
         private tiIndex:JQuery;
         private tiValue:JQuery;
         private imgValue:JQuery;
-        private tiDescr:JQuery
+        private tiDescr:JQuery;
         private btnDelete:JQuery;
         current:any;
         img:JQuery;
         text:JQuery;
-        onSave:Function
+        onSave:Function;
         onDelete:Function;
-        isSuper:boolean;
 
 
-        setAvailable(ar){
 
-        }
+        /*setAvailable(ar){
+
+        }*/
 
 
         private onSaveClick():void{
@@ -57,7 +57,7 @@ module uplight{
         }
 
         setData(item):LabelEditor{
-            this.current= item
+            this.current= item;
             return this;
         }
         renderImage():void{
@@ -72,9 +72,9 @@ module uplight{
         }
         render():LabelEditor{
             var item = this.current;
-            if(item.type== 'img') this.renderImage()
+            if(item.type== 'img') this.renderImage();
             else if(item.type=='text') this.renderText();
-            if(this.isSuper){
+            if(this.R.isSuper){
                 this.tiIndex.val(item.index);
                 this.select.val(item.type);
             }
@@ -101,20 +101,20 @@ module uplight{
                 this.hide();
             }
         }
-        R:RegA
+        R:RegA;
         constructor(){
-            this.isSuper= false;
+
             this.R = RegA.getInstance();
             this.view= $('#LabelEditor');
-            this.select = this.view.find('[data-id=select]:first').change(()=>this.onSelectChange())
+            this.select = this.view.find('[data-id=select]:first').change(()=>this.onSelectChange());
             this.view.find('[data-id=btnClose]').click(()=>{
                 this.hide();
                 this.current=null;
               //  console.log('click');
-            })
+            });
             this.img = this.view.find('[data-id=img]:first');
             this.text = this.view.find('[data-id=text]:first');
-            this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, () => this.onSaveClick());;
+            this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, () => this.onSaveClick());
 
            this.tiValue = this.view.find('[data-id=tiValue]:first');
             this.tiDescr = this.view.find('[data-id=tiDescr]:first');
@@ -132,12 +132,12 @@ module uplight{
 
     export class LabelsManager {
         view: JQuery;
-        private selected: JQuery;
+       // private selected: JQuery;
         private list: JQuery;
         private data:any[];
-        private btnAdd:JQuery
+        private btnAdd:JQuery;
         private max:number;
-        R:RegA
+        R:RegA;
 
         constructor(container:JQuery) {
             container.load('js/admin/screen/labelsManager.htm',()=>{this.init()});
@@ -150,24 +150,24 @@ module uplight{
             this.editor.setData(item).render().show();
         }
 
-        editor:LabelEditor
+        editor:LabelEditor;
 
-        available:string[]=['header','slogan','footer','list-header','list-footer','background','logo'];
+        //available:string[]=['header','slogan','footer','list-header','list-footer','background','logo'];
 
         init(){
 
             this.view = $('#LabelsManager');
-            this.btnAdd = this.view.find('[data-id=btnAdd]').click(()=>this.onAddClick())
+            this.btnAdd = this.view.find('[data-id=btnAdd]').click(()=>this.onAddClick());
             var table=$('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
-            table.append('<tr><th>index</th><th>Value</th><th>Edit</th></tr>')
+            table.append('<tr><th>index</th><th>Value</th><th>Edit</th></tr>');
             this.list = $('<tbody>').on(CLICK, 'tr .fa-edit', (evt) => this.onEditClick($(evt.currentTarget))).appendTo(table);
            this.editor = new LabelEditor();
             this.editor.onSave = (data)=>this.saveItem(data);
-            this.editor.onDelete = (data)=>this.deleteItem(data)
+            this.editor.onDelete = (data)=>this.deleteItem(data);
 
-            var isSuper = false;
-            if(isSuper){
-                this.editor.isSuper= true;
+
+            if(this.R.isSuper){
+
             }else this.view.find('[data-role=isSuper]').hide();
            this.refreshData();
         }
@@ -176,7 +176,7 @@ module uplight{
             if(this.selectedIndex !==-1)  this.data[this.selectedIndex]=data;
             else {
                 var id=-1;
-               var ar = this.data
+               var ar = this.data;
                for(var i=0,n=ar.length;i<n;i++){
                    var item = ar[i];
                    if(item.index == data.index){
@@ -197,7 +197,7 @@ module uplight{
 
         }
 
-        private deleteItem(item):void{
+        private deleteItem(item:any):void{
             this.data.splice( this.selectedIndex,1);
             this.saveLabels();
         }
@@ -207,7 +207,7 @@ module uplight{
             //console.log(this.R.settings);
             this.R.connector.getData(this.R.settings.labels).done((res)=>{
              //   console.log(res);
-               this.data = JSON.parse(res)
+               this.data = JSON.parse(res);
                 this.renderLabels();
             });
         }
@@ -244,11 +244,11 @@ module uplight{
                out+= this.renderItem(item);
            }
             this.list.html(out);
-            this.selectedIndex=-1
+            this.selectedIndex=-1;
            // this.editor.setAvailable(avail)
         }
 
-        private selectedItem:any;
+       // private selectedItem:any;
 
 
         selectedIndex:number;

@@ -4,7 +4,6 @@ var uplight;
     var LabelEditor = (function () {
         function LabelEditor() {
             var _this = this;
-            this.isSuper = false;
             this.R = uplight.RegA.getInstance();
             this.view = $('#LabelEditor');
             this.select = this.view.find('[data-id=select]:first').change(function () { return _this.onSelectChange(); });
@@ -16,7 +15,6 @@ var uplight;
             this.img = this.view.find('[data-id=img]:first');
             this.text = this.view.find('[data-id=text]:first');
             this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, function () { return _this.onSaveClick(); });
-            ;
             this.tiValue = this.view.find('[data-id=tiValue]:first');
             this.tiDescr = this.view.find('[data-id=tiDescr]:first');
             this.tiIndex = this.view.find('[data-id=tiIndex]:first');
@@ -24,8 +22,9 @@ var uplight;
             this.btnDelete = this.view.find('[data-id=btnDelete]:first').click(function () { return _this.onDeleteClick(); });
             this.btnUpload = this.view.find('[data-id=btnUpload]').change(function (evt) { return _this.onFileSelected(evt); });
         }
-        LabelEditor.prototype.setAvailable = function (ar) {
-        };
+        /*setAvailable(ar){
+
+        }*/
         LabelEditor.prototype.onSaveClick = function () {
             console.log('save');
             if (!this.current)
@@ -77,7 +76,7 @@ var uplight;
                 this.renderImage();
             else if (item.type == 'text')
                 this.renderText();
-            if (this.isSuper) {
+            if (this.R.isSuper) {
                 this.tiIndex.val(item.index);
                 this.select.val(item.type);
             }
@@ -110,7 +109,6 @@ var uplight;
     var LabelsManager = (function () {
         function LabelsManager(container) {
             var _this = this;
-            this.available = ['header', 'slogan', 'footer', 'list-header', 'list-footer', 'background', 'logo'];
             container.load('js/admin/screen/labelsManager.htm', function () {
                 _this.init();
             });
@@ -122,6 +120,7 @@ var uplight;
             var item = { index: 'index' + id, description: '', id: id, type: 'text', value: '' };
             this.editor.setData(item).render().show();
         };
+        //available:string[]=['header','slogan','footer','list-header','list-footer','background','logo'];
         LabelsManager.prototype.init = function () {
             var _this = this;
             this.view = $('#LabelsManager');
@@ -132,9 +131,7 @@ var uplight;
             this.editor = new LabelEditor();
             this.editor.onSave = function (data) { return _this.saveItem(data); };
             this.editor.onDelete = function (data) { return _this.deleteItem(data); };
-            var isSuper = false;
-            if (isSuper) {
-                this.editor.isSuper = true;
+            if (this.R.isSuper) {
             }
             else
                 this.view.find('[data-role=isSuper]').hide();

@@ -18,10 +18,10 @@ module uplight {
         private details:DetailsEditor;
         private categories:CategoriesManager;
         private categoryListing:CategoryListing;
-        private importExport:ImportExport
-        private restartKiosks:RestartKiosk
+        private importExport:ImportExport;
+        private restartKiosks:RestartKiosk;
         private labels:LabelsManager;
-        private settingsEdit:SettingsEdit
+        private settingsEdit:SettingsEdit;
         private statistics:Statistics;
         private attractLoop:AttractLoopEdit;
 
@@ -110,7 +110,7 @@ module uplight {
                         break;
                     case '#Settings-':
                         this.hidePreview();
-                        this.settingsEdit = new SettingsEdit(this.content)
+                        this.settingsEdit = new SettingsEdit(this.content);
                         break;
                     case '#Heading-S':
                     case '#Backgroun':
@@ -128,9 +128,9 @@ module uplight {
                 }
         }
 
-        isPreview:boolean
-        btnFullView:JQuery
-        message:JQuery
+        isPreview:boolean;
+        btnFullView:JQuery;
+        message:JQuery;
         messageText:JQuery;
         private init(): void {
             this.R.model = new DestinantionsModel();
@@ -166,15 +166,16 @@ module uplight {
                 this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
-            $('#btnLogout').click(()=>{
-                if( $('#btnLogout').hasClass('disabled')) return;
+
+            var btnLogout =  $('#btnLogout').click(()=>{
+                if( btnLogout.hasClass('disabled')) return;
                 this.logout();
-                $('#btnLogout').addClass('disabled');
+                btnLogout.addClass('disabled');
                 setTimeout(()=>{
-                    $('#btnLogout').removeClass('disabled');
+                    btnLogout.removeClass('disabled');
                 },3000);
 
-            })
+            });
             this.R.msg=(text,cont)=>this.myMsg(text,cont);
 
 
@@ -210,7 +211,7 @@ module uplight {
 
 
 
-        private previewUrl:string ='Kiosk1080.php?id=0'
+        private previewUrl:string ='Kiosk1080.php?id=0';
         private showPreview(url?:string):void{
 
             if(url)this. previewUrl = url;

@@ -24,16 +24,26 @@ var uplight;
             this.list.dispatcher.on(this.list.SELECTED, function (evt, data) {
                 _this.detailsForm.setDestibation(data);
             });
+            if (this.R.isSuper)
+                this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(function () { return _this.onDrop(); });
+            //= this.view.find('[data-id=btnDrop]:first').click(()=>this.onDrop())
             this.btnAdd = this.view.find('[data-id=btnAdd]:first').on(CLICK, function () { return _this.onBtnAddClick(); });
             this.btnDel = this.view.find('[data-id=btnDel]:first').on(CLICK, function () { return _this.onBtnDelClick(); });
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').on(CLICK, function () { return _this.onBtnEditClick(); });
             this.btnSave = this.detailsForm.view.find('[data-id=btnSave]:first').on(CLICK, function () { return _this.onBtnSaveClick(); });
             //this.showForm();
         };
-        DetailsEditor.prototype.showForm = function () {
-            this.detailsForm.show();
-            this.list.hide();
+        DetailsEditor.prototype.onDrop = function () {
+            var _this = this;
+            if (confirm('You want to delete whole table tenats?'))
+                this.R.connector.dropTable('tenants').done(function () {
+                    _this.R.model.refreshData();
+                });
         };
+        // private showForm(){
+        ///  this.detailsForm.show();
+        // this.list.hide();
+        //   }
         DetailsEditor.prototype.hideForm = function () {
             this.detailsForm.hide();
             this.list.show();

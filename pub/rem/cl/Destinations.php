@@ -21,9 +21,20 @@ class Destinations{
 					
 			break;			
 			case 'get_dests':						
-			$out = $this->getAllDests();
-			
+			$out = $this->getAllDests();		
 			break;
+			case 'drop_table':
+			if($get['table']=='tenants'){
+					$res =$this->overwriteDestsinations(array());
+					if($res){
+							$out->success='success';
+							$out->msg='table destinations empty';
+					}else{
+						$out->error='error';
+						$out->result=$this->con->errorInfo();
+					}			
+				}			
+			break;			
 			case 'save_pages':
 			$uid=$get['uid'];
 			$data = file_get_contents("php://input");
@@ -38,8 +49,6 @@ class Destinations{
 			$out->result = 'success';
 			return $out;
 			}
-
-
 			break;
 
 			case 'save':
@@ -83,7 +92,7 @@ class Destinations{
 			
 		}
 		//header('Content-type: application/json');
-		if(!$out)$out=json_encode($this->con->errorInfo());
+		if($out===false)$out=json_encode($this->con->errorInfo());
 		return $out;	
 	}
 	
@@ -141,15 +150,14 @@ class Destinations{
 	
 	
 	
-	private function getAllDests(){			
+	private function getAllDests(){		
+		$result=$this->con ->getAllAsObj('SELECT * FROM destinations ORDER BY LOWER(name)');
 		
-		$result=$this->con ->query('SELECT * FROM destinations ORDER BY LOWER(name)');
 		
-
-			foreach($result as $value) if($value->more)$value->more = json_decode($value->more);
-
+			//foreach($result as $value) if($value->more)$value->more = json_decode($value->more);
 		return $result; 			
 	}
+	
 	private function deleteDest($id){
 
 		return $this->con ->query('DELETE FROM destinations WHERE id='.(int)$id);

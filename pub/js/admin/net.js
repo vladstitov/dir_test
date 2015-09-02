@@ -110,6 +110,9 @@ var uplight;
         // overWriteDests(callBack: Function, data: {}): void {
         //   $.post(this.service + '?a=dests.overwrite', JSON.stringify(data)).done(callBack);
         // }
+        Connector.prototype.dropTable = function (table) {
+            return $.get(this.service + '?a=dests.drop_table&table=' + table);
+        };
         Connector.prototype.uploadDestinationImage = function (form, uid) {
             return $.ajax({
                 url: this.service + '?a=dests.dest_image&id=' + uid,

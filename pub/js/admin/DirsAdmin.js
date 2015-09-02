@@ -25,13 +25,13 @@ var uplight;
                 _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
-            $('#btnLogout').click(function () {
-                if ($('#btnLogout').hasClass('disabled'))
+            var btnLogout = $('#btnLogout').click(function () {
+                if (btnLogout.hasClass('disabled'))
                     return;
                 _this.logout();
-                $('#btnLogout').addClass('disabled');
+                btnLogout.addClass('disabled');
                 setTimeout(function () {
-                    $('#btnLogout').removeClass('disabled');
+                    btnLogout.removeClass('disabled');
                 }, 3000);
             });
             this.R.msg = function (text, cont) { return _this.myMsg(text, cont); };

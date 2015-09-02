@@ -144,6 +144,9 @@ module uplight {
          //   $.post(this.service + '?a=dests.overwrite', JSON.stringify(data)).done(callBack);
        // }
 
+        dropTable(table:string): JQueryPromise<VOResult>{
+            return $.get(this.service + '?a=dests.drop_table&table='+table);
+        }
 
         uploadDestinationImage(form: FormData, uid:string): JQueryPromise<VOResult> {
            return  $.ajax({
