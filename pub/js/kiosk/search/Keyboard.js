@@ -1,4 +1,4 @@
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Keyboard2 = (function () {
@@ -195,4 +195,4 @@ var uplight;
     })();
     uplight.Keyboard2 = Keyboard2;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=keyboard.js.map
+//# sourceMappingURL=Keyboard.js.map

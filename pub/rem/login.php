@@ -1,4 +1,5 @@
 <?php
+define('DATA','../../data');
 session_start();
 if(isset($_POST['credetials'])){
 	$cred = $_POST['credetials'];
@@ -13,7 +14,7 @@ if(isset($_POST['credetials'])){
 	}
 	
 	$ar = explode(',',$cred);	
-	$filename='../../data/directories.db';
+	$filename=DATA.'/directories.db';
 	
 	
 	
@@ -22,13 +23,13 @@ if(isset($_POST['credetials'])){
 		$sth=$db->prepare("SELECT * FROM users WHERE username=? AND password=?");
 		$sth->execute($ar);
 		$res = $sth->fetch(PDO::FETCH_OBJ);
-		//$db->close();
 		
 		if($res){
 			$_SESSION['directories_user']=$res->role;
 			$_SESSION['directories_folder']=$res->folder;			
 			$out->success='loggedin';
-			copy($filename,'../../data/bk/'.time().'.db');
+			if(!file_exists(DATA.'/bk'))  mkdir(DATA.'/bk', 0777, true);
+			copy($filename,DATA.'/bk/'.date('j-m-y_h-i-s').'.db');
 			//header( 'Location: http://www.yoursite.com/new_page.html' );
 		}else{
 			$out->success='wrong';
