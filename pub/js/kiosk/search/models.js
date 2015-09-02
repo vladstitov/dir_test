@@ -1,5 +1,4 @@
-/// <reference path="Registry.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Model = (function () {

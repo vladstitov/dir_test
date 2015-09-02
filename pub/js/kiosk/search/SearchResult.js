@@ -1,4 +1,4 @@
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var SearchResult = (function () {

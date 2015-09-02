@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 7/11/2015.
  */
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Keywords = (function () {
@@ -54,4 +54,4 @@ var uplight;
     })();
     uplight.VOKw = VOKw;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=keywords.js.map
+//# sourceMappingURL=Keywords.js.map

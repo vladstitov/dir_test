@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 6/9/2015.
  */
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Keyboard = (function () {

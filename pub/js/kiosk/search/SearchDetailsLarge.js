@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 7/23/2015.
  */
-/// <reference path="Registry.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var SearchDetailsLarge = (function () {
