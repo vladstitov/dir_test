@@ -3,6 +3,17 @@
 /// <reference path="../../libs/typing/jquery.d.ts" />
 /// <reference path="../../libs/typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
+///<reference path="info/InfoPagesEditor.ts" />
+/// <reference path="Menu.ts" />
+///<reference path="details/DetailsEditor.ts" />
+///<reference path="categories/CategoriesManager.ts" />
+///<reference path="categories/CategoryListing.ts" />
+///<reference path="impexp/ImportExport.ts" />
+///<reference path="impexp/Statistics.ts" />
+///<reference path="screen/LabelsManager.ts" />
+///<reference path="screen/RestartKiosk.ts" />
+///<reference path="screen/SettingsEdit.ts" />
+///<reference path="screen/AttractLoopEdit.ts" />
 var LISTVIEW = 'ListView';
 var DETAILSVIEV = 'DetailsView';
 var MENUVIEW = 'MenuView';

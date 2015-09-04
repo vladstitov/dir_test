@@ -175,22 +175,29 @@ class Destinations{
 				$imgs='';
 				if(isset($dest->cats))$cats = implode(',',$dest->cats);
 				if(isset($dest->imgs))$imgs = implode(',',$dest->imgs);	
+				if(!isset($dest->tmb))$dest->tmb='';	
 				
 				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$dest->kws,$dest->more,$dest->tmb,$dest->info,$dest->meta,$dest->pgs,$imgs);
 				$id=(int) $dest->id;
+				$res=false;
 				if($id){				
 					$res= $this->con->updateRow('UPDATE destinations SET uid=?,name=?,unit=?,cats=?,kws=?,more=?,tmb=?,info=?,meta=?,pgs=?,imgs=? WHERE id='.$id,$ar);
-					if($res)$out->success='update';					
+					if($res){
+						$out->success='updated';
+						$out->result=$id;
+						$out->msg = $dest->name.' updated';						
+						}					
 				}else {				
-					$res = $this->con->insert('INSERT INTO destinations (uid,name,unit,cats,kws,more,tmb,info,meta,pgs,imgs) VALUES (?,?,?,?,?,?,?,?,?,?)',$ar);
-					$out->success='insert';
+					$res = $this->con->insert('INSERT INTO destinations (uid,name,unit,cats,kws,more,tmb,info,meta,pgs,imgs) VALUES (?,?,?,?,?,?,?,?,?,?,?)',$ar);
+					if($res){
+						$out->success='inserted';
+						$out->result=$res;
+						$out->msg = $dest->name.' inserted';
+					}					
 				}
 				
-				if(!$res)$out->error = $this->con->errorInfo();
-				else $out->result=$res;
+				if(!$res)$out->error = $this->con->errorInfo();				
 				return $out;
-
-
 		}
 
 	private function updateAdvanced($id,$data){

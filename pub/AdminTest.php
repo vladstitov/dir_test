@@ -7,7 +7,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,6 +61,12 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
         #menubar .fa-bars{
            font-size: 2em;
 
+        }
+        .hideme{
+             display:none;
+        }
+        .abs{
+            position:absolute;
         }
         .cover{
             background-color: rgba(0,0,0,0.5);
@@ -236,6 +242,7 @@ include ('js/admin/Menu.html');
 
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
+<script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
 
 <script type="text/javascript" src="js/admin/Menu.js"></script>
 

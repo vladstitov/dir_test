@@ -49,7 +49,7 @@ module uplight{
             this.btnEditIcon.on(CLICK,()=>this.onEditIconClick());
             this.icon.parent().on(CLICK,()=>this.onEditIconClick());
             this.R.connector.getIcons().done((data)=>this.onIconsLoaded(data));
-            this.iconPreview=$('<div>').addClass('absolute preview').appendTo(this.iconsLibrary.parent());
+            this.iconPreview=$('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
 
             this.btnClose.on(CLICK,()=>this.hide());
 

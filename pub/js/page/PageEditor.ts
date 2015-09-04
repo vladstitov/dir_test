@@ -1,14 +1,6 @@
 ﻿/// <reference path="PagesList.ts" />
 /// <reference path="../admin/RegA.ts" />
-declare class nicEditor {
-    setPanel(id: string);
-    addInstance(id: string);
-    setContent(htm: string);
-    getContent(): string;
-    panelInstance(divid: string, options: any);
-    removeInstance(divid: string);
-    constructor(options?: {});
-}
+
 
 module page{
     export class PageEditor {

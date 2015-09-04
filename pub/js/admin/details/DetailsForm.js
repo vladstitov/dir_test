@@ -52,7 +52,7 @@ var uplight;
             vo.info = this.info.val() || '';
             vo.imgs = this.imagesEditor.getData();
             vo.imgsD = this.imagesEditor.getDeleted();
-            vo.cats = this.categories.getCurrent();
+            // vo.cats = this.categories.getCurrent();
             vo.more = this.collectDataFromTable();
             vo.meta = this.meta.val() || '';
             vo.kws = this.keywords.val() || '';
@@ -96,7 +96,7 @@ var uplight;
         };
         DetailsForm.prototype.setDestibation = function (vo) {
             this.current = vo;
-            this.categories.setCurrent(vo.cats);
+            this.categories.setCurrent(vo);
             this.imagesEditor.setData(vo);
         };
         DetailsForm.prototype.setID = function (num) {
@@ -165,6 +165,7 @@ var uplight;
             if (!details)
                 details = " ";
             var ar = details.split("\n");
+            console.log(ar.length);
             //  console.log('renderTable   ',ar);
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -175,15 +176,13 @@ var uplight;
         };
         DetailsForm.prototype.collectDataFromTable = function () {
             var list = this.details.children('tr');
-            var out = '';
+            var out = [];
             list.each(function (ind, el) {
                 var tr = $(el);
-                out += tr.children('td:nth-child(1)').text() + "\t";
-                out += tr.children('td:nth-child(2)').text();
-                out = out.replace('\u00a0', '');
-                out += "\n";
+                var str = tr.children('td:nth-child(1)').text() + "\t" + tr.children('td:nth-child(2)').text();
+                out.push(str.replace('\u00a0', ''));
             });
-            return out;
+            return out.join('\n');
         };
         ////////////////////////////DESTINATION///////////////////////////////////
         DetailsForm.prototype.render = function () {

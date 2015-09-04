@@ -1,14 +1,5 @@
 ﻿/// <reference path="regA.ts" />
-/// <reference path="Menu.ts" />
-///<reference path="details/DetailsEditor.ts" />
-///<reference path="categories/CategoriesManager.ts" />
-///<reference path="categories/CategoryListing.ts" />
-///<reference path="impexp/ImportExport.ts" />
-///<reference path="impexp/Statistics.ts" />
-///<reference path="screen/LabelsManager.ts" />
-///<reference path="screen/RestartKiosk.ts" />
-///<reference path="screen/SettingsEdit.ts" />
-///<reference path="screen/AttractLoopEdit.ts" />
+
 
 
 module uplight {
@@ -24,6 +15,7 @@ module uplight {
         private settingsEdit:SettingsEdit;
         private statistics:Statistics;
         private attractLoop:AttractLoopEdit;
+        private infoPages:InfoPagesManager;
 
 
         private menu:Menu;
@@ -74,6 +66,15 @@ module uplight {
                         this.hidePreview();
                        // this.content.hide();
                         this.statistics = new Statistics(this.content);
+                        this.content.show();
+                        // this.restartKiosks.restart();
+
+                        break;
+                    case '#Info-Page':
+                        // this.showPreview();
+                        this.hidePreview();
+                        // this.content.hide();
+                        this.infoPages = new InfoPagesManager(this.content);
                         this.content.show();
                         // this.restartKiosks.restart();
 

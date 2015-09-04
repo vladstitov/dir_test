@@ -10,12 +10,13 @@ module uplight{
         private categoriesAll:JQuery;
         private model:VOCategory[];
         R:RegA
-        private current:number[];
+        private current:VODestination;
 
 
         render():void{
             if(!this.model) this.createModel();
-            var ar = this.current;
+            var ar:number[] = this.current.cats;
+            if(!ar) return;
             var ind= this.indexed;
             var out=[];
             for(var i=0,n=ar.length;i<n;i++){
@@ -27,7 +28,7 @@ module uplight{
         reset():void{
             this.hideEditCategories();
             this.categories.val('');
-            this.current=null;
+            this.current.cats=null;
         }
         constructor(view:JQuery){
 
@@ -47,14 +48,14 @@ module uplight{
             }
             this.indexed=ind;
         }
-        setCurrent(ar:number[]):void{
-            this.current=ar;
+        setCurrent(dest:VODestination):void{
+            this.current=dest;
             this.hideEditCategories();
         }
 
-        getCurrent():number[]{
-            return this.current;
-        }
+       // getCurrent():number[]{
+         //   return this.current;
+        //}
         private catsVisible:boolean;
         private indexed:any;
 
@@ -82,7 +83,7 @@ module uplight{
 
 
         private showItemCategories() {
-            var ar:number[] = this.current
+            var ar:number[] = this.current.cats
             var out:string[] = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item:VOCategory = this.R.model.getCategoryById(ar[i]);
@@ -93,8 +94,9 @@ module uplight{
 
         private addCategory(cat:VOCategory):void {
             var id:number = cat.id
-            if (this.current.indexOf(id) === -1) {
-                this.current.push(id);
+            var ar:number[] = this.current.cats;
+            if (ar.indexOf(id) === -1) {
+                ar.push(id);
                 this.showItemCategories();
                 this.haveChanges = true;
             }
@@ -102,9 +104,10 @@ module uplight{
 
         private removeCategory(cat:VOCategory):void {
             var id:number = cat.id
-            var ind = this.current.indexOf(id);
+            var ar:number[] = this.current.cats;
+            var ind = ar.indexOf(id);
             if (ind !== -1) {
-                this.current.splice(ind, 1);
+                ar.splice(ind, 1);
                 this.showItemCategories();
                 this.haveChanges = true;
             }
@@ -118,8 +121,8 @@ module uplight{
         }
 
         private editCategories():void {
-            if (!this.current){
-                this.current=[];
+            if (!this.current.cats){
+                this.current.cats =[];
                 this.renderAllCats();
                 return;
             }
@@ -128,7 +131,7 @@ module uplight{
             var ar2:VOCategory[] = []
             var cats:VOCategory[] = this.R.model.getCategories();
 
-            var catsAr:number[] = this.current;
+            var catsAr:number[] = this.current.cats;
 
             for (var i = 0, n = cats.length; i < n; i++) {
                 if (catsAr.indexOf(cats[i].id) == -1) ar2.push(cats[i]);

@@ -49,7 +49,7 @@ var uplight;
             this.list.show();
         };
         DetailsEditor.prototype.onBtnAddClick = function () {
-            var dest = new uplight.VODestination({ id: 0 });
+            var dest = new uplight.VODestination({ id: 0, cats: [] });
             this.detailsForm.setDestibation(dest);
             this.list.hide();
             this.detailsForm.show();

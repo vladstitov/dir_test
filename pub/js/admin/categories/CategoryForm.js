@@ -25,7 +25,7 @@ var uplight;
             this.btnEditIcon.on(CLICK, function () { return _this.onEditIconClick(); });
             this.icon.parent().on(CLICK, function () { return _this.onEditIconClick(); });
             this.R.connector.getIcons().done(function (data) { return _this.onIconsLoaded(data); });
-            this.iconPreview = $('<div>').addClass('absolute preview').appendTo(this.iconsLibrary.parent());
+            this.iconPreview = $('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
             this.btnClose.on(CLICK, function () { return _this.hide(); });
             this.hide();
         }

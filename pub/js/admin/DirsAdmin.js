@@ -1,14 +1,4 @@
 /// <reference path="regA.ts" />
-/// <reference path="Menu.ts" />
-///<reference path="details/DetailsEditor.ts" />
-///<reference path="categories/CategoriesManager.ts" />
-///<reference path="categories/CategoryListing.ts" />
-///<reference path="impexp/ImportExport.ts" />
-///<reference path="impexp/Statistics.ts" />
-///<reference path="screen/LabelsManager.ts" />
-///<reference path="screen/RestartKiosk.ts" />
-///<reference path="screen/SettingsEdit.ts" />
-///<reference path="screen/AttractLoopEdit.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -77,6 +67,13 @@ var uplight;
                     this.hidePreview();
                     // this.content.hide();
                     this.statistics = new uplight.Statistics(this.content);
+                    this.content.show();
+                    break;
+                case '#Info-Page':
+                    // this.showPreview();
+                    this.hidePreview();
+                    // this.content.hide();
+                    this.infoPages = new uplight.InfoPagesManager(this.content);
                     this.content.show();
                     break;
                 case '#RestartKi':

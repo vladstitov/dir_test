@@ -15,7 +15,9 @@ var uplight;
         DetailsCategory.prototype.render = function () {
             if (!this.model)
                 this.createModel();
-            var ar = this.current;
+            var ar = this.current.cats;
+            if (!ar)
+                return;
             var ind = this.indexed;
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -26,7 +28,7 @@ var uplight;
         DetailsCategory.prototype.reset = function () {
             this.hideEditCategories();
             this.categories.val('');
-            this.current = null;
+            this.current.cats = null;
         };
         DetailsCategory.prototype.createModel = function () {
             this.model = this.R.model.getCategories();
@@ -37,12 +39,9 @@ var uplight;
             }
             this.indexed = ind;
         };
-        DetailsCategory.prototype.setCurrent = function (ar) {
-            this.current = ar;
+        DetailsCategory.prototype.setCurrent = function (dest) {
+            this.current = dest;
             this.hideEditCategories();
-        };
-        DetailsCategory.prototype.getCurrent = function () {
-            return this.current;
         };
         DetailsCategory.prototype.hideEditCategories = function () {
             if (this.catsVisible) {
@@ -65,7 +64,7 @@ var uplight;
             }
         };
         DetailsCategory.prototype.showItemCategories = function () {
-            var ar = this.current;
+            var ar = this.current.cats;
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = this.R.model.getCategoryById(ar[i]);
@@ -76,17 +75,19 @@ var uplight;
         };
         DetailsCategory.prototype.addCategory = function (cat) {
             var id = cat.id;
-            if (this.current.indexOf(id) === -1) {
-                this.current.push(id);
+            var ar = this.current.cats;
+            if (ar.indexOf(id) === -1) {
+                ar.push(id);
                 this.showItemCategories();
                 this.haveChanges = true;
             }
         };
         DetailsCategory.prototype.removeCategory = function (cat) {
             var id = cat.id;
-            var ind = this.current.indexOf(id);
+            var ar = this.current.cats;
+            var ind = ar.indexOf(id);
             if (ind !== -1) {
-                this.current.splice(ind, 1);
+                ar.splice(ind, 1);
                 this.showItemCategories();
                 this.haveChanges = true;
             }
@@ -99,15 +100,15 @@ var uplight;
                 this.removeCategory(cat);
         };
         DetailsCategory.prototype.editCategories = function () {
-            if (!this.current) {
-                this.current = [];
+            if (!this.current.cats) {
+                this.current.cats = [];
                 this.renderAllCats();
                 return;
             }
             var ar1 = [];
             var ar2 = [];
             var cats = this.R.model.getCategories();
-            var catsAr = this.current;
+            var catsAr = this.current.cats;
             for (var i = 0, n = cats.length; i < n; i++) {
                 if (catsAr.indexOf(cats[i].id) == -1)
                     ar2.push(cats[i]);

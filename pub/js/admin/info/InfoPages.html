@@ -1,0 +1,108 @@
+<section id="InfoPagesManager" class="row">
+        <section id="InfoPagesView" class="panel panel-default">
+            <div class="panel-heading">
+                <div class="tools">
+                    <a  data-id="btnAdd" class="btn" title="Create new Category" ><div class="fa fa-plus"></div> Add</a>
+                    <a  data-id="btnEdit" class="btn" title="Edit selected Category" > <div class="fa fa-edit"></div>Edit</a>
+                    <a  data-id="btnDel" class="btn" title="Delete selected Category" > <div class="fa fa-minus"></div> Delete</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <h5>Pages list</h5>
+                <div id="InfoPagesList">
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="InfoPagesEditor" class="hideme">
+            <style>
+                #InfoPagesEditor [data-id=icon]{
+                    font-size: 1.5em;
+                }
+            </style>
+            <div class="panel panel-default">
+                <div class="modal-header">
+                    <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
+                    <h1 class="modal-title">Page Editor</h1>
+                </div>
+
+                <section data-id="form" class="panel-body">
+                    <div class="form-group col-sm-1">
+                        <label>Icon</label> <!--<label class="btn"> <div class="fa fa-edit"> </div>Edit</label>-->
+                        <div  class="form-control">
+                            <div title="Click on Icon in Library to change" class="fa fa-plus" data-id="icon"> </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-8">
+                        <label>Name:</label>
+                        <input  type="text"  placeholder="name is reqired"  class="form-control"  data-id="tiName" />
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <label>Sequence</label>
+                        <select  class="form-control"  data-id="selSeq" ></select>
+                    </div>
+                    <div class="form-group col-sm-1">
+                        <label>Enable</label>
+                        <input  type="checkbox"   class="form-control" data-id="chkEnabled" />
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                    <div class="btn col-sm-2" data-id="btnEditIcon" title="Open/Close icons Library">
+                        <span class="fa fa-edit"> </span>
+                        <span>Change Icon</span>
+                    </div>
+                    <div class="btn col-sm-2" data-id="btnEditText" title="Open/Close Text Editory">
+                        <span class="fa fa-edit"> </span>
+                        <span>Edit text</span>
+                    </div>
+                    <div class="form-group col-sm-4">
+
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <button type="button" class="btn btn-primary"  data-id="btnSave">Save</button>
+                        <button type="button" class="btn btn-default"  data-id="btnClose">Close</button>
+                    </div>
+                    <div class="form-group col-sm-12">
+
+                        <div class="panel-body hideme" data-id="iconsLibrary" >
+                            <hr/>
+                            <label >Icons Library</label>
+                            <a class="btn pull-right" title="Close icons library" data-id="btnCloseL"><span class="fa fa-close"></span> Close Library</a>
+                            <style>
+                                .list>.fa{
+                                    margin: 1em;
+                                }
+
+                                .preview .fa{
+                                    font-size: 3em;
+                                    background: white;
+
+                                }
+                            </style>
+
+                        </div>
+                        <div class="panel-body hideme" data-ctr="TextEditor"  >
+                            <label >Text Editor</label>
+                            <a class="btn pull-right" title="Close icons library" data-id="btnCloseT"><span class="fa fa-close"></span> Close Editor</a>
+                            <div id="TextEditorPages">
+                                <div id="NicPanelPage"></div>
+                                <div id="PageBody"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+            </section>
+        </section>
+
+
+</section>

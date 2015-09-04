@@ -89,7 +89,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <div id="container">
     <section id="u-header" class="main-color">
         <div id="brand-logo" >
-            <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>"
+            <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>
         </div>
         <div id="brand-name" >
                <?= isset($labels['header'])?$labels['header']:''; ?>
