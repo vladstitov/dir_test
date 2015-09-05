@@ -1401,7 +1401,7 @@ var nicUploadOptions = {
 
 
 var nicUploadButton = nicEditorAdvancedButton.extend({	
-	nicURI : 'rem/services/convert.php',
+	nicURI : 'rem/convert.php',
   errorText : 'Failed to upload image',
 
 	addPane : function() {

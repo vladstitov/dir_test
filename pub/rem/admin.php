@@ -50,13 +50,12 @@ switch(array_shift($a)){
 			$result = saveData($get['file_name'],file_get_contents('php://input'));					
 					
 	break;	
-	/*
-	case 'pages':
-	include 'cl/Pages.php';	
-		$ctr=new Pages();		
-		$result = $ctr->process($a,$post,$get);		
+	
+	case 'save_page':
+		if(!isset($get['url'])) die('ERROR 1');
+		$result = savePage($get['url'],file_get_contents('php://input'));		
 	break;
-	*/
+	
 	case 'cats':				
 	include 'cl/Categories.php';
 		$ctr=new Categories();
@@ -112,6 +111,17 @@ function saveSettings($prop,$value){
 	return file_put_contents($filename,json_encode($sett));
 }
 */
+
+function savePage($file_name,$data){
+		$out=new stdClass();
+		$res = file_put_contents('../'.$file_name,$data);	
+		if($res){
+			$out->success='file saved';
+			$out->result= $file_name;
+		} else $out->error='cant save file';
+		
+		return $out;
+}
 
 function saveData($file_name,$data){
 		$out=new stdClass();				

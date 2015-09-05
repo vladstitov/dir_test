@@ -10,8 +10,8 @@ module uplight {
 
         public onData: Function;
 
-        getMessages(callBack:Function,onError:Function): void {
-            $.get(this.service + 'get_messages&device=' + this.device).done(callBack).fail(onError);
+        getData(filename:string):JQueryPromise<VOResult> {
+           return $.get(this.service + 'get_data&device=' + this.device+'&data='+filename);
 
         }
         getUpdates(stamp:number,callBack: Function, onError: Function): void {

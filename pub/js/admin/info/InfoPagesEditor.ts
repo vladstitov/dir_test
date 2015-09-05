@@ -115,20 +115,41 @@ module uplight{
         }
         setData(data:any){
             this.data= data
+            this.load();
+        }
+        load():void{
+            $('#PageBody').load(this.data+'?'+(new Date()).getSeconds(),(res)=>{
+                console.log(res);
+            })
+// nicEditors.findEditor(this.contId.substr(1)).setContent(resp);
+
         }
 
+
+        savePage(url):JQueryPromise<VOResult>{
+            return this.R.connector.savePage(url,this.content.html());
+        }
         getData():any{
             return this.data;
         }
 
 
+
         private editor:nicEditor;
+        R:RegA
+        content:JQuery
         constructor(private view:JQuery){
+            this.R=RegA.getInstance();
+
             view.find('[data-id=btnCloseT]:first:first').click(()=>this.hide());
 
             this.editor = new nicEditor({ fullPanel: true });
             this.editor.setPanel('NicPanelPage');
             this.editor.addInstance('PageBody');
+            this.content = $('#PageBody');
+            this.content.width(730).height(1100);
+
+
 
         }
 
@@ -199,6 +220,9 @@ module uplight{
         private onEditIconClick():void{
            this.iconsLibrary.toggle();
             this.textEditor.hide();
+        }
+        savePage():JQueryPromise<VOResult>{
+           return this.textEditor.savePage(this.data.url);
         }
 
         render():void{
@@ -300,20 +324,23 @@ module uplight{
             this.view.show();
         }
         private onAddClicked(): void {
+            this.max++;
             var item:any={id:0,icon:'',name:'',seq:this.data.length,enabled:true};
             this.editor.setData(item);
-
             this.editor.show();
             this.hide();
 
         }
         private onSaveClicked():void{
-
             var item= this.editor.getData();
             if(!item) return;
             if(item.id===0){
+                this.max++;
+                item.id=this.max
+                item.url='pages/page'+item.id+'.htm';
                 this.data.push(item);
             }
+            this.editor.savePage();
             this.save().done((res)=>{
                 console.log(res);
                 if(res.success) this.R.msg('Data saved',this.editor.btnSave);

@@ -75,10 +75,13 @@ var uplight;
         function TextEditor(view) {
             var _this = this;
             this.view = view;
+            this.R = uplight.RegA.getInstance();
             view.find('[data-id=btnCloseT]:first:first').click(function () { return _this.hide(); });
             this.editor = new nicEditor({ fullPanel: true });
             this.editor.setPanel('NicPanelPage');
             this.editor.addInstance('PageBody');
+            this.content = $('#PageBody');
+            this.content.width(730).height(1100);
         }
         TextEditor.prototype.show = function () {
             if (!this.isVis) {
@@ -102,6 +105,16 @@ var uplight;
         };
         TextEditor.prototype.setData = function (data) {
             this.data = data;
+            this.load();
+        };
+        TextEditor.prototype.load = function () {
+            $('#PageBody').load(this.data + '?' + (new Date()).getSeconds(), function (res) {
+                console.log(res);
+            });
+            // nicEditors.findEditor(this.contId.substr(1)).setContent(resp);
+        };
+        TextEditor.prototype.savePage = function (url) {
+            return this.R.connector.savePage(url, this.content.html());
         };
         TextEditor.prototype.getData = function () {
             return this.data;
@@ -148,6 +161,9 @@ var uplight;
         InfoEditor.prototype.onEditIconClick = function () {
             this.iconsLibrary.toggle();
             this.textEditor.hide();
+        };
+        InfoEditor.prototype.savePage = function () {
+            return this.textEditor.savePage(this.data.url);
         };
         InfoEditor.prototype.render = function () {
             this.icon.attr('class', this.data.icon);
@@ -231,6 +247,7 @@ var uplight;
             this.view.show();
         };
         InfoPagesManager.prototype.onAddClicked = function () {
+            this.max++;
             var item = { id: 0, icon: '', name: '', seq: this.data.length, enabled: true };
             this.editor.setData(item);
             this.editor.show();
@@ -242,8 +259,12 @@ var uplight;
             if (!item)
                 return;
             if (item.id === 0) {
+                this.max++;
+                item.id = this.max;
+                item.url = 'pages/page' + item.id + '.htm';
                 this.data.push(item);
             }
+            this.editor.savePage();
             this.save().done(function (res) {
                 console.log(res);
                 if (res.success)

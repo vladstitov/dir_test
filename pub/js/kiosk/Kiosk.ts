@@ -12,7 +12,7 @@
 /// <reference path="search/Categories.ts" />
 /// <reference path="Connector.ts" />
 /// <reference path="search/Keywords.ts" />
-
+/// <reference path="MainMenu.ts" />
 
 declare var u_settings:any;
 declare var kiosk_id:number;
@@ -54,6 +54,7 @@ module uplight {
            var si = new SearchInput($('#searchinput'));
            var kw = new Keywords($('#kw-container'));
            var cats= new Categories();
+           var mm = new MainMenu();
 
          this.searchResult = new SearchResult();
            var relay:Relay = new Relay(u_settings.timer);

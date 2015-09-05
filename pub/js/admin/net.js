@@ -131,8 +131,8 @@ var uplight;
             // console.log(vo);
             return $.post(this.service + '?a=destination.save', JSON.stringify(vo));
         };
-        Connector.prototype.savePages = function (uid, pages) {
-            return $.post(this.service + '?a=dests.save_pages&uid=' + uid, pages);
+        Connector.prototype.savePage = function (url, data) {
+            return $.post(this.service + '?a=save_page&url=' + url, data);
         };
         Connector.prototype.getAdvanced = function (callBack, destid) {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);

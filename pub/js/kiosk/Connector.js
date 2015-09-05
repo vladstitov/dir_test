@@ -7,8 +7,8 @@ var uplight;
             this.serv = 'rem/kiosk.php';
             this.who = 'kiosk';
         }
-        Connector.prototype.getMessages = function (callBack, onError) {
-            $.get(this.service + 'get_messages&device=' + this.device).done(callBack).fail(onError);
+        Connector.prototype.getData = function (filename) {
+            return $.get(this.service + 'get_data&device=' + this.device + '&data=' + filename);
         };
         Connector.prototype.getUpdates = function (stamp, callBack, onError) {
             $.get(this.service + 'get_updates&stamp=' + stamp).done(callBack).fail(onError);

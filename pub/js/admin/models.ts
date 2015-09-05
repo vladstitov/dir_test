@@ -39,7 +39,7 @@ module uplight{
             var p2
             if(pages){
                 if(!vo.uid) vo.uid = 'a_'+vo.id;
-               p2 = this.R.connector.savePages(vo.uid,pages);
+               p2 = this.R.connector.savePage('pages/p'+vo.uid+'.htm',pages);
                 $.when(p1,p2).then(function(v1,v2){
                    // console.log('both');
                     //console.log(v1,v2);

@@ -11,6 +11,7 @@
 /// <reference path="search/Categories.ts" />
 /// <reference path="Connector.ts" />
 /// <reference path="search/Keywords.ts" />
+/// <reference path="MainMenu.ts" />
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
@@ -29,6 +30,7 @@ var uplight;
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
             var cats = new uplight.Categories();
+            var mm = new uplight.MainMenu();
             this.searchResult = new uplight.SearchResult();
             var relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START, function () {

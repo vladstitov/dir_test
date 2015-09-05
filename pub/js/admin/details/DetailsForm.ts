@@ -138,9 +138,9 @@ module uplight {
 
             this.categories = new DetailsCategory(form);
 
-           this.editor = new nicEditor({ fullPanel: true });
-            this.editor.setPanel('myNicPanel');
-           this.editor.addInstance('details-pages');
+          // this.editor = new nicEditor({ fullPanel: true });
+           // this.editor.setPanel('myNicPanel');
+          // this.editor.addInstance('details-pages');
             this.imagesEditor = new DetailsImages($('#DetailsImagesEdit'),$('#images-container'));
 
             this.imagesEditor.view.find('.fa-close').on(CLICK,()=>this.onImageEditorCloseClick());

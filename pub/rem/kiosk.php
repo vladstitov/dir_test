@@ -41,7 +41,7 @@ switch(array_shift($a)){
 			
 	break;
 	case 'get_data':
-		$fn=DATA.$get['file_name'];
+		$fn=DATA.$get['data'];
 		echo file_exists($fn)?file_get_contents($fn):'NO';
 			      
 	break;	

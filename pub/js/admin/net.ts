@@ -167,9 +167,8 @@ module uplight {
 
             return $.post(this.service + '?a=destination.save', JSON.stringify(vo));
         }
-        savePages( uid: string,pages:string):JQueryPromise<VOResult> {
-
-            return $.post(this.service + '?a=dests.save_pages&uid=' + uid,pages);
+        savePage(url: string,data:string):JQueryPromise<VOResult> {
+            return $.post(this.service + '?a=save_page&url=' + url,data);
         }
         getAdvanced(callBack: Function, destid: number): void {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);

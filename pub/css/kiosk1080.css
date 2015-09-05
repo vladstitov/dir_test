@@ -124,23 +124,7 @@ a:active{
 #toolsview .view-port{
     margin-top:20px;
 }
-#toolsview section{
-   /* display: inline-block;*/
-    position: absolute;
-}
-#toolsview .view1{
-    left:7em;
-}
-#toolsview .view2{
-    width:100%;
 
-    text-align : center;
-}
-#toolsview .view3{
-    width:200px;
-    text-align : center;
-    right: 50px;
-}
 #footer{
     position:absolute;
     bottom: 0;
@@ -440,8 +424,8 @@ display: inline-block;
 
 .Plastic050 {
     background-color: #b1f5c9;
-    border-color: #5588bf;
-    border-width: 1px;
+ /*   border-color: #5588bf;
+    border-width: 1px;*/
     background-image: linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
     background-image: -moz-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
     background-image: -webkit-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
@@ -451,8 +435,8 @@ display: inline-block;
 
 .Plastic031 {
     background-color: #ebebeb;
-    border-color: #000000;
-    border-width: 1px;
+   /* border-color: #000000;
+    border-width: 1px;*/
     background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
     background-image: -moz-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
     background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);

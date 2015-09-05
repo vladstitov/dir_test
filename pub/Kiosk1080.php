@@ -1,12 +1,12 @@
 ﻿<?php
 session_start();
-define('DATA','../data/');
+define('DATA','../data');
 $kiosk_id=0;
 
 $sett_file= 'settings.json';
 
 if(isset($_GET['kiosk'])) {
-		$kiosks = json_decode(file_get_contents(DATA.'kiosks.json'));
+		$kiosks = json_decode(file_get_contents(DATA.'/kiosks.json'));
 		$kiosk_id=(int)$_GET['kiosk'];
 		foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id) break;
 		if($kiosk->id==$kiosk_id){
@@ -15,11 +15,11 @@ if(isset($_GET['kiosk'])) {
 }
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
-$settings = file_get_contents(DATA.$sett_file);
+$settings = file_get_contents(DATA.'/'.$sett_file);
 $sett=json_decode($settings);
 
 
-$l=file_get_contents(DATA.$sett->labels);
+$l=file_get_contents(DATA.'/'.$sett->labels);
 
 
 $lbs = json_decode($l);
@@ -63,9 +63,15 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
 <style>
-    .hidden{
+    .hideme{
         display: none;
     }
+    li>a{
+        display: block;
+        pointer-events: none;
+        color: inherit;
+    }
+
 
 </style>
 </head>
@@ -145,33 +151,93 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <section id="sideview">
         <hr/>
         <div id="toolsview" class="mainbg">
-            <div class="view-port">
-                <section class="view2">
-                    <div id="Keyboard" data-js="Keyboard">
-                    </div>
-                </section>
-                <section class="view1">
-                    <div id="Categories">
-                        <h3>
-                            <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
-                        </h3>
+			<section data-ctr="MainMenu" class="row hideme">
+                <style>
+                    #btnSearch{
+                        font-size:100px;
+                        padding:20px;
+                        color:white;
+                        background-color:red;
+                    }
 
-                    </div>
-                </section>
+                    #MenuList{
+                        height: 200px;
+                        overflow: hidden;
+                    }
+                    #MenuList  li.item {
+                        border-radius: 20px;
+                        margin: 12px 0 12px 0;
+                        padding: 12px;
+                        width: 98%;
+                        font-size: 30px;
+                    }
+                </style>
 
-                <section class="view3">
-                    <div id="keywords">
-                        <h3>
-                            <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
-                        </h3>
-
-                        <div id="kw-container" class="nano">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6">
+                    <h1 class="text-center">Additional Info</h1>
+                    <div>
+                        <div id="MenuList" class="nano" data-id="list">
                         </div>
-
                     </div>
-                </section>
+                </div>
+                <div class="col-sm-2">
+                    <h3 class="text-center">Search Directory</h3>
+                        <div id="btnSearch" class="fa fa-search pull-right" >
+                            <div>
+                            </div>
+
+                        </div>
+                </div>
+                <div class="col-sm-2"></div>
+        </section>
+
+
+        <section id="SearchView" class="row">
+
+            <style>
+                #SearchView h3{
+                    color: #9d9d9d;
+                }
+
+                #SearchView h3>a{
+                   padding: 12px;
+                   border-radius: 12px;
+                }
+            </style>
+            <div class="col-sm-1">
+
             </div>
-        </div>
+            <section class="col-sm-2">
+                <div id="Categories">
+                    <h3>
+                        <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
+                    </h3>
+
+                </div>
+            </section>
+            <section class="col-sm-6 text-center">
+                <h3 class="text-center">Virtual Keyboard</h3>
+                <div id="Keyboard" data-js="Keyboard" class="text-center">
+                </div>
+                <h3 class="text-center"><a class="Plastic031">Back to Additional Info menu</a></h3>
+            </section>
+            <section class="col-sm-2">
+                <div id="keywords">
+                    <h3>
+                        <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
+                    </h3>
+
+                    <div id="kw-container" class="nano">
+                    </div>
+
+                </div>
+            </section>
+            <div class="col-sm-1">
+                <div class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
+            </div>
+        </section>
+
         <hr/>
     </section>
 <section id="footer">
@@ -219,7 +285,10 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/search/SearchDetails.js"></script>
 <script src="js/kiosk/search/SearchModel.js"></script>
 <script src="js/kiosk/search/Categories.js"></script>
+
 <script src="js/kiosk/InfoPage.js"></script>
+<script src="js/kiosk/MainMenu.js"></script>
+
 <script src="js/kiosk/Banner.js" ></script>
 <!--<script src="js/kiosk/MainView.js"></script>
 <script src="js/kiosk/SearchDetails.js"></script>
