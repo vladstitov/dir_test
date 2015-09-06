@@ -38,6 +38,25 @@ module uplight {
            }
        }
 
+       shoeSearch():void{
+           $('#toolsview').animate({scrollTop:'365'});
+           this.showSearchResult();
+       }
+       showMenu():void{
+           $('#toolsview').animate({scrollTop:'0'});
+       }
+
+
+       showSearchResult():void{
+           $('#mainport').animate({scrollLeft:0});
+       }
+       showPages(item):void{
+           console.log('show pages');
+           $('#mainport').animate({scrollLeft:725});
+       }
+       onMenuClick(item:any):void{
+            this.showPages(item);
+       }
        constructor() {
 
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
@@ -55,6 +74,14 @@ module uplight {
            var kw = new Keywords($('#kw-container'));
            var cats= new Categories();
            var mm = new MainMenu();
+           mm.onClick = (item)=>this.onMenuClick(item);
+
+           $('#btnSearch').click(()=>this.shoeSearch());
+           $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
+           $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
+
+
+
 
          this.searchResult = new SearchResult();
            var relay:Relay = new Relay(u_settings.timer);

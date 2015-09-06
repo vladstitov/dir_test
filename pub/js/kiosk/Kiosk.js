@@ -31,6 +31,10 @@ var uplight;
             var kw = new uplight.Keywords($('#kw-container'));
             var cats = new uplight.Categories();
             var mm = new uplight.MainMenu();
+            mm.onClick = function (item) { return _this.onMenuClick(item); };
+            $('#btnSearch').click(function () { return _this.shoeSearch(); });
+            $('#SearchView [data-id=btnClose]').click(function () { return _this.showMenu(); });
+            $('#SearchView [data-id=btnShowMenu]').click(function () { return _this.showMenu(); });
             this.searchResult = new uplight.SearchResult();
             var relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START, function () {
@@ -50,6 +54,23 @@ var uplight;
                 setTimeout(function () { return _this.unblock(); }, 500);
                 this.isBlocked = true;
             }
+        };
+        Kiosk.prototype.shoeSearch = function () {
+            $('#toolsview').animate({ scrollTop: '365' });
+            this.showSearchResult();
+        };
+        Kiosk.prototype.showMenu = function () {
+            $('#toolsview').animate({ scrollTop: '0' });
+        };
+        Kiosk.prototype.showSearchResult = function () {
+            $('#mainport').animate({ scrollLeft: 0 });
+        };
+        Kiosk.prototype.showPages = function (item) {
+            console.log('show pages');
+            $('#mainport').animate({ scrollLeft: 725 });
+        };
+        Kiosk.prototype.onMenuClick = function (item) {
+            this.showPages(item);
         };
         Kiosk.prototype.unblock = function () {
             this.isBlocked = false;

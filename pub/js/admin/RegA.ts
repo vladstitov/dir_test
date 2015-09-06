@@ -112,7 +112,7 @@ module uplight{
         message(msg:string):void{
 
         }
-        isSuper:boolean;
+        isSuper:boolean = false;
         model: DestinantionsModel;
         connector: Connector;
         dispatcher:JQuery

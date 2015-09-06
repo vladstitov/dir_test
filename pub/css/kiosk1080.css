@@ -118,8 +118,13 @@ a:active{
 #toolsview{
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 365px;
+    overflow: hidden;
 
+}
+#toolsview>section{
+    width: 100%;
+    height: 365px;
 }
 #toolsview .view-port{
     margin-top:20px;
@@ -134,30 +139,14 @@ a:active{
     vertical-align:middle;
 }
 
-#list-header{
-    width:100%;
-    height: 20px;
-}
+
+
 #list-main{
-    width:100%;
+    width:99%;
     height: 880px;
     overflow-y: scroll;
 }
-#list-main .main{
-    width: 100%;
-    height: 100%;
 
-}
-.view-port>hr{
-    margin: 0;
-   /* margin-top:0 !important;
-    margin-bottom: 0 !important;*/
-}
-
-#list-footer{
-    width:100%;
-
-}
 
 #list-main li{
    /* position: relative;*/
@@ -166,7 +155,7 @@ a:active{
     padding: 12px;
   /*  display: table;
    */
-    width: 98%;
+
     min-height: 95px;
 }
 /*#list-main li>.main{
@@ -380,47 +369,8 @@ display: inline-block;
 
 }
 /* END  Details Large */
-#list-footer-main{
-    position: relative;
-    height: 95px;
-
- }
 
 
-#list-footer-main .more{
-    position: absolute;
-    bottom: 20px;
-    vertical-align: middle;
-}
-#list-footer-main #searchinput{
-    position: absolute;
-
-    right: 0;
-}
-#searchinput{
-    font-size: 30px;
-    color: #999999;
-}
-#searchinput .fa-search{
-    position: absolute;
-    top:25px;
-   /* right: 10px;*/
-
-}
-#searchinput .fa-times-circle{
-    position: absolute;
-    top: 25px;
-    right: 10px;
-}
-#searchinput input{
-    border-radius: 30px;
-    font-size: 30px;
-    width: 200px;
-
-    border: none;
-
-    padding: 20px 40px 20px 20px;
-}
 
 .Plastic050 {
     background-color: #b1f5c9;
@@ -506,24 +456,7 @@ display: inline-block;
 #cover>.detailsL{
     top: 230px;
 }
-#mainport, #cover>.detailsL {
-    position: absolute;
-    width:725px;
-    height: 1077px;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-#mainport .view-port{
-    position: absolute;
-    width: 90%;
-    height: 95%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
+
 /*#mainport>.detailsL{
     position: absolute;
     top: 0;

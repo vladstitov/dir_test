@@ -68,7 +68,6 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     }
     li>a{
         display: block;
-        pointer-events: none;
         color: inherit;
     }
 
@@ -112,46 +111,122 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
 
     <section id="mainview" data-ctr="SearchResult">
+        <style>
+           #mainport, #cover>.detailsL {
+                position: absolute;
+                width:725px;
+                height: 1077px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                overflow: hidden;
+               white-space: nowrap;
+            }
+
+           #mainport>section{
+               display: inline-block;
+               width:725px;
+               height: 1077px;
+               vertical-align: top;
+
+           }
+            #mainport .view-port{
+                position: absolute;
+                width: 90%;
+                height: 95%;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+           #Pages{
+               overflow: hidden;
+           }
+            #Pages>div{
+                width:1480px;
+                height: 1077px;
+               /* white-space: nowrap;*/
+             }
+           #Pages>div>div{
+               float: left;
+               white-space: normal;
+               /*display: inline-block;*/
+              /* vertical-align: top;*/
+               width:725px;
+               height: 1077px;
+               padding: 22px;
+
+           }
+
+        </style>
         <div id="mainport" class="mainbg u-glow">
-            <div class="view-port">
-                <section id="list-header">
-                    <div id="list-header-main">
-                        <?= isset($labels['list-header'])?$labels['list-header']:''; ?>
+
+                <section  class="view content" >
+                    <div id="SearchResult" data-id="searchResult">
+                        <section id="list-header" >
+
+                            <div id="list-header-main" class="col-sm-12">
+                              <h4>  <?= isset($labels['list-header'])?$labels['list-header']:''; ?></h4>
+                            </div>
+
+                        </section>
+                        <hr style="margin-bottom: 0"/>
+                        <section id="list-main" class="nano col-lg-12">
+
+                        </section>
+                        <hr style="margin-top: 0"/>
+
+
+                        <section  class="col-sm-12">
+
+
+                                <div class="more col-sm-8" >
+
+                                  <p style="vertical-align: text-bottom; line-height: 140px">  <?=  isset($labels['list_footer'])?$labels['list_footer']:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?></p>
+
+                                </div>
+                                <div id="searchinput" class="col-sm-4">
+                                    <style>
+                                        #searchinput .fa-times-circle{
+                                            position: absolute;
+                                            top: 25px;
+                                            right: 10px;
+                                            font-size: 30px;
+                                            color: #adadad;
+
+                                        }
+                                        #searchinput input{
+                                            border-radius: 30px;
+                                            font-size: 30px;
+                                            width: 200px;
+                                            border: none;
+                                            padding: 20px 40px 20px 20px;
+                                            margin-right: -20px;
+                                        }
+                                    </style>
+                                   <!-- <span class="fa fa-search"></span>-->
+                                    <input type="text" class="Plastic031 pull-right" />
+                                    <span class="fa fa-times-circle"  data-id="btnClear"></span>
+                                </div>
+
+
+
+                        </section>
                     </div>
                 </section>
-                <br>
-
-                <hr/>
-                <section id="list-main" class="nano">
+                <section id="Pages" data-id="Pages">
 
                 </section>
-                <hr/>
-                <br>
-
-                <section id="list-footer">
-                    <div id="list-footer-main">
-                        <div class="more">
-                            <?=  isset($labels['list_footer'])?$labels['list_footer']:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?>
-
-                        </div>
-                        <div id="searchinput">
-                           <!-- <span class="fa fa-search"></span>-->
-                            <input type="text" class="Plastic031" />
-                            <span class="fa fa-times-circle" data-id="btnClear"></span>
-                        </div>
 
 
-                    </div>
-                </section>
-
-            </div>
         </div>
 
     </section>
     <section id="sideview">
         <hr/>
         <div id="toolsview" class="mainbg">
-			<section data-ctr="MainMenu" class="row hideme">
+			<section data-ctr="MainMenu" class="row">
                 <style>
                     #btnSearch{
                         font-size:100px;
@@ -175,14 +250,18 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
                 <div class="col-sm-2"></div>
                 <div class="col-sm-6">
-                    <h1 class="text-center">Additional Info</h1>
+                    <h3 class="text-center">
+                        <?= isset($labels['infopages'])?$labels['infopages']:'&nbsp;'; ?>
+                    </h3>
                     <div>
                         <div id="MenuList" class="nano" data-id="list">
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <h3 class="text-center">Search Directory</h3>
+                    <h3 class="text-center">
+                        <?= isset($labels['btnSearch'])?$labels['btnSearch']:'&nbsp;'; ?>
+                    </h3>
                         <div id="btnSearch" class="fa fa-search pull-right" >
                             <div>
                             </div>
@@ -196,7 +275,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <section id="SearchView" class="row">
 
             <style>
-                #SearchView h3{
+                #sideview h3{
                     color: #9d9d9d;
                 }
 
@@ -217,10 +296,15 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 </div>
             </section>
             <section class="col-sm-6 text-center">
-                <h3 class="text-center">Virtual Keyboard</h3>
+                <h3 class="text-center">
+                    <?= isset($labels['keyboard'])?$labels['keyboard']:'&nbsp;'; ?>
+                </h3>
                 <div id="Keyboard" data-js="Keyboard" class="text-center">
                 </div>
-                <h3 class="text-center"><a class="Plastic031">Back to Additional Info menu</a></h3>
+                <hr/>
+                <h3 class="text-center"><a data-id="btnShowMenu" class="Plastic031">
+                    <?= isset($labels['topages'])?$labels['topages']:'&nbsp;'; ?>
+                </a></h3>
             </section>
             <section class="col-sm-2">
                 <div id="keywords">
@@ -234,7 +318,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 </div>
             </section>
             <div class="col-sm-1">
-                <div class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
+                <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
             </div>
         </section>
 

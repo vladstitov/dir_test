@@ -11,9 +11,27 @@ var uplight;
             this.view = $('[data-ctr=MainMenu]:first');
             this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
             this.list = this.view.find('[data-id=list]');
+            this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });
         }
-        MainMenu.prototype.onData = function (data) {
-            this.data = JSON.parse(data);
+        MainMenu.prototype.onMenuClick = function (evt) {
+            console.log(evt);
+            evt.preventDefault();
+            var i = $(evt.currentTarget).data('i');
+            console.log(i);
+            if (isNaN(i))
+                return;
+            var item = this.data[i];
+            if (!item)
+                return;
+            this.pages.showPage(i);
+            if (this.onClick)
+                this.onClick(item);
+        };
+        MainMenu.prototype.onData = function (res) {
+            // console.log(res);
+            this.data = JSON.parse(res);
+            this.pages = new uplight.InfoPage();
+            this.pages.setData(this.data);
             this.render();
         };
         MainMenu.prototype.render = function () {

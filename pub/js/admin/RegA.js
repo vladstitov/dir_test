@@ -64,6 +64,7 @@ var uplight;
                 'view listing': RegA.VIEW_LISTING,
                 'show-menu': RegA.SHOW_MENU
             };
+            this.isSuper = false;
             this.settingsURL = 'settings.json';
             this.device = { device: 'admin', ln: 'en' };
         }
@@ -151,4 +152,4 @@ var uplight;
     })();
     uplight.VODestination = VODestination;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=regA.js.map
+//# sourceMappingURL=RegA.js.map
