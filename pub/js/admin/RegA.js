@@ -137,19 +137,5 @@ var uplight;
         return VOStat;
     })();
     uplight.VOStat = VOStat;
-    var VODestination = (function () {
-        function VODestination(obj) {
-            for (var str in obj)
-                this[str] = obj[str];
-            if (obj.cats == '0')
-                this.cats = [];
-            else if (typeof obj.cats === 'string' && obj.cats.length)
-                this.cats = obj.cats.split(',').map(Number);
-            if (typeof obj.imgs === 'string' && obj.imgs.length)
-                this.imgs = obj.imgs.split(',');
-        }
-        return VODestination;
-    })();
-    uplight.VODestination = VODestination;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=RegA.js.map

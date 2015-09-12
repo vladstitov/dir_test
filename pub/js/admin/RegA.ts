@@ -1,7 +1,7 @@
 ﻿/// <reference path="net.ts" />
 /// <reference path="models.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
-/// <reference path="../../libs/typing/underscore.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 /// <reference path="Menu.ts" />
@@ -175,29 +175,6 @@ module uplight{
     export class VOStat{
         type:string;
         val:string;
-    }
-    export class VODestination {
-        constructor(obj:any){
-            for(var str in obj) this[str]=obj[str];
-            if(obj.cats=='0') this.cats=[];
-            else  if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
-            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
-        }
-        uid:string;
-        unit: string;
-        id: number;
-        destid:string;
-        info:string;
-        imgs:string[];
-        imgsD:string[];
-        name: string;
-        cats: number[];
-        categories:string[];
-        pgs: string;
-        more: any;
-        tmb:string;
-        meta:string;
-        kws:string;
     }
 
 

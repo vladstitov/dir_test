@@ -6,10 +6,10 @@ $sett=$_GET['settings'];
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="libs/jquery-2.1.0.min.js"></script>
-    <script src="libs/svgjs.js"></script>
+    <script src="js/libs/jquery-2.1.0.min.js"></script>
+    <script src="js/libs/svgjs.js"></script>
     <title></title>
-    <link href="libs/reset.css" rel="stylesheet" />
+    <link href="js/lists/reset.css" rel="stylesheet" />
 	<script>
 	var u_settings = <?php echo file_get_contents('data/'.$sett); ?>
 	</script>

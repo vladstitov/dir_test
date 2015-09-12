@@ -1,15 +1,41 @@
 /// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
+    var VODestination = (function () {
+        function VODestination(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+            if (typeof obj.cats === 'string' && obj.cats.length)
+                this.cats = obj.cats.split(',').map(Number);
+            if (typeof obj.imgs === 'string' && obj.imgs.length)
+                this.imgs = obj.imgs.split(',');
+        }
+        return VODestination;
+    })();
+    uplight.VODestination = VODestination;
+    var VOCategory = (function () {
+        function VOCategory(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+            if (!this.dests)
+                this.dests = [];
+        }
+        return VOCategory;
+    })();
+    uplight.VOCategory = VOCategory;
     var Model = (function () {
-        function Model() {
+        //  warn:Function;
+        //  error:Function;
+        function Model(connector, warn) {
             var _this = this;
+            this.connector = connector;
+            this.warn = warn;
             this.READY = 'READY';
-            this.R = uplight.Registry.getInstance();
+            // this.R = Registry.getInstance();
             this.dispatcher = $({});
-            this.error = this.R.error;
-            this.warn = this.R.warn;
-            this.R.connector.getDestinations().done(function (res) { return _this.onResult(res); });
+            //this.error= this.R.error;
+            // this.warn= this.R.warn;
+            this.connector.getDestinations().done(function (res) { return _this.onResult(res); });
         }
         Model.prototype.getDestById = function (id) {
             return this.destInd[id];
@@ -19,6 +45,9 @@ var uplight;
         };
         Model.prototype.getCategories = function () {
             return this.cats;
+        };
+        Model.prototype.getCategoryById = function (id) {
+            return this.catsInd[id];
         };
         Model.prototype.getDestsByCat = function (catid) {
             // trace(' getAllByType : ' + type);
@@ -57,15 +86,17 @@ var uplight;
         Model.prototype.getData = function () {
             return this.dests;
         };
+        // R:Registry;
         Model.prototype.setData = function (data) {
             this.dests = data;
             this.cache = {};
         };
         Model.prototype.makeCats = function (ar) {
+            //console.log(ar);
             var out = [];
             var ind = [];
             for (var i = 0, n = ar.length; i < n; i++) {
-                var cat = new uplight.VOCategory(ar[i]);
+                var cat = new VOCategory(ar[i]);
                 ind[cat.id] = cat;
                 out.push(cat);
             }
@@ -79,7 +110,7 @@ var uplight;
             var ind = [];
             var kws = {};
             for (var i = 0, n = ar.length; i < n; i++) {
-                var dest = new uplight.VODestination(ar[i]);
+                var dest = new VODestination(ar[i]);
                 ind[dest.id] = dest;
                 if (dest.kws.length) {
                     dest.kws.split(',').forEach(function (el) {
@@ -98,6 +129,7 @@ var uplight;
             this.makeCats(res.cats);
             this.makeDests(res.dests);
             this.addIcon();
+            this.cache = {};
             this.dispatcher.triggerHandler(this.READY);
         };
         Model.prototype.addIcon = function () {
@@ -121,14 +153,20 @@ var uplight;
             return out;
         };
         Model.prototype._getDestsByPattern = function (pattern, data) {
-            pattern = ' ' + pattern.toLowerCase();
-            var out = [];
+            pattern = pattern.toLowerCase();
+            var out1 = [];
+            var out2 = [];
+            var out3 = [];
             for (var i = 0, n = data.length; i < n; i++) {
-                var patt = ' ' + data[i].name.toLowerCase() + ' ' + data[i].unit;
-                if (patt.indexOf(pattern) != -1)
-                    out.push(data[i]);
+                var name = data[i].name.toLowerCase();
+                if (name.indexOf(pattern) == 0)
+                    out1.push(data[i]);
+                else if (name.indexOf(' ' + pattern) !== -1)
+                    out2.push(data[i]);
+                else if (data[i].unit.indexOf(pattern) !== -1)
+                    out3.push(data[i]);
             }
-            return out;
+            return out1.concat(out2, out3);
         };
         Model.prototype._getDestsByCat = function (cat, data) {
             if (cat == 0)

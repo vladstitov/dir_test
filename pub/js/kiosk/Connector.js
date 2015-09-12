@@ -8,7 +8,7 @@ var uplight;
             this.who = 'kiosk';
         }
         Connector.prototype.getData = function (filename) {
-            return $.get(this.service + 'get_data&device=' + this.device + '&data=' + filename);
+            return $.get(this.service + 'get_data&device=' + this.device + '&file_name=' + filename);
         };
         Connector.prototype.getUpdates = function (stamp, callBack, onError) {
             $.get(this.service + 'get_updates&stamp=' + stamp).done(callBack).fail(onError);
@@ -17,8 +17,8 @@ var uplight;
             msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_log', msg);
         };
-        Connector.prototype.relay = function (kiosk_id, stamp, now, ping, timer, status) {
-            return $.get(this.service + 'get_stamp&id=' + kiosk_id + '&stamp=' + stamp + '&now=' + now + '&ping=' + ping + '&timer=' + timer + '&status=' + status);
+        Connector.prototype.relay = function (stamp, now, ping, timer, status) {
+            return $.get(this.service + 'get_stamp&id=' + this.id + '&stamp=' + stamp + '&now=' + now + '&ping=' + ping + '&timer=' + timer + '&status=' + status);
         };
         Connector.prototype.Error = function (msg) {
             msg = (new Date()).toString() + '||' + msg;
@@ -29,15 +29,25 @@ var uplight;
             var stamp = Date.now();
             $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&id=' + this.id + '&stamp=' + stamp);
         };
-        Connector.prototype.getCategories = function (callBack) {
-            $.get(this.service + 'get_categories').done(callBack);
+        Connector.prototype.getCategories = function () {
+            return $.get(this.service + 'get_categories');
         };
         ////////////////////////////////////////
         Connector.prototype.getPagesList = function (callBack) {
             $.get(this.service + 'get_pages_list').done(callBack);
         };
-        Connector.prototype.getPage = function (callBack, id) {
-            $.get(this.service + 'get_page&id=' + id).done(callBack);
+        Connector.prototype.getPages = function () {
+            var _this = this;
+            if (!this.pages)
+                this.pages = $.Deferred();
+            this.getData(u_settings.pages).done(function (res) {
+                var ar = JSON.parse(res);
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    ar[i].label = ar[i].name;
+                }
+                _this.pages.resolve(ar);
+            });
+            return this.pages.promise();
         };
         ///////////////////////////////////////////////
         Connector.prototype.getSettings = function () {

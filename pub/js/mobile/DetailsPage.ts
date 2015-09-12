@@ -1,79 +1,72 @@
 ﻿/// <reference path="../kiosk/registry.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 module mobile {
 
-    
     export class DetailsPage {
-        view: JQuery;      
         private title: JQuery;
-       // private advanced: JQuery;
-       // private details: JQuery;
+        private content:JQuery
+        private name:JQuery;
+        private unit:JQuery;
+        private table:JQuery;
+        private logo:JQuery;
+        private gallery:JQuery;
+        private info:JQuery;
+
         reset(): void {
-            this.cache = {};
 
         }
-        
-            //////////////////////////////////////////////////////////////////////////////////
-       
-      
-       
-        private cache: {} = {};
-        private R: kiosk.Registry;
-        private connector: kiosk.Connector;
 
-        constructor(id: string,conn:kiosk.Connector) {
-            this.view = $(id);               
+        showDestination(id:number):void{
+          var dest:uplight.VODestination =   this.model.getDestById(id);
+            console.log(dest);
+            if(!dest.html) dest.html=this.renderDetails(dest)
+
+            this.content.empty().append(dest.html);
+            this.show();
+
+
+        }
+
+        isHidden:boolean;
+        show():void{
+            if(this.isHidden){
+                this.isHidden = false;
+                this.view.show('fast');
+            }
+        }
+
+        hide():void{
+            if(!this.isHidden){
+                this.isHidden = true;
+                this.view.hide('fast');
+            }
+        }
+
+        constructor(private view:JQuery,private connector:uplight.Connector,private model:uplight.Model) {
+
+            this.content = view.find('[data-id=content]:first');
+            this.hide();
            // this.details = $(id + ' [data-id=details]');
            // this.advanced = $(id + ' [data-id=advanced]');
-            this.connector=  conn
 
-        }
-      //  private current: kiosk.VODestination;
-
-
-        getDetails(dest: kiosk.VODestination): JQuery {
-            // console.log('DetailsPage', page);
-            var id:number = dest.destid;
-            if (!this.cache[id]) this.cache[id] = this.createPage(dest);
-            this.view.empty().append(this.cache[id]);
-            return this.view ;
-        }
-        private createPage(dest: kiosk.VODestination):JQuery{
-            var p:JQuery=$('<div></div>').html(this.renderDetails(dest));
-            if (dest.advanced) $('<div></div>').load(dest.advanced).appendTo(p);
-            return p
-        }
-       /*
-        private loadAdvanced(dest: kiosk.VODestination): string {
-            if (dest.advanced.length < 40) {
-                this.current = dest;
-                this.connector.getAdvanced((res) => this.onPageLoaded(res), dest.destid.toString());
-                return '';
-            } else return dest.advanced;
 
         }
 
 
-        
 
-        private onPageLoaded(res: string): void {
-            this.current.advanced = res;           
-            this.advanced.html(res);
-          
-        }        
-        */
 
-        private renderDetails(dest: kiosk.VODestination): string {
+        private renderDetails(dest: uplight.VODestination): JQuery {
 
-            var out: string = '<p class="xlarge"><span class="left">' + dest.name + '</span><span class="right">' + dest.unit + '</span></p>';
-            if (dest.email || dest.phone || dest.website) {
-                out += '<table><tbody>';
-                if (dest.phone) out += '<tr><td>Phone:  </td><td>' + dest.phone + '</td></tr>';
-                if (dest.email) out += '<tr><td>Email:  </td><td>' + dest.email + '</td></tr>';
-                if (dest.website) out += '<tr><td>Website:  </td><td>' + dest.website + '</td></tr>';
-                out += '</tbody></table>';
 
-            }
+            var out: JQuery = $('<div>').html('<p class="xlarge"><span class="left">' + dest.name + '</span><span class="right">' + dest.unit + '</span></p>');
+           // if (dest.email || dest.phone || dest.website) {
+              //  out += '<table><tbody>';
+               // if (dest.phone) out += '<tr><td>Phone:  </td><td>' + dest.phone + '</td></tr>';
+               // if (dest.email) out += '<tr><td>Email:  </td><td>' + dest.email + '</td></tr>';
+               // if (dest.website) out += '<tr><td>Website:  </td><td>' + dest.website + '</td></tr>';
+               // out += '</tbody></table>';
+
+          //  }
             return out ;
         }
 

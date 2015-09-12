@@ -21,8 +21,8 @@ $settings=json_decode($strSettings);
 
     </style>
 
-    <script src="libs/jquery-2.1.0.min.js"></script>
-    <script src="libs/svgjs.js"></script>
+    <script src="js/libs/jquery-2.1.0.min.js"></script>
+    <script src="js/libs/svgjs.js"></script>
     <!--<script src="/libs/TweenMax.min.js"></script>
     <script src="/libs/easeljs-0.7.1.min.js"></script>-->
     <script type="text/javascript">

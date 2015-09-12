@@ -2,7 +2,7 @@
  * Created by VladHome on 8/12/2015.
  */
 /// <reference path="../Registry.ts" />
-/// <reference path="../../../libs/typing/svgjs.d.ts" />
+/// <reference path="../../typing/svgjs.d.ts" />
 var uplight;
 (function (uplight) {
     var TouchClip = (function () {

@@ -38,15 +38,16 @@ class Destinations{
 			case 'save_pages':
 			$uid=$get['uid'];
 			$data = file_get_contents("php://input");
-			$res = file_put_contents('../data/pages/'.$uid.'.htm',$data);
+			$res = file_put_contents(PREFIX.PAGAS.$uid.'.htm',$data);
 			$out = new stdClass();
 			if(!$res) {
 			$out->error = 'error';
-			$out->info==$this->con->errorInfo();
+			$out->info='cant save';
 
 			}else {
-			$out= new stdClass();
-			$out->result = 'success';
+				$out= new stdClass();
+				$out->success = 'success';
+				$out->result=PAGAS.$uid.'.htm';			
 			return $out;
 			}
 			break;
@@ -77,10 +78,6 @@ class Destinations{
 						
 			 $out->result=$this->overwriteDests(json_decode(file_get_contents("php://input")));			 
 			break;			
-			
-			case 'get_advanced':
-			return $this->getAdvanced($get['destid']);
-			break;
 			case 'dest_image':
 				if(isset($get['id'])){
 						$id= $get['id'];
@@ -108,22 +105,15 @@ class Destinations{
 		$ext = '.'.pathinfo($file["name"], PATHINFO_EXTENSION);
 		$filename=$id.'_'.time().$ext;
 		
-		if(move_uploaded_file($file["tmp_name"],'../data/details/img/'.$filename)){
+		if(move_uploaded_file($file["tmp_name"],PREFIX.DETAILS_IMG.$filename)){
 			$out->success='success';
-			$out->result='data/details/img/'.$filename;
+			$out->result=DETAILS_IMG.$filename;
 		}
 		
 		return $out;
 		
 	
-	}
-	
-	
-	private function getAdvanced($id){
-		$page= $this->con->getField('SELECT advanced FROM destinations WHERE destid='.(int)$id);
-		$fn=$this->root.$page;
-		return file_exists($fn)?file_get_contents($fn):'no page';
-	}
+	}	
 	
 	private function updateCatDests($data){
 		$this->con->beginTransaction('UPDATE destinations SET cats=? WHERE destid=?');		
@@ -149,6 +139,23 @@ class Destinations{
 	}
 	
 	
+	private function cleanData(){
+				$result=$this->con ->getAllAsObj('SELECT * FROM destinations ORDER BY LOWER(name)');
+				foreach($result as $value) {
+								$dirty=0;
+								$cats= explode(',',$value->cats);
+								if(array_search('0',$cats) !==false){;											
+											array_splice($cats,array_search('0',$cats),1);
+											$value->cats = implode(',',$cats);
+											$dirty =1;
+								}
+								if(strlen($value->more)<3){
+									$value->more='';
+									$dirty =2;
+								}
+				}
+				
+	}
 	
 	private function getAllDests(){		
 		$result=$this->con ->getAllAsObj('SELECT * FROM destinations ORDER BY LOWER(name)');
@@ -162,20 +169,28 @@ class Destinations{
 
 		return $this->con ->query('DELETE FROM destinations WHERE id='.(int)$id);
 	}
-	/*
-	private function updateDest($id,$dest){
-			$adv=$this->updateAdvanced($id,stripslashes($dest['advanced']));
-		return $this->con->updateRow('UPDATE destinations SET name=?,unit=?,phone=?,email=?,website=?,cats=?,advanced=? WHERE destid=?',array($dest['name'],$dest['unit'],$dest['phone'],$dest['email'],$dest['website'],$dest['cats'],$adv,$id));
-	}
-*/
+
+	
+	
 		private function updateDestination($dest){
 				$out = new stdClass();
 				$res=false;
 				$cats='';
 				$imgs='';
-				if(isset($dest->cats))$cats = implode(',',$dest->cats);
-				if(isset($dest->imgs))$imgs = implode(',',$dest->imgs);	
-				if(!isset($dest->tmb))$dest->tmb='';	
+				if(isset($dest->cats)){
+						if(is_string($dest->cats))$dest->cats = array($dest->cats);
+						if(array_search('0',$dest->cats) !==false)	array_splice($dest->cats,array_search('0',$dest->cats),1);											
+						$cats = implode(',',$dest->cats);
+				}
+				if(isset($dest->imgs)){
+							
+							$imgs = is_array($dest->imgs)?implode(',',$dest->imgs):$dest->imgs;
+				}				
+				if(!isset($dest->tmb))$dest->tmb='';
+				if(strlen($dest->more)<3)$dest->more='';
+				if(strlen($dest->tmb)<3)$dest->tmb='';	
+				if(strlen($dest->info)<3)$dest->info='';
+				if(strlen($dest->pgs)<3)$dest->pgs='';				
 				
 				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$dest->kws,$dest->more,$dest->tmb,$dest->info,$dest->meta,$dest->pgs,$imgs);
 				$id=(int) $dest->id;
@@ -199,17 +214,6 @@ class Destinations{
 				if(!$res)$out->error = $this->con->errorInfo();				
 				return $out;
 		}
-
-	private function updateAdvanced($id,$data){
-		$id=(int)$id;
-        $fn="data/details/a$id.htm";
-		if(strlen($data)<20)$fn='';
-        else   if(!file_put_contents($this->root.$fn,$data))$fn='';
-        return 	$fn;
-	}
-	private function insertDest(){
-		return $this->con->insert("INSERT INTO destinations (advanced) VALUES ('')");
-				
-	}
+	
 	
 }

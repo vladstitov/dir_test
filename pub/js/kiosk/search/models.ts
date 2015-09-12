@@ -1,6 +1,49 @@
 ﻿/// <reference path="../Registry.ts" />
 
 module uplight{
+
+    export class VODestination {
+        constructor(obj:any){
+            for(var str in obj) this[str]=obj[str];
+            if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
+            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
+        }
+        uid:string;
+        unit: string;
+        id: number;
+       // destid:string;
+        info:string;
+        imgs:string[];
+        imgsD:string[];
+        name: string;
+        cats: number[];
+        categories:string[];
+        pgs: string;
+        more: string;
+        tmb:string
+        meta:string;
+        kws:string;
+        icon:string;
+        html:JQuery;
+
+
+    }
+
+    export class VOCategory {
+        constructor(obj:any){
+            for(var str in obj) this[str]=obj[str];
+            if(!this.dests) this.dests=[];
+        }
+
+        id: number;
+        sort: number;
+        label: string;
+        icon: string;
+        enable: number;
+        type:number;
+        dests:number[];
+    }
+
     export class Model{
         onReady: Function;
         dispatcher:JQuery;
@@ -17,10 +60,14 @@ module uplight{
         getKeywords():any{
            return this.keywords;
         }
+
         getCategories():VOCategory[]{
             return this.cats;
         }
 
+        getCategoryById(id:number):VOCategory{
+            return this.catsInd[id];
+        }
         getDestsByCat(catid: number): VODestination[]{
             // trace(' getAllByType : ' + type);
             var id: string = 'c__' + catid;
@@ -61,7 +108,7 @@ module uplight{
             return this.dests;
         }
 
-        R:Registry;
+       // R:Registry;
         setData(data):void{
             this.dests=data;
             this.cache={};
@@ -69,6 +116,7 @@ module uplight{
 
 
         private makeCats(ar:any[]):void{
+            //console.log(ar);
           var out:VOCategory[]=[];
             var ind:any[] =[];
             for(var i=0,n=ar.length;i<n;i++){
@@ -78,6 +126,7 @@ module uplight{
             }
             this.cats= out;
             this.catsInd= ind;
+
         }
 
         private addKeywords(str:string):void{
@@ -111,6 +160,8 @@ module uplight{
             this.makeCats(res.cats);
             this.makeDests(res.dests);
             this.addIcon();
+            this.cache={};
+
             this.dispatcher.triggerHandler(this.READY);
         }
 
@@ -125,15 +176,15 @@ module uplight{
                 }
             }
         }
-        warn:Function;
-        error:Function;
-        constructor() {
-            this.R = Registry.getInstance();
+      //  warn:Function;
+      //  error:Function;
+        constructor(private connector:Connector,private warn:Function) {
+           // this.R = Registry.getInstance();
             this.dispatcher = $({});
-            this.error= this.R.error;
-            this.warn= this.R.warn;
+            //this.error= this.R.error;
+           // this.warn= this.R.warn;
 
-            this.R.connector.getDestinations().done((res)=>this.onResult(res))
+            this.connector.getDestinations().done((res)=>this.onResult(res))
         }
         private _getDestsByUnit(unit: string, data: VODestination[]): VODestination[] {
             var out: VODestination[] = [];           
@@ -143,13 +194,17 @@ module uplight{
         }
        
         private _getDestsByPattern(pattern: string, data: VODestination[]): VODestination[]{
-            pattern = ' ' + pattern.toLowerCase(); 
-            var out: VODestination[] = [];
+            pattern = pattern.toLowerCase();
+            var out1: VODestination[] = [];
+            var out2:VODestination[]=[];
+            var out3:VODestination[]=[];
             for (var i = 0, n = data.length; i < n; i++) {
-                var patt: string = ' ' + data[i].name.toLowerCase() + ' ' + data[i].unit;
-                if (patt.indexOf(pattern) != -1) out.push(data[i]);               
+                var name = data[i].name.toLowerCase();
+                if(name.indexOf(pattern)==0 ) out1.push(data[i]);
+                else if(name.indexOf(' '+pattern)!==-1 ) out2.push(data[i]);
+                else if(data[i].unit.indexOf(pattern)!==-1)out3.push(data[i]);
             }
-            return out;
+            return out1.concat(out2,out3);
         }
 
         private _getDestsByCat(cat: number, data: VODestination[]): VODestination[]{

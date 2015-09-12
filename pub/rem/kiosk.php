@@ -41,9 +41,11 @@ switch(array_shift($a)){
 			
 	break;
 	case 'get_data':
-		$fn=DATA.$get['data'];
-		echo file_exists($fn)?file_get_contents($fn):'NO';
-			      
+	
+		if(isset($get['file_name'])){
+					$fn=DATA.$get['file_name'];
+			echo file_exists($fn)?file_get_contents($fn):'NO';
+		}			      
 	break;	
 	
 	case 'get_categories':

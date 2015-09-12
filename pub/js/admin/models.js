@@ -1,6 +1,22 @@
 /// <reference path="RegA.ts" />
 var uplight;
 (function (uplight) {
+    var VODestination = (function () {
+        function VODestination(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+            if (obj.cats == '0')
+                this.cats = [];
+            else if (typeof obj.cats === 'string' && obj.cats.length)
+                this.cats = obj.cats.split(',').map(Number);
+            if (typeof obj.imgs === 'string' && obj.imgs.length)
+                this.imgs = obj.imgs.split(',');
+            if (!this.uid)
+                this.uid = '' + this.id;
+        }
+        return VODestination;
+    })();
+    uplight.VODestination = VODestination;
     var DestinantionsModel = (function () {
         function DestinantionsModel() {
             this.dispatcher = $({});
@@ -227,7 +243,7 @@ var uplight;
         DestinantionsModel.prototype.setDestinations = function (res) {
             var out = [];
             for (var i = 0, n = res.length; i < n; i++) {
-                var dest = new uplight.VODestination(res[i]);
+                var dest = new VODestination(res[i]);
                 out.push(dest);
             }
             this.setData(out);

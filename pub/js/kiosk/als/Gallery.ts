@@ -40,13 +40,14 @@ module uplight{
         constructor(url:string){
             this.view = $('<div>');
             this.list=$('<div>').appendTo(this.view);
-            $.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(JSON.parse(res)));
+            $.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
             Registry.getInstance().dispatcher.on( Registry.getInstance().SS_START,()=>this.start());
             Registry.getInstance().dispatcher.on( Registry.getInstance().SS_STOP,()=>this.stop());
         }
 
-        private onData(data:any){
-            //console.log(data);
+        private onData(res:string){
+            var data = JSON.parse(res);
+            console.log(data);
             var ar = data.gallery;
             var out:JQuery[]=[];
             for(var i=0,n=ar.length;i<n;i++){

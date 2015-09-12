@@ -15,8 +15,6 @@
 /// <reference path="MainMenu.ts" />
 
 declare var u_settings:any;
-declare var kiosk_id:number;
-
 
 module uplight {
    export class Kiosk {     
@@ -24,6 +22,7 @@ module uplight {
        private R: Registry;
        private keyboard: Keyboard;
        private timeout:number
+       private dest:SearchDetailsLarge
 
 
        private onMouseDown(evt:MouseEvent):void{
@@ -57,14 +56,23 @@ module uplight {
        onMenuClick(item:any):void{
             this.showPages(item);
        }
+       errors:string='';
+       error(str:string):void{
+           this.errors+=str+"\n";
+       }
+       warns:string='';
+       warn(str:string):void{
+           this.warns+=str+"\n";
+       }
        constructor() {
 
+           console.log('kiodk');
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
            var r:Registry = Registry.getInstance();
            r.connector = new Connector();
-           r.connector.id=kiosk_id;
+           r.connector.id=u_settings.kiosk;
            r.connector.who='kiosk';
-           r.model = new Model();
+           r.model = new Model(r.connector,(w)=>this.warn(w));
            r.settings = u_settings;
            r.dispatcher = $({});
 
@@ -76,15 +84,18 @@ module uplight {
            var mm = new MainMenu();
            mm.onClick = (item)=>this.onMenuClick(item);
 
+          this.dest = new SearchDetailsLarge($('#DetailsLarge'));
+           console.log(this.dest);
+
+
            $('#btnSearch').click(()=>this.shoeSearch());
            $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
            $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
 
 
-
-
          this.searchResult = new SearchResult();
-           var relay:Relay = new Relay(u_settings.timer);
+
+           if(!u_settings.hasOwnProperty('norelay'))  var relay:Relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
 
           // Registry.getInstance().connector.Log('kiosk started succesguly');
@@ -101,23 +112,25 @@ module uplight {
            this.isBlocked = false;
        }
 
-       private onHachChange(): void {           
+       private onHachChange(): void {
+           var h:string = document.location.hash;
            if (this.isBlocked) {
-               document.location.hash = this.prevHash;
+               document.location.hash = h;
                return;
            }
-           this.prevHash = document.location.hash;
+           this.prevHash = h;
            this.isBlocked = true;
            setTimeout(() => this.unblock(), 500);
            
-           var hash: string[] = this.prevHash.split('='); 
+           var hash: string[] = h.split('/');
            switch (hash[0]) {
                case '#category':
                  //  this.keyboardView.hideKeyboard();
                   // var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));
                   // this.maiView.showView(this.searchResult.getListByCategory(cat));
                    break;
-               case '#destid': 
+               case '#destid':
+                   this.dest.showDest(Number(hash[1]));
                  //  this.keyboardView.hideKeyboard();
                  //  this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
                    break;
@@ -143,7 +156,7 @@ module uplight {
             var now=(new Date()).getTime();
             var timer=now- this.timer;
             this.timer=now;
-            Registry.getInstance().connector.relay(kiosk_id,this.stamp,Math.round(now/1000),this.ping,timer,Registry.status).done(function(res:string){
+            Registry.getInstance().connector.relay(this.stamp,Math.round(now/1000),this.ping,timer,Registry.status).done(function(res:string){
                 that.ping=(new Date()).getTime()-now;
                 var vo:VOResult
                 try{
@@ -173,7 +186,5 @@ module uplight {
 }
 
 $(document).ready(()=>{
-    var k = new uplight.Kiosk();
-
-
+   var k = new uplight.Kiosk();
 });

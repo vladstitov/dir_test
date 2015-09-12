@@ -7,19 +7,36 @@
 module uplight{
    export class  SearchDetailsLarge{
        vo:VODestination
-       det:SearchDetails;
        haveData:boolean;
-       view:JQuery
-       detSm:SearchDetails;
        gall:JQuery;
        pages:JQuery;
        img:JQuery;
        imgs:string[];
 
-       constructor(vo:VODestination){
+
+       shoe():void{
+           this.view.show();
+       }
+
+       hide():void{
+           this.view.hide();
+       }
+
+       showDest(id:number):void{
+           var vo:VODestination = Registry.getInstance().model.getDestById(id);
            if(vo.imgs && vo.imgs.length) this.createGallery(vo.imgs);
            if(vo.pgs && vo.pgs.length)this.createPages(vo.pgs);
            this.vo=vo;
+           console.log(vo);
+       }
+
+       constructor(private view:JQuery){
+           console.log(view);
+           view.find('[data-id=btnClose]').click(()=>{
+               this.hide();
+           })
+
+
        }
 
         private  createGallery(imgs:string[]):void{
@@ -59,16 +76,13 @@ module uplight{
 
 
            det.append('<h2><span>'+this.vo.name+'</span><span class="pull-right">'+this.vo.unit+'</span></h2>');
-           if(this.detSm) det.append(this.detSm.view);
+
            if(this.gall) det.append(this.gall);
            if(this.pages) det.append(this.pages);
            return det;
        }
 
-       setDetailsSmall(det:SearchDetails):SearchDetailsLarge{
-                this.detSm = det;
-           return this;
-       }
+
 
 
 

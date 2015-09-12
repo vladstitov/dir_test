@@ -130,6 +130,7 @@ module uplight{
            for(var i=0,n=ar.length;i<n;i++){
                out+= this.renderItem(ar[i],i);
            }
+           this.selectedItem=null;
            this.list2.html(out);
        }
 
@@ -140,10 +141,13 @@ module uplight{
             this.content.prepend(this.uploadView);
             this.btnUpload.on(CHANGE,(evt)=>this.onFileSelected(evt.target))
             this.mode='add';
-
+            if(this.selected)this.selected.removeClass(SELECTED);
+            this.selected=null;
+            this.selectedItem=null;
         }
 
         private onEditClick():void{
+            if(!this.selectedItem) return;
             this.uploadText.text('to Replace File');
             this.content.prepend(this.uploadView);
             this.btnUpload.on(CHANGE,(evt)=>this.onFileSelected(evt.target))
@@ -174,6 +178,7 @@ module uplight{
 
             }
         }
+
         private onFileSelected(input:any):void{
             var files:FileList = input.files;
             if(files.length){

@@ -92,6 +92,7 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += this.renderItem(ar[i], i);
             }
+            this.selectedItem = null;
             this.list2.html(out);
         };
         DetailsImages.prototype.onAddClick = function () {
@@ -100,9 +101,15 @@ var uplight;
             this.content.prepend(this.uploadView);
             this.btnUpload.on(CHANGE, function (evt) { return _this.onFileSelected(evt.target); });
             this.mode = 'add';
+            if (this.selected)
+                this.selected.removeClass(SELECTED);
+            this.selected = null;
+            this.selectedItem = null;
         };
         DetailsImages.prototype.onEditClick = function () {
             var _this = this;
+            if (!this.selectedItem)
+                return;
             this.uploadText.text('to Replace File');
             this.content.prepend(this.uploadView);
             this.btnUpload.on(CHANGE, function (evt) { return _this.onFileSelected(evt.target); });

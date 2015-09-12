@@ -15,29 +15,25 @@ if(isset($_GET['kiosk'])) {
 }
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
-$settings = file_get_contents(DATA.'/'.$sett_file);
-$sett=json_decode($settings);
+$settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
+
+foreach($_GET as $key=>$val) $settings->$key=$val;
 
 
-$l=file_get_contents(DATA.'/'.$sett->labels);
+$l=file_get_contents(DATA.'/'.$settings->labels);
 
 
 $lbs = json_decode($l);
 $labels = array();
 foreach($lbs as $label) $labels[$label->index] = $label->value;
-
-
-
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html ln="en">
 <head>
     <script>
        <?php
-			$out = ' var u_settings ='.$settings.";\n";
-            $out.= ' var kiosk_id='.$kiosk_id.";\n";
-            $out.=' var u_labels = '. $l.";\n";
-			$out.=' var u_params = '.json_encode($_GET).";\r\n";
+			$out = ' var u_settings ='.json_encode($settings).";\n";
+            $out.=' var u_labels = '.json_encode($labels).";\n";
 			echo $out;
        ?>;		
        
@@ -48,15 +44,15 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <meta name="description" content="Kiosk 1080">
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
-    <link href="libs/reset.css" rel="stylesheet" />
-    <link href="libs/bootstrap.css" rel="stylesheet" />
+    <link href="js/lists/reset.css" rel="stylesheet" />
+    <link href="js/libs/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
    
-    <link href="libs/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
-    <script src="libs/jquery-2.1.0.min.js"></script>
-    <script src="libs/svgjs.js"></script>
+    <script src="js/libs/jquery-2.1.0.min.js"></script>
+    <script src="js/libs/svgjs.js"></script>
     <script type="text/javascript">
 
     </script>
@@ -333,16 +329,46 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
     </section>
 
-   <section id="DetailsLarge" class="modal" data-id="btnClose"  style="display: none">
+   <section id="DetailsLarge" class="modal" data-id="btnClose" style="display: block"  >
         <div class="modal-dialog">
             <div class="modal-content Plastic031 central">
+
+                <div class="modal-header">
                     <div class="fa fa-close pull-right" data-id="btnClose"></div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                           <h4>Name</h4>
+                            <h2>
+                                Remove a portion
+                            </h2>
+                        </div>
+                        <div class="col-sm-3">
+                            <h4>unit</h4>
+                           <h2></h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-body content">
+                    <div class="row details">
+                        <div class="col-sm-8 more" data-id="more">
 
+                        </div>
+                        <div class="col-sm-4 tmb" data-id="tmb">
 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" data-id="img">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" data-id="gallery">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-
                     <button class="btn btn-default pull-right" data-id="btnClose">Close</button>
                 </div>
             </div>
@@ -366,7 +392,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/search/Keywords.js" ></script>
 <script src="js/kiosk/search/SearchResult.js"></script>
 <script src="js/kiosk/search/SearchDetailsLarge.js"></script>
-<script src="js/kiosk/search/SearchDetails.js"></script>
+
 <script src="js/kiosk/search/SearchModel.js"></script>
 <script src="js/kiosk/search/Categories.js"></script>
 
@@ -378,8 +404,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/SearchDetails.js"></script>
 -->
 <?php 
-if(!isset($_GET['no-ss'])) echo '<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/als/ScreenSaver.js"></script>';
-if(!isset($_GET['no-kiosk'])) echo '<script src="js/kiosk/Kiosk.js" ></script>';
+if(!isset($settings->noss)) echo '<link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/als/ScreenSaver.js"></script>';
+if(!isset($settings->nokiosk)) echo '<script src="js/kiosk/Kiosk.js" ></script>';
 ?>
 
 

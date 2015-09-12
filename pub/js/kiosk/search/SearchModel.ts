@@ -5,11 +5,86 @@
     /// <reference path="SearchDetailsLarge.ts" />
 
 module uplight{
+
+    export class ButtonView{
+        private $view:JQuery
+        private $kw
+        private details:JQuery
+
+        private $btnMore:JQuery
+        show():void{
+            this.$view.show();
+        }
+
+        hide():void{
+            this.$view.hide();
+        }
+
+        getView(reset:boolean):JQuery{
+            return this.$view;
+        }
+
+        constructor(private model:DestModel){
+            this.$view = $('<li>').addClass('item Plastic031').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
+            this.$kw=this.$view.find('.kws:first');
+        }
+
+        showDetails():void{
+            if(!this.$btnMore){
+                this.$btnMore= this.$view.find('.more:first');
+                this.details = this.createDetails(this.model.vo)
+                this.$view.append(this.details);
+            }
+
+            this.details.show('fast');
+            this.$btnMore.text('Less...');
+        }
+
+        hideDetails():void{
+                this.details.hide('fast');
+                this.$btnMore.text('More...');
+
+        }
+
+        private createDetails(vo:VODestination):JQuery{
+
+            var ar = vo.more.split("\n");
+            var out:string='<div class="more" ><table class="table">';
+
+            for(var i=0,n=ar.length;i<n;i++){
+                var item = ar[i].split('\t');
+                out+='<tr><td>'+(item[0]||'&nbsp;')+'</td><td>'+(item[1]||'&nbsp;')+'</td></tr>';
+            }
+
+            out+='</table></div>';
+
+            if(vo.tmb)out+='<div class="tmb"><img src="'+vo.tmb+'" /></div>';
+
+
+            return $('<div>').addClass('details').html(out);
+        }
+        private renderVo(vo:VODestination,ismore:boolean):JQuery{
+            var more =ismore?'<span class="fa fa-plus"></span><span class="more"> More... </span>':'';
+            var icon ='<span class="icon '+vo.icon+'"></span>';
+            var name='<span class="name">'+vo.name+'</span>';
+            var unit='<span class="unit">'+vo.unit+'</span>';
+            var utype='<span class="unittype">unit</span>';
+            var kws = '<span class="kws">'+'</span>';
+            var info = '<span class="info">'+vo.info+'</span>';
+            var row1='<div class="urow">'+kws+utype+'</div>';
+            var row2='<div class="urow">'+icon+name+unit+'</div>';
+            var row3='<div class="urow">'+more+info+'</div>';
+            return $('<div>').addClass('main').html(row1+row2+row3);
+        }
+
+    }
+
+
     export class DestModel{
-        view:JQuery
+        view:ButtonView;
         private cats:number[];
         byCat:boolean=true;
-        byPat:boolean=true;
+      //  byPat:boolean=true;
         name:string;
         unit:string;
         kws:string;
@@ -18,47 +93,33 @@ module uplight{
         cache={};
         id:number;
         ind:number;
-        details:SearchDetails;
-        haveMore:number=0;
+       // details:SearchDetails;
+        haveMore:boolean
         btnMore:JQuery;
-        detailsLarge:SearchDetailsLarge;
-        constructor(private vo:VODestination){
-            var more =  vo.more.split('\n');
-            var img=''
+      //  detailsLarge:SearchDetailsLarge;
+        table:string;
+        thumb:HTMLImageElement;
+        static  dispatcher:JQuery=$({});
+        static DETAILS_LARGE:string='DETAILS_LARGE';
 
 
-            if(more.length!==1 || (vo.tmb && vo.tmb.length)){
-                var det:SearchDetails = new SearchDetails( $('<div>').addClass('details'));
-                if(more.length!==1) det.createTable(more);
-                if(vo.tmb && vo.tmb.length) img= det.createImage(vo.tmb);
-                this.details = det;
-                this.haveMore=1;
-            }
-
-            var det2:SearchDetailsLarge = new SearchDetailsLarge(vo);
-            if(det2.haveData) this.detailsLarge = det2.setDetailsSmall(det);
+        constructor(public vo:VODestination){
             this.id=vo.id;
-            this.view = $('<li>').addClass(img+' item Plastic031').attr('data-id',vo.id).append(this.renderVo(vo,this.haveMore));
+           if(vo.more || vo.tmb || vo.imgs || vo.pgs)this.haveMore = true;
+            this.view = new ButtonView(this);
             this.name=' '+vo.name.toLowerCase();
             this.unit=' '+vo.unit.toLowerCase();
             this.kws=','+vo.kws;
-            this.kw=this.view.find('.kws:first');
-
-            if(this.detailsLarge){}
-            else if(this.haveMore==1){
-                this.view.append(det.view);
-
-            }
-
-           // console.log(vo.more);
-
-
-
-           // this.view.on(CLICK,()=>this.onClick())
 
         }
 
-        private isHiiden:boolean
+
+
+        getView(reset:boolean):JQuery{
+            return this.view.getView(reset);
+        }
+        private isHiiden:boolean;
+
         show():void{
             if(this.isHiiden){
                 this.isHiiden=false;
@@ -66,6 +127,7 @@ module uplight{
 
             }
         }
+
         hide():void{
             if(!this.isHiiden){
                 this.isHiiden=true;
@@ -73,41 +135,41 @@ module uplight{
 
             }
         }
+
        reset():void{
            this.hideDetails();
            this.clearKeyword();
-           this.show();
+           //this.show();
        }
 
         private isDetails;
 
-        togleDetails():JQuery{
-            if(this.detailsLarge){
-                return this.detailsLarge.getView()
+        togleDetails():boolean{
+            if(!this.haveMore) return false;
+            if(this.vo.imgs || this.vo.pgs){
+                console.log('have large details  this.vo.imgs: '+this.vo.imgs+' this.vo.pgs: '+this.vo.pgs);
+                    DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,this);
+                window.location.hash='#dest/'+this.vo.id;
+                    return true;
             }
-            if(!this.details) return null;
-            if(this.isDetails) {
-                this.isDetails = false;
-                this.details.view.hide('fast');
-                this.btnMore.html('<span class="fa fa-plus"></span> More...');
-            }
-            else {
-                if(!this.btnMore){
-                    this.btnMore= this.view.find('.more:first');
-                }
+
+            if(this.isDetails)this.hideDetails();
+            else this.showDetails();
+            return false;
+        }
+
+
+        showDetails():void{
+            if(!this.isDetails){
+                this.view.showDetails();
                 this.isDetails = true;
-                this.details.view.show('fast');
-                this.btnMore.html('<span class="fa fa-minus"></span> Less...');
             }
-            return null;
         }
 
         hideDetails():void{
             if(this.isDetails) {
                 this.isDetails = false;
-                this.details.view.hide();
-                this.btnMore.html('<span class="fa fa-plus"></span> More...');
-
+                this.view.hideDetails();
             }
         }
 
@@ -160,11 +222,13 @@ module uplight{
             this.ind=out;
             return out;
         }
+
         showKeyword(str:string):void{
            // console.log('showKeyword  '   + str);
             this.kw.text(str);
             this.iskw = 1;
         }
+
         clearKeyword():void{
             if(this.iskw){
                 this.kw.text('');
@@ -189,28 +253,15 @@ module uplight{
             return this;
 
         }
-        render():void{
-            if(this.byCat && this.byPat) this.show();
-            else this.hide();
-        }
-        getView(reset:boolean):JQuery{
-            if(reset) this.reset();
-            return this.view;
-        }
 
 
-        private renderVo(vo:VODestination,ismore:number):JQuery{
-            var more =ismore?'<span class="more"><span class="fa fa-plus"> More...</span></span>':'';
-            var icon ='<span class="icon '+vo.icon+'"></span>';
-            var name='<span class="name">'+vo.name+'</span>';
-            var unit='<span class="unit">'+vo.unit+'</span>';
-            var utype='<span class="unittype">unit</span>';
-            var kws = '<span class="kws">'+'</span>';
-            var info = '<span class="info">'+vo.info+'</span>';
-            var row1='<div class="urow">'+kws+utype+'</div>';
-            var row2='<div class="urow">'+icon+name+unit+'</div>';
-            var row3='<div class="urow">'+more+info+'</div>';
-            return $('<div>').addClass('main').html(row1+row2+row3);
-        }
+       render():void{
+          if(this.byCat) this.show();
+           else this.hide();
+      }
+
+
+
+
     }
 }

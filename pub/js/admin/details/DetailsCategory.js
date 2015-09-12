@@ -20,10 +20,14 @@ var uplight;
                 return;
             var ind = this.indexed;
             var out = [];
-            for (var i = 0, n = ar.length; i < n; i++) {
-                out.push(ind[ar[i]].label);
+            for (var i = ar.length - 1; i >= 0; i--) {
+                var cat = ind[ar[i]];
+                if (cat)
+                    out.push(cat.label);
+                else
+                    ar.splice(i, 1);
             }
-            this.categories.val(out);
+            this.categories.val(out.reverse());
         };
         DetailsCategory.prototype.reset = function () {
             this.hideEditCategories();
@@ -32,12 +36,7 @@ var uplight;
         };
         DetailsCategory.prototype.createModel = function () {
             this.model = this.R.model.getCategories();
-            var ar = this.model;
-            var ind = {};
-            for (var i = 0, n = ar.length; i < n; i++) {
-                ind[ar[i].id] = ar[i];
-            }
-            this.indexed = ind;
+            this.indexed = _.indexBy(this.model, 'id');
         };
         DetailsCategory.prototype.setCurrent = function (dest) {
             this.current = dest;

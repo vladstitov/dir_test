@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../scripts/typings/greensock/greensock.d.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 module uplight.ads {
     export interface IAd {
         setData(data: any): void

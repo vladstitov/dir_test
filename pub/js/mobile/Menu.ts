@@ -4,70 +4,73 @@ module mobile {
 
     export class Menu {
 
-        private cats: uplight.VOItem[];
-        private pages: uplight.VOItem[];
-       view: JQuery;
-        private list: JQuery;
+        private cats: uplight.VOCategory[];
+        private pages: any[];
 
+        private listP: JQuery;
+        private listC:JQuery;
+        private btnMenu:JQuery;
+        private content:JQuery
 
-
-        getCategoryById(id: number): uplight.VOItem {
-            var data: uplight.VOItem[] = this.cats;
-            for (var i = 0, n = data.length; i < n; i++) if (data[i].catid == id) return data[i];
-            return null;
-        }
-        getPageById(id: number): uplight.VOItem {
-            var data: uplight.VOItem[] = this.pages;
-            for (var i = 0, n = data.length; i < n; i++) if (data[i].id == id) return data[i];
-            return null;
-        }
-
-
-private connector:uplight.Connector;
-        constructor(private id: string,conn:uplight.Connector) {
-            this.view = $(id);
-            this.list = $(id + ' [data-id=list]');
-            conn.getCategories((data) => this.onCatData(data));
-            this.connector=conn;
-        }
-
-
-        private onCatData(resp: string): void {
-           // console.log(resp);
-            var data:uplight.VOItem[] = JSON.parse(resp);
-            if (!$.isArray(data)) {
-                console.error(data);
-                return;
+        isHidden:boolean;
+        show():void{
+            if(this.isHidden){
+                this.isHidden = false;
+                this.content.show('fast');
             }
-            this.cats = data;           
-            var out: string = '';
-            for (var i = 0, n = data.length; i < n; i++) {
-                out += this.renderCat(data[i]);
-            }
+        }
 
-            this.list.html(out);            
-            this.connector.getPagesList((data) => this.onPagesData(data));
-        }
-        private onPagesData(resp: string): void {
-            var data: uplight.VOItem[] = JSON.parse(resp);
-            if (!$.isArray(data)) {
-                console.error(data);
-                return;
+        hide():void{
+            if(!this.isHidden){
+                this.isHidden = true;
+                this.content.hide('fast');
             }
-            this.pages = data;
-            //  var color: string = this.R.settings.color;;  
-            var out: string = '';
-            for (var i = 0, n = data.length; i < n; i++) {
-                out += this.renderPage(data[i]);
-            }
-           this.list.append(out);           
-           
         }
-        renderCat(item: uplight.VOItem): string {
-            return '<a class="u-brand" href="#category/'+item.catid+'">' + item.label + '</a>';
+
+        toggle():void{
+            if(this.isHidden)this.show();
+            else this.hide();
         }
-        renderPage(item: uplight.VOItem): string {
-            return '<a  class="u-brand" href="#page/' + item.id + '">' + item.label + '</a>';
+        constructor(private view:JQuery,private conn:uplight.Connector,private model:uplight.Model) {
+
+            this.listP = this.view.find( '[data-id=listP]:first');
+            this.listC = this.view.find( '[data-id=listC]:first');
+            this.content = this.view.find('[data-id=content]:first');
+            this.btnMenu = this.view.find('[data-id=btnMenu]:first').click(()=>this.toggle());
+            var cats:uplight.VOCategory[] = model.getCategories();
+            var d1:JQueryDeferred<uplight.VOCategory> = $.Deferred();
+            if(!cats) {
+                model.dispatcher.on(model.READY,()=>{
+                    cats=model.getCategories();
+                    d1.resolve(cats)})
+
+            }else d1.resolve(cats);
+            $.when(d1).then((cats)=>{
+                  console.log(cats);
+                var out: string = '';
+                var ar = cats
+                for (var i = 0, n = ar.length; i < n; i++)  for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand" href="#category/'+ar[i].id+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+                this.listC.html(out);
+               })
+
+
+           var p0 =   conn.getPages().done((res)=>{
+              // console.log(res);
+             var out='';
+              var ar = res
+              for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand" href="#page/'+ar[i].id+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+               this.listP.html(out);
+
+           });
+
+           // $.when(p0,d1).then((pages,cats)=>{
+            //    console.log(pages,cats);
+
+           // })
+
+
+          //  conn.getCategories((data) => this.onCatData(data));
+
         }
 
     }

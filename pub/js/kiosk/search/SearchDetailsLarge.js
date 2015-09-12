@@ -5,13 +5,29 @@
 var uplight;
 (function (uplight) {
     var SearchDetailsLarge = (function () {
-        function SearchDetailsLarge(vo) {
+        function SearchDetailsLarge(view) {
+            var _this = this;
+            this.view = view;
+            console.log(view);
+            view.find('[data-id=btnClose]').click(function () {
+                _this.hide();
+            });
+        }
+        SearchDetailsLarge.prototype.shoe = function () {
+            this.view.show();
+        };
+        SearchDetailsLarge.prototype.hide = function () {
+            this.view.hide();
+        };
+        SearchDetailsLarge.prototype.showDest = function (id) {
+            var vo = uplight.Registry.getInstance().model.getDestById(id);
             if (vo.imgs && vo.imgs.length)
                 this.createGallery(vo.imgs);
             if (vo.pgs && vo.pgs.length)
                 this.createPages(vo.pgs);
             this.vo = vo;
-        }
+            console.log(vo);
+        };
         SearchDetailsLarge.prototype.createGallery = function (imgs) {
             this.haveData = true;
             var ar = imgs;
@@ -45,17 +61,11 @@ var uplight;
         SearchDetailsLarge.prototype.createView = function () {
             var det = $('<div>').addClass('detailsL');
             det.append('<h2><span>' + this.vo.name + '</span><span class="pull-right">' + this.vo.unit + '</span></h2>');
-            if (this.detSm)
-                det.append(this.detSm.view);
             if (this.gall)
                 det.append(this.gall);
             if (this.pages)
                 det.append(this.pages);
             return det;
-        };
-        SearchDetailsLarge.prototype.setDetailsSmall = function (det) {
-            this.detSm = det;
-            return this;
         };
         return SearchDetailsLarge;
     })();

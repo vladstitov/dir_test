@@ -16,7 +16,7 @@ module uplight {
         mainport:JQuery
       //  cover:JQuery
         view:JQuery
-        viewDetails:JQuery
+       // viewDetails:JQuery
         detailsContent:JQuery;
         constructor(){
             this.view = $('#list-main');
@@ -26,8 +26,8 @@ module uplight {
             this.addListeners();
             this.cache={};
             this.mainport = $('#mainport');
-            this.viewDetails = $('#DetailsLarge').click((evt)=>this.onCoverClick(evt))
-            this.detailsContent = this.viewDetails.find('.content:first');
+           // this.viewDetails = $('#DetailsLarge').click((evt)=>this.onCoverClick(evt))
+          //  this.detailsContent = this.viewDetails.find('.content:first');
 
         }
 
@@ -45,30 +45,13 @@ module uplight {
             console.log('listeners');
         }
 
-        private getModelById(id:number):DestModel{
-            if(this.cache[id]) return this.cache[id];
-            var ar:DestModel[] = this.data;
-            for(var i=0,n=ar.length;i<n;i++){
-               if(ar[i].id==id){
-                   return this.cache[id]=ar[i];
-                   return ar[i];
-               }
-            }
-            return null;
-        }
 
         private onListClick(evt:JQueryEventObject):void{
            // console.log(evt.currentTarget);
             var id:number = $(evt.currentTarget).data('id');
-       // console.log(id);
-            if(isNaN(Number(id))) return;
 
-            var mod= this.getModelById(id);
-               if(mod){
-                   var det:JQuery =  mod.togleDetails();
-                   if(det)this.showDetailsLarge(det);
-               }
-
+            if(isNaN(Number(id)) || !this.dataInd[id]) return;
+            this.dataInd[id].togleDetails();
             this.R.connector.Stat('sr',id.toString());
 
         }
@@ -76,8 +59,8 @@ module uplight {
         private isDetails:boolean;
         private hideDetails():void{
             if(this.isDetails){
-                this.viewDetails.hide();
-                this.detailsContent.empty();
+               // this.viewDetails.hide();
+               // this.detailsContent.empty();
                 this.isDetails = false;
             }
         }
@@ -90,8 +73,8 @@ module uplight {
 
         private showDetailsLarge(det:JQuery):void{
 
-            this.viewDetails.show();
-            this.detailsContent.append(det);
+            //this.viewDetails.show();
+          //  this.detailsContent.append(det);
             this.isDetails = true;
 
         }
@@ -137,20 +120,30 @@ module uplight {
 
         private render(reset:boolean):void{
             var ar:DestModel[] = this.result;
+            this.list.empty();
            // console.log(this.data.length);
-            var list:JQuery = this.list.remove().html('');
-            for(var i=0,n=ar.length;i<n;i++) list.append(ar[i].getView(reset));
-            this.list.appendTo(this.view);
-            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+          //  var list:JQuery = this.list.remove().html('');
+         for(var i=0,n=ar.length;i<n;i++) this.list.append(ar[i].getView(reset));
+           // this.list.appendTo(this.view);
+           // this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
         }
 
+        private dataInd:DestModel[];
         private onDataReady():void{
             var ar = this.model.getData();
             var list= this.list, out:DestModel[] =[];
-            for(var i=0,n=ar.length;i<n;i++)  out.push(new DestModel(ar[i]));
+            var ind:DestModel[]=[];
+            for(var i=0,n=ar.length;i<n;i++) {
+                var dest:DestModel  = new DestModel(ar[i])
+                out.push(dest);
+                ind[dest.id] = dest;
+            }
+            this.dataInd=ind;
             this.data=out;
             this.result=out;
             this.render(false);
+            this.list.appendTo(this.view);
+            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
            // this.searchController = new SearchController());
         }
 

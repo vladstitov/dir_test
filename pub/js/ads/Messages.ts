@@ -1,5 +1,5 @@
-﻿/// <reference path="../../libs/typing/jquery.d.ts" />
-/// <reference path="../../../Scripts/typings/easeljs/easeljs.d.ts" />
+﻿/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/easeljs.d.ts" />
 module uplight.ads{
     import c = createjs;
     export class SS_1920 {

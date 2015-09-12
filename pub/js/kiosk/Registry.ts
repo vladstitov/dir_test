@@ -1,7 +1,6 @@
 ﻿/// <reference path="Connector.ts" />
 /// <reference path="search/KeyboardSimple.ts" />
 /// <reference path="search/SearchResult.ts" />
-/// <reference path="search/SearchDetails.ts" />
 /// <reference path="search/SearchModel.ts" />
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
@@ -9,8 +8,8 @@
 /// <reference path="Kiosk.ts" />
 
 /// <reference path="search/models.ts" />
-/// <reference path="../../libs/typing/greensock.d.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/greensock.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 
 
 var LISTVIEW: string = 'ListView';
@@ -109,52 +108,14 @@ module uplight {
 
 
     }
-    export class VOCategory {
-        constructor(obj:any){
-            for(var str in obj) this[str]=obj[str];
-            if(!this.dests) this.dests=[];
-        }
 
-        id: number;
-        sort: number;
-        label: string;
-        icon: string;
-        enable: number;
-        type:number;
-        dests:number[];
-    }
     export  class VOResult{
         result:string;
         success:string;
         error:string;
     }
 
-    export class VODestination {
-        constructor(obj:any){
-            for(var str in obj) this[str]=obj[str];
-            if(obj.cats=='0') this.cats=[];
-            else  if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
-            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
-        }
-        uid:string;
-        unit: string;
-        id: number;
-        destid:string;
-        info:string;
-        imgs:string[];
-        imgsD:string[];
-        name: string;
-        cats: number[];
-        categories:string[];
-        pgs: string;
-        more: string;
-        tmb:string
-        meta:string;
-        kws:string;
-        icon:string;
 
-
-    }
 
     export class VOAL {
         constructor(obj:any){ for(var str in obj) this[str]=obj[str];}

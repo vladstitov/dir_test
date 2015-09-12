@@ -1,4 +1,4 @@
-﻿/// <reference path="../../libs/typing/jquery.d.ts" />
+﻿/// <reference path="../typing/jquery.d.ts" />
 module models {
     export class ListViewModel {
         private _model: VOItem[];

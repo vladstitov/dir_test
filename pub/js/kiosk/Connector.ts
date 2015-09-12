@@ -10,8 +10,8 @@ module uplight {
 
         public onData: Function;
 
-        getData(filename:string):JQueryPromise<VOResult> {
-           return $.get(this.service + 'get_data&device=' + this.device+'&data='+filename);
+        getData(filename:string):JQueryPromise<string> {
+           return $.get(this.service + 'get_data&device=' + this.device+'&file_name='+filename);
 
         }
         getUpdates(stamp:number,callBack: Function, onError: Function): void {
@@ -22,9 +22,9 @@ module uplight {
             $.post(this.service + 'log_log',msg);
         }
 
-        relay(kiosk_id,stamp:number,now:number,ping:number,timer:number,status:string):JQueryPromise<VOResult>{
+        relay(stamp:number,now:number,ping:number,timer:number,status:string):JQueryPromise<VOResult>{
 
-            return $.get(this.service+'get_stamp&id='+kiosk_id+'&stamp='+stamp+'&now='+now+'&ping='+ping+'&timer='+timer+'&status='+status);
+            return $.get(this.service+'get_stamp&id='+this.id+'&stamp='+stamp+'&now='+now+'&ping='+ping+'&timer='+timer+'&status='+status);
 
         }
         Error(msg:string): void {
@@ -37,8 +37,8 @@ module uplight {
             $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&id='+this.id+'&stamp='+stamp);
         }
 
-        getCategories(callBack:Function) {
-            $.get(this.service + 'get_categories').done(callBack);
+        getCategories():JQueryPromise<VOCategory[]>  {
+           return $.get(this.service + 'get_categories');
 
         }
         ////////////////////////////////////////
@@ -46,10 +46,22 @@ module uplight {
             $.get(this.service + 'get_pages_list').done(callBack);
 
         }
-        getPage(callBack: Function,id:string) {
-            $.get(this.service + 'get_page&id='+id).done(callBack);
+
+        private pages:JQueryDeferred<any[]>;
+        getPages():JQueryPromise<any[]> {
+            if(!this.pages) this.pages = $.Deferred();
+                this.getData(u_settings.pages).done((res)=>{
+                    var ar = JSON.parse(res);
+                    for(var i=0,n=ar.length;i<n;i++){
+                      ar[i].label = ar[i].name;
+                    }
+                    this.pages.resolve(ar);
+                })
+
+            return   this.pages.promise();
 
         }
+
         ///////////////////////////////////////////////
         getSettings():JQueryPromise <JSON> {
             return $.get(this.service + 'get_settings',null,'application/json');

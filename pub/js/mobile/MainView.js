@@ -1,4 +1,5 @@
-﻿var mobile;
+/// <reference path="main.ts" />
+var mobile;
 (function (mobile) {
     var MainView = (function () {
         function MainView(view, width, height) {
@@ -9,20 +10,20 @@
             this.content = $('<div class="mycontent"></div>').width(this.width * 2 + 20).appendTo(this.slider);
         }
         /*
-        showView(el: JQuery): void {
-        
-        this.current = el;
-        this.content.append(el);
-        if (this.content.children().length > 1) {
-        //  console.log('animate   scrollLeft:' + this.width);
-        this.slider.animate({ scrollLeft: this.width }, 500, () => {
-        el.siblings().remove();
-        this.slider.scrollLeft(0);
-        });
-        }
-        }
-        
-        */
+                showView(el: JQuery): void {
+                   
+                    this.current = el;
+                    this.content.append(el);
+                    if (this.content.children().length > 1) {
+                      //  console.log('animate   scrollLeft:' + this.width);
+                        this.slider.animate({ scrollLeft: this.width }, 500, () => {
+                            el.siblings().remove();
+                            this.slider.scrollLeft(0);
+                        });
+                    }
+                }
+
+              */
         MainView.prototype.setHeader = function (str) {
             return this;
         };
@@ -42,12 +43,13 @@
         };
         MainView.prototype.showView = function (el, header) {
             var _this = this;
+            // this.addHeader(header); 
+            // this.addFooter(footer); 
             if (this.header)
                 this.header.prependTo(this.current);
             this.header = null;
             this.current = el;
             this.content.append(el);
-
             // var el = this.current;
             this.slider.animate({ scrollLeft: this.width }, 500, function () {
                 el.siblings().remove();
@@ -58,13 +60,13 @@
                 _this.slider.scrollLeft(0);
             });
         };
-
         MainView.prototype.showViewBack = function (el, header) {
             var _this = this;
             if (this.header)
                 this.header.prependTo(this.current);
             this.header = null;
-
+            // this.addHeader(header);
+            // this.addFooter(footer); 
             if (this.content.children().length > 1) {
                 console.log('CHIDREN more then 1');
                 this.current.siblings().remove();

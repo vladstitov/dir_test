@@ -1,15 +1,14 @@
 /// <reference path="Connector.ts" />
 /// <reference path="search/KeyboardSimple.ts" />
 /// <reference path="search/SearchResult.ts" />
-/// <reference path="search/SearchDetails.ts" />
 /// <reference path="search/SearchModel.ts" />
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
 /// <reference path="als/Gallery.ts" />'
 /// <reference path="Kiosk.ts" />
 /// <reference path="search/models.ts" />
-/// <reference path="../../libs/typing/greensock.d.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/greensock.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 var LISTVIEW = 'ListView';
 var DETAILSVIEV = 'DetailsView';
 var MENUVIEW = 'MenuView';
@@ -78,36 +77,12 @@ var uplight;
         return Registry;
     })();
     uplight.Registry = Registry;
-    var VOCategory = (function () {
-        function VOCategory(obj) {
-            for (var str in obj)
-                this[str] = obj[str];
-            if (!this.dests)
-                this.dests = [];
-        }
-        return VOCategory;
-    })();
-    uplight.VOCategory = VOCategory;
     var VOResult = (function () {
         function VOResult() {
         }
         return VOResult;
     })();
     uplight.VOResult = VOResult;
-    var VODestination = (function () {
-        function VODestination(obj) {
-            for (var str in obj)
-                this[str] = obj[str];
-            if (obj.cats == '0')
-                this.cats = [];
-            else if (typeof obj.cats === 'string' && obj.cats.length)
-                this.cats = obj.cats.split(',').map(Number);
-            if (typeof obj.imgs === 'string' && obj.imgs.length)
-                this.imgs = obj.imgs.split(',');
-        }
-        return VODestination;
-    })();
-    uplight.VODestination = VODestination;
     var VOAL = (function () {
         function VOAL(obj) {
             for (var str in obj)

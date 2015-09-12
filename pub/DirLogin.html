@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Directories Login</title>
-    <script type="text/javascript" src="libs/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
 
     <style>
         #loginForm{
@@ -16,6 +16,16 @@
             top: 0;
             bottom: 0;
         }
+
+        #Message{
+            position: absolute;
+            bottom: 20px;
+            padding: 5px;
+            background-color: #faebcc;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px gray;
+        }
+
 
 
     </style>
@@ -32,9 +42,9 @@
 
 
             var message = function(msg){
-                    $('#Message').html(msg)
+                    $('#Message').html(msg).removeClass('hidden').fadeIn();
                 setTimeout(function(){
-                    $('#Message').html('');
+                    $('#Message').fadeOut();
                 },5000)
             }
 
@@ -70,6 +80,7 @@
                         return;
                     }
 
+
                     switch(vo.success){
                         case 'loggedin':
                             setTimeout(function(){
@@ -80,6 +91,10 @@
                             setTimeout(function(){
                                 window.location.href = vo.url;
                             },3000);
+                            break;
+                        case 'wrong':
+                                console.log('wrong');
+                            message(vo.msg)
                             break;
                     }
 
@@ -303,8 +318,8 @@
 
     </script>
 
-    <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -312,6 +327,11 @@
 
         <div id="loginForm" class="panel panel-default">
             <div class="panel-body">
+                <div style="position: relative">
+                    <div id="Message" class="hidden">
+
+                    </div>
+                </div>
                 <form role="form">
                     <div class="form-group">
                         <label for="user">Username</label>

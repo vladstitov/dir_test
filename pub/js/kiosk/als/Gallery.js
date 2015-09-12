@@ -30,12 +30,13 @@ var uplight;
             this.interval = 0;
             this.view = $('<div>');
             this.list = $('<div>').appendTo(this.view);
-            $.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(JSON.parse(res)); });
+            $.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(res); });
             uplight.Registry.getInstance().dispatcher.on(uplight.Registry.getInstance().SS_START, function () { return _this.start(); });
             uplight.Registry.getInstance().dispatcher.on(uplight.Registry.getInstance().SS_STOP, function () { return _this.stop(); });
         }
-        GalleryDisplay.prototype.onData = function (data) {
-            //console.log(data);
+        GalleryDisplay.prototype.onData = function (res) {
+            var data = JSON.parse(res);
+            console.log(data);
             var ar = data.gallery;
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {

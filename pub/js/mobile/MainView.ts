@@ -1,4 +1,6 @@
-﻿module mobile {
+﻿/// <reference path="main.ts" />
+
+module mobile {
     export class MainView {
         private current: JQuery;       
         private content: JQuery;

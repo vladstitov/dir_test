@@ -1,71 +1,65 @@
-﻿/// <reference path="../kiosk/registry.ts" />
+/// <reference path="../kiosk/registry.ts" />
 var mobile;
 (function (mobile) {
     var Menu = (function () {
-        function Menu(id, conn) {
+        function Menu(view, conn, model) {
             var _this = this;
-            this.id = id;
-            this.view = $(id);
-            this.list = $(id + ' [data-id=list]');
-            conn.getCategories(function (data) {
-                return _this.onCatData(data);
+            this.view = view;
+            this.conn = conn;
+            this.model = model;
+            this.listP = this.view.find('[data-id=listP]:first');
+            this.listC = this.view.find('[data-id=listC]:first');
+            this.content = this.view.find('[data-id=content]:first');
+            this.btnMenu = this.view.find('[data-id=btnMenu]:first').click(function () { return _this.toggle(); });
+            var cats = model.getCategories();
+            var d1 = $.Deferred();
+            if (!cats) {
+                model.dispatcher.on(model.READY, function () {
+                    cats = model.getCategories();
+                    d1.resolve(cats);
+                });
+            }
+            else
+                d1.resolve(cats);
+            $.when(d1).then(function (cats) {
+                console.log(cats);
+                var out = '';
+                var ar = cats;
+                for (var i = 0, n = ar.length; i < n; i++)
+                    for (var i = 0, n = ar.length; i < n; i++)
+                        out += '<a class="u-brand" href="#category/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                _this.listC.html(out);
             });
-            this.connector = conn;
+            var p0 = conn.getPages().done(function (res) {
+                // console.log(res);
+                var out = '';
+                var ar = res;
+                for (var i = 0, n = ar.length; i < n; i++)
+                    out += '<a class="u-brand" href="#page/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                _this.listP.html(out);
+            });
+            // $.when(p0,d1).then((pages,cats)=>{
+            //    console.log(pages,cats);
+            // })
+            //  conn.getCategories((data) => this.onCatData(data));
         }
-        Menu.prototype.getCategoryById = function (id) {
-            var data = this.cats;
-            for (var i = 0, n = data.length; i < n; i++)
-                if (data[i].catid == id)
-                    return data[i];
-            return null;
-        };
-        Menu.prototype.getPageById = function (id) {
-            var data = this.pages;
-            for (var i = 0, n = data.length; i < n; i++)
-                if (data[i].id == id)
-                    return data[i];
-            return null;
-        };
-
-        Menu.prototype.onCatData = function (resp) {
-            var _this = this;
-            // console.log(resp);
-            var data = JSON.parse(resp);
-            if (!$.isArray(data)) {
-                console.error(data);
-                return;
+        Menu.prototype.show = function () {
+            if (this.isHidden) {
+                this.isHidden = false;
+                this.content.show('fast');
             }
-            this.cats = data;
-            var out = '';
-            for (var i = 0, n = data.length; i < n; i++) {
-                out += this.renderCat(data[i]);
-            }
-
-            this.list.html(out);
-            this.connector.getPagesList(function (data) {
-                return _this.onPagesData(data);
-            });
         };
-        Menu.prototype.onPagesData = function (resp) {
-            var data = JSON.parse(resp);
-            if (!$.isArray(data)) {
-                console.error(data);
-                return;
+        Menu.prototype.hide = function () {
+            if (!this.isHidden) {
+                this.isHidden = true;
+                this.content.hide('fast');
             }
-            this.pages = data;
-
-            //  var color: string = this.R.settings.color;;
-            var out = '';
-            for (var i = 0, n = data.length; i < n; i++) {
-                out += this.renderPage(data[i]);
-            }
-            this.list.append(out);
         };
-        Menu.prototype.renderCat = function (item) {
-            return '<a class="u-brand" href="#category/' + item.catid + '">' + item.label + '</a>';
-        };
-        Menu.prototype.renderPage = function (item) {
-            return '<a  class="u-brand" href="#page/' + item.id + '">' + item.label + '</a>';
+        Menu.prototype.toggle = function () {
+            if (this.isHidden)
+                this.show();
+            else
+                this.hide();
         };
         return Menu;
     })();

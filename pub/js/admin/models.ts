@@ -1,6 +1,31 @@
 ﻿/// <reference path="RegA.ts" />
 module uplight{
 
+    export class VODestination {
+        constructor(obj:any){
+            for(var str in obj) this[str]=obj[str];
+            if(obj.cats=='0') this.cats=[];
+            else  if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
+            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
+            if(!this.uid) this.uid=''+this.id;
+        }
+        uid:string;
+        unit: string;
+        id: number;
+        destid:string;
+        info:string;
+        imgs:string[];
+        imgsD:string[];
+        name: string;
+        cats: number[];
+        categories:string[];
+        pgs: string;
+        more: string;
+        tmb:string;
+        meta:string;
+        kws:string;
+    }
+
     export class DestinantionsModel{
 
         dispatcher=$({})

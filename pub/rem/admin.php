@@ -2,6 +2,11 @@
 session_start();
 define('DATA','../../data/');
 define('IMG','images/');
+define('DETAILS','details/');
+define('DETAILS_IMG','details/img/');
+define('PREFIX','../');
+define('PAGES','pages/');
+
 
 
 if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admin'){

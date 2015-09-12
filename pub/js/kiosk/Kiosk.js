@@ -17,12 +17,15 @@ var uplight;
     var Kiosk = (function () {
         function Kiosk() {
             var _this = this;
+            this.errors = '';
+            this.warns = '';
+            console.log('kiodk');
             document.addEventListener('mousedown', function (evt) { return _this.onMouseDown(evt); }, true);
             var r = uplight.Registry.getInstance();
             r.connector = new uplight.Connector();
-            r.connector.id = kiosk_id;
+            r.connector.id = u_settings.kiosk;
             r.connector.who = 'kiosk';
-            r.model = new uplight.Model();
+            r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
             r.settings = u_settings;
             r.dispatcher = $({});
             this.R = r;
@@ -32,11 +35,14 @@ var uplight;
             var cats = new uplight.Categories();
             var mm = new uplight.MainMenu();
             mm.onClick = function (item) { return _this.onMenuClick(item); };
+            this.dest = new uplight.SearchDetailsLarge($('#DetailsLarge'));
+            console.log(this.dest);
             $('#btnSearch').click(function () { return _this.shoeSearch(); });
             $('#SearchView [data-id=btnClose]').click(function () { return _this.showMenu(); });
             $('#SearchView [data-id=btnShowMenu]').click(function () { return _this.showMenu(); });
             this.searchResult = new uplight.SearchResult();
-            var relay = new Relay(u_settings.timer);
+            if (!u_settings.hasOwnProperty('norelay'))
+                var relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START, function () {
                 r.dispatcher.triggerHandler(r.RESET_ALL);
             });
@@ -72,23 +78,31 @@ var uplight;
         Kiosk.prototype.onMenuClick = function (item) {
             this.showPages(item);
         };
+        Kiosk.prototype.error = function (str) {
+            this.errors += str + "\n";
+        };
+        Kiosk.prototype.warn = function (str) {
+            this.warns += str + "\n";
+        };
         Kiosk.prototype.unblock = function () {
             this.isBlocked = false;
         };
         Kiosk.prototype.onHachChange = function () {
             var _this = this;
+            var h = document.location.hash;
             if (this.isBlocked) {
-                document.location.hash = this.prevHash;
+                document.location.hash = h;
                 return;
             }
-            this.prevHash = document.location.hash;
+            this.prevHash = h;
             this.isBlocked = true;
             setTimeout(function () { return _this.unblock(); }, 500);
-            var hash = this.prevHash.split('=');
+            var hash = h.split('/');
             switch (hash[0]) {
                 case '#category':
                     break;
                 case '#destid':
+                    this.dest.showDest(Number(hash[1]));
                     break;
             }
         };
@@ -110,7 +124,7 @@ var uplight;
             var now = (new Date()).getTime();
             var timer = now - this.timer;
             this.timer = now;
-            uplight.Registry.getInstance().connector.relay(kiosk_id, this.stamp, Math.round(now / 1000), this.ping, timer, uplight.Registry.status).done(function (res) {
+            uplight.Registry.getInstance().connector.relay(this.stamp, Math.round(now / 1000), this.ping, timer, uplight.Registry.status).done(function (res) {
                 that.ping = (new Date()).getTime() - now;
                 var vo;
                 try {

@@ -3,38 +3,55 @@
 var mobile;
 (function (mobile) {
     var InfoPage = (function () {
-        function InfoPage(id, conn) {
-            //////////////////////////////////////////////////////////////////////////////////
-            this.cache = {};
-            this.view = $(id);
-            this.content = $(id + ' [data-id=content]');
-            this.title = $(id + ' [data-id=title]');
-            this.connector = conn;
-        }
-        InfoPage.prototype.reset = function () {
-            this.cache = {};
-        };
-        InfoPage.prototype.getPage = function (page) {
-            var id = page.id;
-            this.title.text(page.label);
-            if (!this.cache[id]) {
-                this.cache[id] = 'Loading....';
-                this.loadPage(id.toString());
-            }
-            this.content.html(this.cache[id]);
-            return this.view;
-        };
-        InfoPage.prototype.loadPage = function (id) {
+        function InfoPage(view, connector) {
             var _this = this;
-            this.pageid = id;
-            this.connector.getPage(function (res) { return _this.onPageLoaded(res); }, id);
+            this.view = view;
+            this.connector = connector;
+            this.cache = {};
+            this.content = view.find('[data-id=content]');
+            this.title = view.find('[data-id=title]');
+            var pgs = connector.getPages().done(function (res) {
+                _this.data = res;
+                console.log(res);
+            });
+        }
+        InfoPage.prototype.show = function () {
+            if (this.isHidden) {
+                this.isHidden = false;
+                this.view.show('fast');
+            }
         };
-        InfoPage.prototype.onPageLoaded = function (res) {
-            this.cache[this.pageid] = res;
-            this.content.html(res);
+        InfoPage.prototype.hide = function () {
+            if (!this.isHidden) {
+                this.isHidden = true;
+                this.view.hide('fast');
+            }
+        };
+        InfoPage.prototype.showPage = function (item) {
+            var _this = this;
+            if (item.html)
+                this.content.html(item.html);
+            else {
+                $.get(item.url).done(function (res) {
+                    item.html = res;
+                    _this.content.html(item.html);
+                });
+            }
+            this.show();
+        };
+        InfoPage.prototype.showInfo = function (id) {
+            var ar = this.data;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                if (item.id == id)
+                    break;
+            }
+            console.log(item);
+            if (item.id == id)
+                this.showPage(item);
         };
         return InfoPage;
     })();
     mobile.InfoPage = InfoPage;
 })(mobile || (mobile = {}));
-//# sourceMappingURL=InfoPage.js.map
+//# sourceMappingURL=infopage.js.map
