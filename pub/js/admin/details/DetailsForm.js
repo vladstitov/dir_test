@@ -9,10 +9,25 @@ var uplight;
     var DetailsForm = (function () {
         function DetailsForm(form) {
             var _this = this;
+            this.div = $('<div>');
             this.haveChanges = true;
             this.view = form;
             this.R = uplight.RegA.getInstance();
+            this.view.find('[data-id=btnClose]').click(function () {
+                if (_this.onClose)
+                    _this.onClose();
+            });
+            this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
+                var btn = _this.btnSave;
+                btn.prop('disabled', true);
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                }, 1500);
+                if (_this.onSave)
+                    _this.onSave();
+            });
             this.pages = $('#details-pages');
+            this.images = this.view.find('[data-id=images]:first');
             this.name = form.find('[data-id=tiName]:first');
             this.unit = form.find('[data-id=tiUnit]:first');
             this.form = form;
@@ -30,33 +45,34 @@ var uplight;
             this.btnDeleteRow = this.form.find('[data-id=btnDeleteRow]:first').on(CLICK, function () { return _this.onDeleteRowClicked(); });
             this.details.on(CLICK, 'tr', function (evt) { return _this.onRowSelected($(evt.currentTarget)); });
             this.categories = new uplight.DetailsCategory(form);
-            // this.editor = new nicEditor({ fullPanel: true });
-            // this.editor.setPanel('myNicPanel');
-            // this.editor.addInstance('details-pages');
-            this.imagesEditor = new uplight.DetailsImages($('#DetailsImagesEdit'), $('#images-container'));
-            this.imagesEditor.view.find('.fa-close').on(CLICK, function () { return _this.onImageEditorCloseClick(); });
-            this.imagesEditor.view.find('[data-id=btnDone]').on(CLICK, function () { return _this.onImageEditorDoneClick(); });
+            this.imagesEditor = new uplight.DetailsImages($('#DetailsImagesEdit'));
             this.imagesEditor.hide();
-            $('#DetailsImages [data-id=btnEfit]:first').on(CLICK, function () { return _this.onEditImagesClick(); });
+            this.imagesEditor.onSave = function () { return _this.hideImageEditor(); };
+            this.imagesEditor.onClose = function () { return _this.hideImageEditor(); };
+            this.imagesEditor.onCancel = function () { return _this.hideImageEditor(); };
+            $('#DetailsImages [data-id=btnEdit]:first').on(CLICK, function () { return _this.onEditImagesClick(); });
         }
+        DetailsForm.prototype.encode = function (str) {
+            return str; //this.div.text(str).html();
+        };
         DetailsForm.prototype.getDestination = function () {
             if (!this.current)
                 return null;
             var vo = this.current;
-            vo.name = this.name.val();
+            vo.name = this.encode(this.name.val());
             if (vo.name.length < 2) {
                 this.R.msg('Name is required', this.name);
                 return null;
             }
-            vo.unit = this.unit.val() || '';
-            vo.info = this.info.val() || '';
-            vo.imgs = this.imagesEditor.getData();
-            vo.imgsD = this.imagesEditor.getDeleted();
+            vo.unit = this.encode(this.unit.val() || '');
+            vo.info = this.encode(this.info.val() || '');
+            vo.imgs = this.imagesEditor.getData().toString();
+            // vo.imgsD = this.imagesEditor.getDeleted();
             // vo.cats = this.categories.getCurrent();
             vo.more = this.collectDataFromTable();
-            vo.meta = this.meta.val() || '';
-            vo.kws = this.keywords.val() || '';
-            vo.uid = this.uid.val() || '';
+            vo.meta = this.encode(this.meta.val() || '');
+            vo.kws = this.encode(this.keywords.val() || '');
+            vo.uid = this.encode(this.uid.val());
             vo.tmb = this.tmbImg.attr('src');
             var pages = this.pages.html();
             if (pages.length > 20) {
@@ -72,7 +88,6 @@ var uplight;
         };
         DetailsForm.prototype.show = function () {
             this.view.show();
-            this.render();
         };
         DetailsForm.prototype.focusName = function () {
             this.name.focus();
@@ -94,14 +109,18 @@ var uplight;
             this.tmbImg.attr('src', null);
             // this.showItemCategories();
         };
-        DetailsForm.prototype.setDestibation = function (vo) {
+        DetailsForm.prototype.setDestination = function (vo) {
             this.current = vo;
             this.categories.setCurrent(vo);
             this.imagesEditor.setData(vo);
         };
-        DetailsForm.prototype.setID = function (num) {
-            this.current.id = num;
-            this.dbid.text(num);
+        DetailsForm.prototype.setID = function (id) {
+            this.current.id = id;
+            this.dbid.text(id);
+            if (!this.current.uid.length) {
+                this.current.uid = '' + id;
+                this.uid.val(this.current.uid);
+            }
         };
         DetailsForm.prototype.onUploadTumb = function (res) {
             this.tmbImg.attr('src', res.result);
@@ -117,20 +136,17 @@ var uplight;
                 this.R.connector.uploadDestinationImage(form, this.current.uid).done(function (res) { return _this.onUploadTumb(res); });
             }
         };
-        DetailsForm.prototype.onImageEditorDoneClick = function () {
-            this.imagesEditor.render();
+        DetailsForm.prototype.hideImageEditor = function () {
+            if (this.current.imgs)
+                this.images.html(this.renderImages(this.current.imgs));
             this.view.show();
             this.imagesEditor.hide();
         };
         DetailsForm.prototype.onEditImagesClick = function () {
             this.view.hide();
-            this.imagesEditor.show();
-        };
-        DetailsForm.prototype.onImageEditorCloseClick = function () {
-            this.imagesEditor.resetData();
+            this.imagesEditor.setData(this.current);
             this.imagesEditor.render();
-            this.view.show();
-            this.imagesEditor.hide();
+            this.imagesEditor.show();
         };
         //////////TABLE/////////////////////
         DetailsForm.prototype.onRowSelected = function (el) {
@@ -179,8 +195,10 @@ var uplight;
             var out = [];
             list.each(function (ind, el) {
                 var tr = $(el);
-                var str = tr.children('td:nth-child(1)').text() + "\t" + tr.children('td:nth-child(2)').text();
-                out.push(str.replace('\u00a0', ''));
+                if (tr.text().length > 5) {
+                    var str = tr.children('td:nth-child(1)').text() + "\t" + tr.children('td:nth-child(2)').text();
+                    out.push(str.replace('\u00a0', ''));
+                }
             });
             return out.join('\n');
         };
@@ -193,7 +211,10 @@ var uplight;
                 this.info.val(vo.info);
                 this.renderTable(vo.more);
                 this.categories.render();
-                this.imagesEditor.render();
+                if (vo.imgs.length)
+                    this.images.html(this.renderImages(vo.imgs));
+                else
+                    this.images.html('');
                 this.uid.val(vo.uid);
                 this.meta.val(vo.meta);
                 this.dbid.text(vo.id);
@@ -207,6 +228,14 @@ var uplight;
             }
             else
                 return false;
+        };
+        DetailsForm.prototype.renderImages = function (imgs) {
+            var ar = imgs.split(',');
+            var out = '';
+            for (var i = 0, n = ar.length; i < n; i++) {
+                out += '<a><img src="' + ar[i] + '" /></a>';
+            }
+            return out;
         };
         DetailsForm.prototype.getDestinationId = function () {
             if (this.current)

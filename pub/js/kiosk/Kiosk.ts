@@ -13,6 +13,8 @@
 /// <reference path="Connector.ts" />
 /// <reference path="search/Keywords.ts" />
 /// <reference path="MainMenu.ts" />
+/// <reference path="utils/Relay.ts" />
+/// <reference path="utils/Timeout.ts" />
 
 declare var u_settings:any;
 
@@ -22,8 +24,11 @@ module uplight {
        private R: Registry;
        private keyboard: Keyboard;
        private timeout:number
-       private dest:SearchDetailsLarge
-
+       private details:DetailsLarge
+       private searchInput:SearchInput;
+       private cateegories:Categories;
+       private mainMenu:MainMenu;
+       keywords:Keywords;
 
        private onMouseDown(evt:MouseEvent):void{
 
@@ -83,9 +88,11 @@ module uplight {
            var cats= new Categories();
            var mm = new MainMenu();
            mm.onClick = (item)=>this.onMenuClick(item);
+           var timeout:Timeout = new Timeout(u_settings.ss_timeout)
 
-          this.dest = new SearchDetailsLarge($('#DetailsLarge'));
-           console.log(this.dest);
+          this.details = new DetailsLarge($('#DetailsLarge'));
+           this.details.onClose = ()=>{  this.details.hide();  }
+
 
 
            $('#btnSearch').click(()=>this.shoeSearch());
@@ -95,9 +102,18 @@ module uplight {
 
          this.searchResult = new SearchResult();
 
+           this.searchResult.onSelect = (id)=>{
+               var dest:VODestination = this.R.model.getDestById(id);
+               if(dest.imgs) this.details.setDestination(dest).render().show();
+               else this.searchResult.showDestination(dest);
+               console.log(dest);
+           }
+
            if(!u_settings.hasOwnProperty('norelay'))  var relay:Relay = new Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
 
+
+          // setTimeout(()=>{ DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
           // Registry.getInstance().connector.Log('kiosk started succesguly');
          // Registry.getInstance().connector.Error('kiosk started succesguly');
 
@@ -129,60 +145,30 @@ module uplight {
                   // var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));
                   // this.maiView.showView(this.searchResult.getListByCategory(cat));
                    break;
-               case '#destid':
-                   this.dest.showDest(Number(hash[1]));
+               case '#dest':
+
+                 //  this.dest.showDest(Number(hash[1]));
                  //  this.keyboardView.hideKeyboard();
                  //  this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
                    break;
+               case'#ScreenSaver':
+                   window.location.reload();
+                   /*
+                   this.details.reset();
+                   this.searchResult.reset();
+                   this.keyboard.reset();
+                   this.cateegories.reset();
+                   this.keywords.reset();
+                   */
+
+                   break
 
            }
        }
 
     }
 
-    export class Relay{
-        constructor(delay:number){
-            if(isNaN(delay) || delay<2) delay = 2;
-            this.timer =(new Date()).getTime();
-            setInterval(()=>this.relay(),delay*1000);
-        }
 
-        private stamp:number=0;
-        private ping:number=0;
-        private timer:number
-
-        private relay():void{
-            var that=this;
-            var now=(new Date()).getTime();
-            var timer=now- this.timer;
-            this.timer=now;
-            Registry.getInstance().connector.relay(this.stamp,Math.round(now/1000),this.ping,timer,Registry.status).done(function(res:string){
-                that.ping=(new Date()).getTime()-now;
-                var vo:VOResult
-                try{
-                    vo = JSON.parse(res)
-                }catch(e){
-                    console.warn('relay doesnt work '+ res);
-                    return;
-                }
-
-                switch(vo.success){
-                    case 'reload':
-                        window.location.reload();
-                        break;
-                    case 'load':
-                        window.location.href=vo.result;
-                        break;
-                    case 'stamp':
-                        that.stamp = Number(vo.result);
-                        break;
-                }
-
-
-            })
-        }
-    }
-    
 }
 
 $(document).ready(()=>{

@@ -34,15 +34,13 @@ module uplight{
             this.view = $('#DetailsEditor');
 
             this.list = new DetailsList($('#DetailsList'));
-            this.detailsForm = new DetailsForm($('#DetailsForm'));
-            this.detailsForm.view.find('.panel-heading .fa-close:first').on(CLICK,()=>{
-               this.hideForm();
-            });
-            this.detailsForm.hide();
-            this.list.dispatcher.on(this.list.SELECTED,(evt,data)=>{
-                this.detailsForm.setDestibation(data);
 
-            });
+            this.detailsForm = new DetailsForm($('#DetailsForm'));
+
+            this.detailsForm.onClose = ()=>this.hideForm();
+            this.detailsForm.onSave = ()=>this.onBtnSaveClick();
+            this.detailsForm.hide();
+
 
             if(this.R.isSuper) this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(()=>this.onDrop());
 
@@ -51,7 +49,7 @@ module uplight{
             this.btnDel = this.view.find('[data-id=btnDel]:first').on(CLICK, () => this.onBtnDelClick());
 
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').on(CLICK, () => this.onBtnEditClick());
-            this.btnSave = this.detailsForm.view.find('[data-id=btnSave]:first').on(CLICK, () => this.onBtnSaveClick());
+
             //this.showForm();
         }
 
@@ -69,8 +67,9 @@ module uplight{
         }
 
        private onBtnAddClick(): void {
-                var dest: VODestination = new VODestination({id:0,cats:[]});
-                this.detailsForm.setDestibation(dest);
+                var dest: VODestination = new VODestination({id:0,cats:[],imgs:''});
+                this.detailsForm.setDestination(dest);
+           this.detailsForm.render();
            this.list.hide();
            this.detailsForm.show();
            this.detailsForm.focusName();
@@ -81,7 +80,8 @@ module uplight{
         private onBtnEditClick():void{
           var dest:VODestination = this.list.getSelectedItem();
             if(dest){
-                this.detailsForm.setDestibation(dest);
+                this.detailsForm.setDestination(dest);
+                this.detailsForm.render();
                 this.list.hide();
                 this.detailsForm.show();
                 this.detailsForm.focusName();
@@ -94,36 +94,29 @@ module uplight{
             console.log(res);
 
             if(res.success){
-                if(res.success=='insert'){
+                if(res.success=='inserted'){
                     this.detailsForm.setID( Number(res.result));
-
                     var dest= this.detailsForm.getDestination();
                     this.list.setSelectedItem(dest);
                 }
-                this.R.msg('Record Saved', this.btnSave);
+                this.R.msg('Record Saved', this.detailsForm.btnSave);
+            }  else this.R.msg('ERROR Saving record', this.detailsForm.btnSave);
 
-            }  else this.R.msg('ERROR ', this.btnSave.parent());
-
-
-
+            this.R.model.refreshData();
         }
 
         private onBtnSaveClick(): void {
-           // if (this.btnSave.hasClass(DISABLED)) return;
-            var btn = this.btnSave
-            btn.prop('disabled',true);
-            setTimeout(function(){btn.prop('disabled',false);},1500);
-            var dest = this.detailsForm.getDestination();
-            if (!dest) return;
-
-            this.R.model.saveDestination((res) => this.onSave(res),dest,this.detailsForm.getPages());
-
+            var vo:VODestination = this.detailsForm.getDestination();
+            if (!vo) return;
+            if(!vo.uid) vo.uid =  DestinantionsModel.encodeUID(vo.name)
+            var out=JSON.stringify(vo);
+            this.R.connector.saveDestination(out).done((res)=>this.onSave(res));
+            //this.R.model.saveDestination((res) => this.onSave(res),dest,this.detailsForm.getPages());
         }
       ////////////////////////////////////////////////////////////////////////////////////////////////
         private onDelete(res): void {
             this.R.msg('Record deleted', this.btnDel);
             this.list.selectedItem=null;
-            this.detailsForm.setDestibation(null);
         }
        // private onDeleteConfirmed(): void {
            // this.R.vo.deleteDestination(this.detailsForm., (res) => this.onDelete(res));

@@ -59,7 +59,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
 <style>
-    .hideme{
+    .hide{
         display: none;
     }
     li>a{
@@ -168,7 +168,13 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
                         </section>
                         <hr style="margin-bottom: 0"/>
-                        <section id="list-main" class="nano col-lg-12">
+                        <section  class="col-lg-12">
+                            <div id="list-main">
+                                <div class="nano-content" data-id="list">
+
+                                </div>
+                            </div>
+
 
                         </section>
                         <hr style="margin-top: 0"/>
@@ -329,22 +335,71 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
     </section>
 
-   <section id="DetailsLarge" class="modal" data-id="btnClose" style="display: block"  >
+   <section id="DetailsLarge" class="modal hide" data-id="btnClose" >
+       <style>
+           #DetailsLarge{
+
+           }
+           #DetailsLarge .nano {
+               overflow-x: auto;
+               overflow-y: hidden;
+               height: 100px;
+           }
+           #DetailsLarge .hlist {
+               white-space: nowrap;
+               height: 100px;
+           }
+           #DetailsLarge .hlist>a {
+               vertical-align: top;
+               position: relative;
+               width: 100px;
+               height: 100px;
+               display: inline-block;
+               margin: 0 5px 0 5px;
+           }
+           #DetailsLarge .hlist>a>img {
+               max-height: 100px;
+               max-width: 100px;
+               position: absolute;
+               margin: auto;
+               top: 0;
+               bottom: 0;
+               left: 0;
+               right: 0;
+           }
+           #DetailsLarge .shell{
+               width: 658px;
+               height: 466px;
+               position: relative;
+           }
+           #DetailsLarge .shell>img{
+               max-width: 658px;
+              max-height: 466px;
+               position: absolute;
+               margin: auto;
+               top: 0;
+
+               bottom: 0;
+               left: 0;
+               right: 0;
+           }
+
+       </style>
         <div class="modal-dialog">
             <div class="modal-content Plastic031 central">
 
                 <div class="modal-header">
-                    <div class="fa fa-close pull-right" data-id="btnClose"></div>
+                    <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
                     <div class="row">
                         <div class="col-sm-9">
                            <h4>Name</h4>
-                            <h2>
+                            <h2 data-id="name">
                                 Remove a portion
                             </h2>
                         </div>
                         <div class="col-sm-3">
                             <h4>unit</h4>
-                           <h2></h2>
+                           <h2 data-id="unit"></h2>
                         </div>
                     </div>
                 </div>
@@ -353,17 +408,29 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                         <div class="col-sm-8 more" data-id="more">
 
                         </div>
-                        <div class="col-sm-4 tmb" data-id="tmb">
+                        <div class="col-sm-4 tmb" data-id="tumb">
 
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12" data-id="img">
+                        <div class="col-sm-12">
+                            <div class="shell">
+                                <img data-id="image" />
+                            </div>
 
                         </div>
                     </div>
+                    <hr/>
                     <div class="row">
-                        <div class="col-sm-12" data-id="gallery">
+                        <div class="col-sm-12" >
+                            <div class="nano">
+                                <div  class="nano-content">
+                                    <div data-id="gallery" class="hlist">
+
+                                    </div>
+
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -391,13 +458,14 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
 <script src="js/kiosk/search/Keywords.js" ></script>
 <script src="js/kiosk/search/SearchResult.js"></script>
-<script src="js/kiosk/search/SearchDetailsLarge.js"></script>
+<script src="js/kiosk/search/DetailsLarge.js"></script>
 
 <script src="js/kiosk/search/SearchModel.js"></script>
 <script src="js/kiosk/search/Categories.js"></script>
 
 <script src="js/kiosk/InfoPage.js"></script>
 <script src="js/kiosk/MainMenu.js"></script>
+<script src="js/kiosk/utils/Relay.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
 <!--<script src="js/kiosk/MainView.js"></script>

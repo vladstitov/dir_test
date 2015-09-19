@@ -1,7 +1,7 @@
 /// <reference path="../kiosk/registry.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
-var mobile;
-(function (mobile) {
+/// <reference path="../typing/jquery.d.ts" />
+var uplight;
+(function (uplight) {
     var DetailsPage = (function () {
         function DetailsPage(view, connector, model) {
             this.view = view;
@@ -34,6 +34,10 @@ var mobile;
                 this.view.hide('fast');
             }
         };
+        DetailsPage.prototype.renderTable = function () {
+            var out = '';
+            return out;
+        };
         DetailsPage.prototype.renderDetails = function (dest) {
             var out = $('<div>').html('<p class="xlarge"><span class="left">' + dest.name + '</span><span class="right">' + dest.unit + '</span></p>');
             // if (dest.email || dest.phone || dest.website) {
@@ -47,6 +51,6 @@ var mobile;
         };
         return DetailsPage;
     })();
-    mobile.DetailsPage = DetailsPage;
-})(mobile || (mobile = {}));
-//# sourceMappingURL=detailspage.js.map
+    uplight.DetailsPage = DetailsPage;
+})(uplight || (uplight = {}));
+//# sourceMappingURL=DetailsPage.js.map

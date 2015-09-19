@@ -40,7 +40,7 @@ var uplight;
                 this.R.dispatcher.triggerHandler(this.R.KEYWORD_PRESSED, val);
         };
         Keywords.prototype.renderItem = function (item, i) {
-            return '<li data-i="' + i + '">' + item.label + '</li>';
+            return '<li data-i="' + i + '"><a class="btn">' + item.label + '</a></li>';
         };
         return Keywords;
     })();

@@ -5,22 +5,20 @@ module uplight{
     export class VODestination {
         constructor(obj:any){
             for(var str in obj) this[str]=obj[str];
-            if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
-            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
         }
         uid:string;
         unit: string;
         id: number;
        // destid:string;
         info:string;
-        imgs:string[];
-        imgsD:string[];
+        imgs:string;
+        //imgsD:string[];
         name: string;
         cats: number[];
-        categories:string[];
+       // categories:string[];
         pgs: string;
         more: string;
-        tmb:string
+        tmb:string;
         meta:string;
         kws:string;
         icon:string;
@@ -137,12 +135,15 @@ module uplight{
             var ind:any[] =[];
             var kws:any={};
             for(var i=0,n=ar.length;i<n;i++){
+                if(!ar[i].name) continue;
+
+                if(typeof ar[i].cats === 'string') ar[i].cats=ar[i].cats.split(',').map(Number);
                 var dest:VODestination = new VODestination(ar[i]);
                 ind[dest.id] = dest;
-                if(dest.kws.length){
-                    dest.kws.split(',').forEach(function(el){
-                        if(!kws[el])kws[el]=[];
-                        kws[el].push(dest.id);
+                if(dest.kws && dest.kws.length){
+                    dest.kws.split(',').forEach(function(val){
+                        if(!kws[val])kws[val]=[];
+                        kws[val].push(dest.id);
                     })
                 }
 
@@ -172,13 +173,13 @@ module uplight{
                 var item:VODestination = ar[i];
                 if(item.cats && item.cats.length){
                     if(catsI[item.cats[0]])item.icon= catsI[item.cats[0]].icon;
-                    else this.warn('cant find icon for category '+item.cats[0]+ ' ib dest: '+item.name);
+                    else this.logger('cant find icon for category '+item.cats[0]+ ' ib dest: '+item.name);
                 }
             }
         }
       //  warn:Function;
       //  error:Function;
-        constructor(private connector:Connector,private warn:Function) {
+        constructor(private connector:Connector,private logger:Function) {
            // this.R = Registry.getInstance();
             this.dispatcher = $({});
             //this.error= this.R.error;

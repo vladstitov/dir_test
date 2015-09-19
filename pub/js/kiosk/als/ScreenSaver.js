@@ -14,8 +14,6 @@ var uplight;
             if (isNaN(this.timeout) || this.timeout < 10000)
                 this.timeout = 10000;
             this.attratLoop = new uplight.AttractLoop();
-            if (typeof uplight.Kiosk !== 'undefined')
-                this.addListeners();
             this.isActive = true;
         };
         ScreenSaver.prototype.startTimer = function () {
@@ -26,11 +24,6 @@ var uplight;
         ScreenSaver.prototype.onViewClick = function () {
             if (this.isActive)
                 this.stopScreenSaver();
-        };
-        ScreenSaver.prototype.addListeners = function () {
-            var _this = this;
-            document.addEventListener(CLICK, function (evt) { return _this.onClick(evt); });
-            this.view.click(function () { return _this.onViewClick(); });
         };
         ScreenSaver.prototype.onClick = function (evt) {
             this.startTimer();

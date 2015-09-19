@@ -1,7 +1,7 @@
-﻿/// <reference path="main.ts" />
+﻿/// <reference path="../Mobile.ts" />
 
-module mobile {
-    export class MainView {
+module uplight {
+    export class MainViewMobile {
         private current: JQuery;       
         private content: JQuery;
         private container: JQuery;
@@ -25,7 +25,7 @@ module mobile {
                 }
 
               */
-        setHeader(str: string): MainView {
+        setHeader(str: string): MainViewMobile {
 
             return this;
         }

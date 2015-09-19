@@ -227,7 +227,7 @@ module uplight {
                   this.R.connector.createPage(p,(resp)=>this.onPageCreated(resp));
                   this.R.cover.remove();
                   this.showPages();
-                  this.reset();
+                  this.resetButtons();
               }
 
           });

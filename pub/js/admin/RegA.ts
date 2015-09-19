@@ -38,6 +38,7 @@ var SHOW_PAGE: string = 'Show_Page';
 var SHOW_KEYBOARD: string = 'Show_Keyboard';
 var HIDE_KEYBOARD: string = 'Hide_Keyboard';
 var TYPING: string = 'typing';
+var HIDDEN:string='hidden';
 
 var HASH_CHANGE:string='hash_change';
 var CHANGE: string = 'change';

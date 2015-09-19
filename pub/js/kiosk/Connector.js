@@ -1,6 +1,12 @@
 /// <reference path="Registry.ts" />
 var uplight;
 (function (uplight) {
+    var VOResult = (function () {
+        function VOResult() {
+        }
+        return VOResult;
+    })();
+    uplight.VOResult = VOResult;
     var Connector = (function () {
         function Connector() {
             this.service = 'rem/kiosk.php?a=';

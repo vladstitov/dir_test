@@ -1,9 +1,6 @@
 <style>
-    #DetailsEditor #DetailsList-list .item-header{
-        margin-left: 3px;
-        background-color: #eff1f1
-    }
-    #DetailsEditor #DetailsList-list .item-header>div{
+
+ /*   #DetailsEditor #DetailsList-list .item-header>div{
         display: inline-block;
         text-align: center;
         border-right: dashed 1px #AAAAAA;
@@ -12,7 +9,7 @@
         vertical-align: middle;
         font-weight: bold;
 
-    }
+    }*/
 
 
 
@@ -27,10 +24,7 @@
     /*#Destinations #lstDests ul li:nth-child(even){
         background-color: #eff1f1;
     }*/
-    #DetailsList .nano {
-        height: 600px;
-        overflow-y: auto;
-    }
+
 
 
     #details-categories-list>div{
@@ -42,17 +36,18 @@
         font-weight: normal;
         margin: 0.5em;
     }
+
     #details-table td{
-        border: dashed 1px #245269;
+        border: dashed 1px #dddddd;
     }
 
-    #details-pages, #details-table{
+   /* #details-pages, #details-table{
         color: #555;
         background-color: #fff;
         background-image: none;
         border: 1px solid #ccc;
         border-radius: 4px;
-    }
+    }*/
 
     .relative{
         position: relative;
@@ -95,7 +90,57 @@
                      </span>
 
              </div>
+             <style>
+                 #DetailsList-list .item-header{
+                     margin-left: 3px;
+                     background-color: #eff1f1
+                 }
+                 #DetailsList .nano {
+                     height: 600px;
+                     overflow-y: auto;
+                 }
+                 #DetailsList-list .id {
+                     font-size: 0.5em;
+                 }
+                 #DetailsList-list .uid{
+                     font-size: 75%;
+                     display:inline-block;
+                     width: 5em;
+                     overflow:hidden;
+                     white-space: nowrap;
+                     text-overflow: ellipsis;
+                 }
+                 #DetailsList-list .cats{
+
+                     font-size: 75%;
+                 }
+                 #DetailsList-list .small>div{
+                     display:inline-block;
+                     width: 7em;
+                     overflow:hidden;
+                     white-space: nowrap;
+                     text-overflow: ellipsis;
+                 }
+                 #DetailsList-list .more>div{
+                     font-size: 0.75em;
+                     max-height: 75px;
+                     overflow: auto;
+                 }
+                 #DetailsList-list .tmb>img{
+
+                     height:1.5em ;
+
+                 }
+                 #DetailsList-list .tmb{
+                     text-align: center;
+                     width: 1.6em;
+                 }
+                 #DetailsList-list .imgs{
+                     text-align: center;
+                 }
+             </style>
              <div id="DetailsList-list" class="nano panel-body">
+
 
              </div>
 
@@ -108,7 +153,7 @@
          <section id="DetailsForm" class="panel panel-default relative" >
 
              <div class="panel-heading">
-                 <div class="btn fa fa-close pull-right"></div>
+                 <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
                  <h1 class="panel-title">Details Editor</h1>
 
              </div>
@@ -126,7 +171,7 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label>More Info in one line</label>
+                        <label>Short Info in one line</label>
                         <input  data-id="info" type="text"  class="form-control" />
                     </div>
 
@@ -154,9 +199,48 @@
                 <div  id="DetailsImages" class="form-group col-md-12">
                     <label>Images</label>
 
-                    <div data-id="btnEfit" class="btn"><span class="fa fa-edit"></span> Edit Images </div>
+                    <div data-id="btnEdit" class="btn"><span class="fa fa-edit"></span> Edit Images </div>
 
-                    <div id="images-container" class="table nano" >
+                    <style>
+                        #images-container {
+                            height: 85px;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                            width: 100%;
+                            white-space:nowrap;
+                            *zoom:1;/* For IE7*/
+                            vertical-align:top;
+
+                        }
+                        #images-container a{
+                            display: inline-block;
+                            width: 75px;
+                            height: 75px;
+                            position: relative;
+                            margin: 5px;
+                        }
+
+                        #images-container a>img{
+                            position: absolute;
+                            max-width: 75px;
+                            max-height: 75px;
+                            margin: auto;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+
+
+                        }
+                    </style>
+
+                    <div id="images-container">
+                        <div class="shell">
+                            <div data-id="images" class="list">
+
+                            </div>
+                        </div>
+
 
                     </div>
 
@@ -203,6 +287,7 @@
                     <button type="button" data-id="btnSave" class="btn btn-primary form-control">Save</button>
                 </div>
                 <div class="form-group col-md-4">
+                    <button type="button" data-id="btnClose" class="btn btn-default pull-right">Back to listing</button>
                 </div>
 
 
@@ -218,126 +303,133 @@
 
     </div>
 
+
+
+
+
+
+
     <div class="row">
          <section id="DetailsImagesEdit"  class="panel panel-default relative">
              <style type="text/css">
-                 #DetailsImages .nano  .item{
-                     max-height: 70px;
-                 }
-                 #DetailsImages ul>li{
-                     display: inline-block;
 
-                 }
-                 #DetailsImages .nano{
-                     height: 85px;
-                     overflow-x: auto;
+                 #DetailsImagesEdit .scroll{
+                     height: 180px;
+                     overflow-x: scroll;
                      overflow-y: hidden;
                      width: 100%;
                      white-space:nowrap;
                      *zoom:1;/* For IE7*/
                      vertical-align:top;
                  }
-                 #DetailsImagesEdit .nano{
+
+                 #DetailsImagesEdit .list a{
+
+                      margin: 5px;
+                      width: 150px;
                      height: 150px;
-                     overflow-x: scroll;
-                     overflow-y: hidden;
-                     width: 600px;
-                     white-space:nowrap;
-                     *zoom:1;/* For IE7*/
-                     vertical-align:top;
-                 }#DetailsImagesEdit .nano .item{
-                      box-shadow: 1px 1px 10px #999;
-                      margin: 2px;
-                      max-height: 128px;
-                      cursor: pointer;
+                     position: relative;
+                     display: inline-block;
                   }
-                 #DetailsImagesEdit .content{
-                     width: 600px;
+                 #DetailsImagesEdit .list a.selected{
+                     box-shadow: 0 0 5px #ce8a26;
+                 }
+                 #DetailsImagesEdit .list>a>img{
+                     max-width: 150px;
+                     max-height: 150px;
+                     position: absolute;
+                     margin: auto;
+                     top: 0;
+                     bottom: 0;
+                     left: 0;
+                     right: 0;
+
+                 }
+
+                 #DetailsImagesEdit .preview{
+                     width: 100%;
                      height: 400px;
                      position: relative;
                  }
-                 #DetailsImagesEdit .content>*{
+                 #DetailsImagesEdit .preview>a{
+                     width: 100%;
+                     height: 400px;
+                     position: relative;
+                     display: block;
+                 }
+                 #DetailsImagesEdit .preview img{
                     display: block;
                      position: absolute;
-                    width: 100%;
-                     height: 100%;
-                     left: 0;
-                     right: 0;
-                     top: 0;
-                     bottom: 0;
-                 }
-                 #DetailsImagesEdit .content .item{
-                     position: absolute;
+                     max-width: 600px;
+                     max-height: 400px;
                      left: 0;
                      right: 0;
                      top: 0;
                      bottom: 0;
                      margin: auto;
+                     box-shadow: 0 0 5px #e5e5e5;
                  }
 
-                 #DetailsImagesEdit .content .upload{
+
+                 #DetailsImagesEdit input{
                      position: absolute;
                      top: 0;
                      left: 0;
                      z-index: 100;
                  }
-                 #DetailsImagesEdit .panel-body{
-                     width: 700px;
-                     height: 700px;
-                     left: 0;
-                     right: 0;
-                     margin: auto;
 
-                 }
-                 #DetailsImagesEdit .panel-body>div{
-                     margin: 2em;
-                 }
 
-                 #DetailsImagesEdit .form{
-                     width: 600px;
-                     text-align: center;
-                 }
 
-                 #DetailsImagesEdit input{
-                     display: inline;
-                 }
-                 #DetailsImagesEdit ul>li{
-                     display: inline-block;
-                 }
 
-                 #DetailsImagesEdit .title{
-                     text-align: center;
-                     margin-bottom: -30px;
-                 }
+
+
+
+
+
 
              </style>
                  <div class="panel-heading" >
-                     <div data-id="btnAdd" class="btn"><span class="fa fa-plus"></span> Add Image </span></div>
-                     <div data-id="btnEdit" class="btn"><span class="fa fa-edit"></span> Replace Image </div>
-                     <div data-id="btnDel" class="btn"><span class="fa fa-close"></span> Delete Image </div>
+                         <div class="inline">
+                             <a  class="btn" data-id="btnAdd" ><span class="fa fa-plus"></span> <span> Add Image to gallery </span> </a>
+                             <div class="relative">
+                                 <input type="file" name="file" data-id="uploadAdd" class="hidden" />
+                             </div>
 
-                     <span class="btn pull-right fa fa-close">&nbsp;</span>
+                         </div>
+
+                     <div class="inline">
+                         <a data-id="btnEdit" class="btn"><span class="fa fa-edit"></span> <span> Replace selected Image </span> </a>
+                         <div class="relative">
+                            <input type="file" name="file" data-id="uploadEdit" class="hidden"  />
+                         </div>
+                     </div>
+
+                     <a data-id="btnDel" class="btn"><span class="fa fa-close"></span> Delete Image </a>
+
+                     <span class="btn pull-right fa fa-close" data-id="btnClose">&nbsp;</span>
                  </div>
 
-             <h3 data-id="title" class="title"></h3>
-             <div class="panel-body">
 
+             <div class="panel-body gallery" data-id="gallery">
 
-                         <div data-id="content" class="content border">
-                             <img>
-                         </div>
+                        <h3 data-id="title" class="title"></h3>
 
-                         <div class="border nano" >
-
-                         </div>
-                         <div class="form">
-
-                            <button type="button" data-id="btnDone" class="btn btn-primary">Done</button>
+                         <div data-id="preview" class="preview">
 
                          </div>
 
+                         <div class="border scroll" >
 
+                                 <div data-id="list" class="list">
 
+                                 </div>
+                         </div>
+
+             </div>
+             <div class="modal-footer">
+
+                 <button type="button" data-id="btnSave" class="btn btn-primary">Done</button>
+                 <button type="button" data-id="btnCancel" class="btn btn-default">Cancel</button>
 
              </div>
          </section>

@@ -57,7 +57,7 @@ module uplight {
         RESET_ALL:string='RESET_ALL';
         SS_START:string='SS_START';
         SS_STOP:string='SS_STOP';
-        modelDests: Model;
+        //modelDests: Model;
        // connector: kiosk.Connector;
         settings: any;
         static status:string;
@@ -109,25 +109,8 @@ module uplight {
 
     }
 
-    export  class VOResult{
-        result:string;
-        success:string;
-        error:string;
-    }
 
 
-
-    export class VOAL {
-        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
-        id: number;
-        name: string;
-        src: string;
-        data_url:string;
-        delay:number;
-        size:string;
-        type:string;
-        TC:boolean
-    }
 
 
 }

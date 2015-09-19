@@ -396,7 +396,7 @@ module uplight{
             this.connector.getData(this.vo.data_url).done((res)=>this.setData(JSON.parse(res)));
             return this;
         }
-        reset():void{
+        resetButtons():void{
 
         }
 
@@ -422,7 +422,7 @@ module uplight{
         getView():JQuery{
 
             this.addListeners();
-            this.reset();
+            this.resetButtons();
             console.log('this.view ',this.view);
             return this.view;
         }

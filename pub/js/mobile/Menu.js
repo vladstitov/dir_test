@@ -1,6 +1,6 @@
 /// <reference path="../kiosk/registry.ts" />
-var mobile;
-(function (mobile) {
+var uplight;
+(function (uplight) {
     var Menu = (function () {
         function Menu(view, conn, model) {
             var _this = this;
@@ -27,7 +27,7 @@ var mobile;
                 var ar = cats;
                 for (var i = 0, n = ar.length; i < n; i++)
                     for (var i = 0, n = ar.length; i < n; i++)
-                        out += '<a class="u-brand" href="#category/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                        out += '<a class="u-brand list-group-item" href="#category/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listC.html(out);
             });
             var p0 = conn.getPages().done(function (res) {
@@ -35,7 +35,7 @@ var mobile;
                 var out = '';
                 var ar = res;
                 for (var i = 0, n = ar.length; i < n; i++)
-                    out += '<a class="u-brand" href="#page/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                    out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listP.html(out);
             });
             // $.when(p0,d1).then((pages,cats)=>{
@@ -63,6 +63,6 @@ var mobile;
         };
         return Menu;
     })();
-    mobile.Menu = Menu;
-})(mobile || (mobile = {}));
+    uplight.Menu = Menu;
+})(uplight || (uplight = {}));
 //# sourceMappingURL=Menu.js.map

@@ -141,7 +141,7 @@ module uplight{
             var btn = this.btnSave
             btn.prop('disabled',true);
             setTimeout(function(){btn.prop('disabled',false);},1500);
-            this.R.model.saveCategory(vo,(res)=>this.onSaveResult(res));
+            this.R.model.saveCategory(vo).done((res)=>this.onSaveResult(res));
 
         }
         private onCategorySelected(cat:VOCategory):void{

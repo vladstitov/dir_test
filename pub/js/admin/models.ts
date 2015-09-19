@@ -4,21 +4,16 @@ module uplight{
     export class VODestination {
         constructor(obj:any){
             for(var str in obj) this[str]=obj[str];
-            if(obj.cats=='0') this.cats=[];
-            else  if(typeof obj.cats === 'string' && obj.cats.length) this.cats=obj.cats.split(',').map(Number);
-            if(typeof obj.imgs === 'string' && obj.imgs.length) this.imgs =obj.imgs.split(',');
-            if(!this.uid) this.uid=''+this.id;
         }
         uid:string;
         unit: string;
         id: number;
-        destid:string;
+
         info:string;
-        imgs:string[];
-        imgsD:string[];
+        imgs:string;
         name: string;
         cats: number[];
-        categories:string[];
+        catsStr:string[];
         pgs: string;
         more: string;
         tmb:string;
@@ -53,14 +48,17 @@ module uplight{
             });
         }
 
-        saveDestination(callBack:Function,vo: VODestination,pages:string): void {
+        static encodeUID(name:string):string{
+            return name.replace(/[^a-zA-Z0-9-_]/g, '');
+        }
+       // saveDestination(vo: VODestination): void {
 
-            if(pages && !vo.uid) vo.uid = 'a_'+vo.id;
 
-            var p1= this.R.connector.saveDestination(vo).done((res)=>{
-                this.refreshData();
+          //  var p1= this.R.connector.saveDestination(vo).done((res)=>{
+             //   this.refreshData();
 
-            });
+           // });
+       /*
             var p2
             if(pages){
                 if(!vo.uid) vo.uid = 'a_'+vo.id;
@@ -74,14 +72,14 @@ module uplight{
 
                 })
             }else p1.then(function(res){
-
                 callBack(res);
             })
 
+*/
 
 
+     //   }
 
-        }
         saveCategoryListing(catid,ids,callBack): void {
            this.R.connector.saveCatDests(catid,ids).done((res)=>{
                callBack(res);
@@ -254,6 +252,15 @@ module uplight{
             return this.catsIndexed[id];
         }
 
+        getCategoriesNames(ar:number[]):string[]{
+           var out:string[] =[]
+            for(var i=ar.length-1;i>=0;i--){
+                var vo:VOCategory = this.getCategoryById(ar[i]) ;
+                if(vo)out.push(vo.label);
+                else ar.splice(i,1);
+            }
+            return out.reverse();
+        }
 
         refreshData(): void {
             console.log('DestinantionsModel refresh');
@@ -262,67 +269,33 @@ module uplight{
 
 
            var p1:JQueryPromise<VOCategory[]> = this.R.connector. getCategories();
+
             var p2 :JQueryPromise<VODestination[]> = this.R.connector.getDestinations();
-
-
-
             var self=this;
 
             $.when(p1,p2).then(function(v1,v2){
             //  console.log(v1[0],v2[0]);
                 var res =v1[0];
-                var catInd  = self.setCategories(res);
+               self.setCategories(res);
                 var dests =v2[0];
                 self.setDestinations(dests);
-                self.mapCategories();
+
 
                 self.dispatcher.triggerHandler(self.CATEGORIES_CAHANGE,res);
                 self.dispatcher.triggerHandler(self.CHANGE);
 
-                return;
+         })
 
-                var convert = function(ar:string[],cats:any,destid:number){
-                    var out=[];
-                    for(var i=0,n=ar.length;i<n;i++){
-                        var cat:VOCategory = cats[ar[i]];
-                        if(cat){
-                            if(!cat.dests)cat.dests=[];
-                            out.push(cat.label);
-                            cat.dests.push(destid);
-                        }
-                        else console.warn('no category '+ar[i]);
-                    }
-                    return out;
 
-                }
-                var ar = dests;
-              //  console.log(ar);
-                var destInd=[];
-                for(var i=0,n=ar.length;i<n;i++){
-                    var item:any =ar[i];
-                    destInd[item.id] = item;
-                    if(item.imgs)item.imgs=item.imgs.split(',');
-
-                    if(item.cats==0)item.cats=0;
-                    if(!item.cats) continue;
-                    item.cats = item.cats.split(',').map(Number);
-                   item.categories = convert(item.cats,catInd,item.id);
-                    //item.cats = item.cats.map(Number);
-
-                //  mapCats(item, catInd);
-
-                }
-
-                self.setData(dests);
-            })
-
-                       
         }
-
 
         private setDestinations(res:any[]):void{
                 var out:VODestination[] =[];
             for(var i=0,n=res.length;i<n;i++){
+                var cats:number[] = res[i].cats.split(',').map(Number);
+                res[i].catsStr=this.getCategoriesNames(cats);
+                res[i].cats=cats;
+                if(!res[i].uid)res[i].uid = DestinantionsModel.encodeUID(res[i].name.toLowerCase());
                 var dest:VODestination = new VODestination(res[i]);
                 out.push(dest);
             }
@@ -330,50 +303,27 @@ module uplight{
         }
 
 
-        private mapCategories():void{
-            var catInd:any= this.catsIndexed;
-           // console.log(catInd);
-            var convert = function(ar:number[],cats:any,destid:number):string[]{
-                var out=[];
-                for(var i=0,n=ar.length;i<n;i++){
-                    var cat:VOCategory = cats[ar[i]];
-                    if(cat){
-                        out.push(cat.label);
-                        cat.dests.push(destid);
-                    }
-                    else{
-                        ar.splice(i++,1);
-                      //  console.log(' removed from '+destid+ ' cat '+ ar.splice(i++,1));
-                    }
-                }
-                return out;
-
-            }
-
-            var ar = this.getData();
-          //  console.log(ar);
-            for(var i=0,n=ar.length;i<n;i++){
-                var item = ar[i];
-                item.categories = convert(item.cats,catInd,item.id);
-            }
-        }
 /////////////////////////////CATEGORIES//////////////////////////////////
-        saveCategory(vo:VOCategory,callBack):void{
-            var that= this;
-            this.R.connector.saveCategory(vo).done(function(res){
-                that.setCategories(res);
-                that.mapCategories();
-                callBack({success:true});
+        saveCategory(vo:VOCategory):JQueryPromise<VOCategory[]>{
+            var d = $.Deferred();
 
-             that.dispatcher.triggerHandler(that.CATEGORIES_CAHANGE,res);
+            this.R.connector.saveCategory(vo).done((res)=>{
+                this.setCategories(res);
+                d.resolve(this.getCategories());
+               // that.mapCategories();
+              //  callBack({success:true});
+
+             this.dispatcher.triggerHandler(this.CATEGORIES_CAHANGE,res);
          });
+
+           return d.promise();
 
         }
 
         private categories:VOCategory[]
 
 
-        private setCategories(ar:any[]):any{
+        private setCategories(ar:any[]):void{
             var cats:VOCategory[]=[];
             var catInd =[];
             for(var i=0,n=ar.length;i<n;i++){
@@ -381,9 +331,9 @@ module uplight{
                 cats.push(cat);
                 catInd[cat.id]= cat;
             }
-            this.categories=cats
+            this.categories=cats;
             this.catsIndexed = catInd;
-            return  catInd;
+
         }
         getCategories():VOCategory[]{
             return this.categories

@@ -2,12 +2,13 @@
  * Created by VladHome on 7/18/2015.
  */
     /// <reference path="../Registry.ts" />
-    /// <reference path="SearchDetailsLarge.ts" />
+    /// <reference path="DetailsLarge.ts" />
 
 module uplight{
 
     export class ButtonView{
-        private $view:JQuery
+        private $view:JQuery;
+        private viewStr:string;
         private $kw
         private details:JQuery
 
@@ -23,8 +24,12 @@ module uplight{
         getView(reset:boolean):JQuery{
             return this.$view;
         }
+       // getViewStr(reset:boolean):string{
+         //   return this.viewStr;
+        //}
 
         constructor(private model:DestModel){
+            //this.viewStr = '<li class="item Plastic031" data-id="'+model.id+'" data-more="'+model.haveMore+'">'+this.renderVoStr(model.vo,model.haveMore)+'</li>';
             this.$view = $('<li>').addClass('item Plastic031').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
             this.$kw=this.$view.find('.kws:first');
         }
@@ -35,18 +40,25 @@ module uplight{
                 this.details = this.createDetails(this.model.vo)
                 this.$view.append(this.details);
             }
-
             this.details.show('fast');
             this.$btnMore.text('Less...');
         }
-
         hideDetails():void{
                 this.details.hide('fast');
                 this.$btnMore.text('More...');
 
         }
 
-        private createDetails(vo:VODestination):JQuery{
+
+        showKW(str:string){
+
+            this.$kw.text(str);
+        }
+        resetKW():void{
+                this.$kw.text('');
+        }
+
+        createDetails(vo:VODestination):JQuery{
 
             var ar = vo.more.split("\n");
             var out:string='<div class="more" ><table class="table">';
@@ -63,8 +75,10 @@ module uplight{
 
             return $('<div>').addClass('details').html(out);
         }
-        private renderVo(vo:VODestination,ismore:boolean):JQuery{
-            var more =ismore?'<span class="fa fa-plus"></span><span class="more"> More... </span>':'';
+
+
+        private renderVoStr(vo:VODestination,ismore:boolean):string{
+            var more =ismore?'<a class="btn"><span class="fa fa-plus"></span><span class="more"> More... </span></a>':'';
             var icon ='<span class="icon '+vo.icon+'"></span>';
             var name='<span class="name">'+vo.name+'</span>';
             var unit='<span class="unit">'+vo.unit+'</span>';
@@ -74,7 +88,12 @@ module uplight{
             var row1='<div class="urow">'+kws+utype+'</div>';
             var row2='<div class="urow">'+icon+name+unit+'</div>';
             var row3='<div class="urow">'+more+info+'</div>';
-            return $('<div>').addClass('main').html(row1+row2+row3);
+            return '<div class="main" >'+row1+row2+row3+'</div>';
+        }
+
+
+        private renderVo(vo:VODestination,ismore:boolean):JQuery{
+            return $('<div>').addClass('main').html( this.renderVoStr(vo,ismore));
         }
 
     }
@@ -89,14 +108,14 @@ module uplight{
         unit:string;
         kws:string;
         iskw:number;
-        kw:JQuery;
+       // kw:JQuery;
         cache={};
         id:number;
         ind:number;
        // details:SearchDetails;
         haveMore:boolean
         btnMore:JQuery;
-      //  detailsLarge:SearchDetailsLarge;
+      //  detailsLarge:DetailsLarge;
         table:string;
         thumb:HTMLImageElement;
         static  dispatcher:JQuery=$({});
@@ -107,17 +126,28 @@ module uplight{
             this.id=vo.id;
            if(vo.more || vo.tmb || vo.imgs || vo.pgs)this.haveMore = true;
             this.view = new ButtonView(this);
+
             this.name=' '+vo.name.toLowerCase();
             this.unit=' '+vo.unit.toLowerCase();
             this.kws=','+vo.kws;
 
         }
 
+        addDetails(el:JQuery){
+            if(el.children('.details').length===0) {
+                el.append(this.view.createDetails(this.vo));
+                el.children('.details').show('fast');
+            }
+        }
 
 
         getView(reset:boolean):JQuery{
             return this.view.getView(reset);
         }
+
+       // getViewStr(reset:boolean):string{
+           // return this.view.getViewStr(reset);
+        //}
         private isHiiden:boolean;
 
         show():void{
@@ -145,16 +175,11 @@ module uplight{
         private isDetails;
 
         togleDetails():boolean{
-            if(!this.haveMore) return false;
-            if(this.vo.imgs || this.vo.pgs){
-                console.log('have large details  this.vo.imgs: '+this.vo.imgs+' this.vo.pgs: '+this.vo.pgs);
-                    DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,this);
-                window.location.hash='#dest/'+this.vo.id;
-                    return true;
+            if(this.haveMore){
+                if(this.isDetails)this.hideDetails();
+                else this.showDetails();
+                return this.isDetails;
             }
-
-            if(this.isDetails)this.hideDetails();
-            else this.showDetails();
             return false;
         }
 
@@ -224,14 +249,14 @@ module uplight{
         }
 
         showKeyword(str:string):void{
-           // console.log('showKeyword  '   + str);
-            this.kw.text(str);
+           console.log(this.vo.name+'  showKeyword  '   + str);
+            this.view.showKW(str)
             this.iskw = 1;
         }
 
         clearKeyword():void{
             if(this.iskw){
-                this.kw.text('');
+                this.view.resetKW();
                 this.iskw = 0;
             }
 

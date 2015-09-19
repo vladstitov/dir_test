@@ -151,7 +151,7 @@ module uplight{
            // if (this.btnShowCurrent.hasClass(DISABLED)) return;  
           //  if (this.selectedImage) this.selectedImage.parent().removeClass(SELECTED);          
            // this.imgPreview.attr(SRC, this.currentBackgorund);
-          //  this.reset();
+          //  this.resetButtons();
        // }
         private refreshLibrary(): void {
             this.R.connector.getBackgroundLibrary((data) => this.onAllBackgrounds(data));
@@ -167,7 +167,7 @@ module uplight{
         private completeHandler(evt): void {
             this.formFile.remove();
             this.formFile = null;
-           // setTimeout( () =>this.reset() , 500);          
+           // setTimeout( () =>this.resetButtons() , 500);
             this.list.prepend('<img src="' + evt + '" />');
            // this.imgPreview.attr(SRC, evt);     
             this.list.scrollTop(0);

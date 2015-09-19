@@ -13,30 +13,13 @@ var uplight;
             this.categoriesAll = $('#details-categories-list').on('click', 'input', function (evt) { return _this.onCategoryClick($(evt.currentTarget)); }).hide();
         }
         DetailsCategory.prototype.render = function () {
-            if (!this.model)
-                this.createModel();
-            var ar = this.current.cats;
-            if (!ar)
-                return;
-            var ind = this.indexed;
-            var out = [];
-            for (var i = ar.length - 1; i >= 0; i--) {
-                var cat = ind[ar[i]];
-                if (cat)
-                    out.push(cat.label);
-                else
-                    ar.splice(i, 1);
-            }
-            this.categories.val(out.reverse());
+            var cats = this.current.catsStr ? this.current.catsStr.toString() : '';
+            this.categories.val(cats);
         };
         DetailsCategory.prototype.reset = function () {
             this.hideEditCategories();
             this.categories.val('');
             this.current.cats = null;
-        };
-        DetailsCategory.prototype.createModel = function () {
-            this.model = this.R.model.getCategories();
-            this.indexed = _.indexBy(this.model, 'id');
         };
         DetailsCategory.prototype.setCurrent = function (dest) {
             this.current = dest;
@@ -62,23 +45,14 @@ var uplight;
                 this.showEditCategories();
             }
         };
-        DetailsCategory.prototype.showItemCategories = function () {
-            var ar = this.current.cats;
-            var out = [];
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var item = this.R.model.getCategoryById(ar[i]);
-                if (item)
-                    out.push(item.label);
-            }
-            this.categories.val(out.join(', '));
-        };
         DetailsCategory.prototype.addCategory = function (cat) {
             var id = cat.id;
             var ar = this.current.cats;
+            console.log(ar);
             if (ar.indexOf(id) === -1) {
                 ar.push(id);
-                this.showItemCategories();
-                this.haveChanges = true;
+                this.current.catsStr = this.R.model.getCategoriesNames(ar);
+                this.render();
             }
         };
         DetailsCategory.prototype.removeCategory = function (cat) {
@@ -87,8 +61,8 @@ var uplight;
             var ind = ar.indexOf(id);
             if (ind !== -1) {
                 ar.splice(ind, 1);
-                this.showItemCategories();
-                this.haveChanges = true;
+                this.current.catsStr = this.R.model.getCategoriesNames(ar);
+                this.render();
             }
         };
         DetailsCategory.prototype.onCategoryClick = function (el) {
@@ -119,7 +93,7 @@ var uplight;
             this.categoriesAll.html(out);
         };
         DetailsCategory.prototype.renderAllCats = function () {
-            this.categoriesAll.html(this.renderCats(this.model, false));
+            this.categoriesAll.html(this.renderCats(this.R.model.getCategories(), false));
         };
         DetailsCategory.prototype.renderCats = function (cats, selected) {
             var out = '';

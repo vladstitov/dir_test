@@ -3,6 +3,20 @@
  */
     /// <reference path="../Registry.ts" />
 module uplight{
+
+    export class VOAL {
+     constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
+     id: number;
+     name: string;
+     src: string;
+     data_url:string;
+     delay:number;
+     size:string;
+     type:string;
+     TC:boolean
+     }
+
+
     export class AttractLoop{
         al:VOAL;
         view:JQuery;
@@ -18,6 +32,12 @@ module uplight{
         }
 
 
+        start():void{
+
+        }
+        stop():void{
+
+        }
         loadAL():void{
             var vo:VOAL = this.al;
             if(vo.type=='gallery' || vo.type=='gallery2'){

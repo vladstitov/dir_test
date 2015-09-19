@@ -1,5 +1,12 @@
 ﻿/// <reference path="Registry.ts" />
 module uplight {
+
+    export  class VOResult{
+        result:string;
+        success:string;
+        error:string;
+    }
+
     export class Connector {
         private service = 'rem/kiosk.php?a=';
         private serv= 'rem/kiosk.php';

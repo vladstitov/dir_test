@@ -17,9 +17,7 @@ module uplight {
             this.R=Registry.getInstance();
             this.timeout = Number(this.R.settings.ss_timeout)*1000;
             if(isNaN(this.timeout) || this.timeout<10000)this.timeout=10000;
-
             this.attratLoop = new AttractLoop();
-           if(typeof Kiosk !== 'undefined') this.addListeners();
             this.isActive= true;
         }
 
@@ -34,10 +32,6 @@ module uplight {
             if(this.isActive) this.stopScreenSaver();
         }
 
-        addListeners():void{
-            document.addEventListener(CLICK, (evt: MouseEvent) => this.onClick(evt));
-            this.view.click(()=>this.onViewClick())
-        }
 
         private onClick(evt: MouseEvent): void {
             this.startTimer();

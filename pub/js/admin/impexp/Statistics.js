@@ -2,7 +2,7 @@
  * Created by VladHome on 8/8/2015.
  */
 ///<reference path="../RegA"/>
-///<reference path="../../../libs/typing/chart.d.ts"/>
+///<reference path="../../typing/chart.d.ts"/>
 var uplight;
 (function (uplight) {
     var Statistics = (function () {

@@ -14,17 +14,8 @@ module uplight{
 
 
         render():void{
-            if(!this.model) this.createModel();
-            var ar:number[] = this.current.cats;
-            if(!ar) return;
-            var ind= this.indexed;
-            var out=[];
-            for(var i=ar.length-1;i>=0;i--){
-                var cat = ind[ar[i]];
-                if(cat)out.push(cat.label);
-                else ar.splice(i,1);
-            }
-            this.categories.val(out.reverse());
+            var cats =this.current.catsStr?this.current.catsStr.toString():'';
+            this.categories.val(cats);
         }
 
         reset():void{
@@ -40,20 +31,15 @@ module uplight{
         }
 
 
-        private createModel():void{
-            this.model= this.R.model.getCategories();
-            this.indexed=_.indexBy(this.model,'id');
-        }
+
         setCurrent(dest:VODestination):void{
             this.current=dest;
             this.hideEditCategories();
         }
 
-       // getCurrent():number[]{
-         //   return this.current;
-        //}
+
         private catsVisible:boolean;
-        private indexed:any;
+
 
 
         private hideEditCategories():void {
@@ -78,23 +64,15 @@ module uplight{
         }
 
 
-        private showItemCategories() {
-            var ar:number[] = this.current.cats
-            var out:string[] = [];
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var item:VOCategory = this.R.model.getCategoryById(ar[i]);
-                if (item) out.push(item.label);
-            }
-            this.categories.val(out.join(', '));
-        }
 
         private addCategory(cat:VOCategory):void {
             var id:number = cat.id
             var ar:number[] = this.current.cats;
+            console.log(ar);
             if (ar.indexOf(id) === -1) {
                 ar.push(id);
-                this.showItemCategories();
-                this.haveChanges = true;
+                this.current.catsStr = this.R.model.getCategoriesNames(ar);
+                this.render();
             }
         }
 
@@ -104,8 +82,8 @@ module uplight{
             var ind = ar.indexOf(id);
             if (ind !== -1) {
                 ar.splice(ind, 1);
-                this.showItemCategories();
-                this.haveChanges = true;
+                this.current.catsStr = this.R.model.getCategoriesNames(ar);
+               this.render();
             }
         }
 
@@ -126,7 +104,6 @@ module uplight{
             var ar1:VOCategory[] = []
             var ar2:VOCategory[] = []
             var cats:VOCategory[] = this.R.model.getCategories();
-
             var catsAr:number[] = this.current.cats;
 
             for (var i = 0, n = cats.length; i < n; i++) {
@@ -139,7 +116,7 @@ module uplight{
         }
 
         private renderAllCats():void{
-            this.categoriesAll.html(this.renderCats(this.model,false));
+            this.categoriesAll.html(this.renderCats(this.R.model.getCategories(),false));
         }
         private renderCats(cats:VOCategory[], selected:boolean):string {
             var out:string = '';

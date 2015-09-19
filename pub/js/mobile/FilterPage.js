@@ -1,6 +1,6 @@
 /// <reference path="../kiosk/registry.ts" />
-var mobile;
-(function (mobile) {
+var uplight;
+(function (uplight) {
     var FilterPage = (function () {
         function FilterPage(view, model) {
             var _this = this;
@@ -9,6 +9,16 @@ var mobile;
             this.input = view.find('[data-id=filter]');
             this.input.on('input', function (evt) { return _this.onInput(evt); });
             this.list = view.find('[data-id=list]');
+            this.list.on(CLICK, '.selected', function () {
+                if (_this.isDetails) {
+                    _this.details.hide('fast');
+                    _this.isDetails = false;
+                }
+                else {
+                    _this.details.show('fast');
+                    _this.isDetails = true;
+                }
+            });
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter = view.find('[data-id=tiFilter]:first');
             this.catTitle = view.find('[data-id=catTitle]:first');
@@ -16,6 +26,7 @@ var mobile;
                 _this.input.val('');
                 _this.doAll();
             });
+            this.details = $('<div>').addClass('details');
         }
         FilterPage.prototype.resetView = function () {
             this.input.val('');
@@ -31,6 +42,21 @@ var mobile;
             this.doAll();
             this.show();
             this.input.focus();
+        };
+        FilterPage.prototype.showDestination = function (vo, table) {
+            if (this.selected)
+                this.selected.removeClass(SELECTED);
+            this.list.children();
+            this.current = vo.id;
+            var out = '';
+            out += vo.info;
+            out += table;
+            if (vo.tmb)
+                out += '<div class="tmb"></div><img src="' + vo.tmb + '"/></div>';
+            this.details.html(out).show('fast');
+            this.isDetails = true;
+            this.selected = this.list.children('[data-id=' + vo.id + ']:first').addClass(SELECTED).append(this.details);
+            // window.location.hash='details-small/'+vo.id;
         };
         FilterPage.prototype.showCategory = function (num) {
             this.tiFilter.hide();
@@ -66,6 +92,10 @@ var mobile;
             this.renderList();
         };
         FilterPage.prototype.onInput = function (evt) {
+            var _this = this;
+            setTimeout(function () { return _this.doFilter(); }, 200);
+        };
+        FilterPage.prototype.doFilter = function () {
             var str = this.input.val();
             if (str.length == 0) {
                 this.doAll();
@@ -90,10 +120,10 @@ var mobile;
             //  if (item.advanced) cl = ' more-data"  href="#Details/'+item.destid+'"';
             // else if ((item.email.length + item.phone.length + item.website.length) >20 ) cl= ' more-data" href="#Details/'+item.destid+'"';
             //  var prf:string=cl.length==1?'':'+ ';
-            return '<a  href="#details/' + item.id + '" class="list-group-item' + cl + '> <span class="left">' + item.name + '</span><span class="pull-right">' + item.unit + '</span></a>';
+            return '<a  data-id="' + item.id + '" href="#details/' + item.id + '" class="list-group-item' + cl + '> <span class="left">' + item.name + '</span><span class="pull-right">' + item.unit + '</span></a>';
         };
         return FilterPage;
     })();
-    mobile.FilterPage = FilterPage;
-})(mobile || (mobile = {}));
+    uplight.FilterPage = FilterPage;
+})(uplight || (uplight = {}));
 //# sourceMappingURL=filterpage.js.map

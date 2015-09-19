@@ -58,7 +58,18 @@ module uplight {
 
         private init(): void {
             this.listContainer=this.view.find('.nano:first')
-            this.thead =$('<thead>').html('<tr class="item-header"><th class="item-id">id</th><th class="item-uid">UID</th><th class="item-name">Name</th><th class="item-unit">Unit</th><th class="item-categories">Categories</th></tr>');
+            this.thead =$('<thead>').html('<tr class="item-header">' +
+                '<th class="item-id">id</th>' +
+                '<th class="item-name">Name</th>' +
+                '<th class="item-unit">Unit</th>' +
+                '<th class="item-categories">Categories</th>' +
+                '<th class="">Short Info</th>' +
+                '<th class="">Thumb</th>' +
+                '<th class="">Info Table</th>' +
+                '<th class="">Images</th>' +
+                '<th class="">KWs</th>' +
+                '<th class="item-uid">UID</th>' +
+                '</tr>');
             this.table = $('<table>').addClass('table table-striped').append(this.thead).appendTo(this.listContainer);
             this.list=$('<tbody>').appendTo(this.table);
             // this.listContainer =$('<div>').addClass('list-container').append(this.list).appendTo(this.table);
@@ -123,11 +134,16 @@ module uplight {
 
         private renderItem(item: VODestination,i:number): string {
             return '<tr class="item" data-i="'+i+'" data-id="' + item.id + '" >' +
-                    '<td class="item-id">'+item.id+'+</td>'+
-                    '<td class="item-uid">'+item.uid+'</td>'+
-                    '<td class="item-name">'+ item.name+'</td>'+
-                    '<td class="item-unit">'+ item.unit + '</td>' +
-                    '<td class="item-categories">'+(item.categories || '&nbsp')+'</td>'
+                    '<td class="id">'+item.id+'</td>'+
+                    '<td class="name">'+ item.name+'</td>'+
+                    '<td class="unit">'+ item.unit + '</td>' +
+                    '<td class="cats">'+(item.catsStr?item.catsStr.join(', '):'&nbsp')+'</td>'+
+                    '<td class="small"><div>'+ item.info + '</div></td>' +
+                '<td class="tmb">'+ (item.tmb?'<img src="'+item.tmb+'" />':'') + '</td>' +
+                    '<td class="more"><div>'+ item.more + '</div></td>' +
+                    '<td class="imgs">'+ (item.imgs?(item.imgs.split(',').length):'&nbsp') + '</td>' +
+                    '<td class="kws">'+ (item.kws?(item.kws.split(',').length):'&nbsp') + '</td>' +
+                    '<td title="'+item.uid+'" class="uid">'+(item.uid ||'&nbsp')+'</td>'+
                     '</tr>';
         }
 
@@ -139,7 +155,9 @@ module uplight {
                var ar = this.destinations
          //  console.log(ar);
                var out: string = '';
-               for (var i = 0, n = ar.length; i < n; i++) out += this.renderItem(ar[i],i);
+               for (var i = 0, n = ar.length; i < n; i++){
+                   out += this.renderItem(ar[i],i);
+               }
 
            this.list.html(out);
            this.total.text(n);

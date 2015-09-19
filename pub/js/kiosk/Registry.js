@@ -77,19 +77,5 @@ var uplight;
         return Registry;
     })();
     uplight.Registry = Registry;
-    var VOResult = (function () {
-        function VOResult() {
-        }
-        return VOResult;
-    })();
-    uplight.VOResult = VOResult;
-    var VOAL = (function () {
-        function VOAL(obj) {
-            for (var str in obj)
-                this[str] = obj[str];
-        }
-        return VOAL;
-    })();
-    uplight.VOAL = VOAL;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=Registry.js.map

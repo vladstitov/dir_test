@@ -33,7 +33,7 @@ var uplight;
             var _this = this;
             if (this.btnSave.hasClass(DISABLED))
                 return;
-            uplight.showAlert('You want to save current image as new background?', function () { return _this.alertSave(); }, 'Alert');
+            showAlert('You want to save current image as new background?', function () { return _this.alertSave(); }, 'Alert');
         };
         BackgroundManager.prototype.onImageSelect = function (evt) {
             if (!$(evt.target).is('img'))
@@ -112,7 +112,7 @@ var uplight;
             if (this.btnDel.hasClass(DISABLED))
                 return;
             if (this.selectedImage) {
-                uplight.showAlert('You want to delete selected image from library? ', function () { return _this.deleteSelected(); }, 'Alert');
+                showAlert('You want to delete selected image from library? ', function () { return _this.deleteSelected(); }, 'Alert');
             }
         };
         BackgroundManager.prototype.onImageDeleted = function (data) {
@@ -129,7 +129,7 @@ var uplight;
         // if (this.btnShowCurrent.hasClass(DISABLED)) return;  
         //  if (this.selectedImage) this.selectedImage.parent().removeClass(SELECTED);          
         // this.imgPreview.attr(SRC, this.currentBackgorund);
-        //  this.reset();
+        //  this.resetButtons();
         // }
         BackgroundManager.prototype.refreshLibrary = function () {
             var _this = this;
@@ -142,7 +142,7 @@ var uplight;
         BackgroundManager.prototype.completeHandler = function (evt) {
             this.formFile.remove();
             this.formFile = null;
-            // setTimeout( () =>this.reset() , 500);          
+            // setTimeout( () =>this.resetButtons() , 500);
             this.list.prepend('<img src="' + evt + '" />');
             // this.imgPreview.attr(SRC, evt);     
             this.list.scrollTop(0);
@@ -176,7 +176,7 @@ var uplight;
             var msg = 'Background Saved';
             if (isNaN(Number(resp)))
                 msg = resp;
-            uplight.myMsg(msg, this.btnSave);
+            myMsg(msg, this.btnSave);
         };
         return BackgroundManager;
     })();

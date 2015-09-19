@@ -1,6 +1,6 @@
 ﻿/// <reference path="../kiosk/registry.ts" />
 /// <reference path="../typing/jquery.d.ts" />
-module mobile {
+module uplight {
 
     export class DetailsPage {
         private title: JQuery;
@@ -54,6 +54,11 @@ module mobile {
 
 
 
+        private renderTable():string{
+            var out:string ='';
+
+            return out;
+        }
 
         private renderDetails(dest: uplight.VODestination): JQuery {
 

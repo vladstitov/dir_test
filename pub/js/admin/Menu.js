@@ -2,7 +2,7 @@
  * Created by VladHome on 6/7/2015.
  */
 /// <reference path="regA.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 var uplight;
 (function (uplight) {
     var Menu = (function () {

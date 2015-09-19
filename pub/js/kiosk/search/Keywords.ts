@@ -43,7 +43,7 @@ module uplight{
         }
 
         renderItem(item:VOKw,i):string{
-            return '<li data-i="'+i+'">'+item.label+'</li>';
+            return '<li data-i="'+i+'"><a class="btn">'+item.label+'</a></li>';
         }
 
     }

@@ -4,6 +4,14 @@
 /// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
+    var VOAL = (function () {
+        function VOAL(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOAL;
+    })();
+    uplight.VOAL = VOAL;
     var AttractLoop = (function () {
         function AttractLoop() {
             this.view = $('AttractLoop');
@@ -11,6 +19,10 @@ var uplight;
             this.body = $('[data-id=Body]:first');
             this.loadAL();
         }
+        AttractLoop.prototype.start = function () {
+        };
+        AttractLoop.prototype.stop = function () {
+        };
         AttractLoop.prototype.loadAL = function () {
             var _this = this;
             var vo = this.al;

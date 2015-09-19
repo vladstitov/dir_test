@@ -2,12 +2,16 @@
  * Created by VladHome on 7/18/2015.
  */
 /// <reference path="../Registry.ts" />
-/// <reference path="SearchDetailsLarge.ts" />
+/// <reference path="DetailsLarge.ts" />
 var uplight;
 (function (uplight) {
     var ButtonView = (function () {
+        // getViewStr(reset:boolean):string{
+        //   return this.viewStr;
+        //}
         function ButtonView(model) {
             this.model = model;
+            //this.viewStr = '<li class="item Plastic031" data-id="'+model.id+'" data-more="'+model.haveMore+'">'+this.renderVoStr(model.vo,model.haveMore)+'</li>';
             this.$view = $('<li>').addClass('item Plastic031').data('id', model.id).append(this.renderVo(model.vo, model.haveMore));
             this.$kw = this.$view.find('.kws:first');
         }
@@ -33,6 +37,12 @@ var uplight;
             this.details.hide('fast');
             this.$btnMore.text('More...');
         };
+        ButtonView.prototype.showKW = function (str) {
+            this.$kw.text(str);
+        };
+        ButtonView.prototype.resetKW = function () {
+            this.$kw.text('');
+        };
         ButtonView.prototype.createDetails = function (vo) {
             var ar = vo.more.split("\n");
             var out = '<div class="more" ><table class="table">';
@@ -45,8 +55,8 @@ var uplight;
                 out += '<div class="tmb"><img src="' + vo.tmb + '" /></div>';
             return $('<div>').addClass('details').html(out);
         };
-        ButtonView.prototype.renderVo = function (vo, ismore) {
-            var more = ismore ? '<span class="fa fa-plus"></span><span class="more"> More... </span>' : '';
+        ButtonView.prototype.renderVoStr = function (vo, ismore) {
+            var more = ismore ? '<a class="btn"><span class="fa fa-plus"></span><span class="more"> More... </span></a>' : '';
             var icon = '<span class="icon ' + vo.icon + '"></span>';
             var name = '<span class="name">' + vo.name + '</span>';
             var unit = '<span class="unit">' + vo.unit + '</span>';
@@ -56,7 +66,10 @@ var uplight;
             var row1 = '<div class="urow">' + kws + utype + '</div>';
             var row2 = '<div class="urow">' + icon + name + unit + '</div>';
             var row3 = '<div class="urow">' + more + info + '</div>';
-            return $('<div>').addClass('main').html(row1 + row2 + row3);
+            return '<div class="main" >' + row1 + row2 + row3 + '</div>';
+        };
+        ButtonView.prototype.renderVo = function (vo, ismore) {
+            return $('<div>').addClass('main').html(this.renderVoStr(vo, ismore));
         };
         return ButtonView;
     })();
@@ -65,6 +78,7 @@ var uplight;
         function DestModel(vo) {
             this.vo = vo;
             this.byCat = true;
+            // kw:JQuery;
             this.cache = {};
             this.id = vo.id;
             if (vo.more || vo.tmb || vo.imgs || vo.pgs)
@@ -74,6 +88,12 @@ var uplight;
             this.unit = ' ' + vo.unit.toLowerCase();
             this.kws = ',' + vo.kws;
         }
+        DestModel.prototype.addDetails = function (el) {
+            if (el.children('.details').length === 0) {
+                el.append(this.view.createDetails(this.vo));
+                el.children('.details').show('fast');
+            }
+        };
         DestModel.prototype.getView = function (reset) {
             return this.view.getView(reset);
         };
@@ -95,18 +115,13 @@ var uplight;
             //this.show();
         };
         DestModel.prototype.togleDetails = function () {
-            if (!this.haveMore)
-                return false;
-            if (this.vo.imgs || this.vo.pgs) {
-                console.log('have large details  this.vo.imgs: ' + this.vo.imgs + ' this.vo.pgs: ' + this.vo.pgs);
-                DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE, this);
-                window.location.hash = '#dest/' + this.vo.id;
-                return true;
+            if (this.haveMore) {
+                if (this.isDetails)
+                    this.hideDetails();
+                else
+                    this.showDetails();
+                return this.isDetails;
             }
-            if (this.isDetails)
-                this.hideDetails();
-            else
-                this.showDetails();
             return false;
         };
         DestModel.prototype.showDetails = function () {
@@ -177,13 +192,13 @@ var uplight;
             return out;
         };
         DestModel.prototype.showKeyword = function (str) {
-            // console.log('showKeyword  '   + str);
-            this.kw.text(str);
+            console.log(this.vo.name + '  showKeyword  ' + str);
+            this.view.showKW(str);
             this.iskw = 1;
         };
         DestModel.prototype.clearKeyword = function () {
             if (this.iskw) {
-                this.kw.text('');
+                this.view.resetKW();
                 this.iskw = 0;
             }
         };

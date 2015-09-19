@@ -1,7 +1,7 @@
 /// <reference path="net.ts" />
 /// <reference path="models.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
-/// <reference path="../../libs/typing/underscore.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 /// <reference path="Menu.ts" />
@@ -24,6 +24,7 @@ var SHOW_PAGE = 'Show_Page';
 var SHOW_KEYBOARD = 'Show_Keyboard';
 var HIDE_KEYBOARD = 'Hide_Keyboard';
 var TYPING = 'typing';
+var HIDDEN = 'hidden';
 var HASH_CHANGE = 'hash_change';
 var CHANGE = 'change';
 var CHECKED = 'checked';

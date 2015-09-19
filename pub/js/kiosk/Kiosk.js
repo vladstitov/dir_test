@@ -12,6 +12,8 @@
 /// <reference path="Connector.ts" />
 /// <reference path="search/Keywords.ts" />
 /// <reference path="MainMenu.ts" />
+/// <reference path="utils/Relay.ts" />
+/// <reference path="utils/Timeout.ts" />
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
@@ -35,17 +37,29 @@ var uplight;
             var cats = new uplight.Categories();
             var mm = new uplight.MainMenu();
             mm.onClick = function (item) { return _this.onMenuClick(item); };
-            this.dest = new uplight.SearchDetailsLarge($('#DetailsLarge'));
-            console.log(this.dest);
+            var timeout = new uplight.Timeout(u_settings.ss_timeout);
+            this.details = new uplight.DetailsLarge($('#DetailsLarge'));
+            this.details.onClose = function () {
+                _this.details.hide();
+            };
             $('#btnSearch').click(function () { return _this.shoeSearch(); });
             $('#SearchView [data-id=btnClose]').click(function () { return _this.showMenu(); });
             $('#SearchView [data-id=btnShowMenu]').click(function () { return _this.showMenu(); });
             this.searchResult = new uplight.SearchResult();
+            this.searchResult.onSelect = function (id) {
+                var dest = _this.R.model.getDestById(id);
+                if (dest.imgs)
+                    _this.details.setDestination(dest).render().show();
+                else
+                    _this.searchResult.showDestination(dest);
+                console.log(dest);
+            };
             if (!u_settings.hasOwnProperty('norelay'))
-                var relay = new Relay(u_settings.timer);
+                var relay = new uplight.Relay(u_settings.timer);
             r.dispatcher.on(r.SS_START, function () {
                 r.dispatcher.triggerHandler(r.RESET_ALL);
             });
+            // setTimeout(()=>{ DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
         }
@@ -101,55 +115,16 @@ var uplight;
             switch (hash[0]) {
                 case '#category':
                     break;
-                case '#destid':
-                    this.dest.showDest(Number(hash[1]));
+                case '#dest':
+                    break;
+                case '#ScreenSaver':
+                    window.location.reload();
                     break;
             }
         };
         return Kiosk;
     })();
     uplight.Kiosk = Kiosk;
-    var Relay = (function () {
-        function Relay(delay) {
-            var _this = this;
-            this.stamp = 0;
-            this.ping = 0;
-            if (isNaN(delay) || delay < 2)
-                delay = 2;
-            this.timer = (new Date()).getTime();
-            setInterval(function () { return _this.relay(); }, delay * 1000);
-        }
-        Relay.prototype.relay = function () {
-            var that = this;
-            var now = (new Date()).getTime();
-            var timer = now - this.timer;
-            this.timer = now;
-            uplight.Registry.getInstance().connector.relay(this.stamp, Math.round(now / 1000), this.ping, timer, uplight.Registry.status).done(function (res) {
-                that.ping = (new Date()).getTime() - now;
-                var vo;
-                try {
-                    vo = JSON.parse(res);
-                }
-                catch (e) {
-                    console.warn('relay doesnt work ' + res);
-                    return;
-                }
-                switch (vo.success) {
-                    case 'reload':
-                        window.location.reload();
-                        break;
-                    case 'load':
-                        window.location.href = vo.result;
-                        break;
-                    case 'stamp':
-                        that.stamp = Number(vo.result);
-                        break;
-                }
-            });
-        };
-        return Relay;
-    })();
-    uplight.Relay = Relay;
 })(uplight || (uplight = {}));
 $(document).ready(function () {
     var k = new uplight.Kiosk();

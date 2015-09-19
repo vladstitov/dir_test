@@ -1,6 +1,6 @@
 /// <reference path="models.ts" />
 /// <reference path="rega.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
 /// <reference path="../page/PagesList.ts" />
 var uplight;
 (function (uplight) {
@@ -127,9 +127,9 @@ var uplight;
         Connector.prototype.deleteDestination = function (id) {
             return $.get(this.service + '?a=dests.delete&destid=' + id);
         };
-        Connector.prototype.saveDestination = function (vo) {
+        Connector.prototype.saveDestination = function (data) {
             // console.log(vo);
-            return $.post(this.service + '?a=destination.save', JSON.stringify(vo));
+            return $.post(this.service + '?a=destination.save', data);
         };
         Connector.prototype.savePage = function (url, data) {
             return $.post(this.service + '?a=save_page&url=' + url, data);

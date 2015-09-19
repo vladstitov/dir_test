@@ -5,10 +5,6 @@ var uplight;
         function VODestination(obj) {
             for (var str in obj)
                 this[str] = obj[str];
-            if (typeof obj.cats === 'string' && obj.cats.length)
-                this.cats = obj.cats.split(',').map(Number);
-            if (typeof obj.imgs === 'string' && obj.imgs.length)
-                this.imgs = obj.imgs.split(',');
         }
         return VODestination;
     })();
@@ -26,10 +22,10 @@ var uplight;
     var Model = (function () {
         //  warn:Function;
         //  error:Function;
-        function Model(connector, warn) {
+        function Model(connector, logger) {
             var _this = this;
             this.connector = connector;
-            this.warn = warn;
+            this.logger = logger;
             this.READY = 'READY';
             // this.R = Registry.getInstance();
             this.dispatcher = $({});
@@ -110,13 +106,17 @@ var uplight;
             var ind = [];
             var kws = {};
             for (var i = 0, n = ar.length; i < n; i++) {
+                if (!ar[i].name)
+                    continue;
+                if (typeof ar[i].cats === 'string')
+                    ar[i].cats = ar[i].cats.split(',').map(Number);
                 var dest = new VODestination(ar[i]);
                 ind[dest.id] = dest;
-                if (dest.kws.length) {
-                    dest.kws.split(',').forEach(function (el) {
-                        if (!kws[el])
-                            kws[el] = [];
-                        kws[el].push(dest.id);
+                if (dest.kws && dest.kws.length) {
+                    dest.kws.split(',').forEach(function (val) {
+                        if (!kws[val])
+                            kws[val] = [];
+                        kws[val].push(dest.id);
                     });
                 }
                 out.push(dest);
@@ -141,7 +141,7 @@ var uplight;
                     if (catsI[item.cats[0]])
                         item.icon = catsI[item.cats[0]].icon;
                     else
-                        this.warn('cant find icon for category ' + item.cats[0] + ' ib dest: ' + item.name);
+                        this.logger('cant find icon for category ' + item.cats[0] + ' ib dest: ' + item.name);
                 }
             }
         };

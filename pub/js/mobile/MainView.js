@@ -1,8 +1,8 @@
-/// <reference path="main.ts" />
-var mobile;
-(function (mobile) {
-    var MainView = (function () {
-        function MainView(view, width, height) {
+/// <reference path="../Mobile.ts" />
+var uplight;
+(function (uplight) {
+    var MainViewMobile = (function () {
+        function MainViewMobile(view, width, height) {
             this.view = view;
             this.width = width;
             this.height = height;
@@ -24,24 +24,24 @@ var mobile;
                 }
 
               */
-        MainView.prototype.setHeader = function (str) {
+        MainViewMobile.prototype.setHeader = function (str) {
             return this;
         };
-        MainView.prototype.addFooter = function (footer) {
+        MainViewMobile.prototype.addFooter = function (footer) {
             if (this.footer)
                 this.footer.remove();
             if (footer)
                 this.view.append(footer);
             this.footer = footer;
         };
-        MainView.prototype.addHeader = function (header) {
+        MainViewMobile.prototype.addHeader = function (header) {
             if (this.header)
                 this.header.remove();
             if (header)
                 this.view.prepend(header);
             this.header = header;
         };
-        MainView.prototype.showView = function (el, header) {
+        MainViewMobile.prototype.showView = function (el, header) {
             var _this = this;
             // this.addHeader(header); 
             // this.addFooter(footer); 
@@ -60,7 +60,7 @@ var mobile;
                 _this.slider.scrollLeft(0);
             });
         };
-        MainView.prototype.showViewBack = function (el, header) {
+        MainViewMobile.prototype.showViewBack = function (el, header) {
             var _this = this;
             if (this.header)
                 this.header.prependTo(this.current);
@@ -83,8 +83,8 @@ var mobile;
                 }
             });
         };
-        return MainView;
+        return MainViewMobile;
     })();
-    mobile.MainView = MainView;
-})(mobile || (mobile = {}));
-//# sourceMappingURL=mainview.js.map
+    uplight.MainViewMobile = MainViewMobile;
+})(uplight || (uplight = {}));
+//# sourceMappingURL=MainView.js.map

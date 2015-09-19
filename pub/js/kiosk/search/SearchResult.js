@@ -6,7 +6,7 @@ var uplight;
             this.view = $('#list-main');
             this.R = uplight.Registry.getInstance();
             this.model = uplight.Registry.getInstance().model;
-            this.list = $('<ul>').addClass('nano-content');
+            this.list = this.view.find('[data-id=list]:first');
             this.addListeners();
             this.cache = {};
             this.mainport = $('#mainport');
@@ -16,7 +16,7 @@ var uplight;
         SearchResult.prototype.reset = function () {
             this.result = this.data;
             this.render(true);
-            this.hideDetails();
+            // this.hideDetails();
         };
         SearchResult.prototype.addListeners = function () {
             var _this = this;
@@ -24,34 +24,50 @@ var uplight;
             this.R.dispatcher.on(this.R.SEARCH_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
             this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
-            console.log('listeners');
+            this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
+            // console.log('listeners');
+        };
+        SearchResult.prototype.showDestination = function (vo) {
+            return this.dataInd[vo.id].togleDetails();
         };
         SearchResult.prototype.onListClick = function (evt) {
-            // console.log(evt.currentTarget);
-            var id = $(evt.currentTarget).data('id');
+            console.log(evt.currentTarget);
+            var el = $(evt.currentTarget);
+            console.log(el.data());
+            var id = el.data('id');
             if (isNaN(Number(id)) || !this.dataInd[id])
                 return;
-            this.dataInd[id].togleDetails();
+            if (this.selected)
+                this.selected.removeClass(SELECTED);
+            this.selectedIndex = el.index();
+            this.selected = el.addClass(SELECTED);
+            if (this.onSelect)
+                this.onSelect(id);
             this.R.connector.Stat('sr', id.toString());
         };
-        SearchResult.prototype.hideDetails = function () {
-            if (this.isDetails) {
-                // this.viewDetails.hide();
-                // this.detailsContent.empty();
+        /*
+        private hideDetails():void{
+            if(this.isDetails){
+               // this.viewDetails.hide();
+               // this.detailsContent.empty();
                 this.isDetails = false;
             }
-        };
-        SearchResult.prototype.onCoverClick = function (evt) {
-            // console.log($(evt.target));
-            if ($(evt.target).data('id') == 'btnClose') {
+        }
+        private onCoverClick(evt:JQueryEventObject):void{
+           // console.log($(evt.target));
+            if($(evt.target).data('id')=='btnClose'){
                 this.hideDetails();
             }
-        };
-        SearchResult.prototype.showDetailsLarge = function (det) {
+        }
+
+        private showDetailsLarge(det:JQuery):void{
+
             //this.viewDetails.show();
-            //  this.detailsContent.append(det);
+          //  this.detailsContent.append(det);
             this.isDetails = true;
-        };
+
+        }
+*/
         SearchResult.prototype.onSearchChange = function (pattern) {
             this.currentPattern = pattern.toLowerCase();
             //  console.log(pattern);
@@ -90,15 +106,17 @@ var uplight;
                 ar[i].setCats(cats).render();
         };
         SearchResult.prototype.render = function (reset) {
+            if (this.selected)
+                this.selected.removeClass(SELECTED);
+            this.selectedIndex = -1;
             var ar = this.result;
-            this.list.empty();
+            this.list.children().detach();
+            var ul = $('<ul>');
             for (var i = 0, n = ar.length; i < n; i++)
-                this.list.append(ar[i].getView(reset));
-            // this.list.appendTo(this.view);
-            // this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+                ul.append(ar[i].getView(reset));
+            this.list.append(ul);
         };
         SearchResult.prototype.onDataReady = function () {
-            var _this = this;
             var ar = this.model.getData();
             var list = this.list, out = [];
             var ind = [];
@@ -111,8 +129,7 @@ var uplight;
             this.data = out;
             this.result = out;
             this.render(false);
-            this.list.appendTo(this.view);
-            this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
+            // this.list.appendTo(this.view);
             // this.searchController = new SearchController());
         };
         return SearchResult;

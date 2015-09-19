@@ -139,11 +139,6 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 if (ar[i].cats.length < 4)
                     continue;
-                var ar2 = ar[i].categories;
-                for (var i2 = 0, n2 = ar2.length; i2 < n2; i2++) {
-                    if (cats.indexOf(ar2[i2]) === -1)
-                        cats.push(ar2[i2]);
-                }
             }
             return this.createCategories(cats, 1);
         };
@@ -163,8 +158,6 @@ var uplight;
             var ar = this._data;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                if (item.categories)
-                    item.cats = this.convertCategories(item.categories);
             }
             var is_overwrite = this.rdOver.prop(CHECKED);
             console.log('sendData total ' + ar.length + ' is_overwrite ' + is_overwrite);
@@ -206,7 +199,7 @@ var uplight;
             if (res.result) {
                 this.R.msg('Complete', this.btnUpload);
                 this._data = null;
-                //this.reset();
+                //this.resetButtons();
                 this.getData();
                 this.R.model.refreshData();
             }

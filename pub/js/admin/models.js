@@ -5,14 +5,6 @@ var uplight;
         function VODestination(obj) {
             for (var str in obj)
                 this[str] = obj[str];
-            if (obj.cats == '0')
-                this.cats = [];
-            else if (typeof obj.cats === 'string' && obj.cats.length)
-                this.cats = obj.cats.split(',').map(Number);
-            if (typeof obj.imgs === 'string' && obj.imgs.length)
-                this.imgs = obj.imgs.split(',');
-            if (!this.uid)
-                this.uid = '' + this.id;
         }
         return VODestination;
     })();
@@ -32,30 +24,32 @@ var uplight;
                 callBack(res);
             });
         };
-        DestinantionsModel.prototype.saveDestination = function (callBack, vo, pages) {
-            var _this = this;
-            if (pages && !vo.uid)
-                vo.uid = 'a_' + vo.id;
-            var p1 = this.R.connector.saveDestination(vo).done(function (res) {
-                _this.refreshData();
-            });
-            var p2;
-            if (pages) {
-                if (!vo.uid)
-                    vo.uid = 'a_' + vo.id;
-                p2 = this.R.connector.savePage('pages/p' + vo.uid + '.htm', pages);
-                $.when(p1, p2).then(function (v1, v2) {
-                    // console.log('both');
-                    //console.log(v1,v2);
-                    var res = v1[0];
-                    callBack(res);
-                });
-            }
-            else
-                p1.then(function (res) {
-                    callBack(res);
-                });
+        DestinantionsModel.encodeUID = function (name) {
+            return name.replace(/[^a-zA-Z0-9-_]/g, '');
         };
+        // saveDestination(vo: VODestination): void {
+        //  var p1= this.R.connector.saveDestination(vo).done((res)=>{
+        //   this.refreshData();
+        // });
+        /*
+             var p2
+             if(pages){
+                 if(!vo.uid) vo.uid = 'a_'+vo.id;
+                p2 = this.R.connector.savePage('pages/p'+vo.uid+'.htm',pages);
+                 $.when(p1,p2).then(function(v1,v2){
+                    // console.log('both');
+                     //console.log(v1,v2);
+                     var res = v1[0];
+ 
+                     callBack(res)
+ 
+                 })
+             }else p1.then(function(res){
+                 callBack(res);
+             })
+ 
+ */
+        //   }
         DestinantionsModel.prototype.saveCategoryListing = function (catid, ids, callBack) {
             var _this = this;
             this.R.connector.saveCatDests(catid, ids).done(function (res) {
@@ -191,6 +185,17 @@ var uplight;
         DestinantionsModel.prototype.getCategoryById = function (id) {
             return this.catsIndexed[id];
         };
+        DestinantionsModel.prototype.getCategoriesNames = function (ar) {
+            var out = [];
+            for (var i = ar.length - 1; i >= 0; i--) {
+                var vo = this.getCategoryById(ar[i]);
+                if (vo)
+                    out.push(vo.label);
+                else
+                    ar.splice(i, 1);
+            }
+            return out.reverse();
+        };
         DestinantionsModel.prototype.refreshData = function () {
             console.log('DestinantionsModel refresh');
             this.cache = {};
@@ -200,86 +205,38 @@ var uplight;
             $.when(p1, p2).then(function (v1, v2) {
                 //  console.log(v1[0],v2[0]);
                 var res = v1[0];
-                var catInd = self.setCategories(res);
+                self.setCategories(res);
                 var dests = v2[0];
                 self.setDestinations(dests);
-                self.mapCategories();
                 self.dispatcher.triggerHandler(self.CATEGORIES_CAHANGE, res);
                 self.dispatcher.triggerHandler(self.CHANGE);
-                return;
-                var convert = function (ar, cats, destid) {
-                    var out = [];
-                    for (var i = 0, n = ar.length; i < n; i++) {
-                        var cat = cats[ar[i]];
-                        if (cat) {
-                            if (!cat.dests)
-                                cat.dests = [];
-                            out.push(cat.label);
-                            cat.dests.push(destid);
-                        }
-                        else
-                            console.warn('no category ' + ar[i]);
-                    }
-                    return out;
-                };
-                var ar = dests;
-                //  console.log(ar);
-                var destInd = [];
-                for (var i = 0, n = ar.length; i < n; i++) {
-                    var item = ar[i];
-                    destInd[item.id] = item;
-                    if (item.imgs)
-                        item.imgs = item.imgs.split(',');
-                    if (item.cats == 0)
-                        item.cats = 0;
-                    if (!item.cats)
-                        continue;
-                    item.cats = item.cats.split(',').map(Number);
-                    item.categories = convert(item.cats, catInd, item.id);
-                }
-                self.setData(dests);
             });
         };
         DestinantionsModel.prototype.setDestinations = function (res) {
             var out = [];
             for (var i = 0, n = res.length; i < n; i++) {
+                var cats = res[i].cats.split(',').map(Number);
+                res[i].catsStr = this.getCategoriesNames(cats);
+                res[i].cats = cats;
+                if (!res[i].uid)
+                    res[i].uid = DestinantionsModel.encodeUID(res[i].name.toLowerCase());
                 var dest = new VODestination(res[i]);
                 out.push(dest);
             }
             this.setData(out);
         };
-        DestinantionsModel.prototype.mapCategories = function () {
-            var catInd = this.catsIndexed;
-            // console.log(catInd);
-            var convert = function (ar, cats, destid) {
-                var out = [];
-                for (var i = 0, n = ar.length; i < n; i++) {
-                    var cat = cats[ar[i]];
-                    if (cat) {
-                        out.push(cat.label);
-                        cat.dests.push(destid);
-                    }
-                    else {
-                        ar.splice(i++, 1);
-                    }
-                }
-                return out;
-            };
-            var ar = this.getData();
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var item = ar[i];
-                item.categories = convert(item.cats, catInd, item.id);
-            }
-        };
         /////////////////////////////CATEGORIES//////////////////////////////////
-        DestinantionsModel.prototype.saveCategory = function (vo, callBack) {
-            var that = this;
+        DestinantionsModel.prototype.saveCategory = function (vo) {
+            var _this = this;
+            var d = $.Deferred();
             this.R.connector.saveCategory(vo).done(function (res) {
-                that.setCategories(res);
-                that.mapCategories();
-                callBack({ success: true });
-                that.dispatcher.triggerHandler(that.CATEGORIES_CAHANGE, res);
+                _this.setCategories(res);
+                d.resolve(_this.getCategories());
+                // that.mapCategories();
+                //  callBack({success:true});
+                _this.dispatcher.triggerHandler(_this.CATEGORIES_CAHANGE, res);
             });
+            return d.promise();
         };
         DestinantionsModel.prototype.setCategories = function (ar) {
             var cats = [];
@@ -291,7 +248,6 @@ var uplight;
             }
             this.categories = cats;
             this.catsIndexed = catInd;
-            return catInd;
         };
         DestinantionsModel.prototype.getCategories = function () {
             return this.categories;

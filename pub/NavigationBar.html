@@ -1,0 +1,61 @@
+<!--Main Navigation -->
+
+<section id="Navigation"  class="navbar navbar-default navbar-fixed-top">
+    <section  data-ctr="Menu" class="container">
+        <div class="navbar-header main-color">
+                <?= isset($labels['logo'])?'<img class="logo"  align="middle" src="'.$labels['logo'].'" />':''; ?>
+            <?= isset($labels['header'])?'<span class="header" >'.$labels['header'].' </span>':''; ?>
+
+            <button type="button" class="navbar-toggle" data-id="btnMenu">
+                <span class="sr-only">Toggle navigation</span>
+               <!-- <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>-->
+                <span class="fa fa-bars">&nbsp;</span>
+            </button>
+        </div>
+        <style>
+
+          /*  #Navigation.navbar{
+              background-color: rgba(27, 73, 255, 0.34);
+            }*/
+          #Navigation .logo{
+              max-height: 40px;
+              margin: 5px;
+          }
+            #Navigation nav>a{
+                display: block;
+            }
+            #Navigation .content{
+                background-color: white;
+                padding: 1em;
+            }
+
+        </style>
+       <!-- <div id="buttonMenu" class="pull-right">
+            <div  data-id="btnMenu"><span class="fa fa-bars">&nbsp;</span></div>
+        </div>-->
+
+        <div class="content" data-id="content">
+            <div>
+                <nav>
+                    <a href="#SearchDirectories">Search Directories</a>
+                </nav>
+            </div>
+            <div>
+                <h5>Info Pages</h5>
+                <nav data-id="listP" class="list-group">
+
+                </nav>
+            </div>
+
+            <div>
+                <h5>Listing Categories</h5>
+                <nav data-id="listC" class="list-group">
+
+                </nav>
+            </div>
+        </div>
+
+    </section>
+</section>

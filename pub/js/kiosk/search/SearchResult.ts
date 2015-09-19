@@ -18,11 +18,14 @@ module uplight {
         view:JQuery
        // viewDetails:JQuery
         detailsContent:JQuery;
+
+        onSelect:Function;
         constructor(){
             this.view = $('#list-main');
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
-            this.list=$('<ul>').addClass('nano-content');
+            this.list=this.view.find('[data-id=list]:first');
+
             this.addListeners();
             this.cache={};
             this.mainport = $('#mainport');
@@ -34,7 +37,7 @@ module uplight {
         reset():void{
             this.result = this.data;
             this.render(true);
-            this.hideDetails();
+           // this.hideDetails();
         }
 
         addListeners():void{
@@ -42,21 +45,36 @@ module uplight {
             this.R.dispatcher.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
             this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
-            console.log('listeners');
+            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+           // console.log('listeners');
         }
 
+        showDestination(vo:VODestination):boolean{
+            return this.dataInd[vo.id].togleDetails();
+        }
+
+        selected:JQuery;
+       selectedIndex:number
 
         private onListClick(evt:JQueryEventObject):void{
-           // console.log(evt.currentTarget);
-            var id:number = $(evt.currentTarget).data('id');
+            console.log(evt.currentTarget);
+            var el:JQuery = $(evt.currentTarget);
 
+            console.log(el.data());
+            var id:number = el.data('id');
             if(isNaN(Number(id)) || !this.dataInd[id]) return;
-            this.dataInd[id].togleDetails();
-            this.R.connector.Stat('sr',id.toString());
+
+            if(this.selected)  this.selected.removeClass(SELECTED);
+            this.selectedIndex = el.index();
+            this.selected = el.addClass(SELECTED);
+
+            if(this.onSelect )this.onSelect(id);
+           this.R.connector.Stat('sr',id.toString());
 
         }
 
         private isDetails:boolean;
+        /*
         private hideDetails():void{
             if(this.isDetails){
                // this.viewDetails.hide();
@@ -78,7 +96,7 @@ module uplight {
             this.isDetails = true;
 
         }
-
+*/
         private onSearchChange(pattern:string):void{
             this.currentPattern = pattern.toLowerCase();
           //  console.log(pattern);
@@ -117,15 +135,16 @@ module uplight {
 
         }
 
-
         private render(reset:boolean):void{
+            if(this.selected)  this.selected.removeClass(SELECTED);
+            this.selectedIndex=-1
             var ar:DestModel[] = this.result;
-            this.list.empty();
-           // console.log(this.data.length);
-          //  var list:JQuery = this.list.remove().html('');
-         for(var i=0,n=ar.length;i<n;i++) this.list.append(ar[i].getView(reset));
-           // this.list.appendTo(this.view);
-           // this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+            this.list.children().detach();
+            var ul:JQuery=$('<ul>');
+           // var out=''
+        // for(var i=0,n=ar.length;i<n;i++)out+=ar[i].getViewStr(reset)
+            for(var i=0,n=ar.length;i<n;i++)ul.append(ar[i].getView(reset));
+             this.list.append(ul);
         }
 
         private dataInd:DestModel[];
@@ -142,8 +161,8 @@ module uplight {
             this.data=out;
             this.result=out;
             this.render(false);
-            this.list.appendTo(this.view);
-            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+           // this.list.appendTo(this.view);
+
            // this.searchController = new SearchController());
         }
 

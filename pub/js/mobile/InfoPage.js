@@ -1,45 +1,47 @@
 /// <reference path="../kiosk/registry.ts" />
-/// <reference path="../../libs/typing/jquery.d.ts" />
-var mobile;
-(function (mobile) {
-    var InfoPage = (function () {
-        function InfoPage(view, connector) {
+/// <reference path="../typing/jquery.d.ts" />
+var uplight;
+(function (uplight) {
+    var InfoPageMobile = (function () {
+        function InfoPageMobile(view, connector) {
             var _this = this;
             this.view = view;
             this.connector = connector;
             this.cache = {};
             this.content = view.find('[data-id=content]');
             this.title = view.find('[data-id=title]');
+            this.isHidden = view.hasClass(HIDE);
             var pgs = connector.getPages().done(function (res) {
                 _this.data = res;
-                console.log(res);
+                //console.log(res);
             });
         }
-        InfoPage.prototype.show = function () {
+        InfoPageMobile.prototype.show = function () {
             if (this.isHidden) {
                 this.isHidden = false;
-                this.view.show('fast');
+                this.view.removeClass(HIDE);
             }
         };
-        InfoPage.prototype.hide = function () {
+        InfoPageMobile.prototype.hide = function () {
             if (!this.isHidden) {
                 this.isHidden = true;
-                this.view.hide('fast');
+                this.view.addClass(HIDE);
             }
         };
-        InfoPage.prototype.showPage = function (item) {
+        InfoPageMobile.prototype.showPage = function (item) {
             var _this = this;
             if (item.html)
                 this.content.html(item.html);
             else {
                 $.get(item.url).done(function (res) {
                     item.html = res;
+                    console.log(res);
                     _this.content.html(item.html);
                 });
             }
             this.show();
         };
-        InfoPage.prototype.showInfo = function (id) {
+        InfoPageMobile.prototype.showInfo = function (id) {
             var ar = this.data;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
@@ -50,8 +52,8 @@ var mobile;
             if (item.id == id)
                 this.showPage(item);
         };
-        return InfoPage;
+        return InfoPageMobile;
     })();
-    mobile.InfoPage = InfoPage;
-})(mobile || (mobile = {}));
+    uplight.InfoPageMobile = InfoPageMobile;
+})(uplight || (uplight = {}));
 //# sourceMappingURL=infopage.js.map

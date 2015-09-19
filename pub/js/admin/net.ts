@@ -162,10 +162,10 @@ module uplight {
         deleteDestination(id:number) :JQueryPromise<any> {
             return $.get(this.service + '?a=dests.delete&destid='+id);
         }
-        saveDestination(vo:VODestination):JQueryPromise<VOResult> {
+        saveDestination(data:string):JQueryPromise<VOResult> {
                     // console.log(vo);
 
-            return $.post(this.service + '?a=destination.save', JSON.stringify(vo));
+            return $.post(this.service + '?a=destination.save',data);
         }
         savePage(url: string,data:string):JQueryPromise<VOResult> {
             return $.post(this.service + '?a=save_page&url=' + url,data);

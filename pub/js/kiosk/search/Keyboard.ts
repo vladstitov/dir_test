@@ -199,7 +199,7 @@ module uplight{
             var cl = 'Plastic031';
             if(item=='SPACE') cl+=' space';
             if(item == '&nbsp;')cl+=' back fa fa-caret-square-o-left';
-            return '<div class="kb-key '+cl+'"><span>' + item + '</span></div>';
+            return '<div class="kb-key btn '+cl+'"><span>' + item + '</span></div>';
         }
         private onKeyPressed(evt): void {
 

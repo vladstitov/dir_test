@@ -10,24 +10,31 @@ module uplight {
 
 
 
+        private encode(str:string):string{
+            return str;//this.div.text(str).html();
+        }
+        private div:JQuery=$('<div>');
         getDestination():VODestination {
              if(!this.current) return null;
 
+
             var vo:VODestination = this.current;
-            vo.name = this.name.val();
+            vo.name = this.encode(this.name.val());
+
             if (vo.name.length < 2) {
                 this.R.msg('Name is required', this.name);
                 return null;
             }
-            vo.unit = this.unit.val() || '';
-            vo.info = this.info.val() || '';
-            vo.imgs= this.imagesEditor.getData();
-            vo.imgsD = this.imagesEditor.getDeleted();
+            vo.unit = this.encode(this.unit.val() || '');
+            vo.info = this.encode(this.info.val() || '');
+            vo.imgs= this.imagesEditor.getData().toString();
+           // vo.imgsD = this.imagesEditor.getDeleted();
            // vo.cats = this.categories.getCurrent();
             vo.more = this.collectDataFromTable()
-            vo.meta = this.meta.val() || '';
-            vo.kws = this.keywords.val() || '';
-            vo.uid = this.uid.val() || '';
+            vo.meta = this.encode(this.meta.val() || '');
+            vo.kws = this.encode(this.keywords.val() || '');
+            vo.uid = this.encode(this.uid.val());
+
             vo.tmb = this.tmbImg.attr('src');
             var pages = this.pages.html();
             if (pages.length > 20) {
@@ -45,16 +52,16 @@ module uplight {
 
         show():void{
             this.view.show();
-            this.render();
         }
+
         focusName():void{
             this.name.focus();
         }
+
         hide():void{
-
             this.view.hide();
-
         }
+
         reset():void{
             this.name.val('');
             this.unit.val('');
@@ -70,15 +77,20 @@ module uplight {
             // this.showItemCategories();
 
         }
-        setDestibation(vo:VODestination):void {
+
+        setDestination(vo:VODestination):void {
             this.current = vo;
             this.categories.setCurrent(vo);
             this.imagesEditor.setData(vo);
         }
 
-        setID(num:number):void{
-            this.current.id=num;
-            this.dbid.text(num);
+        setID(id:number):void{
+            this.current.id=id;
+            this.dbid.text(id);
+            if(!this.current.uid.length){
+                this.current.uid=''+id
+                this.uid.val(this.current.uid);
+            }
         }
 
 
@@ -87,6 +99,7 @@ module uplight {
         private unit:JQuery;
         private info:JQuery
         private details:JQuery;
+        private images:JQuery
 
         private keywords:JQuery
         private meta:JQuery
@@ -108,13 +121,27 @@ module uplight {
         private editor:nicEditor;
         private categories:DetailsCategory;
         private imagesEditor:DetailsImages;
+
+        onClose:Function;
+        onSave:Function;
+
+        btnSave:JQuery
+
         view:JQuery
 
         constructor(form:JQuery) {
             this.view = form;
             this.R = RegA.getInstance();
 
+            this.view.find('[data-id=btnClose]').click(()=>{if(this.onClose)this.onClose()});
+           this.btnSave = this.view.find('[data-id=btnSave]').click(()=>{
+               var btn = this.btnSave
+               btn.prop('disabled',true);
+               setTimeout(function(){btn.prop('disabled',false);},1500);
+               if(this.onSave)this.onSave();
+           });
             this.pages =$('#details-pages');
+            this.images = this.view.find('[data-id=images]:first');
             this.name = form.find('[data-id=tiName]:first');
             this.unit = form.find('[data-id=tiUnit]:first');
             this.form = form;
@@ -138,22 +165,22 @@ module uplight {
 
             this.categories = new DetailsCategory(form);
 
-          // this.editor = new nicEditor({ fullPanel: true });
-           // this.editor.setPanel('myNicPanel');
-          // this.editor.addInstance('details-pages');
-            this.imagesEditor = new DetailsImages($('#DetailsImagesEdit'),$('#images-container'));
 
-            this.imagesEditor.view.find('.fa-close').on(CLICK,()=>this.onImageEditorCloseClick());
-            this.imagesEditor.view.find('[data-id=btnDone]').on(CLICK,()=>this.onImageEditorDoneClick());
+            this.imagesEditor = new DetailsImages($('#DetailsImagesEdit'));
+
             this.imagesEditor.hide();
+            this.imagesEditor.onSave = ()=>this.hideImageEditor();
+            this.imagesEditor.onClose = ()=>this.hideImageEditor();
+            this.imagesEditor.onCancel = ()=>this.hideImageEditor();
 
-            $('#DetailsImages [data-id=btnEfit]:first').on(CLICK,()=>this.onEditImagesClick());
+            $('#DetailsImages [data-id=btnEdit]:first').on(CLICK,()=>this.onEditImagesClick());
         }
 
         private onUploadTumb(res:VOResult):void{
             this.tmbImg.attr('src',res.result);
             console.log(res);
         }
+
         private onTmbInputChange(evt:JQueryEventObject):void{
             var input:any =evt.target;
             var files:FileList = input.files;
@@ -164,21 +191,20 @@ module uplight {
 
             }
         }
-        private onImageEditorDoneClick():void{
-            this.imagesEditor.render();
+
+        hideImageEditor():void{
+            if(this.current.imgs)this.images.html(this.renderImages(this.current.imgs));
             this.view.show();
             this.imagesEditor.hide();
         }
+
         private onEditImagesClick():void{
             this.view.hide();
+            this.imagesEditor.setData(this.current);
+            this.imagesEditor.render();
             this.imagesEditor.show();
         }
-        private onImageEditorCloseClick():void{
-            this.imagesEditor.resetData();
-            this.imagesEditor.render();
-            this.view.show();
-            this.imagesEditor.hide();
-        }
+
 //////////TABLE/////////////////////
 
         private onRowSelected(el:JQuery):void {
@@ -232,21 +258,25 @@ module uplight {
         }
 
         private collectDataFromTable():string{
+
             var list:JQuery = this.details.children('tr');
             var out:string[]=[];
-
             list.each(function (ind, el) {
                 var tr = $(el);
-                var str= tr.children('td:nth-child(1)').text()+"\t"+tr.children('td:nth-child(2)').text();
-                out.push(str.replace('\u00a0',''));
+                if(tr.text().length>5){
+                    var str= tr.children('td:nth-child(1)').text()+"\t"+tr.children('td:nth-child(2)').text();
+                    out.push(str.replace('\u00a0',''));
+                }
+
             })
+
             return out.join('\n');
         }
 
         ////////////////////////////DESTINATION///////////////////////////////////
 
 
-        private render():boolean {
+       render():boolean {
             if (this.current) {
                 var vo:VODestination = this.current;
                 this.name.val(vo.name);
@@ -254,7 +284,8 @@ module uplight {
                 this.info.val(vo.info);
                 this.renderTable(vo.more);
                 this.categories.render();
-                this.imagesEditor.render();
+                if(vo.imgs.length) this.images.html(this.renderImages(vo.imgs));
+                else this.images.html('');
                 this.uid.val(vo.uid);
                 this.meta.val(vo.meta);
                 this.dbid.text(vo.id);
@@ -269,6 +300,15 @@ module uplight {
             } else return false;
         }
 
+        private renderImages(imgs:string):string{
+          var   ar:string[]  = imgs.split(',');
+            var out:string=''
+            for(var i=0,n=ar.length;i<n;i++){
+               out+='<a><img src="'+ar[i]+'" /></a>';
+            }
+           return out;
+
+        }
         getDestinationId():number{
             if( this.current) return  this.current.id;
             else return 0;
