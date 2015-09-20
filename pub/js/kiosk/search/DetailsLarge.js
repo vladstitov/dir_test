@@ -61,7 +61,8 @@ var uplight;
             return this;
         };
         DetailsLarge.prototype.createTable = function (more) {
-            console.log('table ' + more.length);
+            if (more.length === 0)
+                return '';
             var ar = more.split("\n");
             var out = '<div class="more" ><table class="table">';
             for (var i = 0, n = ar.length; i < n; i++) {

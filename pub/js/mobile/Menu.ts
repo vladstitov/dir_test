@@ -11,32 +11,51 @@ module uplight {
         private listC:JQuery;
         private btnMenu:JQuery;
         private content:JQuery
+        private menu:JQuery;
+        onSearchFocus:Function;
+        onSearchType:Function;
+        onSearchON:Function;
+        onMenuON:Function;
 
-        isHidden:boolean;
-        show():void{
-            if(this.isHidden){
-                this.isHidden = false;
-                this.content.show('fast');
+
+        isHiddenMenu:boolean;
+        timeoutMenu:number;
+        showMenu():void{
+            if(this.isHiddenMenu){
+                clearTimeout(this.timeoutMenu);
+                this.isHiddenMenu = false;
+                this.menu.removeClass('closed');
+                this.timeoutMenu = setTimeout(()=>{
+                    if(this.onMenuON)this.onMenuON();
+                },500);
             }
         }
 
-        hide():void{
-            if(!this.isHidden){
-                this.isHidden = true;
-                this.content.hide('fast');
+        hideAll():void{
+           this.hideMenu();
+           this.hideSearch();
+        }
+
+        hideMenu():void{
+            if(!this.isHiddenMenu) {
+                clearTimeout(this.timeoutMenu);
+                this.isHiddenMenu = true;
+                this.menu.addClass('closed');
             }
         }
 
-        toggle():void{
-            if(this.isHidden)this.show();
-            else this.hide();
+        toggleMenu():void{
+            console.log('toggleMenu');
+            if(this.isHiddenMenu)this.showMenu();
+            else this.hideMenu();
         }
         constructor(private view:JQuery,private conn:uplight.Connector,private model:uplight.Model) {
-
+            this.menu=$('#Menu');
+            this.menu.find('[data-id=btnClose]').click(()=>this.hideMenu());
             this.listP = this.view.find( '[data-id=listP]:first');
             this.listC = this.view.find( '[data-id=listC]:first');
             this.content = this.view.find('[data-id=content]:first');
-            this.btnMenu = this.view.find('[data-id=btnMenu]:first').click(()=>this.toggle());
+            this.btnMenu = this.view.find('[data-id=btnMenu]:first').click(()=>this.toggleMenu());
             var cats:uplight.VOCategory[] = model.getCategories();
             var d1:JQueryDeferred<uplight.VOCategory> = $.Deferred();
             if(!cats) {
@@ -63,6 +82,14 @@ module uplight {
 
            });
 
+            this.slider = this.view.find('[data-id=SearchSlider]:first');
+            console.log(this.slider);
+            this.view.find('[data-id=btnSearch]').click(()=>this.toggleSearch())
+
+            this.tiSearch = this.view.find('[data-id=tiSearch]:first').on('input',()=>{
+                console.log(this.tiSearch.val());
+                if(this.onSearchType)this.onSearchType(this.tiSearch.val());
+            })
            // $.when(p0,d1).then((pages,cats)=>{
             //    console.log(pages,cats);
 
@@ -72,6 +99,44 @@ module uplight {
           //  conn.getCategories((data) => this.onCatData(data));
 
         }
+
+        tiSearch:JQuery;
+        slider:JQuery;
+        isSearch:boolean;
+        timeoutSearchFocus:number;
+        timeoutON:number
+        hideSearch():void{
+            if(this.isSearch){
+                this.tiSearch.val('');
+                this.isSearch = false;
+                this.slider.animate({scrollTop:0});
+                clearTimeout(this.timeoutSearchFocus );
+                clearTimeout(this.timeoutON);
+            }
+        }
+
+        showSearch():void{
+            if(!this.isSearch){
+                clearTimeout(this.timeoutON);
+                this.isSearch = true;
+                this.slider.animate({scrollTop:30});
+               this.timeoutON = setTimeout(()=>{
+                    if(this.onSearchON)this.onSearchON();
+                },500);
+
+         this.timeoutSearchFocus =  setTimeout(()=>this.focusSearch(),1000);
+            }
+        }
+        focusSearch():void{
+            this.tiSearch.focus();
+            if(this.onSearchFocus)this.onSearchFocus()
+
+        }
+        toggleSearch():void{
+            if(this.isSearch)this.hideSearch();
+            else this.showSearch();
+        }
+
 
     }
 

@@ -15,7 +15,7 @@ module uplight{
         //imgsD:string[];
         name: string;
         cats: number[];
-       // categories:string[];
+        details:string;
         pgs: string;
         more: string;
         tmb:string;
@@ -136,8 +136,7 @@ module uplight{
             var kws:any={};
             for(var i=0,n=ar.length;i<n;i++){
                 if(!ar[i].name) continue;
-
-                if(typeof ar[i].cats === 'string') ar[i].cats=ar[i].cats.split(',').map(Number);
+                if(typeof ar[i].cats === 'string' &&  ar[i].cats.length) ar[i].cats=ar[i].cats.split(',').map(Number);
                 var dest:VODestination = new VODestination(ar[i]);
                 ind[dest.id] = dest;
                 if(dest.kws && dest.kws.length){

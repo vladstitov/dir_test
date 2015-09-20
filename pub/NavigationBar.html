@@ -1,41 +1,54 @@
 <!--Main Navigation -->
 
-<section id="Navigation"  class="navbar navbar-default navbar-fixed-top">
-    <section  data-ctr="Menu" class="container">
-        <div class="navbar-header main-color">
-                <?= isset($labels['logo'])?'<img class="logo"  align="middle" src="'.$labels['logo'].'" />':''; ?>
-            <?= isset($labels['header'])?'<span class="header" >'.$labels['header'].' </span>':''; ?>
 
-            <button type="button" class="navbar-toggle" data-id="btnMenu">
-                <span class="sr-only">Toggle navigation</span>
-               <!-- <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>-->
-                <span class="fa fa-bars">&nbsp;</span>
-            </button>
-        </div>
+<section id="Navigation" data-ctr="Menu"   class="" >
+
+    <div id="Menu"   class="navbar-fixed-top">
+
+
+
         <style>
 
           /*  #Navigation.navbar{
               background-color: rgba(27, 73, 255, 0.34);
             }*/
-          #Navigation .logo{
-              max-height: 40px;
-              margin: 5px;
+          #Navigation{
+              width: 0;
+              height: 0;
           }
+
             #Navigation nav>a{
                 display: block;
             }
-            #Navigation .content{
+            #Navigation #Menu{
                 background-color: white;
-                padding: 1em;
+
+                display: inline-block;
+                width: 250px;
+                top: 50px;
+              /*  position: absolute;*/
+                box-shadow: 5px 5px 5px #666;
+                -webkit-transition: left 0.7s;
+                transition: left 0.7s;
+                left: 0;
             }
+
+          #Navigation #Menu .content{
+              padding: 1em;
+
+
+          }
+          #Navigation #Menu.closed{
+              left:-270px;
+          }
+
+
 
         </style>
        <!-- <div id="buttonMenu" class="pull-right">
             <div  data-id="btnMenu"><span class="fa fa-bars">&nbsp;</span></div>
         </div>-->
-
+        <a href="#menuclose" class="btn fa fa-close pull-right" data-id="btnClose"></a>
         <div class="content" data-id="content">
             <div>
                 <nav>
@@ -57,5 +70,67 @@
             </div>
         </div>
 
-    </section>
+        <button class="btn btn-default pull-right" style="margin: 0.5em; margin-top: -20px;" onclick="window.location.href='#menuclose';" data-id="btnClose">Close</button>
+
+    </div>
+    <style>
+        #Banner{
+            width: 100%;
+
+        }
+        #Banner .btn-primary{
+            margin-right: 15px;
+        }
+        #Banner button{
+            font-size: 1.5em;
+        }
+        #Banner .logo{
+            max-height: 40px;
+            margin: 5px;
+        }
+        #Banner .slider{
+            height: 30px;
+            overflow-y: hidden;
+        }
+        #Banner .slider .item{
+            height: 30px;
+           line-height: 30px;
+        }
+
+    </style>
+    <table id="Banner" class="main-color navbar-fixed-top">
+        <tr>
+            <td >
+                <?= isset($labels['logo'])?'<img class="logo"  align="middle" src="'.$labels['logo'].'" />':''; ?>
+            </td>
+            <td class="text-center" >
+                <div class="slider" data-id="SearchSlider" >
+                    <div class="slider-content">
+                        <div data-id="header" class="item">
+                            <?= isset($labels['header'])?'<span class="header" >'.$labels['header'].' </span>':''; ?>
+                        </div>
+
+                            <div class="item">
+                                <input type="text" size="3" data-id="tiSearch" />
+                                <a data-id="btnSearch"><span class="fa fa-close"></span> Close</a>
+                            </div>
+
+
+                    </div>
+                </div>
+            </td>
+            <td >
+
+
+                <button type="button" class="btn-primary  pull-right" onclick="window.location.href='#togglemenu';" data-id="btnMenu">
+                    <span class="fa fa-bars">&nbsp;</span>
+                </button>
+                <button type="button" class="btn-success pull-right" onclick="window.location.href='#togglemenu';" data-id="btnSearch">
+                    <span class="fa fa-search">&nbsp;</span>
+                </button>
+
+            </td>
+        </tr>
+
+    </table>
 </section>

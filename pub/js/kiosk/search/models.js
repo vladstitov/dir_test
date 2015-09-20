@@ -108,7 +108,7 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 if (!ar[i].name)
                     continue;
-                if (typeof ar[i].cats === 'string')
+                if (typeof ar[i].cats === 'string' && ar[i].cats.length)
                     ar[i].cats = ar[i].cats.split(',').map(Number);
                 var dest = new VODestination(ar[i]);
                 ind[dest.id] = dest;

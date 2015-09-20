@@ -4,6 +4,7 @@
 /// <reference path="kiosk/search/SearchResult.ts" />
 /// <reference path="mobile/filterpage.ts" />
 /// <reference path="mobile/mainview.ts" />
+/// <reference path="mobile/Utils.ts" />
 /// <reference path="mobile/menu.ts" />
 /// <reference path="kiosk/registry.ts" />
 /// <reference path="kiosk/search/DetailsLarge.ts" />
@@ -15,6 +16,8 @@ var SWIPE: string = 'swipe';
 var SWIPELEFT: string = 'swipeleft';
 var SWIPERIGTH: string = 'swiperight';
 var HIDE:string='hidden';
+var OPEN:string='open';
+var DETAILS:string='details'
 
 declare var settings: any;
 
@@ -48,8 +51,21 @@ module uplight {
             console.log('Mobile controller');
                                 
             this.menu = new Menu($('[data-ctr=Menu]:first'),conn,this.R.model);
+            this.menu.onMenuON =()=>{
+                this.menu.hideSearch();
+            };
+            this.menu.onSearchFocus=()=>{
+
+            };
+            this.menu.onSearchON=()=>{
+                this.menu.hideMenu();
+            };
+
+            this.menu.onSearchType=()=>{
+
+            };
           //  this.searchResult = new SearchResult('#Results');
-            this.filterPage = new FilterPage($('[data-ctr=FilterPage]'),this.R.model);
+
 
             this.infoPage = new InfoPageMobile($('[data-ctr=InfoPages]:first'),conn);
             this.detailsLarge = new DetailsLarge($('[data-ctr=DetailsLarge]:first'));
@@ -57,25 +73,26 @@ module uplight {
             this.detailsLarge.onClose=()=>{ window.history.back();}
             $(window).on('hashchange', (evt) => this.onHachChange());
             //document.location.hash = '#Menu';
+            this.filterPage = new FilterPage($('[data-ctr=FilterPage]'),this.R.model,this.detailsLarge.createTable);
+            this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(()=>this.onHachChange(),1000);
         }
 
 
-        private showDestination(id:number):void{
-            var vo:VODestination =  this.R.model.getDestById(id);
-            if(vo.imgs || vo.more) {
-                this.detailsLarge.setDestination(vo).render().show();
-                this.filterPage.hide();
-            }else{
-                this.detailsLarge.hide();
-                var table='';
-                if(vo.more && vo.more.length)table=this.detailsLarge.createTable(vo.more);
-                this.filterPage.showDestination(vo,table);
-                this.filterPage.show();
-                this.detailsLarge.hide();
+        private onListSelect(vo:VODestination):void{
+            console.log(vo);
+            if(vo.imgs) window.location.hash='#destination/'+vo.id;
+            else{
+                //var table='';
+               // if(vo.more && vo.more.length)table=this.detailsLarge.createTable(vo.more);
+               // this.filterPage.addDetails(vo,table);
             }
+        }
+        private showDestination(id:number):void{
 
-           console.log(vo);
+
+
+
            //
            // this.filterPage.hide();
         }
@@ -85,37 +102,53 @@ module uplight {
         }
 
 
+        private showDetails(str):void{
+
+        }
+
         private onHachChange(): void { 
-            var hash: string[] = document.location.hash.split('/');
-               
-            switch (hash[0]) {
-                case '#details':
-                        this.showDestination(Number(hash[1]));
-                       this.infoPage.hide();
+            var ar: string[] = document.location.hash.split('/');
+            var hash:string = document.location.hash;
+            if(hash.indexOf('detailsshow')==0){
+
+            }
+
+
+            switch (ar[0]) {
+                case '#destination':
+                    var vo:VODestination =  this.R.model.getDestById(Number(ar[1]));
+                    if(!vo) break;
+                    this.detailsLarge.setDestination(vo).setDestination(vo);
+                    this.detailsLarge.render().show();
+                    this.infoPage.hide();
+                    this.filterPage.hide();
                     break;
                 case '#category':
-                    this.filterPage.showCategory(Number(hash[1]));
+                    this.filterPage.showCategory(Number(ar[1]));
                     this.infoPage.hide();
                     this.detailsLarge.hide();
+                    this.menu.hideAll();
                     break;
                 case '#page':
-                    var num:number = Number(hash[1]);
+                    var num:number = Number(ar[1]);
                     if(isNaN(num)) break
                     this.showPage(num);
                     this.filterPage.hide();
                     this.detailsLarge.hide();
+                    this.menu.hideAll();
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();
                     this.infoPage.hide();
                     this.detailsLarge.hide();
+                    this.menu.hideAll();
                     break;
                 case '#Menu':
 
                    // this.menu.view.show('fast');
                     break;
                 default:
-                    document.location.hash = '#Menu';
+                   // document.location.hash = '#Menu';
                     break;
             }
 

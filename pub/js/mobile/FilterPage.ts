@@ -1,5 +1,5 @@
 ﻿/// <reference path="../kiosk/registry.ts" />
-
+/// <reference path="../Mobile.ts" />
 
 module uplight {
     export class FilterPage {
@@ -11,21 +11,26 @@ module uplight {
         private catTitle:JQuery;
         private tiFilter:JQuery;
         private details:JQuery
+        private ALL:string='all_';
+        private cache: any={};
         data:uplight.VODestination[];
+
+        onSelect:Function;
+        onMoreDta:Function;
         resetView(): JQuery {
             this.input.val('');
             this.list.html('<p class="bgwhite">Start typing in input field on top of page. Results will come as soon as you are typing</p>');
             return this.view;
         }
 
+
         showDefault():void{
             this.data = this.model.getData();
-            this.renderList();
             this.input.val('');
 
             this.tiFilter.show();
-            this.catTitle.text('');
-            this.doAll();
+            this.catTitle.text('').hide();
+            this.renderAll();
             this.show();
             this.input.focus();
 
@@ -34,31 +39,14 @@ module uplight {
         private current:number
         private selected:JQuery;
 
-        showDestination(vo:VODestination,table:string):void{
-            if(this.selected) this.selected.removeClass(SELECTED);
-            this.list.children()
-            this.current=vo.id;
-           var out:string='';
-            out+=vo.info;
-            out+=table;
-            if(vo.tmb)out+='<div class="tmb"></div><img src="'+vo.tmb+'"/></div>';
-            this.details.html(out).show('fast');
-
-            this.isDetails = true;
-           this.selected =  this.list.children('[data-id='+vo.id+']:first').addClass(SELECTED).append(this.details);
-           // window.location.hash='details-small/'+vo.id;
-        }
 
         showCategory(num:number):void{
-           this.tiFilter.hide();
-
+            this.tiFilter.hide();
             var cat:uplight.VOCategory = this.model.getCategoryById(num);
-            console.log(cat);
-            this.catTitle.text(cat.label);
-
+            this.catTitle.text(cat.label).show();
            this.data = this.model.getDestsByCat(num);
             this.catid=num;
-            this.renderList();
+            this.renderList('cat_'+num);
             this.show();
         }
 
@@ -81,30 +69,60 @@ module uplight {
         }
 
         isDetails:boolean;
-        constructor(private view:JQuery, private model: uplight.Model) {
+
+        constructor(private view:JQuery, private model: uplight.Model,private tableRender:Function) {
             this.input = view.find('[data-id=filter]');
             this.input.on('input', (evt) => this.onInput(evt));                   
             this.list = view.find('[data-id=list]');
-            this.list.on(CLICK,'.selected',()=>{
-               if(this.isDetails){
-                   this.details.hide('fast');
-                   this.isDetails=false;
-               }else{
-                   this.details.show('fast');
-                   this.isDetails=true
-               }
-
-            })
+            this.list.on(CLICK,'a',(evt)=>this.onListClick(evt));
 
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter= view.find('[data-id=tiFilter]:first');
-            this.catTitle= view.find('[data-id=catTitle]:first');
+            this.catTitle= view.find('[data-id=catTitle]:first').hide();
             view.find('[data-id=btnClear]:first').click(()=>{
                 this.input.val('');
-                this.doAll();
+                this.renderAll();
             })
 
             this.details = $('<div>').addClass('details');
+        }
+
+        private  addDetails(vo:VODestination,el:JQuery):void{
+            console.log(vo);
+            if(!vo.details) vo.details = Utils.renderDetails(vo);
+            el.append(vo.details);
+        }
+
+
+        private onListClick(evt:JQueryEventObject):void{
+            var el:JQuery = $(evt.currentTarget).parent();
+
+            if(el.hasClass(SELECTED)){
+               el.removeClass(SELECTED);
+               // el.children('.details');
+               this.selected = null;
+
+            }else{
+                el.addClass(SELECTED);
+                this.selected = el;
+
+                if(el.children('.details').length !==0){
+                  //  el.children('.details').show('fast');
+                }else{
+
+                    var vo:VODestination = this.model.getDestById(el.data('id'));
+                    console.log(vo.imgs.length!==0);
+
+                    if(vo.imgs && vo.imgs.length!==0 && this.onMoreDta)this.onMoreDta(vo);
+                    else this.addDetails(vo,el)
+                    //console.log(vo);
+                   // el.children('.details').show('fast');
+
+
+                }
+
+            }
+
         }
         getHeader(): JQuery {
             return this.input;
@@ -112,49 +130,64 @@ module uplight {
         private onInputFocus(evt): void {
             this.input.val('');
         }
-        private cache: any;
 
-        private doAll():void{
+
+        private renderAll():void{
             this.data = this.model.getData();
-            this.renderList();
+            this.renderList(this.ALL);
         }
         private onInput(evt: JQueryEventObject): void {
                setTimeout(()=>this.doFilter(),200);
         }
 
 
+
         private doFilter():void{
             var str: string = this.input.val();
 
+
             if (str.length == 0) {
-                this.doAll();
+                this.renderAll();
             }
             else {
                 this.data = this.model.getDestsByPattern(str);
                 if (this.data.length == 0)  this.list.html('<p class="bgwhite">  Sorry not results for text <b>'+str+'</b></p>');
-                else  this.renderList();
+                else  this.renderList(str);
                 //if (!this.cache[str]) this.cache[str] = this.renderList(str);
                 // this.list.html(this.cache[str]);
             }
         }
 
 
+        private cats:string[];
 
-        private renderList(): void {
-            var ar = this.data;
-            var out: string = '';
-            for (var i = 0, n = ar.length; i < n; i++) out += this._renderItem(ar[i]);
-            this.list.html(out);
+        private makeCats():string[]{
+            var ar = this.model.getCategories();
+            var out:string[]=[];
+            for(var i=0,n=ar.length;i<n;i++){
+                var item = ar[i];
+                out[ar[i].id] = ar[i].icon;
+            }
+            return out;
         }
 
-        _renderItem(item: VODestination): string {
-            var cl: string='"';
-          //  if (item.advanced) cl = ' more-data"  href="#Details/'+item.destid+'"';
-           // else if ((item.email.length + item.phone.length + item.website.length) >20 ) cl= ' more-data" href="#Details/'+item.destid+'"';
-          //  var prf:string=cl.length==1?'':'+ ';
-            return '<a  data-id="'+item.id+'" href="#details/'+item.id+'" class="list-group-item' + cl +'> <span class="left">'+ item.name + '</span><span class="pull-right">' + item.unit + '</span></a>';
+        private renderList(str:string): void {
+            if(this.cache[str])this.list.html(this.cache[str]);
+            else{
+                if(!this.cats) this.cats = this.makeCats();
+                var ar = this.data;
+                var out: string = '';
+                for (var i = 0, n = ar.length; i < n; i++) out += Utils.renderItem(ar[i],this.cats);
+                this.cache[str]=out;
+                this.list.html(out);
+            }
 
         }
+
+
+
+
+
 
     }
 

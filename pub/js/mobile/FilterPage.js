@@ -1,30 +1,25 @@
 /// <reference path="../kiosk/registry.ts" />
+/// <reference path="../Mobile.ts" />
 var uplight;
 (function (uplight) {
     var FilterPage = (function () {
-        function FilterPage(view, model) {
+        function FilterPage(view, model, tableRender) {
             var _this = this;
             this.view = view;
             this.model = model;
+            this.tableRender = tableRender;
+            this.ALL = 'all_';
+            this.cache = {};
             this.input = view.find('[data-id=filter]');
             this.input.on('input', function (evt) { return _this.onInput(evt); });
             this.list = view.find('[data-id=list]');
-            this.list.on(CLICK, '.selected', function () {
-                if (_this.isDetails) {
-                    _this.details.hide('fast');
-                    _this.isDetails = false;
-                }
-                else {
-                    _this.details.show('fast');
-                    _this.isDetails = true;
-                }
-            });
+            this.list.on(CLICK, 'a', function (evt) { return _this.onListClick(evt); });
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter = view.find('[data-id=tiFilter]:first');
-            this.catTitle = view.find('[data-id=catTitle]:first');
+            this.catTitle = view.find('[data-id=catTitle]:first').hide();
             view.find('[data-id=btnClear]:first').click(function () {
                 _this.input.val('');
-                _this.doAll();
+                _this.renderAll();
             });
             this.details = $('<div>').addClass('details');
         }
@@ -35,37 +30,20 @@ var uplight;
         };
         FilterPage.prototype.showDefault = function () {
             this.data = this.model.getData();
-            this.renderList();
             this.input.val('');
             this.tiFilter.show();
-            this.catTitle.text('');
-            this.doAll();
+            this.catTitle.text('').hide();
+            this.renderAll();
             this.show();
             this.input.focus();
-        };
-        FilterPage.prototype.showDestination = function (vo, table) {
-            if (this.selected)
-                this.selected.removeClass(SELECTED);
-            this.list.children();
-            this.current = vo.id;
-            var out = '';
-            out += vo.info;
-            out += table;
-            if (vo.tmb)
-                out += '<div class="tmb"></div><img src="' + vo.tmb + '"/></div>';
-            this.details.html(out).show('fast');
-            this.isDetails = true;
-            this.selected = this.list.children('[data-id=' + vo.id + ']:first').addClass(SELECTED).append(this.details);
-            // window.location.hash='details-small/'+vo.id;
         };
         FilterPage.prototype.showCategory = function (num) {
             this.tiFilter.hide();
             var cat = this.model.getCategoryById(num);
-            console.log(cat);
-            this.catTitle.text(cat.label);
+            this.catTitle.text(cat.label).show();
             this.data = this.model.getDestsByCat(num);
             this.catid = num;
-            this.renderList();
+            this.renderList('cat_' + num);
             this.show();
         };
         FilterPage.prototype.show = function () {
@@ -81,15 +59,43 @@ var uplight;
                 this.view.hide('fast');
             }
         };
+        FilterPage.prototype.addDetails = function (vo, el) {
+            console.log(vo);
+            if (!vo.details)
+                vo.details = uplight.Utils.renderDetails(vo);
+            el.append(vo.details);
+        };
+        FilterPage.prototype.onListClick = function (evt) {
+            var el = $(evt.currentTarget).parent();
+            if (el.hasClass(SELECTED)) {
+                el.removeClass(SELECTED);
+                // el.children('.details');
+                this.selected = null;
+            }
+            else {
+                el.addClass(SELECTED);
+                this.selected = el;
+                if (el.children('.details').length !== 0) {
+                }
+                else {
+                    var vo = this.model.getDestById(el.data('id'));
+                    console.log(vo.imgs.length !== 0);
+                    if (vo.imgs && vo.imgs.length !== 0 && this.onMoreDta)
+                        this.onMoreDta(vo);
+                    else
+                        this.addDetails(vo, el);
+                }
+            }
+        };
         FilterPage.prototype.getHeader = function () {
             return this.input;
         };
         FilterPage.prototype.onInputFocus = function (evt) {
             this.input.val('');
         };
-        FilterPage.prototype.doAll = function () {
+        FilterPage.prototype.renderAll = function () {
             this.data = this.model.getData();
-            this.renderList();
+            this.renderList(this.ALL);
         };
         FilterPage.prototype.onInput = function (evt) {
             var _this = this;
@@ -98,29 +104,38 @@ var uplight;
         FilterPage.prototype.doFilter = function () {
             var str = this.input.val();
             if (str.length == 0) {
-                this.doAll();
+                this.renderAll();
             }
             else {
                 this.data = this.model.getDestsByPattern(str);
                 if (this.data.length == 0)
                     this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
                 else
-                    this.renderList();
+                    this.renderList(str);
             }
         };
-        FilterPage.prototype.renderList = function () {
-            var ar = this.data;
-            var out = '';
-            for (var i = 0, n = ar.length; i < n; i++)
-                out += this._renderItem(ar[i]);
-            this.list.html(out);
+        FilterPage.prototype.makeCats = function () {
+            var ar = this.model.getCategories();
+            var out = [];
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                out[ar[i].id] = ar[i].icon;
+            }
+            return out;
         };
-        FilterPage.prototype._renderItem = function (item) {
-            var cl = '"';
-            //  if (item.advanced) cl = ' more-data"  href="#Details/'+item.destid+'"';
-            // else if ((item.email.length + item.phone.length + item.website.length) >20 ) cl= ' more-data" href="#Details/'+item.destid+'"';
-            //  var prf:string=cl.length==1?'':'+ ';
-            return '<a  data-id="' + item.id + '" href="#details/' + item.id + '" class="list-group-item' + cl + '> <span class="left">' + item.name + '</span><span class="pull-right">' + item.unit + '</span></a>';
+        FilterPage.prototype.renderList = function (str) {
+            if (this.cache[str])
+                this.list.html(this.cache[str]);
+            else {
+                if (!this.cats)
+                    this.cats = this.makeCats();
+                var ar = this.data;
+                var out = '';
+                for (var i = 0, n = ar.length; i < n; i++)
+                    out += uplight.Utils.renderItem(ar[i], this.cats);
+                this.cache[str] = out;
+                this.list.html(out);
+            }
         };
         return FilterPage;
     })();

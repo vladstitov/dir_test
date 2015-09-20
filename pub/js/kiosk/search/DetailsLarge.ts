@@ -88,8 +88,7 @@ module uplight{
        }
 
       createTable(more:string):string{
-
-          console.log('table '+more.length);
+         if(more.length===0) return '';
            var ar = more.split("\n");
            var out:string='<div class="more" ><table class="table">';
 

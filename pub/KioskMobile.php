@@ -51,6 +51,8 @@ $title='title';
             height: 50px;
         }
 
+
+
     </style>
     <section id="Header" class="row">
        <!-- <div class="col-sm-12" data-id="bgImage">
@@ -133,7 +135,7 @@ $title='title';
                     <div class="modal-content Plastic031 central">
 
                         <div class="modal-header">
-                            <div class="fa fa-close pull-right" data-id="btnClose"></div>
+                            <a class="fa fa-close pull-right" data-id="btnClose"></a>
                             <div class="row">
                                 <div class="col-sm-9">
                                     <h4>Name</h4>
@@ -202,19 +204,88 @@ $title='title';
 
 
             <!--Filter page-->
-            <section  id="FilterPage"  data-ctr="FilterPage" class="row">
+            <section  id="FilterPage"  data-ctr="FilterPage">
 
                     <style>
-                        #FilterPage a:active{
+                        #FilterPage li:active{
                             background-color: khaki;
                         }
+                        #FilterPage li>a{
+                            display: block;
+                          /*  width: 110%;*/
+                            padding: 10px 15px;
+                            margin: -10px -15px;
 
-                        #FilterPage a.selected{
-                            background-color: #c1e2b3;
+                        }
+                       .anim{
+                           -webkit-transition: 1s ease-in-out;
+                           -moz-transition: 1s ease-in-out;
+                           -o-transition: 1s ease-in-out;
+                           transition: 1s ease-in-out;
+                       }
+
+                        #FilterPage li.selected  .fa-angle-double-right{
+                           transform: rotate(180deg);
+                        }
+                        #FilterPage li.selected>a{
+                            background-color: #ebebeb;
+                            /* border-color: #000000;
+                             border-width: 1px;*/
+                            background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+                            background-image: -moz-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+                            background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+                            background-image: -o-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+                            background-image: -ms-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+
                         }
 
+                        #FilterPage li.selected{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,fcfcfc+100 */
+                            background: rgb(255,255,255); /* Old browsers */
+                            background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(252,252,252,1) 100%); /* FF3.6+ */
+                            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(252,252,252,1))); /* Chrome,Safari4+ */
+                            background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* Chrome10+,Safari5.1+ */
+                            background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* Opera 11.10+ */
+                            background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* IE10+ */
+                            background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* W3C */
+                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fcfcfc',GradientType=0 ); /* IE6-9 */
+                            background-color: #c1e2b3;
+                            margin-bottom: 5px;
+                            box-shadow: 0 3px 3px #999;
+                        }
+
+                        #FilterPage li>.details{
+                            display: none;
+                            -webkit-transition:all 0.7s;
+                            transition: all 0.7s;
+                            margin-top: 15px;
+
+                        }
+
+                        #FilterPage li.selected>.details {
+                            min-height: 50px;
+                            display: block;
+
+                        }
+                        #FilterPage .more, .tmb{
+                            display: inline-block;
+
+                        }
+                        #FilterPage .tmb{
+                            float: right;
+                        }
+                        #FilterPage .tmb>img{
+                            max-height: 50px;
+                        }
+                        #FilterPage table{
+                            font-size: 0.9em;
+                        }
+/*
+                        #FilterPage a.selected>.details{
+                            display: block;
+                        }*/
+
                     </style>
-                    <div class="col-sm-12">
+                    <div class="row">
                         <div class="col-sm-12">
                             <div data-id="tiFilter" >
                                 <div style="position: absolute; right: 10px;">
@@ -224,14 +295,19 @@ $title='title';
                                 <input type="text" data-id="filter" class="form-control">
                             </div>
                         </div>
-                        <h2 data-id="catTitle"></h2>
-                    </div>
 
-                    <div class="col-lg-12">
-                        <div data-id="list">
+                    </div>
+                <h2 data-id="catTitle" class="row"></h2>
+
+                <div class="col-sm-12">
+                   <h5> <small> ( <span class="fa fa-angle-double-right" style="font-size: larger; font-weight: 900;"></span> More info available )</small></h5>
+                </div>
+                <div class="row">
+
+                        <div  data-id="list" class="col-sm-12">
 
                         </div>
-                    </div>
+                </div>
 
 
 
@@ -259,6 +335,7 @@ $title='title';
 <script src="js/kiosk/search/models.js"></script>
 <script src="js/mobile/InfoPage.js"></script>
 <script src="js/mobile/FilterPage.js"></script>
+<script src="js/mobile/Utils.js"></script>
 <script src="js/mobile/Menu.js"></script>
 <script src="js/kiosk/search/DetailsLarge.js"></script>
 <script src="js/Mobile.js"></script>

@@ -9,20 +9,24 @@ module uplight{
     export class Menu{
         R:RegA;
         btnOn:JQuery;
+
         constructor(public view:JQuery){
             this.R = RegA.getInstance();
            if(view.length) this.init(view);
             this.btnOn=$('#menu-on').hide();
             this.R.dispatcher.on(RegA.SHOW_MENU,()=>{this.open();})
+
         }
 
         private init(view:JQuery){
 
-            this.view.find('[data-id=btnMenu]:first').on(CLICK,()=>{
+
+                this.view.find('[data-id=btnMenu]:first').on(CLICK,()=>{
                 this.toggle();
             })
 
         }
+
 
         toggle():void{
             if(this.view.hasClass('opened'))this.colapse();
