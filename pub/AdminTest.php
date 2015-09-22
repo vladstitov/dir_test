@@ -16,18 +16,13 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <meta name="author" content="ulight Vlad">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <link href="js/lists/reset.css" rel="stylesheet" type="text/css"/>
 
-    <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 
-    <script type="text/javascript" src="js/libs/nicEdit.js"></script>
-    <script type="text/javascript" src="js/libs/Chart.js"></script>
-
-    <link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+   <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
 
 
 <title>Interactive Directories Admin</title>
@@ -42,30 +37,11 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
             box-shadow: 0 0 5px gray;
 
         }
-       /* #menubar{
-            position: absolute;
-            left:0.5em;
-            top: 2em;
-        }
-        #menubar section{
-          margin: 0 1em 0 1em;
-        }
-        #menubar section:last-child{
-            margin-bottom: 1em;
-        }
-        #menubar .navbar-link{
-            display: block;
-        }
-        #menubar .fa-bars{
-           font-size: 2em;
 
-        }*/
-        .hideme{
-             display:none;
-        }
         .abs{
             position:absolute;
         }
+
         .cover{
             background-color: rgba(0,0,0,0.5);
             width: 100%;
@@ -76,22 +52,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
             display: none;
         }
 
-       /* #Preview{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }*/
-       /* #Preview>div{
-            width: 560px;
-            height: 970px;
-            margin: auto;
-            left: 0;
-            right: 0;
-        }*/
-
-        /*    colors      */
-
-        #adminHeader{
+       #adminHeader{
             text-align: center;
         }
         .item.selected{
@@ -125,31 +86,21 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     </style>
 </head>
 <body>
-
-
 <div id="adminHeader" >
     <h4 >Interactive Directory Admin Panel  <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a></h4>
 
 </div>
 <hr/>
-<?php
-
-?>
-
-
-<div id="error"></div>
-		<div id="content" class="container">
-
-
-	  </div>
+    <div id="error"></div>
+    <div id="content" class="container">
+    </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
 <?php
     include ('js/admin/views/AdminMenu.html');
     include ('js/admin/views/AdminPreviewKiosk.html');
     include ('js/admin/views/AdminPreviewMobile.html');
 ?>
-	  <!------ End of Content---->
-			 
+
 		 <!--start Alert -->
 
 		<div id="myAlert" style="display:none;">
@@ -162,11 +113,20 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 			</div>
 		  </div> 
 		</div>
-<div id="menubar" class="opened table-bordered"></div>
+
 <div id="cover" class="cover">
 
 </div>
 <hr/>
+<!-- -->
+<link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<!---->
+
+<script type="text/javascript" src="js/libs/underscore-min.js"></script>
+<script type="text/javascript" src="js/libs/nicEdit.js"></script>
+<script type="text/javascript" src="js/libs/Chart.js"></script>
+<!---->
 
 <script type="text/javascript" src="js/admin/RegA.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>

@@ -31,27 +31,27 @@ module uplight {
         closePopup(){
             this.newindow.close();
         }
-        test(){
-          //  $('#content').empty();
-       //  this.categories = new CategoriesManager($('#content'));
-        // this.categoryListing = new CategoryListing($('#content'));
-            //$('#menubar').hide();
 
-         // this.details = new DetailsEditor($('#content'));
-          // this.importExport = new ImportExport($('#content'));
-          //  this.labels = new LabelsManager($('#content'))
-        }
 
         private onHashChange(){
 
             var hash:string= window.location.hash.substr(0,10);
             console.log(hash);
          //  if(hash!=='#PreviewKi') this.hidePreview();
-
+            this.hideKiosk();
+            this.hideModile();
                 switch (hash){
+                    case '#PreviewKi':
+                        this.content.hide();
+                      this.showKiosk();
+                        break;
+                    case '#PreviewMo':
+                        this.content.hide();
+                        this.showMobile();
+                        break;
                     case '#Attract-L':
                         // this.showPreview();
-                        this.hidePreview();
+
                         // this.content.hide();
                         this.attractLoop = new AttractLoopEdit(this.content);
                         this.content.show();
@@ -61,7 +61,7 @@ module uplight {
 
                     case '#Statistic':
                         // this.showPreview();
-                        this.hidePreview();
+
                        // this.content.hide();
                         this.statistics = new Statistics(this.content);
                         this.content.show();
@@ -70,7 +70,7 @@ module uplight {
                         break;
                     case '#Info-Page':
                         // this.showPreview();
-                        this.hidePreview();
+
                         // this.content.hide();
                         this.infoPages = new InfoPagesManager(this.content);
                         this.content.show();
@@ -79,7 +79,7 @@ module uplight {
                         break;
                     case '#RestartKi':
                        // this.showPreview();
-                        this.hidePreview();
+
                         this.content.hide();
                         this.content.empty();
                         this.restartKiosks = new RestartKiosk(this.content);
@@ -88,40 +88,39 @@ module uplight {
 
                         break;
                     case '#Listing-V':
-                        this.hidePreview();
+
                         this.details = new DetailsEditor(this.content);
                         this.content.show();
                         break;
                     case '#Categorie':
                     case '#Edit-Cate':
-                        this.hidePreview();
+
                         this.categories = new CategoriesManager(this.content);
                         this.content.show();
                         break
                     case '#Category-':
-                        this.hidePreview();
+
                         this.categoryListing = new CategoryListing(this.content);
                         this.content.show();
                         break;
                     case '#Import-Ex':
-                        this.hidePreview();
+
                         this.importExport = new ImportExport(this.content);
                         break;
                     case '#Settings-':
-                        this.hidePreview();
+
                         this.settingsEdit = new SettingsEdit(this.content);
                         break;
                     case '#Heading-S':
                     case '#Backgroun':
                     case '#Logo-Imag':
-                        this.hidePreview();
+
                         this.labels = new LabelsManager(this.content);
                         this.content.show();
                         break;
                     case '#PreviewKi':
                     default :
-                        this.content.hide();
-                        this.showPreview();
+
                         break
 
                 }
@@ -209,21 +208,34 @@ module uplight {
         }
 
 
-
+        /*            Preview                */
         private previewUrl:string ='Kiosk1080.php?id=0';
-        private showPreview(url?:string):void{
-
-            if(url)this. previewUrl = url;
-                this.preview.find('iframe:first').attr('src',this. previewUrl);
-            this.preview.show();
+        private mobileUrl:string ='KioskMobile.php';
+        private showKiosk():void{
+            $('#AdminPreviewKiosk').removeClass(HIDDEN);
+            $('#AdminPreviewKiosk iframe:first').attr('src',this.previewUrl);
             this.isPreview=true;
-           this.preview.show();
         }
-        hidePreview():void{
+        private hideKiosk():void{
             if(this.isPreview){
-                this.preview.find('iframe:first').attr('src','');
-                this.preview.hide();
+                $('#AdminPreviewKiosk').addClass(HIDDEN);
+                $('#AdminPreviewKiosk iframe:first').attr('src','');
                 this.isPreview=false;
+            }
+        }
+
+        /*         Mobile  preview     */
+        isMobile:boolean;
+        private showMobile(url?:string):void{
+            this.isMobile = true;
+            $('#AdminPreviewMobile').removeClass(HIDDEN);
+            $('#AdminPreviewMobile iframe').attr('src',this.mobileUrl);
+        }
+        private hideModile():void{
+            if( this.isMobile){
+                $('#AdminPreviewMobile').addClass(HIDDEN);
+                $('#AdminPreviewMobile iframe').attr('src','');
+                this.isMobile = false;
             }
         }
 

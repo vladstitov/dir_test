@@ -4,7 +4,9 @@ var uplight;
     var Admin = (function () {
         function Admin() {
             var _this = this;
+            /*            Preview                */
             this.previewUrl = 'Kiosk1080.php?id=0';
+            this.mobileUrl = 'KioskMobile.php';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
             this.R.dispatcher = $({});
@@ -42,83 +44,73 @@ var uplight;
         Admin.prototype.closePopup = function () {
             this.newindow.close();
         };
-        Admin.prototype.test = function () {
-            //  $('#content').empty();
-            //  this.categories = new CategoriesManager($('#content'));
-            // this.categoryListing = new CategoryListing($('#content'));
-            //$('#menubar').hide();
-            // this.details = new DetailsEditor($('#content'));
-            // this.importExport = new ImportExport($('#content'));
-            //  this.labels = new LabelsManager($('#content'))
-        };
         Admin.prototype.onHashChange = function () {
             var hash = window.location.hash.substr(0, 10);
             console.log(hash);
+            //  if(hash!=='#PreviewKi') this.hidePreview();
+            this.hideKiosk();
+            this.hideModile();
             switch (hash) {
+                case '#PreviewKi':
+                    this.content.hide();
+                    this.showKiosk();
+                    break;
+                case '#PreviewMo':
+                    this.content.hide();
+                    this.showMobile();
+                    break;
                 case '#Attract-L':
                     // this.showPreview();
-                    this.hidePreview();
                     // this.content.hide();
                     this.attractLoop = new uplight.AttractLoopEdit(this.content);
                     this.content.show();
                     break;
                 case '#Statistic':
                     // this.showPreview();
-                    this.hidePreview();
                     // this.content.hide();
                     this.statistics = new uplight.Statistics(this.content);
                     this.content.show();
                     break;
                 case '#Info-Page':
                     // this.showPreview();
-                    this.hidePreview();
                     // this.content.hide();
                     this.infoPages = new uplight.InfoPagesManager(this.content);
                     this.content.show();
                     break;
                 case '#RestartKi':
                     // this.showPreview();
-                    this.hidePreview();
                     this.content.hide();
                     this.content.empty();
                     this.restartKiosks = new uplight.RestartKiosk(this.content);
                     this.content.show();
                     break;
                 case '#Listing-V':
-                    this.hidePreview();
                     this.details = new uplight.DetailsEditor(this.content);
                     this.content.show();
                     break;
                 case '#Categorie':
                 case '#Edit-Cate':
-                    this.hidePreview();
                     this.categories = new uplight.CategoriesManager(this.content);
                     this.content.show();
                     break;
                 case '#Category-':
-                    this.hidePreview();
                     this.categoryListing = new uplight.CategoryListing(this.content);
                     this.content.show();
                     break;
                 case '#Import-Ex':
-                    this.hidePreview();
                     this.importExport = new uplight.ImportExport(this.content);
                     break;
                 case '#Settings-':
-                    this.hidePreview();
                     this.settingsEdit = new uplight.SettingsEdit(this.content);
                     break;
                 case '#Heading-S':
                 case '#Backgroun':
                 case '#Logo-Imag':
-                    this.hidePreview();
                     this.labels = new uplight.LabelsManager(this.content);
                     this.content.show();
                     break;
                 case '#PreviewKi':
                 default:
-                    this.content.hide();
-                    this.showPreview();
                     break;
             }
         };
@@ -152,19 +144,28 @@ var uplight;
                 });
             }, 3000);
         };
-        Admin.prototype.showPreview = function (url) {
-            if (url)
-                this.previewUrl = url;
-            this.preview.find('iframe:first').attr('src', this.previewUrl);
-            this.preview.show();
+        Admin.prototype.showKiosk = function () {
+            $('#AdminPreviewKiosk').removeClass(HIDDEN);
+            $('#AdminPreviewKiosk iframe:first').attr('src', this.previewUrl);
             this.isPreview = true;
-            this.preview.show();
         };
-        Admin.prototype.hidePreview = function () {
+        Admin.prototype.hideKiosk = function () {
             if (this.isPreview) {
-                this.preview.find('iframe:first').attr('src', '');
-                this.preview.hide();
+                $('#AdminPreviewKiosk').addClass(HIDDEN);
+                $('#AdminPreviewKiosk iframe:first').attr('src', '');
                 this.isPreview = false;
+            }
+        };
+        Admin.prototype.showMobile = function (url) {
+            this.isMobile = true;
+            $('#AdminPreviewMobile').removeClass(HIDDEN);
+            $('#AdminPreviewMobile iframe').attr('src', this.mobileUrl);
+        };
+        Admin.prototype.hideModile = function () {
+            if (this.isMobile) {
+                $('#AdminPreviewMobile').addClass(HIDDEN);
+                $('#AdminPreviewMobile iframe').attr('src', '');
+                this.isMobile = false;
             }
         };
         return Admin;
