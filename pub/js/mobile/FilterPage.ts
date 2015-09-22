@@ -16,7 +16,9 @@ module uplight {
         data:uplight.VODestination[];
 
         onSelect:Function;
-        onMoreDta:Function;
+        onImageClick:Function;
+
+
         resetView(): JQuery {
             this.input.val('');
             this.list.html('<p class="bgwhite">Start typing in input field on top of page. Results will come as soon as you are typing</p>');
@@ -36,8 +38,22 @@ module uplight {
 
         }
 
+
+        showPattern(str:string):void{
+            if (str.length == 0) {
+                this.renderAll();
+            }else {
+                this.data = this.model.getDestsByPattern(str);
+                if (this.data.length == 0)  this.list.html('<p class="bgwhite">  Sorry not results for text <b>'+str+'</b></p>');
+                else  this.renderList(str);
+            }
+
+        }
+
+
         private current:number
         private selected:JQuery;
+
 
 
         showCategory(num:number):void{
@@ -75,7 +91,7 @@ module uplight {
             this.input.on('input', (evt) => this.onInput(evt));                   
             this.list = view.find('[data-id=list]');
             this.list.on(CLICK,'a',(evt)=>this.onListClick(evt));
-
+            this.list.on(CLICK,'img',(evt)=>this._onImageClick(evt));
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter= view.find('[data-id=tiFilter]:first');
             this.catTitle= view.find('[data-id=catTitle]:first').hide();
@@ -85,6 +101,19 @@ module uplight {
             })
 
             this.details = $('<div>').addClass('details');
+            $('#ImageView').click(()=>{
+                $('#ImageView').fadeOut();
+            })
+        }
+
+        private _onImageClick(evt:JQueryEventObject):void{
+            var el:JQuery = $(evt.target);
+            var src=el.attr('src');
+            //$('#ImageView').removeClass('hidden');
+            $('#ImageView').fadeIn();
+            $('#ImageView img').attr('src',src);
+            if(this.onImageClick)this.onImageClick(src);
+
         }
 
         private  addDetails(vo:VODestination,el:JQuery):void{
@@ -105,21 +134,11 @@ module uplight {
             }else{
                 el.addClass(SELECTED);
                 this.selected = el;
-
                 if(el.children('.details').length !==0){
                   //  el.children('.details').show('fast');
                 }else{
-
                     var vo:VODestination = this.model.getDestById(el.data('id'));
-                    console.log(vo.imgs.length!==0);
-
-                    if(vo.imgs && vo.imgs.length!==0 && this.onMoreDta)this.onMoreDta(vo);
-                    else this.addDetails(vo,el)
-                    //console.log(vo);
-                   // el.children('.details').show('fast');
-
-
-                }
+                    if(vo) this.addDetails(vo,el)                }
 
             }
 

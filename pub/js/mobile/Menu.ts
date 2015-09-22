@@ -15,6 +15,8 @@ module uplight {
         onSearchFocus:Function;
         onSearchType:Function;
         onSearchON:Function;
+        onSearchClose:Function;
+
         onMenuON:Function;
 
 
@@ -31,6 +33,9 @@ module uplight {
             }
         }
 
+        clearSearch():void{
+            this.tiSearch.val('');
+        }
         hideAll():void{
            this.hideMenu();
            this.hideSearch();
@@ -45,7 +50,6 @@ module uplight {
         }
 
         toggleMenu():void{
-            console.log('toggleMenu');
             if(this.isHiddenMenu)this.showMenu();
             else this.hideMenu();
         }
@@ -65,10 +69,10 @@ module uplight {
 
             }else d1.resolve(cats);
             $.when(d1).then((cats)=>{
-                  console.log(cats);
+                 // console.log(cats);
                 var out: string = '';
                 var ar = cats
-                for (var i = 0, n = ar.length; i < n; i++)  for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#category/'+ar[i].id+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+                for (var i = 0, n = ar.length; i < n; i++)  for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#category/'+ar[i].id+'/'+ar[i].label+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
                 this.listC.html(out);
                })
 
@@ -77,14 +81,20 @@ module uplight {
               // console.log(res);
              var out='';
               var ar = res
-              for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#page/'+ar[i].id+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+              for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#page/'+ar[i].id+'/'+ar[i].label+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
                this.listP.html(out);
 
            });
 
             this.slider = this.view.find('[data-id=SearchSlider]:first');
-            console.log(this.slider);
-            this.view.find('[data-id=btnSearch]').click(()=>this.toggleSearch())
+
+            this.view.find('[data-id=btnSearch]').click(()=>this.toggleSearch());
+            this.view.find('[data-id=btnSearchClose]:first').click(()=>{
+                this.tiSearch.val('');
+                this.hideSearch();
+                if(this.onSearchClose)this.onSearchClose();
+
+            })
 
             this.tiSearch = this.view.find('[data-id=tiSearch]:first').on('input',()=>{
                 console.log(this.tiSearch.val());
@@ -107,7 +117,6 @@ module uplight {
         timeoutON:number
         hideSearch():void{
             if(this.isSearch){
-                this.tiSearch.val('');
                 this.isSearch = false;
                 this.slider.animate({scrollTop:0});
                 clearTimeout(this.timeoutSearchFocus );
@@ -117,6 +126,7 @@ module uplight {
 
         showSearch():void{
             if(!this.isSearch){
+                this.tiSearch.val('');
                 clearTimeout(this.timeoutON);
                 this.isSearch = true;
                 this.slider.animate({scrollTop:30});

@@ -45,7 +45,7 @@ $title='title';
 <div id="Container" class="container">
     <style>
         #Header{
-            height: 50px;
+            height: 30px;
         }
         #Header #brand-logo>img{
             height: 50px;
@@ -71,6 +71,7 @@ $title='title';
         <div data-id="bgImage">
 
         </div>
+
         <div data-id="container" >
 
 
@@ -130,6 +131,7 @@ $title='title';
                         height: 128px;
                     }
 
+
                 </style>
                 <div class="modal-dialog">
                     <div class="modal-content Plastic031 central">
@@ -140,7 +142,7 @@ $title='title';
                                 <div class="col-sm-9">
                                     <h4>Name</h4>
                                     <h2 data-id="name">
-                                        Remove a portion
+
                                     </h2>
                                 </div>
                                 <div class="col-sm-3">
@@ -194,8 +196,20 @@ $title='title';
 
 
             <!-- Info Page-->
-            <section data-ctr="InfoPages" class="row">
-                <div class="col-sm-12" data-id="content">
+            <style>
+                #InfoPages .pagecontent{
+                    margin-left: 5px;
+                }
+            </style>
+            <section id="InfoPages" data-ctr="InfoPages" class="row">
+                <div class="col-sm-12">
+                    <h3 data-id="pageTitle"></h3>
+                </div>
+                <div class="col-sm-12">
+
+                    <div data-id="content" class="pagecontent">
+
+                    </div>
                 </div>
             </section>
 
@@ -217,6 +231,12 @@ $title='title';
                             margin: -10px -15px;
 
                         }
+                        #FilterPage li>a>.fa{
+                            font-size: 1em;
+                            width: 12px;
+                          margin-left: -5px;
+                        }
+
                        .anim{
                            -webkit-transition: 1s ease-in-out;
                            -moz-transition: 1s ease-in-out;
@@ -224,7 +244,7 @@ $title='title';
                            transition: 1s ease-in-out;
                        }
 
-                        #FilterPage li.selected  .fa-angle-double-right{
+                        #FilterPage li.selected  .fa-angle-double-left{
                            transform: rotate(180deg);
                         }
                         #FilterPage li.selected>a{
@@ -276,6 +296,18 @@ $title='title';
                         #FilterPage .tmb>img{
                             max-height: 50px;
                         }
+                        #FilterPage .details>.imgs{
+                            max-width: 100%;
+                            overflow-y: hidden;
+                            overflow-x: auto;
+                            height: 40px;
+                        }
+                        #FilterPage .details>.imgs img{
+                            max-height: 35px;
+                        }
+                        #FilterPage .details>.imgs>div{
+                            white-space: nowrap;
+                        }
                         #FilterPage table{
                             font-size: 0.9em;
                         }
@@ -285,7 +317,7 @@ $title='title';
                         }*/
 
                     </style>
-                    <div class="row">
+                <!--    <div class="row">
                         <div class="col-sm-12">
                             <div data-id="tiFilter" >
                                 <div style="position: absolute; right: 10px;">
@@ -296,11 +328,11 @@ $title='title';
                             </div>
                         </div>
 
-                    </div>
-                <h2 data-id="catTitle" class="row"></h2>
+                    </div>-->
+                <h2 data-id="catTitle" class="col-sm-12"></h2>
 
                 <div class="col-sm-12">
-                   <h5> <small> ( <span class="fa fa-angle-double-right" style="font-size: larger; font-weight: 900;"></span> More info available )</small></h5>
+                   <h5> <small> ( <a><span class="fa fa-angle-double-left" style="font-size: larger; font-weight: 900;"></span> More info available </a>)</small></h5>
                 </div>
                 <div class="row">
 
@@ -329,6 +361,36 @@ $title='title';
 
 
 </div>
+<section id="ImageView">
+    <style>
+        #ImageView{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1100;
+            display: none;
+
+        }
+        #ImageView img{
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    </style>
+
+    <img>
+
+
+</section>
 
 <script src="js/kiosk/Registry.js"></script>
 <script src="js/kiosk/Connector.js"></script>

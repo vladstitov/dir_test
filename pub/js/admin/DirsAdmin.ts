@@ -18,12 +18,10 @@ module uplight {
         private infoPages:InfoPagesManager;
 
 
-        private menu:Menu;
+        private menu:AdminMenu;
         private newindow:Window;
         private preview:JQuery;
         private content:JQuery;
-
-
 
        createPop() {
         this.newindow = window.open('Preview.php','Kiosk Preview','width=560,height=980,toolbar=0,menubar=0,location=0,status=0,left=200,top=200');
@@ -136,7 +134,7 @@ module uplight {
         private init(): void {
             this.R.model = new DestinantionsModel();
             $(window).on('hashchange', (evt) => this.onHashChange());
-            this.menu = new Menu($('#Menu').appendTo($('#menubar')));
+            this.menu = new AdminMenu($('#Navigation'));
 
             this.preview=$('#Preview');
             this.isPreview=true;

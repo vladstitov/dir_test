@@ -55,15 +55,19 @@ module uplight {
                 this.menu.hideSearch();
             };
             this.menu.onSearchFocus=()=>{
-
+                window.location.href='#SearchDirectories';
             };
             this.menu.onSearchON=()=>{
                 this.menu.hideMenu();
             };
 
-            this.menu.onSearchType=()=>{
-
+            this.menu.onSearchType=(str:string)=>{
+                this.filterPage.showPattern(str);
             };
+            this.menu.onSearchClose=(str:string)=>{
+                this.filterPage.showDefault();
+            };
+
           //  this.searchResult = new SearchResult('#Results');
 
 
@@ -81,6 +85,7 @@ module uplight {
 
         private onListSelect(vo:VODestination):void{
             console.log(vo);
+
             if(vo.imgs) window.location.hash='#destination/'+vo.id;
             else{
                 //var table='';
@@ -141,7 +146,8 @@ module uplight {
                     this.filterPage.showDefault();
                     this.infoPage.hide();
                     this.detailsLarge.hide();
-                    this.menu.hideAll();
+                    this.menu.hideMenu();
+                    this.menu.showSearch();
                     break;
                 case '#Menu':
 

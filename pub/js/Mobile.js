@@ -35,11 +35,16 @@ var uplight;
                 _this.menu.hideSearch();
             };
             this.menu.onSearchFocus = function () {
+                window.location.href = '#SearchDirectories';
             };
             this.menu.onSearchON = function () {
                 _this.menu.hideMenu();
             };
-            this.menu.onSearchType = function () {
+            this.menu.onSearchType = function (str) {
+                _this.filterPage.showPattern(str);
+            };
+            this.menu.onSearchClose = function (str) {
+                _this.filterPage.showDefault();
             };
             //  this.searchResult = new SearchResult('#Results');
             this.infoPage = new uplight.InfoPageMobile($('[data-ctr=InfoPages]:first'), conn);
@@ -110,7 +115,8 @@ var uplight;
                     this.filterPage.showDefault();
                     this.infoPage.hide();
                     this.detailsLarge.hide();
-                    this.menu.hideAll();
+                    this.menu.hideMenu();
+                    this.menu.showSearch();
                     break;
                 case '#Menu':
                     break;

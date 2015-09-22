@@ -126,7 +126,7 @@ var uplight;
             var _this = this;
             this.R.model = new uplight.DestinantionsModel();
             $(window).on('hashchange', function (evt) { return _this.onHashChange(); });
-            this.menu = new uplight.Menu($('#Menu').appendTo($('#menubar')));
+            this.menu = new uplight.AdminMenu($('#Navigation'));
             this.preview = $('#Preview');
             this.isPreview = true;
             this.content = $('#content');

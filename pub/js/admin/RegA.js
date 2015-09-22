@@ -4,7 +4,7 @@
 /// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
-/// <reference path="Menu.ts" />
+/// <reference path="views/Menu.ts" />
 ///<reference path="details/DetailsEditor.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
@@ -139,4 +139,4 @@ var uplight;
     })();
     uplight.VOStat = VOStat;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=regA.js.map
+//# sourceMappingURL=RegA.js.map

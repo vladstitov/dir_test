@@ -24,12 +24,12 @@ var uplight;
             else
                 d1.resolve(cats);
             $.when(d1).then(function (cats) {
-                console.log(cats);
+                // console.log(cats);
                 var out = '';
                 var ar = cats;
                 for (var i = 0, n = ar.length; i < n; i++)
                     for (var i = 0, n = ar.length; i < n; i++)
-                        out += '<a class="u-brand list-group-item" href="#category/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                        out += '<a class="u-brand list-group-item" href="#category/' + ar[i].id + '/' + ar[i].label + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listC.html(out);
             });
             var p0 = conn.getPages().done(function (res) {
@@ -37,12 +37,17 @@ var uplight;
                 var out = '';
                 var ar = res;
                 for (var i = 0, n = ar.length; i < n; i++)
-                    out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
+                    out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].label + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listP.html(out);
             });
             this.slider = this.view.find('[data-id=SearchSlider]:first');
-            console.log(this.slider);
             this.view.find('[data-id=btnSearch]').click(function () { return _this.toggleSearch(); });
+            this.view.find('[data-id=btnSearchClose]:first').click(function () {
+                _this.tiSearch.val('');
+                _this.hideSearch();
+                if (_this.onSearchClose)
+                    _this.onSearchClose();
+            });
             this.tiSearch = this.view.find('[data-id=tiSearch]:first').on('input', function () {
                 console.log(_this.tiSearch.val());
                 if (_this.onSearchType)
@@ -65,6 +70,9 @@ var uplight;
                 }, 500);
             }
         };
+        Menu.prototype.clearSearch = function () {
+            this.tiSearch.val('');
+        };
         Menu.prototype.hideAll = function () {
             this.hideMenu();
             this.hideSearch();
@@ -77,7 +85,6 @@ var uplight;
             }
         };
         Menu.prototype.toggleMenu = function () {
-            console.log('toggleMenu');
             if (this.isHiddenMenu)
                 this.showMenu();
             else
@@ -85,7 +92,6 @@ var uplight;
         };
         Menu.prototype.hideSearch = function () {
             if (this.isSearch) {
-                this.tiSearch.val('');
                 this.isSearch = false;
                 this.slider.animate({ scrollTop: 0 });
                 clearTimeout(this.timeoutSearchFocus);
@@ -95,6 +101,7 @@ var uplight;
         Menu.prototype.showSearch = function () {
             var _this = this;
             if (!this.isSearch) {
+                this.tiSearch.val('');
                 clearTimeout(this.timeoutON);
                 this.isSearch = true;
                 this.slider.animate({ scrollTop: 30 });

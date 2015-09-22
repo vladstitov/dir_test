@@ -20,7 +20,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 
     <script type="text/javascript" src="js/libs/nicEdit.js"></script>
@@ -29,9 +29,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
     <link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="js/admin/RegA.js"></script>
-<script type="text/javascript" src="js/admin/net.js"></script>  
-<script type="text/javascript" src="js/admin/models.js"></script>
+
 <title>Interactive Directories Admin</title>
 
     <style>
@@ -44,7 +42,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
             box-shadow: 0 0 5px gray;
 
         }
-        #menubar{
+       /* #menubar{
             position: absolute;
             left:0.5em;
             top: 2em;
@@ -61,7 +59,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
         #menubar .fa-bars{
            font-size: 2em;
 
-        }
+        }*/
         .hideme{
              display:none;
         }
@@ -92,10 +90,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
         }*/
 
         /*    colors      */
-        #menubar{
-            background-color: white;
-            /*border-radius: 1em;*/
-        }
+
         #adminHeader{
             text-align: center;
         }
@@ -139,67 +134,20 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 <hr/>
 <?php
 
-/*
-$xml = simplexml_load_file('admin/Menu.html');
-
-$result = $xml->xpath('//li');
-
-foreach($result as $node){
-$str =(string) $node;;
-$node[0]='';
-$a = $node->addChild('a',$str);
-$a->addAttribute('href','#Menu-'.urlencode ($str));
-}
-echo $xml->asXML();
-*/
-include ('js/admin/Menu.html');
 ?>
 
 
 <div id="error"></div>
 		<div id="content" class="container">
 
- <!------------------------------------------------------------------------------------------------>
+
 	  </div>
-<div id="Preview" class="view">
-    <style>
-        #Preview .table-bordered{
-            padding: 0.5em;
-            width: 560px;
-            height: 1020px;
-            margin: auto;
-            left: 0;
-            right: 0;
-            text-align: center;
-            overflow: hidden;
-
-        }
-
-        #Preview iframe{
-             -ms-zoom: 0.5;
-              -moz-transform: scale(0.5);
-              -moz-transform-origin: 0 0;
-              -o-transform: scale(0.5);
-              -o-transform-origin: 0 0;
-              -webkit-transform: scale(0.5);
-              -webkit-transform-origin: 0 0;
-            width: 1080px;
-            height: 1920px;
-
-        }
-
-    </style>
-    <div class="table-bordered">
-        <a data-id="btnFullView"  class="btn pull-right"><span class="fa fa-external-link"></span><span> Open full view</span></a>
-        <h4>Kiosk view</h4>
-        <div class="viewport">
-            <iframe src="" scrolling="no" frameborder="0">
-
-
-        </iframe>
-        </div>
-    </div>
-</div>
+<!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
+<?php
+    include ('js/admin/views/AdminMenu.html');
+    include ('js/admin/views/AdminPreviewKiosk.html');
+    include ('js/admin/views/AdminPreviewMobile.html');
+?>
 	  <!------ End of Content---->
 			 
 		 <!--start Alert -->
@@ -219,6 +167,10 @@ include ('js/admin/Menu.html');
 
 </div>
 <hr/>
+
+<script type="text/javascript" src="js/admin/RegA.js"></script>
+<script type="text/javascript" src="js/admin/net.js"></script>
+<script type="text/javascript" src="js/admin/models.js"></script>
 <script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>
 <script type="text/javascript" src="js/admin/screen/SettingsEdit.js"></script>
 <script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>
@@ -244,7 +196,7 @@ include ('js/admin/Menu.html');
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
 <script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
 
-<script type="text/javascript" src="js/admin/Menu.js"></script>
+<script type="text/javascript" src="js/admin/views/Menu.js"></script>
 
 <script type="text/javascript" src="js/admin/DirsAdmin.js"></script>
 

@@ -1,0 +1,126 @@
+<section id="Navigation">
+    <style>
+        #Navigation{
+
+            z-index: 1000;
+        }
+        #AdminMenu ul{
+            padding: 10px;
+            padding-top: 0;
+
+        }
+        #AdminMenu{
+            position: fixed;
+            top: 50px;
+        }
+        #AdminMenu.content{
+           box-shadow: 5px 5px 5px gray;
+            background-color: white;
+            -webkit-transition: left 1s;
+            left :10px;
+
+        }
+        #AdminMenu>div{
+            padding: 1em;
+        }
+
+
+
+        #AdminMenu.content.closed{
+            left:-300px;
+
+        }
+        #AdminMenu .fa-close{
+
+        }
+        #MenuButton{
+            padding: 1em;
+            position: fixed;
+            top:0;
+            left: 0;
+        }
+
+    </style>
+    <div id="MenuButton">
+        <button class="btn button-default" data-id="btnMenu">
+            <div class="fa fa-bars">
+
+            </div>
+
+        </button>
+
+    </div>
+
+
+    <nav id="AdminMenu" data-id="content"  class="content">
+        <span class="btn fa fa-close pull-right" data-id="btnClose"></span>
+        <div>
+            <ul>
+                   <li><a href="#PreviewMobile" class="divbar-link">Preview Mobile</a ></li>
+                    <li><a href="#PreviewKiosk" class="divbar-link">Preview Kiosk</a ></li>
+                    <li><a href="#RestartKiosk" class="divbar-link">Restart Kiosks</a ></li>
+            </ul>
+
+            <div>
+                <h5>Statistics</h5>
+                <ul>
+                    <li><a href="#Statistic-View" class="divbar-link">View Statistics</a ></li>
+                    <li><a href="#Statistic-Download" class="divbar-link">Download Statistics</a ></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5>Listing</h5>
+                <ul>
+                    <li><a href="#Listing-View" class="divbar-link">View Listing</a ></li>
+                    <li><a href="#Listing-Records" class="divbar-link">Add, Remove, Edit list records</a ></li>
+                    <li><a href="#Details-Info" class="divbar-link">Edit record details info</a ></li>
+                    <li><a href="#Keywords" class="divbar-link">Manage keywords</a ></li>
+                    <li><a href="#Record-to-category" class="divbar-link">Assign record to category</a ></li>
+                    <li><a href="#Import-Export" class="divbar-link">Import / Export records</a ></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Categories</h5>
+                <ul>
+                    <li><a href="#Edit-Categories" class="divbar-link">Add, Remove, Edit Categories</a ></li>
+                    <li><a href="#Categories-sequence" class="divbar-link">Categories sequence</a ></li>
+                    <li><a href="#Category-records" class="divbar-link">Assign records to category </a ></li>
+                </ul>
+
+            </div>
+            <div>
+                <h5>Additional Info</h5>
+                <ul>
+                    <li><a href="#Info-Pages" class="divbar-link">Info Pages</a ></li>
+                </ul>
+            </div>
+            <div class="list-group">
+                <h5>Appearance</h5>
+                <ul>
+                    <li><a  href="#Background-Image" class="divbar-link">Change background image</a ></li>
+                    <li><a href="#Heading-Slogan" class="divbar-link">Edit heading and slogan</a ></li>
+                    <li><a href="#Logo-Image" class="divbar-link">Change logo image</a ></li>
+                    <li><a href="#Restart" class="divbar-link">Change color theme</a ></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Screen Saver</h5>
+                <ul>
+                    <li><a href="#Restart" class="divbar-link">Change timeout</a ></li>
+                    <li><a href="#Attract-Loop" class="divbar-link">Attract loop</a ></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Advanced</h5>
+                <ul>
+                    <li><a href="#Settings-Editor-1" class="divbar-link">Kiosks ON / OFF schedule</a ></li>
+                    <li><a href="#Settings-Editor-2" class="divbar-link">Advanced settings</a ></li>
+                    <li><a href="#Settings-Editor-3" class="divbar-link">Assets manager</a ></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+</section>

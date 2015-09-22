@@ -29,30 +29,46 @@ var uplight;
             out += '</table></div>';
             return out;
         };
+        Utils.createImages = function (imgs) {
+            var out = '';
+            var ar = imgs.split(',');
+            for (var i = 0, n = ar.length; i < n; i++) {
+                out += '<a data-id="' + i + '"><img src="' + ar[i] + '" /></a>';
+            }
+            return out;
+        };
         Utils.renderDetails = function (vo) {
-            var out = '<div class="details">';
+            var out = '';
             if (vo.info)
                 out += '<div class="uinfo">' + vo.info + '</div>';
             out += Utils.createTable(vo.more);
             if (vo.tmb)
                 out += '<div class="tmb"><img src="' + vo.tmb + '"/></div>';
-            return out + '</div>';
+            if (vo.imgs)
+                out += '<div class="imgs"><div>' + Utils.createImages(vo.imgs) + '</div></div>';
+            if (out)
+                out = '<div class="details">' + out + '</div>';
+            return out;
         };
-        Utils.renderItem = function (item, catsObj) {
-            var cl = '';
-            var cats = (item.cats && item.cats.length) ? catsObj[item.cats[0]] : 'fa-fw';
-            if (item.imgs)
-                cl += ' imgs';
-            // if(item.more)cl+=' more';
-            //   if(item.info)cl+=' uinfo';
-            //  if(item.tmb)cl+=' tmb';
+        Utils.renderItem = function (vo, catsObj) {
+            //  var cats:string=(vo.cats && vo.cats.length)?catsObj[vo.cats[0]]:'fa-fw';
+            var more = '<span class="fa fa-fw">&nbsp;</span>';
+            if (vo.more || vo.info || vo.tmb || vo.imgs)
+                more = '<span class="anim fa fa-angle-double-left">&nbsp;</span>';
+            // if(vo.imgs) more+=' <span class="fa fa-image"></span>';
+            //if(more) more='<span class="btn">'+more+'</span>';
+            return '<li class="list-group-item" data-id="' + vo.id + '" ><a>' + more + '<span> ' + vo.name + ' </span><span class="pull-right">' + vo.unit + '</span></a></li>';
+        };
+        Utils.renderItem2 = function (vo, catsObj) {
+            var cats = (vo.cats && vo.cats.length) ? catsObj[vo.cats[0]] : 'fa-fw';
             var more = '';
-            if (cl.length)
-                more = '<span class="anim btn fa fa-angle-double-right"></span>';
-            //  if (item.advanced) cl = ' more-data"  href="#Details/'+item.destid+'"';
-            // else if ((item.email.length + item.phone.length + item.website.length) >20 ) cl= ' more-data" href="#Details/'+item.destid+'"';
-            //  var prf:string=cl.length==1?'':'+ ';
-            return '<li  class="list-group-item" data-id="' + item.id + '"  ><a  data-type="dest"  data-id="' + item.id + '" ><span class="fa ' + cats + '">&nbsp;</span> <span>' + item.name + ' </span> ' + more + '<span class="pull-right">' + item.unit + '</span></a></li>';
+            if (vo.more || vo.info || vo.tmb)
+                more += '<span class="fa fa-info"></span>';
+            if (vo.imgs)
+                more += ' <span class="fa fa-image"></span>';
+            if (more)
+                more = '<span class="btn">' + more + '</span>';
+            return '<li class="list-group-item" data-id="' + vo.id + '" ><a><span class="fa ' + cats + '">&nbsp;</span> <span>' + vo.name + ' </span> ' + more + '<span class="pull-right">' + vo.unit + '</span></a></li>';
         };
         return Utils;
     })();

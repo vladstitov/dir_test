@@ -14,6 +14,7 @@ var uplight;
             this.input.on('input', function (evt) { return _this.onInput(evt); });
             this.list = view.find('[data-id=list]');
             this.list.on(CLICK, 'a', function (evt) { return _this.onListClick(evt); });
+            this.list.on(CLICK, 'img', function (evt) { return _this._onImageClick(evt); });
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter = view.find('[data-id=tiFilter]:first');
             this.catTitle = view.find('[data-id=catTitle]:first').hide();
@@ -22,6 +23,9 @@ var uplight;
                 _this.renderAll();
             });
             this.details = $('<div>').addClass('details');
+            $('#ImageView').click(function () {
+                $('#ImageView').fadeOut();
+            });
         }
         FilterPage.prototype.resetView = function () {
             this.input.val('');
@@ -36,6 +40,18 @@ var uplight;
             this.renderAll();
             this.show();
             this.input.focus();
+        };
+        FilterPage.prototype.showPattern = function (str) {
+            if (str.length == 0) {
+                this.renderAll();
+            }
+            else {
+                this.data = this.model.getDestsByPattern(str);
+                if (this.data.length == 0)
+                    this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
+                else
+                    this.renderList(str);
+            }
         };
         FilterPage.prototype.showCategory = function (num) {
             this.tiFilter.hide();
@@ -59,6 +75,15 @@ var uplight;
                 this.view.hide('fast');
             }
         };
+        FilterPage.prototype._onImageClick = function (evt) {
+            var el = $(evt.target);
+            var src = el.attr('src');
+            //$('#ImageView').removeClass('hidden');
+            $('#ImageView').fadeIn();
+            $('#ImageView img').attr('src', src);
+            if (this.onImageClick)
+                this.onImageClick(src);
+        };
         FilterPage.prototype.addDetails = function (vo, el) {
             console.log(vo);
             if (!vo.details)
@@ -79,10 +104,7 @@ var uplight;
                 }
                 else {
                     var vo = this.model.getDestById(el.data('id'));
-                    console.log(vo.imgs.length !== 0);
-                    if (vo.imgs && vo.imgs.length !== 0 && this.onMoreDta)
-                        this.onMoreDta(vo);
-                    else
+                    if (vo)
                         this.addDetails(vo, el);
                 }
             }
