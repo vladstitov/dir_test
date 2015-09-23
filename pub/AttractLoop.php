@@ -1,5 +1,7 @@
 <?php
-$sett=$_GET['settings'];
+$sett='settings.json';
+if(isset($_GET['settings']))$sett=$_GET['settings'];
+
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +13,7 @@ $sett=$_GET['settings'];
     <title></title>
     <link href="js/lists/reset.css" rel="stylesheet" />
 	<script>
-	var u_settings = <?php echo file_get_contents('data/'.$sett); ?>
+	var u_settings = <?php echo file_get_contents('../data/'.$sett); ?>
 	</script>
 
 </head>
@@ -26,7 +28,10 @@ $sett=$_GET['settings'];
 </div>
 <script>
     $(document).ready(function(){
-        var ts = new uplight.AttractLoop();
+        u_settings.props.forEach(function(vo){
+            u_settings[vo.id] = vo.value;
+        })
+        var ts = new uplight.AttractLoop($('#AttractLoop'),u_settings.attract_loop);
 
     })
 
