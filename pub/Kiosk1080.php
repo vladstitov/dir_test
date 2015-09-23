@@ -66,35 +66,39 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         display: block;
         color: inherit;
     }
+    body{
+        background-image: url('<?= $labels['background']; ?>');
+    }
 
 
 </style>
 </head>
-<body style="background-image: url('<?= $labels['background']; ?>')">
-<section id="Templates" class="hidden">
+<body>
+<div id="Templates" class="hidden"> </div>
+<div id="History" class="hidden"></div>
 
-
-</section>
 <div id="container">
-    <section id="u-header" class="main-color">
-        <div id="brand-logo" >
-            <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>
-        </div>
-        <div id="brand-name" >
-               <?= isset($labels['header'])?$labels['header']:''; ?>
-        </div>
-        <div id="brand-more">
-            <div id="Clock">
-            </div>
+    <section id="u-header" class="main-color view-port">
 
-        </div>
-        <p id="brand-slogan">
-            <?= isset($labels['slogan'])?$labels['slogan']:''; ?>
-        </p>
+            <div id="brand-logo" >
+                <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>
+            </div>
+            <div id="brand-name" >
+                   <?= isset($labels['header'])?$labels['header']:''; ?>
+            </div>
+            <div id="brand-more">
+                <div id="Clock">
+                </div>
+
+            </div>
+            <p id="brand-slogan">
+                <?= isset($labels['slogan'])?$labels['slogan']:''; ?>
+            </p>
+
     </section>
 
 
-    <section id="mainview" data-ctr="SearchResult">
+    <section id="mainview" data-ctr="SearchResult" class="view-port">
         <style>
            #mainport, #cover>.detailsL {
                 position: absolute;
@@ -114,7 +118,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                vertical-align: top;
 
            }
-            #mainport .view-port{
+
+           /* #mainport .view-port{
                 position: absolute;
                 width: 90%;
                 height: 95%;
@@ -123,7 +128,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 top: 0;
                 bottom: 0;
                 margin: auto;
-            }
+            }*/
            #Pages{
                overflow: hidden;
            }
@@ -144,25 +149,21 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
            }
 
         </style>
-        <div id="mainport" class="mainbg u-glow">
-                <section  class="view content">
-                    <?php
-                     include('js/kiosk/search/SearchResult.html');
-                    ?>
-                </section>
-                <section id="Pages" data-id="Pages">
+        <div id="mainport" class="mainbg u-glow view-port-content">
+                <?php
+                 include('js/kiosk/search/SearchResult.html');
+                ?>
+               <section id="Pages" data-id="Pages">
 
                 </section>
-
-
         </div>
 
     </section>
 
 
-    <section id="sideview">
+    <section id="sideview" class="view-port">
         <hr/>
-        <div id="toolsview" class="mainbg">
+        <div id="toolsview" class="mainbg view-port-content">
             <?php
             include('js/kiosk/menu/StartMenu.html');
             include('js/kiosk/search/SearchTools.html');
@@ -170,6 +171,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </div>
         <hr/>
     </section>
+
+
     <section id="footer">
         <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
@@ -178,6 +181,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     include('js/kiosk/search/DetailsLarge.html');
     ?>
 
+</div> <!--End of container-->
 
 <section id="AttractLoop">
     <div  class="cover" data-id="Body">
@@ -189,10 +193,9 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
         }
     </style>
-
-
 </section>
-<div id="History" style="display:none;"></div>
+
+
 
 <script src="js/kiosk/Registry.js"></script>
 <script src="js/kiosk/Connector.js"></script>

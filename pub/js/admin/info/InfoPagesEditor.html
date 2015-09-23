@@ -2,9 +2,9 @@
         <section id="InfoPagesView" class="panel panel-default">
             <div class="panel-heading">
                 <div class="tools">
-                    <a  data-id="btnAdd" class="btn" title="Create new Category" ><div class="fa fa-plus"></div> Add</a>
-                    <a  data-id="btnEdit" class="btn" title="Edit selected Category" > <div class="fa fa-edit"></div>Edit</a>
-                    <a  data-id="btnDel" class="btn" title="Delete selected Category" > <div class="fa fa-minus"></div> Delete</a>
+                    <a  data-id="btnAdd" class="btn" title="Create new Page" ><div class="fa fa-plus"></div> Add</a>
+                    <a  data-id="btnEdit" class="btn" title="Edit selected Page" > <div class="fa fa-edit"></div>Edit</a>
+                    <a  data-id="btnDelete" class="btn" title="Delete selected Page" > <div class="fa fa-minus"></div> Delete</a>
                 </div>
             </div>
             <div class="panel-body">
@@ -16,7 +16,7 @@
         </section>
 
 
-        <section id="InfoPagesEditor" class="hideme">
+        <section id="InfoPagesEditor" class="hidden">
             <style>
                 #InfoPagesEditor [data-id=icon]{
                     font-size: 1.5em;
@@ -24,7 +24,7 @@
             </style>
             <div class="panel panel-default">
                 <div class="modal-header">
-                    <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
+                    <a title="Close Editor" class="btn fa fa-close pull-right" data-id="btnClose"></a>
                     <h1 class="modal-title">Page Editor</h1>
                 </div>
 
@@ -54,14 +54,14 @@
                     <div class="col-md-12">
                         <hr/>
                     </div>
-                    <div class="btn col-sm-2" data-id="btnEditIcon" title="Open/Close icons Library">
+                    <a class="btn col-sm-2" data-id="btnEditIcon" title="Open/Close icons Library">
                         <span class="fa fa-edit"> </span>
                         <span>Change Icon</span>
-                    </div>
-                    <div class="btn col-sm-2" data-id="btnEditText" title="Open/Close Text Editory">
+                    </a>
+                    <a class="btn col-sm-2" data-id="btnEditText" title="Open/Close Text Editor">
                         <span class="fa fa-edit"> </span>
                         <span>Edit text</span>
-                    </div>
+                    </a>
                     <div class="form-group col-sm-4">
 
                     </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group col-sm-12">
 
-                        <div class="panel-body hideme" data-id="iconsLibrary" >
+                        <div class="panel-body hidden" data-id="iconsLibrary" >
                             <hr/>
                             <label >Icons Library</label>
                             <a class="btn pull-right" title="Close icons library" data-id="btnCloseL"><span class="fa fa-close"></span> Close Library</a>
@@ -88,7 +88,7 @@
                             </style>
 
                         </div>
-                        <div class="panel-body hideme" data-ctr="TextEditor"  >
+                        <div class="panel-body hidden" data-ctr="TextEditor"  >
                             <label >Text Editor</label>
                             <a class="btn pull-right" title="Close icons library" data-id="btnCloseT"><span class="fa fa-close"></span> Close Editor</a>
                             <div id="TextEditorPages">

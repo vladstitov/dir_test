@@ -32,6 +32,7 @@ module uplight{
         show():void{
             if(!this.isVis){
                 this.view.show('fast');
+                this.view.removeClass(HIDDEN);
                 this.isVis = true;
             }
 
@@ -96,6 +97,7 @@ module uplight{
            if(!this.isVis) {
                this.isVis = true;
                this.view.show();
+               this.view.removeClass(HIDDEN);
            }
         }
         hide(){
@@ -278,7 +280,7 @@ module uplight{
         url:string;
         constructor(content:JQuery){
             this.R=RegA.getInstance();
-            content.load('js/admin/info/InfoPages.html',()=>this.init())
+            content.load('js/admin/info/InfoPagesEditor.html',()=>this.init())
 
 
         }
@@ -397,13 +399,8 @@ module uplight{
            return this.R.connector.saveData(JSON.stringify(data),this.url)
         }
         private onDelClicked(): void {
-            if( this.btnDelete.hasClass(DISABLED)) return;
-            this.btnDelete.addClass(DISABLED);
-            setTimeout(()=>{ this.btnDelete.removeClass(DISABLED);},3000);
             if(this.selectedIndex==-1) return;
             var item = this.data[this.selectedIndex]
-
-            var isDelete =   confirm('Yoy want to delete category '+item.label+'?')
             if(confirm('Yoy want to delete Page '+item.name+'?')) {
                 this.data.splice(this.selectedIndex,1);
                 this.selectedIndex=-1;

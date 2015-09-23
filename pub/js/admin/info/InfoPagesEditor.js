@@ -23,6 +23,7 @@ var uplight;
         IconsLibrary.prototype.show = function () {
             if (!this.isVis) {
                 this.view.show('fast');
+                this.view.removeClass(HIDDEN);
                 this.isVis = true;
             }
         };
@@ -87,6 +88,7 @@ var uplight;
             if (!this.isVis) {
                 this.isVis = true;
                 this.view.show();
+                this.view.removeClass(HIDDEN);
             }
         };
         TextEditor.prototype.hide = function () {
@@ -207,7 +209,7 @@ var uplight;
             this.selectedIndex = -1;
             this.max = 0;
             this.R = uplight.RegA.getInstance();
-            content.load('js/admin/info/InfoPages.html', function () { return _this.init(); });
+            content.load('js/admin/info/InfoPagesEditor.html', function () { return _this.init(); });
         }
         InfoPagesManager.prototype.init = function () {
             var _this = this;
@@ -317,16 +319,9 @@ var uplight;
         };
         InfoPagesManager.prototype.onDelClicked = function () {
             var _this = this;
-            if (this.btnDelete.hasClass(DISABLED))
-                return;
-            this.btnDelete.addClass(DISABLED);
-            setTimeout(function () {
-                _this.btnDelete.removeClass(DISABLED);
-            }, 3000);
             if (this.selectedIndex == -1)
                 return;
             var item = this.data[this.selectedIndex];
-            var isDelete = confirm('Yoy want to delete category ' + item.label + '?');
             if (confirm('Yoy want to delete Page ' + item.name + '?')) {
                 this.data.splice(this.selectedIndex, 1);
                 this.selectedIndex = -1;

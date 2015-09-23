@@ -8,11 +8,27 @@
             padding: 12px;
             border-radius: 12px;
         }
-    </style>
-    <div class="col-sm-1">
+        #Categories{
+            margin-left: 2em;
+        }
+        #kw-container{
+            float: right;
+            height:270px ;
+            width: 150px;
+            overflow-y: auto;
+            margin-right: 50px;
 
-    </div>
-    <section class="col-sm-2">
+        }
+        #kw-container li>a{
+            width: 100%;
+            text-align: left;
+            /* text-decoration: underline;*/
+            /*  margin: 0.5em;*/
+            /*  border-bottom: thin #f8f8f8 solid;*/
+
+        }
+    </style>
+    <section class="col-sm-3">
         <div id="Categories">
             <h3>
                 <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
@@ -31,18 +47,20 @@
             <?= isset($labels['topages'])?$labels['topages']:'&nbsp;'; ?>
         </a></h3>
     </section>
-    <section class="col-sm-2">
+    <section class="col-sm-3">
+        <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
         <div id="keywords">
-            <h3>
+            <h3 class="text-center">
                 <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
             </h3>
+
 
             <div id="kw-container" class="nano">
             </div>
 
         </div>
+
     </section>
-    <div class="col-sm-1">
-        <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
-    </div>
+
+
 </section>

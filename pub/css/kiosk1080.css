@@ -416,21 +416,7 @@ display: inline-block;
 
 }
 
-#kw-container{
-    float: right;
-    height:270px ;
-    width: 130px;
-    overflow-y: auto;
 
-}
-#kw-container li>a{
-    width: 100%;
-    text-align: left;
-   /* text-decoration: underline;*/
-  /*  margin: 0.5em;*/
-  /*  border-bottom: thin #f8f8f8 solid;*/
-
-}
 
 #Screensaver{
     position: absolute;
