@@ -19,25 +19,46 @@ module uplight{
 
     export class AttractLoop{
         al:VOAL;
-        view:JQuery;
+
         body:JQuery;
 
 
 
-        constructor(){
-            this.view=$('AttractLoop');
-            this.al = u_settings.attract_loop;
+        constructor(private view:JQuery,prop:any){
+
+            this.al = prop
             this.body=$('[data-id=Body]:first');
             this.loadAL();
         }
 
 
+      private isActive
+        hide():boolean{
+            if(this.isActive){
+                this.view.addClass(HIDDEN);
+                this.isActive = false
+                this.stop();
+                return true;
+            }
+            return false;
+        }
+
         start():void{
 
+
+        }
+        show():void{
+            if(!this.isActive){
+                this.view.removeClass(HIDDEN);
+                this.isActive = true
+                this.start();
+            }
         }
         stop():void{
 
+
         }
+
         loadAL():void{
             var vo:VOAL = this.al;
             if(vo.type=='gallery' || vo.type=='gallery2'){

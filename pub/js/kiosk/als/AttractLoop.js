@@ -13,13 +13,29 @@ var uplight;
     })();
     uplight.VOAL = VOAL;
     var AttractLoop = (function () {
-        function AttractLoop() {
-            this.view = $('AttractLoop');
-            this.al = u_settings.attract_loop;
+        function AttractLoop(view, prop) {
+            this.view = view;
+            this.al = prop;
             this.body = $('[data-id=Body]:first');
             this.loadAL();
         }
+        AttractLoop.prototype.hide = function () {
+            if (this.isActive) {
+                this.view.addClass(HIDDEN);
+                this.isActive = false;
+                this.stop();
+                return true;
+            }
+            return false;
+        };
         AttractLoop.prototype.start = function () {
+        };
+        AttractLoop.prototype.show = function () {
+            if (!this.isActive) {
+                this.view.removeClass(HIDDEN);
+                this.isActive = true;
+                this.start();
+            }
         };
         AttractLoop.prototype.stop = function () {
         };

@@ -28,9 +28,11 @@ module uplight {
        private searchInput:SearchInput;
        private cateegories:Categories;
        private mainMenu:MainMenu;
+       private attractLoop:AttractLoop;
        keywords:Keywords;
 
        private onMouseDown(evt:MouseEvent):void{
+          if(this.attractLoop.hide()) window.location.href='#kiosk';
 
            if(this.isBlocked){
                evt.preventDefault();
@@ -78,7 +80,11 @@ module uplight {
            r.connector.id=u_settings.kiosk;
            r.connector.who='kiosk';
            r.model = new Model(r.connector,(w)=>this.warn(w));
+           u_settings.props.forEach(function(val){
+               u_settings[val.id] = val.value;
+           })
            r.settings = u_settings;
+
            r.dispatcher = $({});
 
            this.R=r;
@@ -88,7 +94,12 @@ module uplight {
            var cats= new Categories();
            var mm = new MainMenu();
            mm.onClick = (item)=>this.onMenuClick(item);
-           var timeout:Timeout = new Timeout(u_settings.ss_timeout)
+           var timeout:Timeout = new Timeout(u_settings.ss_timeout);
+           timeout.onTimeout=(num)=>{
+               console.log('timeout '+num);
+               window.location.href='#timeout'
+           }
+
 
           this.details = new DetailsLarge($('#DetailsLarge'));
            this.details.onClose = ()=>{  this.details.hide();  }
@@ -113,6 +124,8 @@ module uplight {
             r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
 
 
+           this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
+           this.attractLoop.show();
           // setTimeout(()=>{ DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
           // Registry.getInstance().connector.Log('kiosk started succesguly');
          // Registry.getInstance().connector.Error('kiosk started succesguly');

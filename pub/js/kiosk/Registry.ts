@@ -41,6 +41,7 @@ var SHOW_DATA_VIEW_BACK: string = 'SHOW_DATA_VIEW_BACK';
 var CLICK: string = 'click';
 var SHOW: string = 'show';
 var HIDE: string = 'hide';
+var HIDDEN:string = 'hidden';
 //var trace = function (data) { console.log(data); }
 declare  var u_settings:any;
 module uplight {

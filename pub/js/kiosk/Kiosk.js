@@ -28,6 +28,9 @@ var uplight;
             r.connector.id = u_settings.kiosk;
             r.connector.who = 'kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
+            u_settings.props.forEach(function (val) {
+                u_settings[val.id] = val.value;
+            });
             r.settings = u_settings;
             r.dispatcher = $({});
             this.R = r;
@@ -38,6 +41,10 @@ var uplight;
             var mm = new uplight.MainMenu();
             mm.onClick = function (item) { return _this.onMenuClick(item); };
             var timeout = new uplight.Timeout(u_settings.ss_timeout);
+            timeout.onTimeout = function (num) {
+                console.log('timeout ' + num);
+                window.location.href = '#timeout';
+            };
             this.details = new uplight.DetailsLarge($('#DetailsLarge'));
             this.details.onClose = function () {
                 _this.details.hide();
@@ -59,12 +66,16 @@ var uplight;
             r.dispatcher.on(r.SS_START, function () {
                 r.dispatcher.triggerHandler(r.RESET_ALL);
             });
+            this.attractLoop = new uplight.AttractLoop($('#AttractLoop'), u_settings.attract_loop);
+            this.attractLoop.show();
             // setTimeout(()=>{ DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
         }
         Kiosk.prototype.onMouseDown = function (evt) {
             var _this = this;
+            if (this.attractLoop.hide())
+                window.location.href = '#kiosk';
             if (this.isBlocked) {
                 evt.preventDefault();
                 evt.stopPropagation();

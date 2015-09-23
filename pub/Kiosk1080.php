@@ -72,19 +72,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 </head>
 <body style="background-image: url('<?= $labels['background']; ?>')">
 <section id="Templates" class="hidden">
-    <section id="AttractLoop">
-        <div  class="cover" data-id="Body">
-        </div>
-        <style>
-            #AttractLoop {
-                position: absolute;
-                top: 170px;
 
-            }
-        </style>
-
-
-    </section>
 
 </section>
 <div id="container">
@@ -157,65 +145,10 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
         </style>
         <div id="mainport" class="mainbg u-glow">
-
-                <section  class="view content" >
-                    <div id="SearchResult" data-id="searchResult">
-                        <section id="list-header" >
-
-                            <div id="list-header-main" class="col-sm-12">
-                              <h4>  <?= isset($labels['list-header'])?$labels['list-header']:''; ?></h4>
-                            </div>
-
-                        </section>
-                        <hr style="margin-bottom: 0"/>
-                        <section  class="col-lg-12">
-                            <div id="list-main">
-                                <div class="nano-content" data-id="list">
-
-                                </div>
-                            </div>
-
-
-                        </section>
-                        <hr style="margin-top: 0"/>
-
-
-                        <section  class="col-sm-12">
-
-
-                                <div class="more col-sm-8" >
-
-                                  <p style="vertical-align: text-bottom; line-height: 140px">  <?=  isset($labels['list_footer'])?$labels['list_footer']:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?></p>
-
-                                </div>
-                                <div id="searchinput" class="col-sm-4">
-                                    <style>
-                                        #searchinput .fa-times-circle{
-                                            position: absolute;
-                                            top: 25px;
-                                            right: 10px;
-                                            font-size: 30px;
-                                            color: #adadad;
-
-                                        }
-                                        #searchinput input{
-                                            border-radius: 30px;
-                                            font-size: 30px;
-                                            width: 200px;
-                                            border: none;
-                                            padding: 20px 40px 20px 20px;
-                                            margin-right: -20px;
-                                        }
-                                    </style>
-                                   <!-- <span class="fa fa-search"></span>-->
-                                    <input type="text" class="Plastic031 pull-right" />
-                                    <span class="fa fa-times-circle"  data-id="btnClear"></span>
-                                </div>
-
-
-
-                        </section>
-                    </div>
+                <section  class="view content">
+                    <?php
+                     include('js/kiosk/search/SearchResult.html');
+                    ?>
                 </section>
                 <section id="Pages" data-id="Pages">
 
@@ -225,228 +158,40 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </div>
 
     </section>
+
+
     <section id="sideview">
         <hr/>
         <div id="toolsview" class="mainbg">
-			<section data-ctr="MainMenu" class="row">
-                <style>
-                    #btnSearch{
-                        font-size:100px;
-                        padding:20px;
-                        color:white;
-                        background-color:red;
-                    }
-
-                    #MenuList{
-                        height: 200px;
-                        overflow: hidden;
-                    }
-                    #MenuList  li.item {
-                        border-radius: 20px;
-                        margin: 12px 0 12px 0;
-                        padding: 12px;
-                        width: 98%;
-                        font-size: 30px;
-                    }
-                </style>
-
-                <div class="col-sm-2"></div>
-                <div class="col-sm-6">
-                    <h3 class="text-center">
-                        <?= isset($labels['infopages'])?$labels['infopages']:'&nbsp;'; ?>
-                    </h3>
-                    <div>
-                        <div id="MenuList" class="nano" data-id="list">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <h3 class="text-center">
-                        <?= isset($labels['btnSearch'])?$labels['btnSearch']:'&nbsp;'; ?>
-                    </h3>
-                        <div id="btnSearch" class="fa fa-search pull-right" >
-                            <div>
-                            </div>
-
-                        </div>
-                </div>
-                <div class="col-sm-2"></div>
-        </section>
-
-
-        <section id="SearchView" class="row">
-
-            <style>
-                #sideview h3{
-                    color: #9d9d9d;
-                }
-
-                #SearchView h3>a{
-                   padding: 12px;
-                   border-radius: 12px;
-                }
-            </style>
-            <div class="col-sm-1">
-
-            </div>
-            <section class="col-sm-2">
-                <div id="Categories">
-                    <h3>
-                        <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
-                    </h3>
-
-                </div>
-            </section>
-            <section class="col-sm-6 text-center">
-                <h3 class="text-center">
-                    <?= isset($labels['keyboard'])?$labels['keyboard']:'&nbsp;'; ?>
-                </h3>
-                <div id="Keyboard" data-js="Keyboard" class="text-center">
-                </div>
-                <hr/>
-                <h3 class="text-center"><a data-id="btnShowMenu" class="Plastic031">
-                    <?= isset($labels['topages'])?$labels['topages']:'&nbsp;'; ?>
-                </a></h3>
-            </section>
-            <section class="col-sm-2">
-                <div id="keywords">
-                    <h3>
-                        <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
-                    </h3>
-
-                    <div id="kw-container" class="nano">
-                    </div>
-
-                </div>
-            </section>
-            <div class="col-sm-1">
-                <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
-            </div>
-        </section>
-
+            <?php
+            include('js/kiosk/menu/StartMenu.html');
+            include('js/kiosk/search/SearchTools.html');
+            ?>
+        </div>
         <hr/>
     </section>
-<section id="footer">
-    <?= isset($labels['footer'])?$labels['footer']:''; ?>
+    <section id="footer">
+        <?= isset($labels['footer'])?$labels['footer']:''; ?>
+    </section>
+
+    <?php
+    include('js/kiosk/search/DetailsLarge.html');
+    ?>
+
+
+<section id="AttractLoop">
+    <div  class="cover" data-id="Body">
+    </div>
+    <style>
+        #AttractLoop {
+            position: absolute;
+            top: 170px;
+
+        }
+    </style>
+
+
 </section>
-
-    <section id="cover">
-
-
-    </section>
-
-   <section id="DetailsLarge" class="modal hide" data-id="btnClose" >
-       <style>
-           #DetailsLarge{
-
-           }
-           #DetailsLarge .nano {
-               overflow-x: auto;
-               overflow-y: hidden;
-               height: 100px;
-           }
-           #DetailsLarge .hlist {
-               white-space: nowrap;
-               height: 100px;
-           }
-           #DetailsLarge .hlist>a {
-               vertical-align: top;
-               position: relative;
-               width: 100px;
-               height: 100px;
-               display: inline-block;
-               margin: 0 5px 0 5px;
-           }
-           #DetailsLarge .hlist>a>img {
-               max-height: 100px;
-               max-width: 100px;
-               position: absolute;
-               margin: auto;
-               top: 0;
-               bottom: 0;
-               left: 0;
-               right: 0;
-           }
-           #DetailsLarge .shell{
-               width: 658px;
-               height: 466px;
-               position: relative;
-           }
-           #DetailsLarge .shell>img{
-               max-width: 658px;
-              max-height: 466px;
-               position: absolute;
-               margin: auto;
-               top: 0;
-
-               bottom: 0;
-               left: 0;
-               right: 0;
-           }
-
-       </style>
-        <div class="modal-dialog">
-            <div class="modal-content Plastic031 central">
-
-                <div class="modal-header">
-                    <div class="btn fa fa-close pull-right" data-id="btnClose"></div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                           <h4>Name</h4>
-                            <h2 data-id="name">
-                                Remove a portion
-                            </h2>
-                        </div>
-                        <div class="col-sm-3">
-                            <h4>unit</h4>
-                           <h2 data-id="unit"></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-body content">
-                    <div class="row details">
-                        <div class="col-sm-8 more" data-id="more">
-
-                        </div>
-                        <div class="col-sm-4 tmb" data-id="tumb">
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="shell">
-                                <img data-id="image" />
-                            </div>
-
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-sm-12" >
-                            <div class="nano">
-                                <div  class="nano-content">
-                                    <div data-id="gallery" class="hlist">
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default pull-right" data-id="btnClose">Close</button>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-</div>
 <div id="History" style="display:none;"></div>
 
 <script src="js/kiosk/Registry.js"></script>
@@ -466,6 +211,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/InfoPage.js"></script>
 <script src="js/kiosk/MainMenu.js"></script>
 <script src="js/kiosk/utils/Relay.js"></script>
+<script src="js/kiosk/utils/Timeout.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
 <!--<script src="js/kiosk/MainView.js"></script>

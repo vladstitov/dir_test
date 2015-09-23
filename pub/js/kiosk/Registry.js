@@ -32,6 +32,7 @@ var SHOW_DATA_VIEW_BACK = 'SHOW_DATA_VIEW_BACK';
 var CLICK = 'click';
 var SHOW = 'show';
 var HIDE = 'hide';
+var HIDDEN = 'hidden';
 var uplight;
 (function (uplight) {
     var Registry = (function () {
@@ -78,4 +79,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

@@ -7,14 +7,21 @@ var uplight;
     var Timeout = (function () {
         function Timeout(timeout) {
             var _this = this;
+            console.log(timeout);
+            if (isNaN(timeout)) {
+                console.log('error setting timeout ', timeout);
+                timeout = 60;
+            }
             this.timeout = timeout;
             document.addEventListener(CLICK, function (evt) { return _this.startTimer(); });
         }
         Timeout.prototype.startTimer = function () {
+            var _this = this;
             clearTimeout(this.timer);
             this.timer = setTimeout(function () {
-                window.location.href = '#timeout';
-            }, this.timeout);
+                if (_this.onTimeout)
+                    _this.onTimeout(_this.timeout);
+            }, this.timeout * 1000);
         };
         return Timeout;
     })();
