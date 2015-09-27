@@ -151,7 +151,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </style>
         <div id="mainport" class="mainbg u-glow view-port-content">
                 <?php
-                 include('js/kiosk/search/SearchResult.html');
+                 include('js/kiosk/search/SearchResult.htm');
                 ?>
                <section id="Pages" data-id="Pages">
 
@@ -165,8 +165,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <hr/>
         <div id="toolsview" class="mainbg view-port-content">
             <?php
-            include('js/kiosk/menu/StartMenu.html');
-            include('js/kiosk/search/SearchTools.html');
+            include('js/kiosk/menu/StartMenu.htm');
+            include('js/kiosk/search/SearchTools.htm');
             ?>
         </div>
         <hr/>
@@ -178,7 +178,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     </section>
 
     <?php
-    include('js/kiosk/search/DetailsLarge.html');
+    include('js/kiosk/search/DetailsLarge.htm');
     ?>
 
 </div> <!--End of container-->

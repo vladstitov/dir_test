@@ -35,6 +35,12 @@ $title='title';
 	 ?>
 	 </script>
     <style type="text/css">
+        #FrontPage{
+            background-image: url('<?= $labels['background']; ?>');
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+        }
 
 	</style>
             
@@ -68,140 +74,21 @@ $title='title';
         </div>-->
     </section>
     <section id="Content" class="row">
-        <div data-id="bgImage">
+        <div id="FrontPage">
 
         </div>
 
+
         <div data-id="container" >
+            <?php include('js/mobile/DetailsLarge.htm'); ?>
 
 
-
-
-            <!--Details Page-->
-            <section id="DetailsLarge" data-ctr="DetailsLarge" style="display: block"  >
-                <style>
-                    #DetailsLarge{
-
-                    }
-                    #DetailsLarge .nano {
-                        overflow-x: auto;
-                        overflow-y: hidden;
-                        height: 100px;
-                    }
-                    #DetailsLarge .hlist {
-                        white-space: nowrap;
-                        height: 100px;
-                    }
-                    #DetailsLarge .hlist>a {
-                        vertical-align: top;
-                        position: relative;
-                        width: 100px;
-                        height: 100px;
-                        display: inline-block;
-                        margin: 0 5px 0 5px;
-                    }
-                    #DetailsLarge .hlist>a>img {
-                        max-height: 100px;
-                        max-width: 100px;
-                        position: absolute;
-                        margin: auto;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                    }
-                    #DetailsLarge .shell{
-                       width: 100%;
-                        height: 466px;
-                        position: relative;
-                    }
-                    #DetailsLarge .shell>img{
-                       max-width: 100%;
-                        max-height: 466px;
-                        position: absolute;
-                        margin: auto;
-                        top: 0;
-
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                    }
-                    #DetailsLarge .details>.tmb>img{
-
-                        height: 128px;
-                    }
-
-
-                </style>
-                <div class="modal-dialog">
-                    <div class="modal-content Plastic031 central">
-
-                        <div class="modal-header">
-                            <a class="fa fa-close pull-right" data-id="btnClose"></a>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <h4>Name</h4>
-                                    <h2 data-id="name">
-
-                                    </h2>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h4>unit</h4>
-                                    <h2 data-id="unit"></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-body content">
-                            <div class="row details">
-                                <div class="col-sm-8 more" data-id="more">
-
-                                </div>
-                                <div class="col-sm-4 tmb" data-id="tumb">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="shell">
-                                        <img data-id="image" />
-                                    </div>
-
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-sm-12" >
-                                    <div class="nano">
-                                        <div  class="nano-content">
-                                            <div data-id="gallery" class="hlist">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-default pull-right" data-id="btnClose">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-
-            <!-- Info Page-->
-            <style>
-                #InfoPages .pagecontent{
-                    margin-left: 5px;
-                }
-            </style>
             <section id="InfoPages" data-ctr="InfoPages" class="row">
+                <style>
+                    #InfoPages .pagecontent{
+                        margin-left: 5px;
+                    }
+                </style>
                 <div class="col-sm-12">
                     <h3 data-id="pageTitle"></h3>
                 </div>
@@ -213,148 +100,13 @@ $title='title';
                 </div>
             </section>
 
-
-
-
-
-            <!--Filter page-->
-            <section  id="FilterPage"  data-ctr="FilterPage">
-
-                    <style>
-                        #FilterPage li:active{
-                            background-color: khaki;
-                        }
-                        #FilterPage li>a{
-                            display: block;
-                          /*  width: 110%;*/
-                            padding: 10px 15px;
-                            margin: -10px -15px;
-
-                        }
-                        #FilterPage li>a>.fa{
-                            font-size: 1em;
-                            width: 12px;
-                          margin-left: -5px;
-                        }
-
-                       .anim{
-                           -webkit-transition: 1s ease-in-out;
-                           -moz-transition: 1s ease-in-out;
-                           -o-transition: 1s ease-in-out;
-                           transition: 1s ease-in-out;
-                       }
-
-                        #FilterPage li.selected  .fa-angle-double-left{
-                           transform: rotate(180deg);
-                        }
-                        #FilterPage li.selected>a{
-                            background-color: #ebebeb;
-                            /* border-color: #000000;
-                             border-width: 1px;*/
-                            background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
-                            background-image: -moz-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
-                            background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
-                            background-image: -o-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
-                            background-image: -ms-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
-
-                        }
-
-                        #FilterPage li.selected{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,fcfcfc+100 */
-                            background: rgb(255,255,255); /* Old browsers */
-                            background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(252,252,252,1) 100%); /* FF3.6+ */
-                            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(252,252,252,1))); /* Chrome,Safari4+ */
-                            background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* Chrome10+,Safari5.1+ */
-                            background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* Opera 11.10+ */
-                            background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* IE10+ */
-                            background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(252,252,252,1) 100%); /* W3C */
-                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fcfcfc',GradientType=0 ); /* IE6-9 */
-                            background-color: #c1e2b3;
-                            margin-bottom: 5px;
-                            box-shadow: 0 3px 3px #999;
-                        }
-
-                        #FilterPage li>.details{
-                            display: none;
-                            -webkit-transition:all 0.7s;
-                            transition: all 0.7s;
-                            margin-top: 15px;
-
-                        }
-
-                        #FilterPage li.selected>.details {
-                            min-height: 50px;
-                            display: block;
-
-                        }
-                        #FilterPage .more, .tmb{
-                            display: inline-block;
-
-                        }
-                        #FilterPage .tmb{
-                            float: right;
-                        }
-                        #FilterPage .tmb>img{
-                            max-height: 50px;
-                        }
-                        #FilterPage .details>.imgs{
-                            max-width: 100%;
-                            overflow-y: hidden;
-                            overflow-x: auto;
-                            height: 40px;
-                        }
-                        #FilterPage .details>.imgs img{
-                            max-height: 35px;
-                        }
-                        #FilterPage .details>.imgs>div{
-                            white-space: nowrap;
-                        }
-                        #FilterPage table{
-                            font-size: 0.9em;
-                        }
-/*
-                        #FilterPage a.selected>.details{
-                            display: block;
-                        }*/
-
-                    </style>
-                <!--    <div class="row">
-                        <div class="col-sm-12">
-                            <div data-id="tiFilter" >
-                                <div style="position: absolute; right: 10px;">
-                                    <span data-id="btnClear" id="FilterPageClose" class="btn fa fa-times-circle" style="font-size: 1.5em; color: #bbbbbb"></span>
-                                </div>
-
-                                <input type="text" data-id="filter" class="form-control">
-                            </div>
-                        </div>
-
-                    </div>-->
-                <h2 data-id="catTitle" class="col-sm-12"></h2>
-
-                <div class="col-sm-12">
-                   <h5> <small> ( <a><span class="fa fa-angle-double-left" style="font-size: larger; font-weight: 900;"></span> More info available </a>)</small></h5>
-                </div>
-                <div class="row">
-
-                        <div  data-id="list" class="col-sm-12">
-
-                        </div>
-                </div>
-
-
-
-                </section>
-
-
-
-
-
+            <?php include('js/mobile/FilterPage.htm'); ?>
 
         </div>
     </section>
 
     <section id="Footer" class="row">
-
+        <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
 
 <?php include('NavigationBar.html');?>
