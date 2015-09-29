@@ -4,6 +4,7 @@
 /// <reference path="kiosk/search/SearchResult.ts" />
 /// <reference path="mobile/filterpage.ts" />
 /// <reference path="mobile/mainview.ts" />
+/// <reference path="mobile/FrontPage.ts" />
 /// <reference path="mobile/Utils.ts" />
 /// <reference path="mobile/menu.ts" />
 /// <reference path="kiosk/registry.ts" />
@@ -47,6 +48,7 @@ var uplight;
                 _this.filterPage.showDefault();
             };
             //  this.searchResult = new SearchResult('#Results');
+            this.frontPage = $('#FrontPage').hide();
             this.infoPage = new uplight.InfoPageMobile($('[data-ctr=InfoPages]:first'), conn);
             this.detailsLarge = new uplight.DetailsLarge($('[data-ctr=DetailsLarge]:first'));
             this.detailsLarge.hide();
