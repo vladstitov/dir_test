@@ -3,13 +3,13 @@
 var uplight;
 (function (uplight) {
     var FilterPage = (function () {
-        function FilterPage(view, model, tableRender) {
+        function FilterPage(view, model) {
             var _this = this;
             this.view = view;
             this.model = model;
-            this.tableRender = tableRender;
             this.ALL = 'all_';
             this.cache = {};
+            this.isHidden = true;
             this.input = view.find('[data-id=filter]');
             this.input.on('input', function (evt) { return _this.onInput(evt); });
             this.list = view.find('[data-id=list]');
@@ -65,14 +65,16 @@ var uplight;
         FilterPage.prototype.show = function () {
             if (this.isHidden) {
                 this.isHidden = false;
-                this.view.show('fast');
+                this.view.removeClass(HIDE);
+                this.view.addClass(SHOW);
                 this.input.focus();
             }
         };
         FilterPage.prototype.hide = function () {
             if (!this.isHidden) {
                 this.isHidden = true;
-                this.view.hide('fast');
+                this.view.addClass(HIDE);
+                this.view.removeClass(SHOW);
             }
         };
         FilterPage.prototype._onImageClick = function (evt) {

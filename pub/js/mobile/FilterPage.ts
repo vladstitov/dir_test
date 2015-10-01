@@ -67,26 +67,27 @@ module uplight {
         }
 
 
-        isHidden:boolean;
+        isHidden:boolean=true;
         show():void{
             if(this.isHidden){
                 this.isHidden = false;
-                this.view.show('fast');
+                this.view.removeClass(HIDE);
+                this.view.addClass(SHOW);
                 this.input.focus();
             }
         }
 
         hide():void{
             if(!this.isHidden){
-
                 this.isHidden = true;
-                this.view.hide('fast');
+                this.view.addClass(HIDE);
+                this.view.removeClass(SHOW);
             }
         }
 
         isDetails:boolean;
 
-        constructor(private view:JQuery, private model: uplight.Model,private tableRender:Function) {
+        constructor(private view:JQuery, private model: uplight.Model) {
             this.input = view.find('[data-id=filter]');
             this.input.on('input', (evt) => this.onInput(evt));                   
             this.list = view.find('[data-id=list]');

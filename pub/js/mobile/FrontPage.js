@@ -8,6 +8,9 @@ var uplight;
         function FrontPage(view) {
             this.view = view;
         }
+        FrontPage.prototype.init = function () {
+            console.log(this.view);
+        };
         return FrontPage;
     })();
     uplight.FrontPage = FrontPage;

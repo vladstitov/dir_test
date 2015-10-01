@@ -16,11 +16,12 @@ var TAPHOLD: string = 'taphold';
 var SWIPE: string = 'swipe';
 var SWIPELEFT: string = 'swipeleft';
 var SWIPERIGTH: string = 'swiperight';
-var HIDE:string='hidden';
+var HIDE:string='hide';
+var SHOW:string='show';
 var OPEN:string='open';
 var DETAILS:string='details'
 
-declare var settings: any;
+declare var u_settings: any;
 
 module uplight {
 
@@ -38,7 +39,7 @@ module uplight {
         private infoPage: InfoPageMobile;
         private detailsLarge: DetailsLarge;
         private filterPage: FilterPage;
-        private frontPage:JQuery
+        private frontPage:FrontPage;
 
         private R: uplight.Registry;
         private menu: Menu;
@@ -46,6 +47,7 @@ module uplight {
        // private mainView: MainView;
         constructor() {
 
+            var settings=u_settings;
             this.R = uplight.Registry.getInstance();          
            var conn:uplight.Connector = new uplight.Connector();
            // this.R.connector.getSettings((data) => this.onSettings(data));      
@@ -74,14 +76,15 @@ module uplight {
           //  this.searchResult = new SearchResult('#Results');
 
 
-            this.frontPage = $('#FrontPage').hide();
+            this.frontPage = new FrontPage($('#FrontPage'));
+
             this.infoPage = new InfoPageMobile($('[data-ctr=InfoPages]:first'),conn);
             this.detailsLarge = new DetailsLarge($('[data-ctr=DetailsLarge]:first'));
             this.detailsLarge.hide();
             this.detailsLarge.onClose=()=>{ window.history.back();}
             $(window).on('hashchange', (evt) => this.onHachChange());
             //document.location.hash = '#Menu';
-            this.filterPage = new FilterPage($('[data-ctr=FilterPage]'),this.R.model,this.detailsLarge.createTable);
+            this.filterPage = new FilterPage($('[data-ctr=FilterPage]'),this.R.model);
             this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(()=>this.onHachChange(),1000);
         }

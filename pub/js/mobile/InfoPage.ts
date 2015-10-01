@@ -1,10 +1,8 @@
 ﻿/// <reference path="../kiosk/registry.ts" />
 /// <reference path="../typing/jquery.d.ts" />
 module uplight {
-
     
     export class InfoPageMobile {
-
 
       //  view: JQuery;
         private content: JQuery;
@@ -20,6 +18,7 @@ module uplight {
             if(this.isHidden){
                 this.isHidden = false;
                 this.view.removeClass(HIDE);
+                this.view.addClass(SHOW);
             }
         }
 
@@ -27,6 +26,7 @@ module uplight {
             if(!this.isHidden){
                 this.isHidden = true;
                 this.view.addClass(HIDE);
+                this.view.removeClass(SHOW);
             }
         }
 

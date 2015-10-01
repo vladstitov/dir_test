@@ -42,13 +42,15 @@ $title='title';
             background-size: 100% 100%;
         }
 
+
 	</style>
             
     
 </head>
-
 <body>
-<div id="Container" class="container">
+
+<div id="Container">
+
     <style>
         #Header{
             height: 30px;
@@ -57,9 +59,19 @@ $title='title';
             height: 50px;
         }
 
+        .container{
+            transition: all 1s;
 
+        }
+        .container.show{
+            margin-left: 0;
+        }
+        .container.hide{
+            margin-left: 500px;
+        }
 
     </style>
+
     <section id="Header" class="row">
        <!-- <div class="col-sm-12" data-id="bgImage">
             <div class="col-sm-1">
@@ -73,36 +85,37 @@ $title='title';
             </div>
         </div>-->
     </section>
-    <section id="Content" class="row">
-        <div id="FrontPage">
+    <section id="Content" data-id="container">
+        <?php
+             if(isset($settings->front_page))include($settings->front_page);
+            include('js/mobile/DetailsLarge.htm');
+             ?>
 
-        </div>
-
-
-        <div data-id="container" >
-            <?php include('js/mobile/DetailsLarge.htm'); ?>
-
-
-            <section id="InfoPages" data-ctr="InfoPages" class="row">
+            <section id="InfoPages" data-ctr="InfoPages" class="container">
                 <style>
                     #InfoPages .pagecontent{
                         margin-left: 5px;
                     }
                 </style>
+
+              <div class="row">
                 <div class="col-sm-12">
                     <h3 data-id="pageTitle"></h3>
                 </div>
-                <div class="col-sm-12">
+              </div>
 
-                    <div data-id="content" class="pagecontent">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div data-id="content" class="pagecontent">
 
+                        </div>
                     </div>
                 </div>
             </section>
 
             <?php include('js/mobile/FilterPage.htm'); ?>
 
-        </div>
+
     </section>
 
     <section id="Footer" class="row">
@@ -149,6 +162,7 @@ $title='title';
 <script src="js/kiosk/search/models.js"></script>
 <script src="js/mobile/InfoPage.js"></script>
 <script src="js/mobile/FilterPage.js"></script>
+<script src="js/mobile/FrontPage.js"></script>
 <script src="js/mobile/Utils.js"></script>
 <script src="js/mobile/Menu.js"></script>
 <script src="js/kiosk/search/DetailsLarge.js"></script>

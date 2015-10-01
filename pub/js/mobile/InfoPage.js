@@ -20,12 +20,14 @@ var uplight;
             if (this.isHidden) {
                 this.isHidden = false;
                 this.view.removeClass(HIDE);
+                this.view.addClass(SHOW);
             }
         };
         InfoPageMobile.prototype.hide = function () {
             if (!this.isHidden) {
                 this.isHidden = true;
                 this.view.addClass(HIDE);
+                this.view.removeClass(SHOW);
             }
         };
         InfoPageMobile.prototype.showPage = function (item) {

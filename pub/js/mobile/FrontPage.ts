@@ -8,5 +8,9 @@ module uplight{
         constructor(private view:JQuery){
 
         }
+        private init():void{
+
+            console.log(this.view);
+        }
     }
 }
