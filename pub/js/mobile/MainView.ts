@@ -1,4 +1,4 @@
-﻿/// <reference path="../Mobile.ts" />
+﻿/// <reference path="Mobile.ts" />
 
 module uplight {
     export class MainViewMobile {

@@ -1,5 +1,5 @@
 <div id="FrontPage">
-    <h3 data-id="header">Address goes here&nbsp;</h3>
+    <h3 data-id="header">Address goes here</h3>
     <div data-id="menu" contenteditable="false" class="show">
         <nav data-id="list" class="nano-content list-group"></nav>
     </div>

@@ -1,15 +1,15 @@
 /// <reference path="../kiosk/registry.ts" />
-/// <reference path="../Mobile.ts" />
+/// <reference path="Mobile.ts" />
 var uplight;
 (function (uplight) {
     var FilterPage = (function () {
-        function FilterPage(view, model) {
+        function FilterPage(view) {
             var _this = this;
             this.view = view;
-            this.model = model;
             this.ALL = 'all_';
             this.cache = {};
-            this.isHidden = true;
+            this.chache = {};
+            this.template = view.clone();
             this.input = view.find('[data-id=filter]');
             this.input.on('input', function (evt) { return _this.onInput(evt); });
             this.list = view.find('[data-id=list]');
@@ -23,22 +23,27 @@ var uplight;
                 _this.renderAll();
             });
             this.details = $('<div>').addClass('details');
-            $('#ImageView').click(function () {
-                $('#ImageView').fadeOut();
-            });
         }
+        FilterPage.prototype.getView = function () {
+            return this.view;
+        };
+        FilterPage.prototype.setData = function (data) {
+            this.data = data;
+        };
+        FilterPage.prototype.addListeners = function () {
+        };
         FilterPage.prototype.resetView = function () {
             this.input.val('');
             this.list.html('<p class="bgwhite">Start typing in input field on top of page. Results will come as soon as you are typing</p>');
             return this.view;
         };
         FilterPage.prototype.showDefault = function () {
-            this.data = this.model.getData();
+            this.data = uplight.Registry.getInstance().model.getData();
             this.input.val('');
             this.tiFilter.show();
             this.catTitle.text('').hide();
             this.renderAll();
-            this.show();
+            // this.show();
             this.input.focus();
         };
         FilterPage.prototype.showPattern = function (str) {
@@ -46,69 +51,59 @@ var uplight;
                 this.renderAll();
             }
             else {
-                this.data = this.model.getDestsByPattern(str);
+                this.data = uplight.Registry.getInstance().model.getDestsByPattern(str);
                 if (this.data.length == 0)
                     this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
                 else
                     this.renderList(str);
             }
         };
+        FilterPage.prototype.setCategoryName = function (str) {
+            this.catTitle.text(str).show();
+        };
         FilterPage.prototype.showCategory = function (num) {
-            this.tiFilter.hide();
-            var cat = this.model.getCategoryById(num);
-            this.catTitle.text(cat.label).show();
-            this.data = this.model.getDestsByCat(num);
-            this.catid = num;
-            this.renderList('cat_' + num);
-            this.show();
-        };
-        FilterPage.prototype.show = function () {
-            if (this.isHidden) {
-                this.isHidden = false;
-                this.view.removeClass(HIDE);
-                this.view.addClass(SHOW);
-                this.input.focus();
-            }
-        };
-        FilterPage.prototype.hide = function () {
-            if (!this.isHidden) {
-                this.isHidden = true;
-                this.view.addClass(HIDE);
-                this.view.removeClass(SHOW);
-            }
+            var page = new FilterPage(this.template.clone());
+            var cat = uplight.Registry.getInstance().model.getCategoryById(num);
+            page.setCategoryName(cat.label);
+            var data = uplight.Registry.getInstance().model.getDestsByCat(num);
+            page.setData(data);
+            page.renderData();
+            return page.getView();
         };
         FilterPage.prototype._onImageClick = function (evt) {
             var el = $(evt.target);
             var src = el.attr('src');
-            //$('#ImageView').removeClass('hidden');
-            $('#ImageView').fadeIn();
-            $('#ImageView img').attr('src', src);
+            if (src)
+                uplight.Utils.showImage(src);
             if (this.onImageClick)
                 this.onImageClick(src);
         };
         FilterPage.prototype.addDetails = function (vo, el) {
-            console.log(vo);
+            // console.log(vo);
             if (!vo.details)
                 vo.details = uplight.Utils.renderDetails(vo);
             el.append(vo.details);
         };
         FilterPage.prototype.onListClick = function (evt) {
             var el = $(evt.currentTarget).parent();
+            console.log(el);
             if (el.hasClass(SELECTED)) {
                 el.removeClass(SELECTED);
-                // el.children('.details');
+                // el.children('.details').hide('fast');
                 this.selected = null;
             }
             else {
-                el.addClass(SELECTED);
-                this.selected = el;
                 if (el.children('.details').length !== 0) {
                 }
                 else {
-                    var vo = this.model.getDestById(el.data('id'));
+                    var vo = uplight.Registry.getInstance().model.getDestById(el.data('id'));
                     if (vo)
                         this.addDetails(vo, el);
                 }
+                setTimeout(function () {
+                    el.addClass(SELECTED);
+                }, 100);
+                this.selected = el;
             }
         };
         FilterPage.prototype.getHeader = function () {
@@ -118,7 +113,7 @@ var uplight;
             this.input.val('');
         };
         FilterPage.prototype.renderAll = function () {
-            this.data = this.model.getData();
+            this.data = uplight.Registry.getInstance().model.getData();
             this.renderList(this.ALL);
         };
         FilterPage.prototype.onInput = function (evt) {
@@ -131,7 +126,7 @@ var uplight;
                 this.renderAll();
             }
             else {
-                this.data = this.model.getDestsByPattern(str);
+                this.data = uplight.Registry.getInstance().model.getDestsByPattern(str);
                 if (this.data.length == 0)
                     this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
                 else
@@ -139,13 +134,20 @@ var uplight;
             }
         };
         FilterPage.prototype.makeCats = function () {
-            var ar = this.model.getCategories();
+            var ar = uplight.Registry.getInstance().model.getCategories();
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
                 out[ar[i].id] = ar[i].icon;
             }
             return out;
+        };
+        FilterPage.prototype.renderData = function () {
+            var ar = this.data;
+            var out = '';
+            for (var i = 0, n = ar.length; i < n; i++)
+                out += uplight.Utils.renderItemMobile(ar[i], this.cats);
+            this.list.html(out);
         };
         FilterPage.prototype.renderList = function (str) {
             if (this.cache[str])
@@ -156,7 +158,7 @@ var uplight;
                 var ar = this.data;
                 var out = '';
                 for (var i = 0, n = ar.length; i < n; i++)
-                    out += uplight.Utils.renderItem(ar[i], this.cats);
+                    out += uplight.Utils.renderItemMobile(ar[i], this.cats);
                 this.cache[str] = out;
                 this.list.html(out);
             }

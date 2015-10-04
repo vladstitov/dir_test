@@ -1,38 +1,31 @@
-﻿﻿<?php
-define('DATA','../data');
-$strSetttings=file_get_contents(DATA."/settings.json");
-$settings=json_decode($strSetttings);
-$strLabels= file_get_contents(DATA."/".$settings->labels);
-$labels=json_decode($strLabels);
+﻿<?php define('DATA','../data');
+$strSetttings = file_get_contents(DATA."/settings.json");
+$settings = json_decode($strSetttings);
+$strLabels = file_get_contents(DATA."/".$settings->labels);
+$labels = json_decode($strLabels);
 foreach($labels as $label)$labels[$label->index]=$label->value;
-$title='title';
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>INTERACTIVE DIRECTORIES</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="js/libs/jquery-2.1.0.min.js"></script>
     <link rel="stylesheet" href="js/libs/bootstrap.css" />
     <link rel="stylesheet" href="js/libs/font-awesome.css" />
     <link rel="stylesheet" href="css/lightblue.css" />
-
-
-
-
-
-
-
 
      <script type="text/javascript">
 	 var scr;
 	 <?php
 	 $js=' var u_settings='.$strSetttings;
      $js.="\n\r".' var u_labels='.$strLabels;
-
+     if(isset($settings->pages))$js.="\n\r".' var u_pages='.file_get_contents(DATA.'/'.$settings->pages);
 
 	 echo $js;
 	 ?>
+
 	 </script>
     <style type="text/css">
         #FrontPage{
@@ -41,19 +34,16 @@ $title='title';
             height: 100%;
             background-size: 100% 100%;
         }
-
-
 	</style>
-            
-    
+
 </head>
-<body>
+<body class="body">
 
 <div id="Container">
 
     <style>
         #Header{
-            height: 30px;
+            height: 50px;
         }
         #Header #brand-logo>img{
             height: 50px;
@@ -85,36 +75,40 @@ $title='title';
             </div>
         </div>-->
     </section>
+    <style>
+        #ViewPort{
+           padding: 0;
+            margin: 0;
+            overflow: hidden;
+
+        }
+        #Dram{
+            padding: 0;
+            margin: 0;
+        }
+        #Slot1{
+            padding: 0;
+            margin: 0;
+            float: left;
+        }
+        #Slot2{
+            padding: 0;
+            margin: 0;
+            float: left;
+
+        }
+        #Content{
+            overflow-y: hidden;
+        }
+
+    </style>
+
     <section id="Content" data-id="container">
         <?php
-             if(isset($settings->front_page))include($settings->front_page);
+            if(isset($settings->front_page))include($settings->front_page);
             include('js/mobile/DetailsLarge.htm');
-             ?>
-
-            <section id="InfoPages" data-ctr="InfoPages" class="container">
-                <style>
-                    #InfoPages .pagecontent{
-                        margin-left: 5px;
-                    }
-                </style>
-
-              <div class="row">
-                <div class="col-sm-12">
-                    <h3 data-id="pageTitle"></h3>
-                </div>
-              </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div data-id="content" class="pagecontent">
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <?php include('js/mobile/FilterPage.htm'); ?>
-
+            include('js/mobile/FilterPage.htm');
+        ?>
 
     </section>
 
@@ -165,8 +159,9 @@ $title='title';
 <script src="js/mobile/FrontPage.js"></script>
 <script src="js/mobile/Utils.js"></script>
 <script src="js/mobile/Menu.js"></script>
+<script src="js/view/Views.js"></script>
 <script src="js/kiosk/search/DetailsLarge.js"></script>
-<script src="js/Mobile.js"></script>
+<script src="js/mobile/Mobile.js"></script>
 
 </body>
 </html>

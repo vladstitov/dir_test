@@ -1,14 +1,15 @@
-/// <reference path="mobile/DetailsPage.ts" />
-/// <reference path="mobile/infopage.ts" />
-/// <reference path="kiosk/search/models.ts" />
-/// <reference path="kiosk/search/SearchResult.ts" />
-/// <reference path="mobile/filterpage.ts" />
-/// <reference path="mobile/mainview.ts" />
-/// <reference path="mobile/FrontPage.ts" />
-/// <reference path="mobile/Utils.ts" />
-/// <reference path="mobile/menu.ts" />
-/// <reference path="kiosk/registry.ts" />
-/// <reference path="kiosk/search/DetailsLarge.ts" />
+/// <reference path="DetailsPage.ts" />
+/// <reference path="infopage.ts" />
+/// <reference path="../kiosk/search/models.ts" />
+/// <reference path="../kiosk/search/SearchResult.ts" />
+/// <reference path="filterpage.ts" />
+/// <reference path="mainview.ts" />
+/// <reference path="FrontPage.ts" />
+/// <reference path="Utils.ts" />
+/// <reference path="menu.ts" />
+/// <reference path="../view/Views.ts" />
+/// <reference path="../kiosk/registry.ts" />
+/// <reference path="../kiosk/search/DetailsLarge.ts" />
 var CLICK = 'mousedown';
 var TAP = 'tap';
 var TAPHOLD = 'taphold';
@@ -27,6 +28,7 @@ var uplight;
             var _this = this;
             this.errors = '';
             this.warns = '';
+            this.cache = {};
             var settings = u_settings;
             this.R = uplight.Registry.getInstance();
             var conn = new uplight.Connector();
@@ -50,8 +52,9 @@ var uplight;
                 _this.filterPage.showDefault();
             };
             //  this.searchResult = new SearchResult('#Results');
+            this.content = $('#Content');
+            this.transition = new uplight.Transition(this.content);
             this.frontPage = new uplight.FrontPage($('#FrontPage'));
-            this.infoPage = new uplight.InfoPageMobile($('[data-ctr=InfoPages]:first'), conn);
             this.detailsLarge = new uplight.DetailsLarge($('[data-ctr=DetailsLarge]:first'));
             this.detailsLarge.hide();
             this.detailsLarge.onClose = function () {
@@ -59,9 +62,10 @@ var uplight;
             };
             $(window).on('hashchange', function (evt) { return _this.onHachChange(); });
             //document.location.hash = '#Menu';
-            this.filterPage = new uplight.FilterPage($('[data-ctr=FilterPage]'), this.R.model);
-            this.filterPage.onSelect = function (vo) { return _this.onListSelect(vo); };
+            this.filterPage = new uplight.FilterPage($('[data-ctr=FilterPage]'));
+            // this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(function () { return _this.onHachChange(); }, 1000);
+            this.content = $('#Content');
         }
         Mobile.prototype.error = function (str) {
             this.errors += str + "\n";
@@ -76,12 +80,25 @@ var uplight;
             else {
             }
         };
+        Mobile.prototype.showView2 = function (newV) {
+            var _this = this;
+            var w = this.content.width();
+            this.content.width(w);
+            this.content.css('overflow', 'hidden');
+            var old = this.content.children();
+            old.width(w).css('float', 'left');
+            newV.width(w).css('float', 'left');
+            var slider = $('<div>').width(w * 2 + 30).append(old).append(newV).appendTo(this.content);
+            this.content.animate({ scrollLeft: w }, function () {
+                old.detach();
+                newV.appendTo(_this.content);
+                newV.css('width', 'auto');
+                slider.detach();
+            });
+        };
         Mobile.prototype.showDestination = function (id) {
             //
             // this.filterPage.hide();
-        };
-        Mobile.prototype.showPage = function (id) {
-            this.infoPage.showInfo(id);
         };
         Mobile.prototype.showDetails = function (str) {
         };
@@ -90,6 +107,7 @@ var uplight;
             var hash = document.location.hash;
             if (hash.indexOf('detailsshow') == 0) {
             }
+            uplight.Utils.hideImage();
             switch (ar[0]) {
                 case '#destination':
                     var vo = this.R.model.getDestById(Number(ar[1]));
@@ -97,12 +115,10 @@ var uplight;
                         break;
                     this.detailsLarge.setDestination(vo).setDestination(vo);
                     this.detailsLarge.render().show();
-                    this.infoPage.hide();
-                    this.filterPage.hide();
                     break;
                 case '#category':
-                    this.filterPage.showCategory(Number(ar[1]));
-                    this.infoPage.hide();
+                    var v = this.filterPage.showCategory(Number(ar[1]));
+                    this.showView(v);
                     this.detailsLarge.hide();
                     this.menu.hideAll();
                     break;
@@ -111,23 +127,35 @@ var uplight;
                     if (isNaN(num))
                         break;
                     this.showPage(num);
-                    this.filterPage.hide();
+                    // this.filterPage.hide();
                     this.detailsLarge.hide();
                     this.menu.hideAll();
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();
-                    this.infoPage.hide();
+                    this.showView(this.filterPage.getView());
                     this.detailsLarge.hide();
                     this.menu.hideMenu();
                     this.menu.showSearch();
                     break;
                 case '#Menu':
                     break;
+                case '#logo':
+                    this.showView(this.frontPage.getView());
+                    break;
                 default:
                     break;
             }
             return;
+        };
+        Mobile.prototype.showPage = function (id) {
+            var ar = u_pages;
+            for (var i = 0, n = ar.length; i < n; i++)
+                if (ar[i].id == id)
+                    this.transition.showView(ar[i].url);
+        };
+        Mobile.prototype.showView = function (view) {
+            this.transition.showView(view);
         };
         return Mobile;
     })();

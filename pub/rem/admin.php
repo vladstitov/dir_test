@@ -60,6 +60,10 @@ switch(array_shift($a)){
 		if(!isset($get['url'])) die('ERROR 1');
 		$result = savePage($get['url'],file_get_contents('php://input'));		
 	break;
+	case 'get_page':
+		if(!isset($get['url'])) die('ERROR 1');
+		$result = file_get_contents(PREFIX.$get['url']);
+	break;
 	
 	case 'cats':				
 	include 'cl/Categories.php';

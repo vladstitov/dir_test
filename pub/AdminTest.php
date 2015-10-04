@@ -155,6 +155,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
 <script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
+<script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>
 
 <script type="text/javascript" src="js/admin/views/Menu.js"></script>
 

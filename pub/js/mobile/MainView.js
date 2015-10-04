@@ -1,4 +1,4 @@
-/// <reference path="../Mobile.ts" />
+/// <reference path="Mobile.ts" />
 var uplight;
 (function (uplight) {
     var MainViewMobile = (function () {

@@ -1,21 +1,10 @@
 <section  id="FilterPage"  data-ctr="FilterPage" class="container">
 
     <style>
-        #FilterPage li:active{
+        #FilterPage li>a:active{
             background-color: khaki;
         }
-        #FilterPage li>a{
-            display: block;
-            /*  width: 110%;*/
-            padding: 10px 15px;
-            margin: -10px -15px;
 
-        }
-        #FilterPage li>a>.fa{
-            font-size: 1em;
-            width: 12px;
-            margin-left: -5px;
-        }
 
         .anim{
             -webkit-transition: 1s ease-in-out;
@@ -53,18 +42,37 @@
             box-shadow: 0 3px 3px #999;
         }
 
-        #FilterPage li>.details{
-            display: none;
-            -webkit-transition:all 0.7s;
-            transition: all 0.7s;
-            margin-top: 15px;
-
+        #FilterPage .list-group-item>.details{
+            max-height:0;
+            -webkit-transition: max-height 0.5s;
+            -moz-transition: max-height 0.5s;
+            -ms-transition: max-height 0.5s;
+            -o-transition: max-height 0.5s;
+            transition: max-height 0.5s;
+           /* display: none;*/
         }
 
-        #FilterPage li.selected>.details {
-            min-height: 50px;
-            display: block;
+        #FilterPage .list-group-item.selected>.details {
+          /*
+            min-height: 50px;*/
+           /* padding-top: 15px;*/
+           max-height:400px;
+           /* transition: height 1s;*/
+        }
 
+        #FilterPage li>a{
+            display: block;
+            /*  width: 110%;*/
+            padding: 10px 15px;
+            margin: -10px -15px;
+            position: relative;
+            background-color: inherit;
+
+        }
+        #FilterPage li>a>.fa{
+            font-size: 1em;
+            width: 12px;
+            margin-left: -5px;
         }
         #FilterPage .more, .tmb{
             display: inline-block;
@@ -90,6 +98,9 @@
         }
         #FilterPage table{
             font-size: 0.9em;
+        }
+        #FilterPage .fa{
+            width: 14px;
         }
         /*
                                 #FilterPage a.selected>.details{
@@ -120,7 +131,10 @@
 
     <div class="row">
 
-        <div  data-id="list" class="col-sm-12">
+        <div >
+            <nav data-id="list" class="list-group">
+
+            </nav>
 
         </div>
     </div>

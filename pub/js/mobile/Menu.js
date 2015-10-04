@@ -1,4 +1,4 @@
-/// <reference path="../kiosk/registry.ts" />
+/// <reference path="Mobile.ts" />
 var uplight;
 (function (uplight) {
     var Menu = (function () {
@@ -32,14 +32,16 @@ var uplight;
                         out += '<a class="u-brand list-group-item" href="#category/' + ar[i].id + '/' + ar[i].label + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listC.html(out);
             });
-            var p0 = conn.getPages().done(function (res) {
-                // console.log(res);
-                var out = '';
-                var ar = res;
-                for (var i = 0, n = ar.length; i < n; i++)
-                    out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].label + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
-                _this.listP.html(out);
-            });
+            //  var p0 =   conn.getPages().done((res)=>{
+            // console.log(res);
+            var out = '';
+            var ar = u_pages;
+            console.log(u_pages);
+            for (var i = 0, n = ar.length; i < n; i++)
+                out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].name + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].name + '</a>';
+            this.listP.html(out);
+            //  });
+            //
             this.slider = this.view.find('[data-id=SearchSlider]:first');
             this.view.find('[data-id=btnSearch]').click(function () { return _this.toggleSearch(); });
             this.view.find('[data-id=btnSearchClose]:first').click(function () {

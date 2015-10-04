@@ -1,5 +1,5 @@
 ﻿/// <reference path="../kiosk/registry.ts" />
-/// <reference path="../Mobile.ts" />
+/// <reference path="Mobile.ts" />
 
 module uplight {
     export class FilterPage {
@@ -14,10 +14,19 @@ module uplight {
         private ALL:string='all_';
         private cache: any={};
         data:uplight.VODestination[];
-
         onSelect:Function;
         onImageClick:Function;
 
+        getView():JQuery{
+            return this.view
+        }
+
+        setData(data:uplight.VODestination[]):void{
+            this.data = data;
+        }
+        addListeners():void{
+
+        }
 
         resetView(): JQuery {
             this.input.val('');
@@ -27,13 +36,13 @@ module uplight {
 
 
         showDefault():void{
-            this.data = this.model.getData();
+            this.data = Registry.getInstance().model.getData();
             this.input.val('');
 
             this.tiFilter.show();
             this.catTitle.text('').hide();
             this.renderAll();
-            this.show();
+           // this.show();
             this.input.focus();
 
         }
@@ -43,7 +52,7 @@ module uplight {
             if (str.length == 0) {
                 this.renderAll();
             }else {
-                this.data = this.model.getDestsByPattern(str);
+                this.data = Registry.getInstance().model.getDestsByPattern(str);
                 if (this.data.length == 0)  this.list.html('<p class="bgwhite">  Sorry not results for text <b>'+str+'</b></p>');
                 else  this.renderList(str);
             }
@@ -56,17 +65,21 @@ module uplight {
 
 
 
-        showCategory(num:number):void{
-            this.tiFilter.hide();
-            var cat:uplight.VOCategory = this.model.getCategoryById(num);
-            this.catTitle.text(cat.label).show();
-           this.data = this.model.getDestsByCat(num);
-            this.catid=num;
-            this.renderList('cat_'+num);
-            this.show();
+        setCategoryName(str:string):void{
+            this.catTitle.text(str).show();
+        }
+        private chache:any={}
+        showCategory(num:number):JQuery{
+            var page:FilterPage = new FilterPage(this.template.clone());
+            var cat:uplight.VOCategory = Registry.getInstance().model.getCategoryById(num);
+            page.setCategoryName(cat.label);
+            var data = Registry.getInstance().model.getDestsByCat(num);
+            page.setData(data);
+            page.renderData();
+            return page.getView();
         }
 
-
+/*
         isHidden:boolean=true;
         show():void{
             if(this.isHidden){
@@ -84,10 +97,12 @@ module uplight {
                 this.view.removeClass(SHOW);
             }
         }
-
+*/
         isDetails:boolean;
 
-        constructor(private view:JQuery, private model: uplight.Model) {
+        private template:JQuery;
+        constructor(private view:JQuery){
+            this.template = view.clone();
             this.input = view.find('[data-id=filter]');
             this.input.on('input', (evt) => this.onInput(evt));                   
             this.list = view.find('[data-id=list]');
@@ -102,44 +117,49 @@ module uplight {
             })
 
             this.details = $('<div>').addClass('details');
-            $('#ImageView').click(()=>{
-                $('#ImageView').fadeOut();
-            })
+
+
+
         }
+
 
         private _onImageClick(evt:JQueryEventObject):void{
             var el:JQuery = $(evt.target);
             var src=el.attr('src');
-            //$('#ImageView').removeClass('hidden');
-            $('#ImageView').fadeIn();
-            $('#ImageView img').attr('src',src);
+            if(src)Utils.showImage(src)
             if(this.onImageClick)this.onImageClick(src);
-
         }
 
         private  addDetails(vo:VODestination,el:JQuery):void{
-            console.log(vo);
+           // console.log(vo);
             if(!vo.details) vo.details = Utils.renderDetails(vo);
+
             el.append(vo.details);
+
+
         }
 
 
         private onListClick(evt:JQueryEventObject):void{
             var el:JQuery = $(evt.currentTarget).parent();
 
+            console.log(el);
             if(el.hasClass(SELECTED)){
                el.removeClass(SELECTED);
-               // el.children('.details');
+              // el.children('.details').hide('fast');
                this.selected = null;
 
             }else{
-                el.addClass(SELECTED);
-                this.selected = el;
+
                 if(el.children('.details').length !==0){
-                  //  el.children('.details').show('fast');
+               //  el.children('.details').show('fast');
                 }else{
-                    var vo:VODestination = this.model.getDestById(el.data('id'));
-                    if(vo) this.addDetails(vo,el)                }
+                    var vo:VODestination = Registry.getInstance().model.getDestById(el.data('id'));
+                    if(vo) this.addDetails(vo,el);
+                 //  el.children('.details').show('fast');
+                }
+                setTimeout(function(){el.addClass(SELECTED);},100)
+                this.selected = el;
 
             }
 
@@ -153,7 +173,7 @@ module uplight {
 
 
         private renderAll():void{
-            this.data = this.model.getData();
+            this.data = Registry.getInstance().model.getData();
             this.renderList(this.ALL);
         }
         private onInput(evt: JQueryEventObject): void {
@@ -170,7 +190,7 @@ module uplight {
                 this.renderAll();
             }
             else {
-                this.data = this.model.getDestsByPattern(str);
+                this.data = Registry.getInstance().model.getDestsByPattern(str);
                 if (this.data.length == 0)  this.list.html('<p class="bgwhite">  Sorry not results for text <b>'+str+'</b></p>');
                 else  this.renderList(str);
                 //if (!this.cache[str]) this.cache[str] = this.renderList(str);
@@ -182,7 +202,7 @@ module uplight {
         private cats:string[];
 
         private makeCats():string[]{
-            var ar = this.model.getCategories();
+            var ar = Registry.getInstance().model.getCategories();
             var out:string[]=[];
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
@@ -191,13 +211,20 @@ module uplight {
             return out;
         }
 
+        renderData():void{
+            var ar = this.data;
+            var out: string = '';
+            for (var i = 0, n = ar.length; i < n; i++) out += Utils.renderItemMobile(ar[i],this.cats);
+            this.list.html(out);
+        }
+
         private renderList(str:string): void {
             if(this.cache[str])this.list.html(this.cache[str]);
             else{
                 if(!this.cats) this.cats = this.makeCats();
                 var ar = this.data;
                 var out: string = '';
-                for (var i = 0, n = ar.length; i < n; i++) out += Utils.renderItem(ar[i],this.cats);
+                for (var i = 0, n = ar.length; i < n; i++) out += Utils.renderItemMobile(ar[i],this.cats);
                 this.cache[str]=out;
                 this.list.html(out);
             }

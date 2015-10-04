@@ -134,6 +134,9 @@ var uplight;
         Connector.prototype.savePage = function (url, data) {
             return $.post(this.service + '?a=save_page&url=' + url, data);
         };
+        Connector.prototype.getPage = function (url) {
+            return $.get(this.service + '?a=get_page&url=' + url);
+        };
         Connector.prototype.getAdvanced = function (callBack, destid) {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);
         };

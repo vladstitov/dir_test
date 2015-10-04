@@ -1,9 +1,30 @@
 /**
  * Created by VladHome on 9/20/2015.
  */
-    /// <reference path="../Mobile.ts" />
+    /// <reference path="Mobile.ts" />
 module uplight{
     export class Utils{
+        static isImage:boolean;
+        static isImageInit:boolean;
+        static hideImage():void{
+            if(Utils.isImage){
+                $('#ImageView').fadeOut();
+                Utils.isImage = false;
+            }
+        }
+
+        static showImage(src:string):void{
+
+            Utils.isImage = true;
+            $('#ImageView').fadeIn();
+            $('#ImageView img').attr('src',src);
+
+          if(!Utils.isImageInit) {
+              $('#ImageView').click(()=>{    Utils.hideImage();})
+              Utils.isImageInit = true;
+          }
+        }
+
         static checkValue(val:string):string{
             if(!val || val.length===0)return '&nbsp;';
             var re= /\S+@\S+\.\S+/;
@@ -40,7 +61,7 @@ module uplight{
             out+=Utils.createTable(vo.more);
             if(vo.tmb)out+='<div class="tmb"><img src="'+vo.tmb+'"/></div>';
             if(vo.imgs) out+='<div class="imgs"><div>' +Utils.createImages(vo.imgs)+'</div></div>';
-            if(out) out= '<div class="details">'+out+'</div>';
+            if(out) out= '<div class="details"><br/>'+out+'</div>';
             return out;
         }
 
@@ -51,6 +72,17 @@ module uplight{
             var more='<span class="fa fa-fw">&nbsp;</span>';
             if(vo.more || vo.info || vo.tmb || vo.imgs)more='<span class="anim fa fa-angle-double-left">&nbsp;</span>';
            // if(vo.imgs) more+=' <span class="fa fa-image"></span>';
+            //if(more) more='<span class="btn">'+more+'</span>';
+
+            return '<li class="list-group-item" data-id="'+vo.id+'" ><a>'+more+'<span> '+ vo.name + ' </span><span class="pull-right">' + vo.unit + '</span></a></li>';
+
+        }
+        static renderItemMobile(vo: VODestination,catsObj:any): string {
+            //  var cats:string=(vo.cats && vo.cats.length)?catsObj[vo.cats[0]]:'fa-fw';
+
+            var more='<span class="fa fa-fw">&nbsp;</span>';
+            if(vo.more || vo.info || vo.tmb || vo.imgs)more='<span class="anim fa fa-angle-double-left">&nbsp;</span>';
+            // if(vo.imgs) more+=' <span class="fa fa-image"></span>';
             //if(more) more='<span class="btn">'+more+'</span>';
 
             return '<li class="list-group-item" data-id="'+vo.id+'" ><a>'+more+'<span> '+ vo.name + ' </span><span class="pull-right">' + vo.unit + '</span></a></li>';

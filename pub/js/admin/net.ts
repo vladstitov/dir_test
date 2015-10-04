@@ -170,6 +170,9 @@ module uplight {
         savePage(url: string,data:string):JQueryPromise<VOResult> {
             return $.post(this.service + '?a=save_page&url=' + url,data);
         }
+        getPage(url: string) :JQueryPromise<any> {
+            return $.get(this.service + '?a=get_page&url='+url);
+        }
         getAdvanced(callBack: Function, destid: number): void {
             $.get(this.service + '?a=dests.get_advanced&destid=' + destid).done(callBack);
         }              

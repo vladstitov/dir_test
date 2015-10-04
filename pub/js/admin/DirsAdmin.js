@@ -1,4 +1,21 @@
 /// <reference path="regA.ts" />
+/// <reference path="net.ts" />
+/// <reference path="models.ts" />
+/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
+/// <reference path="com/GalleryAdmin.ts" />
+///<reference path="info/InfoPagesEditor.ts" />
+///<reference path="info/FrontPageEditor.ts" />
+/// <reference path="views/Menu.ts" />
+///<reference path="details/DetailsEditor.ts" />
+///<reference path="categories/CategoriesManager.ts" />
+///<reference path="categories/CategoryListing.ts" />
+///<reference path="impexp/ImportExport.ts" />
+///<reference path="impexp/Statistics.ts" />
+///<reference path="screen/LabelsManager.ts" />
+///<reference path="screen/RestartKiosk.ts" />
+///<reference path="screen/SettingsEdit.ts" />
+///<reference path="screen/AttractLoopEdit.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -75,6 +92,15 @@ var uplight;
                     // this.showPreview();
                     // this.content.hide();
                     this.infoPages = new uplight.InfoPagesManager(this.content);
+                    this.content.show();
+                    break;
+                case '#Front-Pag':
+                    if (!this.frontPageEditor)
+                        this.frontPageEditor = new uplight.FrontPageEditor(this.content);
+                    else {
+                        this.content.children().detach();
+                        this.frontPageEditor.appendTo(this.content);
+                    }
                     this.content.show();
                     break;
                 case '#RestartKi':

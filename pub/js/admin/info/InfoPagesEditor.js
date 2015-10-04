@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 9/2/2015.
  */
-/// <reference path="../regA.ts" />
+/// <reference path="../DirsAdmin.ts" />
 var uplight;
 (function (uplight) {
     var IconsLibrary = (function () {
