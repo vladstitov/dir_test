@@ -1,16 +1,6 @@
-﻿/// <reference path="Connector.ts" />
-/// <reference path="search/KeyboardSimple.ts" />
-/// <reference path="search/SearchResult.ts" />
-/// <reference path="search/SearchModel.ts" />
-/// <reference path="als/TouchClip.ts" />
-/// <reference path="als/AttractLoop.ts" />
-/// <reference path="als/Gallery.ts" />'
-/// <reference path="Kiosk.ts" />
-
+﻿/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="Connector.ts" />
 /// <reference path="search/models.ts" />
-/// <reference path="../typing/greensock.d.ts" />
-/// <reference path="../typing/jquery.d.ts" />
-
 
 var LISTVIEW: string = 'ListView';
 var DETAILSVIEV: string = 'DetailsView';
@@ -42,11 +32,9 @@ var CLICK: string = 'click';
 var SHOW: string = 'show';
 var HIDE: string = 'hide';
 var HIDDEN:string = 'hidden';
-//var trace = function (data) { console.log(data); }
+
 declare  var u_settings:any;
 module uplight {
-
-
 
     export class Registry {
         KEY_PRESSED:string='KEY_PRESSED';

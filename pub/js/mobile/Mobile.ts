@@ -1,7 +1,6 @@
-﻿/// <reference path="DetailsPage.ts" />
-/// <reference path="infopage.ts" />
+﻿/// <reference path="infopage.ts" />
 /// <reference path="../kiosk/search/models.ts" />
-/// <reference path="../kiosk/search/SearchResult.ts" />
+
 /// <reference path="filterpage.ts" />
 /// <reference path="mainview.ts" />
 /// <reference path="FrontPage.ts" />
@@ -10,6 +9,7 @@
 /// <reference path="../view/Views.ts" />
 /// <reference path="../kiosk/registry.ts" />
 /// <reference path="../kiosk/search/DetailsLarge.ts" />
+
 
 var CLICK: string = 'mousedown';
 var TAP: string = 'tap';

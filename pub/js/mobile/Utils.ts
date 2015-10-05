@@ -29,7 +29,8 @@ module uplight{
             if(!val || val.length===0)return '&nbsp;';
             var re= /\S+@\S+\.\S+/;
             if(re.test(val)) return '<a href="mailto:'+val+'">'+val+'</a>';
-            if(val.match(/\d/g).length===10) return '<a href="tel:'+val+'">'+val+'</a>';
+            var phone:string[] = val.match(/\d/g);
+            if(phone && phone.length===10) return '<a href="tel:'+val+'">'+val+'</a>';
 
             return val;
         }

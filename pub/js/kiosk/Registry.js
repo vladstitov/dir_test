@@ -1,14 +1,6 @@
-/// <reference path="Connector.ts" />
-/// <reference path="search/KeyboardSimple.ts" />
-/// <reference path="search/SearchResult.ts" />
-/// <reference path="search/SearchModel.ts" />
-/// <reference path="als/TouchClip.ts" />
-/// <reference path="als/AttractLoop.ts" />
-/// <reference path="als/Gallery.ts" />'
-/// <reference path="Kiosk.ts" />
-/// <reference path="search/models.ts" />
-/// <reference path="../typing/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
+/// <reference path="Connector.ts" />
+/// <reference path="search/models.ts" />
 var LISTVIEW = 'ListView';
 var DETAILSVIEV = 'DetailsView';
 var MENUVIEW = 'MenuView';
@@ -79,4 +71,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

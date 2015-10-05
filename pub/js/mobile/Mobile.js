@@ -1,7 +1,5 @@
-/// <reference path="DetailsPage.ts" />
 /// <reference path="infopage.ts" />
 /// <reference path="../kiosk/search/models.ts" />
-/// <reference path="../kiosk/search/SearchResult.ts" />
 /// <reference path="filterpage.ts" />
 /// <reference path="mainview.ts" />
 /// <reference path="FrontPage.ts" />

@@ -30,7 +30,8 @@ var uplight;
             var re = /\S+@\S+\.\S+/;
             if (re.test(val))
                 return '<a href="mailto:' + val + '">' + val + '</a>';
-            if (val.match(/\d/g).length === 10)
+            var phone = val.match(/\d/g);
+            if (phone && phone.length === 10)
                 return '<a href="tel:' + val + '">' + val + '</a>';
             return val;
         };

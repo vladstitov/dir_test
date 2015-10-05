@@ -151,6 +151,7 @@ module uplight {
 
             }else{
 
+                console.log(el.children('.details').length);
                 if(el.children('.details').length !==0){
                //  el.children('.details').show('fast');
                 }else{

@@ -3,6 +3,17 @@
 /// <reference path="banner.ts" />
 /// <reference path="als/ScreenSaver.ts" />
 /// <reference path="infopage.ts" />
+/// <reference path="Connector.ts" />
+/// <reference path="search/KeyboardSimple.ts" />
+/// <reference path="search/SearchResult.ts" />
+/// <reference path="search/SearchModel.ts" />
+/// <reference path="als/TouchClip.ts" />
+/// <reference path="als/AttractLoop.ts" />
+/// <reference path="als/Gallery.ts" />
+/// <reference path="search/models.ts" />
+/// <reference path="../typing/greensock.d.ts" />
+/// <reference path="../typing/jquery.d.ts" />
+
 
 /// <reference path="arch/KeyboardView.ts" />
 /// <reference path="search/Keyboard.ts" />
