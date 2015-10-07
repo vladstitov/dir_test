@@ -273,8 +273,10 @@ module uplight{
             var p2 :JQueryPromise<VODestination[]> = this.R.connector.getDestinations();
             var self=this;
 
-            $.when(p1,p2).then(function(v1,v2){
-            //  console.log(v1[0],v2[0]);
+            $.when(p1,p2).then(function(v:any){
+                var v1=arguments[0];
+                var v2=arguments[1];
+            // console.log(v1[0],v2[0]);
                 var res =v1[0];
                self.setCategories(res);
                 var dests =v2[0];

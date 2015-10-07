@@ -1,15 +1,15 @@
 /**
  * Created by VladHome on 8/8/2015.
  */
-///<reference path="../RegA"/>
 ///<reference path="../../typing/chart.d.ts"/>
+/// <reference path="../DirsAdmin.ts" />
 var uplight;
 (function (uplight) {
     var Statistics = (function () {
         function Statistics(contauner) {
             var _this = this;
             this.R = uplight.RegA.getInstance();
-            contauner.load('js/admin/impexp/Statistics.html', function () { return _this.init(); });
+            contauner.load('htms/admin/Statistics.htm', function () { return _this.init(); });
         }
         Statistics.prototype.init = function () {
             var _this = this;
@@ -19,7 +19,7 @@ var uplight;
         };
         Statistics.prototype.onData = function (res) {
             var ar = res;
-            // console.log(res);
+            //  console.log(res);
             //  var out:VOStat[]=[];
             var kiosks = {};
             var dests = {};
@@ -309,12 +309,11 @@ var uplight;
             return out;
         };
         KiosksChart.prototype.renderKiosk = function (obj) {
-            return '<li><span class="glyphicon glyphicon-stop" style="color:' + obj.color + ';"></span> <span> ' + obj.name + '</span></li>';
+            return '<li title="kiosk id ' + obj.id + '"><span class="glyphicon glyphicon-stop" style="color:' + obj.color + ';"></span> <span> ' + obj.name + '</span></li>';
         };
         KiosksChart.prototype.onKiosks = function (res) {
             var timeline = this.craeateTimeline();
-            //  console.log(timeline);
-            var ks = JSON.parse(res).kiosks;
+            var ks = JSON.parse(res);
             var ar = ks;
             var list = $('<ul>');
             var out = '';
@@ -322,6 +321,8 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
                 var clicks = this.clicks[ar[i].id];
+                if (!clicks)
+                    continue;
                 clicks = this.convertClicks(clicks);
                 ar[i].clicks = this.mapClicks(timeline, clicks);
                 ar[i].color = this.colors[i];

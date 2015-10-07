@@ -1,7 +1,8 @@
 /**
  * Created by VladHome on 9/2/2015.
  */
-/// <reference path="../DirsAdmin.ts" />
+/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../RegA.ts" />
 var uplight;
 (function (uplight) {
     var IconsLibrary = (function () {
@@ -123,6 +124,7 @@ var uplight;
         };
         return TextEditor;
     })();
+    uplight.TextEditor = TextEditor;
     var InfoEditor = (function () {
         function InfoEditor() {
             var _this = this;
@@ -203,6 +205,7 @@ var uplight;
         };
         return InfoEditor;
     })();
+    uplight.InfoEditor = InfoEditor;
     var InfoPagesManager = (function () {
         function InfoPagesManager(content) {
             var _this = this;
@@ -215,13 +218,13 @@ var uplight;
             var _this = this;
             this.url = this.R.settings.pages;
             this.view = $('#InfoPagesView');
-            this.editor = new InfoEditor();
-            this.editor.onClose = function () {
-                _this.editor.hide();
+            this.iEditor = new InfoEditor();
+            this.iEditor.onClose = function () {
+                _this.iEditor.hide();
                 _this.show();
             };
-            this.editor.R = this.R;
-            this.editor.onSave = function () { return _this.onSaveClicked(); };
+            this.iEditor.R = this.R;
+            this.iEditor.onSave = function () { return _this.onSaveClicked(); };
             this.btnAdd = this.view.find('[data-id=btnAdd]:first').click(function () { return _this.onAddClicked(); });
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').click(function () { return _this.onEditClicked(); });
             this.btnDelete = this.view.find('[data-id=btnDelete]').click(function () { return _this.onDelClicked(); });
@@ -240,7 +243,7 @@ var uplight;
             this.selected = $(evt.currentTarget);
             this.selected.addClass(SELECTED);
             this.selectedIndex = i;
-            this.editor.setData(this.data[i]);
+            this.iEditor.setData(this.data[i]);
         };
         InfoPagesManager.prototype.hide = function () {
             this.view.hide();
@@ -251,13 +254,13 @@ var uplight;
         InfoPagesManager.prototype.onAddClicked = function () {
             this.max++;
             var item = { id: 0, icon: '', name: '', seq: this.data.length, enabled: true };
-            this.editor.setData(item);
-            this.editor.show();
+            this.iEditor.setData(item);
+            this.iEditor.show();
             this.hide();
         };
         InfoPagesManager.prototype.onSaveClicked = function () {
             var _this = this;
-            var item = this.editor.getData();
+            var item = this.iEditor.getData();
             if (!item)
                 return;
             if (item.id === 0) {
@@ -266,11 +269,11 @@ var uplight;
                 item.url = 'pages/page' + item.id + '.htm';
                 this.data.push(item);
             }
-            this.editor.savePage();
+            this.iEditor.savePage();
             this.save().done(function (res) {
                 console.log(res);
                 if (res.success)
-                    _this.R.msg('Data saved', _this.editor.btnSave);
+                    _this.R.msg('Data saved', _this.iEditor.btnSave);
             });
         };
         InfoPagesManager.prototype.onData = function (data) {
@@ -289,7 +292,7 @@ var uplight;
                 out += '<tr data-i="' + i + '" class="item"><td>' + item.id + '</td><td><span class="' + item.icon + '"></span></td><td>' + item.name + '</td><td>' + item.seq + '</td><td>' + item.enabled + '</td></tr>';
             }
             this.list.html(out);
-            this.editor.setSeq(n + 2);
+            this.iEditor.setSeq(n + 2);
             if (this.selectedIndex != -1) {
                 this.list.find('[data-i=' + this.selectedIndex + ']').addClass(SELECTED);
             }
@@ -299,9 +302,9 @@ var uplight;
             if (this.selectedIndex == -1)
                 return;
             var item = this.data[this.selectedIndex];
-            this.editor.setData(item);
-            this.editor.onSave = function () { return _this.onSaveClicked(); };
-            this.editor.show();
+            this.iEditor.setData(item);
+            this.iEditor.onSave = function () { return _this.onSaveClicked(); };
+            this.iEditor.show();
             this.hide();
         };
         InfoPagesManager.prototype.loadData = function () {

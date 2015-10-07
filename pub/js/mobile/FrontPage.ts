@@ -18,11 +18,14 @@ module uplight{
         private pages:any[];
         private list:JQuery
         constructor(public view:JQuery){
+
             view.addClass('container');
+
             this.list= view.find('[data-id=list]:first');
             this.pages = u_pages;
             this.renderList();
         }
+
         private init():void{
             console.log(this.view);
         }

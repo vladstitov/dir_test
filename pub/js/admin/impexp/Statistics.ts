@@ -1,8 +1,9 @@
 /**
  * Created by VladHome on 8/8/2015.
  */
-    ///<reference path="../RegA"/>
     ///<reference path="../../typing/chart.d.ts"/>
+    /// <reference path="../DirsAdmin.ts" />
+
 module uplight{
     export class Statistics{
 
@@ -10,7 +11,7 @@ module uplight{
         private data:VOStat[];
         constructor(contauner:JQuery){
             this.R = RegA.getInstance();
-            contauner.load('js/admin/impexp/Statistics.html',()=>this.init());
+            contauner.load('htms/admin/Statistics.htm',()=>this.init());
         }
 
         private init():void{
@@ -21,7 +22,7 @@ module uplight{
 
         private onData(res:any):void{
             var ar = res
-           // console.log(res);
+         //  console.log(res);
           //  var out:VOStat[]=[];
 
             var kiosks:any={};
@@ -337,20 +338,21 @@ module uplight{
         }
 
         private renderKiosk(obj:any):string{
-            return '<li><span class="glyphicon glyphicon-stop" style="color:'+obj.color+';"></span> <span> '+obj.name+'</span></li>';
+            return '<li title="kiosk id '+obj.id+'"><span class="glyphicon glyphicon-stop" style="color:'+obj.color+';"></span> <span> '+obj.name+'</span></li>';
         }
 
         private onKiosks(res):void{
             var timeline:number[]=  this.craeateTimeline();
-          //  console.log(timeline);
-            var ks= JSON.parse(res).kiosks;
+           var ks= JSON.parse(res);
             var ar = ks;
             var list = $('<ul>');
             var out='';
             var datasets:any[]=[];
+
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
                 var clicks:number[] = this.clicks[ar[i].id];
+                if(!clicks) continue;
                 clicks = this.convertClicks(clicks);
                 ar[i].clicks = this.mapClicks(timeline,clicks);
                 ar[i].color=this.colors[i];

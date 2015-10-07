@@ -1,7 +1,8 @@
 /**
  * Created by VladHome on 9/2/2015.
  */
-    /// <reference path="../DirsAdmin.ts" />
+    /// <reference path="../../typing/jquery.d.ts" />
+    /// <reference path="../RegA.ts" />
 module uplight{
     export class IconsLibrary{
 
@@ -87,7 +88,7 @@ module uplight{
     }
 
 
-    class TextEditor{
+    export class TextEditor{
         private isVis:boolean
         private data:any
         private btnSave:JQuery;
@@ -159,7 +160,7 @@ module uplight{
 
     }
 
-    class InfoEditor{
+    export class InfoEditor{
         private view:JQuery;
          btnSave:JQuery;
         private  btnClose:JQuery;
@@ -271,7 +272,7 @@ module uplight{
         btnAdd:JQuery;
         btnEdit:JQuery;
         btnDelete:JQuery;
-        editor:InfoEditor;
+        iEditor:InfoEditor;
         R:RegA;
         selectedIndex:number=-1;
         data:any[];
@@ -290,14 +291,14 @@ module uplight{
 
             this.view=$('#InfoPagesView');
 
-            this.editor = new InfoEditor();
-            this.editor.onClose=()=>{
-                this.editor.hide();
+            this.iEditor = new InfoEditor();
+            this.iEditor.onClose=()=>{
+                this.iEditor.hide();
                 this.show();
             }
-            this.editor.R= this.R;
+            this.iEditor.R= this.R;
 
-            this.editor.onSave = ()=>this.onSaveClicked();
+            this.iEditor.onSave = ()=>this.onSaveClicked();
 
             this.btnAdd = this.view.find('[data-id=btnAdd]:first').click(()=> this.onAddClicked());
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').click(()=> this.onEditClicked());
@@ -317,7 +318,7 @@ module uplight{
             this.selected = $(evt.currentTarget);
             this.selected.addClass(SELECTED);
             this.selectedIndex=i;
-            this.editor.setData(this.data[i]);
+            this.iEditor.setData(this.data[i]);
         }
         hide():void{
            this.view.hide();
@@ -328,13 +329,13 @@ module uplight{
         private onAddClicked(): void {
             this.max++;
             var item:any={id:0,icon:'',name:'',seq:this.data.length,enabled:true};
-            this.editor.setData(item);
-            this.editor.show();
+            this.iEditor.setData(item);
+            this.iEditor.show();
             this.hide();
 
         }
         private onSaveClicked():void{
-            var item= this.editor.getData();
+            var item= this.iEditor.getData();
             if(!item) return;
             if(item.id===0){
                 this.max++;
@@ -342,10 +343,10 @@ module uplight{
                 item.url='pages/page'+item.id+'.htm';
                 this.data.push(item);
             }
-            this.editor.savePage();
+            this.iEditor.savePage();
             this.save().done((res)=>{
                 console.log(res);
-                if(res.success) this.R.msg('Data saved',this.editor.btnSave);
+                if(res.success) this.R.msg('Data saved',this.iEditor.btnSave);
             });
         }
 
@@ -367,7 +368,7 @@ module uplight{
                 out+='<tr data-i="'+i+'" class="item"><td>'+item.id+'</td><td><span class="'+item.icon+'"></span></td><td>'+item.name+'</td><td>'+item.seq+'</td><td>'+item.enabled+'</td></tr>';
             }
             this.list.html(out);
-            this.editor.setSeq(n+2);
+            this.iEditor.setSeq(n+2);
 
             if(this.selectedIndex!=-1){
                     this.list.find('[data-i='+this.selectedIndex+']').addClass(SELECTED);
@@ -378,9 +379,9 @@ module uplight{
         private onEditClicked(): void {
             if(this.selectedIndex==-1) return;
             var item = this.data[this.selectedIndex];
-            this.editor.setData(item);
-            this.editor.onSave = ()=>this.onSaveClicked();
-            this.editor.show();
+            this.iEditor.setData(item);
+            this.iEditor.onSave = ()=>this.onSaveClicked();
+            this.iEditor.show();
             this.hide();
 
         }

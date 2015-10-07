@@ -1,0 +1,1 @@
+﻿<?phperror_reporting(-1);define('DATA','../data');$strSetttings = file_get_contents(DATA."/settings.json");$settings = json_decode($strSetttings);$strLabels = file_get_contents(DATA."/".$settings->labels);$labels = json_decode($strLabels);foreach($labels as $label)$labels[$label->index]=$label->value; ?>  hello

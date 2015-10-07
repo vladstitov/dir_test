@@ -141,8 +141,8 @@ module uplight {
                     '<td class="small"><div>'+ item.info + '</div></td>' +
                 '<td class="tmb">'+ (item.tmb?'<img src="'+item.tmb+'" />':'') + '</td>' +
                     '<td class="more"><div>'+ item.more + '</div></td>' +
-                    '<td class="imgs">'+ (item.imgs?(item.imgs.split(',').length):'&nbsp') + '</td>' +
-                    '<td class="kws">'+ (item.kws?(item.kws.split(',').length):'&nbsp') + '</td>' +
+                    '<td class="imgs">'+ (item.imgs?(item.imgs.split(',').length+''):'&nbsp') + '</td>' +
+                    '<td class="kws">'+ (item.kws?(item.kws.split(',').length+''):'&nbsp') + '</td>' +
                     '<td title="'+item.uid+'" class="uid">'+(item.uid ||'&nbsp')+'</td>'+
                     '</tr>';
         }

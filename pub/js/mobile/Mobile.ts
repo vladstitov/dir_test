@@ -86,7 +86,6 @@ module uplight {
             this.frontPage = new FrontPage($('#FrontPage'));
 
 
-
             this.detailsLarge = new DetailsLarge($('[data-ctr=DetailsLarge]:first'));
             this.detailsLarge.hide();
             this.detailsLarge.onClose=()=>{ window.history.back();}

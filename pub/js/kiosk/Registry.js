@@ -71,4 +71,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=Registry.js.map
+//# sourceMappingURL=registry.js.map

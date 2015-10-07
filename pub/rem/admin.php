@@ -1,4 +1,5 @@
-<?php
+<?
+error_reporting(E_ALL);
 session_start();
 define('DATA','../../data/');
 define('IMG','images/');
@@ -66,9 +67,9 @@ switch(array_shift($a)){
 	break;
 	
 	case 'cats':				
-	include 'cl/Categories.php';
-		$ctr=new Categories();
-		$result= $ctr->process($a,$post,$get);		
+		include 'cl/Categories.php';
+		$ctr=new Categories();		
+		$result=$ctr->process($a,$post,$get);	
 	break;
 		
 	case 'dests':		
@@ -173,4 +174,3 @@ function uploadImage($file,$folder,$prefix){
 		return $out;
 		
 		}
-?>

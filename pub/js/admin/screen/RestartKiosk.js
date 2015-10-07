@@ -14,7 +14,7 @@ var uplight;
             var p1 = this.connector.getData('admin.json').done(function (res) {
                 _this.admin = JSON.parse(res);
             });
-            var p2 = container.load('js/admin/screen/KiosksEdit.html');
+            var p2 = container.load('htms/admin/KiosksEdit.html');
             var p3 = this.connector.getServerTime().done(function (res) {
                 _this.s_time = Number(res);
             });
@@ -218,5 +218,6 @@ var uplight;
         }
         return VOKiosk;
     })();
+    uplight.VOKiosk = VOKiosk;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=RestartKiosk.js.map

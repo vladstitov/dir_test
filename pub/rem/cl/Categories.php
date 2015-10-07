@@ -1,12 +1,12 @@
-<?php
-include_once('DbConnector.php');
+<?
+//include_once('DbConnector.php');
 include_once('cl/DbConnector.php');
 class Categories{
 	//var $db;
 	var $con;
 	 function __construct(){
-		$this->con = new DbConnector();			
-        //$this->db = $this->con->db;
+		$this->con = new DbConnector();		
+        //$this->db = $this->con->db;		
     }
 	
 	public function process($a,$data,$get){		
@@ -16,8 +16,9 @@ class Categories{
 			case 'maintain':			
 		
 			break;			
-			case 'get_all':				
-			$out =$this->getCategories();	
+			case 'get_all':	
+		
+			$out = $this->getCategories();	
 			break;
 			case 'get_icons':			
 			$out=$this->getIcons();
@@ -37,18 +38,18 @@ class Categories{
 			
 			
 		}
-		header('Content-type: application/json');
-		return json_encode($out);
+		//header('Content-type: application/json');
+		return $out;
 	}
 	
 	
 	private function updateDestsInCatategory($catid,$destids){
 				$sql ='SELECT id,cats FROM destinations';
 				$dests =  $this->con->query($sql);
-				$dirty =[];
+				$dirty =array();
 			foreach($dests as $dest){
 							$ar=0;
-							if($dest->cats == '')$ar=[];
+							if($dest->cats == '')$ar= array();
 							else $ar = explode(',',$dest->cats);
 							$ind = array_search($catid,$ar);							
 					if(array_search($dest->id,$destids)===false){								
@@ -79,8 +80,8 @@ class Categories{
 	
 	
 	private function parseTopic($topic){
-			$topic = explode("\r\n",$topic);
-			$out= [];
+			$topic = explode("\n",$topic);
+			$out= array();
 			$out[] = array_shift($topic);
 			foreach($topic as $line){
 						$line = trim($line);//str_replace(' ','',$string);
@@ -91,7 +92,7 @@ class Categories{
 	private function getIcons(){
 	$icons = file_get_contents('../../data/fa-icons.txt');
 	$topics = explode('*',$icons);
-	$out = [];
+	$out = array();
 	
 	foreach($topics as $topic){
 			$topic= trim($topic);
@@ -107,6 +108,7 @@ class Categories{
 		foreach($ar as $value) $this->con->execute(array($i++,$value));		
 		return $this->con->commit();
 	}
+	
 	/*
 	private function catSortOrder($data){
 		$this->db->beginTransaction();
@@ -120,6 +122,7 @@ class Categories{
 		return $this->db->errorInfo();
 	}
 	*/
+
 	private function updateCategory($ar){
 				$res= $this->con->updateRow('UPDATE categories SET label=? , icon=?,enable=?,sort=?  WHERE id=?',$ar);
 				
@@ -162,7 +165,7 @@ class Categories{
 		
 		if($ind == $id) return $this->getCategories();
 
-		$indexed = array_diff($indexed,[$id]);
+		$indexed = array_diff($indexed,array($id));
 		array_splice($indexed,$sort-1,0,$id);
 		$res =  $this->catSortOrder($indexed);
 		
@@ -181,7 +184,7 @@ class Categories{
 	}
 	
 	private function getCategories(){
-			$res = $this->con->query('SELECT * FROM categories ORDER BY sort');	
+			$res = $this->con->getAllAsObj('SELECT * FROM categories ORDER BY sort');			
 			foreach($res as $value){
 					$value->id = (int)$value->id;
 					$value->sort = (int)$value->sort;
@@ -197,11 +200,11 @@ class Categories{
 		foreach($ar as $dest) $this->con->execute(array($dest->cats,$dest->id));		
 		return $this->con->commit();			
 	}
-	
+
 	private function deleteCategoryFromDests($catid){
 			$sql ='SELECT id,cats FROM destinations';
 			$dests =  $this->con->query($sql);
-			$out =[];
+			$out = array();
 			foreach($dests as $dest){
 					$ar= explode(',',$dest->cats);
 					$ind = array_search($catid,$ar);					

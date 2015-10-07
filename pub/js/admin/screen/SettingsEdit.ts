@@ -76,7 +76,7 @@ module uplight{
 
     }
 
-   interface Editor{
+ export  interface Editor{
         onSave:Function;
         btnSave:JQuery
         setData(item:any):Editor
@@ -150,7 +150,7 @@ module uplight{
 
 
         constructor(private container:JQuery){
-                container.load('js/admin/screen/SettingsEdit.htm',()=>{setTimeout(()=>{this.init()},50)});
+                container.load('htms/admin/SettingsEdit.htm',()=>{setTimeout(()=>{this.init()},50)});
                 this.R = RegA.getInstance();
         }
 
