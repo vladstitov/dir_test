@@ -4736,7 +4736,7 @@ var uplight;
     var LabelsManager = (function () {
         function LabelsManager(container) {
             var _this = this;
-            container.load('js/admin/screen/labelsManager.htm', function () {
+            container.load('htms/admin/LabelsManager.htm', function () {
                 _this.init();
             });
             this.R = uplight.RegA.getInstance();
@@ -4886,7 +4886,7 @@ var uplight;
             var p1 = this.connector.getData('admin.json').done(function (res) {
                 _this.admin = JSON.parse(res);
             });
-            var p2 = container.load('htms/admin/KiosksEdit.html');
+            var p2 = container.load('htms/admin/KiosksEdit.htm');
             var p3 = this.connector.getServerTime().done(function (res) {
                 _this.s_time = Number(res);
             });

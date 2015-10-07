@@ -32,7 +32,7 @@ module uplight {
             this.R = RegA.getInstance();
 
             var p1 = this.connector.getData('admin.json').done((res)=>{this.admin= JSON.parse(res)});
-            var p2 = container.load('htms/admin/KiosksEdit.html');
+            var p2 = container.load('htms/admin/KiosksEdit.htm');
             var p3 =  this.connector.getServerTime().done((res)=>{ this.s_time = Number(res);});
             var p4 = this.loadData();
 

@@ -126,41 +126,8 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 <script type="text/javascript" src="js/libs/nicEdit.js"></script>
 <script type="text/javascript" src="js/libs/Chart.js"></script>
-<!---->
 
-<script type="text/javascript" src="js/admin/RegA.js"></script>
-<script type="text/javascript" src="js/admin/net.js"></script>
-<script type="text/javascript" src="js/admin/models.js"></script>
-<script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>
-<script type="text/javascript" src="js/admin/screen/SettingsEdit.js"></script>
-<script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>
-<script type="text/javascript" src="js/admin/screen/AttractLoopEdit.js"></script>
-
-<script type="text/javascript" src="js/admin/categories/CategoryForm.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoryListing.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoryList.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoryInListing.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoriesList.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoryNotListing.js"></script>
-<script type="text/javascript" src="js/admin/categories/CategoriesManager.js"></script>
-
-<script type="text/javascript" src="js/admin/screen/LabelsManager.js"></script>
-
-<script type="text/javascript" src="js/admin/details/DetailsList.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsCategory.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsForm.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsEditor.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsImages.js"></script>
-
-<script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
-<script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>
-<script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
-<script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>
-
-<script type="text/javascript" src="js/admin/views/Menu.js"></script>
-
-<script type="text/javascript" src="js/admin/DirsAdmin.js"></script>
-
+<script type="text/javascript" src="js/admin.js"></script>
 
     </body>
 <script>

@@ -109,7 +109,7 @@ var uplight;
     var LabelsManager = (function () {
         function LabelsManager(container) {
             var _this = this;
-            container.load('js/admin/screen/labelsManager.htm', function () {
+            container.load('htms/admin/LabelsManager.htm', function () {
                 _this.init();
             });
             this.R = uplight.RegA.getInstance();

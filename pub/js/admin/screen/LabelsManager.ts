@@ -140,7 +140,7 @@ module uplight{
         R:RegA;
 
         constructor(container:JQuery) {
-            container.load('js/admin/screen/labelsManager.htm',()=>{this.init()});
+            container.load('htms/admin/LabelsManager.htm',()=>{this.init()});
             this.R = RegA.getInstance();
         }
         private onAddClick():void{
