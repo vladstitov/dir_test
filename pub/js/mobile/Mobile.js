@@ -4,6 +4,7 @@
 /// <reference path="mainview.ts" />
 /// <reference path="FrontPage.ts" />
 /// <reference path="Utils.ts" />
+/// <reference path="GoogleMap.ts" />
 /// <reference path="menu.ts" />
 /// <reference path="../view/Views.ts" />
 /// <reference path="../kiosk/registry.ts" />
@@ -64,6 +65,7 @@ var uplight;
             // this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(function () { return _this.onHachChange(); }, 1000);
             this.content = $('#Content');
+            this.gmap = new uplight.GoogleMap();
         }
         Mobile.prototype.error = function (str) {
             this.errors += str + "\n";
@@ -105,8 +107,14 @@ var uplight;
             var hash = document.location.hash;
             if (hash.indexOf('detailsshow') == 0) {
             }
+            console.log(ar[0]);
             uplight.Utils.hideImage();
             switch (ar[0]) {
+                case '#gmap':
+                    this.showView(this.gmap.getView());
+                    this.detailsLarge.hide();
+                    this.menu.hideAll();
+                    break;
                 case '#destination':
                     var vo = this.R.model.getDestById(Number(ar[1]));
                     if (!vo)

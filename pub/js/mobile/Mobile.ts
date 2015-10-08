@@ -5,6 +5,7 @@
 /// <reference path="mainview.ts" />
 /// <reference path="FrontPage.ts" />
 /// <reference path="Utils.ts" />
+/// <reference path="GoogleMap.ts" />
 /// <reference path="menu.ts" />
 /// <reference path="../view/Views.ts" />
 /// <reference path="../kiosk/registry.ts" />
@@ -42,6 +43,7 @@ module uplight {
         private detailsLarge: DetailsLarge;
         private filterPage: FilterPage;
         private frontPage:FrontPage;
+        private gmap:GoogleMap;
 
         private R: uplight.Registry;
         private menu: Menu;
@@ -97,6 +99,7 @@ module uplight {
             this.content = $('#Content');
 
 
+            this.gmap = new GoogleMap();
 
         }
 
@@ -111,8 +114,6 @@ module uplight {
                // this.filterPage.addDetails(vo,table);
             }
         }
-
-
 
 
         private content:JQuery
@@ -166,9 +167,15 @@ module uplight {
 
             }
 
+            console.log(ar[0]);
           Utils.hideImage();
 
             switch (ar[0]) {
+                case '#gmap':
+                    this.showView(this.gmap.getView());
+                    this.detailsLarge.hide();
+                    this.menu.hideAll();
+                    break;
                 case '#destination':
                     var vo:VODestination =  this.R.model.getDestById(Number(ar[1]));
                     if(!vo) break;

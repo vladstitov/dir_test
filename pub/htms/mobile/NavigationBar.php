@@ -106,9 +106,9 @@
             <td class="text-center" >
                 <div class="slider" data-id="SearchSlider" >
                     <div class="slider-content">
-                        <div data-id="header" class="item">
+                        <a data-id="header" class="item" href="#gmap">
                             <?= isset($labels['header'])?'<span class="header" >'.$labels['header'].' </span>':''; ?>
-                        </div>
+                        </a>
 
                             <div class="item">
                                 <input type="text" size="3" data-id="tiSearch" />
