@@ -5,10 +5,11 @@
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
+/// <reference path="com/Utils.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />
 /// <reference path="views/Menu.ts" />
-///<reference path="details/DetailsEditor.ts" />
+///<reference path="destinations/DestinationsController.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
@@ -22,7 +23,7 @@ module uplight {
 
     export class Admin {
         private R: RegA;
-        private details:DetailsEditor;
+        private listing:DestinationsController;
         private categories:CategoriesManager;
         private categoryListing:CategoryListing;
         private importExport:ImportExport;
@@ -117,7 +118,7 @@ module uplight {
                         break;
                     case '#Listing-V':
 
-                        this.details = new DetailsEditor(this.content);
+                        this.listing = new DestinationsController(this.content);
                         this.content.show();
                         break;
                     case '#Categorie':

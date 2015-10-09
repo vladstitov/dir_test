@@ -4,10 +4,11 @@
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
+/// <reference path="com/Utils.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />
 /// <reference path="views/Menu.ts" />
-///<reference path="details/DetailsEditor.ts" />
+///<reference path="destinations/DestinationsController.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
@@ -111,7 +112,7 @@ var uplight;
                     this.content.show();
                     break;
                 case '#Listing-V':
-                    this.details = new uplight.DetailsEditor(this.content);
+                    this.listing = new uplight.DestinationsController(this.content);
                     this.content.show();
                     break;
                 case '#Categorie':

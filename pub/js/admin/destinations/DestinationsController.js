@@ -1,25 +1,38 @@
-/// <reference path="../RegA.ts" />
+/// <reference path="../DirsAdmin.ts" />
 /// <reference path="DetailsForm.ts" />
-/// <reference path="DetailsList.ts" />
+/// <reference path="DestinationsList.ts" />
 /// <reference path="DetailsCategory.ts" />
 var uplight;
 (function (uplight) {
-    var DetailsEditor = (function () {
-        function DetailsEditor(container) {
+    var DestinationsController = (function () {
+        function DestinationsController(container) {
             var _this = this;
-            container.load('js/admin/details/DetailsEditor.htm', function () { return _this.init(); });
+            container.load('htms/admin/DestinationsEditor.htm', function () { return _this.init(); });
             this.R = uplight.RegA.getInstance();
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
         }
-        DetailsEditor.prototype.init = function () {
+        DestinationsController.prototype.init = function () {
             var _this = this;
-            this.view = $('#DetailsEditor');
-            this.list = new uplight.DetailsList($('#DetailsList'));
+            this.view = $('#DestinationsEditor');
+            this.list = new uplight.DestinationsList($('#DestinationsList'));
+            console.log(window.location.hash);
+            this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'), window.location.hash);
+            this.breacrumb.onCiick = function (url) {
+                if (url == 'listing') {
+                    _this.hideForm();
+                }
+                else if (url == 'DetailsForm')
+                    _this.detailsForm.showDetails();
+            };
+            this.breacrumb.addCrumb('listing', 'Listing');
             this.detailsForm = new uplight.DetailsForm($('#DetailsForm'));
             this.detailsForm.onClose = function () { return _this.hideForm(); };
             this.detailsForm.onSave = function () { return _this.onBtnSaveClick(); };
             this.detailsForm.hide();
+            this.detailsForm.onImageEditor = function () {
+                _this.breacrumb.addCrumb('imageeditor', 'Image Editor');
+            };
             if (this.R.isSuper)
                 this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(function () { return _this.onDrop(); });
             //= this.view.find('[data-id=btnDrop]:first').click(()=>this.onDrop())
@@ -28,7 +41,7 @@ var uplight;
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').on(CLICK, function () { return _this.onBtnEditClick(); });
             //this.showForm();
         };
-        DetailsEditor.prototype.onDrop = function () {
+        DestinationsController.prototype.onDrop = function () {
             var _this = this;
             if (confirm('You want to delete whole table tenats?'))
                 this.R.connector.dropTable('tenants').done(function () {
@@ -39,19 +52,22 @@ var uplight;
         ///  this.detailsForm.show();
         // this.list.hide();
         //   }
-        DetailsEditor.prototype.hideForm = function () {
+        DestinationsController.prototype.hideForm = function () {
+            this.breacrumb.clear();
+            this.breacrumb.addCrumb('listing', 'Listing');
             this.detailsForm.hide();
             this.list.show();
         };
-        DetailsEditor.prototype.onBtnAddClick = function () {
+        DestinationsController.prototype.onBtnAddClick = function () {
             var dest = new uplight.VODestination({ id: 0, cats: [], imgs: '' });
             this.detailsForm.setDestination(dest);
             this.detailsForm.render();
             this.list.hide();
             this.detailsForm.show();
             this.detailsForm.focusName();
+            this.breacrumb.addCrumb('DetailsForm', 'Details form');
         };
-        DetailsEditor.prototype.onBtnEditClick = function () {
+        DestinationsController.prototype.onBtnEditClick = function () {
             var dest = this.list.getSelectedItem();
             if (dest) {
                 this.detailsForm.setDestination(dest);
@@ -59,9 +75,10 @@ var uplight;
                 this.list.hide();
                 this.detailsForm.show();
                 this.detailsForm.focusName();
+                this.breacrumb.addCrumb('DetailsForm', 'Details form');
             }
         };
-        DetailsEditor.prototype.onSave = function (res) {
+        DestinationsController.prototype.onSave = function (res) {
             console.log(res);
             if (res.success) {
                 if (res.success == 'inserted') {
@@ -75,7 +92,7 @@ var uplight;
                 this.R.msg('ERROR Saving record', this.detailsForm.btnSave);
             this.R.model.refreshData();
         };
-        DetailsEditor.prototype.onBtnSaveClick = function () {
+        DestinationsController.prototype.onBtnSaveClick = function () {
             var _this = this;
             var vo = this.detailsForm.getDestination();
             if (!vo)
@@ -87,14 +104,14 @@ var uplight;
             //this.R.model.saveDestination((res) => this.onSave(res),dest,this.detailsForm.getPages());
         };
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        DetailsEditor.prototype.onDelete = function (res) {
+        DestinationsController.prototype.onDelete = function (res) {
             this.R.msg('Record deleted', this.btnDel);
             this.list.selectedItem = null;
         };
         // private onDeleteConfirmed(): void {
         // this.R.vo.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
         //}
-        DetailsEditor.prototype.onBtnDelClick = function () {
+        DestinationsController.prototype.onBtnDelClick = function () {
             var _this = this;
             var dest = this.list.getSelectedItem();
             if (dest) {
@@ -105,8 +122,8 @@ var uplight;
             }
             // showAlert('You want to delete record: ' + name + '?', () => this.onDeleteConfirmed(),'Delete');
         };
-        return DetailsEditor;
+        return DestinationsController;
     })();
-    uplight.DetailsEditor = DetailsEditor;
+    uplight.DestinationsController = DestinationsController;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=DetailsEditor.js.map
+//# sourceMappingURL=DestinationsController.js.map

@@ -10,6 +10,10 @@ module uplight {
 
 
 
+        onImageEditor:Function;
+        showDetails():void{
+            this.showDetailsView();
+        }
         private encode(str:string):string{
             return str;//this.div.text(str).html();
         }
@@ -59,7 +63,10 @@ module uplight {
         }
 
         hide():void{
+
             this.view.hide();
+            this.imagesEditor.hide();
+
         }
 
         reset():void{
@@ -169,9 +176,9 @@ module uplight {
             this.imagesEditor = new DetailsImages($('#DetailsImagesEdit'));
 
             this.imagesEditor.hide();
-            this.imagesEditor.onSave = ()=>this.hideImageEditor();
-            this.imagesEditor.onClose = ()=>this.hideImageEditor();
-            this.imagesEditor.onCancel = ()=>this.hideImageEditor();
+            this.imagesEditor.onSave = ()=>this.showDetailsView();
+            this.imagesEditor.onClose = ()=>this.showDetailsView();
+            this.imagesEditor.onCancel = ()=>this.showDetailsView();
 
             $('#DetailsImages [data-id=btnEdit]:first').on(CLICK,()=>this.onEditImagesClick());
         }
@@ -192,7 +199,8 @@ module uplight {
             }
         }
 
-        hideImageEditor():void{
+        showDetailsView():void{
+
             if(this.current.imgs)this.images.html(this.renderImages(this.current.imgs));
             this.view.show();
             this.imagesEditor.hide();
@@ -203,6 +211,7 @@ module uplight {
             this.imagesEditor.setData(this.current);
             this.imagesEditor.render();
             this.imagesEditor.show();
+            if(this.onImageEditor)this.onImageEditor();
         }
 
 //////////TABLE/////////////////////

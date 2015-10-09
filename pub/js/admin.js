@@ -1492,6 +1492,43 @@ var uplight;
     })();
     uplight.GalleryAdmin = GalleryAdmin;
 })(uplight || (uplight = {}));
+/// <reference path="../../typing/jquery.d.ts" />
+var uplight;
+(function (uplight) {
+    var BreadCrumbs = (function () {
+        function BreadCrumbs(view, home) {
+            var _this = this;
+            this.view = view;
+            this.home = home;
+            this.list = $('<ul>').addClass('breadcrumb').appendTo(view);
+            this.list.on(CLICK, 'li', function (evt) {
+                return _this.onListClick(evt);
+            });
+        }
+        BreadCrumbs.prototype.addCrumb = function (url, text) {
+            if (this.selected)
+                this.selected.removeClass('active');
+
+            // this.selected =$('<li>').addClass('active').data('id',url).append($('<a>').attr('href',this.home+'/'+url).text(text)).appendTo(this.list);
+            this.selected = $('<li>').addClass('active').data('id', url).text(text).appendTo(this.list);
+        };
+        BreadCrumbs.prototype.clear = function () {
+            this.selected = null;
+            this.list.html('');
+        };
+        BreadCrumbs.prototype.removeLast = function () {
+            this.list.children().last().detach();
+            this.selected = this.list.children().last().addClass('active');
+        };
+        BreadCrumbs.prototype.onListClick = function (evt) {
+            var el = $(evt.currentTarget);
+            if (this.onCiick)
+                this.onCiick(el.data('id'));
+        };
+        return BreadCrumbs;
+    })();
+    uplight.BreadCrumbs = BreadCrumbs;
+})(uplight || (uplight = {}));
 /**
 * Created by VladHome on 9/2/2015.
 */
@@ -2466,19 +2503,22 @@ var uplight;
 
             this.imagesEditor.hide();
             this.imagesEditor.onSave = function () {
-                return _this.hideImageEditor();
+                return _this.showDetailsView();
             };
             this.imagesEditor.onClose = function () {
-                return _this.hideImageEditor();
+                return _this.showDetailsView();
             };
             this.imagesEditor.onCancel = function () {
-                return _this.hideImageEditor();
+                return _this.showDetailsView();
             };
 
             $('#DetailsImages [data-id=btnEdit]:first').on(CLICK, function () {
                 return _this.onEditImagesClick();
             });
         }
+        DetailsForm.prototype.showDetails = function () {
+            this.showDetailsView();
+        };
         DetailsForm.prototype.encode = function (str) {
             return str;
         };
@@ -2529,6 +2569,7 @@ var uplight;
 
         DetailsForm.prototype.hide = function () {
             this.view.hide();
+            this.imagesEditor.hide();
         };
 
         DetailsForm.prototype.reset = function () {
@@ -2579,7 +2620,7 @@ var uplight;
             }
         };
 
-        DetailsForm.prototype.hideImageEditor = function () {
+        DetailsForm.prototype.showDetailsView = function () {
             if (this.current.imgs)
                 this.images.html(this.renderImages(this.current.imgs));
             this.view.show();
@@ -2591,6 +2632,8 @@ var uplight;
             this.imagesEditor.setData(this.current);
             this.imagesEditor.render();
             this.imagesEditor.show();
+            if (this.onImageEditor)
+                this.onImageEditor();
         };
 
         //////////TABLE/////////////////////
@@ -2714,11 +2757,11 @@ var uplight;
     uplight.DetailsForm = DetailsForm;
 })(uplight || (uplight = {}));
 /// <reference path="../rega.ts" />
-/// <reference path="DetailsEditor.ts" />
+/// <reference path="DestinationsController.ts" />
 var uplight;
 (function (uplight) {
-    var DetailsList = (function () {
-        function DetailsList(view) {
+    var DestinationsList = (function () {
+        function DestinationsList(view) {
             this.dispatcher = $({});
             this.SELECTED = 'SELECTED';
             this.view = view;
@@ -2726,14 +2769,14 @@ var uplight;
             this.init();
         }
         // isMultyselect: boolean = true;
-        DetailsList.prototype.setSelectedItem = function (vo) {
+        DestinationsList.prototype.setSelectedItem = function (vo) {
             this.selectedItem = vo;
         };
-        DetailsList.prototype.getSelectedItem = function () {
+        DestinationsList.prototype.getSelectedItem = function () {
             return this.selectedItem;
         };
 
-        DetailsList.prototype.show = function () {
+        DestinationsList.prototype.show = function () {
             this.view.show();
             if (this.selectedEl) {
                 var num = this.selectedEl.offset().top;
@@ -2742,17 +2785,17 @@ var uplight;
             }
         };
 
-        DetailsList.prototype.hide = function () {
+        DestinationsList.prototype.hide = function () {
             this.view.hide();
         };
 
-        DetailsList.prototype.reset = function () {
+        DestinationsList.prototype.reset = function () {
             this.selectedItem = null;
             this.listContainer.scrollTop(0);
             this.selectedEl = null;
         };
 
-        DetailsList.prototype.init = function () {
+        DestinationsList.prototype.init = function () {
             var _this = this;
             this.listContainer = this.view.find('.nano:first');
             this.thead = $('<thead>').html('<tr class="item-header">' + '<th class="item-id">id</th>' + '<th class="item-name">Name</th>' + '<th class="item-unit">Unit</th>' + '<th class="item-categories">Categories</th>' + '<th class="">Short Info</th>' + '<th class="">Thumb</th>' + '<th class="">Info Table</th>' + '<th class="">Images</th>' + '<th class="">KWs</th>' + '<th class="item-uid">UID</th>' + '</tr>');
@@ -2786,23 +2829,23 @@ var uplight;
             }
         };
 
-        DetailsList.prototype.onFilterChange = function () {
+        DestinationsList.prototype.onFilterChange = function () {
             this.filterList(this.tiFilter.val());
         };
 
-        DetailsList.prototype.filterList = function (pattern) {
+        DestinationsList.prototype.filterList = function (pattern) {
             this.destinations = this.R.model.getDestinantionsByPattern(pattern);
             this.reset();
             this.renderDestinations();
         };
-        DetailsList.prototype.onModelChange = function () {
+        DestinationsList.prototype.onModelChange = function () {
             this.tiFilter.val('');
             this.renderCategories();
             this.destinations = this.R.model.getData();
             this.renderDestinations();
         };
 
-        DetailsList.prototype.onSelected = function (evt) {
+        DestinationsList.prototype.onSelected = function (evt) {
             var el = $(evt.currentTarget);
             var i = this.selectElement(el);
             var dest = this.destinations[i];
@@ -2811,11 +2854,11 @@ var uplight;
             this.dispatcher.triggerHandler(this.SELECTED, dest);
         };
 
-        DetailsList.prototype.renderItem = function (item, i) {
+        DestinationsList.prototype.renderItem = function (item, i) {
             return '<tr class="item" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="name">' + item.name + '</td>' + '<td class="unit">' + item.unit + '</td>' + '<td class="cats">' + (item.catsStr ? item.catsStr.join(', ') : '&nbsp') + '</td>' + '<td class="small"><div>' + item.info + '</div></td>' + '<td class="tmb">' + (item.tmb ? '<img src="' + item.tmb + '" />' : '') + '</td>' + '<td class="more"><div>' + item.more + '</div></td>' + '<td class="imgs">' + (item.imgs ? (item.imgs.split(',').length + '') : '&nbsp') + '</td>' + '<td class="kws">' + (item.kws ? (item.kws.split(',').length + '') : '&nbsp') + '</td>' + '<td title="' + item.uid + '" class="uid">' + (item.uid || '&nbsp') + '</td>' + '</tr>';
         };
 
-        DetailsList.prototype.renderDestinations = function () {
+        DestinationsList.prototype.renderDestinations = function () {
             this.selectedEl = null;
             var ar = this.destinations;
 
@@ -2831,7 +2874,7 @@ var uplight;
                 this.selectItemById(this.selectedItem.id);
         };
 
-        DetailsList.prototype.selectElement = function (el) {
+        DestinationsList.prototype.selectElement = function (el) {
             console.log('selecting ' + el.offset().top);
             var i = el.data('i');
             if (isNaN(i))
@@ -2842,14 +2885,14 @@ var uplight;
             this.selectedEl = el;
             return i;
         };
-        DetailsList.prototype.selectItemById = function (id) {
+        DestinationsList.prototype.selectItemById = function (id) {
             var el = this.list.children('[data-id=' + id + ']:first');
             if (el)
                 this.selectElement(el);
             return el;
         };
 
-        DetailsList.prototype.scrollToElemnt = function (el) {
+        DestinationsList.prototype.scrollToElemnt = function (el) {
             console.log('scrolling ');
             this.listContainer.scrollTop(0);
             var num = +el.offset().top;
@@ -2870,7 +2913,7 @@ var uplight;
         }
         */
         // private listContainer:JQuery;
-        DetailsList.prototype.renderCategories = function () {
+        DestinationsList.prototype.renderCategories = function () {
             var ar = this.R.model.getCategories();
 
             // console.log(ar);
@@ -2881,16 +2924,16 @@ var uplight;
             this.selectCats.html(str);
         };
 
-        DetailsList.prototype.renderCats = function (vo) {
+        DestinationsList.prototype.renderCats = function (vo) {
             return '<option value="' + vo.id + '">' + vo.label + '</option>';
         };
 
-        DetailsList.prototype.onSelectChange = function (evt) {
+        DestinationsList.prototype.onSelectChange = function (evt) {
             var cat = Number($(evt.target).prop('value'));
             if (!isNaN(cat))
                 this.filterByCategory(cat);
         };
-        DetailsList.prototype.filterByCategory = function (cat) {
+        DestinationsList.prototype.filterByCategory = function (cat) {
             this.currentCat = cat;
             if (this.currentCat == 0)
                 this.destinations = this.R.model.getData();
@@ -2903,32 +2946,41 @@ var uplight;
             this.reset();
             this.renderDestinations();
         };
-        return DetailsList;
+        return DestinationsList;
     })();
-    uplight.DetailsList = DetailsList;
+    uplight.DestinationsList = DestinationsList;
 })(uplight || (uplight = {}));
-/// <reference path="../RegA.ts" />
+/// <reference path="../DirsAdmin.ts" />
 /// <reference path="DetailsForm.ts" />
-/// <reference path="DetailsList.ts" />
+/// <reference path="DestinationsList.ts" />
 /// <reference path="DetailsCategory.ts" />
 var uplight;
 (function (uplight) {
-    var DetailsEditor = (function () {
-        function DetailsEditor(container) {
+    var DestinationsController = (function () {
+        function DestinationsController(container) {
             var _this = this;
-            container.load('js/admin/details/DetailsEditor.htm', function () {
+            container.load('htms/admin/DestinationsEditor.htm', function () {
                 return _this.init();
             });
             this.R = uplight.RegA.getInstance();
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
         }
-        DetailsEditor.prototype.init = function () {
+        DestinationsController.prototype.init = function () {
             var _this = this;
-            this.view = $('#DetailsEditor');
+            this.view = $('#DestinationsEditor');
 
-            this.list = new uplight.DetailsList($('#DetailsList'));
+            this.list = new uplight.DestinationsList($('#DestinationsList'));
 
+            console.log(window.location.hash);
+            this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'), window.location.hash);
+            this.breacrumb.onCiick = function (url) {
+                if (url == 'listing') {
+                    _this.hideForm();
+                } else if (url == 'DetailsForm')
+                    _this.detailsForm.showDetails();
+            };
+            this.breacrumb.addCrumb('listing', 'Listing');
             this.detailsForm = new uplight.DetailsForm($('#DetailsForm'));
 
             this.detailsForm.onClose = function () {
@@ -2938,6 +2990,9 @@ var uplight;
                 return _this.onBtnSaveClick();
             };
             this.detailsForm.hide();
+            this.detailsForm.onImageEditor = function () {
+                _this.breacrumb.addCrumb('imageeditor', 'Image Editor');
+            };
 
             if (this.R.isSuper)
                 this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(function () {
@@ -2958,7 +3013,7 @@ var uplight;
             //this.showForm();
         };
 
-        DetailsEditor.prototype.onDrop = function () {
+        DestinationsController.prototype.onDrop = function () {
             var _this = this;
             if (confirm('You want to delete whole table tenats?'))
                 this.R.connector.dropTable('tenants').done(function () {
@@ -2970,21 +3025,24 @@ var uplight;
         ///  this.detailsForm.show();
         // this.list.hide();
         //   }
-        DetailsEditor.prototype.hideForm = function () {
+        DestinationsController.prototype.hideForm = function () {
+            this.breacrumb.clear();
+            this.breacrumb.addCrumb('listing', 'Listing');
             this.detailsForm.hide();
             this.list.show();
         };
 
-        DetailsEditor.prototype.onBtnAddClick = function () {
+        DestinationsController.prototype.onBtnAddClick = function () {
             var dest = new uplight.VODestination({ id: 0, cats: [], imgs: '' });
             this.detailsForm.setDestination(dest);
             this.detailsForm.render();
             this.list.hide();
             this.detailsForm.show();
             this.detailsForm.focusName();
+            this.breacrumb.addCrumb('DetailsForm', 'Details form');
         };
 
-        DetailsEditor.prototype.onBtnEditClick = function () {
+        DestinationsController.prototype.onBtnEditClick = function () {
             var dest = this.list.getSelectedItem();
             if (dest) {
                 this.detailsForm.setDestination(dest);
@@ -2992,10 +3050,11 @@ var uplight;
                 this.list.hide();
                 this.detailsForm.show();
                 this.detailsForm.focusName();
+                this.breacrumb.addCrumb('DetailsForm', 'Details form');
             }
         };
 
-        DetailsEditor.prototype.onSave = function (res) {
+        DestinationsController.prototype.onSave = function (res) {
             console.log(res);
 
             if (res.success) {
@@ -3011,7 +3070,7 @@ var uplight;
             this.R.model.refreshData();
         };
 
-        DetailsEditor.prototype.onBtnSaveClick = function () {
+        DestinationsController.prototype.onBtnSaveClick = function () {
             var _this = this;
             var vo = this.detailsForm.getDestination();
             if (!vo)
@@ -3026,7 +3085,7 @@ var uplight;
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        DetailsEditor.prototype.onDelete = function (res) {
+        DestinationsController.prototype.onDelete = function (res) {
             this.R.msg('Record deleted', this.btnDel);
             this.list.selectedItem = null;
         };
@@ -3034,7 +3093,7 @@ var uplight;
         // private onDeleteConfirmed(): void {
         // this.R.vo.deleteDestination(this.detailsForm., (res) => this.onDelete(res));
         //}
-        DetailsEditor.prototype.onBtnDelClick = function () {
+        DestinationsController.prototype.onBtnDelClick = function () {
             var _this = this;
             var dest = this.list.getSelectedItem();
             if (dest) {
@@ -3047,9 +3106,9 @@ var uplight;
             }
             // showAlert('You want to delete record: ' + name + '?', () => this.onDeleteConfirmed(),'Delete');
         };
-        return DetailsEditor;
+        return DestinationsController;
     })();
-    uplight.DetailsEditor = DetailsEditor;
+    uplight.DestinationsController = DestinationsController;
 })(uplight || (uplight = {}));
 /// <reference path="../rega.ts" />
 var uplight;
@@ -5676,10 +5735,11 @@ var uplight;
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="../typing/underscore.d.ts" />
 /// <reference path="com/GalleryAdmin.ts" />
+/// <reference path="com/Utils.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />
 /// <reference path="views/Menu.ts" />
-///<reference path="details/DetailsEditor.ts" />
+///<reference path="destinations/DestinationsController.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="impexp/ImportExport.ts" />
@@ -5796,7 +5856,7 @@ var uplight;
 
                     break;
                 case '#Listing-V':
-                    this.details = new uplight.DetailsEditor(this.content);
+                    this.listing = new uplight.DestinationsController(this.content);
                     this.content.show();
                     break;
                 case '#Categorie':

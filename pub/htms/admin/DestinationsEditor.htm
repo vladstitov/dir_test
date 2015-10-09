@@ -1,6 +1,6 @@
 <style>
 
- /*   #DetailsEditor #DetailsList-list .item-header>div{
+ /*   #DetailsEditor #DestinationsList-list .item-header>div{
         display: inline-block;
         text-align: center;
         border-right: dashed 1px #AAAAAA;
@@ -13,11 +13,11 @@
 
 
 
-    #DetailsEditor #txtFilter{
+    #DestinationsEditor #txtFilter{
         width: 5em;
     }
 
-    #DetailsList .panel-heading>div {
+    #DestinationsList .panel-heading>div {
        display: inline;
     }
 
@@ -64,11 +64,30 @@
         margin: 5px;
     }
 
+    #DestinationsEditor .breadcrumb li{
+        cursor: pointer;
+    }
+
+     #DestinationsEditor .breadcrumb li.active{
+         cursor: auto;
+     }
+     #DestinationsEditor .breadcrumb li.active:hover{
+         text-decoration: none;
+     }
+     #DestinationsEditor .breadcrumb li:hover{
+         text-decoration: underline;
+     }
+
 </style>
 
-<div id="DetailsEditor">
-        <div class="row">
-         <section id="DetailsList" class="panel panel-default">
+<div id="DestinationsEditor" data-ctr="DestinationsEditor">
+
+    <div class="row" data-ctr="Breadcrumbs">
+
+
+    </div>
+       <div class="row" data-ctr="DestinationsList">
+         <section id="DestinationsList" class="panel panel-default">
              <div class="panel-heading" data-id="tools">
                      <div>
                          By Category: <select data-id="select"></select>
@@ -145,7 +164,7 @@
              </div>
 
          </section>
-        </div>
+       </div>
 
          
          <!-------new ----------->

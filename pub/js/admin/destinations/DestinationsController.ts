@@ -1,16 +1,16 @@
-﻿/// <reference path="../RegA.ts" />
+﻿/// <reference path="../DirsAdmin.ts" />
 /// <reference path="DetailsForm.ts" />
-/// <reference path="DetailsList.ts" />
+/// <reference path="DestinationsList.ts" />
 /// <reference path="DetailsCategory.ts" />
 
 module uplight{
-    export class DetailsEditor{
+    export class DestinationsController{
 
         R:RegA
 
 
         constructor(container:JQuery) {
-            container.load('js/admin/details/DetailsEditor.htm',()=>this.init());
+            container.load('htms/admin/DestinationsEditor.htm',()=>this.init());
             this.R=RegA.getInstance();
             if (!this.R.model) this.R.model = new DestinantionsModel();
 
@@ -26,20 +26,35 @@ module uplight{
         private btnSave: JQuery;
 
         private detailsForm:DetailsForm;
-        private list:DetailsList;
+        private list:DestinationsList;
+        private breacrumb:BreadCrumbs
 
         private btnDrop:JQuery;
 
         private init(): void {
-            this.view = $('#DetailsEditor');
+            this.view = $('#DestinationsEditor');
 
-            this.list = new DetailsList($('#DetailsList'));
+            this.list = new DestinationsList($('#DestinationsList'));
 
+            console.log(window.location.hash);
+           this.breacrumb = new BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'),window.location.hash);
+            this.breacrumb.onCiick=(url)=>{
+                if(url=='listing'){
+                    this.hideForm();
+
+                }
+                else if (url=='DetailsForm')this.detailsForm.showDetails();
+            }
+            this.breacrumb.addCrumb('listing','Listing');
             this.detailsForm = new DetailsForm($('#DetailsForm'));
+
 
             this.detailsForm.onClose = ()=>this.hideForm();
             this.detailsForm.onSave = ()=>this.onBtnSaveClick();
             this.detailsForm.hide();
+            this.detailsForm.onImageEditor= ()=>{
+                this.breacrumb.addCrumb('imageeditor','Image Editor');
+            }
 
 
             if(this.R.isSuper) this.btnDrop = $('<a>').addClass('btn').html('<span class="fa fa-bolt"> Drop Table</span>').appendTo(this.list.view.find('[data-id=tools]:first')).click(()=>this.onDrop());
@@ -62,6 +77,8 @@ module uplight{
      //   }
 
         private hideForm():void{
+            this.breacrumb.clear();
+            this.breacrumb.addCrumb('listing','Listing');
             this.detailsForm.hide();
             this.list.show();
         }
@@ -73,6 +90,7 @@ module uplight{
            this.list.hide();
            this.detailsForm.show();
            this.detailsForm.focusName();
+           this.breacrumb.addCrumb('DetailsForm','Details form');
         }
 
 
@@ -85,6 +103,7 @@ module uplight{
                 this.list.hide();
                 this.detailsForm.show();
                 this.detailsForm.focusName();
+                this.breacrumb.addCrumb('DetailsForm','Details form');
             }
 
         }

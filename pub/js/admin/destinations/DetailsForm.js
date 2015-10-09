@@ -47,11 +47,14 @@ var uplight;
             this.categories = new uplight.DetailsCategory(form);
             this.imagesEditor = new uplight.DetailsImages($('#DetailsImagesEdit'));
             this.imagesEditor.hide();
-            this.imagesEditor.onSave = function () { return _this.hideImageEditor(); };
-            this.imagesEditor.onClose = function () { return _this.hideImageEditor(); };
-            this.imagesEditor.onCancel = function () { return _this.hideImageEditor(); };
+            this.imagesEditor.onSave = function () { return _this.showDetailsView(); };
+            this.imagesEditor.onClose = function () { return _this.showDetailsView(); };
+            this.imagesEditor.onCancel = function () { return _this.showDetailsView(); };
             $('#DetailsImages [data-id=btnEdit]:first').on(CLICK, function () { return _this.onEditImagesClick(); });
         }
+        DetailsForm.prototype.showDetails = function () {
+            this.showDetailsView();
+        };
         DetailsForm.prototype.encode = function (str) {
             return str; //this.div.text(str).html();
         };
@@ -94,6 +97,7 @@ var uplight;
         };
         DetailsForm.prototype.hide = function () {
             this.view.hide();
+            this.imagesEditor.hide();
         };
         DetailsForm.prototype.reset = function () {
             this.name.val('');
@@ -136,7 +140,7 @@ var uplight;
                 this.R.connector.uploadDestinationImage(form, this.current.uid).done(function (res) { return _this.onUploadTumb(res); });
             }
         };
-        DetailsForm.prototype.hideImageEditor = function () {
+        DetailsForm.prototype.showDetailsView = function () {
             if (this.current.imgs)
                 this.images.html(this.renderImages(this.current.imgs));
             this.view.show();
@@ -147,6 +151,8 @@ var uplight;
             this.imagesEditor.setData(this.current);
             this.imagesEditor.render();
             this.imagesEditor.show();
+            if (this.onImageEditor)
+                this.onImageEditor();
         };
         //////////TABLE/////////////////////
         DetailsForm.prototype.onRowSelected = function (el) {

@@ -1,7 +1,7 @@
 ﻿/// <reference path="../rega.ts" />
-/// <reference path="DetailsEditor.ts" />
+/// <reference path="DestinationsController.ts" />
 module uplight {
-    export class DetailsList {
+    export class DestinationsList {
         
        // isMultyselect: boolean = true;
 
@@ -49,7 +49,7 @@ module uplight {
         private listContainer:JQuery
         view: JQuery;
         list: JQuery;
-        details:DetailsEditor;
+      //  details:DetailsEditor;
         onChange: Function;
         private thead:JQuery
         private table:JQuery

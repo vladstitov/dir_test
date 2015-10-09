@@ -128,6 +128,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 <script type="text/javascript" src="js/libs/Chart.js"></script>
 <!---->
 
+<script src="js/admin/com/Utils.js"></script>
 <script type="text/javascript" src="js/admin/RegA.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>
 <script type="text/javascript" src="js/admin/models.js"></script>
@@ -146,11 +147,11 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admi
 
 <script type="text/javascript" src="js/admin/screen/LabelsManager.js"></script>
 
-<script type="text/javascript" src="js/admin/details/DetailsList.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsCategory.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsForm.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsEditor.js"></script>
-<script type="text/javascript" src="js/admin/details/DetailsImages.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DestinationsList.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsCategory.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsForm.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DestinationsController.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsImages.js"></script>
 
 <script type="text/javascript" src="js/admin/impexp/ImportExport.js"></script>
 <script type="text/javascript" src="js/admin/impexp/Statistics.js"></script>

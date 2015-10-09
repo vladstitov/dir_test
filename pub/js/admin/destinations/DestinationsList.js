@@ -1,9 +1,9 @@
 /// <reference path="../rega.ts" />
-/// <reference path="DetailsEditor.ts" />
+/// <reference path="DestinationsController.ts" />
 var uplight;
 (function (uplight) {
-    var DetailsList = (function () {
-        function DetailsList(view) {
+    var DestinationsList = (function () {
+        function DestinationsList(view) {
             this.dispatcher = $({});
             this.SELECTED = 'SELECTED';
             this.view = view;
@@ -11,13 +11,13 @@ var uplight;
             this.init();
         }
         // isMultyselect: boolean = true;
-        DetailsList.prototype.setSelectedItem = function (vo) {
+        DestinationsList.prototype.setSelectedItem = function (vo) {
             this.selectedItem = vo;
         };
-        DetailsList.prototype.getSelectedItem = function () {
+        DestinationsList.prototype.getSelectedItem = function () {
             return this.selectedItem;
         };
-        DetailsList.prototype.show = function () {
+        DestinationsList.prototype.show = function () {
             this.view.show();
             if (this.selectedEl) {
                 var num = this.selectedEl.offset().top;
@@ -25,15 +25,15 @@ var uplight;
                     this.scrollToElemnt(this.selectedEl);
             }
         };
-        DetailsList.prototype.hide = function () {
+        DestinationsList.prototype.hide = function () {
             this.view.hide();
         };
-        DetailsList.prototype.reset = function () {
+        DestinationsList.prototype.reset = function () {
             this.selectedItem = null;
             this.listContainer.scrollTop(0);
             this.selectedEl = null;
         };
-        DetailsList.prototype.init = function () {
+        DestinationsList.prototype.init = function () {
             var _this = this;
             this.listContainer = this.view.find('.nano:first');
             this.thead = $('<thead>').html('<tr class="item-header">' + '<th class="item-id">id</th>' + '<th class="item-name">Name</th>' + '<th class="item-unit">Unit</th>' + '<th class="item-categories">Categories</th>' + '<th class="">Short Info</th>' + '<th class="">Thumb</th>' + '<th class="">Info Table</th>' + '<th class="">Images</th>' + '<th class="">KWs</th>' + '<th class="item-uid">UID</th>' + '</tr>');
@@ -54,21 +54,21 @@ var uplight;
                 this.renderCategories();
             }
         };
-        DetailsList.prototype.onFilterChange = function () {
+        DestinationsList.prototype.onFilterChange = function () {
             this.filterList(this.tiFilter.val());
         };
-        DetailsList.prototype.filterList = function (pattern) {
+        DestinationsList.prototype.filterList = function (pattern) {
             this.destinations = this.R.model.getDestinantionsByPattern(pattern);
             this.reset();
             this.renderDestinations();
         };
-        DetailsList.prototype.onModelChange = function () {
+        DestinationsList.prototype.onModelChange = function () {
             this.tiFilter.val('');
             this.renderCategories();
             this.destinations = this.R.model.getData();
             this.renderDestinations();
         };
-        DetailsList.prototype.onSelected = function (evt) {
+        DestinationsList.prototype.onSelected = function (evt) {
             var el = $(evt.currentTarget);
             var i = this.selectElement(el);
             var dest = this.destinations[i];
@@ -76,10 +76,10 @@ var uplight;
             this.selectedItem = dest;
             this.dispatcher.triggerHandler(this.SELECTED, dest);
         };
-        DetailsList.prototype.renderItem = function (item, i) {
+        DestinationsList.prototype.renderItem = function (item, i) {
             return '<tr class="item" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="name">' + item.name + '</td>' + '<td class="unit">' + item.unit + '</td>' + '<td class="cats">' + (item.catsStr ? item.catsStr.join(', ') : '&nbsp') + '</td>' + '<td class="small"><div>' + item.info + '</div></td>' + '<td class="tmb">' + (item.tmb ? '<img src="' + item.tmb + '" />' : '') + '</td>' + '<td class="more"><div>' + item.more + '</div></td>' + '<td class="imgs">' + (item.imgs ? (item.imgs.split(',').length + '') : '&nbsp') + '</td>' + '<td class="kws">' + (item.kws ? (item.kws.split(',').length + '') : '&nbsp') + '</td>' + '<td title="' + item.uid + '" class="uid">' + (item.uid || '&nbsp') + '</td>' + '</tr>';
         };
-        DetailsList.prototype.renderDestinations = function () {
+        DestinationsList.prototype.renderDestinations = function () {
             this.selectedEl = null;
             var ar = this.destinations;
             //  console.log(ar);
@@ -92,7 +92,7 @@ var uplight;
             if (this.selectedItem)
                 this.selectItemById(this.selectedItem.id);
         };
-        DetailsList.prototype.selectElement = function (el) {
+        DestinationsList.prototype.selectElement = function (el) {
             console.log('selecting ' + el.offset().top);
             var i = el.data('i');
             if (isNaN(i))
@@ -103,13 +103,13 @@ var uplight;
             this.selectedEl = el;
             return i;
         };
-        DetailsList.prototype.selectItemById = function (id) {
+        DestinationsList.prototype.selectItemById = function (id) {
             var el = this.list.children('[data-id=' + id + ']:first');
             if (el)
                 this.selectElement(el);
             return el;
         };
-        DetailsList.prototype.scrollToElemnt = function (el) {
+        DestinationsList.prototype.scrollToElemnt = function (el) {
             console.log('scrolling ');
             this.listContainer.scrollTop(0);
             var num = +el.offset().top;
@@ -129,7 +129,7 @@ var uplight;
                 }
                 */
         // private listContainer:JQuery;
-        DetailsList.prototype.renderCategories = function () {
+        DestinationsList.prototype.renderCategories = function () {
             var ar = this.R.model.getCategories();
             // console.log(ar);
             var str = '<option value="0">All</option>';
@@ -138,15 +138,15 @@ var uplight;
                 str += this.renderCats(ar[i]);
             this.selectCats.html(str);
         };
-        DetailsList.prototype.renderCats = function (vo) {
+        DestinationsList.prototype.renderCats = function (vo) {
             return '<option value="' + vo.id + '">' + vo.label + '</option>';
         };
-        DetailsList.prototype.onSelectChange = function (evt) {
+        DestinationsList.prototype.onSelectChange = function (evt) {
             var cat = Number($(evt.target).prop('value'));
             if (!isNaN(cat))
                 this.filterByCategory(cat);
         };
-        DetailsList.prototype.filterByCategory = function (cat) {
+        DestinationsList.prototype.filterByCategory = function (cat) {
             this.currentCat = cat;
             if (this.currentCat == 0)
                 this.destinations = this.R.model.getData();
@@ -158,8 +158,8 @@ var uplight;
             this.reset();
             this.renderDestinations();
         };
-        return DetailsList;
+        return DestinationsList;
     })();
-    uplight.DetailsList = DetailsList;
+    uplight.DestinationsList = DestinationsList;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=DetailsList.js.map
+//# sourceMappingURL=DestinationsList.js.map
