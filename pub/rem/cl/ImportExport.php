@@ -1,5 +1,5 @@
 <?php
-include_once('DbConnector.php');
+//include_once('DbConnector.php');
 include_once('cl/DbConnector.php');
 class ImportExport{	
 	var $con;
@@ -94,14 +94,15 @@ class ImportExport{
 				(isset($v->meta)?$v->meta:''),
 				(isset($v->more)?$v->more:''),
 				(isset($v->info)?$v->info:''),
-				(isset($v->pgs)?$v->pgs:'')
+				(isset($v->tmb)?$v->tmb:''),
+				(isset($v->imgs)?$v->imgs:'')
 				);
 				return $out;
 		}
 		private function insertDestinations($data){
 			$data = $this->toArray($data);
 			$out= new stdClass();
-			$this->con->beginTransaction('INSERT INTO destinations (uid,name,unit,cats,kws,meta,more,info,pgs) VALUES (?,?,?,?,?,?,?,?,?)');
+			$this->con->beginTransaction('INSERT INTO destinations (uid,name,unit,cats,kws,meta,more,info,tmb,imgs) VALUES (?,?,?,?,?,?,?,?,?,?)');
 			//foreach($data as $v)$this->con->execute(array($v->uid,$v->name,$v->unit,$v->cats,$v->kws,$v->meta,$v->more,$v->info,$v->pgs));
 			foreach($data as $v)$this->con->execute($v);
 			$res= $this->con-> commit();
@@ -114,7 +115,7 @@ class ImportExport{
 		}
 		private function overwriteDestsinations($data){
 			$this->con->queryPure("DROP TABLE destinations");
-			$res = $this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT,locations TEXT,labels TEXT)");
+			$res = $this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,meta TEXT,info TEXT,tmb TEXT,imgs TEXT)");
 			$out = new stdClass();
 			if($res) return $this->insertDestinations($data);
 			else  $out->error=$this->con->errorInfo();
@@ -183,8 +184,8 @@ class ImportExport{
 			$ar = $this->getAllDests();	
 			$out=0;
 			if($ar){
-				fputcsv($fp, array('UID','Name','Unit','Info','Categories','Keywords','Table','Pages','Meta'));	        
-				foreach($ar as $v) fputcsv($fp, array($v->uid,$v->name,$v->unit,$v->info,$v->cats,$v->kws,$v->more,$v->pgs,$v->meta));
+				fputcsv($fp, array('UID','Name','Unit','Info','Categories','Keywords','Table','Meta','Thumbnail','Images'));	        
+				foreach($ar as $v) fputcsv($fp, array($v->uid,$v->name,$v->unit,$v->info,$v->cats,$v->kws,$v->more,$v->meta,$v->tmb,$v->imgs));
 				$out=1;
 			}			
 			fclose($fp);		

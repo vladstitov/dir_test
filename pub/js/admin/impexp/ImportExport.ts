@@ -87,11 +87,11 @@ module uplight {
         }
         private renderHead():string{
             return  '<thead><th>UID</th><th>Name</th><th>unit</th><th>Info</th><th>Categories</th>'
-                +'<th>Keywords</th><th>Table</th><th>Pages</th><th>Meta</th></thead><tbody>';
+                +'<th>Keywords</th><th>Table</th><th>Meta</th><th>Thumbnail</th><th>Images</th></thead><tbody>';
         }
-        private renderItem(item:any,i:number):string{
+        private renderItem(item:VODestination,i:number):string{
             return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + item.cats
-                + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.pgs + '</td><td>' + item.meta + '</td></tr>';
+                + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.meta + '</td><td>'+item.tmb+'</td><td>'+item.imgs+'</td></tr>';
 
         }
 
@@ -150,7 +150,7 @@ module uplight {
             for(var i=1,n=ar.length;i<n;i++){
                 var item = ar[i];
                 if(item[4]) this.checkCatigories(item[4]);
-                out.push({uid:item[0],name:item[1],unit:item[2],info:item[3],cats:item[4],kws:item[5],more:item[6],pgs:item[7],meta:item[8]});
+                out.push({uid:item[0],name:item[1],unit:item[2],info:item[3],cats:item[4],kws:item[5],more:item[6],meta:item[7],tmb:item[8],imgs:item[9]});
             }
             this._data=out;
             this.renderData();
@@ -163,7 +163,7 @@ module uplight {
 
         private onFileSelected(files: FileList): void {
             //  var file: File = files[0];
-            console.log(files);
+           // console.log(files);
             if (files.length === 1) {
                 var form: FormData = new FormData();
                 form.append('file',files[0]);
@@ -201,12 +201,14 @@ module uplight {
 
         }
 
-        private convertCategories(ar:string[]):number[]{
+        private convertCategories(cats:any):any{
+            if(!cats) return'';
             var out:number[]=[];
+            var ar = cats.split(',');
             for(var i=0,n=ar.length;i<n;i++){
                 out.push(this.getCategoryIdbyLabel(ar[i]));
             }
-            return out;
+            return out.join(',');
         }
 
         private onNewCategories(res:VOCategory[]):void{
@@ -218,13 +220,15 @@ module uplight {
             var ar = this._data;
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                //if(item.categories)item.cats = this.convertCategories(item.categories);
+                console.log(item);
+                item.cats =  this.convertCategories(item.cats);
             }
 
             var is_overwrite:boolean = this.rdOver.prop(CHECKED);
             console.log('sendData total '+ar.length +' is_overwrite '+is_overwrite);
+
             this.R.connector.insertdDestinations(JSON.stringify(ar),is_overwrite).done((res)=>{
-               // console.log(res);
+              console.log(res);
                this.getData();
             });
         }
@@ -245,7 +249,7 @@ module uplight {
             console.log('uploding');
             this.btnUpload.prop('disabled',true)
             this.R.msg('Uploading...',this.btnUpload);
-            setTimeout(()=>{this.btnUpload.prop('disabled',false)},3000);
+           // setTimeout(()=>{this.btnUpload.prop('disabled',false)},3000);
             if(this.newCategories.length) this.uploadNewCategories();
             else this.sendData();
 
