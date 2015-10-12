@@ -6,7 +6,7 @@ var uplight;
             var _this = this;
             this.R = uplight.RegA.getInstance();
             // if(!this.R.vo)this.R.vo = new DestinantionsModel();
-            container.load('js/admin/impexp/ImportExport.htm', function () {
+            container.load('htms/admin/ImportExport.htm', function () {
                 _this.init();
             });
             // this.init();

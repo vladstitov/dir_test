@@ -29,7 +29,7 @@ module uplight {
         constructor(container:JQuery) {
             this.R=RegA.getInstance();
            // if(!this.R.vo)this.R.vo = new DestinantionsModel();
-            container.load('js/admin/impexp/ImportExport.htm',()=>{this.init()});
+            container.load('htms/admin/ImportExport.htm',()=>{this.init()});
 
 
            // this.init();
