@@ -11,21 +11,23 @@ class ImportExport{
 	function process($a,$data,$opt){
 		$out=new stdClass();	
 		switch(array_shift($a)){
-			case 'export_CSV':	
-					$res = $this->sendAsCSV();
-					if($res) return '  ';
-					else $out->error='error';
-				return $out;
-			break;	
-			
+			case 'saveAsCSV':			
+				return  $this->saveAsCSV($data);
+			break;			
 				case 'parse_csv':			
 				return  $this->importFromCSV($_FILES["file"]);			
 			break;
 			
-			case 'get_all':				
-				return $this->getAllDests();			
+			case 'get_CSV':
+			 header('Content-Description: File Transfer');
+			header('Content-Type: application/csv');
+			header('Content-Disposition: attachment; filename="directories.csv"');
+			header('Pragma: no-cache');
+			readfile(PREFIX.MEDIA.'directories.csv');
+			exit;
+				return ' ';			
 			break;
-			
+		/*	
 			case 'save_file':	
 				$filename = '/bk/exp_'.date('m-d-y-H-i-s').'.txt';
 				if(isset($opt['filename']))	{
@@ -41,47 +43,20 @@ class ImportExport{
 
 				return $out;
 			break;
-			
-			case 'insert_destinations':				
-				$data = json_decode(file_get_contents("php://input"));				
+			*/
+			case 'insert_destinations':	
+							
 				if(isset($opt['overwrite'])) $out=$this->overwriteDestsinations($data);
 				else $out=$this->insertDestinations($data);
 				
 				return $out;
 			break;
-			case 'insert_categories':				
-				$data = json_decode(file_get_contents("php://input"));				
-				if(isset($opt['overwrite'])) $out=$this->overwriteCategories($data);
-				else $out=$this->insertCategories($data);
-				
-				return $out;
-			break;
+			
 			
 			
 		}
 	}
-	
-	
-	
-	
-		private function insertCategories($data){
-			$out= new stdClass();		
-			$this->con->beginTransaction('INSERT INTO categories (label,icon,type,enable,sort) VALUES (?,?,?,?,?)');
-			foreach($data as $v) $this->con->execute(array($v->label,$v->icon,$v->type,$v->enable,$v->sort));
-			$res= $this->con-> commit();
-			if($res) $out->success='success';
-			else  $out->error=$this->con->errorInfo();
-			return $out;		
-		}
-		private function overwriteCategories($data){
-			$out= new stdClass();
-			$this->con->queryPure("DROP TABLE categories");
-			$res = $this->con->queryPure("CREATE TABLE categories (id INTEGER PRIMARY KEY,label TEXT,icon TEXT,type INTEGER,enable INTEGER,sort INTEGER)");
-			
-			if($res)return $this->insertCategories($data);
-			else  $out->error=$this->con->errorInfo();
-			return $out;
-		}	
+		
 		
 		private  function toArray($data){
 				$out=[];
@@ -177,19 +152,25 @@ class ImportExport{
 	}
 	
 	
-	private function sendAsCSV(){	
-			header( 'Content-Type: text/csv' );
-            header( 'Content-Disposition: attachment;filename=directories.csv');
-            $fp = fopen('php://output', 'w');   
-			$ar = $this->getAllDests();	
-			$out=0;
+	private function saveAsCSV($ar){
+	$out =new stdClass();	
+			//return $ar;	
+			//header( 'Content-Type: text/csv' );
+          //  header( 'Content-Disposition: attachment;filename=directories.csv');
+           // $fp = fopen('php://output', 'w');   
+		   $fp = fopen(PREFIX.MEDIA.'directories.csv', 'w'); 
+			//$ar = $this->getAllDests();	
+			
 			if($ar){
-				fputcsv($fp, array('UID','Name','Unit','Info','Categories','Keywords','Table','Meta','Thumbnail','Images'));	        
-				foreach($ar as $v) fputcsv($fp, array($v->uid,$v->name,$v->unit,$v->info,$v->cats,$v->kws,$v->more,$v->meta,$v->tmb,$v->imgs));
-				$out=1;
-			}			
+				//fputcsv($fp, array('UID','Name','Unit','Info','Categories','Keywords','Table','Meta','Thumbnail','Images'));					
+				//foreach($ar as $v) fputcsv($fp, array($v->uid,$v->name,$v->unit,$v->info,is_array($v->cats)?implode(',',$v->cats):$v->cats,$v->kws,$v->more,$v->meta,$v->tmb,$v->imgs));
+				foreach($ar as $v) fputcsv($fp, $v);
+				
+			}	
+		
 			fclose($fp);		
-       
+       $out->result=MEDIA.'/directories.csv';
+	   $out->success='success';
 		return $out;
     }
 	

@@ -10,7 +10,7 @@ module uplight {
         private table: JQuery;
         private tbody:JQuery;
         private tableView:JQuery
-        private model: DestinantionsModel;
+     //   private model: DestinantionsModel;
 
         private total:JQuery;
         private btnDel: JQuery;
@@ -18,27 +18,23 @@ module uplight {
         private rdOver: JQuery;
         private btnSelect: JQuery;
         private btnUpload: JQuery;
-        private btnDownload:JQuery
+        private btnDownload:JQuery;
         private categories:VOCategory[];
-        private headers: string[];
+        private headers: string[]=['UID','Name','Unit','Info','Categories','Keywords','Table','Meta','Thumbnail','Images'];
 
 
 
 
-        R:RegA
+        R:RegA;
         constructor(container:JQuery) {
             this.R=RegA.getInstance();
-           // if(!this.R.vo)this.R.vo = new DestinantionsModel();
             container.load('htms/admin/ImportExport.htm',()=>{this.init()});
-
-
-           // this.init();
         }
 
         private init(): void {
 
             this.view = $('#ImportExport');
-            this.tableView = $('#ImportExport #table-container');
+            this.tableView = $('#table-container');
             this.table = $('<table>' ).addClass('table table-bordered').appendTo(this.tableView);
             this.tbody = $('<tbody>' ).appendTo(this.table);
             this.total = this.view.find('[data-id=total]');
@@ -52,10 +48,10 @@ module uplight {
             this.rdOver = this.view.find('[data-id=rdOver]:first');
             this.btnUpload = this.view.find('[data-id=btnUpload]').on(CLICK,()=>this.onUploadClicked());
 
-            this.btnDownload = this.view.find('[data-id=btnDownload]');//.on(CLICK,()=>this.onDownloadClick());
+           this.btnDownload = this.view.find('[data-id=btnDownload]').on(CLICK,()=>this.onDownloadClick());
 
 
-            this.btnDownload.attr('href',this.R.connector.service+'?a=importexport.export_CSV');
+           // this.btnDownload.attr('href',this.R.connector.service+'?a=importexport.export_CSV');
 
 
 
@@ -65,99 +61,139 @@ module uplight {
 
             this.table.append(this.renderHead());
             this.getData();
+            this.R.model.dispatcher.on(this.R.model.CHANGE,()=>this.getData());
         }
 
 
 
+        private convertToArray(ar:VODestination[]):string[][]{
+            var out:string[][]=[];
+
+            for(var i=0,n=ar.length;i<n;i++){
+                var item:VODestination = ar[i];
+               var cats=this.R.model.getCategoriesNames(item.cats).join(',');
+                out.push([item.uid,item.name,item.unit,item.info,cats,item.kws,item.more,item.meta,item.tmb,item.imgs]);
+            }
+            return out;
+        }
+        private onDownloadClick():void{
+            var ar = this._data;
+            var out:string[][] = this.convertToArray(this._data);
+            out.unshift(this.headers);
+            $.post(this.R.connector.service+'?a=importexport.saveAsCSV',JSON.stringify(out)).done((res)=>{
+                var idown = $('<iframe>', { id:'idown', src:this.R.connector.service+'?a=importexport.get_CSV' }).hide().appendTo('body');
+
+            });
+        }
 
        // private catInd:any;
         private onCategories(res):void{
             this.categories=res;
+
            // this.catInd = _.indexBy(res,'label');
 
         }
         getData(): void {
-            this.R.connector.getCategories().done((res)=>this.onCategories(res));
-            this.R.connector.exportDestination().done((res) => this.onDataComplete(res));
+            this._data = this.R.model.getData();
+            //    console.log(ar);
+            this.renderData();
+            this.isNewData = false;
+            this.btnUpload.prop('disabled',true);
+           // this.R.connector.getCategories().done((res)=>this.onCategories(res));
+           // this.R.connector.exportDestination().done((res) => this.onDataComplete(res));
         }
 
 
-        private onError(res): void {
+        private onError(res:any): void {
+
+            console.log('ERROR ',res);
 
         }
         private renderHead():string{
-            return  '<thead><th>UID</th><th>Name</th><th>unit</th><th>Info</th><th>Categories</th>'
-                +'<th>Keywords</th><th>Table</th><th>Meta</th><th>Thumbnail</th><th>Images</th></thead><tbody>';
+            return '<thead><th>'+this.headers.join('</th><th>')+'</th></thead><tbody>';
         }
-        private renderItem(item:VODestination,i:number):string{
-            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + item.cats
+
+        private renderItem(item:VODestination,i:number,cats:string):string{
+            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + cats
                 + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.meta + '</td><td>'+item.tmb+'</td><td>'+item.imgs+'</td></tr>';
 
         }
 
-        private onDataComplete(ar:any[]): void {
+       /* private onDataComplete(ar:any[]): void {
                 this._data = ar;
             //    console.log(ar);
                 this.renderData();
                 this.isNewData = false;
                 this.btnUpload.prop('disabled',true);
-        }
+        }*/
 
         private renderData():void{
             var out: string =''
             var ar=this._data;
 
-            for (var i = 0, n = ar.length; i < n; i++)  out += this.renderItem(ar[i],i);
+            for (var i = 0, n = ar.length; i < n; i++){
+                var cats='';
+                if(ar[i].cats) cats=  this.R.model.getCategoriesNames(ar[i].cats).join(',');
+                out += this.renderItem(ar[i],i,cats);
+
+            }
 
             this.tbody.html(out);
             this.total.text(n);
         }
 
 
-        private checkHeaders(ar:string[]){
+        private checkHeaders(ar:string[]):boolean{
+            if(ar.length<9) return false;
 
+            return true;
         }
 
         private getCategoryIdbyLabel(label:string):number{
-            var ar = this.categories
+            var ar = this.R.model.getCategories();
             for(var i=0,n=ar.length;i<n;i++){
                 if(ar[i].label==label) return ar[i].id;
             }
             return 0;
         }
-        private newCategories:string[];
+       // private newCategories:string[];
 
-        private addNewCategory(str:string):void{
-            if(this.newCategories.indexOf(str)===-1)this.newCategories.push(str);
-        }
-        private checkCatigories(str:string):void{
+      //  private addNewCategory(str:string):void{
+         //   if(this.newCategories.indexOf(str)===-1)this.newCategories.push(str);
+        //}
+       /* private convertCategories(str:string):void{
             if(str.length<3) return;
             var ar = str.split(',');
             for(var i=0,n=ar.length;i<n;i++){
-                if(this.getCategoryIdbyLabel(ar[i])) ;
+                if(this.getCategoryIdbyLabel(ar[i])){}
                 else this.addNewCategory(ar[i]);
             }
         }
-
-        private isNewData:boolean
+*/
+        private isNewData:boolean;
 
         private onCSVComplete(res): void {
-            var ar = res
-            //console.log('onCSVComplete ',res);
+            var ar = res;
+            console.log('onCSVComplete ',res);
             var out=[];
-            this.checkHeaders(res.shift());
-            this.newCategories =[];
-            for(var i=1,n=ar.length;i<n;i++){
+            this.checkHeaders(ar.shift());
+
+            console.log(ar);
+            for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                if(item[4]) this.checkCatigories(item[4]);
-                out.push({uid:item[0],name:item[1],unit:item[2],info:item[3],cats:item[4],kws:item[5],more:item[6],meta:item[7],tmb:item[8],imgs:item[9]});
+                if(item.length>9){
+                    item[4] = this.convertCategories(item[4]);
+                    out.push(new VODestination({uid:item[0],name:item[1],unit:item[2],info:item[3],cats:item[4],kws:item[5],more:item[6],meta:item[7],tmb:item[8],imgs:item[9]}));
+                }
             }
+
             this._data=out;
+            console.log('onCSVComplete out ',out);
             this.renderData();
             this.isNewData = true;
             this.btnUpload.prop('disabled',false);
 
-            if(this.newCategories.length) alert('New categories will be added: '+"\n"+this.newCategories.join("\n"));
+           // if(this.newCategories.length) alert('New categories will be added: '+"\n"+this.newCategories.join("\n"));
 
         }
 
@@ -171,9 +207,10 @@ module uplight {
             }
           // console.log(file);
         }
+        /*
 
         private createCategories(ar:string[],start:number):VOCategory[]{
-            var out:VOCategory[]=[]
+            var out:VOCategory[]=[];
 
             for(var i=0,n=ar.length;i<n;i++){
                 var cat = new VOCategory({id:0});
@@ -187,9 +224,11 @@ module uplight {
 
             return out;
         }
+
+
         private  collectCategories():VOCategory[]{
             var cats:string[]=[];
-            var ar = this._data
+            var ar = this._data;
             for(var i=0,n=ar.length;i<n;i++){
                 if(ar[i].cats.length<4) continue;
                // var ar2 = ar[i].categories;
@@ -200,15 +239,15 @@ module uplight {
             return this.createCategories(cats,1);
 
         }
-
+*/
         private convertCategories(cats:any):any{
-            if(!cats) return'';
+            if(!cats) return [];
             var out:number[]=[];
             var ar = cats.split(',');
             for(var i=0,n=ar.length;i<n;i++){
                 out.push(this.getCategoryIdbyLabel(ar[i]));
             }
-            return out.join(',');
+            return out;
         }
 
         private onNewCategories(res:VOCategory[]):void{
@@ -217,22 +256,21 @@ module uplight {
         }
 
         private sendData():void{
-            var ar = this._data;
-            for(var i=0,n=ar.length;i<n;i++){
-                var item = ar[i];
-                console.log(item);
-                item.cats =  this.convertCategories(item.cats);
-            }
-
+            var ar:any[] = this._data;
             var is_overwrite:boolean = this.rdOver.prop(CHECKED);
             console.log('sendData total '+ar.length +' is_overwrite '+is_overwrite);
 
+            for(var i=0,n=ar.length;i<n;i++){
+                 ar[i].cats= ar[i].cats.join(',');
+            }
+
             this.R.connector.insertdDestinations(JSON.stringify(ar),is_overwrite).done((res)=>{
-              console.log(res);
-               this.getData();
+                console.log(res);
+                this.R.model.refreshData();
             });
         }
-        private uploadNewCategories():void{
+
+     /*   private uploadNewCategories():void{
             var is_overwrite:boolean = this.rdOver.prop(CHECKED);
             console.log('is_overwrite '+is_overwrite);
             var ar:VOCategory[]
@@ -244,17 +282,19 @@ module uplight {
                 console.log('insertCategories   ',r);
                 this.R.connector.getCategories().done((res)=>this.onNewCategories(res));
             });
-        }
+        }*/
+
         private onUploadClicked(): void {
             console.log('uploding');
             this.btnUpload.prop('disabled',true)
             this.R.msg('Uploading...',this.btnUpload);
            // setTimeout(()=>{this.btnUpload.prop('disabled',false)},3000);
-            if(this.newCategories.length) this.uploadNewCategories();
-            else this.sendData();
+           // if(this.newCategories.length) this.uploadNewCategories();
+           // else
+                this.sendData();
 
         }
-
+        /*
         private onUploadComplete(res): void {
 
             console.log(res);
@@ -267,7 +307,7 @@ module uplight {
             }
         }
 
-       /*
+
         private renderData(data:VODestination[]): void {
             var out: string = '<thead><th>id</th><th>Name</th><th>Unit</th><th>Personal info</th><th>Categories</th></thead><tbody>';
             for (var i = 0, n = data.length; i < n; i++) out += this.renderItem(data[i]);
@@ -308,11 +348,11 @@ module uplight {
 */
      //   }
 
-        private onImportClick(evt): void {
+       // private onImportClick(evt): void {
 
            // this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
             //$('#ImportExport progress').show();
-        }
+       // }
 
      
         private onProgress(evt: ProgressEvent): void {
@@ -324,14 +364,16 @@ module uplight {
         private onDelClicked(): void {
             if (this.btnDel.hasClass(DISABLED)) return;
             // console.log(this.table.find('.selected').each);
-            var data = this._data;
-            $(this.table.find('.selected').get().reverse()).each(function (ind: number, el: HTMLTableRowElement) {
-                if (el.rowIndex) {
-                    data.splice(el.rowIndex - 1, 1);
-                    $(el).remove();
-                }              
-            });
-          //  this.renderData(this._data);
+           if(confirm('You want to delete selected records?')){
+               var data = this._data;
+               $(this.table.find('.selected').get().reverse()).each(function (ind: number, el: HTMLTableRowElement) {
+                   if (el.rowIndex) {
+                       data.splice(el.rowIndex - 1, 1);
+                       $(el).remove();
+                   }
+               });
+           }
+
         }
 
 

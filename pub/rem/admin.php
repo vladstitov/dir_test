@@ -4,9 +4,11 @@ session_start();
 define('DATA','../../data/');
 define('IMG','images/');
 define('DETAILS','details/');
+define('MEDIA','media/');
 define('DETAILS_IMG','details/img/');
 define('PREFIX','../');
 define('PAGES','pages/');
+
 
 
 
@@ -92,7 +94,7 @@ switch(array_shift($a)){
 	case 'importexport':
 	include 'cl/ImportExport.php';		
 		$ctr= new ImportExport();
-		$result=$ctr->process($a,$post,$get);
+		$result=$ctr->process($a,json_decode(file_get_contents("php://input")),$get);
 	break;	
 	
 	case 'login':

@@ -12,14 +12,17 @@ var uplight;
             contauner.load('htms/admin/Statistics.htm', function () { return _this.init(); });
         }
         Statistics.prototype.init = function () {
-            var _this = this;
             // var today = new Date()
             //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
+            var _this = this;
             this.R.connector.getStatistics('-30 days', 'now').done(function (res) { return _this.onData(res); });
+            var today = new Date();
+            var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+            this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
         };
         Statistics.prototype.onData = function (res) {
             var ar = res;
-            //  console.log(res);
+            //   console.log(res);
             //  var out:VOStat[]=[];
             var kiosks = {};
             var dests = {};
@@ -65,7 +68,7 @@ var uplight;
             }
             var colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
             var categ = new CategoriesChart($('#CategoriesChart'), cats, colors);
-            var kiosksChart = new KiosksChart($('#KiosksChart'), kiosks, colors);
+            var kiosksChart = new KiosksChart($('#KiosksChart'), kiosks, colors, this.fromTo);
             var destinTopDestinations = new TopDestinations($('#TopDestinations'), dests);
             var searches = new TopSearches($('#TopSearches'), kw, kb);
             console.log('total ' + n);
@@ -264,11 +267,13 @@ var uplight;
         return VOKs;
     })();
     var KiosksChart = (function () {
-        function KiosksChart(view, clicks, colors) {
+        function KiosksChart(view, clicks, colors, fromto) {
+            //  console.log(clicks);
             var _this = this;
             this.view = view;
             this.clicks = clicks;
             this.colors = colors;
+            this.view.find('[data-id=fromto]:first').text(fromto);
             uplight.RegA.getInstance().connector.getData('kiosks.json').done(function (res) { return _this.onKiosks(res); });
         }
         KiosksChart.prototype.craeateTimeline = function () {
@@ -322,7 +327,7 @@ var uplight;
                 var item = ar[i];
                 var clicks = this.clicks[ar[i].id];
                 if (!clicks)
-                    continue;
+                    clicks = [];
                 clicks = this.convertClicks(clicks);
                 ar[i].clicks = this.mapClicks(timeline, clicks);
                 ar[i].color = this.colors[i];
@@ -339,7 +344,6 @@ var uplight;
             }
             list.html(out);
             this.view.find('[data-id=list]:first').append(list);
-            // console.log(ks);
             var data = {
                 labels: timeline.map(String),
                 datasets: datasets /*[
@@ -366,7 +370,8 @@ var uplight;
                 ]*/
             };
             var canvas = this.view.find('[data-id=canvas]:first');
-            var myLineChart = new Chart(canvas.get(0).getContext("2d")).Line(data, this.getOptions());
+            var ctx = canvas.get(0).getContext("2d");
+            var myLineChart = new Chart(ctx).Line(data, this.getOptions());
         };
         KiosksChart.prototype.getOptions = function () {
             return {

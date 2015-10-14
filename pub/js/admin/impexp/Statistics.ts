@@ -9,6 +9,7 @@ module uplight{
 
         R:RegA;
         private data:VOStat[];
+        private fromTo:string
         constructor(contauner:JQuery){
             this.R = RegA.getInstance();
             contauner.load('htms/admin/Statistics.htm',()=>this.init());
@@ -17,12 +18,16 @@ module uplight{
         private init():void{
            // var today = new Date()
           //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
+
             this.R.connector.getStatistics('-30 days','now').done((res)=>this.onData(res));
+            var today = new Date()
+            var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
+            this.fromTo = 'from '+today.toDateString().substr(4) +' to '+priorDate.toDateString().substr(4);
         }
 
         private onData(res:any):void{
             var ar = res
-         //  console.log(res);
+       //   console.log(res);
           //  var out:VOStat[]=[];
 
             var kiosks:any={};
@@ -65,7 +70,7 @@ module uplight{
             }
             var  colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
             var categ:CategoriesChart  = new CategoriesChart($('#CategoriesChart'),cats,colors);
-            var kiosksChart:KiosksChart = new KiosksChart($('#KiosksChart'),kiosks,colors);
+            var kiosksChart:KiosksChart = new KiosksChart($('#KiosksChart'),kiosks,colors,this.fromTo);
             var destinTopDestinations = new TopDestinations($('#TopDestinations'),dests);
             var searches:TopSearches = new TopSearches($('#TopSearches'),kw,kb);
 
@@ -288,7 +293,12 @@ module uplight{
 
     class KiosksChart{
 
-        constructor(private view:JQuery,private clicks:any,private colors:string[]){
+        constructor(private view:JQuery,private clicks:any,private colors:string[],fromto:string){
+
+
+          //  console.log(clicks);
+
+           this.view.find('[data-id=fromto]:first').text(fromto);
 
             RegA.getInstance().connector.getData('kiosks.json').done((res)=>this.onKiosks(res));
         }
@@ -342,6 +352,7 @@ module uplight{
         }
 
         private onKiosks(res):void{
+
             var timeline:number[]=  this.craeateTimeline();
            var ks= JSON.parse(res);
             var ar = ks;
@@ -352,7 +363,8 @@ module uplight{
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
                 var clicks:number[] = this.clicks[ar[i].id];
-                if(!clicks) continue;
+                if(!clicks) clicks=[];
+
                 clicks = this.convertClicks(clicks);
                 ar[i].clicks = this.mapClicks(timeline,clicks);
                 ar[i].color=this.colors[i];
@@ -368,10 +380,13 @@ module uplight{
                 datasets.push(ds);
 
             }
+
+
             list.html(out);
             this.view.find('[data-id=list]:first').append(list);
 
-           // console.log(ks);
+
+
 
             var data = {
                 labels: timeline.map(String),
@@ -403,7 +418,10 @@ module uplight{
 
 
             var canvas = this.view.find('[data-id=canvas]:first');
-            var myLineChart = new Chart(canvas.get(0).getContext("2d")).Line(data, this.getOptions());
+            var ctx=canvas.get(0).getContext("2d");
+           var myLineChart:any = new Chart(ctx).Line(data, this.getOptions());
+
+
         }
 
         private getOptions():any{

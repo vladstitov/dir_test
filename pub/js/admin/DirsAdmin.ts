@@ -159,8 +159,13 @@ module uplight {
         btnFullView:JQuery;
         message:JQuery;
         messageText:JQuery;
+
         private init(): void {
             this.R.model = new DestinantionsModel();
+            this.R.model.dispatcher.on(this.R.model.CHANGE,()=>{
+                this.R.model.dispatcher.off(this.R.model.CHANGE);
+                this.onHashChange();
+            });
             $(window).on('hashchange', (evt) => this.onHashChange());
             this.menu = new AdminMenu($('#Navigation'));
 
@@ -190,7 +195,6 @@ module uplight {
             this.R.connector.getData('settings.json').done((resp) => {
                 this.R.settings = JSON.parse(resp);
                 this.init();
-                this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
 

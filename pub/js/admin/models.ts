@@ -13,6 +13,7 @@ module uplight{
         imgs:string;
         name: string;
         cats: number[];
+       // catsS:string;
         catsStr:string[];
         pgs: string;
         more: string;
@@ -251,6 +252,7 @@ module uplight{
         getCategoryById(id:number):VOCategory{
             return this.catsIndexed[id];
         }
+
 
         getCategoriesNames(ar:number[]):string[]{
            var out:string[] =[]

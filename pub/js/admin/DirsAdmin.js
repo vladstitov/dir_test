@@ -32,7 +32,6 @@ var uplight;
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
                 _this.init();
-                _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
             var btnLogout = $('#btnLogout').click(function () {
@@ -144,6 +143,10 @@ var uplight;
         Admin.prototype.init = function () {
             var _this = this;
             this.R.model = new uplight.DestinantionsModel();
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+                _this.R.model.dispatcher.off(_this.R.model.CHANGE);
+                _this.onHashChange();
+            });
             $(window).on('hashchange', function (evt) { return _this.onHashChange(); });
             this.menu = new uplight.AdminMenu($('#Navigation'));
             this.preview = $('#Preview');
