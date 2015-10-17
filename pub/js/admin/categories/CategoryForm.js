@@ -15,6 +15,9 @@ var uplight;
             this.btnClose = view.find('[data-id=btnClose]');
             this.btnSave = view.find('[data-id=save]:first');
             this.selectSeq = view.find('[data-id=selectSeq]:first');
+            this.btnBlankIcon = view.find('[data-id=btnBlankIcon]:first').click(function () {
+                _this.icon.attr('class', 'fa fa-fw');
+            });
             this.btnSave.on(CLICK, function () { return _this.onSaveClicked(); });
             this.R.dispatcher.on(this.R.CATEGORY_SELECTED, function (evt, cat) { return _this.onCategorySelected(cat); });
             if (this.model.getCategories())

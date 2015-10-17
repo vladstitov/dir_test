@@ -153,6 +153,9 @@ var uplight;
             this.iconsLibrary.onSelect = function (str) {
                 _this.icon.attr('class', str);
             };
+            this.btnBlankIcon = this.view.find('[data-id=btnBlankIcon]:first').click(function () {
+                _this.icon.attr('class', 'fa fa-fw');
+            });
             this.textEditor = new TextEditor(this.view.find('[data-ctr=TextEditor]:first'));
             this.btnEditIcon.on(CLICK, function () { return _this.onEditIconClick(); });
             this.btnEditText = this.view.find('[data-id=btnEditText]:first').click(function () {

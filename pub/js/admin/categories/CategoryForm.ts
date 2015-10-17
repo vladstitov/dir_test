@@ -14,7 +14,8 @@ module uplight{
         private selectSeq:JQuery
         private icon:JQuery
         private iconsLibrary:JQuery;
-        private btnEditIcon:JQuery
+        private btnEditIcon:JQuery;
+        private btnBlankIcon:JQuery;
 
         private iconPreview:JQuery;
 
@@ -38,12 +39,17 @@ module uplight{
             this.btnSave = view.find('[data-id=save]:first');
             this.selectSeq = view.find('[data-id=selectSeq]:first');
 
+            this.btnBlankIcon = view.find('[data-id=btnBlankIcon]:first').click(()=>{
+                this.icon.attr('class','fa fa-fw');
+            })
+
             this.btnSave.on(CLICK,()=>this.onSaveClicked())
 
             this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat))
 
             if(this.model.getCategories()) this.renderSequance();
             else this.model.dispatcher.on(this.model.CHANGE,()=> this.renderSequance());
+
 
 
             this.iconsLibrary.parent().hide();

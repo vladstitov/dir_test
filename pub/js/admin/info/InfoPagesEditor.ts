@@ -177,6 +177,7 @@ module uplight{
         private  btnEditText:JQuery;
         private textEditor:TextEditor;
 
+        private btnBlankIcon:JQuery;
 
         constructor(){
             this.view= $('#InfoPagesEditor');
@@ -203,7 +204,9 @@ module uplight{
                 this.icon.attr('class',str);
             }
 
-
+            this.btnBlankIcon = this.view.find('[data-id=btnBlankIcon]:first').click(()=>{
+                this.icon.attr('class','fa fa-fw');
+            })
 
             this.textEditor = new TextEditor(this.view.find('[data-ctr=TextEditor]:first'));
 
