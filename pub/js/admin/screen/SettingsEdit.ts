@@ -150,6 +150,7 @@ module uplight{
 
 
         constructor(private container:JQuery){
+            console.log('SettingsEdit');
                 container.load('htms/admin/SettingsEdit.htm',()=>{setTimeout(()=>{this.init()},50)});
                 this.R = RegA.getInstance();
         }

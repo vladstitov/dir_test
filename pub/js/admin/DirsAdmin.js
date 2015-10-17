@@ -128,6 +128,7 @@ var uplight;
                     break;
                 case '#Settings-':
                     this.settingsEdit = new uplight.SettingsEdit(this.content);
+                    this.content.show();
                     break;
                 case '#Heading-S':
                 case '#Backgroun':

@@ -22,7 +22,7 @@ module uplight{
             this.reloadPage();
         }
         constructor(container:JQuery){
-            container.load('js/admin/info/FrontPageEditor.htm',()=>this.init());
+            container.load('htms/admin/FrontPageEditor.htm',()=>this.init());
 
         }
 

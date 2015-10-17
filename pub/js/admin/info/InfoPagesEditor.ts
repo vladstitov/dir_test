@@ -281,7 +281,7 @@ module uplight{
         url:string;
         constructor(content:JQuery){
             this.R=RegA.getInstance();
-            content.load('js/admin/info/InfoPagesEditor.html',()=>this.init())
+            content.load('htms/admin/InfoPagesEditor.html',()=>this.init())
 
 
         }

@@ -1,8 +1,7 @@
 ﻿<?php
 session_start();
-if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']!='admin'){
-	 // header( 'Location:DirectoriesLogin.html' ) ;
-	  echo file_get_contents('DirLogin.html');
+if(!isset($_SESSION['directories_user'])){
+	 echo file_get_contents('DirLogin.html');
 	  exit;
 }
 ?>

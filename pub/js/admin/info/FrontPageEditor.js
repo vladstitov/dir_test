@@ -7,7 +7,7 @@ var uplight;
     var FrontPageEditor = (function () {
         function FrontPageEditor(container) {
             var _this = this;
-            container.load('js/admin/info/FrontPageEditor.htm', function () { return _this.init(); });
+            container.load('htms/admin/FrontPageEditor.htm', function () { return _this.init(); });
         }
         FrontPageEditor.prototype.appendTo = function (container) {
             container.append(this.view);

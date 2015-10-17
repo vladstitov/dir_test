@@ -212,7 +212,7 @@ var uplight;
             this.selectedIndex = -1;
             this.max = 0;
             this.R = uplight.RegA.getInstance();
-            content.load('js/admin/info/InfoPagesEditor.html', function () { return _this.init(); });
+            content.load('htms/admin/InfoPagesEditor.html', function () { return _this.init(); });
         }
         InfoPagesManager.prototype.init = function () {
             var _this = this;

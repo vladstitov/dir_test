@@ -9,7 +9,7 @@ var uplight;
             var _this = this;
             this.settingsURL = 'settings.json';
             this.R = uplight.RegA.getInstance();
-            container.load('js/admin/screen/AttractLoopEdit.html', function () { return _this.init(); });
+            container.load('htms/admin/AttractLoopEdit.html', function () { return _this.init(); });
         }
         AttractLoopEdit.prototype.init = function () {
             var _this = this;

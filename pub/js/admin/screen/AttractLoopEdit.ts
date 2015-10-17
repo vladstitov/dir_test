@@ -38,7 +38,7 @@ module uplight{
 
         constructor(container:JQuery){
             this.R=RegA.getInstance();
-            container.load('js/admin/screen/AttractLoopEdit.html',()=>this.init());
+            container.load('htms/admin/AttractLoopEdit.html',()=>this.init());
         }
 
         private init():void{

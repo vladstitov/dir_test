@@ -137,8 +137,8 @@ module uplight {
                         this.importExport = new ImportExport(this.content);
                         break;
                     case '#Settings-':
-
                         this.settingsEdit = new SettingsEdit(this.content);
+                        this.content.show();
                         break;
                     case '#Heading-S':
                     case '#Backgroun':

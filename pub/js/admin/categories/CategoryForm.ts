@@ -19,6 +19,7 @@ module uplight{
         private iconPreview:JQuery;
 
         private current:VOCategory;
+        onClose:Function;
 
 
         R:RegA;
@@ -26,14 +27,14 @@ module uplight{
               this.R = RegA.getInstance();
 
             this.model = this.R.model;
-            this.view = view
+            this.view = view;
             this.tiName =  view.find('[data-id=tiName]:first');
 
             this.chkEnable = view.find('[data-id=chkEnable]:first').on('click',()=>this.onCheckClick());
             this.icon = view.find('[data-id=icon]:first');
             this.iconsLibrary = view.find('[data-id=iconsLibrary]:first');
             this.btnEditIcon =  view.find('[data-id=btnEditIcon]:first');
-            this.btnClose = view.find('[data-id=btnClose]:first');
+            this.btnClose = view.find('[data-id=btnClose]');
             this.btnSave = view.find('[data-id=save]:first');
             this.selectSeq = view.find('[data-id=selectSeq]:first');
 
@@ -51,7 +52,10 @@ module uplight{
             this.R.connector.getIcons().done((data)=>this.onIconsLoaded(data));
             this.iconPreview=$('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
 
-            this.btnClose.on(CLICK,()=>this.hide());
+            this.btnClose.on(CLICK,()=>{
+                if(this.onClose)this.onClose();
+                this.hide();
+            });
 
             this.hide();
         }
@@ -129,9 +133,10 @@ module uplight{
         }
 
         private onSaveResult(res):void {
-            if(res.success) this.R.msg('Record Saved', this.btnSave);
-             else this.R.msg('ERROR ', this.btnSave);
-
+            if(res.success){
+                this.R.msg('Record Saved', this.btnSave);
+                this.R.model.mapCategories();
+            } else this.R.msg('ERROR ', this.btnSave);
             console.log(res);
         }
 

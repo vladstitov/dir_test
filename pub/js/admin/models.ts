@@ -312,8 +312,14 @@ module uplight{
             var d = $.Deferred();
 
             this.R.connector.saveCategory(vo).done((res)=>{
-                this.setCategories(res);
-                d.resolve(this.getCategories());
+                var result=new VOResult();
+
+                if(this.setCategories(res)) result.success='success';
+                else {
+                    result.error='notarray';
+                    result.result=res.toString();
+                }
+                d.resolve(result);
                // that.mapCategories();
               //  callBack({success:true});
 
@@ -326,8 +332,35 @@ module uplight{
 
         private categories:VOCategory[]
 
+        private addDestinationToCategories(dest:VODestination,cats):void{
+            var ar = dest.cats;
+            if(ar){
+                for(var i=0,n=ar.length;i<n;i++){
+                    var cat:VOCategory = cats[ar[i]]
+                  if(cat){
+                      if(!cat.dests) cat.dests=[]
+                      cat.dests.push(dest.id);
+                  }
+                }
+            }
+        }
 
-        private setCategories(ar:any[]):void{
+        private isCategoriesMapped():boolean{
+            var ar = this.getCategories();
+            for(var i=0,n=ar.length;i<n;i++) if(ar[i].dests) return true;
+            return false;
+        }
+
+        mapCategories():void{
+            if(this.isCategoriesMapped()) return;
+            var cats=this.catsIndexed;
+            var ar = this.getData();
+            for(var i=0,n=ar.length;i<n;i++)this.addDestinationToCategories(ar[i],cats);
+
+        }
+
+        private setCategories(ar:any[]):boolean{
+            if(!Array.isArray(ar)) return false;
             var cats:VOCategory[]=[];
             var catInd =[];
             for(var i=0,n=ar.length;i<n;i++){
@@ -338,6 +371,7 @@ module uplight{
             this.categories=cats;
             this.catsIndexed = catInd;
 
+            return true;
         }
         getCategories():VOCategory[]{
             return this.categories

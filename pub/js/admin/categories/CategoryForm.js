@@ -12,7 +12,7 @@ var uplight;
             this.icon = view.find('[data-id=icon]:first');
             this.iconsLibrary = view.find('[data-id=iconsLibrary]:first');
             this.btnEditIcon = view.find('[data-id=btnEditIcon]:first');
-            this.btnClose = view.find('[data-id=btnClose]:first');
+            this.btnClose = view.find('[data-id=btnClose]');
             this.btnSave = view.find('[data-id=save]:first');
             this.selectSeq = view.find('[data-id=selectSeq]:first');
             this.btnSave.on(CLICK, function () { return _this.onSaveClicked(); });
@@ -26,7 +26,11 @@ var uplight;
             this.icon.parent().on(CLICK, function () { return _this.onEditIconClick(); });
             this.R.connector.getIcons().done(function (data) { return _this.onIconsLoaded(data); });
             this.iconPreview = $('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
-            this.btnClose.on(CLICK, function () { return _this.hide(); });
+            this.btnClose.on(CLICK, function () {
+                if (_this.onClose)
+                    _this.onClose();
+                _this.hide();
+            });
             this.hide();
         }
         CategoryForm.prototype.toggle = function () {
@@ -101,8 +105,10 @@ var uplight;
                 this.showLibrary();
         };
         CategoryForm.prototype.onSaveResult = function (res) {
-            if (res.success)
+            if (res.success) {
                 this.R.msg('Record Saved', this.btnSave);
+                this.R.model.mapCategories();
+            }
             else
                 this.R.msg('ERROR ', this.btnSave);
             console.log(res);

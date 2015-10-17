@@ -9,14 +9,27 @@ var uplight;
             this.R = uplight.RegA.getInstance();
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('js/admin/categories/CategoriesManager.htm', function () {
+            container.load('htms/admin/CategoriesManager.htm', function () {
                 _this.init();
             });
         }
+        CategoriesManager.prototype.show = function () {
+            this.isVisible = true;
+            this.view.show('fast');
+        };
+        CategoriesManager.prototype.hide = function () {
+            if (this.isVisible) {
+                this.isVisible = false;
+                this.view.hide('fast');
+            }
+        };
         CategoriesManager.prototype.init = function () {
             var _this = this;
             this.view = $('#CategoriesManager');
             this.categoryForm = new uplight.CategoryForm($('#CategoryForm'));
+            this.categoryForm.onClose = function () {
+                _this.show();
+            };
             this.list = new uplight.CategoriesList($('#CategoriesList'));
             this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
@@ -26,6 +39,7 @@ var uplight;
             this.btnDel = $('#CategoriesView [data-id=btnDel]').on(CLICK, function () { return _this.onDelClicked(); });
             this.total = this.view.find('[data-id=total]');
             this.title = this.view.find('[data-id=title]');
+            this.isVisible = true;
         };
         CategoriesManager.prototype.onModelChanged = function () {
             // this.editCategories.renderList();
@@ -40,7 +54,8 @@ var uplight;
             this.categoryForm.show();
         };
         CategoriesManager.prototype.onEditClicked = function () {
-            this.categoryForm.toggle();
+            this.categoryForm.show();
+            this.hide();
         };
         CategoriesManager.prototype.onDeleteSuccess = function (res) {
             console.log(res);

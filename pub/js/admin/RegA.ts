@@ -116,10 +116,7 @@ module uplight{
 
     }
     export class VOCategory {
-        constructor(obj:any){
-            for(var str in obj) this[str]=obj[str];
-            if(!this.dests) this.dests=[];
-        }
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
         id: number;
         sort: number;
         label: string;

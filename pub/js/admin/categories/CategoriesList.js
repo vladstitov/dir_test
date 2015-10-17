@@ -56,6 +56,7 @@ var uplight;
             this.renderList();
         };
         CategoriesList.prototype.renderList = function () {
+            this.R.model.mapCategories();
             var ar = this.R.model.getCategories();
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -65,10 +66,11 @@ var uplight;
             this.data = ar;
         };
         CategoriesList.prototype.renderItem = function (item, i) {
-            if (!item.dests)
-                item.dests = [];
+            var total = 0;
+            if (item.dests)
+                total = item.dests.length;
             //if (this.isChange) return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" contentEditable="true">' + item.label + '</div></li>';
-            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td class="name">' + item.label + '</td>' + '<td class="seq">' + item.sort + '</td>' + '<td class="recs">' + item.dests.length + '</td>' + '</tr>';
+            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td class="name">' + item.label + '</td>' + '<td class="seq">' + item.sort + '</td>' + '<td class="recs">' + total + '</td>' + '</tr>';
             // return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" >' + item.label + '</div></li>';
         };
         return CategoriesList;

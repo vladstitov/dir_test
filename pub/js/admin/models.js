@@ -232,15 +232,51 @@ var uplight;
             var _this = this;
             var d = $.Deferred();
             this.R.connector.saveCategory(vo).done(function (res) {
-                _this.setCategories(res);
-                d.resolve(_this.getCategories());
+                var result = new uplight.VOResult();
+                if (_this.setCategories(res))
+                    result.success = 'success';
+                else {
+                    result.error = 'notarray';
+                    result.result = res.toString();
+                }
+                d.resolve(result);
                 // that.mapCategories();
                 //  callBack({success:true});
                 _this.dispatcher.triggerHandler(_this.CATEGORIES_CAHANGE, res);
             });
             return d.promise();
         };
+        DestinantionsModel.prototype.addDestinationToCategories = function (dest, cats) {
+            var ar = dest.cats;
+            if (ar) {
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    var cat = cats[ar[i]];
+                    if (cat) {
+                        if (!cat.dests)
+                            cat.dests = [];
+                        cat.dests.push(dest.id);
+                    }
+                }
+            }
+        };
+        DestinantionsModel.prototype.isCategoriesMapped = function () {
+            var ar = this.getCategories();
+            for (var i = 0, n = ar.length; i < n; i++)
+                if (ar[i].dests)
+                    return true;
+            return false;
+        };
+        DestinantionsModel.prototype.mapCategories = function () {
+            if (this.isCategoriesMapped())
+                return;
+            var cats = this.catsIndexed;
+            var ar = this.getData();
+            for (var i = 0, n = ar.length; i < n; i++)
+                this.addDestinationToCategories(ar[i], cats);
+        };
         DestinantionsModel.prototype.setCategories = function (ar) {
+            if (!Array.isArray(ar))
+                return false;
             var cats = [];
             var catInd = [];
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -250,6 +286,7 @@ var uplight;
             }
             this.categories = cats;
             this.catsIndexed = catInd;
+            return true;
         };
         DestinantionsModel.prototype.getCategories = function () {
             return this.categories;

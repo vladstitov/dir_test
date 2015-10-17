@@ -33,7 +33,7 @@ module uplight{
         this.R=RegA.getInstance();
         var that=this;
         if(!this.R.model)this.R.model = new DestinantionsModel();
-        container.load('js/admin/categories/CategoryListing.htm',function(){that.init();})
+        container.load('htms/admin/CategoryListing.htm',function(){that.init();})
 
         }
 

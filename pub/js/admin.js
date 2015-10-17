@@ -101,8 +101,6 @@ var uplight;
         function VOCategory(obj) {
             for (var str in obj)
                 this[str] = obj[str];
-            if (!this.dests)
-                this.dests = [];
         }
         return VOCategory;
     })();
@@ -400,8 +398,15 @@ var uplight;
             var d = $.Deferred();
 
             this.R.connector.saveCategory(vo).done(function (res) {
-                _this.setCategories(res);
-                d.resolve(_this.getCategories());
+                var result = new uplight.VOResult();
+
+                if (_this.setCategories(res))
+                    result.success = 'success';
+                else {
+                    result.error = 'notarray';
+                    result.result = res.toString();
+                }
+                d.resolve(result);
 
                 // that.mapCategories();
                 //  callBack({success:true});
@@ -411,7 +416,40 @@ var uplight;
             return d.promise();
         };
 
+        DestinantionsModel.prototype.addDestinationToCategories = function (dest, cats) {
+            var ar = dest.cats;
+            if (ar) {
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    var cat = cats[ar[i]];
+                    if (cat) {
+                        if (!cat.dests)
+                            cat.dests = [];
+                        cat.dests.push(dest.id);
+                    }
+                }
+            }
+        };
+
+        DestinantionsModel.prototype.isCategoriesMapped = function () {
+            var ar = this.getCategories();
+            for (var i = 0, n = ar.length; i < n; i++)
+                if (ar[i].dests)
+                    return true;
+            return false;
+        };
+
+        DestinantionsModel.prototype.mapCategories = function () {
+            if (this.isCategoriesMapped())
+                return;
+            var cats = this.catsIndexed;
+            var ar = this.getData();
+            for (var i = 0, n = ar.length; i < n; i++)
+                this.addDestinationToCategories(ar[i], cats);
+        };
+
         DestinantionsModel.prototype.setCategories = function (ar) {
+            if (!Array.isArray(ar))
+                return false;
             var cats = [];
             var catInd = [];
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -421,6 +459,8 @@ var uplight;
             }
             this.categories = cats;
             this.catsIndexed = catInd;
+
+            return true;
         };
         DestinantionsModel.prototype.getCategories = function () {
             return this.categories;
@@ -1785,7 +1825,7 @@ var uplight;
             this.selectedIndex = -1;
             this.max = 0;
             this.R = uplight.RegA.getInstance();
-            content.load('js/admin/info/InfoPagesEditor.html', function () {
+            content.load('htms/admin/InfoPagesEditor.html', function () {
                 return _this.init();
             });
         }
@@ -1947,7 +1987,7 @@ var uplight;
     var FrontPageEditor = (function () {
         function FrontPageEditor(container) {
             var _this = this;
-            container.load('js/admin/info/FrontPageEditor.htm', function () {
+            container.load('htms/admin/FrontPageEditor.htm', function () {
                 return _this.init();
             });
         }
@@ -3128,7 +3168,7 @@ var uplight;
             this.icon = view.find('[data-id=icon]:first');
             this.iconsLibrary = view.find('[data-id=iconsLibrary]:first');
             this.btnEditIcon = view.find('[data-id=btnEditIcon]:first');
-            this.btnClose = view.find('[data-id=btnClose]:first');
+            this.btnClose = view.find('[data-id=btnClose]');
             this.btnSave = view.find('[data-id=save]:first');
             this.selectSeq = view.find('[data-id=selectSeq]:first');
 
@@ -3160,7 +3200,9 @@ var uplight;
             this.iconPreview = $('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
 
             this.btnClose.on(CLICK, function () {
-                return _this.hide();
+                if (_this.onClose)
+                    _this.onClose();
+                _this.hide();
             });
 
             this.hide();
@@ -3249,11 +3291,11 @@ var uplight;
         };
 
         CategoryForm.prototype.onSaveResult = function (res) {
-            if (res.success)
+            if (res.success) {
                 this.R.msg('Record Saved', this.btnSave);
-            else
+                this.R.model.mapCategories();
+            } else
                 this.R.msg('ERROR ', this.btnSave);
-
             console.log(res);
         };
 
@@ -3406,6 +3448,7 @@ var uplight;
         };
 
         CategoriesList.prototype.renderList = function () {
+            this.R.model.mapCategories();
             var ar = this.R.model.getCategories();
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -3416,11 +3459,12 @@ var uplight;
         };
 
         CategoriesList.prototype.renderItem = function (item, i) {
-            if (!item.dests)
-                item.dests = [];
+            var total = 0;
+            if (item.dests)
+                total = item.dests.length;
 
             //if (this.isChange) return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" contentEditable="true">' + item.label + '</div></li>';
-            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td class="name">' + item.label + '</td>' + '<td class="seq">' + item.sort + '</td>' + '<td class="recs">' + item.dests.length + '</td>' + '</tr>';
+            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td class="name">' + item.label + '</td>' + '<td class="seq">' + item.sort + '</td>' + '<td class="recs">' + total + '</td>' + '</tr>';
             // return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" >' + item.label + '</div></li>';
         };
         return CategoriesList;
@@ -3438,14 +3482,28 @@ var uplight;
             this.R = uplight.RegA.getInstance();
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('js/admin/categories/CategoriesManager.htm', function () {
+            container.load('htms/admin/CategoriesManager.htm', function () {
                 _this.init();
             });
         }
+        CategoriesManager.prototype.show = function () {
+            this.isVisible = true;
+            this.view.show('fast');
+        };
+
+        CategoriesManager.prototype.hide = function () {
+            if (this.isVisible) {
+                this.isVisible = false;
+                this.view.hide('fast');
+            }
+        };
         CategoriesManager.prototype.init = function () {
             var _this = this;
             this.view = $('#CategoriesManager');
             this.categoryForm = new uplight.CategoryForm($('#CategoryForm'));
+            this.categoryForm.onClose = function () {
+                _this.show();
+            };
             this.list = new uplight.CategoriesList($('#CategoriesList'));
             this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
@@ -3462,6 +3520,7 @@ var uplight;
             });
             this.total = this.view.find('[data-id=total]');
             this.title = this.view.find('[data-id=title]');
+            this.isVisible = true;
         };
 
         CategoriesManager.prototype.onModelChanged = function () {
@@ -3479,7 +3538,8 @@ var uplight;
         };
 
         CategoriesManager.prototype.onEditClicked = function () {
-            this.categoryForm.toggle();
+            this.categoryForm.show();
+            this.hide();
         };
 
         CategoriesManager.prototype.onDeleteSuccess = function (res) {
@@ -3844,7 +3904,7 @@ var uplight;
             var that = this;
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('js/admin/categories/CategoryListing.htm', function () {
+            container.load('htms/admin/CategoryListing.htm', function () {
                 that.init();
             });
         }
@@ -3915,18 +3975,16 @@ var uplight;
     var ImportExport = (function () {
         function ImportExport(container) {
             var _this = this;
+            this.headers = ['UID', 'Name', 'Unit', 'Info', 'Categories', 'Keywords', 'Table', 'Meta', 'Thumbnail', 'Images'];
             this.R = uplight.RegA.getInstance();
-
-            // if(!this.R.vo)this.R.vo = new DestinantionsModel();
-            container.load('js/admin/impexp/ImportExport.htm', function () {
+            container.load('htms/admin/ImportExport.htm', function () {
                 _this.init();
             });
-            // this.init();
         }
         ImportExport.prototype.init = function () {
             var _this = this;
             this.view = $('#ImportExport');
-            this.tableView = $('#ImportExport #table-container');
+            this.tableView = $('#table-container');
             this.table = $('<table>').addClass('table table-bordered').appendTo(this.tableView);
             this.tbody = $('<tbody>').appendTo(this.table);
             this.total = this.view.find('[data-id=total]');
@@ -3946,16 +4004,40 @@ var uplight;
                 return _this.onUploadClicked();
             });
 
-            this.btnDownload = this.view.find('[data-id=btnDownload]'); //.on(CLICK,()=>this.onDownloadClick());
+            this.btnDownload = this.view.find('[data-id=btnDownload]').on(CLICK, function () {
+                return _this.onDownloadClick();
+            });
 
-            this.btnDownload.attr('href', this.R.connector.service + '?a=importexport.export_CSV');
-
+            // this.btnDownload.attr('href',this.R.connector.service+'?a=importexport.export_CSV');
             this.btnSelect = this.view.find('[data-id=btnImport]').change(function (evt) {
                 _this.onFileSelected(evt.target.files);
             });
 
             this.table.append(this.renderHead());
             this.getData();
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+                return _this.getData();
+            });
+        };
+
+        ImportExport.prototype.convertToArray = function (ar) {
+            var out = [];
+
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                var cats = this.R.model.getCategoriesNames(item.cats).join(',');
+                out.push([item.uid, item.name, item.unit, item.info, cats, item.kws, item.more, item.meta, item.tmb, item.imgs]);
+            }
+            return out;
+        };
+        ImportExport.prototype.onDownloadClick = function () {
+            var _this = this;
+            var ar = this._data;
+            var out = this.convertToArray(this._data);
+            out.unshift(this.headers);
+            $.post(this.R.connector.service + '?a=importexport.saveAsCSV', JSON.stringify(out)).done(function (res) {
+                var idown = $('<iframe>', { id: 'idown', src: _this.R.connector.service + '?a=importexport.get_CSV' }).hide().appendTo('body');
+            });
         };
 
         // private catInd:any;
@@ -3964,49 +4046,58 @@ var uplight;
             // this.catInd = _.indexBy(res,'label');
         };
         ImportExport.prototype.getData = function () {
-            var _this = this;
-            this.R.connector.getCategories().done(function (res) {
-                return _this.onCategories(res);
-            });
-            this.R.connector.exportDestination().done(function (res) {
-                return _this.onDataComplete(res);
-            });
-        };
-
-        ImportExport.prototype.onError = function (res) {
-        };
-        ImportExport.prototype.renderHead = function () {
-            return '<thead><th>UID</th><th>Name</th><th>unit</th><th>Info</th><th>Categories</th>' + '<th>Keywords</th><th>Table</th><th>Pages</th><th>Meta</th></thead><tbody>';
-        };
-        ImportExport.prototype.renderItem = function (item, i) {
-            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + item.cats + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.pgs + '</td><td>' + item.meta + '</td></tr>';
-        };
-
-        ImportExport.prototype.onDataComplete = function (ar) {
-            this._data = ar;
+            this._data = this.R.model.getData();
 
             //    console.log(ar);
             this.renderData();
             this.isNewData = false;
             this.btnUpload.prop('disabled', true);
+            // this.R.connector.getCategories().done((res)=>this.onCategories(res));
+            // this.R.connector.exportDestination().done((res) => this.onDataComplete(res));
         };
 
+        ImportExport.prototype.onError = function (res) {
+            console.log('ERROR ', res);
+        };
+        ImportExport.prototype.renderHead = function () {
+            return '<thead><th>' + this.headers.join('</th><th>') + '</th></thead><tbody>';
+        };
+
+        ImportExport.prototype.renderItem = function (item, i, cats) {
+            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + cats + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.meta + '</td><td>' + item.tmb + '</td><td>' + item.imgs + '</td></tr>';
+        };
+
+        /* private onDataComplete(ar:any[]): void {
+        this._data = ar;
+        //    console.log(ar);
+        this.renderData();
+        this.isNewData = false;
+        this.btnUpload.prop('disabled',true);
+        }*/
         ImportExport.prototype.renderData = function () {
             var out = '';
             var ar = this._data;
 
-            for (var i = 0, n = ar.length; i < n; i++)
-                out += this.renderItem(ar[i], i);
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var cats = '';
+                if (ar[i].cats)
+                    cats = this.R.model.getCategoriesNames(ar[i].cats).join(',');
+                out += this.renderItem(ar[i], i, cats);
+            }
 
             this.tbody.html(out);
             this.total.text(n);
         };
 
         ImportExport.prototype.checkHeaders = function (ar) {
+            if (ar.length < 9)
+                return false;
+
+            return true;
         };
 
         ImportExport.prototype.getCategoryIdbyLabel = function (label) {
-            var ar = this.categories;
+            var ar = this.R.model.getCategories();
             for (var i = 0, n = ar.length; i < n; i++) {
                 if (ar[i].label == label)
                     return ar[i].id;
@@ -4014,48 +4105,33 @@ var uplight;
             return 0;
         };
 
-        ImportExport.prototype.addNewCategory = function (str) {
-            if (this.newCategories.indexOf(str) === -1)
-                this.newCategories.push(str);
-        };
-        ImportExport.prototype.checkCatigories = function (str) {
-            if (str.length < 3)
-                return;
-            var ar = str.split(',');
-            for (var i = 0, n = ar.length; i < n; i++) {
-                if (this.getCategoryIdbyLabel(ar[i]))
-                    ;
-                else
-                    this.addNewCategory(ar[i]);
-            }
-        };
-
         ImportExport.prototype.onCSVComplete = function (res) {
             var ar = res;
-
-            //console.log('onCSVComplete ',res);
+            console.log('onCSVComplete ', res);
             var out = [];
-            this.checkHeaders(res.shift());
-            this.newCategories = [];
-            for (var i = 1, n = ar.length; i < n; i++) {
+            this.checkHeaders(ar.shift());
+
+            console.log(ar);
+            for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                if (item[4])
-                    this.checkCatigories(item[4]);
-                out.push({ uid: item[0], name: item[1], unit: item[2], info: item[3], cats: item[4], kws: item[5], more: item[6], pgs: item[7], meta: item[8] });
+                if (item.length > 9) {
+                    item[4] = this.convertCategories(item[4]);
+                    out.push(new uplight.VODestination({ uid: item[0], name: item[1], unit: item[2], info: item[3], cats: item[4], kws: item[5], more: item[6], meta: item[7], tmb: item[8], imgs: item[9] }));
+                }
             }
+
             this._data = out;
+            console.log('onCSVComplete out ', out);
             this.renderData();
             this.isNewData = true;
             this.btnUpload.prop('disabled', false);
-
-            if (this.newCategories.length)
-                alert('New categories will be added: ' + "\n" + this.newCategories.join("\n"));
+            // if(this.newCategories.length) alert('New categories will be added: '+"\n"+this.newCategories.join("\n"));
         };
 
         ImportExport.prototype.onFileSelected = function (files) {
             var _this = this;
             //  var file: File = files[0];
-            console.log(files);
+            // console.log(files);
             if (files.length === 1) {
                 var form = new FormData();
                 form.append('file', files[0]);
@@ -4066,37 +4142,44 @@ var uplight;
             // console.log(file);
         };
 
-        ImportExport.prototype.createCategories = function (ar, start) {
+        /*
+        
+        private createCategories(ar:string[],start:number):VOCategory[]{
+        var out:VOCategory[]=[];
+        
+        for(var i=0,n=ar.length;i<n;i++){
+        var cat = new VOCategory({id:0});
+        cat.label=ar[i];
+        cat.icon='';
+        cat.enable=1;
+        cat.type=0;
+        cat.sort=i+start;
+        out.push(cat);
+        }
+        
+        return out;
+        }
+        
+        
+        private  collectCategories():VOCategory[]{
+        var cats:string[]=[];
+        var ar = this._data;
+        for(var i=0,n=ar.length;i<n;i++){
+        if(ar[i].cats.length<4) continue;
+        // var ar2 = ar[i].categories;
+        // for(var i2=0,n2=ar2.length;i2<n2;i2++){
+        //  if(cats.indexOf(ar2[i2])===-1)cats.push(ar2[i2]);
+        // }
+        }
+        return this.createCategories(cats,1);
+        
+        }
+        */
+        ImportExport.prototype.convertCategories = function (cats) {
+            if (!cats)
+                return [];
             var out = [];
-
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var cat = new uplight.VOCategory({ id: 0 });
-                cat.label = ar[i];
-                cat.icon = '';
-                cat.enable = 1;
-                cat.type = 0;
-                cat.sort = i + start;
-                out.push(cat);
-            }
-
-            return out;
-        };
-        ImportExport.prototype.collectCategories = function () {
-            var cats = [];
-            var ar = this._data;
-            for (var i = 0, n = ar.length; i < n; i++) {
-                if (ar[i].cats.length < 4)
-                    continue;
-                // var ar2 = ar[i].categories;
-                // for(var i2=0,n2=ar2.length;i2<n2;i2++){
-                //  if(cats.indexOf(ar2[i2])===-1)cats.push(ar2[i2]);
-                // }
-            }
-            return this.createCategories(cats, 1);
-        };
-
-        ImportExport.prototype.convertCategories = function (ar) {
-            var out = [];
+            var ar = cats.split(',');
             for (var i = 0, n = ar.length; i < n; i++) {
                 out.push(this.getCategoryIdbyLabel(ar[i]));
             }
@@ -4111,63 +4194,57 @@ var uplight;
         ImportExport.prototype.sendData = function () {
             var _this = this;
             var ar = this._data;
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var item = ar[i];
-                //if(item.categories)item.cats = this.convertCategories(item.categories);
-            }
-
             var is_overwrite = this.rdOver.prop(CHECKED);
             console.log('sendData total ' + ar.length + ' is_overwrite ' + is_overwrite);
-            this.R.connector.insertdDestinations(JSON.stringify(ar), is_overwrite).done(function (res) {
-                // console.log(res);
-                _this.getData();
-            });
-        };
-        ImportExport.prototype.uploadNewCategories = function () {
-            var _this = this;
-            var is_overwrite = this.rdOver.prop(CHECKED);
-            console.log('is_overwrite ' + is_overwrite);
-            var ar;
-            if (is_overwrite)
-                ar = this.collectCategories();
-            else
-                ar = this.createCategories(this.newCategories, this.categories.length);
-            console.log(ar);
 
-            this.R.connector.insertCategories(ar, is_overwrite).done(function (r) {
-                console.log('insertCategories   ', r);
-                _this.R.connector.getCategories().done(function (res) {
-                    return _this.onNewCategories(res);
-                });
+            for (var i = 0, n = ar.length; i < n; i++) {
+                ar[i].cats = ar[i].cats.join(',');
+            }
+
+            this.R.connector.insertdDestinations(JSON.stringify(ar), is_overwrite).done(function (res) {
+                console.log(res);
+                _this.R.model.refreshData();
             });
         };
+
+        /*   private uploadNewCategories():void{
+        var is_overwrite:boolean = this.rdOver.prop(CHECKED);
+        console.log('is_overwrite '+is_overwrite);
+        var ar:VOCategory[]
+        if(is_overwrite) ar= this.collectCategories();
+        else ar = this.createCategories(this.newCategories,this.categories.length);
+        console.log(ar);
+        
+        this.R.connector.insertCategories(ar,is_overwrite).done((r)=>{
+        console.log('insertCategories   ',r);
+        this.R.connector.getCategories().done((res)=>this.onNewCategories(res));
+        });
+        }*/
         ImportExport.prototype.onUploadClicked = function () {
-            var _this = this;
             console.log('uploding');
             this.btnUpload.prop('disabled', true);
             this.R.msg('Uploading...', this.btnUpload);
-            setTimeout(function () {
-                _this.btnUpload.prop('disabled', false);
-            }, 3000);
-            if (this.newCategories.length)
-                this.uploadNewCategories();
-            else
-                this.sendData();
-        };
 
-        ImportExport.prototype.onUploadComplete = function (res) {
-            console.log(res);
-            if (res.result) {
-                this.R.msg('Complete', this.btnUpload);
-                this._data = null;
-
-                //this.resetButtons();
-                this.getData();
-                this.R.model.refreshData();
-            }
+            // setTimeout(()=>{this.btnUpload.prop('disabled',false)},3000);
+            // if(this.newCategories.length) this.uploadNewCategories();
+            // else
+            this.sendData();
         };
 
         /*
+        private onUploadComplete(res): void {
+        
+        console.log(res);
+        if (res.result) {
+        this.R.msg('Complete', this.btnUpload);
+        this._data = null;
+        //this.resetButtons();
+        this.getData();
+        this.R.model.refreshData();
+        }
+        }
+        
+        
         private renderData(data:VODestination[]): void {
         var out: string = '<thead><th>id</th><th>Name</th><th>Unit</th><th>Personal info</th><th>Categories</th></thead><tbody>';
         for (var i = 0, n = data.length; i < n; i++) out += this.renderItem(data[i]);
@@ -4207,11 +4284,10 @@ var uplight;
         trace(xlsx(file).base64);
         */
         //   }
-        ImportExport.prototype.onImportClick = function (evt) {
-            // this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
-            //$('#ImportExport progress').show();
-        };
-
+        // private onImportClick(evt): void {
+        // this.R.connector.uploadTempFile('uploadFile', (res) => this.onUploadComplete(res), null,this.onProgress);
+        //$('#ImportExport progress').show();
+        // }
         ImportExport.prototype.onProgress = function (evt) {
             console.log(evt);
             if (evt.lengthComputable) {
@@ -4223,14 +4299,15 @@ var uplight;
                 return;
 
             // console.log(this.table.find('.selected').each);
-            var data = this._data;
-            $(this.table.find('.selected').get().reverse()).each(function (ind, el) {
-                if (el.rowIndex) {
-                    data.splice(el.rowIndex - 1, 1);
-                    $(el).remove();
-                }
-            });
-            //  this.renderData(this._data);
+            if (confirm('You want to delete selected records?')) {
+                var data = this._data;
+                $(this.table.find('.selected').get().reverse()).each(function (ind, el) {
+                    if (el.rowIndex) {
+                        data.splice(el.rowIndex - 1, 1);
+                        $(el).remove();
+                    }
+                });
+            }
         };
 
         ImportExport.prototype.onItemClick = function (evt) {
@@ -4259,18 +4336,21 @@ var uplight;
             });
         }
         Statistics.prototype.init = function () {
-            var _this = this;
             // var today = new Date()
             //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
+            var _this = this;
             this.R.connector.getStatistics('-30 days', 'now').done(function (res) {
                 return _this.onData(res);
             });
+            var today = new Date();
+            var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+            this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
         };
 
         Statistics.prototype.onData = function (res) {
             var ar = res;
 
-            //  console.log(res);
+            //   console.log(res);
             //  var out:VOStat[]=[];
             var kiosks = {};
             var dests = {};
@@ -4317,7 +4397,7 @@ var uplight;
             }
             var colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
             var categ = new CategoriesChart($('#CategoriesChart'), cats, colors);
-            var kiosksChart = new KiosksChart($('#KiosksChart'), kiosks, colors);
+            var kiosksChart = new KiosksChart($('#KiosksChart'), kiosks, colors, this.fromTo);
             var destinTopDestinations = new TopDestinations($('#TopDestinations'), dests);
             var searches = new TopSearches($('#TopSearches'), kw, kb);
 
@@ -4539,11 +4619,14 @@ var uplight;
     })();
 
     var KiosksChart = (function () {
-        function KiosksChart(view, clicks, colors) {
+        function KiosksChart(view, clicks, colors, fromto) {
             var _this = this;
             this.view = view;
             this.clicks = clicks;
             this.colors = colors;
+            //  console.log(clicks);
+            this.view.find('[data-id=fromto]:first').text(fromto);
+
             uplight.RegA.getInstance().connector.getData('kiosks.json').done(function (res) {
                 return _this.onKiosks(res);
             });
@@ -4605,7 +4688,8 @@ var uplight;
                 var item = ar[i];
                 var clicks = this.clicks[ar[i].id];
                 if (!clicks)
-                    continue;
+                    clicks = [];
+
                 clicks = this.convertClicks(clicks);
                 ar[i].clicks = this.mapClicks(timeline, clicks);
                 ar[i].color = this.colors[i];
@@ -4620,17 +4704,18 @@ var uplight;
                 ds.data = ar[i].clicks;
                 datasets.push(ds);
             }
+
             list.html(out);
             this.view.find('[data-id=list]:first').append(list);
 
-            // console.log(ks);
             var data = {
                 labels: timeline.map(String),
                 datasets: datasets
             };
 
             var canvas = this.view.find('[data-id=canvas]:first');
-            var myLineChart = new Chart(canvas.get(0).getContext("2d")).Line(data, this.getOptions());
+            var ctx = canvas.get(0).getContext("2d");
+            var myLineChart = new Chart(ctx).Line(data, this.getOptions());
         };
 
         KiosksChart.prototype.getOptions = function () {
@@ -5322,6 +5407,7 @@ var uplight;
         function SettingsEdit(container) {
             var _this = this;
             this.container = container;
+            console.log('SettingsEdit');
             container.load('htms/admin/SettingsEdit.htm', function () {
                 setTimeout(function () {
                     _this.init();
@@ -5434,7 +5520,7 @@ var uplight;
             var _this = this;
             this.settingsURL = 'settings.json';
             this.R = uplight.RegA.getInstance();
-            container.load('js/admin/screen/AttractLoopEdit.html', function () {
+            container.load('htms/admin/AttractLoopEdit.html', function () {
                 return _this.init();
             });
         }
@@ -5763,7 +5849,6 @@ var uplight;
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
                 _this.init();
-                _this.onHashChange();
                 //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
             });
 
@@ -5873,6 +5958,7 @@ var uplight;
                     break;
                 case '#Settings-':
                     this.settingsEdit = new uplight.SettingsEdit(this.content);
+                    this.content.show();
                     break;
                 case '#Heading-S':
                 case '#Backgroun':
@@ -5889,6 +5975,10 @@ var uplight;
         Admin.prototype.init = function () {
             var _this = this;
             this.R.model = new uplight.DestinantionsModel();
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+                _this.R.model.dispatcher.off(_this.R.model.CHANGE);
+                _this.onHashChange();
+            });
             $(window).on('hashchange', function (evt) {
                 return _this.onHashChange();
             });

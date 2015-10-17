@@ -12,7 +12,7 @@ module uplight {
         constructor(container:JQuery) {
             this.R=RegA.getInstance();
             if (!this.R.model) this.R.model = new DestinantionsModel();
-            container.load('js/admin/categories/CategoriesManager.htm',()=>{this.init()})
+            container.load('htms/admin/CategoriesManager.htm',()=>{this.init()})
         }
 
         
@@ -32,9 +32,24 @@ module uplight {
 
         R:RegA
 
+        private isVisible:boolean
+        show():void{
+            this.isVisible = true;
+            this.view.show('fast');
+        }
+
+        hide():void{
+            if(this.isVisible){
+                this.isVisible = false;
+                this.view.hide('fast');
+            }
+        }
         private init(): void {
             this.view = $('#CategoriesManager');
             this.categoryForm= new CategoryForm($('#CategoryForm'));
+            this.categoryForm.onClose=()=>{
+                this.show();
+            }
             this.list = new CategoriesList($('#CategoriesList'));
             this.R.model.dispatcher.on(this.R.model.CHANGE,()=>{this.onModelChanged()});
 
@@ -43,7 +58,7 @@ module uplight {
             this.btnDel = $('#CategoriesView [data-id=btnDel]').on(CLICK, () => this.onDelClicked());
             this.total = this.view.find('[data-id=total]');
             this.title = this.view.find('[data-id=title]');
-
+            this.isVisible=true;
         }
 
 
@@ -70,8 +85,8 @@ module uplight {
 
 
         private onEditClicked(): void {
-            this.categoryForm.toggle();
-
+            this.categoryForm.show();
+            this.hide();
         }
 
 

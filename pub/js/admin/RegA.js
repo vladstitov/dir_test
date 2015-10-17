@@ -89,8 +89,6 @@ var uplight;
         function VOCategory(obj) {
             for (var str in obj)
                 this[str] = obj[str];
-            if (!this.dests)
-                this.dests = [];
         }
         return VOCategory;
     })();

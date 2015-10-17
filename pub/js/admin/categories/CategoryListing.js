@@ -13,7 +13,7 @@ var uplight;
             var that = this;
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('js/admin/categories/CategoryListing.htm', function () {
+            container.load('htms/admin/CategoryListing.htm', function () {
                 that.init();
             });
         }
