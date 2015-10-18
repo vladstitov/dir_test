@@ -62,6 +62,7 @@
                         <span class="fa fa-edit"> </span>
                         <span>Edit text</span>
                     </a>
+
                     <div class="form-group col-sm-4">
 
                     </div>
@@ -91,8 +92,16 @@
 
                         </div>
                         <div class="panel-body hidden" data-ctr="TextEditor"  >
-                            <label >Text Editor</label>
-                            <a class="btn pull-right" title="Close icons library" data-id="btnCloseT"><span class="fa fa-close"></span> Close Editor</a>
+                            <label >Text Editor</label>&nbsp;&nbsp;&nbsp;
+                            <a class="btn" data-id="btnFromTemplate" title="New From Template">
+                                <span class="fa fa-file-text-o"> </span>
+                                <span>New From Template</span>
+                            </a>
+                            <select data-id="selTemplate" class="hidden">
+
+                            </select>
+                            <a class="btn pull-right" title="Close Editor" data-id="btnCloseT"><span class="fa fa-close"></span> Close Editor</a>
+                            <a class="btn pull-right" title="Disregard changes" data-id="btnDisregard"><span class="fa fa-close"></span> Disregard changes</a>
                             <div id="TextEditorPages">
                                 <style>
                                     #PageBody{

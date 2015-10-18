@@ -84,6 +84,9 @@ var uplight;
             this.editor.addInstance('PageBody');
             this.content = $('#PageBody');
             this.content.width(730).height(1100);
+            this.btnDisregard = view.find('[data-id=btnDisregard]:first').click(function () {
+                _this.loadPage(_this.data);
+            });
         }
         TextEditor.prototype.show = function () {
             if (!this.isVis) {
@@ -108,12 +111,15 @@ var uplight;
         };
         TextEditor.prototype.setData = function (data) {
             this.data = data;
-            this.load();
+            this.loadPage(data);
         };
-        TextEditor.prototype.load = function () {
-            $('#PageBody').load(this.data + '?' + (new Date()).getSeconds(), function (res) {
-                console.log(res);
-            });
+        TextEditor.prototype.loadPage = function (url) {
+            if (url)
+                $('#PageBody').load(url + '?' + (new Date()).getSeconds(), function (res) {
+                    //console.log(res);
+                });
+            else
+                $('#PageBody').html('');
             // nicEditors.findEditor(this.contId.substr(1)).setContent(resp);
         };
         TextEditor.prototype.savePage = function (url) {
@@ -156,6 +162,14 @@ var uplight;
             this.btnBlankIcon = this.view.find('[data-id=btnBlankIcon]:first').click(function () {
                 _this.icon.attr('class', 'fa fa-fw');
             });
+            this.btnFromTemplate = this.view.find('[data-id=btnFromTemplate]:first').click(function () {
+                if (!_this.selTemplate)
+                    _this.selTemplate = _this.createSelect();
+                if (_this.selTemplate.hasClass(HIDDEN))
+                    _this.selTemplate.removeClass(HIDDEN);
+                else
+                    _this.selTemplate.addClass(HIDDEN);
+            });
             this.textEditor = new TextEditor(this.view.find('[data-ctr=TextEditor]:first'));
             this.btnEditIcon.on(CLICK, function () { return _this.onEditIconClick(); });
             this.btnEditText = this.view.find('[data-id=btnEditText]:first').click(function () {
@@ -165,6 +179,28 @@ var uplight;
             this.icon.parent().on(CLICK, function () { return _this.onEditIconClick(); });
             //this.iconPreview=$('<div>').addClass('absolute preview').appendTo(this.iconsLibrary.view.parent());
         }
+        InfoEditor.prototype.createSelect = function () {
+            var _this = this;
+            var selTemplate = this.view.find('[data-id=selTemplate]:first').change(function () {
+                var url = _this.selTemplate.val();
+                _this.textEditor.loadPage(url);
+            });
+            this.R.connector.getData('pages_templates.json').done(function (res) {
+                console.log(res);
+                var ar = JSON.parse(res);
+                if (!Array.isArray(ar)) {
+                    alert('Error loading templates');
+                    return;
+                }
+                var out = '<option></option>';
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    var item = ar[i];
+                    out += '<option value="' + item.url + '">' + item.name + '</option>';
+                }
+                _this.selTemplate.html(out);
+            });
+            return selTemplate;
+        };
         InfoEditor.prototype.onEditIconClick = function () {
             this.iconsLibrary.toggle();
             this.textEditor.hide();

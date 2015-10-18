@@ -118,16 +118,16 @@ module uplight{
         }
         setData(data:any){
             this.data= data
-            this.load();
+            this.loadPage(data);
         }
-        load():void{
-            $('#PageBody').load(this.data+'?'+(new Date()).getSeconds(),(res)=>{
-                console.log(res);
+        loadPage(url:string):void{
+            if(url) $('#PageBody').load(url+'?'+(new Date()).getSeconds(),(res)=>{
+                //console.log(res);
             })
+            else $('#PageBody').html('');
 // nicEditors.findEditor(this.contId.substr(1)).setContent(resp);
 
         }
-
 
         savePage(url):JQueryPromise<VOResult>{
             return this.R.connector.savePage(url,this.content.html());
@@ -139,6 +139,7 @@ module uplight{
 
 
         private editor:nicEditor;
+        private btnDisregard:JQuery
         R:RegA
         content:JQuery
         constructor(private view:JQuery){
@@ -152,6 +153,9 @@ module uplight{
             this.content = $('#PageBody');
             this.content.width(730).height(1100);
 
+            this.btnDisregard= view.find('[data-id=btnDisregard]:first').click(()=>{
+                this.loadPage(this.data);
+            })
 
 
         }
@@ -176,6 +180,8 @@ module uplight{
         private chkEnabled:JQuery
         private  btnEditText:JQuery;
         private textEditor:TextEditor;
+        private selTemplate:JQuery;
+        private btnFromTemplate:JQuery;
 
         private btnBlankIcon:JQuery;
 
@@ -208,6 +214,13 @@ module uplight{
                 this.icon.attr('class','fa fa-fw');
             })
 
+            this.btnFromTemplate = this.view.find('[data-id=btnFromTemplate]:first').click(()=>{
+                if(!this.selTemplate)this.selTemplate = this.createSelect();
+                if(this.selTemplate.hasClass(HIDDEN)) this.selTemplate.removeClass(HIDDEN);
+                else this.selTemplate.addClass(HIDDEN);
+            })
+
+
             this.textEditor = new TextEditor(this.view.find('[data-ctr=TextEditor]:first'));
 
 
@@ -223,6 +236,33 @@ module uplight{
             //this.iconPreview=$('<div>').addClass('absolute preview').appendTo(this.iconsLibrary.view.parent());
 
         }
+
+
+        private createSelect():JQuery{
+           var selTemplate= this.view.find('[data-id=selTemplate]:first').change(()=>{
+                    var url=this.selTemplate.val();
+
+               this.textEditor.loadPage(url);
+            })
+
+            this.R.connector.getData('pages_templates.json').done((res)=>{
+                console.log(res);
+                var ar = JSON.parse(res);
+                if(!Array.isArray(ar)){
+                    alert('Error loading templates');
+                  return;
+                }
+                var out='<option></option>';
+                for(var i=0,n=ar.length;i<n;i++){
+                    var item = ar[i];
+                    out+='<option value="'+item.url+'">'+item.name+'</option>';
+                }
+                this.selTemplate.html(out);
+
+            })
+            return selTemplate;
+        }
+
         private onEditIconClick():void{
            this.iconsLibrary.toggle();
             this.textEditor.hide();

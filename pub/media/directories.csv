@@ -1,0 +1,21 @@
+UID,Name,Unit,Info,Categories,Keywords,Table,Meta,Thumbnail,Images
+Person2,"Person 2",123,,People,,"Phone	555 555 6677
+email	email@webmail.com",,details/img/undefined_1444007003.png,
+p3,"Person 3 images",324,,People,,"Phone	444 555 5578
+email	personemail@emailsite.com",,,"details/img/p3_1444007624.png,details/img/p3_1444007630.png,details/img/p3_1444007649.png,details/img/p3_1444007664.png"
+Person4,"Person 4",564,,,,"Phone	567 786 6766",,details/img/_1444008596.png,"details/img/undefined_1444008539.png,details/img/undefined_1444008518.png,details/img/undefined_1444008554.png,details/img/undefined_1444008573.png"
+Person5,"Person 5",435,"small info about Person5","People,Category 1",,"Phone	444 555 6666
+email	email@email.com",,,
+a1,"Tenant 1",122,"Some small info about Tenant 1 in one line","Category 3,Tenants",,"Phone	456 854 5677
+Fax	456 286 4567",,,
+u2,"Tenant 2",125,,"Tenants,Category 2",,"Phone	678 987 7890
+Fax	678 098 6545
+Website	http://companywebsite.com",,,
+u3,"Tenant 3",125,,Tenants,,"Phone	678 987 7890
+Fax	678 098 6545
+Website	http://companywebsite.com",,details/img/u3_1444006555.png,
+Tenant4Contactandlogo,"Tenant 4 ",234,,Tenants,,"Phone	555 555 5555
+Cell	444 565 5655",,details/img/_1444006536.png,
+Tenant5,"Tenant 5 ",77,"one line info for tenant 5","Tenants,Category 3",,"Phone	 676 666 6666
+email	support@tenantwebsite.com",,details/img/undefined_1444009224.png,
+Tenant6,"Tenant 6 ",45,,"Tenants,Category 2",,"Phone	678 777 7777",,details/img/Tenant6_1444009042.png,
