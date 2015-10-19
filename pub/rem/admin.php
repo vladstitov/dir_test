@@ -27,10 +27,26 @@ $a=explode('.',$get['a']);
 $result = false;
 
 
-switch(array_shift($a)){	
-	case 'get_statistics':	
-		$result = utils()->getStatistics($get);
+switch(array_shift($a)){
+	case 'test':
+		include 'cl/Statistics.php';
+		$ctr= new Statistics();
+		$ar=json_decode('[{"id":4,"type":"kiosk"},{"id":6,"type":"kiosk"}]');		
+		//$result = $ctr->getCount($ar,'-30 days','now');
+		$result = $ctr->getCount($ar,0,'now');
+		
+	break;	
+	case 'get_statistics':
+		include 'cl/Statistics.php';
+		$ctr = new Statistics();
+		$result = $ctr->getStatistics();
 	break;
+	case 'get_usage':
+		include 'cl/Statistics.php';		
+		$ctr = new Statistics();
+		$result = $ctr->getUsage($get);
+	break;
+	
 	case 'upload_image':	
 		$result = utils()->uploadImage($_FILES["file"],$get['folder'],$get['prefix']);	
 	break;

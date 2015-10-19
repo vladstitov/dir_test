@@ -10,7 +10,7 @@ class Utils{
 	}
 	public function getStatistics($get){
 		$from=strtotime($get['from']);//1437096651492;
-		$to=strtotime($get['to']);	
+		$to=strtotime($get['to']);
 		return $this->getDB()->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
 	}
 	
