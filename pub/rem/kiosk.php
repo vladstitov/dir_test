@@ -28,14 +28,31 @@ switch(array_shift($a)){
 	break;
 	case 'log_stat':
 		$type=$get['type'];		
-		$val=$get['val'];
-		$who=$get['who'];
-		$id = $get['id'];		
-		$stamp= $get['stamp'];
-		if(strlen($stamp)>10)$stamp= substr($stamp,0,10);
+		$val=$get['val'];	
 		$db=new PDO('sqlite:'.DATA.'statistics.db');
-		$db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY, type CHAR(10),val CHAR(10),who CHAR(10),did INTEGER,stamp INTEGER)');				
-		$res= $db->query("INSERT INTO stats (type,val,who,did,stamp) VALUES ('$type','$val','$who',$id,$stamp)");
+		inserClick($get,$db);
+		switch($type){
+			case 'sr':
+			$res = addRate('destinations',$val,$db);			
+			break;
+			case 'kb':
+			$res = addRate('search',$val,$db);
+			break;
+			case 'kw':
+			$res = addRate('keywords',$val,$db);
+			break;
+			case 'pg':
+			$res = addRate('pages',$val,$db);
+			break;
+			case 'cp':
+			$res = updateCategory($val,'+1',$db);
+			break;
+			case 'cm':
+			$res = updateCategory($val,'-1',$db);
+			break;
+		
+		}	
+		
 		if($res) echo 'OK';
 		else echo json_encode($db->errorInfo());		
 			
@@ -74,7 +91,25 @@ switch(array_shift($a)){
 	break;	
 }
 
+function inserClick($get,$db){
+		$type=substr($get['type'].$get['val'],0,10);	
+		$who = isset($get['who'])?addslashes($get['who']): $_SERVER['REMOTE_ADDR'];	
+		$stamp = isset($get['stamp'])?$get['stamp']:''.time();
+		if(strlen($stamp)>10)$stamp = substr($stamp,0,10);
+		$res= $db->query("INSERT INTO clicks (device,stamp,type) VALUES ('$who',$stamp,'$type')");		
+		return $res;
+}
 
+function addRate($table,$word,$db){	
+		$res = $db->query("UPDATE $table SET rate=rate+1 WHERE value='$word'");
+		if($res->rowCount()===0)$res = $db->query("INSERT INTO $table (value,rate) VALUES('$word',1)");
+		return $res;
+}
+function updateCategory($id,$incr,$db){		
+		$res = $db->query("UPDATE categories SET rate=rate$incr WHERE id=".$id);
+		if($res->rowCount()===0)$res = $db->query("INSERT INTO categories (id,rate) VALUES($id,10000)");
+		return $res;
+}
 
 function trackKiosk($get){	
 	

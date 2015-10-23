@@ -31,6 +31,9 @@ var uplight;
             var settings = u_settings;
             this.R = uplight.Registry.getInstance();
             var conn = new uplight.Connector();
+            conn.who = 'mob';
+            conn.id = 0;
+            this.R.connector = conn;
             // this.R.connector.getSettings((data) => this.onSettings(data));      
             this.R.model = new uplight.Model(conn, function (w) { return _this.warn(w); });
             console.log('Mobile controller');
@@ -114,19 +117,24 @@ var uplight;
                     this.showView(this.gmap.getView());
                     this.detailsLarge.hide();
                     this.menu.hideAll();
+                    this.R.connector.Stat('pg', 'gmap');
                     break;
                 case '#destination':
                     var vo = this.R.model.getDestById(Number(ar[1]));
                     if (!vo)
                         break;
-                    this.detailsLarge.setDestination(vo).setDestination(vo);
+                    this.detailsLarge.setDestination(vo);
+                    ;
                     this.detailsLarge.render().show();
+                    // this.filterPage.hide();
+                    this.R.connector.Stat('sr', vo.id + '');
                     break;
                 case '#category':
                     var v = this.filterPage.showCategory(Number(ar[1]));
                     this.showView(v);
                     this.detailsLarge.hide();
                     this.menu.hideAll();
+                    this.R.connector.Stat('ct', ar[1]);
                     break;
                 case '#page':
                     var num = Number(ar[1]);
@@ -136,6 +144,7 @@ var uplight;
                     // this.filterPage.hide();
                     this.detailsLarge.hide();
                     this.menu.hideAll();
+                    this.R.connector.Stat('pg', num + '');
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();

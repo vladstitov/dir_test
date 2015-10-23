@@ -101,6 +101,10 @@ var uplight;
                     if (vo)
                         this.addDetails(vo, el);
                 }
+                clearTimeout(this.statTimeout);
+                this.statTimeout = setTimeout(function () {
+                    uplight.Registry.getInstance().connector.Stat('sr', el.data('id'));
+                }, 2000);
                 setTimeout(function () {
                     el.addClass(SELECTED);
                 }, 100);
@@ -132,6 +136,10 @@ var uplight;
                     this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
                 else
                     this.renderList(str);
+                clearTimeout(this.statTimeout);
+                this.statTimeout = setTimeout(function () {
+                    uplight.Registry.getInstance().connector.Stat('kb', str);
+                }, 2000);
             }
         };
         FilterPage.prototype.makeCats = function () {

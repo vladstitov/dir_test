@@ -159,6 +159,8 @@ module uplight {
                     if(vo) this.addDetails(vo,el);
                  //  el.children('.details').show('fast');
                 }
+                clearTimeout(this.statTimeout)
+                this.statTimeout = setTimeout(()=>{ Registry.getInstance().connector.Stat('sr',el.data('id'));},2000);
                 setTimeout(function(){el.addClass(SELECTED);},100)
                 this.selected = el;
 
@@ -183,6 +185,7 @@ module uplight {
 
 
 
+        private statTimeout:number
         private doFilter():void{
             var str: string = this.input.val();
 
@@ -194,6 +197,8 @@ module uplight {
                 this.data = Registry.getInstance().model.getDestsByPattern(str);
                 if (this.data.length == 0)  this.list.html('<p class="bgwhite">  Sorry not results for text <b>'+str+'</b></p>');
                 else  this.renderList(str);
+                clearTimeout(this.statTimeout)
+                this.statTimeout = setTimeout(()=>{ Registry.getInstance().connector.Stat('kb',str);},2000);
                 //if (!this.cache[str]) this.cache[str] = this.renderList(str);
                 // this.list.html(this.cache[str]);
             }

@@ -19,8 +19,20 @@ class Statistics{
 			$this->filename = DATA.'statistics.json';
 	}
 
-	function getUsage($get){
-			$devs=array();		
+	function getUsage($devices,$from,$to){
+				$ar = explode(',',$devices);				
+				$from=is_numeric($from)?(int)$from:strtotime($from);//1437096651492;
+				$to=is_numeric($to)?(int)$to:strtotime($to);
+				$out=new stdClass();
+			foreach($ar as $device){
+				$clicks= array();				
+				$res = $this->getDB()->query("SELECT stamp FROM clicks WHERE (stamp BETWEEN $from AND $to) AND device='$device'");
+				if($res) foreach($res->fetchAll(PDO::FETCH_NUM) as $row) $clicks[] = $row[0];
+				$out->$device = $clicks;
+			}
+			return $out;
+			
+			$devs=array();
 			if(isset($get['kiosks'])) foreach(explode(',',$get['kiosks']) as $id) $devs[] = new Device('kiosk',$id);		
 			$from=isset($get['from'])?$get['from']:0;
 			$to = isset($get['to'])?$get['to']:time();
@@ -50,12 +62,13 @@ class Statistics{
 			return $ar;
 	
 	}
-	function getStatistics(){
-				$pub= $this->getPublished();
-				$now= time();				
-				$pub = $this->addStatistics($pub,$now);
-				return $pub;			
-	
+	function getStatistics(){	
+				$out= new stdClass();
+				$out->destinations = $this->getDB()->query('SELECT * FROM destinations ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->keywords = $this->getDB()->query('SELECT * FROM keywords ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->search = $this->getDB()->query('SELECT * FROM search ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->categories = $this->getDB()->query('SELECT * FROM categories')->fetchAll(PDO::FETCH_NUM);				
+				return $out;	
 	}
 		
 	

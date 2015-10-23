@@ -8,6 +8,7 @@ var uplight;
     var Statistics = (function () {
         function Statistics(contauner) {
             var _this = this;
+            this.colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
             this.R = uplight.RegA.getInstance();
             contauner.load('htms/admin/Statistics.htm', function () { return _this.init(); });
         }
@@ -15,85 +16,54 @@ var uplight;
             // var today = new Date()
             //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
             var _this = this;
-            this.R.connector.getStatistics('-30 days', 'now').done(function (res) { return _this.onData(res); });
+            this.R.connector.getStatistics().done(function (res) { return _this.onData(res); });
             var today = new Date();
             var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
             this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
+            var kiosksChart = new KiosksChart($('#KiosksChart'), this.colors, this.fromTo);
         };
         Statistics.prototype.onData = function (res) {
-            var ar = res;
-            //   console.log(res);
-            //  var out:VOStat[]=[];
-            var kiosks = {};
-            var dests = {};
-            var kb = {};
-            var kw = {};
-            var cats = {};
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var st = new uplight.VOStat();
-                var did = ar[i][4];
-                if (!kiosks[did])
-                    kiosks[did] = kiosks[did] = [];
-                var k = kiosks[did];
-                var stamp = Number(ar[i][5]);
-                kiosks[did].push(stamp);
-                var val = ar[i][2];
-                switch (ar[i][1]) {
-                    case 'cp':
-                        if (cats[val] === undefined)
-                            cats[val] = 0;
-                        cats[val]++;
-                        break;
-                    case 'cm':
-                        if (cats[val] === undefined)
-                            cats[val] = 0;
-                        cats[val]--;
-                        break;
-                    case 'kw':
-                        if (kw[val] === undefined)
-                            kw[val] = 0;
-                        kw[val]++;
-                        break;
-                    case 'kb':
-                        if (kb[val] === undefined)
-                            kb[val] = 0;
-                        kb[val]++;
-                        break;
-                    case 'sr':
-                        if (!dests[val])
-                            dests[val] = 1;
-                        dests[val]++;
-                        break;
-                }
-            }
-            var colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
-            var categ = new CategoriesChart($('#CategoriesChart'), cats, colors);
-            var kiosksChart = new KiosksChart($('#KiosksChart'), kiosks, colors, this.fromTo);
+            var cats = res.categories;
+            var dests = res.destinations;
+            //  var search = res.search;
+            console.log(res);
+            var categ = new CategoriesChart($('#CategoriesChart'), cats, this.colors);
             var destinTopDestinations = new TopDestinations($('#TopDestinations'), dests);
-            var searches = new TopSearches($('#TopSearches'), kw, kb);
-            console.log('total ' + n);
+            var searches = new TopSearches($('#TopSearches'), res.search, res.keywords);
         };
         return Statistics;
     })();
     uplight.Statistics = Statistics;
-    var TopSearches = (function () {
-        function TopSearches(view, kw, kb) {
-            this.view = view;
-            var kwa = [];
-            var kba = [];
-            for (var str in kw)
-                kwa.push({ v: str, n: kw[str] });
-            for (var str in kb)
-                kba.push({ v: str, n: kb[str] });
-            kwa = _.sortBy(kwa, 'n').reverse();
-            kba = _.sortBy(kba, 'n').reverse();
-            this.showKewords(kwa);
-            this.showKeyboard(kba);
+    var VoRate = (function () {
+        function VoRate(ar) {
+            this.value = ar[0];
+            this.rate = ar[1];
         }
+        return VoRate;
+    })();
+    uplight.VoRate = VoRate;
+    var TopSearches = (function () {
+        function TopSearches(view, search, keywords) {
+            this.view = view;
+            var kws = this.parseData(keywords);
+            var kbs = this.parseData(search);
+            // console.log(kws);
+            // console.log(kbs);
+            // kws = _.sortBy(kws,'rate').reverse();
+            //  kbs= _.sortBy(kbs,'rate').reverse();
+            this.showKewords(kws);
+            this.showKeyboard(kbs);
+        }
+        TopSearches.prototype.parseData = function (ar) {
+            var out = [];
+            for (var i = 0, n = ar.length; i < n; i++)
+                out.push(new VoRate(ar[i]));
+            return out;
+        };
         TopSearches.prototype.showKewords = function (ar) {
             var out = '<table class="table"><thead><tr><td>Keyword</td><td>Times</td></tr></thead><tbody>';
             for (var i = 0, n = ar.length; i < n; i++) {
-                out += '<tr><td> ' + ar[i].v + ' </td><td> ' + ar[i].n + ' </td></tr>';
+                out += '<tr><td> ' + ar[i].value + ' </td><td> ' + ar[i].rate + ' </td></tr>';
             }
             out += '</tbody></table>';
             this.view.find('[data-id=list1]:first').html(out);
@@ -101,7 +71,7 @@ var uplight;
         TopSearches.prototype.showKeyboard = function (ar) {
             var out = '<table class="table"><thead><tr><td>Search</td><td>Times</td></tr></thead><tbody>';
             for (var i = 0, n = ar.length; i < n; i++) {
-                out += '<tr><td> ' + ar[i].v + ' </td><td> ' + ar[i].n + ' </td></tr>';
+                out += '<tr><td> ' + ar[i].value + ' </td><td> ' + ar[i].rate + ' </td></tr>';
             }
             out += '</tbody></table>';
             this.view.find('[data-id=list2]:first').html(out);
@@ -110,61 +80,57 @@ var uplight;
     })();
     var TopDestinations = (function () {
         function TopDestinations(view, data) {
-            var _this = this;
             this.view = view;
             this.data = data;
-            uplight.RegA.getInstance().connector.getDestinations().done(function (res) { return _this.onDestinations(res); });
+            this.render(data);
+            // RegA.getInstance().connector.getDestinations().done((res:any)=>this.onDestinations(res))
         }
-        TopDestinations.prototype.getData = function () {
-            var data = this.data;
-            var ar = [];
-            for (var str in data) {
-                ar.push({ id: str, val: data[str] });
-            }
-            //console.log(ar);
-            ar = _.sortBy(ar, 'val');
-            ar = ar.reverse();
-            ar = _.first(ar, 20);
-            return ar;
-        };
-        TopDestinations.prototype.onDestinations = function (res) {
+        TopDestinations.prototype.render = function (ar) {
             // console.log(res);
-            var data = this.data;
-            var ar = res;
-            var obj = [];
-            for (var i = 0, n = ar.length; i < n; i++)
-                obj[ar[i].id] = ar[i];
-            ar = this.getData();
+            var dests = uplight.RegA.getInstance().model.getDestinationsIndexed();
             var out = '<thead><tr><td>Clicks</td><td>Name</td><td>Unit</td></tr></thead><tbody>';
             for (var i = 0, n = ar.length; i < n; i++) {
-                var dest = obj[ar[i].id];
-                if (dest) {
-                    dest.clicks = ar[i].val;
-                    out += this.renderItem(dest);
-                }
+                var dest = dests[ar[i][0]];
+                out += this.renderItem(dest, ar[i][1]);
             }
             out += '</tbody>';
             var list = $('<table>').addClass('table').html(out).appendTo(this.view.find('[data-id=list]:first'));
         };
-        TopDestinations.prototype.renderItem = function (item) {
-            return '<tr><td>' + item.clicks + '</td><td>' + item.name + '</td><td >' + item.unit + '</td></tr>';
+        TopDestinations.prototype.renderItem = function (item, clicks) {
+            return '<tr><td>' + clicks + '</td><td>' + item.name + '</td><td >' + item.unit + '</td></tr>';
         };
         return TopDestinations;
     })();
     var CategoriesChart = (function () {
         function CategoriesChart(view, data, colors) {
-            var _this = this;
             this.view = view;
             this.data = data;
             this.colors = colors;
-            uplight.RegA.getInstance().connector.getCategories().done(function (res) { return _this.onCategories(res); });
-        }
-        CategoriesChart.prototype.getCategryStat = function (id) {
-            var ar = this.data;
+            console.log(data);
+            var ar = data;
+            var out = {};
+            var max = 0;
             for (var i = 0, n = ar.length; i < n; i++) {
-                var item = ar[i];
+                var val = ar[i][1];
+                if (isNaN(val))
+                    val = 10000;
+                val = 10000 - val;
+                if (val > max)
+                    max = val;
+                out[ar[i][0]] = val;
             }
-        };
+            for (var str in out)
+                out[str] -= max;
+            this.render(out);
+            //RegA.getInstance().connector.getCategories().done((res)=>this.onCategories(res))
+        }
+        /* private getCategryStat(id:number){
+             var ar = this.data
+             for(var i=0,n=ar.length;i<n;i++){
+                 var item = ar[i];
+             }
+           }
+   */
         /* private parseData(cats:any,data:any):void{
             console.log(data);
              var ar = data
@@ -189,24 +155,30 @@ var uplight;
              return out;
          }
          private cats:any;*/
-        CategoriesChart.prototype.onCategories = function (res) {
-            var data = this.data;
+        CategoriesChart.prototype.render = function (data) {
             var list = $('<ul>');
             var out = '';
-            var ar = res;
+            // var ar = res
             var obj = {};
             var pies = [];
-            var cats = [];
+            var ar = uplight.RegA.getInstance().model.getCategories();
+            var total = 0;
             for (var i = 0, n = ar.length; i < n; i++) {
-                var cat = new uplight.VOCategory(ar[i]);
-                cat.color = this.colors[i];
+                // var cat:VOCategory = new VOCategory(ar[i]);
                 var vo = new VOPie();
-                vo.color = cat.color;
-                vo.label = cat.label;
-                vo.value = 100 + (data[cat.id] || 0);
+                vo.color = this.colors[i];
+                vo.label = ar[i].label;
+                var val = data[ar[i].id] || 1;
+                if (val === 0)
+                    val = 1;
+                val = 1 / Math.abs(val);
+                total += val;
+                vo.value = val; // 100+(data[cat.id] || 0);
                 pies.push(vo);
-                cats.push(cat);
-                out += '<li><span class="glyphicon glyphicon-stop" style="color:' + cat.color + ';"></span> <span> ' + cat.label + '</span></li>';
+                out += '<li><span class="glyphicon glyphicon-stop" style="color:' + vo.color + ';"></span> <span> ' + vo.label + '</span></li>';
+            }
+            for (var i = 0, n = pies.length; i < n; i++) {
+                pies[i].value = pies[i].value / total * 100;
             }
             // console.log(pies);
             // this.parseData(obj,this.data);
@@ -267,11 +239,10 @@ var uplight;
         return VOKs;
     })();
     var KiosksChart = (function () {
-        function KiosksChart(view, clicks, colors, fromto) {
+        function KiosksChart(view, colors, fromto) {
             //  console.log(clicks);
             var _this = this;
             this.view = view;
-            this.clicks = clicks;
             this.colors = colors;
             this.view.find('[data-id=fromto]:first').text(fromto);
             uplight.RegA.getInstance().connector.getData('kiosks.json').done(function (res) { return _this.onKiosks(res); });
@@ -316,22 +287,21 @@ var uplight;
         KiosksChart.prototype.renderKiosk = function (obj) {
             return '<li title="kiosk id ' + obj.id + '"><span class="glyphicon glyphicon-stop" style="color:' + obj.color + ';"></span> <span> ' + obj.name + '</span></li>';
         };
-        KiosksChart.prototype.onKiosks = function (res) {
+        KiosksChart.prototype.onData = function (res) {
+            // console.log('usage',res);
             var timeline = this.craeateTimeline();
-            var ks = JSON.parse(res);
-            var ar = ks;
-            var list = $('<ul>');
-            var out = '';
+            var ar = [];
+            for (var str in res) {
+                var item = this.devices[str];
+                var clicks = this.convertClicks(res[str]);
+                item.clicks = this.mapClicks(timeline, clicks);
+                ar.push(item);
+            }
+            this.drawGraph(timeline.map(String), ar);
+        };
+        KiosksChart.prototype.drawGraph = function (timeline, ar) {
             var datasets = [];
             for (var i = 0, n = ar.length; i < n; i++) {
-                var item = ar[i];
-                var clicks = this.clicks[ar[i].id];
-                if (!clicks)
-                    clicks = [];
-                clicks = this.convertClicks(clicks);
-                ar[i].clicks = this.mapClicks(timeline, clicks);
-                ar[i].color = this.colors[i];
-                out += this.renderKiosk(ar[i]);
                 var ds = {};
                 ds.label = ar[i].name;
                 ds.strokeColor = ar[i].color;
@@ -342,8 +312,43 @@ var uplight;
                 ds.data = ar[i].clicks;
                 datasets.push(ds);
             }
+            var data = {
+                labels: timeline.map(String),
+                datasets: datasets
+            };
+            var canvas = this.view.find('[data-id=canvas]:first');
+            var ctx = canvas.get(0).getContext("2d");
+            var myLineChart = new Chart(ctx).Line(data, this.getOptions());
+        };
+        KiosksChart.prototype.onKiosks = function (res) {
+            var _this = this;
+            var ids = [];
+            // var timeline:number[]=  this.craeateTimeline();
+            var ks = JSON.parse(res);
+            // console.log(ks);
+            var ar = ks;
+            var list = $('<ul>');
+            var out = '';
+            var datasets = [];
+            var devices = {};
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                //  var id:string = 'kiosk'+item.id;
+                ids.push(item.index);
+                devices[item.index] = ar[i];
+                // var clicks:number[] = this.clicks[ar[i].id];
+                //if(!clicks) clicks=[];
+                //clicks = this.convertClicks(clicks);
+                //ar[i].clicks = this.mapClicks(timeline,clicks);
+                ar[i].color = this.colors[i];
+                out += this.renderKiosk(ar[i]);
+            }
+            this.devices = devices;
+            uplight.RegA.getInstance().connector.getUsage(ids.join(','), '-30 days', 'now').done(function (res) { return _this.onData(res); });
             list.html(out);
             this.view.find('[data-id=list]:first').append(list);
+            return;
+            var timeline;
             var data = {
                 labels: timeline.map(String),
                 datasets: datasets /*[

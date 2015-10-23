@@ -43,8 +43,8 @@ switch(array_shift($a)){
 	break;
 	case 'get_usage':
 		include 'cl/Statistics.php';		
-		$ctr = new Statistics();
-		$result = $ctr->getUsage($get);
+		$ctr = new Statistics();		
+		$result = $ctr->getUsage($get['devices'],$get['from'],$get['to']);
 	break;
 	
 	case 'upload_image':	

@@ -60,11 +60,18 @@ var uplight;
         };
         ///////////////////////////////////
         ////////////////////ImportExport////////////////////
-        Connector.prototype.getStatistics = function (from, to) {
+        Connector.prototype.getStatistics = function () {
             var q = {};
             q.a = 'get_statistics';
+            return $.get(this.service, q);
+        };
+        Connector.prototype.getUsage = function (devices, from, to) {
+            var q = {};
+            q.a = 'get_usage';
             q.from = from;
             q.to = to;
+            q.devices = devices;
+            console.log(devices);
             return $.get(this.service, q);
         };
         Connector.prototype.exportDestination = function () {

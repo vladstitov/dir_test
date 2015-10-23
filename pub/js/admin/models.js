@@ -154,6 +154,9 @@ var uplight;
         DestinantionsModel.prototype.getData = function () {
             return this._data;
         };
+        DestinantionsModel.prototype.getDestinationsIndexed = function () {
+            return this.destInex;
+        };
         DestinantionsModel.prototype.getUnassigned = function () {
             var out = [];
             var ar = this.getData();
@@ -184,6 +187,9 @@ var uplight;
         };
         DestinantionsModel.prototype.getCategoryById = function (id) {
             return this.catsIndexed[id];
+        };
+        DestinantionsModel.prototype.getCategoriesIndexed = function () {
+            return this.catsIndexed;
         };
         DestinantionsModel.prototype.getCategoriesNames = function (ar) {
             var out = [];
@@ -216,6 +222,7 @@ var uplight;
         };
         DestinantionsModel.prototype.setDestinations = function (res) {
             var out = [];
+            var destInd = {};
             for (var i = 0, n = res.length; i < n; i++) {
                 var cats = res[i].cats.split(',').map(Number);
                 res[i].catsStr = this.getCategoriesNames(cats);
@@ -223,9 +230,10 @@ var uplight;
                 if (!res[i].uid)
                     res[i].uid = DestinantionsModel.encodeUID(res[i].name.toLowerCase());
                 var dest = new VODestination(res[i]);
+                destInd[dest.id] = dest;
                 out.push(dest);
             }
-            this.setData(out);
+            this.setData(out, destInd);
         };
         /////////////////////////////CATEGORIES//////////////////////////////////
         DestinantionsModel.prototype.saveCategory = function (vo) {
@@ -298,8 +306,9 @@ var uplight;
                 callBack(res);
             });
         };
-        DestinantionsModel.prototype.setData = function (data) {
+        DestinantionsModel.prototype.setData = function (data, destInd) {
             this._data = data;
+            this.destInex = destInd;
         };
         DestinantionsModel.prototype.eraseCache = function () {
             this.cacheDests = {};

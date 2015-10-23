@@ -80,11 +80,18 @@ module uplight {
 
         ////////////////////ImportExport////////////////////
 
-        getStatistics(from:string,to:string):JQueryPromise<any[]>{
+        getStatistics():JQueryPromise<any[]>{
             var q:any={};
             q.a='get_statistics';
+            return $.get(this.service ,q);
+        }
+        getUsage(devices:string,from:string,to:string):JQueryPromise<any[]>{
+            var q:any={};
+            q.a='get_usage';
             q.from=from;
             q.to=to;
+            q.devices=devices;
+            console.log(devices);
             return $.get(this.service ,q);
         }
         exportDestination() :JQueryPromise<any[]> {

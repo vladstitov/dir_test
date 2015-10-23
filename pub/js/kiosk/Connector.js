@@ -31,9 +31,9 @@ var uplight;
             $.post(this.service + 'log_error', msg);
         };
         Connector.prototype.Stat = function (type, val) {
-            var who = this.who;
+            var who = this.who + this.id;
             var stamp = Date.now();
-            $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&id=' + this.id + '&stamp=' + stamp);
+            $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&stamp=' + stamp);
         };
         Connector.prototype.getCategories = function () {
             return $.get(this.service + 'get_categories');

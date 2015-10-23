@@ -39,9 +39,9 @@ module uplight {
             $.post(this.service + 'log_error',msg);
         }
         Stat(type:string,val:string): void {
-            var who = this.who;
+            var who = this.who+this.id;
             var stamp= Date.now();
-            $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&id='+this.id+'&stamp='+stamp);
+            $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&stamp='+stamp);
         }
 
         getCategories():JQueryPromise<VOCategory[]>  {

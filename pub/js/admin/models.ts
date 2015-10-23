@@ -193,6 +193,9 @@ module uplight{
         getData(): VODestination[] {
             return this._data;
         }
+        getDestinationsIndexed():any{
+            return this.destInex;
+        }
         getUnassigned(): VODestination[] {
             var out: VODestination[] = [];
             var ar:VODestination[] = this.getData();
@@ -252,6 +255,9 @@ module uplight{
         getCategoryById(id:number):VOCategory{
             return this.catsIndexed[id];
         }
+        getCategoriesIndexed():any{
+            return this.catsIndexed;
+        }
 
 
         getCategoriesNames(ar:number[]):string[]{
@@ -293,17 +299,21 @@ module uplight{
 
         }
 
+
         private setDestinations(res:any[]):void{
                 var out:VODestination[] =[];
+            var destInd:any={};
             for(var i=0,n=res.length;i<n;i++){
                 var cats:number[] = res[i].cats.split(',').map(Number);
                 res[i].catsStr=this.getCategoriesNames(cats);
                 res[i].cats=cats;
+
                 if(!res[i].uid)res[i].uid = DestinantionsModel.encodeUID(res[i].name.toLowerCase());
                 var dest:VODestination = new VODestination(res[i]);
+                destInd[dest.id]=dest;
                 out.push(dest);
             }
-            this.setData(out);
+            this.setData(out,destInd);
         }
 
 
@@ -389,9 +399,10 @@ module uplight{
 
 
 
-
-        private setData(data: VODestination[]): void {
+        private destInex:any;
+        private setData(data: VODestination[],destInd:any): void {
             this._data = data;
+            this.destInex = destInd
         }
         private eraseCache():void{
             this.cacheDests = {};
