@@ -30,10 +30,10 @@ $result = false;
 switch(array_shift($a)){
 	case 'test':
 		include 'cl/Statistics.php';
-		$ctr= new Statistics();
-		$ar=json_decode('[{"id":4,"type":"kiosk"},{"id":6,"type":"kiosk"}]');		
+		//$ctr= new Statistics();
+		//$ar=json_decode('[{"id":4,"type":"kiosk"},{"id":6,"type":"kiosk"}]');		
 		//$result = $ctr->getCount($ar,'-30 days','now');
-		$result = $ctr->getCount($ar,0,'now');
+		//$result = $ctr->getCount($ar,0,'now');
 		
 	break;	
 	case 'get_statistics':

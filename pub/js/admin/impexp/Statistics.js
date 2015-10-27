@@ -26,7 +26,7 @@ var uplight;
             var cats = res.categories;
             var dests = res.destinations;
             //  var search = res.search;
-            console.log(res);
+            //  console.log(res);
             var categ = new CategoriesChart($('#CategoriesChart'), cats, this.colors);
             var destinTopDestinations = new TopDestinations($('#TopDestinations'), dests);
             var searches = new TopSearches($('#TopSearches'), res.search, res.keywords);
@@ -86,12 +86,16 @@ var uplight;
             // RegA.getInstance().connector.getDestinations().done((res:any)=>this.onDestinations(res))
         }
         TopDestinations.prototype.render = function (ar) {
-            // console.log(res);
+            // console.log(ar);
             var dests = uplight.RegA.getInstance().model.getDestinationsIndexed();
+            //console.log(dests);
             var out = '<thead><tr><td>Clicks</td><td>Name</td><td>Unit</td></tr></thead><tbody>';
             for (var i = 0, n = ar.length; i < n; i++) {
                 var dest = dests[ar[i][0]];
-                out += this.renderItem(dest, ar[i][1]);
+                if (dest)
+                    out += this.renderItem(dest, ar[i][1]);
+                else
+                    console.log('error no destination with id: ' + ar[i][0]);
             }
             out += '</tbody>';
             var list = $('<table>').addClass('table').html(out).appendTo(this.view.find('[data-id=list]:first'));
@@ -103,10 +107,10 @@ var uplight;
     })();
     var CategoriesChart = (function () {
         function CategoriesChart(view, data, colors) {
+            // console.log(data);
             this.view = view;
             this.data = data;
             this.colors = colors;
-            console.log(data);
             var ar = data;
             var out = {};
             var max = 0;

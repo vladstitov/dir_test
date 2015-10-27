@@ -10,8 +10,7 @@ module uplight{
         private selected:JQuery
 
         private hash:string;
-        constructor(private view:JQuery,private home:string){
-
+        constructor(private view:JQuery){
             this.list=$('<ul>').addClass('breadcrumb').appendTo(view);
            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
         }

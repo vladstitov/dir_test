@@ -2,7 +2,8 @@
  * Created by VladHome on 9/2/2015.
  */
 /// <reference path="../../typing/jquery.d.ts" />
-/// <reference path="../RegA.ts" />
+/// <reference path="../DirsAdmin.ts" />
+/// <reference path="../com/Utils.ts" />
 var uplight;
 (function (uplight) {
     var IconsLibrary = (function () {
@@ -255,12 +256,21 @@ var uplight;
         }
         InfoPagesManager.prototype.init = function () {
             var _this = this;
+            this.view = $('#InfoPagesManager');
+            this.listing = $('#InfoPagesListing');
+            this.breadCrumbs = new uplight.BreadCrumbs(this.view.find('[data-ctr=BreadCrumbs]:first'));
+            this.breadCrumbs.onCiick = function (url) {
+                console.log(url);
+                if (url == 'listing') {
+                    _this.showListing();
+                }
+                // else if (url=='DetailsForm')this.detailsForm.showDetails();
+            };
+            this.breadCrumbs.addCrumb('listing', 'Listing');
             this.url = this.R.settings.pages;
-            this.view = $('#InfoPagesView');
             this.iEditor = new InfoEditor();
             this.iEditor.onClose = function () {
-                _this.iEditor.hide();
-                _this.show();
+                _this.showListing();
             };
             this.iEditor.R = this.R;
             this.iEditor.onSave = function () { return _this.onSaveClicked(); };
@@ -284,18 +294,22 @@ var uplight;
             this.selectedIndex = i;
             this.iEditor.setData(this.data[i]);
         };
-        InfoPagesManager.prototype.hide = function () {
-            this.view.hide();
+        InfoPagesManager.prototype.hideListing = function () {
+            this.listing.hide();
         };
-        InfoPagesManager.prototype.show = function () {
-            this.view.show();
+        InfoPagesManager.prototype.showListing = function () {
+            this.iEditor.hide();
+            this.breadCrumbs.clear();
+            this.breadCrumbs.addCrumb('listing', 'Listing');
+            this.listing.show();
         };
         InfoPagesManager.prototype.onAddClicked = function () {
             this.max++;
             var item = { id: 0, icon: '', name: '', seq: this.data.length, enabled: true };
             this.iEditor.setData(item);
             this.iEditor.show();
-            this.hide();
+            this.hideListing();
+            this.breadCrumbs.addCrumb('pageeditor', 'Page Editor');
         };
         InfoPagesManager.prototype.onSaveClicked = function () {
             var _this = this;
@@ -344,7 +358,8 @@ var uplight;
             this.iEditor.setData(item);
             this.iEditor.onSave = function () { return _this.onSaveClicked(); };
             this.iEditor.show();
-            this.hide();
+            this.hideListing();
+            this.breadCrumbs.addCrumb('pageeditor', 'Page Editor');
         };
         InfoPagesManager.prototype.loadData = function () {
             var _this = this;

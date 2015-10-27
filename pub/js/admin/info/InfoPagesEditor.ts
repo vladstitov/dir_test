@@ -2,7 +2,10 @@
  * Created by VladHome on 9/2/2015.
  */
     /// <reference path="../../typing/jquery.d.ts" />
-    /// <reference path="../RegA.ts" />
+    /// <reference path="../DirsAdmin.ts" />
+    /// <reference path="../com/Utils.ts" />
+
+
 module uplight{
     export class IconsLibrary{
 
@@ -321,6 +324,9 @@ module uplight{
         data:any[];
         selected:JQuery;
 
+        private breadCrumbs:BreadCrumbs
+
+        private listing:JQuery;
         url:string;
         constructor(content:JQuery){
             this.R=RegA.getInstance();
@@ -330,14 +336,24 @@ module uplight{
         }
 
         init():void{
+            this.view=$('#InfoPagesManager');
+            this.listing = $('#InfoPagesListing')
+            this.breadCrumbs = new BreadCrumbs(this.view.find('[data-ctr=BreadCrumbs]:first'))
+            this.breadCrumbs.onCiick=(url)=>{
+                console.log(url);
+                if(url=='listing'){
+                    this.showListing();
+                }
+               // else if (url=='DetailsForm')this.detailsForm.showDetails();
+            }
+            this.breadCrumbs.addCrumb('listing','Listing');
             this.url=this.R.settings.pages
 
-            this.view=$('#InfoPagesView');
+
 
             this.iEditor = new InfoEditor();
             this.iEditor.onClose=()=>{
-                this.iEditor.hide();
-                this.show();
+                this.showListing();
             }
             this.iEditor.R= this.R;
 
@@ -363,18 +379,23 @@ module uplight{
             this.selectedIndex=i;
             this.iEditor.setData(this.data[i]);
         }
-        hide():void{
-           this.view.hide();
+        hideListing():void{
+
+           this.listing.hide();
         }
-        show():void{
-            this.view.show();
+        showListing():void{
+            this.iEditor.hide();
+            this.breadCrumbs.clear();
+            this.breadCrumbs.addCrumb('listing','Listing');
+            this.listing.show();
         }
         private onAddClicked(): void {
             this.max++;
             var item:any={id:0,icon:'',name:'',seq:this.data.length,enabled:true};
             this.iEditor.setData(item);
             this.iEditor.show();
-            this.hide();
+            this.hideListing();
+            this.breadCrumbs.addCrumb('pageeditor','Page Editor');
 
         }
         private onSaveClicked():void{
@@ -425,7 +446,8 @@ module uplight{
             this.iEditor.setData(item);
             this.iEditor.onSave = ()=>this.onSaveClicked();
             this.iEditor.show();
-            this.hide();
+            this.hideListing();
+            this.breadCrumbs.addCrumb('pageeditor','Page Editor');
 
         }
 

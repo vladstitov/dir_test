@@ -33,9 +33,9 @@ var uplight;
             $.post(this.service + 'log_error', msg);
         };
         Connector.prototype.Stat = function (type, val) {
-            var who = this.who;
+            var who = this.who + this.id;
             var stamp = Date.now();
-            $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&id=' + this.id + '&stamp=' + stamp);
+            $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&stamp=' + stamp);
         };
 
         Connector.prototype.getCategories = function () {
@@ -524,6 +524,10 @@ var uplight;
                         this.addDetails(vo, el);
                     //  el.children('.details').show('fast');
                 }
+                clearTimeout(this.statTimeout);
+                this.statTimeout = setTimeout(function () {
+                    uplight.Registry.getInstance().connector.Stat('sr', el.data('id'));
+                }, 2000);
                 setTimeout(function () {
                     el.addClass(SELECTED);
                 }, 100);
@@ -559,6 +563,10 @@ var uplight;
                     this.list.html('<p class="bgwhite">  Sorry not results for text <b>' + str + '</b></p>');
                 else
                     this.renderList(str);
+                clearTimeout(this.statTimeout);
+                this.statTimeout = setTimeout(function () {
+                    uplight.Registry.getInstance().connector.Stat('kb', str);
+                }, 2000);
                 //if (!this.cache[str]) this.cache[str] = this.renderList(str);
                 // this.list.html(this.cache[str]);
             }
@@ -1306,6 +1314,9 @@ var uplight;
             var settings = u_settings;
             this.R = uplight.Registry.getInstance();
             var conn = new uplight.Connector();
+            conn.who = 'mob';
+            conn.id = 0;
+            this.R.connector = conn;
 
             // this.R.connector.getSettings((data) => this.onSettings(data));
             this.R.model = new uplight.Model(conn, function (w) {
@@ -1414,20 +1425,25 @@ var uplight;
                     this.showView(this.gmap.getView());
                     this.detailsLarge.hide();
                     this.menu.hideAll();
+                    this.R.connector.Stat('pg', 'gmap');
                     break;
                 case '#destination':
                     var vo = this.R.model.getDestById(Number(ar[1]));
                     if (!vo)
                         break;
-                    this.detailsLarge.setDestination(vo).setDestination(vo);
+                    this.detailsLarge.setDestination(vo);
+                    ;
                     this.detailsLarge.render().show();
 
+                    // this.filterPage.hide();
+                    this.R.connector.Stat('sr', vo.id + '');
                     break;
                 case '#category':
                     var v = this.filterPage.showCategory(Number(ar[1]));
                     this.showView(v);
                     this.detailsLarge.hide();
                     this.menu.hideAll();
+                    this.R.connector.Stat('ct', ar[1]);
                     break;
                 case '#page':
                     var num = Number(ar[1]);
@@ -1439,6 +1455,7 @@ var uplight;
                     this.detailsLarge.hide();
 
                     this.menu.hideAll();
+                    this.R.connector.Stat('pg', num + '');
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();

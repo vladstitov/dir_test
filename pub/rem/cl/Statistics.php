@@ -1,9 +1,8 @@
 <?
-include_once('cl/DbConnector.php');
 class Device{
 		var $type;
 		var $id;
-		function Device($type,$id){
+		function __construct($type,$id){
 			$this->type=$type;
 			$this->id=$id;
 		}
@@ -12,10 +11,8 @@ class Statistics{
     var  $db;
 	var $con;
 	var $pub;
-	var $filename;
-	
-	function Statistics(){
-	
+	var $filename;	
+	function __construct(){	
 			$this->filename = DATA.'statistics.json';
 	}
 

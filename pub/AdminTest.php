@@ -81,6 +81,19 @@ if(!isset($_SESSION['directories_user'])){
         .disabled{
             opacity: 0.5;
         }
+        .breadcrumb li{
+            cursor: pointer;
+        }
+
+        .breadcrumb li.active{
+            cursor: auto;
+        }
+        .breadcrumb li.active:hover{
+            text-decoration: none;
+        }
+        .breadcrumb li:hover{
+            text-decoration: underline;
+        }
 
     </style>
 </head>

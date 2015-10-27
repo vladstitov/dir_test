@@ -2,10 +2,9 @@
 var uplight;
 (function (uplight) {
     var BreadCrumbs = (function () {
-        function BreadCrumbs(view, home) {
+        function BreadCrumbs(view) {
             var _this = this;
             this.view = view;
-            this.home = home;
             this.list = $('<ul>').addClass('breadcrumb').appendTo(view);
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
         }

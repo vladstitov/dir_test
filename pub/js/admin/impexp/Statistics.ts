@@ -34,21 +34,18 @@ module uplight{
             var dests = res.destinations;
           //  var search = res.search;
 
-            console.log(res);
+          //  console.log(res);
 
             var categ:CategoriesChart  = new CategoriesChart($('#CategoriesChart'),cats,this.colors);
 
             var destinTopDestinations = new TopDestinations($('#TopDestinations'),dests);
             var searches:TopSearches = new TopSearches($('#TopSearches'), res.search,res.keywords);
 
-
         }
-
-
     }
 
     export class VoRate{
-        value:string | number;
+        value:any;
         rate:number;
         constructor(ar:any[]){
             this.value=ar[0];
@@ -108,15 +105,14 @@ module uplight{
 
 
         private render(ar:any[]):void{
-               // console.log(res);
-
-
+           // console.log(ar);
             var dests:any =    RegA.getInstance().model.getDestinationsIndexed();
-
+//console.log(dests);
             var out='<thead><tr><td>Clicks</td><td>Name</td><td>Unit</td></tr></thead><tbody>';
             for(var i=0,n=ar.length;i<n;i++){
                var dest  = dests[ar[i][0]];
-                    out+=this.renderItem(dest,ar[i][1]);
+                if(dest)  out+=this.renderItem(dest,ar[i][1]);
+                else console.log('error no destination with id: '+ar[i][0]);
             }
 
             out+='</tbody>';
@@ -136,7 +132,7 @@ module uplight{
     class CategoriesChart{
         list:JQuery;
         constructor(private view:JQuery,private data:any,private colors:string[]){
-            console.log(data);
+           // console.log(data);
 
             var ar = data
             var out:any={};

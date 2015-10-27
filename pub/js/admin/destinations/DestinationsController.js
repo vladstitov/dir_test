@@ -17,7 +17,7 @@ var uplight;
             this.view = $('#DestinationsEditor');
             this.list = new uplight.DestinationsList($('#DestinationsList'));
             console.log(window.location.hash);
-            this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'), window.location.hash);
+            this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'));
             this.breacrumb.onCiick = function (url) {
                 if (url == 'listing') {
                     _this.hideForm();

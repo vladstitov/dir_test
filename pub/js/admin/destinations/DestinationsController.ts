@@ -37,7 +37,7 @@ module uplight{
             this.list = new DestinationsList($('#DestinationsList'));
 
             console.log(window.location.hash);
-           this.breacrumb = new BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'),window.location.hash);
+           this.breacrumb = new BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'));
             this.breacrumb.onCiick=(url)=>{
                 if(url=='listing'){
                     this.hideForm();
