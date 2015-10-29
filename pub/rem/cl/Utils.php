@@ -1,28 +1,11 @@
 <?
-include_once('cl/DbConnector.php');
-class Utils{
-    var  $db;
-	var $con;
-
-	private function getDB(){	
-			if(!$this->db) $this->db = new PDO('sqlite:'.DATA.'statistics.db');
-			return $this->db;
-	}
-	public function getStatistics($get){
-		$from=strtotime($get['from']);//1437096651492;
-		$to=strtotime($get['to']);
-		return $this->getDB()->query("SELECT * FROM stats WHERE stamp BETWEEN $from AND $to")->fetchAll(PDO::FETCH_NUM);
-	}
-	
-	public function getData($get){
-			if(isset($get['file_name'])){
-				$file_name= DATA.$get['file_name'];			
-				if(file_exists($file_name)) return file_get_contents($file_name);			
-			}			
-			return 'ERROR';
-	}
-	
-	
+class Utils{ 	
+	public function restartKiosks($get){
+				error_log('restart: '.date("Y-m-d H:i:s")."/r/n", 3, DATA.'restart.log');
+				$out=new stdClass();
+				$out->success='success';
+				return $out;				
+	}	
 	
 	public function saveData($file_name,$data){
 		$out=new stdClass();				
