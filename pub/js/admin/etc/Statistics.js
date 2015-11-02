@@ -3,6 +3,12 @@
  */
 ///<reference path="../../typing/chart.d.ts"/>
 /// <reference path="../DirsAdmin.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var uplight;
 (function (uplight) {
     var Statistics = (function () {
@@ -21,6 +27,7 @@ var uplight;
             var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
             this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
             var kiosksChart = new KiosksChart($('#KiosksChart'), this.colors, this.fromTo);
+            var devices = new DevicesData($('#DevicesData'), this.colors);
         };
         Statistics.prototype.onData = function (res) {
             var cats = res.categories;
@@ -34,6 +41,90 @@ var uplight;
         return Statistics;
     })();
     uplight.Statistics = Statistics;
+    var VODevice = (function () {
+        function VODevice(obj) {
+            this.S_time = 0;
+            this.K_time = 0;
+            this.ip = '';
+            this.ping = 0;
+            this.start_at = 0;
+            this.timer = 15000;
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VODevice;
+    })();
+    uplight.VODevice = VODevice;
+    var DeviceModel = (function (_super) {
+        __extends(DeviceModel, _super);
+        function DeviceModel(dev, s_time) {
+            _super.call(this, dev);
+            var delta = s_time - dev.S_time;
+            if (delta < dev.maxdelay)
+                this.status = 1;
+            else
+                this.status = 0;
+        }
+        return DeviceModel;
+    })(VODevice);
+    uplight.DeviceModel = DeviceModel;
+    var DevicesData = (function () {
+        // private greenLite:JQuery;
+        function DevicesData(view, colors) {
+            this.view = view;
+            this.colors = colors;
+            console.log('DevicesData');
+            this.list = view.find('[data-id=list]:first');
+            // this.greenLite=view.find('[data-view=greenLite]:first');
+            this.loadData();
+        }
+        DevicesData.prototype.loadData = function () {
+            var _this = this;
+            this.list.find('.status').detach();
+            uplight.RegA.getInstance().connector.getDevices().done(function (res) { return _this.onKiosks(res); });
+        };
+        DevicesData.prototype.onKiosks = function (res) {
+            this.data = res.result;
+            this.s_time = Number(res.success);
+            //console.log(this.data);
+            // console.log(this.s_time);
+            this.render();
+            // RegA.getInstance().connector.  getServerTime().done((res)=>{
+            //  this.s_time = Number(res);
+            //  this.render();
+            //  });
+        };
+        DevicesData.prototype.render = function () {
+            var _this = this;
+            var s_time = this.s_time;
+            var ar = this.data;
+            var out = '';
+            var ks = [];
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var k = new DeviceModel(ar[i], s_time);
+                ks.push(k);
+                out += this.createDevice(k);
+            }
+            this.devices = ks;
+            this.list.html(out);
+            setTimeout(function () { return _this.loadData(); }, 10000);
+        };
+        DevicesData.prototype.createDevice = function (obj) {
+            var color = '#0F0';
+            var statusStr = 'Working fine';
+            var cl = 'fa-circle';
+            if (obj.status === 0) {
+                color = '#ECCC6B';
+                cl = 'fa-exclamation-triangle';
+                statusStr = 'Experienced delays';
+            }
+            var stsrtTime = obj.start_at ? new Date(obj.start_at * 1000).toLocaleString() : '';
+            var lastTime = obj.K_time ? new Date(obj.K_time * 1000).toLocaleString() : '';
+            return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '?kiosk=' + obj.id + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + obj.ip + '</td>' + '<td>' + obj.ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
+        };
+        return DevicesData;
+    })();
+    uplight.DevicesData = DevicesData;
     var VoRate = (function () {
         function VoRate(ar) {
             this.value = ar[0];
@@ -244,10 +335,10 @@ var uplight;
     })();
     var KiosksChart = (function () {
         function KiosksChart(view, colors, fromto) {
-            //  console.log(clicks);
             var _this = this;
             this.view = view;
             this.colors = colors;
+            //  console.log(clicks);
             this.view.find('[data-id=fromto]:first').text(fromto);
             uplight.RegA.getInstance().connector.getData('kiosks.json').done(function (res) { return _this.onKiosks(res); });
         }

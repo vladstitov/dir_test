@@ -165,6 +165,12 @@ var uplight;
         Connector.prototype.getServerTime = function () {
             return $.get(this.service + '?a=screen.get_server_time');
         };
+        Connector.prototype.getDevices = function () {
+            return $.get(this.service + '?a=get_devices');
+        };
+        Connector.prototype.restartKiosks = function () {
+            return $.get(this.service + '?a=restart_kiosks');
+        };
         Connector.prototype.getData = function (filename) {
             return $.get(this.service + '?a=get_data&file_name=' + filename);
         };

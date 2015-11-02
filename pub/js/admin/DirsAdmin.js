@@ -8,13 +8,13 @@
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />
 /// <reference path="views/Menu.ts" />
+/// <reference path="views/Navigation.ts" />
 ///<reference path="destinations/DestinationsController.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
-///<reference path="impexp/ImportExport.ts" />
-///<reference path="impexp/Statistics.ts" />
+///<reference path="etc/ImportExport.ts" />
+///<reference path="etc/Statistics.ts" />
 ///<reference path="screen/LabelsManager.ts" />
-///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 var uplight;
@@ -103,13 +103,6 @@ var uplight;
                     }
                     this.content.show();
                     break;
-                case '#RestartKi':
-                    // this.showPreview();
-                    this.content.hide();
-                    this.content.empty();
-                    this.restartKiosks = new uplight.RestartKiosk(this.content);
-                    this.content.show();
-                    break;
                 case '#Listing-V':
                     this.listing = new uplight.DestinationsController(this.content);
                     this.content.show();
@@ -143,13 +136,15 @@ var uplight;
         };
         Admin.prototype.init = function () {
             var _this = this;
+            this.navigatiom = new uplight.Navigation($('#AdminNav'));
+            this.R.confirm = new uplight.Confirm($('#Confirm'));
             this.R.model = new uplight.DestinantionsModel();
             this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 _this.R.model.dispatcher.off(_this.R.model.CHANGE);
                 _this.onHashChange();
             });
             $(window).on('hashchange', function (evt) { return _this.onHashChange(); });
-            this.menu = new uplight.AdminMenu($('#Navigation'));
+            //  this.menu = new AdminMenu($('#Navigation'));
             this.preview = $('#Preview');
             this.isPreview = true;
             this.content = $('#content');
@@ -158,6 +153,21 @@ var uplight;
             this.btnFullView = this.preview.find('[data-id=btnFullView]').click(function () {
                 window.open(_this.previewUrl, "_blank");
             });
+            $('#btnRestartKiosks').click(function () {
+                _this.R.confirm.show('Restart Kiosks', 'You want to restart kiosks?', function () {
+                    _this.R.connector.restartKiosks().done(function (res) {
+                        console.log(res);
+                        if (res.success == 'success') {
+                            _this.R.msg('Restarting kiosks', $('#btnRestartKiosks'));
+                        }
+                        else
+                            _this.R.msg('Server Error', $('#btnRestartKiosks'));
+                    }).fail(function () {
+                        alert('Communication error');
+                    });
+                });
+            });
+            window.location.hash = '#Statistic';
         };
         Admin.prototype.logout = function () {
             this.R.connector.logout().done(function (res) {

@@ -34,4 +34,41 @@ module uplight{
             if(this.onCiick)this.onCiick(el.data('id'));
         }
     }
+    export class Confirm{
+
+        onYes:Function;
+        onNo:Function;
+        private title:JQuery;
+        private text:JQuery;
+        private btnYes:JQuery;
+        private btnNo:JQuery;
+        private btnClose:JQuery;
+        constructor( private view:JQuery){
+            this.title = view.find('[data-id=title]:first');
+            this.text = view.find('[data-id=text]:first');
+            this.btnClose = view.find('[data-id=btnClose]:first').click(()=>{
+                this.hide();
+            });
+            this.btnYes = view.find('[data-id=btnYes]:first').click(()=>{
+                this.hide();
+                if(this.onYes)this.onYes();
+            });
+            this.btnNo = view.find('[data-id=btnNo]:first').click(()=>{
+                this.hide();
+                if(this.onNo)this.onNo();
+            });
+
+        }
+        hide():void{
+            this.view.fadeOut();
+        }
+        show(title:string,text:string,onYes:Function,onNo?:Function):void{
+            this.title.text(title);
+            this.text.html(text);
+            this.onYes = onYes;
+            this.onNo = onNo;
+            this.view.fadeIn();
+            this.view.show();
+        }
+    }
 }

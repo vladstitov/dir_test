@@ -87,7 +87,9 @@ if(!isset($_SESSION['directories_user'])){
 <body>
 <div id="adminHeader" >
     <h4 >Interactive Directory Admin Panel  <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a></h4>
-
+    <?
+ include ('htms/admin/Navigation.htm');
+?>
 </div>
 <hr/>
     <div id="error"></div>
@@ -95,7 +97,7 @@ if(!isset($_SESSION['directories_user'])){
     </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
 <?php
-    include ('htms/admin/AdminMenu.htm');
+   // include ('htms/admin/AdminMenu.htm');
     include ('htms/admin/AdminPreviewKiosk.htm');
     include ('htms/admin/AdminPreviewMobile.htm');
 ?>

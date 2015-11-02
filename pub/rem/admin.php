@@ -35,7 +35,8 @@ switch(array_shift($a)){
 		//$result = $ctr->getCount($ar,'-30 days','now');
 		//$result = $ctr->getCount($ar,0,'now');
 		
-	break;	
+	break;
+		
 	case 'get_statistics':
 		include 'cl/Statistics.php';
 		$ctr = new Statistics();
@@ -46,7 +47,12 @@ switch(array_shift($a)){
 		$ctr = new Statistics();		
 		$result = $ctr->getUsage($get['devices'],$get['from'],$get['to']);
 	break;
-	
+	case 'get_devices':
+	$result = utils()->getDevices();
+	break;
+	case 'restart_kiosks':		
+		$result = utils()->restartKiosks($get);
+	break;
 	case 'upload_image':	
 		$result = utils()->uploadImage($_FILES["file"],$get['folder'],$get['prefix']);	
 	break;

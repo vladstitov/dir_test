@@ -27,9 +27,7 @@ module uplight{
         }
 
         private init():void{
-
             this.view = $('#FrontPageEditor');
-
             this.btnAdd = this.view.find('[data-id=btnAdd]:first').click(()=> this.onAddClicked());
             this.btnEdit = this.view.find('[data-id=btnEdit]:first').click(()=> this.onEditClicked());
             this.btnDelete = this.view.find('[data-id=btnDelete]').click(() => this.onDelClicked());
@@ -52,22 +50,36 @@ module uplight{
         private onAddClicked():void{
 
         }
+        private hideEdit():void{
+            this.isEdit = false;
+            $('#NicPanelPage').hide();
+            this.editor.attr('contenteditable',false);
+        }
+        private isEdit:boolean;
         private onEditClicked():void{
             if(!this.nicEdit){
                 this.nicEdit = new nicEditor({ fullPanel: true });
                 this.nicEdit.setPanel('NicPanelPage');
                 this.nicEdit.addInstance('PageBody');
             }
+            if(this.isEdit)this.hideEdit();
+            else{
+                this.isEdit = true;
+                this.editor.attr('contenteditable',true);
+                $('#NicPanelPage').show();
+            }
+
         }
         private onDelClicked():void{
 
         }
 
         private onSave(res):void{
-            console.log(res);;
+            console.log(res);
         }
 
         private onSaveClicked():void{
+            this.hideEdit();
             if(confirm('You want to save Front page?')){
 
                 var url:string =RegA.getInstance().settings.front_page;

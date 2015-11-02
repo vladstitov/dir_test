@@ -80,6 +80,7 @@ module uplight{
             'show-menu':RegA.SHOW_MENU
         }
 
+        confirm:Confirm;
         register(obj: any): void {
             this[obj.id]=obj
         }
@@ -127,7 +128,7 @@ module uplight{
         color:string;
     }
     export  class VOResult{
-        result:string;
+        result:any;
         success:string;
         error:string;
     }

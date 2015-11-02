@@ -34,21 +34,33 @@ var uplight;
         };
         FrontPageEditor.prototype.onAddClicked = function () {
         };
+        FrontPageEditor.prototype.hideEdit = function () {
+            this.isEdit = false;
+            $('#NicPanelPage').hide();
+            this.editor.attr('contenteditable', false);
+        };
         FrontPageEditor.prototype.onEditClicked = function () {
             if (!this.nicEdit) {
                 this.nicEdit = new nicEditor({ fullPanel: true });
                 this.nicEdit.setPanel('NicPanelPage');
                 this.nicEdit.addInstance('PageBody');
             }
+            if (this.isEdit)
+                this.hideEdit();
+            else {
+                this.isEdit = true;
+                this.editor.attr('contenteditable', true);
+                $('#NicPanelPage').show();
+            }
         };
         FrontPageEditor.prototype.onDelClicked = function () {
         };
         FrontPageEditor.prototype.onSave = function (res) {
             console.log(res);
-            ;
         };
         FrontPageEditor.prototype.onSaveClicked = function () {
             var _this = this;
+            this.hideEdit();
             if (confirm('You want to save Front page?')) {
                 var url = uplight.RegA.getInstance().settings.front_page;
                 var tmp = this.list.children().detach();

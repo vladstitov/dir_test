@@ -4,7 +4,10 @@
 
     ///<reference path="../RegA"/>
 module uplight {
-    export class RestartKiosk {
+    export class DevicesEdit{
+
+    }
+    export class DevicesStats {
         R:RegA
         view:JQuery
        // data:any;
@@ -26,16 +29,13 @@ module uplight {
         private connector:Connector
         private admin:any;
         private data:any;
-
         constructor(private container:JQuery) {
             this.connector = RegA.getInstance().connector;
             this.R = RegA.getInstance();
-
             var p1 = this.connector.getData('admin.json').done((res)=>{this.admin= JSON.parse(res)});
-            var p2 = container.load('htms/admin/KiosksEdit.htm');
+            var p2 = container.load('htms/admin/DevicesEdit.htm');
             var p3 =  this.connector.getServerTime().done((res)=>{ this.s_time = Number(res);});
             var p4 = this.loadData();
-
             $.when(p1,p2,p3,p4).then(()=>this.init());
         }
 

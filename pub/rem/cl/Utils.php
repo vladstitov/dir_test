@@ -1,12 +1,25 @@
 <?
-class Utils{ 	
+class Utils{
+	public function getDevices(){
+				$out = new stdClass();
+				$out->result =  json_decode($this->getData(array('file_name'=>'kiosks.json')));
+				$out->success = time();
+				return $out;
+	}
+
 	public function restartKiosks($get){
 				error_log('restart: '.date("Y-m-d H:i:s")."/r/n", 3, DATA.'restart.log');
 				$out=new stdClass();
 				$out->success='success';
 				return $out;				
 	}	
-	
+	public function getData($get){
+			if(isset($get['file_name'])){
+				$file_name= DATA.$get['file_name'];			
+				if(file_exists($file_name)) return file_get_contents($file_name);			
+			}			
+			return 'ERROR';
+	}
 	public function saveData($file_name,$data){
 		$out=new stdClass();				
 		$filename=DATA.$file_name;					

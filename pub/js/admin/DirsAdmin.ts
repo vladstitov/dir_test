@@ -9,31 +9,32 @@
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />
 /// <reference path="views/Menu.ts" />
+/// <reference path="views/Navigation.ts" />
 ///<reference path="destinations/DestinationsController.ts" />
 ///<reference path="categories/CategoriesManager.ts" />
 ///<reference path="categories/CategoryListing.ts" />
-///<reference path="impexp/ImportExport.ts" />
-///<reference path="impexp/Statistics.ts" />
+///<reference path="etc/ImportExport.ts" />
+///<reference path="etc/Statistics.ts" />
 ///<reference path="screen/LabelsManager.ts" />
-///<reference path="screen/RestartKiosk.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 
 module uplight {
-
+declare var BootstrapDialog:any;
     export class Admin {
         private R: RegA;
         private listing:DestinationsController;
         private categories:CategoriesManager;
         private categoryListing:CategoryListing;
         private importExport:ImportExport;
-        private restartKiosks:RestartKiosk;
+       // private restartKiosks:DevicesStats;
         private labels:LabelsManager;
         private settingsEdit:SettingsEdit;
         private statistics:Statistics;
         private attractLoop:AttractLoopEdit;
         private infoPages:InfoPagesManager;
         private frontPageEditor:FrontPageEditor;
+        private navigatiom:Navigation;
 
 
         private menu:AdminMenu;
@@ -52,7 +53,6 @@ module uplight {
 
 
         private onHashChange(){
-
             var hash:string= window.location.hash.substr(0,10);
             console.log(hash);
          //  if(hash!=='#PreviewKi') this.hidePreview();
@@ -106,16 +106,6 @@ module uplight {
                         // this.restartKiosks.restart();
 
                         break;
-                    case '#RestartKi':
-                       // this.showPreview();
-
-                        this.content.hide();
-                        this.content.empty();
-                        this.restartKiosks = new RestartKiosk(this.content);
-                        this.content.show();
-                       // this.restartKiosks.restart();
-
-                        break;
                     case '#Listing-V':
 
                         this.listing = new DestinationsController(this.content);
@@ -159,15 +149,16 @@ module uplight {
         btnFullView:JQuery;
         message:JQuery;
         messageText:JQuery;
-
         private init(): void {
+            this.navigatiom = new Navigation($('#AdminNav'));
+            this.R.confirm = new Confirm($('#Confirm'));
             this.R.model = new DestinantionsModel();
             this.R.model.dispatcher.on(this.R.model.CHANGE,()=>{
                 this.R.model.dispatcher.off(this.R.model.CHANGE);
                 this.onHashChange();
             });
             $(window).on('hashchange', (evt) => this.onHashChange());
-            this.menu = new AdminMenu($('#Navigation'));
+          //  this.menu = new AdminMenu($('#Navigation'));
 
             this.preview=$('#Preview');
             this.isPreview=true;
@@ -177,7 +168,20 @@ module uplight {
             this.messageText = $('<div>').appendTo(this.message);
             this.btnFullView = this.preview.find('[data-id=btnFullView]').click(()=>{window.open(this. previewUrl, "_blank");})
 
+            $('#btnRestartKiosks').click(()=>{
+               this.R.confirm.show('Restart Kiosks','You want to restart kiosks?',()=>{
+                  this.R.connector.restartKiosks().done((res:VOResult)=>{
+                      console.log(res);
+                      if(res.success=='success'){
+                          this.R.msg('Restarting kiosks',$('#btnRestartKiosks'));
+                      }else this.R.msg('Server Error',$('#btnRestartKiosks'));
 
+                  }).fail(()=>{ alert('Communication error')});
+               })
+            })
+
+
+            window.location.hash='#Statistic';
 
         }
 

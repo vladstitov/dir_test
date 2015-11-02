@@ -4,8 +4,14 @@
 ///<reference path="../RegA"/>
 var uplight;
 (function (uplight) {
-    var RestartKiosk = (function () {
-        function RestartKiosk(container) {
+    var DevicesEdit = (function () {
+        function DevicesEdit() {
+        }
+        return DevicesEdit;
+    })();
+    uplight.DevicesEdit = DevicesEdit;
+    var DevicesStats = (function () {
+        function DevicesStats(container) {
             var _this = this;
             this.container = container;
             this.filename = 'kiosks.json';
@@ -14,14 +20,14 @@ var uplight;
             var p1 = this.connector.getData('admin.json').done(function (res) {
                 _this.admin = JSON.parse(res);
             });
-            var p2 = container.load('htms/admin/KiosksEdit.htm');
+            var p2 = container.load('htms/admin/DevicesEdit.htm');
             var p3 = this.connector.getServerTime().done(function (res) {
                 _this.s_time = Number(res);
             });
             var p4 = this.loadData();
             $.when(p1, p2, p3, p4).then(function () { return _this.init(); });
         }
-        RestartKiosk.prototype.init = function () {
+        DevicesStats.prototype.init = function () {
             var _this = this;
             console.log('admin', this.admin);
             this.view = $('#KiosksEdit');
@@ -39,7 +45,7 @@ var uplight;
             this.makeTemplates(this.admin.templates);
             this.render();
         };
-        RestartKiosk.prototype.onSaveClick = function () {
+        DevicesStats.prototype.onSaveClick = function () {
             if (!this.selectedItem) {
                 var k = new VOKiosk({});
                 var ar = this.kiosks;
@@ -60,30 +66,30 @@ var uplight;
             this.save();
             this.hidePanel();
         };
-        RestartKiosk.prototype.hidePanel = function () {
+        DevicesStats.prototype.hidePanel = function () {
             $('#kioskEditPanel').fadeOut();
         };
-        RestartKiosk.prototype.showPanel = function () {
+        DevicesStats.prototype.showPanel = function () {
             $('#kioskEditPanel').fadeIn();
         };
-        RestartKiosk.prototype.onCloseClick = function () {
+        DevicesStats.prototype.onCloseClick = function () {
             this.hidePanel();
         };
-        RestartKiosk.prototype.loadData = function () {
+        DevicesStats.prototype.loadData = function () {
             var _this = this;
             return this.R.connector.getData(this.filename).done(function (res) { return _this.onData(res); });
         };
-        RestartKiosk.prototype.makeTemplates = function (ar) {
+        DevicesStats.prototype.makeTemplates = function (ar) {
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += '<option value="' + ar[i].value + '">' + ar[i].label + '</option>';
             }
             this.selTemplate.html(out);
         };
-        RestartKiosk.prototype.onData = function (res) {
+        DevicesStats.prototype.onData = function (res) {
             this.data = JSON.parse(res);
         };
-        RestartKiosk.prototype.render = function () {
+        DevicesStats.prototype.render = function () {
             var s_time = this.s_time;
             var ar = this.data;
             var out = '';
@@ -96,7 +102,7 @@ var uplight;
             this.kiosks = ks;
             this.list.html(out);
         };
-        RestartKiosk.prototype.onEditClick = function () {
+        DevicesStats.prototype.onEditClick = function () {
             var ar = this.collectChecked();
             if (ar.length === 0) {
                 alert('Please select checkbox in line you want to edit');
@@ -108,22 +114,22 @@ var uplight;
             this.selTemplate.val(this.selectedItem.template);
             this.showPanel();
         };
-        RestartKiosk.prototype.onCreateClick = function () {
+        DevicesStats.prototype.onCreateClick = function () {
             this.selectedItem = null;
             this.editHeader.text('New Kiosk');
             this.tiName.val('');
             this.showPanel();
         };
-        RestartKiosk.prototype.onDataSaved = function (res) {
+        DevicesStats.prototype.onDataSaved = function (res) {
             var _this = this;
             console.log(res);
             this.loadData().then(function () { return _this.render(); });
         };
-        RestartKiosk.prototype.save = function () {
+        DevicesStats.prototype.save = function () {
             var _this = this;
             this.R.connector.saveData(JSON.stringify(this.kiosks), this.filename).done(function (res) { return _this.onDataSaved(res); });
         };
-        RestartKiosk.prototype.collectChecked = function () {
+        DevicesStats.prototype.collectChecked = function () {
             var out = [];
             this.view.find('table input').each(function (ind, el) {
                 if ($(el).prop('checked'))
@@ -131,7 +137,7 @@ var uplight;
             });
             return out;
         };
-        RestartKiosk.prototype.onRestartClick = function () {
+        DevicesStats.prototype.onRestartClick = function () {
             var ar = this.collectChecked();
             if (ar.length === 0) {
                 alert('Please select checkbox in line you want to Restart');
@@ -141,7 +147,7 @@ var uplight;
                 this.restartKiosks(ar);
             }
         };
-        RestartKiosk.prototype.restartKiosks = function (ids) {
+        DevicesStats.prototype.restartKiosks = function (ids) {
             var ar = this.kiosks;
             for (var i = ar.length - 1; i >= 0; i--) {
                 if (ids.indexOf(ar[i].id) !== -1)
@@ -149,14 +155,14 @@ var uplight;
             }
             this.save();
         };
-        RestartKiosk.prototype.getKioskById = function (id) {
+        DevicesStats.prototype.getKioskById = function (id) {
             var ar = this.kiosks;
             for (var i = 0, n = ar.length; i < n; i++)
                 if (ar[i].id == id)
                     return ar[i];
             return null;
         };
-        RestartKiosk.prototype.deleteKiosks = function (ids) {
+        DevicesStats.prototype.deleteKiosks = function (ids) {
             var ar = this.kiosks;
             for (var i = ar.length - 1; i >= 0; i--) {
                 if (ids.indexOf(ar[i].id) !== -1)
@@ -164,7 +170,7 @@ var uplight;
             }
             this.save();
         };
-        RestartKiosk.prototype.getKioskNames = function (ar) {
+        DevicesStats.prototype.getKioskNames = function (ar) {
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 var k = this.getKioskById(ar[i]);
@@ -173,7 +179,7 @@ var uplight;
             }
             return out;
         };
-        RestartKiosk.prototype.onDeleteClick = function () {
+        DevicesStats.prototype.onDeleteClick = function () {
             var ar = this.collectChecked();
             if (ar.length === 0) {
                 alert('Please select checkbox in line you want to delete');
@@ -183,7 +189,7 @@ var uplight;
                 this.deleteKiosks(ar);
             }
         };
-        RestartKiosk.prototype.onAllClick = function () {
+        DevicesStats.prototype.onAllClick = function () {
             var isOn;
             this.view.find('table input').each(function (ind, el) {
                 if (ind === 0)
@@ -191,7 +197,7 @@ var uplight;
                 $(el).prop('checked', isOn);
             });
         };
-        RestartKiosk.prototype.createDevice = function (obj, s_time) {
+        DevicesStats.prototype.createDevice = function (obj, s_time) {
             // console.log(obj);
             var timer = (obj.timer / 1000);
             timer += timer * 0.1;
@@ -202,9 +208,9 @@ var uplight;
                 isOK = 1;
             return '<tr>' + '<td><input type="checkbox" data-id="' + obj.id + '" /> </td>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '?kiosk=' + obj.id + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td>' + obj.status + '</td>' + '<td>' + isOK + '</td>' + '<td>' + obj.ip + '</td>' + '<td>' + obj.ping + '</td>' + '<td class="text-right">' + new Date(obj.start_at * 1000).toLocaleString() + '</td>' + '<td class="text-right">' + new Date(obj.K_time * 1000).toLocaleString() + '</td>' + '</tr>';
         };
-        return RestartKiosk;
+        return DevicesStats;
     })();
-    uplight.RestartKiosk = RestartKiosk;
+    uplight.DevicesStats = DevicesStats;
     var VOKiosk = (function () {
         function VOKiosk(obj) {
             this.S_time = 0;
@@ -220,4 +226,4 @@ var uplight;
     })();
     uplight.VOKiosk = VOKiosk;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RestartKiosk.js.map
+//# sourceMappingURL=DevicesEdit.js.map

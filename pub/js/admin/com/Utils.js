@@ -30,5 +30,39 @@ var uplight;
         return BreadCrumbs;
     })();
     uplight.BreadCrumbs = BreadCrumbs;
+    var Confirm = (function () {
+        function Confirm(view) {
+            var _this = this;
+            this.view = view;
+            this.title = view.find('[data-id=title]:first');
+            this.text = view.find('[data-id=text]:first');
+            this.btnClose = view.find('[data-id=btnClose]:first').click(function () {
+                _this.hide();
+            });
+            this.btnYes = view.find('[data-id=btnYes]:first').click(function () {
+                _this.hide();
+                if (_this.onYes)
+                    _this.onYes();
+            });
+            this.btnNo = view.find('[data-id=btnNo]:first').click(function () {
+                _this.hide();
+                if (_this.onNo)
+                    _this.onNo();
+            });
+        }
+        Confirm.prototype.hide = function () {
+            this.view.fadeOut();
+        };
+        Confirm.prototype.show = function (title, text, onYes, onNo) {
+            this.title.text(title);
+            this.text.html(text);
+            this.onYes = onYes;
+            this.onNo = onNo;
+            this.view.fadeIn();
+            this.view.show();
+        };
+        return Confirm;
+    })();
+    uplight.Confirm = Confirm;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=Utils.js.map

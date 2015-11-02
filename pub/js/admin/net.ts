@@ -204,6 +204,12 @@ module uplight {
         getServerTime():JQueryPromise<string>{
             return $.get(this.service + '?a=screen.get_server_time');
         }
+        getDevices():JQueryPromise<VOResult>{
+        return $.get(this.service + '?a=get_devices');
+    }
+        restartKiosks():JQueryPromise<VOResult>{
+            return $.get(this.service + '?a=restart_kiosks');
+        }
 
 
         getData(filename:string) :JQueryPromise<string> {
@@ -227,118 +233,7 @@ module uplight {
           return  $.post(this.service + '?a=screen.save_labels', JSON.stringify(data));
 
         }
-       // getScreenSaver(callBack: Function): void {
-         //   $.get(this.service + '?a=screen.get_screensaver').done(callBack);
-       // }
-       // saveScrenSaver(data: any, callBack: Function): void {
-         //   $.post(this.service + '?a=screen.screensaver', JSON.stringify(data)).done(callBack);
-       // }
-       // getColor(callBack): void {
-        //    $.get(this.service + '?a=screen.get_color').done(callBack);
-       // }
-       // saveColor(data: {}, callBack): void {
-        //    $.post(this.service + '?a=screen.save_color', data).done(callBack);
-       // }
 
-       // getMessages(callBack): void {
-        //    $.get(this.service + '?a=screen.get_messages').done(callBack);
-       // }
-       // saveMessages(data: string, callBack): void {
-       //     $.post(this.service + '?a=screen.save_messages', data).done(callBack);
-       // }
-       // getBanner(callBack: Function): void {
-         //   $.get(this.service + '?a=screen.get_banner').done(callBack);
-       // }
-       // saveBanner(data: any, callBack: Function): void {
-        //    $.post(this.service + '?a=screen.save_header', data).done(callBack);
-       // }
-       /// getSettings(callBack: Function): void {
-       //     $.get(this.serviceK+'?a=get_settings').done(callBack);
-       // }
-       // saveSettings(callBack: Function,data:string): void {
-
-         //   $.post(this.service + '?a=screen.save_settings',data).done(callBack);
-       // }
-
-
-       /// uploadAttractLoop(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function) {
-        //    this.uploadFile(form, '?a=screen.upload_al', completeHandler, errorHandler, onProgress);
-      //  }
-      ///  getAllAttractLoopss(callBack: Function): void {
-      //      $.get(this.service + '?a=screen.get_all_AL').done(callBack);
-      //  }
-
-        //saveSetting(sett: string, data: any, callBack: Function): void {
-        //    $.post(this.service + '?a=screen.save_setting.' + sett, JSON.stringify(data)).done(callBack);
-        //}
-        ////////////////////////////////Labels////////////////////////////
-        /*
-
-        deleteImage(url: string, callBack: Function): void {
-            var data: any = RegA.getInstance().device;
-            data.deleteMediaUrl = url;
-            // data.a = 'screen.deleteMedia';
-            $.post(this.service + '?a=screen.deleteMedia', data).done(callBack);
-        }
-
-        saveBackground(url: string, callBack: Function): void {
-            var data: any = RegA.getInstance().device;
-            data.newBackground = url;
-            $.post(this.service + '?a=screen.newBackground', data, 'application/json').done(callBack);
-        }
-
-       // uploadBackgroundLibrary(form: any, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
-           // this.uploadFile(form, '?a=screen.bg_upload', completeHandler, errorHandler, onProgress);
-       // }
-
-       // uploadTempFile(formname: string, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
-        //    this.uploadFile(<HTMLFormElement>document.getElementById(formname),'?a=screen.upload_temp' , completeHandler, errorHandler, onProgress);
-       //}
-
-        saveImageIndex(filename:string,index:string):JQueryPromise<VOCategory[]>{
-            var data:any={};
-            data.a='screen.save_image_index';
-            data.file_name=filename;
-            data.index=index;
-            return $.get(this.service,data);
-        }
-
-       uploadTempImage(data:FormData): JQueryPromise<VOCategory[]> {
-           //console.log('uploadTempImage    ',data);
-           return  $.ajax({
-                url: this.service+'?a=screen.upload_image',  //Server script to process data
-                type: 'POST',
-                dataType: 'json',
-                data: data,
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-
-        }
-*/
-       /* private uploadFile2(form:HTMLElement, service: string, completeHandler: Function, errorHandler: Function, onProgress: Function): void {
-          //  var data: FormData = new FormData(form);
-            $.ajax({
-                url: this.service + service,  //Server script to process data
-                type: 'POST',
-                xhr: function () {  // Custom XMLHttpRequest
-                    var myXhr = $.ajaxSettings.xhr();
-                   if (myXhr.upload) { // Check if upload property exists
-                        myXhr.upload.addEventListener('progress', onProgress, false);
-                   }
-                   return myXhr;
-                },
-                // Form data
-              //  data: data,
-                //Options to tell jQuery not to process data or worry about content-type.
-               cache: false,
-               contentType: false,
-               processData: false
-            }).done(completeHandler).fail(errorHandler);
-
-        }
-*/
 
     }
 }

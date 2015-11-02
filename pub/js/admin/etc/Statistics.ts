@@ -6,7 +6,6 @@
 
 module uplight{
     export class Statistics{
-
         R:RegA;
         private data:VOStat[];
        private colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
@@ -26,6 +25,7 @@ module uplight{
             var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
             this.fromTo = 'from '+today.toDateString().substr(4) +' to '+priorDate.toDateString().substr(4);
             var kiosksChart:KiosksChart = new KiosksChart($('#KiosksChart'),this.colors,this.fromTo);
+            var devices:DevicesData = new DevicesData($('#DevicesData'),this.colors);
 
         }
 
@@ -44,6 +44,108 @@ module uplight{
         }
     }
 
+    export class VODevice{
+        id:number;
+        name:string;
+        maxdelay:number;
+        S_time:number=0;
+        K_time:number=0;
+        ip:string='';
+        ping:number=0;
+        start_at:number=0;
+        timer:number=15000;
+        template:string;
+        constructor(obj:any){
+            for(var str in obj) this[str] = obj[str];
+        }
+    }
+    export class DeviceModel extends VODevice {
+        status:number;
+        constructor(dev:VODevice,s_time:number){
+            super(dev);
+            var delta:number = s_time-dev.S_time
+            if(delta< dev.maxdelay)this.status=1;
+           else this.status=0;
+
+        }
+    }
+    export class DevicesData {
+        private data:VODevice[];
+        private devices:DeviceModel[];
+        private s_time:number;
+        private list:JQuery;
+       // private greenLite:JQuery;
+        constructor(private view:JQuery,private colors:string[]){
+            console.log('DevicesData');
+            this.list = view.find('[data-id=list]:first');
+           // this.greenLite=view.find('[data-view=greenLite]:first');
+            this.loadData();
+        }
+        private loadData():void{
+           this.list.find('.status').detach();
+            RegA.getInstance().connector.getDevices().done((res)=>this.onKiosks(res));
+        }
+        private onKiosks(res:VOResult):void{
+            this.data=res.result;
+            this.s_time = Number(res.success);
+            //console.log(this.data);
+           // console.log(this.s_time);
+            this.render();
+           // RegA.getInstance().connector.  getServerTime().done((res)=>{
+              //  this.s_time = Number(res);
+              //  this.render();
+          //  });
+
+
+        }
+
+        private render():void {
+            var s_time=this.s_time;
+            var ar:VODevice[] =  this.data
+            var out='';
+            var ks:DeviceModel[]=[];
+            for(var i=0,n=ar.length;i<n;i++){
+                var k:DeviceModel = new DeviceModel(ar[i],s_time);
+                ks.push(k);
+                out+=this.createDevice(k);
+            }
+            this.devices = ks;
+            this.list.html(out) ;
+            setTimeout(()=>this.loadData(),10000);
+        }
+
+        private createDevice(obj:DeviceModel):string{
+
+            var color:string='#0F0';
+            var statusStr='Working fine';
+            var  cl ='fa-circle';
+           if(obj.status === 0){
+               color = '#ECCC6B';
+               cl='fa-exclamation-triangle';
+               statusStr = 'Experienced delays';
+           }
+
+
+
+
+            var stsrtTime:string= obj.start_at?new Date(obj.start_at*1000).toLocaleString():'';
+            var lastTime:string =obj.K_time? new Date(obj.K_time*1000).toLocaleString():'';
+            return '<tr>' +
+                '<td>'+obj.name+'</td>' +
+                '<td><a target="_blank" href="'+obj.template+'?kiosk='+obj.id+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
+                '<td><span title="'+statusStr+'" class="status fa '+cl+'" style="color:'+color+'">&nbsp</span></td>' +
+                '<td>'+obj.ip+'</td>' +
+                '<td>'+obj.ping+'</td>' +
+                '<td class="text-right">'+stsrtTime+'</td>' +
+                '<td class="text-right">'+lastTime+'</td>' +
+                '</tr>';
+
+
+        }
+
+
+
+    }
     export class VoRate{
         value:any;
         rate:number;
@@ -283,14 +385,9 @@ module uplight{
     }
 
     class KiosksChart{
-
         constructor(private view:JQuery,private colors:string[],fromto:string){
-
-
           //  console.log(clicks);
-
            this.view.find('[data-id=fromto]:first').text(fromto);
-
             RegA.getInstance().connector.getData('kiosks.json').done((res)=>this.onKiosks(res));
         }
 
