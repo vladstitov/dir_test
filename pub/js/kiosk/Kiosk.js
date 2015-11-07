@@ -24,6 +24,7 @@
 /// <reference path="MainMenu.ts" />
 /// <reference path="utils/Relay.ts" />
 /// <reference path="utils/Timeout.ts" />
+/// <reference path="views.ts" />
 var uplight;
 (function (uplight) {
     var Kiosk = (function () {
@@ -48,8 +49,18 @@ var uplight;
             var si = new uplight.SearchInput($('#searchinput'));
             var kw = new uplight.Keywords($('#kw-container'));
             var cats = new uplight.Categories();
-            var mm = new uplight.MainMenu();
-            mm.onClick = function (item) { return _this.onMenuClick(item); };
+            var btnSearch = new uplight.ButtonSearch($('[data-ctr=ButtonSearch]:first'));
+            var kbv = new uplight.KeyboardView($('[data-ctr=KeyboardView]:first'));
+            var pm = new uplight.PagesMenu($('[data-ctr=PagesMenu]:first'));
+            pm.onSelect = function (item) { return _this.onMenuClick(item); };
+            var mm = new uplight.MainMenu($('[data-ctr=MainMenu]:first'));
+            this.infoPage = new uplight.InfoPagesModel($('[data-id=Pages]:first'));
+            this.R.dispatcher.on(this.R.PAGE_SELECED, function (evt, page) {
+                _this.showPages(page);
+            });
+            this.R.dispatcher.on(this.R.CATEGORY_SELECTED, function (evt, cat) {
+                _this.showSearchResult();
+            });
             var timeout = new uplight.Timeout(u_settings.ss_timeout);
             timeout.onTimeout = function (num) {
                 console.log('timeout ' + num);
@@ -59,10 +70,10 @@ var uplight;
             this.details.onClose = function () {
                 _this.details.hide();
             };
-            $('#btnSearch').click(function () { return _this.shoeSearch(); });
+            $('#btnSearch').click(function () { return _this.showSearch(); });
             $('#SearchView [data-id=btnClose]').click(function () { return _this.showMenu(); });
             $('#SearchView [data-id=btnShowMenu]').click(function () { return _this.showMenu(); });
-            this.searchResult = new uplight.SearchResult();
+            this.searchResult = new uplight.SearchResult($('#SearchResult'));
             this.searchResult.onSelect = function (id) {
                 var dest = _this.R.model.getDestById(id);
                 if (dest.imgs)
@@ -96,7 +107,7 @@ var uplight;
                 this.isBlocked = true;
             }
         };
-        Kiosk.prototype.shoeSearch = function () {
+        Kiosk.prototype.showSearch = function () {
             $('#toolsview').animate({ scrollTop: '365' });
             this.showSearchResult();
         };
@@ -107,7 +118,7 @@ var uplight;
             $('#mainport').animate({ scrollLeft: 0 });
         };
         Kiosk.prototype.showPages = function (item) {
-            console.log('show pages');
+            console.log('show pages', item);
             $('#mainport').animate({ scrollLeft: 725 });
         };
         Kiosk.prototype.onMenuClick = function (item) {

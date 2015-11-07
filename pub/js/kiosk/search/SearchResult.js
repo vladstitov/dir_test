@@ -1,15 +1,18 @@
 /// <reference path="../Registry.ts" />
+/// <reference path="SearchModel.ts" />
 var uplight;
 (function (uplight) {
     var SearchResult = (function () {
-        function SearchResult() {
-            this.view = $('#list-main');
+        function SearchResult(view) {
+            this.view = view;
             this.R = uplight.Registry.getInstance();
             this.model = uplight.Registry.getInstance().model;
             this.list = this.view.find('[data-id=list]:first');
             this.addListeners();
             this.cache = {};
             this.mainport = $('#mainport');
+            this.header = this.view.find('[data-id=header]');
+            this.HEADER = this.header.text();
             // this.viewDetails = $('#DetailsLarge').click((evt)=>this.onCoverClick(evt))
             //  this.detailsContent = this.viewDetails.find('.content:first');
         }
@@ -25,7 +28,20 @@ var uplight;
             this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
+            this.R.dispatcher.on(this.R.CATEGORY_SELECTED, function (evt, catid) { return _this.onCategorySelected(catid); });
             // console.log('listeners');
+        };
+        SearchResult.prototype.onCategorySelected = function (catid) {
+            var cat = this.model.getCategoryById(catid);
+            this.header.html('<span class="' + cat.icon + '"> </span> <span>' + cat.label + '</span>');
+            var out = [];
+            var ar = this.data;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                if (ar[i].hasCategory(catid))
+                    out.push(ar[i]);
+            }
+            this.result = out;
+            this.render(true);
         };
         SearchResult.prototype.showDestination = function (vo) {
             return this.dataInd[vo.id].togleDetails();
@@ -76,6 +92,7 @@ var uplight;
             else
                 this.result = this.data;
             this.render(false);
+            this.header.text(this.HEADER);
         };
         SearchResult.prototype.filterSearch = function () {
             var out1 = [];

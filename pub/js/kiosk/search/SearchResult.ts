@@ -1,9 +1,8 @@
 ﻿/// <reference path="../Registry.ts" />
-
+/// <reference path="SearchModel.ts" />
 
 module uplight {
     export class SearchResult {
-
         private data:DestModel[];
         model:Model
         result:DestModel[];
@@ -15,20 +14,22 @@ module uplight {
         R:Registry
         mainport:JQuery
       //  cover:JQuery
-        view:JQuery
+
        // viewDetails:JQuery
         detailsContent:JQuery;
 
         onSelect:Function;
-        constructor(){
-            this.view = $('#list-main');
+        header:JQuery;
+        private HEADER:string
+        constructor(private view:JQuery){
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
             this.list=this.view.find('[data-id=list]:first');
-
             this.addListeners();
             this.cache={};
             this.mainport = $('#mainport');
+            this.header = this.view.find('[data-id=header]');
+            this.HEADER = this.header.text();
            // this.viewDetails = $('#DetailsLarge').click((evt)=>this.onCoverClick(evt))
           //  this.detailsContent = this.viewDetails.find('.content:first');
 
@@ -46,7 +47,21 @@ module uplight {
             this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
             this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
+            this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,catid)=>this.onCategorySelected(catid));
            // console.log('listeners');
+        }
+
+
+        private onCategorySelected(catid:number){
+            var cat:VOCategory = this.model.getCategoryById(catid);
+            this.header.html('<span class="'+cat.icon+'"> </span> <span>'+cat.label+'</span>');
+            var out:DestModel[] =[];
+            var ar = this.data;
+            for(var i=0,n=ar.length;i<n;i++){
+                if(ar[i].hasCategory(catid)) out.push(ar[i]);
+            }
+            this.result = out;
+            this.render(true);
         }
 
         showDestination(vo:VODestination):boolean{
@@ -67,7 +82,6 @@ module uplight {
             if(this.selected)  this.selected.removeClass(SELECTED);
             this.selectedIndex = el.index();
             this.selected = el.addClass(SELECTED);
-
             if(this.onSelect )this.onSelect(id);
            this.R.connector.Stat('sr',id.toString());
 
@@ -103,13 +117,14 @@ module uplight {
             if(pattern.length) this.result = this.filterSearch();
             else this.result = this.data;
             this.render(false);
+            this.header.text(this.HEADER);
         }
 
         private filterSearch():DestModel[]{
             var out1:DestModel[]=[];
             var out2:DestModel[]=[];
             var out3:DestModel[]=[];
-           var ar = this.data
+           var ar = this.data;
             var str= this.currentPattern;
            for(var i=0,n=ar.length;i<n;i++){
                ar[i].clearKeyword();
@@ -118,7 +133,6 @@ module uplight {
                else if(ind===2)out2.push(ar[i]);
                else if(ind===3)out3.push(ar[i]);
            }
-
             return out1.concat(out2,out3);
         }
 

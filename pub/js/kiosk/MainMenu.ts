@@ -3,41 +3,90 @@
  */
     /// <reference path="Kiosk.ts" />
 module uplight{
-    export class MainMenu{
-        view:JQuery
+
+    export  class MainMenu{
+        onSelect:Function;
+        private list:JQuery;
+        private data:any[];
+        private R:Registry
+        constructor(private view:JQuery){
+            this.R=Registry.getInstance();
+            var d2 = $.Deferred();
+            var d1 = Registry.getInstance().connector.getData('pages.json');
+            var cats:VOCategory[]= Registry.getInstance().model.getCategories();
+            if(cats)d2.resolve(cats);
+            else this.R.model.dispatcher.on(this.R.model.READY,()=>{d2.resolve(this.R.model.getCategories());});
+            $.when(d1,d2).then((v1,v2)=>{ this.onData(JSON.parse(v1[0]),v2)});
+            this.list = this.view.find('[data-id=list]');
+            this.list.on(CLICK,'a',(evt)=>this.onMenuClick(evt))
+        }
+
+        private onData(pages:VOPage[],categories:VOCategory[]):void{
+            var ar:any[]=[]
+            this.data =ar.concat(pages).concat(categories);
+            this.render();
+        }
+
+        render():void{
+            var ar = this.data
+            var out='<ul class="nano-content">';
+            for(var i=0,n=ar.length;i<n;i++){
+                var item = ar[i];
+                out+='<li class="item Plastic031"><a data-i="'+i+'"><span class="'+item.icon+'"></span> <span> '+(item.name || item.label)+'</span></a></li>';
+            }
+            out+='</ul>'
+            this.list.html(out);
+        }
+
+        private onMenuClick(evt:JQueryEventObject):void {
+          //  console.log(evt);
+            evt.preventDefault();
+            var i:number  = Number($(evt.currentTarget).data('i'));
+          //  console.log(i);
+            if (isNaN(i)) return
+            var item = this.data[i];
+            if (!item) return;
+            if(item.url)this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED,item.id);
+            else this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED,item.id);
+            if (this.onSelect)this.onSelect(item);
+
+        }
+
+    }
+
+    export class PagesMenu{
         R:Registry
         data:any[];
-        list:JQuery
-       onClick:Function
-        pages:InfoPage;
-        constructor(){
+        list:JQuery;
+        onSelect:Function;
 
+        pages:InfoPagesModel;
+        constructor(private view:JQuery){
             this.R=Registry.getInstance();
-
-            this.view=$('[data-ctr=MainMenu]:first');
             this.R.connector.getData('pages.json').done((data)=>this.onData(data))
             this.list = this.view.find('[data-id=list]');
             this.list.on(CLICK,'a',(evt)=>this.onMenuClick(evt))
 
         }
 
-        onMenuClick(evt:JQueryEventObject):void{
-            console.log(evt);
+        private onMenuClick(evt:JQueryEventObject):void{
+           // console.log(evt);
             evt.preventDefault();
             var i = $(evt.currentTarget).data('i');
-            console.log(i);
+          //  console.log(i);
             if(isNaN(i)) return
             var item= this.data[i];
             if(!item) return;
-            this.pages.showPage(i);
-            if(this.onClick)this.onClick(item);
+           // this.pages.showPage(i);
+            if(this.onSelect)this.onSelect(item);
+            this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED,item.id);
         }
 
         onData(res):void{
            // console.log(res);
             this.data = JSON.parse(res);
-            this.pages = new InfoPage()
-           this.pages.setData(this.data);
+          // this.pages = new InfoPagesModel($('[data-id=Pages]:first'));
+         // this.pages.setData(this.data);
             this.render();
         }
 

@@ -5,36 +5,92 @@
 var uplight;
 (function (uplight) {
     var MainMenu = (function () {
-        function MainMenu() {
+        function MainMenu(view) {
             var _this = this;
+            this.view = view;
             this.R = uplight.Registry.getInstance();
-            this.view = $('[data-ctr=MainMenu]:first');
-            this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
+            var d2 = $.Deferred();
+            var d1 = uplight.Registry.getInstance().connector.getData('pages.json');
+            var cats = uplight.Registry.getInstance().model.getCategories();
+            if (cats)
+                d2.resolve(cats);
+            else
+                this.R.model.dispatcher.on(this.R.model.READY, function () {
+                    d2.resolve(_this.R.model.getCategories());
+                });
+            $.when(d1, d2).then(function (v1, v2) {
+                _this.onData(JSON.parse(v1[0]), v2);
+            });
             this.list = this.view.find('[data-id=list]');
             this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });
         }
+        MainMenu.prototype.onData = function (pages, categories) {
+            var ar = [];
+            this.data = ar.concat(pages).concat(categories);
+            this.render();
+        };
+        MainMenu.prototype.render = function () {
+            var ar = this.data;
+            var out = '<ul class="nano-content">';
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                out += '<li class="item Plastic031"><a data-i="' + i + '"><span class="' + item.icon + '"></span> <span> ' + (item.name || item.label) + '</span></a></li>';
+            }
+            out += '</ul>';
+            this.list.html(out);
+        };
         MainMenu.prototype.onMenuClick = function (evt) {
-            console.log(evt);
+            //  console.log(evt);
             evt.preventDefault();
-            var i = $(evt.currentTarget).data('i');
-            console.log(i);
+            var i = Number($(evt.currentTarget).data('i'));
+            //  console.log(i);
             if (isNaN(i))
                 return;
             var item = this.data[i];
             if (!item)
                 return;
-            this.pages.showPage(i);
-            if (this.onClick)
-                this.onClick(item);
+            if (item.url)
+                this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED, item.id);
+            else
+                this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED, item.id);
+            if (this.onSelect)
+                this.onSelect(item);
         };
-        MainMenu.prototype.onData = function (res) {
+        return MainMenu;
+    })();
+    uplight.MainMenu = MainMenu;
+    var PagesMenu = (function () {
+        function PagesMenu(view) {
+            var _this = this;
+            this.view = view;
+            this.R = uplight.Registry.getInstance();
+            this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
+            this.list = this.view.find('[data-id=list]');
+            this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });
+        }
+        PagesMenu.prototype.onMenuClick = function (evt) {
+            // console.log(evt);
+            evt.preventDefault();
+            var i = $(evt.currentTarget).data('i');
+            //  console.log(i);
+            if (isNaN(i))
+                return;
+            var item = this.data[i];
+            if (!item)
+                return;
+            // this.pages.showPage(i);
+            if (this.onSelect)
+                this.onSelect(item);
+            this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED, item.id);
+        };
+        PagesMenu.prototype.onData = function (res) {
             // console.log(res);
             this.data = JSON.parse(res);
-            this.pages = new uplight.InfoPage();
-            this.pages.setData(this.data);
+            // this.pages = new InfoPagesModel($('[data-id=Pages]:first'));
+            // this.pages.setData(this.data);
             this.render();
         };
-        MainMenu.prototype.render = function () {
+        PagesMenu.prototype.render = function () {
             var ar = this.data;
             var out = '<ul class="nano-content">';
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -44,8 +100,8 @@ var uplight;
             out += '</ul>';
             this.list.html(out);
         };
-        return MainMenu;
+        return PagesMenu;
     })();
-    uplight.MainMenu = MainMenu;
+    uplight.PagesMenu = PagesMenu;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=MainMenu.js.map

@@ -1,24 +1,58 @@
 ﻿/// <reference path="Registry.ts" />
 /// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
 module uplight {
 
-    export class InfoPage {      
-        private content: JQuery;
+    export class VOPage{
+       view:JQuery;
+        name:string;
+        url:string;
+        id:number;
+        enabled:boolean;
+        private icon:string;
+        private header:JQuery
+        private content:JQuery;
+        constructor(obj:any){
+            for (var str in obj)this[str] = obj[str];
+            this.id=Number(this.id);
+            this.view =$('<div>').addClass('page');
+            this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="'+this.icon+'"> </span> <span> '+this.name+'</span>');
+            this.content = $('<div>').addClass('content').appendTo(this.view);
+            if(this.url) $.get(this.url).done((data)=>{ this.content.html(data);});
+        }
+    }
 
-        private view:JQuery
+
+    export class InfoPagesModel {
+        private content: JQuery;
         private list:JQuery;
         private width:number;
-        data:any[];
+        private data:VOPage[];
         private prev:number=-2;
 
-        constructor() {
-           this.view=$('[data-id=Pages]:first');
+        private dataInd:any;
+
+
+        private R:Registry;
+        constructor(private view:JQuery) {
+            this.R=Registry.getInstance();
+            this.R.connector.getData('pages.json').done((data)=>this.onData(data));
+            this.R.dispatcher.on(this.R.PAGE_SELECED,(evt,pageid)=>{this.showPage(pageid)});
             this.view.css('overfow','hidden');
             this.width = this.view.width();
             this.list=$('<div>').appendTo(this.view);
-
         }
 
+        private onData(res:string):void{
+            var out:VOPage[]=[];
+            var ar = JSON.parse(res);
+            for(var i=0,n=ar.length;i<n;i++){
+                out.push(new VOPage( ar[i]));
+            }
+            this.data = out;
+            this.dataInd =_.indexBy(out,'id');
+        }
+        /*
         loadData(item:any):void {
 
             $.get(item.url).done(function(data){
@@ -34,22 +68,27 @@ module uplight {
                 }
             this.data = data
         }
-
+*/
         current:number=-1
 
         private _showPage(i:number):void{
 
         }
+
         inTrans:boolean
 
-        showPage(i:number):void{
+        showPage(id:number):void{
             if(this.inTrans)return;
-            if(i==this.current) return
-
-            var item=this.data[i]
-            this.list.append(item.$div)
+            if(id==this.current) return
+            var item:VOPage=this.dataInd[id];
+            if(!item){
+                console.log('Error cant find page with id'+id);
+                return;
+            }
+            this.current = id;
+            this.list.append(item.view)
             if(this.list.children().length>1){
-                this.inTrans=true
+                this.inTrans=true;
                 this.view.animate({scrollLeft:this.width},()=>{
                     this.list.children().first().remove();
                     this.view.scrollLeft(0);

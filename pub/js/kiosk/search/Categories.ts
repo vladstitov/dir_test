@@ -3,6 +3,8 @@
  */
     /// <reference path="../Registry.ts" />
 module uplight{
+
+
     export class Categories{
 
         private list:JQuery
@@ -13,6 +15,7 @@ module uplight{
 
         private selected:number[];
         constructor(){
+
             this.view =$('#Categories');
             this.R=Registry.getInstance();
             this.list=$('<ul>').appendTo(this.view);
@@ -55,6 +58,7 @@ module uplight{
 
 
         }
+
         private onDataReady():void{
             this.data = this.R.model.getCategories();
             this.render();

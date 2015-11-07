@@ -1,32 +1,33 @@
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="Connector.ts" />
 /// <reference path="search/models.ts" />
-var LISTVIEW = 'ListView';
-var DETAILSVIEV = 'DetailsView';
-var MENUVIEW = 'MenuView';
-var VPCONTENT = 'VpContent';
-var SHOW_LISTVIEW = 'Show_ListView';
-var SHOW_DETAILSVIEW = 'Show_DetailsView';
-var SHOW_PAGE = 'Show_Page';
-var SHOW_KEYBOARD = 'Show_Keyboard';
-var HIDE_KEYBOARD = 'Hide_Keyboard';
-var TYPING = 'typing';
-var SELECTED = 'selected';
-var DISABLED = 'disabled';
-var CLOSE = 'CLOSE';
-var SCREENSAVER_START = 'SCREENSAVER_START';
-var SCREENSAVER_END = 'SCREENSAVER_END';
-var MENU_CLICKED = 'MENU_CLICKED';
-var MENU_PAGE_CLICKED = 'MENU_PAGE_CLICKED';
-var CATEGORY_SELECTED = 'CATEGORY_SELECTED';
-var SHOW_DATA_VIEW = 'SHOW_DATA_VIEW';
-var SHOW_DATA_VIEW_BACK = 'SHOW_DATA_VIEW_BACK';
+/// <reference path="InfoPage.ts" />
 var CLICK = 'click';
 var SHOW = 'show';
 var HIDE = 'hide';
 var HIDDEN = 'hidden';
+var SELECTED = 'selected';
+var DISABLED = 'disabled';
 var uplight;
 (function (uplight) {
+    // var LISTVIEW: string = 'ListView';
+    //var DETAILSVIEV: string = 'DetailsView';
+    // var MENUVIEW: string = 'MenuView';
+    // var VPCONTENT: string = 'VpContent';
+    // var SHOW_LISTVIEW: string = 'Show_ListView';
+    //   var SHOW_DETAILSVIEW: string = 'Show_DetailsView';
+    // var SHOW_PAGE: string = 'Show_Page';
+    //  var SHOW_KEYBOARD: string = 'Show_Keyboard';
+    // var HIDE_KEYBOARD: string = 'Hide_Keyboard';
+    // var TYPING: string = 'typing';
+    // var CLOSE: string = 'CLOSE';
+    var SCREENSAVER_START = 'SCREENSAVER_START';
+    var SCREENSAVER_END = 'SCREENSAVER_END';
+    //var MENU_CLICKED: string = 'MENU_CLICKED';
+    //var MENU_PAGE_CLICKED: string = 'MENU_PAGE_CLICKED';
+    // var CATEGORY_SELECTED: string = 'CATEGORY_SELECTED';
+    //var SHOW_DATA_VIEW: string = 'SHOW_DATA_VIEW';
+    // var SHOW_DATA_VIEW_BACK: string = 'SHOW_DATA_VIEW_BACK';
     var Registry = (function () {
         function Registry() {
             this.KEY_PRESSED = 'KEY_PRESSED';
@@ -38,6 +39,11 @@ var uplight;
             this.RESET_ALL = 'RESET_ALL';
             this.SS_START = 'SS_START';
             this.SS_STOP = 'SS_STOP';
+            this.PAGE_SELECED = 'PAGE_SELECED';
+            this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
+            this.SHOW_KEYBOARD = 'SHOW_KEYBOARD';
+            this.RESET_VIEWS = 'RESET_VIEWS';
+            this.HIDE_VIEWS = 'HIDE_VIEWS';
             this.all = [];
             // onSearchResultClick2: Function;
             this.errors = '';
@@ -71,4 +77,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

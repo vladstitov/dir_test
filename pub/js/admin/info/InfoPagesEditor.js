@@ -225,6 +225,9 @@ var uplight;
         InfoEditor.prototype.setData = function (data) {
             this.data = data;
             this.textEditor.setData(data.url);
+            if (data.id === 0)
+                this.textEditor.show();
+            /////////////////////////////////////////////
             this.render();
         };
         InfoEditor.prototype.getData = function () {

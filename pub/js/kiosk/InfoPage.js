@@ -1,39 +1,81 @@
 /// <reference path="Registry.ts" />
 /// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
 var uplight;
 (function (uplight) {
-    var InfoPage = (function () {
-        function InfoPage() {
+    var VOPage = (function () {
+        function VOPage(obj) {
+            var _this = this;
+            for (var str in obj)
+                this[str] = obj[str];
+            this.id = Number(this.id);
+            this.view = $('<div>').addClass('page');
+            this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="' + this.icon + '"> </span> <span> ' + this.name + '</span>');
+            this.content = $('<div>').addClass('content').appendTo(this.view);
+            if (this.url)
+                $.get(this.url).done(function (data) {
+                    _this.content.html(data);
+                });
+        }
+        return VOPage;
+    })();
+    uplight.VOPage = VOPage;
+    var InfoPagesModel = (function () {
+        function InfoPagesModel(view) {
+            var _this = this;
+            this.view = view;
             this.prev = -2;
+            /*
+            loadData(item:any):void {
+    
+                $.get(item.url).done(function(data){
+                 //   console.log(data);
+                   item.$div=$('<div>').html(data);
+              })
+            }
+    
+            setData(data:any[]):void{
+                    var ar = data
+                    for(var i=0,n=ar.length;i<n;i++){
+                          this.loadData(ar[i]);
+                    }
+                this.data = data
+            }
+    */
             this.current = -1;
-            this.view = $('[data-id=Pages]:first');
+            this.R = uplight.Registry.getInstance();
+            this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
+            this.R.dispatcher.on(this.R.PAGE_SELECED, function (evt, pageid) {
+                _this.showPage(pageid);
+            });
             this.view.css('overfow', 'hidden');
             this.width = this.view.width();
             this.list = $('<div>').appendTo(this.view);
         }
-        InfoPage.prototype.loadData = function (item) {
-            $.get(item.url).done(function (data) {
-                //   console.log(data);
-                item.$div = $('<div>').html(data);
-            });
-        };
-        InfoPage.prototype.setData = function (data) {
-            var ar = data;
+        InfoPagesModel.prototype.onData = function (res) {
+            var out = [];
+            var ar = JSON.parse(res);
             for (var i = 0, n = ar.length; i < n; i++) {
-                this.loadData(ar[i]);
+                out.push(new VOPage(ar[i]));
             }
-            this.data = data;
+            this.data = out;
+            this.dataInd = _.indexBy(out, 'id');
         };
-        InfoPage.prototype._showPage = function (i) {
+        InfoPagesModel.prototype._showPage = function (i) {
         };
-        InfoPage.prototype.showPage = function (i) {
+        InfoPagesModel.prototype.showPage = function (id) {
             var _this = this;
             if (this.inTrans)
                 return;
-            if (i == this.current)
+            if (id == this.current)
                 return;
-            var item = this.data[i];
-            this.list.append(item.$div);
+            var item = this.dataInd[id];
+            if (!item) {
+                console.log('Error cant find page with id' + id);
+                return;
+            }
+            this.current = id;
+            this.list.append(item.view);
             if (this.list.children().length > 1) {
                 this.inTrans = true;
                 this.view.animate({ scrollLeft: this.width }, function () {
@@ -58,11 +100,11 @@ var uplight;
         }
 
         */
-        InfoPage.prototype.onPageLoaded = function (res) {
+        InfoPagesModel.prototype.onPageLoaded = function (res) {
             // this.content.html(res);
         };
-        return InfoPage;
+        return InfoPagesModel;
     })();
-    uplight.InfoPage = InfoPage;
+    uplight.InfoPagesModel = InfoPagesModel;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=infopage.js.map
+//# sourceMappingURL=InfoPage.js.map

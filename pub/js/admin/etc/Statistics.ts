@@ -327,7 +327,8 @@ module uplight{
 
            list.html(out);
             this.list= list;
-            list.appendTo(this.view.find('[data-id=list]:first'));
+            var cont = this.view.find('[data-id=list]:first').empty()
+            list.appendTo(cont);
 
             var canvas:JQuery = this.view.find('[data-id=canvas]:first');
 

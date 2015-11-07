@@ -202,6 +202,9 @@ var uplight;
                 this.iskw = 0;
             }
         };
+        DestModel.prototype.hasCategory = function (num) {
+            return this.vo.cats.indexOf(num) !== -1;
+        };
         DestModel.prototype.setCats = function (cats) {
             this.cats = ar;
             var ar = this.vo.cats;

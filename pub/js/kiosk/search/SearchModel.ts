@@ -261,7 +261,9 @@ module uplight{
             }
 
         }
-
+        hasCategory(num:number):boolean{
+            return this.vo.cats.indexOf(num)!==-1;
+        }
         setCats(cats:number[]):DestModel{
             this.cats=ar;
             var ar:number[] = this.vo.cats;

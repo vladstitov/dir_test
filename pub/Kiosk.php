@@ -13,9 +13,11 @@ if(isset($_GET['kiosk'])) {
 }
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
+
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
 
 foreach($_GET as $key=>$val) $settings->$key=$val;
+
 
 
 $l=file_get_contents(DATA.'/'.$settings->labels);
@@ -39,14 +41,14 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Kiosk 1080">
+    <meta name="description" content="Kiosk 1920">
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
     <link href="js/lists/reset.css" rel="stylesheet" />
     <link href="js/libs/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
-    <link href="css/kiosk1080.css" rel="stylesheet" />
+    <link href="css/<?=$css; ?>" rel="stylesheet" />
    
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
@@ -99,24 +101,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
     <section id="mainview" data-ctr="SearchResult" class="view-port">
         <style>
-           #mainport, #cover>.detailsL {
-                position: absolute;
-                width:725px;
-                height: 1077px;
-                left: 0;
-                right: 0;
-                margin: auto;
-                overflow: hidden;
-               white-space: nowrap;
-            }
 
-           #mainport>section{
-               display: inline-block;
-               width:725px;
-               height: 1077px;
-               vertical-align: top;
-
-           }
 
            /* #mainport .view-port{
                 position: absolute;
@@ -128,29 +113,13 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 bottom: 0;
                 margin: auto;
             }*/
-           #Pages{
-               overflow: hidden;
-           }
-            #Pages>div{
-                width:1480px;
-                height: 1077px;
-               /* white-space: nowrap;*/
-             }
-           #Pages>div>div{
-               float: left;
-               white-space: normal;
-               /*display: inline-block;*/
-              /* vertical-align: top;*/
-               width:725px;
-               height: 1077px;
-               padding: 22px;
 
-           }
+
 
         </style>
         <div id="mainport" class="mainbg u-glow view-port-content">
                 <?php
-                 include('htms/kiosk/SearchResult1080.php');
+                 include('js/kiosk/search/SearchResult.htm');
                 ?>
                <section id="Pages" data-id="Pages">
 
@@ -164,18 +133,20 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <hr/>
         <div id="toolsview" class="mainbg view-port-content">
             <?php
-            include('htms/kiosk/StartMenu1080.php');
-            include('htms/kiosk/SearchTools.htm');
+            include('js/kiosk/menu/StartMenu.htm');
+            include('js/kiosk/search/SearchTools.htm');
             ?>
         </div>
         <hr/>
     </section>
+
+
     <section id="footer">
         <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
 
     <?php
-    include('htms/kiosk/DetailsLarge.htm');
+    include('js/kiosk/search/DetailsLarge.htm');
     ?>
 
 </div> <!--End of container-->

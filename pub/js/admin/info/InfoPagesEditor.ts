@@ -292,6 +292,8 @@ module uplight{
         setData(data:any):void{
             this.data = data;
             this.textEditor.setData(data.url);
+            if(data.id===0)this.textEditor.show();
+            /////////////////////////////////////////////
             this.render();
         }
         getData():any{

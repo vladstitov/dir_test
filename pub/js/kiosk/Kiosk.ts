@@ -26,6 +26,7 @@
 /// <reference path="MainMenu.ts" />
 /// <reference path="utils/Relay.ts" />
 /// <reference path="utils/Timeout.ts" />
+/// <reference path="views.ts" />
 
 declare var u_settings:any;
 
@@ -38,9 +39,11 @@ module uplight {
        private details:DetailsLarge
        private searchInput:SearchInput;
        private cateegories:Categories;
-       private mainMenu:MainMenu;
+       private mainMenu:PagesMenu;
        private attractLoop:AttractLoop;
        keywords:Keywords;
+
+       private infoPage:InfoPage;
 
        private onMouseDown(evt:MouseEvent):void{
           if(this.attractLoop.hide()) window.location.href='#kiosk';
@@ -55,7 +58,7 @@ module uplight {
            }
        }
 
-       shoeSearch():void{
+       showSearch():void{
            $('#toolsview').animate({scrollTop:'365'});
            this.showSearchResult();
        }
@@ -68,7 +71,7 @@ module uplight {
            $('#mainport').animate({scrollLeft:0});
        }
        showPages(item):void{
-           console.log('show pages');
+           console.log('show pages',item);
            $('#mainport').animate({scrollLeft:725});
        }
        onMenuClick(item:any):void{
@@ -82,6 +85,7 @@ module uplight {
        warn(str:string):void{
            this.warns+=str+"\n";
        }
+
        constructor() {
 
            console.log('kiodk');
@@ -103,8 +107,23 @@ module uplight {
            var si = new SearchInput($('#searchinput'));
            var kw = new Keywords($('#kw-container'));
            var cats= new Categories();
-           var mm = new MainMenu();
-           mm.onClick = (item)=>this.onMenuClick(item);
+           var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
+           var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
+
+           var pm = new PagesMenu($('[data-ctr=PagesMenu]:first'));
+           pm.onSelect = (item)=>this.onMenuClick(item);
+
+           var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
+
+           this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
+
+           this.R.dispatcher.on(this.R.PAGE_SELECED,(evt,page)=>{
+               this.showPages(page);
+           })
+           this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,cat)=>{
+               this.showSearchResult();
+           })
+
            var timeout:Timeout = new Timeout(u_settings.ss_timeout);
            timeout.onTimeout=(num)=>{
                console.log('timeout '+num);
@@ -117,12 +136,12 @@ module uplight {
 
 
 
-           $('#btnSearch').click(()=>this.shoeSearch());
+           $('#btnSearch').click(()=>this.showSearch());
            $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
            $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
 
 
-         this.searchResult = new SearchResult();
+         this.searchResult = new SearchResult($('#SearchResult'));
 
            this.searchResult.onSelect = (id)=>{
                var dest:VODestination = this.R.model.getDestById(id);

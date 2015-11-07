@@ -1,4 +1,4 @@
-<section data-ctr="MainMenu" class="row">
+<section data-ctr="PagesMenu" class="row">
     <style>
         #btnSearch{
             font-size:100px;
@@ -20,7 +20,7 @@
         }
     </style>
 
-    <div class="col-sm-2"></div>
+    <div class="col-sm-1"></div>
     <div class="col-sm-6">
         <h3 class="text-center">
             <?= isset($labels['infopages'])?$labels['infopages']:'&nbsp;'; ?>
@@ -30,6 +30,7 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-2"></div>
     <div class="col-sm-2">
         <h3 class="text-center">
             <?= isset($labels['btnSearch'])?$labels['btnSearch']:'&nbsp;'; ?>
@@ -40,5 +41,5 @@
 
         </div>
     </div>
-    <div class="col-sm-2"></div>
+    <div class="col-sm-1"></div>
 </section>

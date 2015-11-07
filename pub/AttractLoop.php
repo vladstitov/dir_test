@@ -21,7 +21,7 @@ if(isset($_GET['settings']))$sett=$_GET['settings'];
 <div id="AttractLoop">
     <div  class="cover" data-id="Body">
     </div>
-    <link href="js/kiosk/als/AttractLoop.css" rel="stylesheet" />
+    <link href="css/AttractLoop.css" rel="stylesheet" />
     <script src="js/kiosk/Registry.js"></script>
     <script src="js/kiosk/als/AttractLoop.js"></script>
 
