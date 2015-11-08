@@ -176,4 +176,4 @@ var uplight;
     })();
     uplight.FilterPage = FilterPage;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=FilterPage.js.map
+//# sourceMappingURL=filterpage.js.map

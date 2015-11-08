@@ -1,8 +1,13 @@
 <?
 class Utils{
-	public function getDevices(){
+	public function getDevicesData(){
 				$out = new stdClass();
-				$out->result =  json_decode($this->getData(array('file_name'=>'kiosks.json')));
+				$devices = json_decode($this->getData(array('file_name'=>'kiosks.json')));
+				foreach($devices  as $device){
+						$filename=DATA.'devs/track_'.$device->id.'.json';
+						if(file_exists($filename))$device->track = json_decode(file_get_contents($filename));
+				}
+				$out->result = $devices;//  json_decode($this->getData(array('file_name'=>'kiosks.json')));
 				$out->success = time();
 				return $out;
 	}

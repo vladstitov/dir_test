@@ -40,25 +40,15 @@ var uplight;
             var r = uplight.Registry.getInstance();
             r.events = $('<div>');
             r.connector = new uplight.Connector();
-            r.connector.id = u_settings.kiosk;
-            r.connector.who = 'kiosk';
+            r.connector.id = u_settings.id;
+            r.settings = u_settings;
+            // console.log(u_settings);          // r.connector.who='kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
             u_settings.props.forEach(function (val) {
                 u_settings[val.id] = val.value;
             });
-            r.settings = u_settings;
             this.setControllers();
             this.R = r;
-            //this.keyboard = new Keyboard();
-            // var si = new SearchInput($('#searchinput'));
-            //  var kw = new Keywords($('#kw-container'));
-            //  var cats= new Categories();
-            ///var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
-            //  var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
-            // var pm = new PagesMenu($('[data-ctr=PagesMenu]:first'));
-            // pm.onSelect = (item)=>this.onMenuClick(item);
-            // var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
-            //this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
             r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
             r.events.on(r.KIOSK_SHOW_MENU, null, function (evt) { return _this.showMenu(); });
             this.R.events.on(uplight.Keyboard.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
@@ -69,11 +59,11 @@ var uplight;
             this.R.events.on(r.CATEGORY_SELECTED, function (evt, cat) {
                 _this.showSearchResult();
             });
-            var timeout = new uplight.Timeout(u_settings.ss_timeout);
-            timeout.onTimeout = function (num) {
-                console.log('timeout ' + num);
-                window.location.href = '#timeout';
-            };
+            // var timeout:Timeout = new Timeout(u_settings.ss_timeout);
+            // timeout.onTimeout=(num)=>{
+            //    console.log('timeout '+num);
+            //  window.location.href='#timeout'
+            // }
             r.events.on(uplight.DetailsLarge.DETAILS_LARGE_CLOSE_CLICK, function (evt) {
                 r.events.triggerHandler(uplight.DetailsLarge.DETAILS_LARGE_HIDE);
             });

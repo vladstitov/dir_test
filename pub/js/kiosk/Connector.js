@@ -11,7 +11,6 @@ var uplight;
         function Connector() {
             this.service = 'rem/kiosk.php?a=';
             this.serv = 'rem/kiosk.php';
-            this.who = 'kiosk';
         }
         Connector.prototype.getData = function (filename) {
             return $.get(this.service + 'get_data&device=' + this.device + '&file_name=' + filename);
@@ -23,15 +22,18 @@ var uplight;
             msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_log', msg);
         };
-        Connector.prototype.relay = function (stamp, now, ping, timer, status) {
-            return $.get(this.service + 'get_stamp&id=' + this.id + '&stamp=' + stamp + '&now=' + now + '&ping=' + ping + '&timer=' + timer + '&status=' + status);
+        Connector.prototype.relay = function (obj) {
+            obj.a = 'get_stamp';
+            obj.id = this.id;
+            //stamp:number,now:number,ping:number,timer:number,status:string
+            return $.get(this.serv, obj);
         };
         Connector.prototype.Error = function (msg) {
             msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_error', msg);
         };
         Connector.prototype.Stat = function (type, val) {
-            var who = this.who + this.id;
+            var who = this.id;
             var stamp = Date.now();
             $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&stamp=' + stamp);
         };

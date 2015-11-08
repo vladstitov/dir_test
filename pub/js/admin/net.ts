@@ -207,6 +207,9 @@ module uplight {
         getDevices():JQueryPromise<VOResult>{
         return $.get(this.service + '?a=get_devices');
     }
+        getDevicesData():JQueryPromise<VOResult>{
+            return $.get(this.service + '?a=get_devices_data');
+        }
         restartKiosks():JQueryPromise<VOResult>{
             return $.get(this.service + '?a=restart_kiosks');
         }

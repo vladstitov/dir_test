@@ -21,6 +21,7 @@ var uplight;
             this.isActive = true;
             this.R = uplight.Registry.getInstance();
             this.view = $(el);
+            this.width = this.view.width();
             var tt = Number(this.R.settings.ss_timeout);
             if (isNaN(tt) || tt < 10)
                 tt = 10;
@@ -74,7 +75,7 @@ var uplight;
                 this.gallery = gal;
             }
             if (vo.TC)
-                var tc = new uplight.TouchClip();
+                var tc = new uplight.TouchClip(this.width);
             this.cover.append(tc.view);
             tc.start();
             this.tc = tc;

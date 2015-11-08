@@ -122,4 +122,4 @@ var uplight;
     })();
     uplight.VOStat = VOStat;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=rega.js.map
+//# sourceMappingURL=regA.js.map

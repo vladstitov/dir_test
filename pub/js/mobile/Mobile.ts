@@ -56,10 +56,11 @@ module uplight {
 
         constructor() {
             var settings=u_settings;
-            this.R = uplight.Registry.getInstance();          
+            this.R = uplight.Registry.getInstance();
+            this.R.settings = settings;
            var conn:uplight.Connector = new uplight.Connector();
-            conn.who='mob';
-           conn.id=0;
+           conn.id = settings.id;
+
             this.R.connector = conn;
            // this.R.connector.getSettings((data) => this.onSettings(data));      
             this.R.model = new Model(conn,(w)=>this.warn(w));

@@ -86,13 +86,14 @@ module uplight {
            var r:Registry = Registry.getInstance();
            r.events = $('<div>');
            r.connector = new Connector();
-           r.connector.id=u_settings.kiosk;
-           r.connector.who='kiosk';
+           r.connector.id=u_settings.id;
+           r.settings = u_settings;
+           // console.log(u_settings);          // r.connector.who='kiosk';
            r.model = new Model(r.connector,(w)=>this.warn(w));
            u_settings.props.forEach(function(val){
                u_settings[val.id] = val.value;
            })
-           r.settings = u_settings;
+
 
 
 
@@ -100,22 +101,6 @@ module uplight {
 
            this.setControllers();
            this.R=r;
-          //this.keyboard = new Keyboard();
-          // var si = new SearchInput($('#searchinput'));
-         //  var kw = new Keywords($('#kw-container'));
-         //  var cats= new Categories();
-           ///var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
-         //  var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
-
-          // var pm = new PagesMenu($('[data-ctr=PagesMenu]:first'));
-          // pm.onSelect = (item)=>this.onMenuClick(item);
-
-          // var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
-
-           //this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
-
-
-
 
            r.events.on(r.KIOSK_SHOW_SEARCH,()=>this.showSearch());
 
@@ -132,11 +117,11 @@ module uplight {
                this.showSearchResult();
            })
 
-           var timeout:Timeout = new Timeout(u_settings.ss_timeout);
-           timeout.onTimeout=(num)=>{
-               console.log('timeout '+num);
-               window.location.href='#timeout'
-           }
+          // var timeout:Timeout = new Timeout(u_settings.ss_timeout);
+          // timeout.onTimeout=(num)=>{
+           //    console.log('timeout '+num);
+             //  window.location.href='#timeout'
+          // }
 
            r.events.on(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK,(evt)=>{
                r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_HIDE);

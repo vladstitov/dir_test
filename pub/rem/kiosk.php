@@ -16,7 +16,7 @@ $result= false;
 
 switch(array_shift($a)){
 	case 'get_stamp':
-	echo json_encode(trackKiosk($get));	
+	echo json_encode(trackDevice($get));	
 	break;
 	case 'log_error':
 		error_log(file_get_contents("php://input")."|\n\r|", 3,DATA.'logs/k_error'.date('m-y').'.log');			
@@ -111,63 +111,18 @@ function updateCategory($id,$incr,$db){
 		return $res;
 }
 
-function trackKiosk($get){	
-	
+function trackDevice($get){	
 		$out=new stdClass();
-		$out->success='success';			
-		$file_name=DATA.'kiosks.json';
-		
-		$id=(int)$get['id'];
-		$track = json_decode(file_get_contents($file_name));
-		
-		foreach($track as $kiosk) if($kiosk->id===$id) break;
-		
-		if($kiosk->id!==$id){
-				$out->success='nothing '.$id;
-				return $out;		
-		}		
-					
-		$stamp=(int)$get['stamp'];
-		$k_time=(int)@$get['now'];
-		$timer=(int)@$get['timer'];
-		$status=@$get['status'];
-		
-		if($stamp==0) {
-			$stamp=time();
-			$kiosk->status='started';// 1 status started;  2 status working ; 3 status screensaver; 100 restart with url; 99 reload
-			$kiosk ->start_at = $k_time;
-			$kiosk->stamp = $stamp;
-			$kiosk->ip = $_SERVER['REMOTE_ADDR'];
-			$out->success = 'stamp';
-			$out->result = $stamp;
-			$out->ktime = $k_time;			
-			file_put_contents($file_name,json_encode($track));
-			return $out;
-		}
-							
-		if($kiosk->status=='restart'){
-			$out->success='restart';
-			$out->result='Kiosk1080.php?device='.$id;
-		}
-		if($kiosk->status=='reload'){
-			$out->success='reload';
-			$out->result=''.$id;
-		}
-		
-		$kiosk->status=$status;
-		$kiosk->K_time=$k_time;
-		$kiosk->ping=(int)@$get['ping'];
-		$kiosk->S_time = time();
-		$kiosk->timer=$timer;
-		
-		file_put_contents($file_name,json_encode($track));
-		
-					
-					
-		
-			
-			return $out;
-		
+		$out->success='success';
+		$id=isset($get['id'])?$get['id']:'00';		
+		$file_name=DATA.'devs/track_'.$id.'.json';
+		$dev = array();
+		foreach($get as $key=>$val)	$dev[$key]=$val;		
+		$dev['s_time']=time();
+		$dev['ip'] = $_SERVER['REMOTE_ADDR'];			
+		file_put_contents($file_name,json_encode($dev));					
+		$out->result = filemtime(DATA.'restart.log');			
+		return $out;		
 }
 
 

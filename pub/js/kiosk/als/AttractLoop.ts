@@ -30,10 +30,14 @@ module uplight{
         private timeout:number=60000;
         private gallery:Gallery;
         private tc:TouchClip;
+        width:number;
 
         constructor(el:HTMLElement){
+
             this.R=Registry.getInstance();
             this.view = $(el)
+
+             this.width= this.view.width();
             var tt:number = Number(this.R.settings.ss_timeout)
             if(isNaN(tt) || tt<10) tt=10;
             this.timeout = tt*1000;
@@ -96,7 +100,7 @@ module uplight{
 
             }
             if(vo.TC)
-                var tc = new TouchClip();
+                var tc = new TouchClip(this.width);
                 this.cover.append(tc.view);
                 tc.start();
             this.tc= tc;

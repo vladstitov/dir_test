@@ -168,6 +168,9 @@ var uplight;
         Connector.prototype.getDevices = function () {
             return $.get(this.service + '?a=get_devices');
         };
+        Connector.prototype.getDevicesData = function () {
+            return $.get(this.service + '?a=get_devices_data');
+        };
         Connector.prototype.restartKiosks = function () {
             return $.get(this.service + '?a=restart_kiosks');
         };

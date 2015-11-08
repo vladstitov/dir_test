@@ -10,8 +10,8 @@ module uplight {
     export class Connector {
         private service = 'rem/kiosk.php?a=';
         private serv= 'rem/kiosk.php';
-        id:number;
-        who:string='kiosk';
+        id:string;
+       // who:string='kiosk';
         public device: string;
         public lang: string;
 
@@ -29,9 +29,11 @@ module uplight {
             $.post(this.service + 'log_log',msg);
         }
 
-        relay(stamp:number,now:number,ping:number,timer:number,status:string):JQueryPromise<VOResult>{
-
-            return $.get(this.service+'get_stamp&id='+this.id+'&stamp='+stamp+'&now='+now+'&ping='+ping+'&timer='+timer+'&status='+status);
+        relay(obj:any):JQueryPromise<VOResult>{
+            obj.a='get_stamp';
+            obj.id=this.id;
+            //stamp:number,now:number,ping:number,timer:number,status:string
+            return $.get(this.serv,obj);
 
         }
         Error(msg:string): void {
@@ -39,7 +41,7 @@ module uplight {
             $.post(this.service + 'log_error',msg);
         }
         Stat(type:string,val:string): void {
-            var who = this.who+this.id;
+            var who = this.id;
             var stamp= Date.now();
             $.get(this.service + 'log_stat'+'&type='+type+'&val='+val+'&who='+who+'&stamp='+stamp);
         }

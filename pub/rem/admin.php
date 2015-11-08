@@ -47,8 +47,8 @@ switch(array_shift($a)){
 		$ctr = new Statistics();		
 		$result = $ctr->getUsage($get['devices'],$get['from'],$get['to']);
 	break;
-	case 'get_devices':
-	$result = utils()->getDevices();
+	case 'get_devices_data':
+	$result = utils()->getDevicesData();
 	break;
 	case 'restart_kiosks':		
 		$result = utils()->restartKiosks($get);

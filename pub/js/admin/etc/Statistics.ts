@@ -48,13 +48,15 @@ module uplight{
         id:number;
         name:string;
         maxdelay:number;
+        start:number=0;
         S_time:number=0;
-        K_time:number=0;
+        now:number=0;
         ip:string='';
         ping:number=0;
         start_at:number=0;
         timer:number=15000;
         template:string;
+        track:any;
         constructor(obj:any){
             for(var str in obj) this[str] = obj[str];
         }
@@ -62,7 +64,8 @@ module uplight{
     export class DeviceModel extends VODevice {
         status:number;
         constructor(dev:VODevice,s_time:number){
-            super(dev);
+            super(dev.track);
+            for(var str in dev) this[str] = dev[str];
             var delta:number = s_time-dev.S_time
             if(delta< dev.maxdelay)this.status=1;
            else this.status=0;
@@ -76,19 +79,19 @@ module uplight{
         private list:JQuery;
        // private greenLite:JQuery;
         constructor(private view:JQuery,private colors:string[]){
-            console.log('DevicesData');
+            //console.log('DevicesData');
             this.list = view.find('[data-id=list]:first');
            // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
         }
         private loadData():void{
            this.list.find('.status').detach();
-            RegA.getInstance().connector.getDevices().done((res)=>this.onKiosks(res));
+            RegA.getInstance().connector.getDevicesData().done((res)=>this.onKiosks(res));
         }
         private onKiosks(res:VOResult):void{
             this.data=res.result;
             this.s_time = Number(res.success);
-            //console.log(this.data);
+          // console.log(this.data);
            // console.log(this.s_time);
             this.render();
            // RegA.getInstance().connector.  getServerTime().done((res)=>{
@@ -106,6 +109,7 @@ module uplight{
             var ks:DeviceModel[]=[];
             for(var i=0,n=ar.length;i<n;i++){
                 var k:DeviceModel = new DeviceModel(ar[i],s_time);
+               /// console.log(k);
                 ks.push(k);
                 out+=this.createDevice(k);
             }
@@ -127,9 +131,8 @@ module uplight{
 
 
 
-
-            var stsrtTime:string= obj.start_at?new Date(obj.start_at*1000).toLocaleString():'';
-            var lastTime:string =obj.K_time? new Date(obj.K_time*1000).toLocaleString():'';
+            var stsrtTime:string= obj.start?new Date(obj.start*1000).toLocaleString():'';
+            var lastTime:string =obj.now? new Date(obj.now*1000).toLocaleString():'';
             return '<tr>' +
                 '<td>'+obj.name+'</td>' +
                 '<td><a target="_blank" href="'+obj.template+'?kiosk='+obj.id+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
@@ -497,8 +500,8 @@ module uplight{
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
               //  var id:string = 'kiosk'+item.id;
-                ids.push(item.index);
-                devices[item.index] = ar[i];
+                ids.push(item.id);
+                devices[item.id] = ar[i];
 
                // var clicks:number[] = this.clicks[ar[i].id];
                 //if(!clicks) clicks=[];

@@ -23,14 +23,14 @@ module uplight{
             return this.view
         }
 
-        constructor(){
+        constructor(private width:number){
             var el = document.createElement('div');
             el.id = 'Touchclip';
             var draw = SVG(el);
-            var rect = draw.rect(1920, 80).fill({ color: '#000', opacity: 0.5 }).y(20);;
+            var rect = draw.rect(width, 80).fill({ color: '#000', opacity: 0.5 }).y(20);;
 
-            this.rec1 = draw.rect(1920, 15).fill({ color: '#a90329', opacity: 1.0 }).y(105);
-            this.rec2 = draw.rect(1920, 15).fill({ color: '#a90329', opacity: 1.0 })
+            this.rec1 = draw.rect(width, 15).fill({ color: '#a90329', opacity: 1.0 }).y(105);
+            this.rec2 = draw.rect(width, 15).fill({ color: '#a90329', opacity: 1.0 })
             this.text = draw.text('TOUCH TO BEGIN').fill('#fff').y(0);
 
             this.text.font({
@@ -51,13 +51,14 @@ module uplight{
 
         }
 
+
         private runIn(): void {
-            this.text.x(2000);
-            this.rec1.x(2000);
-            this.rec2.x(-2000);
+            this.text.x(this.width+100);
+            this.rec1.x(this.width+100);
+            this.rec2.x(-(this.width+100));
             this.rec1.animate().x(0);
             this.rec2.animate().x(0);
-            this.text.animate(500, '>', 1000).x(280);
+            this.text.animate(500, '>', 1000).x((this.width-500)/2);
             this.interval = setTimeout(()=>this.removeText(),5000);
 
         }

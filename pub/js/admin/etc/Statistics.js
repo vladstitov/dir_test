@@ -43,8 +43,9 @@ var uplight;
     uplight.Statistics = Statistics;
     var VODevice = (function () {
         function VODevice(obj) {
+            this.start = 0;
             this.S_time = 0;
-            this.K_time = 0;
+            this.now = 0;
             this.ip = '';
             this.ping = 0;
             this.start_at = 0;
@@ -58,7 +59,9 @@ var uplight;
     var DeviceModel = (function (_super) {
         __extends(DeviceModel, _super);
         function DeviceModel(dev, s_time) {
-            _super.call(this, dev);
+            _super.call(this, dev.track);
+            for (var str in dev)
+                this[str] = dev[str];
             var delta = s_time - dev.S_time;
             if (delta < dev.maxdelay)
                 this.status = 1;
@@ -73,7 +76,7 @@ var uplight;
         function DevicesData(view, colors) {
             this.view = view;
             this.colors = colors;
-            console.log('DevicesData');
+            //console.log('DevicesData');
             this.list = view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
@@ -81,12 +84,12 @@ var uplight;
         DevicesData.prototype.loadData = function () {
             var _this = this;
             this.list.find('.status').detach();
-            uplight.RegA.getInstance().connector.getDevices().done(function (res) { return _this.onKiosks(res); });
+            uplight.RegA.getInstance().connector.getDevicesData().done(function (res) { return _this.onKiosks(res); });
         };
         DevicesData.prototype.onKiosks = function (res) {
             this.data = res.result;
             this.s_time = Number(res.success);
-            //console.log(this.data);
+            // console.log(this.data);
             // console.log(this.s_time);
             this.render();
             // RegA.getInstance().connector.  getServerTime().done((res)=>{
@@ -102,6 +105,7 @@ var uplight;
             var ks = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 var k = new DeviceModel(ar[i], s_time);
+                /// console.log(k);
                 ks.push(k);
                 out += this.createDevice(k);
             }
@@ -118,8 +122,8 @@ var uplight;
                 cl = 'fa-exclamation-triangle';
                 statusStr = 'Experienced delays';
             }
-            var stsrtTime = obj.start_at ? new Date(obj.start_at * 1000).toLocaleString() : '';
-            var lastTime = obj.K_time ? new Date(obj.K_time * 1000).toLocaleString() : '';
+            var stsrtTime = obj.start ? new Date(obj.start * 1000).toLocaleString() : '';
+            var lastTime = obj.now ? new Date(obj.now * 1000).toLocaleString() : '';
             return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '?kiosk=' + obj.id + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + obj.ip + '</td>' + '<td>' + obj.ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
         };
         return DevicesData;
@@ -430,8 +434,8 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
                 //  var id:string = 'kiosk'+item.id;
-                ids.push(item.index);
-                devices[item.index] = ar[i];
+                ids.push(item.id);
+                devices[item.id] = ar[i];
                 // var clicks:number[] = this.clicks[ar[i].id];
                 //if(!clicks) clicks=[];
                 //clicks = this.convertClicks(clicks);
