@@ -16,7 +16,7 @@ var uplight;
             this.tiSearch = view.find('[data-id=tiSearch]:first').on('input', function () { return _this.onSearchInput(); });
             this.btnClose = view.find('[data-id=btnClose]:first').on(CLICK, function () { return _this.onCloseClicked(); });
             this.btnBack = view.find('[data-id=btnBack]:first').on(CLICK, function () { return _this.onCloseClicked(); });
-            // this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat));
+            // this.R.events.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat));
             this.R.dispatcher.on(this.R.CATEGORY_REMOVE_SELECTED, function (evt, elms) { return _this.onRemoved(elms); });
             this.R.dispatcher.on(this.R.CATEGORY_REST, function () { return _this.render(); });
             this.btnClear = view.find('.fa-times-circle:first').on(CLICK, function () { return _this.onClearClicked(); });

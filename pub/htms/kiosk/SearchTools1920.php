@@ -64,7 +64,7 @@
 
             </button>
         </div>
-        <div id="Keyboard" data-js="Keyboard" class="text-center">
+        <div id="Keyboard" data-ctr="uplight.Keyboard" class="text-center">
         </div>
     </section>
 </section>

@@ -16,7 +16,7 @@ var uplight;
         Categories.prototype.addListeners = function () {
             var _this = this;
             this.list.on(CLICK, 'input', function (evt) { return _this.onListChanged($(evt.currentTarget)); });
-            this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
+            this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
         };
         Categories.prototype.reset = function () {
             this.render();
@@ -26,7 +26,7 @@ var uplight;
             if (ind == -1) {
                 this.selected.push(id);
                 this.R.connector.Stat('cp', id.toString());
-                this.R.dispatcher.triggerHandler(this.R.CATEGORIES_CHANGE, [this.selected]);
+                this.R.events.triggerHandler(Categories.CATEGORIES_CHANGE, [this.selected]);
             }
         };
         Categories.prototype.removeCategory = function (id) {
@@ -35,7 +35,7 @@ var uplight;
                 this.selected.splice(ind, 1);
                 //console.log(this.selected);
                 this.R.connector.Stat('cm', id.toString());
-                this.R.dispatcher.triggerHandler(this.R.CATEGORIES_CHANGE, [this.selected]);
+                this.R.events.triggerHandler(Categories.CATEGORIES_CHANGE, [this.selected]);
             }
         };
         Categories.prototype.onListChanged = function (evt) {
@@ -66,6 +66,8 @@ var uplight;
             this.selected = idis;
             this.list.html(out);
         };
+        Categories.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
+        Categories.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
         return Categories;
     })();
     uplight.Categories = Categories;

@@ -31,8 +31,8 @@ var uplight;
             this.view = $('<div>');
             this.list = $('<div>').appendTo(this.view);
             $.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(res); });
-            uplight.Registry.getInstance().dispatcher.on(uplight.Registry.getInstance().SS_START, function () { return _this.start(); });
-            uplight.Registry.getInstance().dispatcher.on(uplight.Registry.getInstance().SS_STOP, function () { return _this.stop(); });
+            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_START, function () { return _this.start(); });
+            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_STOP, function () { return _this.stop(); });
         }
         GalleryDisplay.prototype.onData = function (res) {
             var data = JSON.parse(res);

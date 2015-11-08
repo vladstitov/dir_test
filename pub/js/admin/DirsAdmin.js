@@ -32,7 +32,7 @@ var uplight;
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
                 _this.init();
-                //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
+                //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });
             var btnLogout = $('#btnLogout').click(function () {
                 if (btnLogout.hasClass('disabled'))
@@ -44,9 +44,9 @@ var uplight;
                 }, 3000);
             });
             this.R.msg = function (text, cont) { return _this.myMsg(text, cont); };
-            // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
-            // this.R.dispatcher.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
-            // this.R.dispatcher.on(RegA.VIEW_LISTING,()=>{
+            // this.R.events.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
+            // this.R.events.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
+            // this.R.events.on(RegA.VIEW_LISTING,()=>{
             // $('#content').empty();
             //if(!this.details) this.details = new DetailsEditor($('#content'));
             //});

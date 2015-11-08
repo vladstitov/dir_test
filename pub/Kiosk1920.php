@@ -102,7 +102,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                    <?= isset($labels['header'])?$labels['header']:''; ?>
             </div>
             <div id="brand-more">
-                <div id="Clock">
+                <div id="Clock" data-ctr="uplight.Clock">
                 </div>
 
             </div>
@@ -166,10 +166,17 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
            }
         </style>
         <div id="mainport" class="mainbg view-port-content">
-                <?php
-                 include('htms/kiosk/SearchResult1920.php');
-                ?>
-               <section id="Pages" data-id="Pages">
+            <section id="SearchResult" data-id="searchResult" data-ctr="uplight.SearchResult">
+                <div class="col-sm-12">
+                    <? include('htms/kiosk/ListHeader.php'); ?>
+                </div>
+                <hr style="margin-bottom: 0"/>
+                <div  class="col-lg-12">
+                    <? include('htms/kiosk/ListMain.php'); ?>
+                </div>
+                <hr style="margin-top: 0"/>
+            </section>
+               <section id="Pages"  data-ctr="uplight.InfoPagesModel">
 
                 </section>
         </div>
@@ -198,7 +205,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </style>
         <hr/>
         <!--<div id="toolsview" class="view-port-content" data-ctr="notSwitchView">-->
-            <div data-ctr="ButtonSearch">
+            <div data-ctr="uplight.ButtonSearch">
 
                 <button  data-id="btnSearch" class="btn-danger btn-xxlarge">
                     <span class="fa fa-search" ></span>
@@ -211,7 +218,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
         <!--</div>-->
     </section>
-    <section id="KeyboardView" class="text-center mainbg" data-ctr="KeyboardView">
+    <section id="KeyboardView" class="text-center mainbg" data-ctr="uplight.KeyboardView">
         <h3 class="text-center">
             <?= isset($labels['keyboard'])?$labels['keyboard']:'&nbsp;'; ?>
         </h3>
@@ -280,7 +287,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <div class="col-sm-2">
             <button class="btn btn-danger" data-id="btnClose"><span class="fa fa-close"></span></button>
         </div>
-        <div id="Keyboard" data-ctr="Keyboard" class="text-center">
+        <div id="Keyboard" data-ctr="uplight.Keyboard" class="text-center">
         </div>
     </section>
         <section id="view3" class="mainbg">

@@ -5,9 +5,9 @@
 var uplight;
 (function (uplight) {
     var Keyboard = (function () {
-        function Keyboard() {
+        function Keyboard(el) {
             this.alphabet = '1,2,3,4,5,6,7,8,9,0,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,&nbsp;,Z,X,C,V,SPACE,B,N,M';
-            this.view = $('#Keyboard');
+            this.view = $(el);
             this.R = uplight.Registry.getInstance();
             // if(set && set.keyboard) this.initSettings(set.keyboard);
             this.keys = $('<div>');
@@ -28,7 +28,7 @@ var uplight;
             else if (txt == 'space') {
                 txt = ' ';
             }
-            this.R.dispatcher.triggerHandler(this.R.KEY_PRESSED, txt);
+            this.R.events.triggerHandler(Keyboard.KEY_PRESSED, txt);
         };
         Keyboard.prototype.parseKeys = function (ar) {
             var out = '<div class="row1">';
@@ -51,6 +51,11 @@ var uplight;
                 cl += ' back fa fa-caret-square-o-left';
             return '<div class="kb-key btn ' + cl + '"><span>' + item + '</span></div>';
         };
+        Keyboard.KEY_PRESSED = 'KEY_PRESSED';
+        Keyboard.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
+        Keyboard.SEARCH_CHANGED = 'SEARCH_CHANGED';
+        Keyboard.KEYBOARD_SHOW = 'KEYBOARD_SHOW';
+        Keyboard.KEYBOARD_HIDE = 'KEYBOARD_HIDE';
         return Keyboard;
     })();
     uplight.Keyboard = Keyboard;
@@ -70,13 +75,13 @@ var uplight;
         SearchInput.prototype.addListeners = function () {
             var _this = this;
             this.btnClear.on(CLICK, function () { return _this.onClearClick(); });
-            this.R.dispatcher.on(this.R.KEY_PRESSED, function (evt, txt) {
+            this.R.events.on(Keyboard.KEY_PRESSED, function (evt, txt) {
                 _this.onKeyPressed(txt);
             });
-            this.R.dispatcher.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
+            this.R.events.on(Keyboard.KEYWORD_PRESSED, function (evt, txt) {
                 _this.onKeyword(txt);
             });
-            this.R.dispatcher.on(this.R.RESET_ALL, function () { return _this.reset(); });
+            this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
         };
         SearchInput.prototype.onKeyword = function (str) {
             //this.isKw=true
@@ -89,7 +94,8 @@ var uplight;
         SearchInput.prototype.setText = function (txt) {
             this.data = txt;
             this.input.val(this.data);
-            this.R.dispatcher.triggerHandler(this.R.SEARCH_CHANGED, this.data);
+            console.log(Keyboard.SEARCH_CHANGED, this.data);
+            this.R.events.triggerHandler(Keyboard.SEARCH_CHANGED, this.data);
         };
         SearchInput.prototype.onKeyPressed = function (txt) {
             var str = this.data;

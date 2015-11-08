@@ -1,8 +1,12 @@
 ﻿/// <reference path="../Registry.ts" />
 /// <reference path="SearchModel.ts" />
+/// <reference path="Categories.ts" />
+/// <reference path="KeyboardSimple.ts" />
 
 module uplight {
     export class SearchResult {
+        static SEARCH_RESULT_SELECT:string = 'SEARCH_RESULT_SELECT';
+        static SEARCH_RESULT_SHOW_DESTINATION:string = 'SEARCH_RESULT_SHOW_DESTINATION';
         private data:DestModel[];
         model:Model
         result:DestModel[];
@@ -15,13 +19,15 @@ module uplight {
         mainport:JQuery
       //  cover:JQuery
 
+        private view:JQuery
        // viewDetails:JQuery
         detailsContent:JQuery;
 
-        onSelect:Function;
+        //onSelect:Function;
         header:JQuery;
         private HEADER:string
-        constructor(private view:JQuery){
+        constructor(private el:HTMLElement){
+            this.view = $(el);
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
             this.list=this.view.find('[data-id=list]:first');
@@ -42,12 +48,13 @@ module uplight {
         }
 
         addListeners():void{
-            this.R.dispatcher.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
-            this.R.dispatcher.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
-            this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
+            this.R.events.on(Categories.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
+            this.R.events.on(Keyboard.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
+            this.R.events.on(this.R.RESET_ALL,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
             this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
-            this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,catid)=>this.onCategorySelected(catid));
+            this.R.events.on(Categories.CATEGORY_SELECTED,(evt,catid)=>this.onCategorySelected(catid));
+            this.R.events.on( SearchResult.SEARCH_RESULT_SHOW_DESTINATION,(evt,id)=>this.showDestination(id));
            // console.log('listeners');
         }
 
@@ -64,8 +71,8 @@ module uplight {
             this.render(true);
         }
 
-        showDestination(vo:VODestination):boolean{
-            return this.dataInd[vo.id].togleDetails();
+        private showDestination(id:number):boolean{
+            return this.dataInd[id].togleDetails();
         }
 
         selected:JQuery;
@@ -82,7 +89,8 @@ module uplight {
             if(this.selected)  this.selected.removeClass(SELECTED);
             this.selectedIndex = el.index();
             this.selected = el.addClass(SELECTED);
-            if(this.onSelect )this.onSelect(id);
+            this.R.events.triggerHandler( SearchResult.SEARCH_RESULT_SELECT,id);
+            //if(this.onSelect )this.onSelect(id);
            this.R.connector.Stat('sr',id.toString());
 
         }

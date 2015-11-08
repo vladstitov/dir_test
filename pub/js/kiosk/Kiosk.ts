@@ -31,19 +31,22 @@
 declare var u_settings:any;
 
 module uplight {
-   export class Kiosk {     
-       private searchResult: SearchResult;
-       private R: Registry;
-       private keyboard: Keyboard;
-       private timeout:number
-       private details:DetailsLarge
-       private searchInput:SearchInput;
-       private cateegories:Categories;
-       private mainMenu:PagesMenu;
-       private attractLoop:AttractLoop;
-       keywords:Keywords;
+   export class Kiosk {
 
-       private infoPage:InfoPage;
+
+
+      // private searchResult: SearchResult;
+       private R: Registry;
+     //  private keyboard: Keyboard;
+       private timeout:number
+    //   private details:DetailsLarge
+      // private searchInput:SearchInput;
+       //private cateegories:Categories;
+    //   private mainMenu:PagesMenu;
+       private attractLoop:AttractLoop;
+       //keywords:Keywords;
+
+     //  private infoPage:InfoPagesModel;
 
        private onMouseDown(evt:MouseEvent):void{
           if(this.attractLoop.hide()) window.location.href='#kiosk';
@@ -70,13 +73,12 @@ module uplight {
        showSearchResult():void{
            $('#mainport').animate({scrollLeft:0});
        }
-       showPages(item):void{
-           console.log('show pages',item);
+       showPages():void{
            $('#mainport').animate({scrollLeft:725});
        }
-       onMenuClick(item:any):void{
-            this.showPages(item);
-       }
+      // onMenuClick(item:any):void{
+           // this.showPages();
+      // }
        errors:string='';
        error(str:string):void{
            this.errors+=str+"\n";
@@ -87,7 +89,6 @@ module uplight {
        }
 
        constructor() {
-
            console.log('kiodk');
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
            var r:Registry = Registry.getInstance();
@@ -100,27 +101,37 @@ module uplight {
            })
            r.settings = u_settings;
 
-           r.dispatcher = $({});
+           r.events = $({});
 
+
+
+           this.setControllers();
            this.R=r;
-          this.keyboard = new Keyboard();
+          //this.keyboard = new Keyboard();
            var si = new SearchInput($('#searchinput'));
            var kw = new Keywords($('#kw-container'));
-           var cats= new Categories();
-           var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
-           var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
+         //  var cats= new Categories();
+           ///var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
+         //  var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
 
-           var pm = new PagesMenu($('[data-ctr=PagesMenu]:first'));
-           pm.onSelect = (item)=>this.onMenuClick(item);
+          // var pm = new PagesMenu($('[data-ctr=PagesMenu]:first'));
+          // pm.onSelect = (item)=>this.onMenuClick(item);
 
-           var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
+          // var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
 
-           this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
+           //this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
 
-           this.R.dispatcher.on(this.R.PAGE_SELECED,(evt,page)=>{
-               this.showPages(page);
+           this.R.events.on(this.R.KIOSK_SHOW_MENU,()=>this.showMenu());
+           this.R.events.on(this.R.KIOSK_SHOW_SEARCH,()=>this.showSearch());
+
+           this.R.events.on(Keyboard.KEYBOARD_SHOW,()=>this.showSearchResult());
+
+           this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,page)=>{
+               this.R.events.triggerHandler(Keyboard.KEYBOARD_HIDE);
+               this.showPages();
+
            })
-           this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,cat)=>{
+           this.R.events.on(Categories.CATEGORY_SELECTED,(evt,cat)=>{
                this.showSearchResult();
            })
 
@@ -130,38 +141,62 @@ module uplight {
                window.location.href='#timeout'
            }
 
-
-          this.details = new DetailsLarge($('#DetailsLarge'));
-           this.details.onClose = ()=>{  this.details.hide();  }
-
-
-
-           $('#btnSearch').click(()=>this.showSearch());
-           $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
-           $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
+           r.events.on(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK,(evt)=>{
+               r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_HIDE);
+           });
 
 
-         this.searchResult = new SearchResult($('#SearchResult'));
+          // $('#btnSearch').click(()=>this.showSearch());
+          // $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
+          // $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
+
+
+        // this.searchResult = new SearchResult($('#SearchResult'));
+           r.events.on( SearchResult.SEARCH_RESULT_SELECT,(evt,id)=>{
+               var dest:VODestination = this.R.model.getDestById(id);
+               if(dest.imgs)r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_SHOW,id)// this.details.setDestination(dest).render().show();
+               else r.events.triggerHandler( SearchResult.SEARCH_RESULT_SHOW_DESTINATION,id)//this.searchResult.showDestination(dest);
+               console.log(dest);
+           })
+/*
 
            this.searchResult.onSelect = (id)=>{
-               var dest:VODestination = this.R.model.getDestById(id);
-               if(dest.imgs) this.details.setDestination(dest).render().show();
-               else this.searchResult.showDestination(dest);
-               console.log(dest);
-           }
 
+           }
+*/
            if(!u_settings.hasOwnProperty('norelay'))  var relay:Relay = new Relay(u_settings.timer);
-            r.dispatcher.on(r.SS_START,function(){r.dispatcher.triggerHandler(r.RESET_ALL)});
+            r.events.on(r.SS_START,function(){r.events.triggerHandler(r.RESET_ALL)});
 
 
            this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
            this.attractLoop.show();
-          // setTimeout(()=>{ DestModel.dispatcher.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
+          // setTimeout(()=>{ DestModel.events.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
           // Registry.getInstance().connector.Log('kiosk started succesguly');
          // Registry.getInstance().connector.Error('kiosk started succesguly');
 
        }
+       setControllers():void{
+           var stringToFunction = function(str) {
+               var arr = str.split(".");
+               var fn = (window || this);
+               for (var i = 0, len = arr.length; i < len; i++) fn = fn[arr[i]];
+               if (typeof fn !== "function")   fn=null;
+               return  fn;
+           };
 
+           var r:Registry= Registry.getInstance();
+
+           $('[data-ctr]').each(function(ind,el){
+               var str=$(el).data('ctr');
+               var MyClass = stringToFunction(str);
+               if(MyClass) {
+                   r.register(str,MyClass);
+                   var cl= new MyClass(el);
+               } else console.warn(' class '+str+' not loaded');
+
+               //console.log(el);
+           })
+       }
 
 
        private prevHash;

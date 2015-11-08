@@ -41,9 +41,8 @@ module uplight {
         private date:JQuery
         private time:JQuery;
         private ampm:JQuery
-        constructor(id) {
-
-            this.view = $('#'+id);
+        constructor(el:HTMLElement) {
+            this.view = $(el);
             this.time = $('<span></span>').appendTo(this.view);
             this.ampm = $('<span></span>').appendTo(this.view); 
             this.view.append('<br/>');
@@ -72,7 +71,7 @@ module uplight {
         }
     }
 
-    if(document.getElementById('Clock')) Registry.getInstance().add( new Clock('Clock'));
+
 
     export class Weather {
        view:JQuery;

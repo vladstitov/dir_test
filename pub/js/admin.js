@@ -3017,7 +3017,7 @@ var uplight;
             this.total = this.view.find('[data-id=total]');
             this.currentCat = 0;
 
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+            this.R.model.events.on(this.R.model.CHANGE, function () {
                 return _this.onModelChange();
             });
             this.destinations = this.R.model.getData();
@@ -3338,14 +3338,14 @@ var uplight;
                 return _this.onSaveClicked();
             });
 
-            this.R.dispatcher.on(this.R.CATEGORY_SELECTED, function (evt, cat) {
+            this.R.events.on(this.R.CATEGORY_SELECTED, function (evt, cat) {
                 return _this.onCategorySelected(cat);
             });
 
             if (this.model.getCategories())
                 this.renderSequance();
             else
-                this.model.dispatcher.on(this.model.CHANGE, function () {
+                this.model.events.on(this.model.CHANGE, function () {
                     return _this.renderSequance();
                 });
 
@@ -3561,7 +3561,7 @@ var uplight;
             table.append(this.list);
             this.listView = $('#CategoriesList-container');
             this.R = uplight.RegA.getInstance();
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+            this.R.model.events.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
             });
             if (this.R.model.getCategories())
@@ -3569,7 +3569,7 @@ var uplight;
             this.list.on(CLICK, 'tr', function (evt) {
                 return _this.onClick($(evt.currentTarget));
             });
-            this.R.model.dispatcher.on(this.R.model.CATEGORIES_CAHANGE, function (evt, cata) {
+            this.R.model.events.on(this.R.model.CATEGORIES_CAHANGE, function (evt, cata) {
                 return _this.onCategoriesChanged();
             });
         }
@@ -3588,7 +3588,7 @@ var uplight;
                 // console.log(cat);
                 this.selectedItem = cat;
                 this.selectElement(el);
-                this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED, cat);
+                this.R.events.triggerHandler(this.R.CATEGORY_SELECTED, cat);
             }
         };
 
@@ -3667,7 +3667,7 @@ var uplight;
                 _this.show();
             };
             this.list = new uplight.CategoriesList($('#CategoriesList'));
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+            this.R.model.events.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
             });
 
@@ -3737,7 +3737,7 @@ var uplight;
             this.view = view;
             this.R = uplight.RegA.getInstance();
 
-            this.R.dispatcher.on(this.R.CATEGORY_REST, function () {
+            this.R.events.on(this.R.CATEGORY_REST, function () {
                 return _this.render();
             });
             this.list = $('<ul>').appendTo(view.find('[data-id=list]:first'));
@@ -3745,7 +3745,7 @@ var uplight;
                 return _this.onListClick($(evt.currentTarget));
             });
             this.title = view.find('[data-id=title]:first');
-            this.R.dispatcher.on(this.R.CATEGORY_ADD_SELECTED, function (evt, elms) {
+            this.R.events.on(this.R.CATEGORY_ADD_SELECTED, function (evt, elms) {
                 return _this.onAddSelected(elms);
             });
             this.total = view.find('[data-id=total]:first');
@@ -3753,13 +3753,13 @@ var uplight;
                 return _this.onDelClicked();
             });
             this.btnReset = view.find('[data-id=btnReset]').on(CLICK, function () {
-                _this.R.dispatcher.triggerHandler(_this.R.CATEGORY_REST);
+                _this.R.events.triggerHandler(_this.R.CATEGORY_REST);
             });
         }
         CategoryInListing.prototype.onDelClicked = function () {
             var _this = this;
             var elms = this.list.children('.selected');
-            this.R.dispatcher.triggerHandler(this.R.CATEGORY_REMOVE_SELECTED, [elms]);
+            this.R.events.triggerHandler(this.R.CATEGORY_REMOVE_SELECTED, [elms]);
             setTimeout(function () {
                 return _this.refreshList();
             }, 500);
@@ -3858,10 +3858,10 @@ var uplight;
             }).appendTo(this.view.find('[data-id=list]:first'));
             if (this.R.model.getCategories())
                 this.render();
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+            this.R.model.events.on(this.R.model.CHANGE, function () {
                 return _this.render();
             });
-            this.R.dispatcher.on(this.R.CATEGORY_NOTINLIS_CLOSE, function () {
+            this.R.events.on(this.R.CATEGORY_NOTINLIS_CLOSE, function () {
                 return _this.show();
             });
         }
@@ -3936,11 +3936,11 @@ var uplight;
                 return _this.onCloseClicked();
             });
 
-            // this.R.dispatcher.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat));
-            this.R.dispatcher.on(this.R.CATEGORY_REMOVE_SELECTED, function (evt, elms) {
+            // this.R.events.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat));
+            this.R.events.on(this.R.CATEGORY_REMOVE_SELECTED, function (evt, elms) {
                 return _this.onRemoved(elms);
             });
-            this.R.dispatcher.on(this.R.CATEGORY_REST, function () {
+            this.R.events.on(this.R.CATEGORY_REST, function () {
                 return _this.render();
             });
             this.btnClear = view.find('.fa-times-circle:first').on(CLICK, function () {
@@ -3976,7 +3976,7 @@ var uplight;
         };
         CategoryNotListing.prototype.onCloseClicked = function () {
             this.hide();
-            this.R.dispatcher.triggerHandler(this.R.CATEGORY_NOTINLIS_CLOSE);
+            this.R.events.triggerHandler(this.R.CATEGORY_NOTINLIS_CLOSE);
         };
 
         CategoryNotListing.prototype.setCurrent = function (cat) {
@@ -3986,7 +3986,7 @@ var uplight;
         CategoryNotListing.prototype.onAddClick = function () {
             var _this = this;
             var elms = this.list.children('.selected');
-            this.R.dispatcher.triggerHandler(this.R.CATEGORY_ADD_SELECTED, [elms]);
+            this.R.events.triggerHandler(this.R.CATEGORY_ADD_SELECTED, [elms]);
             setTimeout(function () {
                 return _this.refreshList();
             }, 500);
@@ -4177,7 +4177,7 @@ var uplight;
 
             this.table.append(this.renderHead());
             this.getData();
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+            this.R.model.events.on(this.R.model.CHANGE, function () {
                 return _this.getData();
             });
         };
@@ -5872,7 +5872,7 @@ var uplight;
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
                 _this.init();
-                //this.R.vo.dispatcher.on(this.R.vo.READY,()=>this.test());
+                //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });
 
             var btnLogout = $('#btnLogout').click(function () {
@@ -5887,9 +5887,9 @@ var uplight;
             this.R.msg = function (text, cont) {
                 return _this.myMsg(text, cont);
             };
-            // this.R.dispatcher.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
-            // this.R.dispatcher.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
-            // this.R.dispatcher.on(RegA.VIEW_LISTING,()=>{
+            // this.R.events.on(RegA.SHOW_PREVIEW,(evt,data)=>this.showPreview(data));
+            // this.R.events.on(RegA.HIDE_PREVIEW,function(){$('#preview').hide();});
+            // this.R.events.on(RegA.VIEW_LISTING,()=>{
             // $('#content').empty();
             //if(!this.details) this.details = new DetailsEditor($('#content'));
             //});
@@ -5992,8 +5992,8 @@ var uplight;
             this.navigatiom = new uplight.Navigation($('#AdminNav'));
             this.R.confirm = new uplight.Confirm($('#Confirm'));
             this.R.model = new uplight.DestinantionsModel();
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
-                _this.R.model.dispatcher.off(_this.R.model.CHANGE);
+            this.R.model.events.on(this.R.model.CHANGE, function () {
+                _this.R.model.events.off(_this.R.model.CHANGE);
                 _this.onHashChange();
             });
             $(window).on('hashchange', function (evt) {

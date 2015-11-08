@@ -1,4 +1,4 @@
-<section id="SearchResult" data-id="searchResult" data-ctr="SearchResult">
+<section id="SearchResult" data-id="searchResult" data-ctr="uplight.SearchResult">
     <div class="col-sm-12">
         <? include('htms/kiosk/ListHeader.php'); ?>
     </div>

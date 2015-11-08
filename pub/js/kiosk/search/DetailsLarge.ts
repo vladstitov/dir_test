@@ -17,6 +17,9 @@ module uplight{
        $img:JQuery;
        $page:JQuery;
 
+      static DETAILS_LARGE_HIDE:string = 'HIDE_DETAILS_LARGE';
+      static DETAILS_LARGE_CLOSE_CLICK:string = 'DETAILS_LARGE_CLOSE_CLICK';
+      static DETAILS_LARGE_SHOW:string = 'SHOW_DETAILS_LARGE';
        isVis:boolean
 
        onClose:Function
@@ -36,10 +39,12 @@ module uplight{
            }
        }
 
+       private view:JQuery
 
-       constructor(private view:JQuery){
+       constructor(el:HTMLElement){
           // console.log(view);
-
+           var view=$(el);
+           this.view = view;
            this.$name= view.find('[data-id=name]:first');
            this.$unit= view.find('[data-id=unit]:first');
            this.$more= view.find('[data-id=more]:first');
@@ -53,10 +58,23 @@ module uplight{
 
            this.isVis = !view.hasClass(HIDE);
            view.find('[data-id=btnClose]').click(()=>{
-               if(this.onClose)this.onClose();
+               var r:Registry = Registry.getInstance();
+               r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK);
            })
 
 
+           this.addListeners();
+       }
+
+       addListeners():void{
+           var r:Registry = Registry.getInstance();
+           r.events.on(DetailsLarge.DETAILS_LARGE_SHOW,(evt,id)=>this.showDetails(id));
+           r.events.on(DetailsLarge.DETAILS_LARGE_HIDE,(evt)=>this.hide());
+       }
+
+       private showDetails(id:number):void{
+           var dest:VODestination =  Registry.getInstance().model.getDestById(id);
+           this.setDestination(dest).render().show();
        }
 
        setDestination(vo:VODestination):DetailsLarge {

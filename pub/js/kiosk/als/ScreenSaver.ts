@@ -46,7 +46,7 @@ module uplight {
             this.isActive = true;
             console.log('start ss');
             this.view.appendTo('body');
-            this.R.dispatcher.triggerHandler(this.R.SS_START);
+            this.R.events.triggerHandler(this.R.SS_START);
 
         }
 
@@ -54,7 +54,7 @@ module uplight {
             this.isActive = false;
             this.view.remove();
             console.log('stop ss');
-            this.R.dispatcher.triggerHandler(this.R.SS_STOP);
+            this.R.events.triggerHandler(this.R.SS_STOP);
         }
 
 

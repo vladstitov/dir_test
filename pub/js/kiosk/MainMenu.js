@@ -50,9 +50,9 @@ var uplight;
             if (!item)
                 return;
             if (item.url)
-                this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED, item.id);
+                this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, item.id);
             else
-                this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED, item.id);
+                this.R.events.triggerHandler(uplight.Categories.CATEGORY_SELECTED, item.id);
             if (this.onSelect)
                 this.onSelect(item);
         };
@@ -60,9 +60,9 @@ var uplight;
     })();
     uplight.MainMenu = MainMenu;
     var PagesMenu = (function () {
-        function PagesMenu(view) {
+        function PagesMenu(el) {
             var _this = this;
-            this.view = view;
+            this.view = $(el);
             this.R = uplight.Registry.getInstance();
             this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
             this.list = this.view.find('[data-id=list]');
@@ -81,7 +81,7 @@ var uplight;
             // this.pages.showPage(i);
             if (this.onSelect)
                 this.onSelect(item);
-            this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED, item.id);
+            this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, item.id);
         };
         PagesMenu.prototype.onData = function (res) {
             // console.log(res);

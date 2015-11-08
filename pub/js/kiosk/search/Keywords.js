@@ -37,7 +37,7 @@ var uplight;
             var i = el.data('i');
             var val = this.data[i].label;
             if (val.length > 1)
-                this.R.dispatcher.triggerHandler(this.R.KEYWORD_PRESSED, val);
+                this.R.events.triggerHandler(this.R.KEYWORD_PRESSED, val);
         };
         Keywords.prototype.renderItem = function (item, i) {
             return '<li data-i="' + i + '"><a class="btn">' + item.label + '</a></li>';

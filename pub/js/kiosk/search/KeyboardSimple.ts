@@ -5,13 +5,18 @@
 
 module uplight{
     export class Keyboard {
-        private keys:JQuery;
+       static   KEY_PRESSED:string='KEY_PRESSED';
+        static  KEYWORD_PRESSED:string='KEYWORD_PRESSED';
+        static SEARCH_CHANGED:string='SEARCH_CHANGED';
+        static KEYBOARD_SHOW:string ='KEYBOARD_SHOW';
+        static KEYBOARD_HIDE:string ='KEYBOARD_HIDE';
+           private keys:JQuery;
 
         view:JQuery
         private alphabet:string = '1,2,3,4,5,6,7,8,9,0,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,&nbsp;,Z,X,C,V,SPACE,B,N,M';
         R:Registry
-        constructor() {
-            this.view = $('#Keyboard');
+        constructor(el:HTMLElement) {
+            this.view = $(el);
             this.R=Registry.getInstance();
            // if(set && set.keyboard) this.initSettings(set.keyboard);
             this.keys = $('<div>');
@@ -22,6 +27,7 @@ module uplight{
 
         }
         addListeners():void{
+
 
             this.keys.on(CLICK,'.kb-key',(evt)=>{this.onKeyClick($(evt.currentTarget))})
         }
@@ -34,7 +40,7 @@ module uplight{
             }else if(txt=='space'){
                 txt=' ';
             }
-            this.R.dispatcher.triggerHandler(this.R.KEY_PRESSED,txt);
+            this.R.events.triggerHandler(Keyboard.KEY_PRESSED,txt);
         }
         private parseKeys(ar: string[]):string{
             var out: string = '<div class="row1">';
@@ -78,9 +84,9 @@ module uplight{
         }
         private addListeners():void{
             this.btnClear.on(CLICK,()=>this.onClearClick());
-            this.R.dispatcher.on(this.R.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
-            this.R.dispatcher.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
-            this.R.dispatcher.on(this.R.RESET_ALL,()=>this.reset());
+            this.R.events.on(Keyboard.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
+            this.R.events.on(Keyboard.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
+            this.R.events.on(this.R.RESET_ALL,()=>this.reset());
         }
         private onKeyword(str:string):void{
             //this.isKw=true
@@ -93,7 +99,8 @@ module uplight{
         private setText(txt:string):void{
             this.data=txt;
             this.input.val(this.data);
-            this.R.dispatcher.triggerHandler(this.R.SEARCH_CHANGED,this.data);
+            console.log(Keyboard.SEARCH_CHANGED,this.data);
+            this.R.events.triggerHandler(Keyboard.SEARCH_CHANGED,this.data);
         }
 
         private timeout:number

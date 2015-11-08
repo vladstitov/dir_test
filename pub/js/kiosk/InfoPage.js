@@ -21,9 +21,8 @@ var uplight;
     })();
     uplight.VOPage = VOPage;
     var InfoPagesModel = (function () {
-        function InfoPagesModel(view) {
+        function InfoPagesModel(el) {
             var _this = this;
-            this.view = view;
             this.prev = -2;
             /*
             loadData(item:any):void {
@@ -43,9 +42,10 @@ var uplight;
             }
     */
             this.current = -1;
+            this.view = $(el);
             this.R = uplight.Registry.getInstance();
             this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
-            this.R.dispatcher.on(this.R.PAGE_SELECED, function (evt, pageid) {
+            this.R.events.on(InfoPagesModel.PAGE_SELECED, function (evt, pageid) {
                 _this.showPage(pageid);
             });
             this.view.css('overfow', 'hidden');
@@ -103,6 +103,7 @@ var uplight;
         InfoPagesModel.prototype.onPageLoaded = function (res) {
             // this.content.html(res);
         };
+        InfoPagesModel.PAGE_SELECED = 'PAGE_SELECED';
         return InfoPagesModel;
     })();
     uplight.InfoPagesModel = InfoPagesModel;

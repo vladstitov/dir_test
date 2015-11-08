@@ -16,7 +16,7 @@ var uplight;
             var cats = model.getCategories();
             var d1 = $.Deferred();
             if (!cats) {
-                model.dispatcher.on(model.READY, function () {
+                model.events.on(model.READY, function () {
                     cats = model.getCategories();
                     d1.resolve(cats);
                 });

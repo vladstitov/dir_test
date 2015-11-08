@@ -38,7 +38,7 @@ module uplight{
             var el=$(e);
             var i:number = el.data('i');
             var val = this.data[i].label;
-            if(val.length>1)this.R.dispatcher.triggerHandler(this.R.KEYWORD_PRESSED,val);
+            if(val.length>1)this.R.events.triggerHandler(this.R.KEYWORD_PRESSED,val);
 
         }
 

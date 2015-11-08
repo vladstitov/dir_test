@@ -24,6 +24,7 @@ module uplight {
 
 
     export class InfoPagesModel {
+        static PAGE_SELECED:string = 'PAGE_SELECED';
         private content: JQuery;
         private list:JQuery;
         private width:number;
@@ -34,10 +35,14 @@ module uplight {
 
 
         private R:Registry;
-        constructor(private view:JQuery) {
+
+        private view:JQuery
+
+        constructor(el:HTMLElement) {
+            this.view = $(el);
             this.R=Registry.getInstance();
             this.R.connector.getData('pages.json').done((data)=>this.onData(data));
-            this.R.dispatcher.on(this.R.PAGE_SELECED,(evt,pageid)=>{this.showPage(pageid)});
+            this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,pageid)=>{this.showPage(pageid)});
             this.view.css('overfow','hidden');
             this.width = this.view.width();
             this.list=$('<div>').appendTo(this.view);

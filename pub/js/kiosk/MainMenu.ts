@@ -46,8 +46,8 @@ module uplight{
             if (isNaN(i)) return
             var item = this.data[i];
             if (!item) return;
-            if(item.url)this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED,item.id);
-            else this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED,item.id);
+            if(item.url)this.R.events.triggerHandler(InfoPagesModel.PAGE_SELECED,item.id);
+            else this.R.events.triggerHandler(Categories.CATEGORY_SELECTED,item.id);
             if (this.onSelect)this.onSelect(item);
 
         }
@@ -58,10 +58,12 @@ module uplight{
         R:Registry
         data:any[];
         list:JQuery;
+        private view:JQuery
         onSelect:Function;
 
         pages:InfoPagesModel;
-        constructor(private view:JQuery){
+        constructor(el:HTMLElement){
+            this.view = $(el);
             this.R=Registry.getInstance();
             this.R.connector.getData('pages.json').done((data)=>this.onData(data))
             this.list = this.view.find('[data-id=list]');
@@ -79,7 +81,7 @@ module uplight{
             if(!item) return;
            // this.pages.showPage(i);
             if(this.onSelect)this.onSelect(item);
-            this.R.dispatcher.triggerHandler(this.R.PAGE_SELECED,item.id);
+            this.R.events.triggerHandler(InfoPagesModel.PAGE_SELECED,item.id);
         }
 
         onData(res):void{

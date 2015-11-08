@@ -41,8 +41,8 @@ module uplight{
             this.view = $('<div>');
             this.list=$('<div>').appendTo(this.view);
             $.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
-            Registry.getInstance().dispatcher.on( Registry.getInstance().SS_START,()=>this.start());
-            Registry.getInstance().dispatcher.on( Registry.getInstance().SS_STOP,()=>this.stop());
+            Registry.getInstance().events.on( Registry.getInstance().SS_START,()=>this.start());
+            Registry.getInstance().events.on( Registry.getInstance().SS_STOP,()=>this.stop());
         }
 
         private onData(res:string){

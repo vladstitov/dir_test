@@ -32,8 +32,8 @@ var uplight;
     })();
     uplight.Banner = Banner;
     var Clock = (function () {
-        function Clock(id) {
-            this.view = $('#' + id);
+        function Clock(el) {
+            this.view = $(el);
             this.time = $('<span></span>').appendTo(this.view);
             this.ampm = $('<span></span>').appendTo(this.view);
             this.view.append('<br/>');
@@ -63,8 +63,6 @@ var uplight;
         return Clock;
     })();
     uplight.Clock = Clock;
-    if (document.getElementById('Clock'))
-        uplight.Registry.getInstance().add(new Clock('Clock'));
     var Weather = (function () {
         function Weather() {
             var _this = this;

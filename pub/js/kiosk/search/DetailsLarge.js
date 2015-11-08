@@ -5,9 +5,10 @@
 var uplight;
 (function (uplight) {
     var DetailsLarge = (function () {
-        function DetailsLarge(view) {
-            // console.log(view);
+        function DetailsLarge(el) {
             var _this = this;
+            // console.log(view);
+            var view = $(el);
             this.view = view;
             this.$name = view.find('[data-id=name]:first');
             this.$unit = view.find('[data-id=unit]:first');
@@ -20,9 +21,10 @@ var uplight;
             this.$page = view.find('[data-id=page]:first');
             this.isVis = !view.hasClass(HIDE);
             view.find('[data-id=btnClose]').click(function () {
-                if (_this.onClose)
-                    _this.onClose();
+                var r = uplight.Registry.getInstance();
+                r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK);
             });
+            this.addListeners();
         }
         DetailsLarge.prototype.show = function () {
             if (!this.isVis) {
@@ -35,6 +37,16 @@ var uplight;
                 this.view.addClass(HIDE).hide();
                 this.isVis = false;
             }
+        };
+        DetailsLarge.prototype.addListeners = function () {
+            var _this = this;
+            var r = uplight.Registry.getInstance();
+            r.events.on(DetailsLarge.DETAILS_LARGE_SHOW, function (evt, id) { return _this.showDetails(id); });
+            r.events.on(DetailsLarge.DETAILS_LARGE_HIDE, function (evt) { return _this.hide(); });
+        };
+        DetailsLarge.prototype.showDetails = function (id) {
+            var dest = uplight.Registry.getInstance().model.getDestById(id);
+            this.setDestination(dest).render().show();
         };
         DetailsLarge.prototype.setDestination = function (vo) {
             this.vo = vo;
@@ -84,6 +96,9 @@ var uplight;
             console.log($(evt.currentTarget));
             this.$img.attr('src', $(evt.currentTarget).children('img').first().attr('src'));
         };
+        DetailsLarge.DETAILS_LARGE_HIDE = 'HIDE_DETAILS_LARGE';
+        DetailsLarge.DETAILS_LARGE_CLOSE_CLICK = 'DETAILS_LARGE_CLOSE_CLICK';
+        DetailsLarge.DETAILS_LARGE_SHOW = 'SHOW_DETAILS_LARGE';
         return DetailsLarge;
     })();
     uplight.DetailsLarge = DetailsLarge;
