@@ -38,6 +38,7 @@ var uplight;
             console.log('kiodk');
             document.addEventListener('mousedown', function (evt) { return _this.onMouseDown(evt); }, true);
             var r = uplight.Registry.getInstance();
+            r.events = $('<div>');
             r.connector = new uplight.Connector();
             r.connector.id = u_settings.kiosk;
             r.connector.who = 'kiosk';
@@ -46,12 +47,11 @@ var uplight;
                 u_settings[val.id] = val.value;
             });
             r.settings = u_settings;
-            r.events = $({});
             this.setControllers();
             this.R = r;
             //this.keyboard = new Keyboard();
-            var si = new uplight.SearchInput($('#searchinput'));
-            var kw = new uplight.Keywords($('#kw-container'));
+            // var si = new SearchInput($('#searchinput'));
+            //  var kw = new Keywords($('#kw-container'));
             //  var cats= new Categories();
             ///var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
             //  var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
@@ -59,14 +59,14 @@ var uplight;
             // pm.onSelect = (item)=>this.onMenuClick(item);
             // var mm:MainMenu = new MainMenu($('[data-ctr=MainMenu]:first'));
             //this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
-            this.R.events.on(this.R.KIOSK_SHOW_MENU, function () { return _this.showMenu(); });
-            this.R.events.on(this.R.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
+            r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
+            r.events.on(r.KIOSK_SHOW_MENU, null, function (evt) { return _this.showMenu(); });
             this.R.events.on(uplight.Keyboard.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
             this.R.events.on(uplight.InfoPagesModel.PAGE_SELECED, function (evt, page) {
                 _this.R.events.triggerHandler(uplight.Keyboard.KEYBOARD_HIDE);
                 _this.showPages();
             });
-            this.R.events.on(uplight.Categories.CATEGORY_SELECTED, function (evt, cat) {
+            this.R.events.on(r.CATEGORY_SELECTED, function (evt, cat) {
                 _this.showSearchResult();
             });
             var timeout = new uplight.Timeout(u_settings.ss_timeout);
@@ -97,21 +97,19 @@ var uplight;
             */
             if (!u_settings.hasOwnProperty('norelay'))
                 var relay = new uplight.Relay(u_settings.timer);
-            r.events.on(r.SS_START, function () {
+            r.events.on(r.AL_START, function () {
                 r.events.triggerHandler(r.RESET_ALL);
             });
-            this.attractLoop = new uplight.AttractLoop($('#AttractLoop'), u_settings.attract_loop);
-            this.attractLoop.show();
+            //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
+            // this.attractLoop.show();
             // setTimeout(()=>{ DestModel.events.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
             // Registry.getInstance().connector.Log('kiosk started succesguly');
             // Registry.getInstance().connector.Error('kiosk started succesguly');
         }
-        //keywords:Keywords;
-        //  private infoPage:InfoPagesModel;
+        // private isAL:boolean=true;
         Kiosk.prototype.onMouseDown = function (evt) {
+            // if(this.attractLoop.hide()) window.location.href='#kiosk';
             var _this = this;
-            if (this.attractLoop.hide())
-                window.location.href = '#kiosk';
             if (this.isBlocked) {
                 evt.preventDefault();
                 evt.stopPropagation();
@@ -127,9 +125,11 @@ var uplight;
             this.showSearchResult();
         };
         Kiosk.prototype.showMenu = function () {
+            console.log('showMenu');
             $('#toolsview').animate({ scrollTop: '0' });
         };
         Kiosk.prototype.showSearchResult = function () {
+            console.log('showSearck');
             $('#mainport').animate({ scrollLeft: 0 });
         };
         Kiosk.prototype.showPages = function () {

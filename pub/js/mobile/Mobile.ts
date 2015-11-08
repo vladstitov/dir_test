@@ -40,7 +40,7 @@ module uplight {
         }
 
         private infoPages: InfoPageMobile[];
-        private detailsLarge: DetailsLarge;
+       // private detailsLarge: DetailsLarge;
         private filterPage: FilterPage;
         private frontPage:FrontPage;
         private gmap:GoogleMap;
@@ -63,7 +63,7 @@ module uplight {
             this.R.connector = conn;
            // this.R.connector.getSettings((data) => this.onSettings(data));      
             this.R.model = new Model(conn,(w)=>this.warn(w));
-            console.log('Mobile controller');
+           // console.log('Mobile controller');
                                 
             this.menu = new Menu($('[data-ctr=Menu]:first'),conn,this.R.model);
             this.menu.onMenuON =()=>{
@@ -92,25 +92,18 @@ module uplight {
             this.frontPage = new FrontPage($('#FrontPage'));
 
 
-            this.detailsLarge = new DetailsLarge($('[data-ctr=DetailsLarge]:first'));
-            this.detailsLarge.hide();
-            this.detailsLarge.onClose=()=>{ window.history.back();}
             $(window).on('hashchange', (evt) => this.onHachChange());
-            //document.location.hash = '#Menu';
             this.filterPage = new FilterPage($('[data-ctr=FilterPage]'));
-           // this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(()=>this.onHachChange(),1000);
             this.content = $('#Content');
-
-
             this.gmap = new GoogleMap();
-
         }
 
 
 
+/*
         private onListSelect(vo:VODestination):void{
-            console.log(vo);
+           // console.log(vo);
             if(vo.imgs) window.location.hash='#destination/'+vo.id;
             else{
                 //var table='';
@@ -118,6 +111,7 @@ module uplight {
                // this.filterPage.addDetails(vo,table);
             }
         }
+*/
 
 
         private content:JQuery
@@ -145,54 +139,26 @@ module uplight {
 
         }
 
-
-
-
-        private showDestination(id:number):void{
-
-
-
-
-           //
-           // this.filterPage.hide();
-        }
-
-
-
-
-        private showDetails(str):void{
-
-        }
-
         private onHachChange(): void { 
             var ar: string[] = document.location.hash.split('/');
             var hash:string = document.location.hash;
-            if(hash.indexOf('detailsshow')==0){
-
-            }
-
             console.log(ar[0]);
           Utils.hideImage();
 
             switch (ar[0]) {
                 case '#gmap':
                     this.showView(this.gmap.getView());
-                    this.detailsLarge.hide();
                     this.menu.hideAll();
                     this.R.connector.Stat('pg','gmap');
                     break;
                 case '#destination':
                     var vo:VODestination =  this.R.model.getDestById(Number(ar[1]));
                     if(!vo) break;
-                    this.detailsLarge.setDestination(vo);;//.setDestination(vo);
-                    this.detailsLarge.render().show();
-                   // this.filterPage.hide();
                     this.R.connector.Stat('sr',vo.id+'');
                     break;
                 case '#category':
                    var v:JQuery =  this.filterPage.showCategory(Number(ar[1]));
                     this.showView(v);
-                    this.detailsLarge.hide();
                     this.menu.hideAll();
                     this.R.connector.Stat('ct',ar[1]);
                     break;
@@ -200,39 +166,24 @@ module uplight {
                     var num:number = Number(ar[1]);
                     if(isNaN(num)) break
                    this.showPage(num);
-                   // this.filterPage.hide();
-                    this.detailsLarge.hide();
-
                     this.menu.hideAll();
                     this.R.connector.Stat('pg',num+'');
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();
                     this.showView(this.filterPage.getView());
-                    this.detailsLarge.hide();
                     this.menu.hideMenu();
                     this.menu.showSearch();
                     break;
                 case '#Menu':
-
-                   // this.menu.view.show('fast');
                     break;
                 case '#logo':
                     this.showView(this.frontPage.getView());
-                    //this.frontPage.show();
-                    //this.infoPage.hide();
-                   // this.detailsLarge.hide();
-                   // this.filterPage.hide();
-
-
-                    // this.menu.view.show('fast');
                     break;
                 default:
                    // document.location.hash = '#Menu';
                     break;
             }
-
-            return;
 
         }
 

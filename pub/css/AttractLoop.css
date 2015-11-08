@@ -21,16 +21,7 @@
     overflow: hidden;
 
 }
-#AttractLoop .gallery>.x650x1024 {
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-   /* bottom: 475px;*/
-    width: 650px;
-    height: 1024px;
-    overflow: hidden;
-}
+
 #AttractLoop .gallery *{
     margin: 0;
     padding: 0;

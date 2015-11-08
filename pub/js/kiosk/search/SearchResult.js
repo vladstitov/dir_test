@@ -26,12 +26,12 @@ var uplight;
         };
         SearchResult.prototype.addListeners = function () {
             var _this = this;
-            this.R.events.on(uplight.Categories.CATEGORIES_CHANGE, function (evt, cats) { return _this.onCategoriesChange(cats); });
+            this.R.events.on(this.R.CATEGORIES_CHANGE, function (evt, cats) { return _this.onCategoriesChange(cats); });
             this.R.events.on(uplight.Keyboard.SEARCH_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
             this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
-            this.R.events.on(uplight.Categories.CATEGORY_SELECTED, function (evt, catid) { return _this.onCategorySelected(catid); });
+            this.R.events.on(this.R.CATEGORY_SELECTED, function (evt, catid) { return _this.onCategorySelected(catid); });
             this.R.events.on(SearchResult.SEARCH_RESULT_SHOW_DESTINATION, function (evt, id) { return _this.showDestination(id); });
             // console.log('listeners');
         };

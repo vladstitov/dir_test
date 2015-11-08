@@ -143,7 +143,7 @@ module uplight {
         private onListClick(evt:JQueryEventObject):void{
             var el:JQuery = $(evt.currentTarget).parent();
 
-            console.log(el);
+           // console.log(el);
             if(el.hasClass(SELECTED)){
                el.removeClass(SELECTED);
               // el.children('.details').hide('fast');
@@ -151,7 +151,7 @@ module uplight {
 
             }else{
 
-                console.log(el.children('.details').length);
+              //  console.log(el.children('.details').length);
                 if(el.children('.details').length !==0){
                //  el.children('.details').show('fast');
                 }else{

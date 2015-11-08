@@ -52,7 +52,6 @@ var uplight;
             return '<div class="kb-key btn ' + cl + '"><span>' + item + '</span></div>';
         };
         Keyboard.KEY_PRESSED = 'KEY_PRESSED';
-        Keyboard.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
         Keyboard.SEARCH_CHANGED = 'SEARCH_CHANGED';
         Keyboard.KEYBOARD_SHOW = 'KEYBOARD_SHOW';
         Keyboard.KEYBOARD_HIDE = 'KEYBOARD_HIDE';
@@ -60,12 +59,12 @@ var uplight;
     })();
     uplight.Keyboard = Keyboard;
     var SearchInput = (function () {
-        function SearchInput(view) {
-            this.view = view;
+        function SearchInput(el) {
+            this.view = $(el);
             this.data = '';
             this.input = this.view.find('input');
             this.R = uplight.Registry.getInstance();
-            this.btnClear = view.find('[data-id=btnClear]:first');
+            this.btnClear = this.view.find('[data-id=btnClear]:first');
             this.addListeners();
         }
         SearchInput.prototype.reset = function () {
@@ -78,7 +77,7 @@ var uplight;
             this.R.events.on(Keyboard.KEY_PRESSED, function (evt, txt) {
                 _this.onKeyPressed(txt);
             });
-            this.R.events.on(Keyboard.KEYWORD_PRESSED, function (evt, txt) {
+            this.R.events.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
                 _this.onKeyword(txt);
             });
             this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });

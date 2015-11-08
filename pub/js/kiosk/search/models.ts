@@ -165,6 +165,7 @@ module uplight{
             this.addIcon();
             this.cache={};
 
+            console.log(this.READY);
             this.dispatcher.triggerHandler(this.READY);
         }
 
@@ -186,7 +187,7 @@ module uplight{
             this.dispatcher = $({});
             //this.error= this.R.error;
            // this.warn= this.R.warn;
-
+console.log('get destinations');
             this.connector.getDestinations().done((res)=>this.onResult(res))
         }
         private _getDestsByUnit(unit: string, data: VODestination[]): VODestination[] {

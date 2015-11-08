@@ -5,11 +5,11 @@
 var uplight;
 (function (uplight) {
     var Keywords = (function () {
-        function Keywords(view) {
+        function Keywords(el) {
             var _this = this;
+            this.view = $(el);
             this.R = uplight.Registry.getInstance();
-            this.view = view.empty();
-            this.list = $('<ul>').appendTo(view);
+            this.list = $('<ul>').appendTo(this.view.find('[data-id=list]:first'));
             this.list.on(CLICK, 'li', function (evt) {
                 _this.onClick(evt.currentTarget);
             });
@@ -17,6 +17,7 @@ var uplight;
         }
         Keywords.prototype.onDataReady = function () {
             var obj = this.R.model.getKeywords();
+            console.log(obj);
             var out = [];
             for (var str in obj)
                 out.push(new VOKw(str, obj[str]));

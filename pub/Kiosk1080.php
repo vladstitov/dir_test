@@ -69,6 +69,11 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     body{
         background-image: url('<?= $labels['background']; ?>');
     }
+    body{
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+    }
 
 
 </style>
@@ -152,11 +157,18 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <div id="mainport" class="mainbg u-glow view-port-content">
             <section id="SearchResult" data-ctr="uplight.SearchResult">
                 <div class="col-sm-12">
-                    <? include('htms/kiosk/ListHeader.php'); ?>
+                    <div id="list-header" >
+                        <div id="list-header-main" >
+                            <h4 data-id="header">  <?= isset($labels['list-header'])?$labels['list-header']:''; ?></h4>
+                        </div>
+                    </div>
                 </div>
                 <hr style="margin-bottom: 0"/>
                 <div  class="col-lg-12">
-                    <? include('htms/kiosk/ListMain.php'); ?>
+                    <div id="list-main">
+                        <div class="nano-content" data-id="list">
+                        </div>
+                    </div>
                 </div>
                 <hr style="margin-top: 0"/>
                 <div  class="col-sm-12">
@@ -164,7 +176,31 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                         <p style="vertical-align: text-bottom; line-height: 140px">  <?=  isset($labels['list_footer'])?$labels['list_footer']:'( <span class="fa fa-plus"></span> More... More Info Available )'; ?></p>
                     </div>
                     <div class="col-sm-4">
-                        <? include('htms/kiosk/SearchInput.php'); ?>
+                        <div id="searchinput" data-ctr="uplight.SearchInput">
+                            <style>
+                                #searchinput{
+                                    position: relative;
+                                }
+                                #searchinput .fa-times-circle{
+                                    position: absolute;
+                                    top: 25px;
+                                    right: 10px;
+                                    font-size: 30px;
+                                    color: #adadad;
+                                }
+                                #searchinput input{
+                                    border-radius: 30px;
+                                    font-size: 30px;
+                                    width: 200px;
+                                    border: none;
+                                    padding: 20px 40px 20px 20px;
+                                    margin-right: -20px;
+                                }
+                            </style>
+                            <!-- <span class="fa fa-search"></span>-->
+                            <input type="text" class="Plastic031 pull-right" />
+                            <span class="fa fa-times-circle"  data-id="btnClear"></span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -220,13 +256,11 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     </div>
 
                 </div>
+                <div class="col-sm-2"></div>
             </section>
-        </div>
-        <div class="col-sm-2"></div>
-    </section>
 
 
-    <section id="SearchView" class="row">
+            <section id="SearchView" class="row">
         <style>
             #sideview h3{
                 color: #9d9d9d;
@@ -257,7 +291,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
             }
         </style>
         <section class="col-sm-3">
-            <div id="Categories">
+            <div id="Categories" data-ctr="uplight.CategoriesCheck">
 
                 <h3>
                     <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
@@ -269,22 +303,24 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
             <h3 class="text-center">
                 <?= isset($labels['keyboard'])?$labels['keyboard']:'&nbsp;'; ?>
             </h3>
-            <div id="Keyboard" data-js="Keyboard" class="text-center" data-ctr="uplight.Keyboard">
+            <div id="Keyboard"  class="text-center" data-ctr="uplight.Keyboard">
             </div>
             <hr/>
-            <h3 class="text-center"><a data-id="btnShowMenu" class="Plastic031">
+            <h3 class="text-center">
+                <a id="btnShowMenu" class="Plastic031">
                 <?= isset($labels['topages'])?$labels['topages']:'&nbsp;'; ?>
-            </a></h3>
+                </a>
+            </h3>
         </section>
         <section class="col-sm-3">
             <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
-            <div id="keywords">
+            <div id="keywords" data-ctr="uplight.Keywords">
                 <h3 class="text-center">
                     <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>
                 </h3>
 
 
-                <div id="kw-container" class="nano">
+                <div id="kw-container" class="nano" data-id="list">
                 </div>
 
             </div>
@@ -296,6 +332,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </div>
         <hr/>
     </section>
+
     <section id="footer">
         <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
@@ -306,14 +343,35 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
 </div> <!--End of container-->
 
-<section id="AttractLoop">
-    <div  class="cover" data-id="Body">
+<section id="AttractLoop" data-ctr="uplight.AttractLoop">
+    <div  class="cover" data-id="cover">
     </div>
     <style>
         #AttractLoop {
             position: absolute;
             top: 170px;
 
+        }
+        #AttractLoop{
+            width: 1080px;
+            height: 1750px;
+        }
+        #AttractLoop .gallery>.x650x1024 {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top:200px;
+            width: 650px;
+            height: 1024px;
+            overflow: hidden;
+        }
+        #Touchclip{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 1080px;
+            height: 120px;
         }
     </style>
 </section>
@@ -341,24 +399,12 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/utils/Timeout.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
-<!--<script src="js/kiosk/MainView.js"></script>
-<script src="js/kiosk/SearchDetails.js"></script>
--->
-<?php 
-if(!isset($settings->noss)) echo '<link href="css/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/als/ScreenSaver.js"></script>';
-if(!isset($settings->nokiosk)) echo '<script src="js/kiosk/Kiosk.js" ></script>';
-?>
-
-
-
-
-
-<script>
-    $(document).ready(function(){
-        $(document).triggerHandler('DOCUMENT_READY');
-
-    })
-</script>
+<link href="css/AttractLoop.css" rel="stylesheet" />
+<script src="js/kiosk/als/AttractLoop.js"></script>
+<script src="js/kiosk/als/ScreenSaver.js"></script>
+<script src="js/kiosk/als/TouchClip.js"></script>
+<script src="js/kiosk/als/Gallery.js"></script>
+<script src="js/kiosk/Kiosk.js" ></script>
 
 </body>
 </html>

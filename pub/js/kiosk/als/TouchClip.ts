@@ -43,8 +43,8 @@ module uplight{
             this.view = $(el);
 
 
-            Registry.getInstance().events.on( Registry.getInstance().SS_START,()=>this.start());
-            Registry.getInstance().events.on( Registry.getInstance().SS_STOP,()=>this.stop());
+            Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
+            Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
         }
 
         private runOut(): void {

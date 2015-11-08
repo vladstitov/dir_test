@@ -11,17 +11,21 @@ var SELECTED = 'selected';
 var DISABLED = 'disabled';
 var uplight;
 (function (uplight) {
-    var SCREENSAVER_START = 'SCREENSAVER_START';
-    var SCREENSAVER_END = 'SCREENSAVER_END';
     var Registry = (function () {
         function Registry() {
-            this.KIOSK_SHOW_MENU = ' KIOSK_SHOW_MENU';
+            this.KIOSK_SHOW_MENU = 'KIOSK_SHOW_MENU';
             this.KIOSK_SHOW_SEARCH = 'KIOSK_SHOW_SEARCH';
+            this.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
+            this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
+            this.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
             this.ON_SETTINGS = 'ON_SETTINGS';
             this.ON_DATA = 'ON_DATA';
             this.RESET_ALL = 'RESET_ALL';
-            this.SS_START = 'SS_START';
-            this.SS_STOP = 'SS_STOP';
+            this.SCREENSAVER_START = 'SCREENSAVER_START';
+            this.SCREENSAVER_END = 'SCREENSAVER_END';
+            this.AL_START = 'AL_START';
+            this.AL_STOP = 'AL_STOP';
+            this.AL_STOPED = 'AL_STOPED';
             this.RESET_VIEWS = 'RESET_VIEWS';
             this.HIDE_VIEWS = 'HIDE_VIEWS';
             this._registr = {};

@@ -32,24 +32,14 @@ declare var u_settings:any;
 
 module uplight {
    export class Kiosk {
-
-
-
-      // private searchResult: SearchResult;
        private R: Registry;
-     //  private keyboard: Keyboard;
        private timeout:number
-    //   private details:DetailsLarge
-      // private searchInput:SearchInput;
-       //private cateegories:Categories;
-    //   private mainMenu:PagesMenu;
-       private attractLoop:AttractLoop;
-       //keywords:Keywords;
 
-     //  private infoPage:InfoPagesModel;
+      // private isAL:boolean=true;
 
        private onMouseDown(evt:MouseEvent):void{
-          if(this.attractLoop.hide()) window.location.href='#kiosk';
+         // if(this.attractLoop.hide()) window.location.href='#kiosk';
+
 
            if(this.isBlocked){
                evt.preventDefault();
@@ -66,11 +56,13 @@ module uplight {
            this.showSearchResult();
        }
        showMenu():void{
+           console.log('showMenu');
            $('#toolsview').animate({scrollTop:'0'});
        }
 
 
        showSearchResult():void{
+           console.log('showSearck');
            $('#mainport').animate({scrollLeft:0});
        }
        showPages():void{
@@ -92,6 +84,7 @@ module uplight {
            console.log('kiodk');
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
            var r:Registry = Registry.getInstance();
+           r.events = $('<div>');
            r.connector = new Connector();
            r.connector.id=u_settings.kiosk;
            r.connector.who='kiosk';
@@ -101,15 +94,15 @@ module uplight {
            })
            r.settings = u_settings;
 
-           r.events = $({});
+
 
 
 
            this.setControllers();
            this.R=r;
           //this.keyboard = new Keyboard();
-           var si = new SearchInput($('#searchinput'));
-           var kw = new Keywords($('#kw-container'));
+          // var si = new SearchInput($('#searchinput'));
+         //  var kw = new Keywords($('#kw-container'));
          //  var cats= new Categories();
            ///var btnSearch:ButtonSearch = new ButtonSearch($('[data-ctr=ButtonSearch]:first'));
          //  var kbv:KeyboardView = new KeyboardView($('[data-ctr=KeyboardView]:first'));
@@ -121,8 +114,12 @@ module uplight {
 
            //this.infoPage = new InfoPagesModel($('[data-id=Pages]:first'));
 
-           this.R.events.on(this.R.KIOSK_SHOW_MENU,()=>this.showMenu());
-           this.R.events.on(this.R.KIOSK_SHOW_SEARCH,()=>this.showSearch());
+
+
+
+           r.events.on(r.KIOSK_SHOW_SEARCH,()=>this.showSearch());
+
+           r.events.on(r.KIOSK_SHOW_MENU,null,(evt)=>this.showMenu());
 
            this.R.events.on(Keyboard.KEYBOARD_SHOW,()=>this.showSearchResult());
 
@@ -131,7 +128,7 @@ module uplight {
                this.showPages();
 
            })
-           this.R.events.on(Categories.CATEGORY_SELECTED,(evt,cat)=>{
+           this.R.events.on(r.CATEGORY_SELECTED,(evt,cat)=>{
                this.showSearchResult();
            })
 
@@ -165,11 +162,12 @@ module uplight {
            }
 */
            if(!u_settings.hasOwnProperty('norelay'))  var relay:Relay = new Relay(u_settings.timer);
-            r.events.on(r.SS_START,function(){r.events.triggerHandler(r.RESET_ALL)});
+
+            r.events.on(r.AL_START,function(){r.events.triggerHandler(r.RESET_ALL)});
 
 
-           this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
-           this.attractLoop.show();
+         //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
+          // this.attractLoop.show();
           // setTimeout(()=>{ DestModel.events.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
           // Registry.getInstance().connector.Log('kiosk started succesguly');
          // Registry.getInstance().connector.Error('kiosk started succesguly');

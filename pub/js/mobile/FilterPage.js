@@ -86,14 +86,14 @@ var uplight;
         };
         FilterPage.prototype.onListClick = function (evt) {
             var el = $(evt.currentTarget).parent();
-            console.log(el);
+            // console.log(el);
             if (el.hasClass(SELECTED)) {
                 el.removeClass(SELECTED);
                 // el.children('.details').hide('fast');
                 this.selected = null;
             }
             else {
-                console.log(el.children('.details').length);
+                //  console.log(el.children('.details').length);
                 if (el.children('.details').length !== 0) {
                 }
                 else {

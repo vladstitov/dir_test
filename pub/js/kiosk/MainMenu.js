@@ -5,9 +5,9 @@
 var uplight;
 (function (uplight) {
     var MainMenu = (function () {
-        function MainMenu(view) {
+        function MainMenu(el) {
             var _this = this;
-            this.view = view;
+            this.view = $(el);
             this.R = uplight.Registry.getInstance();
             var d2 = $.Deferred();
             var d1 = uplight.Registry.getInstance().connector.getData('pages.json');
@@ -52,7 +52,7 @@ var uplight;
             if (item.url)
                 this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, item.id);
             else
-                this.R.events.triggerHandler(uplight.Categories.CATEGORY_SELECTED, item.id);
+                this.R.events.triggerHandler(this.R.CATEGORY_SELECTED, item.id);
             if (this.onSelect)
                 this.onSelect(item);
         };

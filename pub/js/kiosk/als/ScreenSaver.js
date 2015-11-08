@@ -13,7 +13,7 @@ var uplight;
             this.timeout = Number(this.R.settings.ss_timeout) * 1000;
             if (isNaN(this.timeout) || this.timeout < 10000)
                 this.timeout = 10000;
-            this.attratLoop = new uplight.AttractLoop($('#AttractLoop'), this.R.settings.attract_loop);
+            // this.attratLoop = new AttractLoop($('#AttractLoop'),this.R.settings.attract_loop);
             this.isActive = true;
         };
         ScreenSaver2.prototype.startTimer = function () {
@@ -36,13 +36,13 @@ var uplight;
             this.isActive = true;
             console.log('start ss');
             this.view.appendTo('body');
-            this.R.events.triggerHandler(this.R.SS_START);
+            //  this.R.events.triggerHandler(this.R.SS_START);
         };
         ScreenSaver2.prototype.stopScreenSaver = function () {
             this.isActive = false;
             this.view.remove();
             console.log('stop ss');
-            this.R.events.triggerHandler(this.R.SS_STOP);
+            // this.R.events.triggerHandler(this.R.SS_STOP);
         };
         return ScreenSaver2;
     })();

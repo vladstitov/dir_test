@@ -16,18 +16,28 @@ var DISABLED: string = 'disabled';
 
 module uplight {
 
-    var SCREENSAVER_START: string = 'SCREENSAVER_START';
-    var SCREENSAVER_END: string = 'SCREENSAVER_END';
+
 
     export class Registry {
-        KIOSK_SHOW_MENU:string=' KIOSK_SHOW_MENU';
+
+        KIOSK_SHOW_MENU:string='KIOSK_SHOW_MENU';
         KIOSK_SHOW_SEARCH:string='KIOSK_SHOW_SEARCH';
+
+        CATEGORIES_CHANGE:string='CATEGORIES_CHANGE';
+        CATEGORY_SELECTED:string='CATEGORY_SELECTED';
+
+        KEYWORD_PRESSED:string='KEYWORD_PRESSED';
 
         ON_SETTINGS:string='ON_SETTINGS';
         ON_DATA:string='ON_DATA';
         RESET_ALL:string='RESET_ALL';
-        SS_START:string='SS_START';
-        SS_STOP:string='SS_STOP';
+
+        SCREENSAVER_START: string = 'SCREENSAVER_START';
+        SCREENSAVER_END: string = 'SCREENSAVER_END';
+        AL_START:string = 'AL_START';
+        AL_STOP:string = 'AL_STOP';
+        AL_STOPED:string = 'AL_STOPED';
+
         RESET_VIEWS:string='RESET_VIEWS';
         HIDE_VIEWS:string='HIDE_VIEWS';
         settings: any;

@@ -2,24 +2,44 @@
  * Created by VladHome on 8/23/2015.
  */
 /// <reference path="../Registry.ts" />
+/// <reference path="AttractLoop.ts" />
 var uplight;
 (function (uplight) {
     var Gallery = (function () {
         function Gallery(vo) {
             this.vo = vo;
+            this.galleries = [];
             this.view = $('<div>').addClass('gallery');
             if (vo.type == 'gallery') {
                 var gal = new GalleryDisplay(vo.data_url);
                 this.view.append(gal.view);
+                this.galleries.push(gal);
             }
             else if (vo.type == 'gallery2') {
                 var ar = this.vo.data_url.split(',');
                 var gal = new GalleryDisplay(ar[0]);
+                this.galleries.push(gal);
                 this.view.append(gal.view);
                 var gal2 = new GalleryDisplay(ar[1]);
                 this.view.append(gal2.view);
+                this.galleries.push(gal2);
             }
         }
+        Gallery.prototype.getView = function () {
+            return this.view;
+        };
+        Gallery.prototype.start = function () {
+            var ar = this.galleries;
+            for (var i = 0, n = ar.length; i < n; i++)
+                ar[i].start();
+            ;
+        };
+        Gallery.prototype.stop = function () {
+            var ar = this.galleries;
+            for (var i = 0, n = ar.length; i < n; i++)
+                ar[i].stop();
+            ;
+        };
         return Gallery;
     })();
     uplight.Gallery = Gallery;
@@ -31,12 +51,12 @@ var uplight;
             this.view = $('<div>');
             this.list = $('<div>').appendTo(this.view);
             $.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(res); });
-            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_START, function () { return _this.start(); });
-            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_STOP, function () { return _this.stop(); });
+            // Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
+            // Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
         }
         GalleryDisplay.prototype.onData = function (res) {
             var data = JSON.parse(res);
-            console.log(data);
+            //   console.log(data);
             var ar = data.gallery;
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -85,5 +105,6 @@ var uplight;
         };
         return GalleryDisplay;
     })();
+    uplight.GalleryDisplay = GalleryDisplay;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=Gallery.js.map

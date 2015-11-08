@@ -31,6 +31,7 @@ var uplight;
             this.dispatcher = $({});
             //this.error= this.R.error;
             // this.warn= this.R.warn;
+            console.log('get destinations');
             this.connector.getDestinations().done(function (res) { return _this.onResult(res); });
         }
         Model.prototype.getDestById = function (id) {
@@ -130,6 +131,7 @@ var uplight;
             this.makeDests(res.dests);
             this.addIcon();
             this.cache = {};
+            console.log(this.READY);
             this.dispatcher.triggerHandler(this.READY);
         };
         Model.prototype.addIcon = function () {

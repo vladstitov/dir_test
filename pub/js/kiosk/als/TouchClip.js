@@ -21,8 +21,8 @@ var uplight;
                 size: 60
             });
             this.view = $(el);
-            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_START, function () { return _this.start(); });
-            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().SS_STOP, function () { return _this.stop(); });
+            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().AL_START, function () { return _this.start(); });
+            uplight.Registry.getInstance().events.on(uplight.Registry.getInstance().AL_STOP, function () { return _this.stop(); });
         }
         TouchClip.prototype.start = function () {
             clearInterval(this.interval);

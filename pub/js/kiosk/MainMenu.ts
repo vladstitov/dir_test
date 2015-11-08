@@ -8,8 +8,10 @@ module uplight{
         onSelect:Function;
         private list:JQuery;
         private data:any[];
-        private R:Registry
-        constructor(private view:JQuery){
+        private R:Registry;
+        private view:JQuery;
+        constructor(el:HTMLElement){
+            this.view = $(el);
             this.R=Registry.getInstance();
             var d2 = $.Deferred();
             var d1 = Registry.getInstance().connector.getData('pages.json');
@@ -47,7 +49,7 @@ module uplight{
             var item = this.data[i];
             if (!item) return;
             if(item.url)this.R.events.triggerHandler(InfoPagesModel.PAGE_SELECED,item.id);
-            else this.R.events.triggerHandler(Categories.CATEGORY_SELECTED,item.id);
+            else this.R.events.triggerHandler(this.R.CATEGORY_SELECTED,item.id);
             if (this.onSelect)this.onSelect(item);
 
         }

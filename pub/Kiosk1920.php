@@ -168,11 +168,18 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <div id="mainport" class="mainbg view-port-content">
             <section id="SearchResult" data-id="searchResult" data-ctr="uplight.SearchResult">
                 <div class="col-sm-12">
-                    <? include('htms/kiosk/ListHeader.php'); ?>
+                    <div id="list-header" >
+                        <div id="list-header-main" >
+                            <h4 data-id="header">  <?= isset($labels['list-header'])?$labels['list-header']:''; ?></h4>
+                        </div>
+                    </div>
                 </div>
                 <hr style="margin-bottom: 0"/>
                 <div  class="col-lg-12">
-                    <? include('htms/kiosk/ListMain.php'); ?>
+                    <div id="list-main">
+                        <div class="nano-content" data-id="list">
+                        </div>
+                    </div>
                 </div>
                 <hr style="margin-top: 0"/>
             </section>
@@ -224,7 +231,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         </h3>
         <div class="col-sm-10">
 
-            <div id="searchinput">
+            <div id="searchinput" data-ctr="uplight.SearchInput">
                 <style>
                     #KeyboardView{
                         position: absolute;
@@ -299,7 +306,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     padding: 20px;
                 }
             </style>
-            <div id="MainMenu" data-ctr="MainMenu">
+            <div id="MainMenu" data-ctr="uplight.MainMenu">
                 <style>
                     #MainMenu>.nano{
                         width: 400px;
@@ -326,15 +333,14 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <section id="footer">
         <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
-
     <?php
     include('htms/kiosk/DetailsLarge.htm');
     ?>
 
 </div> <!--End of container-->
 
-<section id="AttractLoop">
-    <div  class="cover" data-id="Body">
+<section id="AttractLoop" data-ctr="uplight.AttractLoop">
+    <div  class="cover" data-id="cover">
     </div>
     <style>
         #AttractLoop {
@@ -389,24 +395,12 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/views.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
-<!--<script src="js/kiosk/MainView.js"></script>
-<script src="js/kiosk/SearchDetails.js"></script>
--->
-<?php 
-if(!isset($settings->noss)) echo '<link href="css/AttractLoop.css" rel="stylesheet" /><script src="js/kiosk/als/AttractLoop.js"></script><script src="js/kiosk/als/ScreenSaver.js"></script>';
-if(!isset($settings->nokiosk)) echo '<script src="js/kiosk/Kiosk.js" ></script>';
-?>
-
-
-
-
-
-<script>
-    $(document).ready(function(){
-        $(document).triggerHandler('DOCUMENT_READY');
-
-    })
-</script>
+<link href="css/AttractLoop.css" rel="stylesheet" />
+<script src="js/kiosk/als/AttractLoop.js"></script>
+<script src="js/kiosk/als/ScreenSaver.js"></script>
+<script src="js/kiosk/als/TouchClip.js"></script>
+<script src="js/kiosk/als/Gallery.js"></script>
+<script src="js/kiosk/Kiosk.js" ></script>
 
 </body>
 </html>

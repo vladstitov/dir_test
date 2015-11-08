@@ -5,9 +5,8 @@
 module uplight{
 
 
-    export class Categories{
-        static CATEGORIES_CHANGE:string='CATEGORIES_CHANGE';
-        static CATEGORY_SELECTED:string='CATEGORY_SELECTED';
+    export class CategoriesCheck{
+
         private list:JQuery
         R:Registry
 
@@ -15,9 +14,8 @@ module uplight{
         private data:VOCategory[];
 
         private selected:number[];
-        constructor(){
-
-            this.view =$('#Categories');
+        constructor(el:HTMLElement){
+            this.view =$(el);
             this.R=Registry.getInstance();
             this.list=$('<ul>').appendTo(this.view);
             this.R.model.dispatcher.on(this.R.model.READY,()=>this.onDataReady());
@@ -38,7 +36,7 @@ module uplight{
             if(ind==-1){
                 this.selected.push(id);
                 this.R.connector.Stat('cp',id.toString());
-                this.R.events.triggerHandler(Categories.CATEGORIES_CHANGE,[this.selected]);
+                this.R.events.triggerHandler(this.R.CATEGORIES_CHANGE,[this.selected]);
             }
         }
         private removeCategory(id:number):void{
@@ -47,7 +45,7 @@ module uplight{
                 this.selected.splice(ind,1);
                 //console.log(this.selected);
                 this.R.connector.Stat('cm',id.toString());
-                this.R.events.triggerHandler(Categories.CATEGORIES_CHANGE,[this.selected]);
+                this.R.events.triggerHandler(this.R.CATEGORIES_CHANGE,[this.selected]);
             }
         }
         private onListChanged(evt:JQuery):void{

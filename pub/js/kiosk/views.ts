@@ -8,9 +8,13 @@ module uplight{
     export class LowPanelController{
         constructor(el:HTMLElement){
             var r:Registry = Registry.getInstance();
-            $('#btnSearch').click(r.events.triggerHandler(r.KIOSK_SHOW_SEARCH));
-            $('#SearchView [data-id=btnClose]').click(r.events.triggerHandler(r.KIOSK_SHOW_MENU));
-            $('#SearchView [data-id=btnShowMenu]').click(r.events.triggerHandler(r.KIOSK_SHOW_MENU));
+
+            $('#btnSearch').click(()=>r.events.triggerHandler(r.KIOSK_SHOW_SEARCH));
+            $('#SearchView [data-id=btnClose]').click(function(){
+                console.log('close  '+r.KIOSK_SHOW_MENU);
+                Registry.getInstance().events.trigger(r.KIOSK_SHOW_MENU);
+            });
+           $('#btnShowMenu').click(()=>r.events.triggerHandler(r.KIOSK_SHOW_MENU));
 
         }
     }

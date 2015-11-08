@@ -4,21 +4,22 @@
 /// <reference path="../Registry.ts" />
 module uplight{
     export class Keywords{
-        view:JQuery;
+        private view:JQuery;
         list:JQuery;
         data:VOKw[];
         R:Registry;
 
-        constructor(view:JQuery){
+        constructor(el:HTMLElement){
+            this.view = $(el);
             this.R = Registry.getInstance();
-
-            this.view=view.empty();
-            this.list =$('<ul>').appendTo(view);
+            this.list =$('<ul>').appendTo(this.view.find('[data-id=list]:first'));
             this.list.on(CLICK,'li',(evt)=>{this.onClick(evt.currentTarget)});
             this.R.model.dispatcher.on(this.R.model.READY,()=>this.onDataReady());
         }
         private onDataReady():void{
+
            var obj  =  this.R.model.getKeywords();
+            console.log(obj);
             var out:VOKw[]=[];
             for(var str in obj) out.push(new VOKw(str,obj[str]));
             this.data=out;

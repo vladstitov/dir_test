@@ -6,7 +6,7 @@
 module uplight{
     export class Keyboard {
        static   KEY_PRESSED:string='KEY_PRESSED';
-        static  KEYWORD_PRESSED:string='KEYWORD_PRESSED';
+
         static SEARCH_CHANGED:string='SEARCH_CHANGED';
         static KEYBOARD_SHOW:string ='KEYBOARD_SHOW';
         static KEYBOARD_HIDE:string ='KEYBOARD_HIDE';
@@ -67,13 +67,12 @@ module uplight{
         data:string;
         R:Registry;
         private isKw:boolean;
-        constructor(view:JQuery){
-
-            this.view=view;
+        constructor(el:HTMLElement){
+            this.view=$(el);
             this.data='';
             this.input = this.view.find('input');
             this.R=Registry.getInstance();
-            this.btnClear = view.find('[data-id=btnClear]:first');
+            this.btnClear = this.view.find('[data-id=btnClear]:first');
             this.addListeners();
 
         }
@@ -85,7 +84,7 @@ module uplight{
         private addListeners():void{
             this.btnClear.on(CLICK,()=>this.onClearClick());
             this.R.events.on(Keyboard.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
-            this.R.events.on(Keyboard.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
+            this.R.events.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
             this.R.events.on(this.R.RESET_ALL,()=>this.reset());
         }
         private onKeyword(str:string):void{
