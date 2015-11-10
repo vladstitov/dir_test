@@ -14,7 +14,7 @@ var uplight;
             });
             this.img = this.view.find('[data-id=img]:first');
             this.text = this.view.find('[data-id=text]:first');
-            this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, function () { return _this.onSaveClick(); });
+            this.btnSave = this.view.find('[data-id=btnSave]').on(CLICK, function () { return _this.onSaveClick(); });
             this.tiValue = this.view.find('[data-id=tiValue]:first');
             this.tiDescr = this.view.find('[data-id=tiDescr]:first');
             this.tiIndex = this.view.find('[data-id=tiIndex]:first');
@@ -26,7 +26,7 @@ var uplight;
 
         }*/
         LabelEditor.prototype.onSaveClick = function () {
-            console.log('save');
+            //  console.log('save');
             if (!this.current)
                 return;
             var item = this.current;
@@ -76,10 +76,8 @@ var uplight;
                 this.renderImage();
             else if (item.type == 'text')
                 this.renderText();
-            if (this.R.isSuper) {
-                this.tiIndex.val(item.index);
-                this.select.val(item.type);
-            }
+            this.tiIndex.val(item.index);
+            this.select.val(item.type);
             this.tiDescr.val(item.description);
             return this;
         };
@@ -150,13 +148,8 @@ var uplight;
                         break;
                     }
                 }
-                if (id !== -1) {
-                    var yes = confirm('You want to override ' + ar[i].description + '? ');
-                    if (yes)
-                        this.data[i] = data;
-                    else
-                        return;
-                }
+                if (id !== -1)
+                    this.data[i] = data;
                 else
                     this.data.push(data);
             }
@@ -179,7 +172,9 @@ var uplight;
             var _this = this;
             this.R.connector.saveData(JSON.stringify(this.data), this.R.settings.labels).done(function (res) {
                 _this.refreshData();
-                console.log(res);
+                if (res.success) {
+                    _this.R.msg('File saved', _this.editor.btnSave);
+                }
             });
         };
         LabelsManager.prototype.onSaveClick = function () {

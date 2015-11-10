@@ -1,39 +1,51 @@
 ///<reference path="DirsAdmin.ts" />
-var LISTVIEW = 'ListView';
-var DETAILSVIEV = 'DetailsView';
-var MENUVIEW = 'MenuView';
-var VPCONTENT = 'VpContent';
-var SHOW_LISTVIEW = 'Show_ListView';
-var SHOW_DETAILSVIEW = 'Show_DetailsView';
-var SHOW_PAGE = 'Show_Page';
-var SHOW_KEYBOARD = 'Show_Keyboard';
-var HIDE_KEYBOARD = 'Hide_Keyboard';
-var TYPING = 'typing';
-var HIDDEN = 'hidden';
-var HASH_CHANGE = 'hash_change';
+/*
+var LISTVIEW: string = 'ListView';
+var DETAILSVIEV: string = 'DetailsView';
+var MENUVIEW: string = 'MenuView';
+var VPCONTENT: string = 'VpContent';
+var SHOW_LISTVIEW: string = 'Show_ListView';
+var SHOW_DETAILSVIEW: string = 'Show_DetailsView';
+var SHOW_PAGE: string = 'Show_Page';
+var SHOW_KEYBOARD: string = 'Show_Keyboard';
+var HIDE_KEYBOARD: string = 'Hide_Keyboard';
+var TYPING: string = 'typing';
+
+var HASH_CHANGE:string='hash_change';
+
+var CONTENTEDITABLE:string='contenteditable';
+
+var IMG: string = 'img';
+var SRC: string = 'src';
+var ALERT: string = 'myAlert';
+
+var ALERT_YES: string = 'alert_yes';
+var ALERT_NO: string = 'alert_no';
+
+
+
+
+var REMOVE: string = 'remove';
+var SHOW: string = 'show';
+var HIDE: string = 'hide';
+var CLOSE:string='close';
+var CREATE:string='create';
+
+//var trace = function (data) { console.log(data); }
+
+var onAlertYes: Function;
+var myAlert: JQuery;
+var myAlertTitle: JQuery;
+var myAlertMsg: JQuery;
+*/
 var CHANGE = 'change';
 var CHECKED = 'checked';
 var DISABLED = 'disabled';
 var SELECTED = 'selected';
-var CONTENTEDITABLE = 'contenteditable';
-var IMG = 'img';
-var SRC = 'src';
-var ALERT = 'myAlert';
-var ALERT_YES = 'alert_yes';
-var ALERT_NO = 'alert_no';
-var CLICK = 'click';
 var MOUSE_OVER = 'mouseover';
 var MOUSE_OUT = 'mouseout';
-var REMOVE = 'remove';
-var SHOW = 'show';
-var HIDE = 'hide';
-var CLOSE = 'close';
-var CREATE = 'create';
-//var trace = function (data) { console.log(data); }
-var onAlertYes;
-var myAlert;
-var myAlertTitle;
-var myAlertMsg;
+var CLICK = 'click';
+var HIDDEN = 'hidden';
 var uplight;
 (function (uplight) {
     var RegA = (function () {

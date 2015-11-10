@@ -19,8 +19,9 @@
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 
+
+
 module uplight {
-declare var BootstrapDialog:any;
     export class Admin {
         private R: RegA;
         private listing:DestinationsController;
@@ -180,8 +181,7 @@ declare var BootstrapDialog:any;
                })
             })
 
-
-            window.location.hash='#Statistic';
+            if(window.location.hash=='') window.location.hash='#Statistic';
 
         }
 

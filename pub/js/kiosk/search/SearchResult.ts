@@ -44,6 +44,7 @@ module uplight {
         reset():void{
             this.result = this.data;
             this.render(true);
+
            // this.hideDetails();
         }
 

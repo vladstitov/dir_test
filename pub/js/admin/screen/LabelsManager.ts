@@ -3,7 +3,7 @@ module uplight{
     export class LabelEditor{
         view:JQuery;
         private select:JQuery;
-        private btnSaveLabel: JQuery;
+        btnSave: JQuery;
         private btnUpload:JQuery;
         private tiIndex:JQuery;
         private tiValue:JQuery;
@@ -24,7 +24,7 @@ module uplight{
 
 
         private onSaveClick():void{
-            console.log('save');
+          //  console.log('save');
             if(!this.current) return;
             var item = this.current;
             if(item.type=='img'){
@@ -32,10 +32,8 @@ module uplight{
             }else{
                 item.value = this.tiValue.val();
             }
-
             item.description = this.tiDescr.val();
-            item.index= this.tiIndex.val();
-
+            item.index = this.tiIndex.val();
            this.onSave(item);
         }
 
@@ -51,8 +49,6 @@ module uplight{
                 console.log(res);
                 if(res.success) this.imgValue.attr('src',res.result);
                });
-
-
             }
         }
 
@@ -74,10 +70,10 @@ module uplight{
             var item = this.current;
             if(item.type== 'img') this.renderImage();
             else if(item.type=='text') this.renderText();
-            if(this.R.isSuper){
-                this.tiIndex.val(item.index);
-                this.select.val(item.type);
-            }
+
+            this.tiIndex.val(item.index);
+            this.select.val(item.type);
+
             this.tiDescr.val(item.description);
 
             return this;
@@ -114,7 +110,7 @@ module uplight{
             });
             this.img = this.view.find('[data-id=img]:first');
             this.text = this.view.find('[data-id=text]:first');
-            this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, () => this.onSaveClick());
+            this.btnSave = this.view.find('[data-id=btnSave]').on(CLICK, () => this.onSaveClick());
 
            this.tiValue = this.view.find('[data-id=tiValue]:first');
             this.tiDescr = this.view.find('[data-id=tiDescr]:first');
@@ -155,7 +151,6 @@ module uplight{
         //available:string[]=['header','slogan','footer','list-header','list-footer','background','logo'];
 
         init(){
-
             this.view = $('#LabelsManager');
             this.btnAdd = this.view.find('[data-id=btnAdd]').click(()=>this.onAddClick());
             var table=$('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
@@ -184,13 +179,8 @@ module uplight{
                        break;
                    }
                }
-
-                if(id!==-1){
-                   var yes =  confirm('You want to override '+ ar[i].description+'? ');
-                    if(yes)  this.data[i]= data;
-                    else return;
-                }else this.data.push(data);
-
+                if(id!==-1) this.data[i]= data;
+                else this.data.push(data);
             }
 
             this.saveLabels();
@@ -215,9 +205,11 @@ module uplight{
 
 
         private saveLabels():void{
-            this.R.connector.saveData(JSON.stringify(this.data),this.R.settings.labels).done((res)=>{
+            this.R.connector.saveData(JSON.stringify(this.data),this.R.settings.labels).done((res:VOResult)=>{
                 this.refreshData();
-                console.log(res);
+                if(res.success){
+                    this.R.msg('File saved',this.editor.btnSave);
+                }
             })
         }
 

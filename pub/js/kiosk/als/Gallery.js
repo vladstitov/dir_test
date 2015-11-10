@@ -77,16 +77,20 @@ var uplight;
             if (this.current >= this.galley.length)
                 this.current = 0;
             var next = this.galley[this.current];
+            if (this.list.children().length > 1) {
+                this.list.children().detach();
+                this.cur = null;
+            }
             this.list.append(next);
-            if (this.next) {
-                this.prev = this.next;
+            if (this.cur) {
+                var prev = this.cur;
                 this.list.addClass('move');
                 setTimeout(function () {
-                    _this.prev.remove();
+                    prev.detach();
                     _this.list.removeClass('move');
                 }, 2000);
             }
-            this.next = next;
+            this.cur = next;
         };
         GalleryDisplay.prototype.createImage = function (url) {
             return $('<div>').addClass('item').html('<img src="' + url + '" />');

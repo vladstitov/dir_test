@@ -70,6 +70,7 @@ module uplight{
            var r:Registry = Registry.getInstance();
            r.events.on(DetailsLarge.DETAILS_LARGE_SHOW,(evt,id)=>this.showDetails(id));
            r.events.on(DetailsLarge.DETAILS_LARGE_HIDE,(evt)=>this.hide());
+           r.events.on(r.RESET_ALL,(evt)=>this.hide());
        }
 
        private showDetails(id:number):void{

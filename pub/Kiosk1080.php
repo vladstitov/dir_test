@@ -92,7 +92,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                    <?= isset($labels['header'])?$labels['header']:''; ?>
             </div>
             <div id="brand-more">
-                <div id="Clock">
+                <div id="Clock" data-ctr="uplight.Clock">
                 </div>
 
             </div>
@@ -337,6 +337,17 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         <?= isset($labels['footer'])?$labels['footer']:''; ?>
     </section>
 
+    <style>
+        #DetailsLarge>.modal-dialog{
+            width: 730px;
+            top:380px;
+            margin-top: 0;
+
+        }
+        #DetailsLarge .modal-content{
+            height: 1100px;
+        }
+    </style>
     <?php
     include('htms/kiosk/DetailsLarge.htm');
     ?>
@@ -346,34 +357,13 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <section id="AttractLoop" data-ctr="uplight.AttractLoop">
     <div  class="cover" data-id="cover">
     </div>
-    <style>
-        #AttractLoop {
-            position: absolute;
-            top: 170px;
 
-        }
-        #AttractLoop{
-            width: 1080px;
-            height: 1750px;
-        }
-        #AttractLoop .gallery>.x650x1024 {
-            position: absolute;
-            margin: auto;
-            left: 0;
-            right: 0;
-            top:200px;
-            width: 650px;
-            height: 1024px;
-            overflow: hidden;
-        }
-        #Touchclip{
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 1080px;
-            height: 120px;
-        }
-    </style>
+    <link href="css/AttractLoop.css" rel="stylesheet" />
+    <link href="css/AL_1080.css" rel="stylesheet" />
+    <script src="js/kiosk/als/AttractLoop.js"></script>
+    <script src="js/kiosk/als/ScreenSaver.js"></script>
+    <script src="js/kiosk/als/TouchClip.js"></script>
+    <script src="js/kiosk/als/Gallery.js"></script>
 </section>
 
 
@@ -399,11 +389,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <script src="js/kiosk/utils/Timeout.js"></script>
 
 <script src="js/kiosk/Banner.js" ></script>
-<link href="css/AttractLoop.css" rel="stylesheet" />
-<script src="js/kiosk/als/AttractLoop.js"></script>
-<script src="js/kiosk/als/ScreenSaver.js"></script>
-<script src="js/kiosk/als/TouchClip.js"></script>
-<script src="js/kiosk/als/Gallery.js"></script>
+
 <script src="js/kiosk/Kiosk.js" ></script>
 
 </body>

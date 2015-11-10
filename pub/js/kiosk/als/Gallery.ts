@@ -54,7 +54,7 @@ module uplight{
         private current=-1;
        private  interval:number=0;
         private prev:JQuery;
-        private next:JQuery;
+        private cur:JQuery;
 
         constructor(url:string){
             this.view = $('<div>');
@@ -85,12 +85,16 @@ module uplight{
             this.current++;
             if(this.current>=this.galley.length) this.current=0;
           var next = this.galley[this.current];
+            if( this.list.children().length>1){
+                this.list.children().detach();
+                this.cur=null;
+            }
             this.list.append(next);
-            if(this.next){
-                this.prev=this.next;
+            if(this.cur){
+                var prev = this.cur;
                 this.list.addClass('move');
                 setTimeout(()=>{
-                    this.prev.remove();
+                    prev.detach();
                     this.list.removeClass('move');
 
                 },2000)
@@ -103,7 +107,7 @@ module uplight{
                 })
                 */
             }
-            this.next=next;
+           this.cur=next;
         }
         private createImage(url:string):JQuery{
             return $('<div>').addClass('item').html('<img src="'+url+'" />');

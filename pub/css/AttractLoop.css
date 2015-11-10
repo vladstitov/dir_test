@@ -43,9 +43,7 @@
 
 #AttractLoop .gallery>.x1080x300 {
     position: absolute;
-    margin: auto;
     left: 0;
-    right: 0;
     bottom: 120px;
     width: 1080px;
     height: 300px;

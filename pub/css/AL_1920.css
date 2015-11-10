@@ -1,0 +1,24 @@
+#AttractLoop {
+    position: absolute;
+    top: 170px;
+}
+
+#AttractLoop{
+    width: 1920px;
+    height: 910px;
+}
+#AttractLoop .gallery>.x650x1024 {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 650px;
+    height: 1024px;
+    overflow: hidden;
+}
+#Touchclip{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 1920px;
+    height: 120px;
+}

@@ -310,15 +310,8 @@ display: inline-block;
 }
 /*END Details */
 /*START Details Large */
-#DetailsLarge>.modal-dialog{
-    width: 730px;
-    top:380px;
-    margin-top: 0;
 
-}
-#DetailsLarge .modal-content{
-    height: 1100px;
-}
+
 .central .fa-close{
     position: absolute;
     top: 10px;

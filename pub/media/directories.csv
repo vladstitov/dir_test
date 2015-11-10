@@ -1,12 +1,12 @@
 UID,Name,Unit,Info,Categories,Keywords,Table,Meta,Thumbnail,Images
 Person2,"Person 2",123,,People,,"Phone	555 555 6677
 email	email@webmail.com",,details/img/undefined_1444007003.png,
-p3,"Person 3 images",324,,People,,"Phone	444 555 5578
+p3,"Person 3 images",324,,"People,Category 2",,"Phone	444 555 5578
 email	personemail@emailsite.com",,,"details/img/p3_1444007624.png,details/img/p3_1444007630.png,details/img/p3_1444007649.png,details/img/p3_1444007664.png"
-Person4,"Person 4",564,,,,"Phone	567 786 6766",,details/img/_1444008596.png,"details/img/undefined_1444008539.png,details/img/undefined_1444008518.png,details/img/undefined_1444008554.png,details/img/undefined_1444008573.png"
-Person5,"Person 5",435,"small info about Person5","People,Category 1",,"Phone	444 555 6666
+Person4,"Person 4",564,,"Category 2",,"Phone	567 786 6766",,details/img/_1444008596.png,"details/img/undefined_1444008539.png,details/img/undefined_1444008518.png,details/img/undefined_1444008554.png,details/img/undefined_1444008573.png"
+Person5,"Person 5",435,"small info about Person5","People,Category 1,Category 2",,"Phone	444 555 6666
 email	email@email.com",,,
-a1,"Tenant 1",122,"Some small info about Tenant 1 in one line","Category 3,Tenants",,"Phone	456 854 5677
+a1,"Tenant 1",122,"Some small info about Tenant 1 in one line","Category 3,Tenants,Category 2",,"Phone	456 854 5677
 Fax	456 286 4567",,,
 u2,"Tenant 2",125,,"Tenants,Category 2",,"Phone	678 987 7890
 Fax	678 098 6545

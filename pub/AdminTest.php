@@ -186,7 +186,14 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/admin/destinations/DetailsImages.js"></script>
 
 <script type="text/javascript" src="js/admin/etc/ImportExport.js"></script>
+
+
+<script type="text/javascript" src="js/admin/etc/DeviceBase.js"></script>
+<script type="text/javascript" src="js/admin/etc/KioskChart.js"></script>
+<script type="text/javascript" src="js/admin/etc/TopSearches.js"></script>
 <script type="text/javascript" src="js/admin/etc/Statistics.js"></script>
+
+
 <script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
 <script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>
 

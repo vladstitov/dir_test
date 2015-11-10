@@ -112,7 +112,7 @@ var uplight;
         function SettingsEdit(container) {
             var _this = this;
             this.container = container;
-            console.log('SettingsEdit');
+            // console.log('SettingsEdit');
             container.load('htms/admin/SettingsEdit.htm', function () {
                 setTimeout(function () {
                     _this.init();

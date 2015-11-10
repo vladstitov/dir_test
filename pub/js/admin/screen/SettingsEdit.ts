@@ -150,7 +150,7 @@ module uplight{
 
 
         constructor(private container:JQuery){
-            console.log('SettingsEdit');
+           // console.log('SettingsEdit');
                 container.load('htms/admin/SettingsEdit.htm',()=>{setTimeout(()=>{this.init()},50)});
                 this.R = RegA.getInstance();
         }
@@ -205,7 +205,8 @@ module uplight{
 
         private refreshData():void{
             this.R.connector.getData(this.R.settingsURL).done((res:string)=>{
-                this.R.settings  = JSON.parse(res)
+                this.R.settings  = JSON.parse(res);
+
                 this.data = this.R.settings.props;
                 this.render();
             })

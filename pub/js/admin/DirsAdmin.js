@@ -167,7 +167,8 @@ var uplight;
                     });
                 });
             });
-            window.location.hash = '#Statistic';
+            if (window.location.hash == '')
+                window.location.hash = '#Statistic';
         };
         Admin.prototype.logout = function () {
             this.R.connector.logout().done(function (res) {

@@ -9,6 +9,7 @@ declare class nicEditor {
 }
 
 
+/*
 var LISTVIEW: string = 'ListView';
 var DETAILSVIEV: string = 'DetailsView';
 var MENUVIEW: string = 'MenuView';
@@ -19,13 +20,9 @@ var SHOW_PAGE: string = 'Show_Page';
 var SHOW_KEYBOARD: string = 'Show_Keyboard';
 var HIDE_KEYBOARD: string = 'Hide_Keyboard';
 var TYPING: string = 'typing';
-var HIDDEN:string='hidden';
 
 var HASH_CHANGE:string='hash_change';
-var CHANGE: string = 'change';
-var CHECKED: string = 'checked';
-var DISABLED: string = 'disabled';
-var SELECTED: string = 'selected';
+
 var CONTENTEDITABLE:string='contenteditable';
 
 var IMG: string = 'img';
@@ -35,9 +32,8 @@ var ALERT: string = 'myAlert';
 var ALERT_YES: string = 'alert_yes';
 var ALERT_NO: string = 'alert_no';
 
-var CLICK: string = 'click';
-var MOUSE_OVER:string='mouseover';
-var MOUSE_OUT:string='mouseout';
+
+
 
 var REMOVE: string = 'remove';
 var SHOW: string = 'show';
@@ -51,8 +47,16 @@ var onAlertYes: Function;
 var myAlert: JQuery;
 var myAlertTitle: JQuery;
 var myAlertMsg: JQuery;
+*/
 
-
+var CHANGE: string = 'change';
+var CHECKED: string = 'checked';
+var DISABLED: string = 'disabled';
+var SELECTED: string = 'selected';
+var MOUSE_OVER:string='mouseover';
+var MOUSE_OUT:string='mouseout';
+var CLICK: string = 'click';
+var HIDDEN:string='hidden';
 
 module uplight{
 
