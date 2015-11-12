@@ -198,6 +198,7 @@ module uplight {
             this.R.connector = new Connector();
             this.R.connector.getData('settings.json').done((resp) => {
                 this.R.settings = JSON.parse(resp);
+                this.R.props = _.indexBy(this.R.settings.props,'id');
                 this.init();
                 //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });

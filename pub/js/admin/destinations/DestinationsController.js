@@ -16,7 +16,6 @@ var uplight;
             var _this = this;
             this.view = $('#DestinationsEditor');
             this.list = new uplight.DestinationsList($('#DestinationsList'));
-            console.log(window.location.hash);
             this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'));
             this.breacrumb.onCiick = function (url) {
                 if (url == 'listing') {
@@ -48,10 +47,6 @@ var uplight;
                     _this.R.model.refreshData();
                 });
         };
-        // private showForm(){
-        ///  this.detailsForm.show();
-        // this.list.hide();
-        //   }
         DestinationsController.prototype.hideForm = function () {
             this.breacrumb.clear();
             this.breacrumb.addCrumb('listing', 'Listing');
@@ -115,10 +110,9 @@ var uplight;
             var _this = this;
             var dest = this.list.getSelectedItem();
             if (dest) {
-                var isdel = confirm('You want to delete ' + dest.name + ' from database?');
-                if (isdel) {
-                    this.R.model.deleteDestination(dest, function (res) { return _this.onDelete(res); });
-                }
+                this.R.confirm.show('Delete record', 'You want to delete ' + dest.name + ' from database?', function () {
+                    _this.R.model.deleteDestination(dest, function (res) { return _this.onDelete(res); });
+                });
             }
             // showAlert('You want to delete record: ' + name + '?', () => this.onDeleteConfirmed(),'Delete');
         };

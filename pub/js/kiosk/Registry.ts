@@ -16,6 +16,12 @@ var DISABLED: string = 'disabled';
 
 module uplight {
 
+    export class VOProps{
+        id:number;
+        label:string;
+        value:number|string;
+        type:string;
+    }
 
 
     export class Registry {
@@ -41,6 +47,7 @@ module uplight {
         RESET_VIEWS:string='RESET_VIEWS';
         HIDE_VIEWS:string='HIDE_VIEWS';
         settings: any;
+        props:any;//_.Dictionary<VOProps>;
         static status:string;
 
         isServer: boolean;

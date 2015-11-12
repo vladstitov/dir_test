@@ -20,7 +20,7 @@ module uplight{
             var table:JQuery=view.find('.table:first');
 
             var head:JQuery=$('<thead>');
-            head.html('<tr class="header"><th class="id">ID</th><th class="icon">Icon</th><th class="name">Name</th><th class="seq">Sequence</th><th class="recs">Records</th></tr>');
+            head.html('<tr class="header"><th class="id">ID</th><th class="icon">Icon</th><th class="name">Name</th><th class="seq">Sequence</th><th class="seq">Enabled</th><th class="recs">Records</th></tr>');
             table.append(head)
 
             this.list = $('<tbody>');
@@ -83,14 +83,17 @@ module uplight{
 
         private renderItem(item: VOCategory,i:number): string {
             var total=0;
+            var enbl:string ='fa fa-check';
+            if(!item.enable)enbl = 'fa fa-minus';
             if(item.dests)total =item.dests.length;
             //if (this.isChange) return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" contentEditable="true">' + item.label + '</div></li>';
             return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') +'" data-i="'+i+'" data-id="' + item.id + '" >' +
                 '<td class="id">'+item.id+'</td>' +
                 '<td class="icon"><span class="'+item.icon+'"></td>' +
-                '<td class="name">' + item.label +'</td>' +
-                '<td class="seq">'+item.sort+ '</td>' +
-                '<td class="recs">'+total+'</td>' +
+                '<td >' + item.label +'</td>' +
+                '<td >'+item.sort+ '</td>' +
+                '<td ><span class="'+enbl+ '"></span></td>' +
+                '<td >'+total+'</td>' +
                 '</tr>';
             // return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" >' + item.label + '</div></li>';
         }

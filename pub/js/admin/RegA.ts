@@ -104,6 +104,7 @@ module uplight{
         connector: Connector;
         dispatcher:JQuery
         settings: any;
+        props:any;
         settingsURL:string = 'settings.json';
         device: {} = { device: 'admin', ln: 'en' };
         private static _instance: RegA = new RegA();

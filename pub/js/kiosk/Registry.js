@@ -11,6 +11,12 @@ var SELECTED = 'selected';
 var DISABLED = 'disabled';
 var uplight;
 (function (uplight) {
+    var VOProps = (function () {
+        function VOProps() {
+        }
+        return VOProps;
+    })();
+    uplight.VOProps = VOProps;
     var Registry = (function () {
         function Registry() {
             this.KIOSK_SHOW_MENU = 'KIOSK_SHOW_MENU';

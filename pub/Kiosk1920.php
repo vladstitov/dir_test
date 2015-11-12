@@ -164,6 +164,11 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                padding: 22px;
 
            }
+           #Pages .page>.header{
+               font-size: large;
+               margin-bottom: 1em;
+           }
+
         </style>
         <div id="mainport" class="mainbg view-port-content">
             <section id="SearchResult" data-id="searchResult" data-ctr="uplight.SearchResult">

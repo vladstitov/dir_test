@@ -42,8 +42,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <meta name="description" content="Kiosk 1080">
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
-    <link href="js/lists/reset.css" rel="stylesheet" />
-    <link href="js/libs/bootstrap.css" rel="stylesheet" />
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
@@ -152,6 +152,12 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                padding: 22px;
 
            }
+           #Pages .page>.header{
+               font-size: large;
+               margin-bottom: 1em;
+           }
+
+
 
         </style>
         <div id="mainport" class="mainbg u-glow view-port-content">

@@ -42,6 +42,7 @@ var uplight;
             r.connector = new uplight.Connector();
             r.connector.id = u_settings.id;
             r.settings = u_settings;
+            r.props = _.indexBy(u_settings.props, 'id');
             // console.log(u_settings);          // r.connector.who='kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
             u_settings.props.forEach(function (val) {
@@ -85,8 +86,9 @@ var uplight;
             
                        }
             */
-            if (!u_settings.hasOwnProperty('norelay'))
-                var relay = new uplight.Relay(u_settings.timer);
+            //  console.log(r.props['timer']);
+            if (r.props['timer'])
+                var relay = new uplight.Relay(r.props['timer'].value);
             r.events.on(r.AL_START, function () {
                 r.events.triggerHandler(r.RESET_ALL);
             });

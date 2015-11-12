@@ -1,5 +1,6 @@
 <?
 class Utils{
+	
 	public function getDevicesData(){
 				$out = new stdClass();
 				$devices = json_decode($this->getData(array('file_name'=>'kiosks.json')));

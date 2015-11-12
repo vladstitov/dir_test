@@ -1,72 +1,23 @@
- <style type="text/css">	
+ <style type="text/css">
+     #CategoriesList-list{
+         height: 20em;
+         overflow: auto;
+     }
 
- #editRow {
-	float:right; 
- }
-  #editRow img{
-	  width:1.0em;
-	  height:1.0em;
-	  margin:0;
-	  padding:0;
-	  cursor:pointer; 
-  }
-.catname{
-	width:200px;
-}
- #CategoriesList-list{
-     height: 20em;
-     overflow: auto;
-
- }
-#panel2>img{
-	margin:0;
-}
-#panel2>a{
-	margin:0;
-}
-
-.header>div{
-    display: inline-block;;
-}
-
-
- #CategoriesList .item{
+     #CategoriesList .item{
          cursor: pointer;
      }
- #CategoriesList tr,th{
-     text-align: center;
- }
 
-
-
- #CategoriesList .table .id{
-        width: 2em;
- }
- #CategoriesList .table .icon{
-     width: 2em;
- }
- #CategoriesList .item .name{
-     text-align: left;
- }
- #CategoriesList .table  .table .seq{
-         width: 6em;
- }
- #CategoriesList .table .recs{
-     width: 6em;
- }
-
-     .list>.fa{
+     .icons-lib>.topic>.list>.fa{
          margin: 1em;
      }
 
-     .preview .fa{
+     #CategoryForm .form .c-icon{
+         font-size: 1.5em;
+     }
+     #CategoryForm>.form .abs.preview{
          font-size: 3em;
          background: white;
-
-     }
-
-     #CategoryForm [data-id=icon]{
-         font-size: 1.5em;
      }
 </style>
  
@@ -86,8 +37,6 @@
 
                 <div id="CategoriesList" class="panel-body">
                        <h5>Categories in Menu list</h5>
-
-
                          <table  class="table">
 
                          </table>
@@ -105,12 +54,12 @@
 
             </div>
             <br/>
-            <section id="details-form" role="form" class="panel-body">
+            <section class="panel-body form">
 
                 <div class="form-group col-sm-1">
                     <label>Icon</label> <!--<label class="btn"> <div class="fa fa-edit"> </div>Edit</label>-->
                     <div  class="form-control">
-                        <div title="Click on Icon in Library to change" class="fa fa-plus" data-id="icon"> </div>
+                        <div title="Click on Icon in Library to change" class="fa fa-plus c-icon" data-id="icon"> </div>
                     </div>
                 </div>
                 <div class="form-group col-sm-8">
@@ -149,7 +98,9 @@
                 <div class="form-group col-sm-12">
                     <label >Icons Library</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button class="btn btn-default" data-id="btnBlankIcon">Remove Icon</button>
-                    <div class="panel-body" data-id="iconsLibrary"></div>
+                    <div class="panel-body icons-lib" data-id="iconsLibrary">
+
+                    </div>
                 </div>
 
             </section>

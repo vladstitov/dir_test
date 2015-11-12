@@ -1,46 +1,42 @@
 ﻿///<reference path="DirsAdmin.ts" />
 
-var LISTVIEW = 'ListView';
-var DETAILSVIEV = 'DetailsView';
-var MENUVIEW = 'MenuView';
-var VPCONTENT = 'VpContent';
-var SHOW_LISTVIEW = 'Show_ListView';
-var SHOW_DETAILSVIEW = 'Show_DetailsView';
-var SHOW_PAGE = 'Show_Page';
-var SHOW_KEYBOARD = 'Show_Keyboard';
-var HIDE_KEYBOARD = 'Hide_Keyboard';
-var TYPING = 'typing';
-var HIDDEN = 'hidden';
-
-var HASH_CHANGE = 'hash_change';
+/*
+var LISTVIEW: string = 'ListView';
+var DETAILSVIEV: string = 'DetailsView';
+var MENUVIEW: string = 'MenuView';
+var VPCONTENT: string = 'VpContent';
+var SHOW_LISTVIEW: string = 'Show_ListView';
+var SHOW_DETAILSVIEW: string = 'Show_DetailsView';
+var SHOW_PAGE: string = 'Show_Page';
+var SHOW_KEYBOARD: string = 'Show_Keyboard';
+var HIDE_KEYBOARD: string = 'Hide_Keyboard';
+var TYPING: string = 'typing';
+var HASH_CHANGE:string='hash_change';
+var CONTENTEDITABLE:string='contenteditable';
+var IMG: string = 'img';
+var SRC: string = 'src';
+var ALERT: string = 'myAlert';
+var ALERT_YES: string = 'alert_yes';
+var ALERT_NO: string = 'alert_no';
+var REMOVE: string = 'remove';
+var SHOW: string = 'show';
+var HIDE: string = 'hide';
+var CLOSE:string='close';
+var CREATE:string='create';
+//var trace = function (data) { console.log(data); }
+var onAlertYes: Function;
+var myAlert: JQuery;
+var myAlertTitle: JQuery;
+var myAlertMsg: JQuery;
+*/
 var CHANGE = 'change';
 var CHECKED = 'checked';
 var DISABLED = 'disabled';
 var SELECTED = 'selected';
-var CONTENTEDITABLE = 'contenteditable';
-
-var IMG = 'img';
-var SRC = 'src';
-var ALERT = 'myAlert';
-
-var ALERT_YES = 'alert_yes';
-var ALERT_NO = 'alert_no';
-
-var CLICK = 'click';
 var MOUSE_OVER = 'mouseover';
 var MOUSE_OUT = 'mouseout';
-
-var REMOVE = 'remove';
-var SHOW = 'show';
-var HIDE = 'hide';
-var CLOSE = 'close';
-var CREATE = 'create';
-
-//var trace = function (data) { console.log(data); }
-var onAlertYes;
-var myAlert;
-var myAlertTitle;
-var myAlertMsg;
+var CLICK = 'click';
+var HIDDEN = 'hidden';
 
 var uplight;
 (function (uplight) {
@@ -1192,6 +1188,9 @@ var uplight;
         Connector.prototype.getDevices = function () {
             return $.get(this.service + '?a=get_devices');
         };
+        Connector.prototype.getDevicesData = function () {
+            return $.get(this.service + '?a=get_devices_data');
+        };
         Connector.prototype.restartKiosks = function () {
             return $.get(this.service + '?a=restart_kiosks');
         };
@@ -1898,6 +1897,10 @@ var uplight;
         InfoEditor.prototype.setData = function (data) {
             this.data = data;
             this.textEditor.setData(data.url);
+            if (data.id === 0)
+                this.textEditor.show();
+
+            /////////////////////////////////////////////
             this.render();
         };
         InfoEditor.prototype.getData = function () {
@@ -3017,7 +3020,7 @@ var uplight;
             this.total = this.view.find('[data-id=total]');
             this.currentCat = 0;
 
-            this.R.model.events.on(this.R.model.CHANGE, function () {
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 return _this.onModelChange();
             });
             this.destinations = this.R.model.getData();
@@ -3169,8 +3172,6 @@ var uplight;
             this.view = $('#DestinationsEditor');
 
             this.list = new uplight.DestinationsList($('#DestinationsList'));
-
-            console.log(window.location.hash);
             this.breacrumb = new uplight.BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'));
             this.breacrumb.onCiick = function (url) {
                 if (url == 'listing') {
@@ -3219,10 +3220,6 @@ var uplight;
                 });
         };
 
-        // private showForm(){
-        ///  this.detailsForm.show();
-        // this.list.hide();
-        //   }
         DestinationsController.prototype.hideForm = function () {
             this.breacrumb.clear();
             this.breacrumb.addCrumb('listing', 'Listing');
@@ -3295,12 +3292,11 @@ var uplight;
             var _this = this;
             var dest = this.list.getSelectedItem();
             if (dest) {
-                var isdel = confirm('You want to delete ' + dest.name + ' from database?');
-                if (isdel) {
-                    this.R.model.deleteDestination(dest, function (res) {
+                this.R.confirm.show('Delete record', 'You want to delete ' + dest.name + ' from database?', function () {
+                    _this.R.model.deleteDestination(dest, function (res) {
                         return _this.onDelete(res);
                     });
-                }
+                });
             }
             // showAlert('You want to delete record: ' + name + '?', () => this.onDeleteConfirmed(),'Delete');
         };
@@ -3338,14 +3334,14 @@ var uplight;
                 return _this.onSaveClicked();
             });
 
-            this.R.events.on(this.R.CATEGORY_SELECTED, function (evt, cat) {
+            this.R.dispatcher.on(this.R.CATEGORY_SELECTED, function (evt, cat) {
                 return _this.onCategorySelected(cat);
             });
 
             if (this.model.getCategories())
                 this.renderSequance();
             else
-                this.model.events.on(this.model.CHANGE, function () {
+                this.model.dispatcher.on(this.model.CHANGE, function () {
                     return _this.renderSequance();
                 });
 
@@ -3554,14 +3550,14 @@ var uplight;
             var table = view.find('.table:first');
 
             var head = $('<thead>');
-            head.html('<tr class="header"><th class="id">ID</th><th class="icon">Icon</th><th class="name">Name</th><th class="seq">Sequence</th><th class="recs">Records</th></tr>');
+            head.html('<tr class="header"><th class="id">ID</th><th class="icon">Icon</th><th class="name">Name</th><th class="seq">Sequence</th><th class="seq">Enabled</th><th class="recs">Records</th></tr>');
             table.append(head);
 
             this.list = $('<tbody>');
             table.append(this.list);
             this.listView = $('#CategoriesList-container');
             this.R = uplight.RegA.getInstance();
-            this.R.model.events.on(this.R.model.CHANGE, function () {
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
             });
             if (this.R.model.getCategories())
@@ -3569,7 +3565,7 @@ var uplight;
             this.list.on(CLICK, 'tr', function (evt) {
                 return _this.onClick($(evt.currentTarget));
             });
-            this.R.model.events.on(this.R.model.CATEGORIES_CAHANGE, function (evt, cata) {
+            this.R.model.dispatcher.on(this.R.model.CATEGORIES_CAHANGE, function (evt, cata) {
                 return _this.onCategoriesChanged();
             });
         }
@@ -3588,7 +3584,7 @@ var uplight;
                 // console.log(cat);
                 this.selectedItem = cat;
                 this.selectElement(el);
-                this.R.events.triggerHandler(this.R.CATEGORY_SELECTED, cat);
+                this.R.dispatcher.triggerHandler(this.R.CATEGORY_SELECTED, cat);
             }
         };
 
@@ -3622,11 +3618,14 @@ var uplight;
 
         CategoriesList.prototype.renderItem = function (item, i) {
             var total = 0;
+            var enbl = 'fa fa-check';
+            if (!item.enable)
+                enbl = 'fa fa-minus';
             if (item.dests)
                 total = item.dests.length;
 
             //if (this.isChange) return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" contentEditable="true">' + item.label + '</div></li>';
-            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td class="name">' + item.label + '</td>' + '<td class="seq">' + item.sort + '</td>' + '<td class="recs">' + total + '</td>' + '</tr>';
+            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td >' + item.label + '</td>' + '<td >' + item.sort + '</td>' + '<td ><span class="' + enbl + '"></span></td>' + '<td >' + total + '</td>' + '</tr>';
             // return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" >' + item.label + '</div></li>';
         };
         return CategoriesList;
@@ -3667,7 +3666,7 @@ var uplight;
                 _this.show();
             };
             this.list = new uplight.CategoriesList($('#CategoriesList'));
-            this.R.model.events.on(this.R.model.CHANGE, function () {
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 _this.onModelChanged();
             });
 
@@ -3697,6 +3696,7 @@ var uplight;
             cat.enable = 1;
             this.categoryForm.setCurrent(cat);
             this.categoryForm.show();
+            this.hide();
         };
 
         CategoriesManager.prototype.onEditClicked = function () {
@@ -3715,11 +3715,11 @@ var uplight;
             // console.log(item);
             if (!item)
                 return;
-            var isDelete = confirm('Yoy want to delete category ' + item.label + '?');
-            if (isDelete)
-                this.R.model.deleteCategory(item, function (res) {
+            this.R.confirm.show('Delete Category', 'Yoy want to delete category ' + item.label + '?', function () {
+                _this.R.model.deleteCategory(item, function (res) {
                     return _this.onDeleteSuccess(res);
                 });
+            });
         };
         return CategoriesManager;
     })();
@@ -3737,7 +3737,7 @@ var uplight;
             this.view = view;
             this.R = uplight.RegA.getInstance();
 
-            this.R.events.on(this.R.CATEGORY_REST, function () {
+            this.R.dispatcher.on(this.R.CATEGORY_REST, function () {
                 return _this.render();
             });
             this.list = $('<ul>').appendTo(view.find('[data-id=list]:first'));
@@ -3745,7 +3745,7 @@ var uplight;
                 return _this.onListClick($(evt.currentTarget));
             });
             this.title = view.find('[data-id=title]:first');
-            this.R.events.on(this.R.CATEGORY_ADD_SELECTED, function (evt, elms) {
+            this.R.dispatcher.on(this.R.CATEGORY_ADD_SELECTED, function (evt, elms) {
                 return _this.onAddSelected(elms);
             });
             this.total = view.find('[data-id=total]:first');
@@ -3753,13 +3753,13 @@ var uplight;
                 return _this.onDelClicked();
             });
             this.btnReset = view.find('[data-id=btnReset]').on(CLICK, function () {
-                _this.R.events.triggerHandler(_this.R.CATEGORY_REST);
+                _this.R.dispatcher.triggerHandler(_this.R.CATEGORY_REST);
             });
         }
         CategoryInListing.prototype.onDelClicked = function () {
             var _this = this;
             var elms = this.list.children('.selected');
-            this.R.events.triggerHandler(this.R.CATEGORY_REMOVE_SELECTED, [elms]);
+            this.R.dispatcher.triggerHandler(this.R.CATEGORY_REMOVE_SELECTED, [elms]);
             setTimeout(function () {
                 return _this.refreshList();
             }, 500);
@@ -3858,10 +3858,10 @@ var uplight;
             }).appendTo(this.view.find('[data-id=list]:first'));
             if (this.R.model.getCategories())
                 this.render();
-            this.R.model.events.on(this.R.model.CHANGE, function () {
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 return _this.render();
             });
-            this.R.events.on(this.R.CATEGORY_NOTINLIS_CLOSE, function () {
+            this.R.dispatcher.on(this.R.CATEGORY_NOTINLIS_CLOSE, function () {
                 return _this.show();
             });
         }
@@ -3937,10 +3937,10 @@ var uplight;
             });
 
             // this.R.events.on(this.R.CATEGORY_SELECTED,(evt,cat)=>this.onCategorySelected(cat));
-            this.R.events.on(this.R.CATEGORY_REMOVE_SELECTED, function (evt, elms) {
+            this.R.dispatcher.on(this.R.CATEGORY_REMOVE_SELECTED, function (evt, elms) {
                 return _this.onRemoved(elms);
             });
-            this.R.events.on(this.R.CATEGORY_REST, function () {
+            this.R.dispatcher.on(this.R.CATEGORY_REST, function () {
                 return _this.render();
             });
             this.btnClear = view.find('.fa-times-circle:first').on(CLICK, function () {
@@ -3976,7 +3976,7 @@ var uplight;
         };
         CategoryNotListing.prototype.onCloseClicked = function () {
             this.hide();
-            this.R.events.triggerHandler(this.R.CATEGORY_NOTINLIS_CLOSE);
+            this.R.dispatcher.triggerHandler(this.R.CATEGORY_NOTINLIS_CLOSE);
         };
 
         CategoryNotListing.prototype.setCurrent = function (cat) {
@@ -3986,7 +3986,7 @@ var uplight;
         CategoryNotListing.prototype.onAddClick = function () {
             var _this = this;
             var elms = this.list.children('.selected');
-            this.R.events.triggerHandler(this.R.CATEGORY_ADD_SELECTED, [elms]);
+            this.R.dispatcher.triggerHandler(this.R.CATEGORY_ADD_SELECTED, [elms]);
             setTimeout(function () {
                 return _this.refreshList();
             }, 500);
@@ -4177,7 +4177,7 @@ var uplight;
 
             this.table.append(this.renderHead());
             this.getData();
-            this.R.model.events.on(this.R.model.CHANGE, function () {
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
                 return _this.getData();
             });
         };
@@ -4482,62 +4482,22 @@ var uplight;
     })();
     uplight.ImportExport = ImportExport;
 })(uplight || (uplight = {}));
-/**
-* Created by VladHome on 8/8/2015.
-*/
-///<reference path="../../typing/chart.d.ts"/>
-/// <reference path="../DirsAdmin.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+/**
+* Created by VladHome on 11/9/2015.
+*/
 var uplight;
 (function (uplight) {
-    var Statistics = (function () {
-        function Statistics(contauner) {
-            var _this = this;
-            this.colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
-            this.R = uplight.RegA.getInstance();
-            contauner.load('htms/admin/Statistics.htm', function () {
-                return _this.init();
-            });
-        }
-        Statistics.prototype.init = function () {
-            // var today = new Date()
-            //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
-            var _this = this;
-            this.R.connector.getStatistics().done(function (res) {
-                return _this.onData(res);
-            });
-
-            var today = new Date();
-            var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
-            this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
-            var kiosksChart = new KiosksChart($('#KiosksChart'), this.colors, this.fromTo);
-            var devices = new DevicesData($('#DevicesData'), this.colors);
-        };
-
-        Statistics.prototype.onData = function (res) {
-            var cats = res.categories;
-            var dests = res.destinations;
-
-            //  var search = res.search;
-            //  console.log(res);
-            var categ = new CategoriesChart($('#CategoriesChart'), cats, this.colors);
-
-            var destinTopDestinations = new TopDestinations($('#TopDestinations'), dests);
-            var searches = new TopSearches($('#TopSearches'), res.search, res.keywords);
-        };
-        return Statistics;
-    })();
-    uplight.Statistics = Statistics;
-
     var VODevice = (function () {
         function VODevice(obj) {
-            this.S_time = 0;
-            this.K_time = 0;
+            this.start = 0;
+            this.s_time = 0;
+            this.now = 0;
             this.ip = '';
             this.ping = 0;
             this.start_at = 0;
@@ -4548,12 +4508,15 @@ var uplight;
         return VODevice;
     })();
     uplight.VODevice = VODevice;
+
     var DeviceModel = (function (_super) {
         __extends(DeviceModel, _super);
-        function DeviceModel(dev, s_time) {
-            _super.call(this, dev);
-            var delta = s_time - dev.S_time;
-            if (delta < dev.maxdelay)
+        function DeviceModel(dev, s_time, timer) {
+            _super.call(this, dev.track);
+            for (var str in dev)
+                this[str] = dev[str];
+            var delta = (s_time - this.s_time);
+            if (delta < timer)
                 this.status = 1;
             else
                 this.status = 0;
@@ -4561,72 +4524,15 @@ var uplight;
         return DeviceModel;
     })(VODevice);
     uplight.DeviceModel = DeviceModel;
-    var DevicesData = (function () {
-        // private greenLite:JQuery;
-        function DevicesData(view, colors) {
-            this.view = view;
-            this.colors = colors;
-            console.log('DevicesData');
-            this.list = view.find('[data-id=list]:first');
-
-            // this.greenLite=view.find('[data-view=greenLite]:first');
-            this.loadData();
-        }
-        DevicesData.prototype.loadData = function () {
-            var _this = this;
-            this.list.find('.status').detach();
-            uplight.RegA.getInstance().connector.getDevices().done(function (res) {
-                return _this.onKiosks(res);
-            });
-        };
-        DevicesData.prototype.onKiosks = function (res) {
-            this.data = res.result;
-            this.s_time = Number(res.success);
-
-            //console.log(this.data);
-            // console.log(this.s_time);
-            this.render();
-            // RegA.getInstance().connector.  getServerTime().done((res)=>{
-            //  this.s_time = Number(res);
-            //  this.render();
-            //  });
-        };
-
-        DevicesData.prototype.render = function () {
-            var _this = this;
-            var s_time = this.s_time;
-            var ar = this.data;
-            var out = '';
-            var ks = [];
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var k = new DeviceModel(ar[i], s_time);
-                ks.push(k);
-                out += this.createDevice(k);
-            }
-            this.devices = ks;
-            this.list.html(out);
-            setTimeout(function () {
-                return _this.loadData();
-            }, 10000);
-        };
-
-        DevicesData.prototype.createDevice = function (obj) {
-            var color = '#0F0';
-            var statusStr = 'Working fine';
-            var cl = 'fa-circle';
-            if (obj.status === 0) {
-                color = '#ECCC6B';
-                cl = 'fa-exclamation-triangle';
-                statusStr = 'Experienced delays';
-            }
-
-            var stsrtTime = obj.start_at ? new Date(obj.start_at * 1000).toLocaleString() : '';
-            var lastTime = obj.K_time ? new Date(obj.K_time * 1000).toLocaleString() : '';
-            return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '?kiosk=' + obj.id + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + obj.ip + '</td>' + '<td>' + obj.ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
-        };
-        return DevicesData;
-    })();
-    uplight.DevicesData = DevicesData;
+})(uplight || (uplight = {}));
+/**
+* Created by VladHome on 11/9/2015.
+*/
+/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../typing/underscore.d.ts" />
+/// <reference path="../RegA.ts" />
+var uplight;
+(function (uplight) {
     var VoRate = (function () {
         function VoRate(ar) {
             this.value = ar[0];
@@ -4672,6 +4578,7 @@ var uplight;
         };
         return TopSearches;
     })();
+    uplight.TopSearches = TopSearches;
 
     var TopDestinations = (function () {
         function TopDestinations(view, data) {
@@ -4704,7 +4611,16 @@ var uplight;
         };
         return TopDestinations;
     })();
-
+    uplight.TopDestinations = TopDestinations;
+})(uplight || (uplight = {}));
+/**
+* Created by VladHome on 11/9/2015.
+*/
+/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../typing/underscore.d.ts" />
+/// <reference path="../RegA.ts" />
+var uplight;
+(function (uplight) {
     var CategoriesChart = (function () {
         function CategoriesChart(view, data, colors) {
             this.view = view;
@@ -4798,7 +4714,8 @@ var uplight;
             // console.log(cats);
             list.html(out);
             this.list = list;
-            list.appendTo(this.view.find('[data-id=list]:first'));
+            var cont = this.view.find('[data-id=list]:first').empty();
+            list.appendTo(cont);
 
             var canvas = this.view.find('[data-id=canvas]:first');
 
@@ -4829,6 +4746,7 @@ var uplight;
         };
         return CategoriesChart;
     })();
+    uplight.CategoriesChart = CategoriesChart;
 
     var VOPie = (function () {
         function VOPie() {
@@ -4967,8 +4885,8 @@ var uplight;
                 var item = ar[i];
 
                 //  var id:string = 'kiosk'+item.id;
-                ids.push(item.index);
-                devices[item.index] = ar[i];
+                ids.push(item.id);
+                devices[item.id] = ar[i];
 
                 // var clicks:number[] = this.clicks[ar[i].id];
                 //if(!clicks) clicks=[];
@@ -5041,6 +4959,135 @@ var uplight;
         };
         return KiosksChart;
     })();
+    uplight.KiosksChart = KiosksChart;
+})(uplight || (uplight = {}));
+/**
+* Created by VladHome on 11/9/2015.
+*/
+/// <reference path="../RegA.ts" />
+/// <reference path="DeviceBase.ts" />
+/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../typing/underscore.d.ts" />
+var uplight;
+(function (uplight) {
+    var DevicesData = (function () {
+        // private greenLite:JQuery;
+        function DevicesData(view, colors) {
+            var _this = this;
+            this.view = view;
+            this.colors = colors;
+            //console.log('DevicesData');
+            if (uplight.RegA.getInstance().props['timer'])
+                this.kioskTimer = uplight.RegA.getInstance().props['timer'].value;
+            this.list = view.find('[data-id=list]:first');
+
+            // this.greenLite=view.find('[data-view=greenLite]:first');
+            this.loadData();
+            setInterval(function () {
+                return _this.loadData();
+            }, 10000);
+        }
+        DevicesData.prototype.loadData = function () {
+            var _this = this;
+            this.list.find('.status').detach();
+            uplight.RegA.getInstance().connector.getDevicesData().done(function (res) {
+                return _this.onKiosks(res);
+            });
+        };
+        DevicesData.prototype.onKiosks = function (res) {
+            this.data = res.result;
+            this.s_time = Number(res.success);
+
+            // console.log(this.data);
+            // console.log(this.s_time);
+            this.render();
+            // RegA.getInstance().connector.  getServerTime().done((res)=>{
+            //  this.s_time = Number(res);
+            //  this.render();
+            //  });
+        };
+
+        DevicesData.prototype.render = function () {
+            var kt = this.kioskTimer;
+            console.log(kt);
+            var s_time = this.s_time;
+            var ar = this.data;
+            var out = '';
+            var ks = [];
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var k = new uplight.DeviceModel(ar[i], s_time, kt);
+                ks.push(k);
+                out += this.createDevice(k);
+            }
+            this.devices = ks;
+            this.list.html(out);
+        };
+
+        DevicesData.prototype.createDevice = function (obj) {
+            var color = '#0F0';
+            var statusStr = 'Working fine';
+            var cl = 'fa-circle';
+            if (obj.status === 0) {
+                color = '#ECCC6B';
+                cl = 'fa-exclamation-triangle';
+                statusStr = 'Experienced delays';
+            }
+
+            var stsrtTime = obj.start ? new Date(obj.start * 1000).toLocaleString() : '';
+            var lastTime = obj.now ? new Date(obj.now * 1000).toLocaleString() : '';
+            return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '?kiosk=' + obj.id + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + obj.ip + '</td>' + '<td>' + obj.ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
+        };
+        return DevicesData;
+    })();
+    uplight.DevicesData = DevicesData;
+})(uplight || (uplight = {}));
+/**
+* Created by VladHome on 8/8/2015.
+*/
+///<reference path="../../typing/chart.d.ts"/>
+/// <reference path="../DirsAdmin.ts" />
+/// <reference path="DeviceBase.ts" />
+/// <reference path="TopSearches.ts" />
+/// <reference path="KioskChart.ts" />
+/// <reference path="DeviceData.ts" />
+var uplight;
+(function (uplight) {
+    var Statistics = (function () {
+        function Statistics(contauner) {
+            var _this = this;
+            this.colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
+            this.R = uplight.RegA.getInstance();
+            contauner.load('htms/admin/Statistics.htm', function () {
+                return _this.init();
+            });
+        }
+        Statistics.prototype.init = function () {
+            // var today = new Date()
+            //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
+            var _this = this;
+            this.R.connector.getStatistics().done(function (res) {
+                return _this.onData(res);
+            });
+
+            var today = new Date();
+            var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+            this.fromTo = 'from ' + today.toDateString().substr(4) + ' to ' + priorDate.toDateString().substr(4);
+            var kiosksChart = new uplight.KiosksChart($('#KiosksChart'), this.colors, this.fromTo);
+            var devices = new uplight.DevicesData($('#DevicesData'), this.colors);
+        };
+
+        Statistics.prototype.onData = function (res) {
+            var cats = res.categories;
+            var dests = res.destinations;
+
+            //  console.log(res);
+            var categ = new uplight.CategoriesChart($('#CategoriesChart'), cats, this.colors);
+            var destinTopDestinations = new uplight.TopDestinations($('#TopDestinations'), dests);
+            var searches = new uplight.TopSearches($('#TopSearches'), res.search, res.keywords);
+        };
+        return Statistics;
+    })();
+    uplight.Statistics = Statistics;
 })(uplight || (uplight = {}));
 /// <reference path="../RegA.ts" />
 var uplight;
@@ -5060,7 +5107,7 @@ var uplight;
             });
             this.img = this.view.find('[data-id=img]:first');
             this.text = this.view.find('[data-id=text]:first');
-            this.btnSaveLabel = this.view.find('[data-id=btnSave]').on(CLICK, function () {
+            this.btnSave = this.view.find('[data-id=btnSave]').on(CLICK, function () {
                 return _this.onSaveClick();
             });
 
@@ -5081,7 +5128,7 @@ var uplight;
         
         }*/
         LabelEditor.prototype.onSaveClick = function () {
-            console.log('save');
+            //  console.log('save');
             if (!this.current)
                 return;
             var item = this.current;
@@ -5090,10 +5137,8 @@ var uplight;
             } else {
                 item.value = this.tiValue.val();
             }
-
             item.description = this.tiDescr.val();
             item.index = this.tiIndex.val();
-
             this.onSave(item);
         };
 
@@ -5134,10 +5179,10 @@ var uplight;
                 this.renderImage();
             else if (item.type == 'text')
                 this.renderText();
-            if (this.R.isSuper) {
-                this.tiIndex.val(item.index);
-                this.select.val(item.type);
-            }
+
+            this.tiIndex.val(item.index);
+            this.select.val(item.type);
+
             this.tiDescr.val(item.description);
 
             return this;
@@ -5220,14 +5265,9 @@ var uplight;
                         break;
                     }
                 }
-
-                if (id !== -1) {
-                    var yes = confirm('You want to override ' + ar[i].description + '? ');
-                    if (yes)
-                        this.data[i] = data;
-                    else
-                        return;
-                } else
+                if (id !== -1)
+                    this.data[i] = data;
+                else
                     this.data.push(data);
             }
 
@@ -5253,7 +5293,9 @@ var uplight;
             var _this = this;
             this.R.connector.saveData(JSON.stringify(this.data), this.R.settings.labels).done(function (res) {
                 _this.refreshData();
-                console.log(res);
+                if (res.success) {
+                    _this.R.msg('File saved', _this.editor.btnSave);
+                }
             });
         };
 
@@ -5430,7 +5472,7 @@ var uplight;
         function SettingsEdit(container) {
             var _this = this;
             this.container = container;
-            console.log('SettingsEdit');
+            // console.log('SettingsEdit');
             container.load('htms/admin/SettingsEdit.htm', function () {
                 setTimeout(function () {
                     _this.init();
@@ -5496,6 +5538,7 @@ var uplight;
             var _this = this;
             this.R.connector.getData(this.R.settingsURL).done(function (res) {
                 _this.R.settings = JSON.parse(res);
+
                 _this.data = _this.R.settings.props;
                 _this.render();
             });
@@ -5871,6 +5914,7 @@ var uplight;
             this.R.connector = new uplight.Connector();
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
+                _this.R.props = _.indexBy(_this.R.settings.props, 'id');
                 _this.init();
                 //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });
@@ -5992,8 +6036,8 @@ var uplight;
             this.navigatiom = new uplight.Navigation($('#AdminNav'));
             this.R.confirm = new uplight.Confirm($('#Confirm'));
             this.R.model = new uplight.DestinantionsModel();
-            this.R.model.events.on(this.R.model.CHANGE, function () {
-                _this.R.model.events.off(_this.R.model.CHANGE);
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
+                _this.R.model.dispatcher.off(_this.R.model.CHANGE);
                 _this.onHashChange();
             });
             $(window).on('hashchange', function (evt) {
@@ -6025,7 +6069,8 @@ var uplight;
                 });
             });
 
-            window.location.hash = '#Statistic';
+            if (window.location.hash == '')
+                window.location.hash = '#Statistic';
         };
 
         Admin.prototype.logout = function () {

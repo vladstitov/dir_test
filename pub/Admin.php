@@ -1,7 +1,7 @@
-﻿<?php
+﻿<?
 session_start();
 if(!isset($_SESSION['directories_user'])){
-	  echo file_get_contents('DirLogin.html');
+	 echo file_get_contents('DirLogin.html');
 	  exit;
 }
 ?>
@@ -81,13 +81,30 @@ if(!isset($_SESSION['directories_user'])){
         .disabled{
             opacity: 0.5;
         }
+        .breadcrumb li{
+            cursor: pointer;
+        }
+
+        .breadcrumb li.active{
+            cursor: auto;
+        }
+        .breadcrumb li.active:hover{
+            text-decoration: none;
+        }
+        .breadcrumb li:hover{
+            text-decoration: underline;
+        }
 
     </style>
 </head>
 <body>
 <div id="adminHeader" >
-    <h4 >Interactive Directory Admin Panel  <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a></h4>
-    <?
+    <h4 ><span>Interactive Directory Admin Panel </span>
+
+        <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a>
+        <button id="btnRestartKiosks" class="btn btn-warning pull-right">Restart Kiosks</button>
+    </h4>
+<?
  include ('htms/admin/Navigation.htm');
 ?>
 </div>
@@ -96,28 +113,41 @@ if(!isset($_SESSION['directories_user'])){
     <div id="content" class="container">
     </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
-<?php
-   // include ('htms/admin/AdminMenu.htm');
+<?
+    //include ('htms/admin/AdminMenu.htm');
     include ('htms/admin/AdminPreviewKiosk.htm');
     include ('htms/admin/AdminPreviewMobile.htm');
 ?>
 
-		 <!--start Alert -->
 
-		<div id="myAlert" style="display:none;">
-			<div id="alertContainer">
-				<h3 id="alertTitle">Alert</h3>
-			<div id="alert_msg">Do you vant to save Background on server?  </div>
-			<div id="alertbuttons">
-				<button data-id="yes">Yes</button>
-				<button >Cancel</button>
-			</div>
-		  </div> 
-		</div>
+
 
 <div id="cover" class="cover">
 
 </div>
+<div id="Confirm" class="modal">
+    <style>
+        #Confirm{
+            background-color: rgba(200,200,200,0.2);
+        }
+    </style>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-id="btnClose">×</button>
+                <h4 class="modal-title" data-id="title">Modal title</h4>
+            </div>
+            <div class="modal-body" data-id="text">
+                <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-id="btnYes">Confirm</button>
+                <button type="button" class="btn btn-default" data-id="btnNo">Cancel</button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <hr/>
 <!-- -->
 <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
@@ -127,8 +157,12 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 <script type="text/javascript" src="js/libs/nicEdit.js"></script>
 <script type="text/javascript" src="js/libs/Chart.js"></script>
+<!--<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
+<!---->
+
 
 <script type="text/javascript" src="js/admin.js"></script>
+
 
     </body>
 <script>

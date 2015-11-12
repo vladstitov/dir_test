@@ -80,6 +80,7 @@ module uplight {
             cat.enable = 1;
             this.categoryForm.setCurrent(cat);
             this.categoryForm.show();
+            this.hide();
            
         }
 
@@ -98,8 +99,9 @@ module uplight {
             var item = this.list.selectedItem;
            // console.log(item);
             if(!item) return;
-            var isDelete =   confirm('Yoy want to delete category '+item.label+'?')
-            if(isDelete)  this.R.model.deleteCategory(item,(res)=>this.onDeleteSuccess(res));
+            this.R.confirm.show('Delete Category','Yoy want to delete category '+item.label+'?',()=>{
+                this.R.model.deleteCategory(item,(res)=>this.onDeleteSuccess(res));
+            });
 
         }
 

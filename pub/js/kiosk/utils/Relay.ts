@@ -4,19 +4,26 @@
     /// <reference path="../Kiosk.ts" />
 module uplight{
     export class Relay{
-        constructor(delay:number){
+        constructor(delay:number,count?:number){
             if(isNaN(delay) || delay<2) delay = 2;
             this.timer =(new Date()).getTime();
             this.startTime = Math.round(this.timer/1000);
-            setInterval(()=>this.relay(),delay*1000);
+           this.interval =  setInterval(()=>this.relay(),delay*1000);
+            this.count = 1000000;
+            if(count) this.count = count;
+
         }
 
+        private interval:number;
         private stamp:number=0;
         private ping:number=0;
         private timer:number;
         private startTime:number;
+        private count:number;
 
         private relay():void{
+            this.count--;
+            if(this.count < 0) clearInterval(this.interval);
             var self=this;
             var now=(new Date()).getTime();
             var timer=now - this.timer;

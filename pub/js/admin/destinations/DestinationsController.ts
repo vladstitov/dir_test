@@ -6,15 +6,11 @@
 module uplight{
     export class DestinationsController{
 
-        R:RegA
-
-
+        R:RegA;
         constructor(container:JQuery) {
             container.load('htms/admin/DestinationsEditor.htm',()=>this.init());
             this.R=RegA.getInstance();
             if (!this.R.model) this.R.model = new DestinantionsModel();
-
-
         }
 
 
@@ -35,8 +31,6 @@ module uplight{
             this.view = $('#DestinationsEditor');
 
             this.list = new DestinationsList($('#DestinationsList'));
-
-            console.log(window.location.hash);
            this.breacrumb = new BreadCrumbs(this.view.find('[data-ctr=Breadcrumbs]:first'));
             this.breacrumb.onCiick=(url)=>{
                 if(url=='listing'){
@@ -71,10 +65,6 @@ module uplight{
         private onDrop():void{
             if(confirm('You want to delete whole table tenats?')) this.R.connector.dropTable('tenants').done(()=>{this.R.model.refreshData()});
         }
-       // private showForm(){
-          ///  this.detailsForm.show();
-           // this.list.hide();
-     //   }
 
         private hideForm():void{
             this.breacrumb.clear();
@@ -144,12 +134,9 @@ module uplight{
         private onBtnDelClick(): void {
              var dest:VODestination = this.list.getSelectedItem();
             if(dest) {
-                var isdel = confirm('You want to delete '+dest.name+' from database?');
-                if(isdel){
+                this.R.confirm.show('Delete record','You want to delete '+dest.name+' from database?',()=>{
                     this.R.model.deleteDestination(dest,(res)=>this.onDelete(res));
-                }
-
-
+                })
             }
 
                // showAlert('You want to delete record: ' + name + '?', () => this.onDeleteConfirmed(),'Delete');

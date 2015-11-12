@@ -9,6 +9,7 @@
 /// <reference path="menu.ts" />
 /// <reference path="../view/Views.ts" />
 /// <reference path="../kiosk/registry.ts" />
+/// <reference path="../kiosk/utils/Relay.ts" />
 /// <reference path="../kiosk/search/DetailsLarge.ts" />
 
 
@@ -59,7 +60,9 @@ module uplight {
             this.R = uplight.Registry.getInstance();
             this.R.settings = settings;
            var conn:uplight.Connector = new uplight.Connector();
-           conn.id = settings.id;
+           conn.id = 'mobile';
+
+            var rel:Relay = new Relay(5,2);
 
             this.R.connector = conn;
            // this.R.connector.getSettings((data) => this.onSettings(data));      

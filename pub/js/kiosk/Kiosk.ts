@@ -88,6 +88,7 @@ module uplight {
            r.connector = new Connector();
            r.connector.id=u_settings.id;
            r.settings = u_settings;
+           r.props = _.indexBy(u_settings.props,'id');
            // console.log(u_settings);          // r.connector.who='kiosk';
            r.model = new Model(r.connector,(w)=>this.warn(w));
            u_settings.props.forEach(function(val){
@@ -146,7 +147,10 @@ module uplight {
 
            }
 */
-           if(!u_settings.hasOwnProperty('norelay'))  var relay:Relay = new Relay(u_settings.timer);
+
+
+        //  console.log(r.props['timer']);
+           if(r.props['timer'])  var relay:Relay = new Relay(r.props['timer'].value);
 
             r.events.on(r.AL_START,function(){r.events.triggerHandler(r.RESET_ALL)});
 

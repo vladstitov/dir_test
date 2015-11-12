@@ -31,6 +31,7 @@ var uplight;
             this.R.connector = new uplight.Connector();
             this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.settings = JSON.parse(resp);
+                _this.R.props = _.indexBy(_this.R.settings.props, 'id');
                 _this.init();
                 //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });

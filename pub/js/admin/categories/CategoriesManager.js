@@ -52,6 +52,7 @@ var uplight;
             cat.enable = 1;
             this.categoryForm.setCurrent(cat);
             this.categoryForm.show();
+            this.hide();
         };
         CategoriesManager.prototype.onEditClicked = function () {
             this.categoryForm.show();
@@ -67,9 +68,9 @@ var uplight;
             // console.log(item);
             if (!item)
                 return;
-            var isDelete = confirm('Yoy want to delete category ' + item.label + '?');
-            if (isDelete)
-                this.R.model.deleteCategory(item, function (res) { return _this.onDeleteSuccess(res); });
+            this.R.confirm.show('Delete Category', 'Yoy want to delete category ' + item.label + '?', function () {
+                _this.R.model.deleteCategory(item, function (res) { return _this.onDeleteSuccess(res); });
+            });
         };
         return CategoriesManager;
     })();
