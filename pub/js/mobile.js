@@ -12,7 +12,6 @@ var uplight;
         function Connector() {
             this.service = 'rem/kiosk.php?a=';
             this.serv = 'rem/kiosk.php';
-            this.who = 'kiosk';
         }
         Connector.prototype.getData = function (filename) {
             return $.get(this.service + 'get_data&device=' + this.device + '&file_name=' + filename);
@@ -25,15 +24,19 @@ var uplight;
             $.post(this.service + 'log_log', msg);
         };
 
-        Connector.prototype.relay = function (stamp, now, ping, timer, status) {
-            return $.get(this.service + 'get_stamp&id=' + this.id + '&stamp=' + stamp + '&now=' + now + '&ping=' + ping + '&timer=' + timer + '&status=' + status);
+        Connector.prototype.relay = function (obj) {
+            obj.a = 'get_stamp';
+            obj.id = this.id;
+
+            //stamp:number,now:number,ping:number,timer:number,status:string
+            return $.get(this.serv, obj);
         };
         Connector.prototype.Error = function (msg) {
             msg = (new Date()).toString() + '||' + msg;
             $.post(this.service + 'log_error', msg);
         };
         Connector.prototype.Stat = function (type, val) {
-            var who = this.who + this.id;
+            var who = this.id;
             var stamp = Date.now();
             $.get(this.service + 'log_stat' + '&type=' + type + '&val=' + val + '&who=' + who + '&stamp=' + stamp);
         };
@@ -117,6 +120,7 @@ var uplight;
 
             //this.error= this.R.error;
             // this.warn= this.R.warn;
+            console.log('get destinations');
             this.connector.getDestinations().done(function (res) {
                 return _this.onResult(res);
             });
@@ -233,6 +237,7 @@ var uplight;
             this.addIcon();
             this.cache = {};
 
+            console.log(this.READY);
             this.dispatcher.triggerHandler(this.READY);
         };
 
@@ -301,60 +306,175 @@ var uplight;
     })();
     uplight.Model = Model;
 })(uplight || (uplight = {}));
+/// <reference path="Registry.ts" />
+/// <reference path="../typing/jquery.d.ts" />
+/// <reference path="../typing/underscore.d.ts" />
+var uplight;
+(function (uplight) {
+    var VOPage = (function () {
+        function VOPage(obj) {
+            var _this = this;
+            for (var str in obj)
+                this[str] = obj[str];
+            this.id = Number(this.id);
+            this.view = $('<div>').addClass('page');
+            this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="' + this.icon + '"> </span> <span> ' + this.name + '</span>');
+            this.content = $('<div>').addClass('content').appendTo(this.view);
+            if (this.url)
+                $.get(this.url).done(function (data) {
+                    _this.content.html(data);
+                });
+        }
+        return VOPage;
+    })();
+    uplight.VOPage = VOPage;
+
+    var InfoPagesModel = (function () {
+        function InfoPagesModel(el) {
+            var _this = this;
+            this.prev = -2;
+            /*
+            loadData(item:any):void {
+            
+            $.get(item.url).done(function(data){
+            //   console.log(data);
+            item.$div=$('<div>').html(data);
+            })
+            }
+            
+            setData(data:any[]):void{
+            var ar = data
+            for(var i=0,n=ar.length;i<n;i++){
+            this.loadData(ar[i]);
+            }
+            this.data = data
+            }
+            */
+            this.current = -1;
+            this.view = $(el);
+            this.R = uplight.Registry.getInstance();
+            this.R.connector.getData('pages.json').done(function (data) {
+                return _this.onData(data);
+            });
+            this.R.events.on(InfoPagesModel.PAGE_SELECED, function (evt, pageid) {
+                _this.showPage(pageid);
+            });
+            this.view.css('overfow', 'hidden');
+            this.width = this.view.width();
+            this.list = $('<div>').appendTo(this.view);
+        }
+        InfoPagesModel.prototype.onData = function (res) {
+            var out = [];
+            var ar = JSON.parse(res);
+            for (var i = 0, n = ar.length; i < n; i++) {
+                out.push(new VOPage(ar[i]));
+            }
+            this.data = out;
+            this.dataInd = _.indexBy(out, 'id');
+        };
+
+        InfoPagesModel.prototype._showPage = function (i) {
+        };
+
+        InfoPagesModel.prototype.showPage = function (id) {
+            var _this = this;
+            if (this.inTrans)
+                return;
+            if (id == this.current)
+                return;
+            var item = this.dataInd[id];
+            if (!item) {
+                console.log('Error cant find page with id' + id);
+                return;
+            }
+            this.current = id;
+            this.list.append(item.view);
+            if (this.list.children().length > 1) {
+                this.inTrans = true;
+                this.view.animate({ scrollLeft: this.width }, function () {
+                    _this.list.children().first().remove();
+                    _this.view.scrollLeft(0);
+                    _this.inTrans = false;
+                });
+            }
+        };
+
+        /*
+        getPage(page:VOItem): JQuery {
+        if (!this.cache[page.id]) this.cache[page.id] = this.createPage(page);
+        return this.cache[page.id];
+        }
+        
+        private createPage(page: VOItem): JQuery {
+        var p:JQuery = $('<div class="view"><div class="mytitle">'+page.label+'</div></div>');
+        this.content = $('<div class="view-content">Loading</div>').appendTo(p);
+        this.loadPage(page.id.toString());
+        return p;
+        
+        }
+        
+        */
+        InfoPagesModel.prototype.onPageLoaded = function (res) {
+            // this.content.html(res);
+        };
+        InfoPagesModel.PAGE_SELECED = 'PAGE_SELECED';
+        return InfoPagesModel;
+    })();
+    uplight.InfoPagesModel = InfoPagesModel;
+})(uplight || (uplight = {}));
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="Connector.ts" />
 /// <reference path="search/models.ts" />
-var LISTVIEW = 'ListView';
-var DETAILSVIEV = 'DetailsView';
-var MENUVIEW = 'MenuView';
-var VPCONTENT = 'VpContent';
-var SHOW_LISTVIEW = 'Show_ListView';
-var SHOW_DETAILSVIEW = 'Show_DetailsView';
-var SHOW_PAGE = 'Show_Page';
-var SHOW_KEYBOARD = 'Show_Keyboard';
-var HIDE_KEYBOARD = 'Hide_Keyboard';
-var TYPING = 'typing';
-
-var SELECTED = 'selected';
-var DISABLED = 'disabled';
-
-var CLOSE = 'CLOSE';
-var SCREENSAVER_START = 'SCREENSAVER_START';
-var SCREENSAVER_END = 'SCREENSAVER_END';
-
-var MENU_CLICKED = 'MENU_CLICKED';
-var MENU_PAGE_CLICKED = 'MENU_PAGE_CLICKED';
-var CATEGORY_SELECTED = 'CATEGORY_SELECTED';
-
-var SHOW_DATA_VIEW = 'SHOW_DATA_VIEW';
-var SHOW_DATA_VIEW_BACK = 'SHOW_DATA_VIEW_BACK';
-
+/// <reference path="InfoPage.ts" />
 var CLICK = 'click';
+var CLOSE = 'close';
 var SHOW = 'show';
 var HIDE = 'hide';
 var HIDDEN = 'hidden';
+var SELECTED = 'selected';
+var DISABLED = 'disabled';
 
 var uplight;
 (function (uplight) {
+    var VOProps = (function () {
+        function VOProps() {
+        }
+        return VOProps;
+    })();
+    uplight.VOProps = VOProps;
+
     var Registry = (function () {
         function Registry() {
-            this.KEY_PRESSED = 'KEY_PRESSED';
+            this.KIOSK_SHOW_MENU = 'KIOSK_SHOW_MENU';
+            this.KIOSK_SHOW_SEARCH = 'KIOSK_SHOW_SEARCH';
+            this.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
+            this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
             this.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
             this.ON_SETTINGS = 'ON_SETTINGS';
             this.ON_DATA = 'ON_DATA';
-            this.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
-            this.SEARCH_CHANGED = 'SEARCH_CHANGED';
             this.RESET_ALL = 'RESET_ALL';
-            this.SS_START = 'SS_START';
-            this.SS_STOP = 'SS_STOP';
-            this.all = [];
-            // onSearchResultClick2: Function;
+            this.SCREENSAVER_START = 'SCREENSAVER_START';
+            this.SCREENSAVER_END = 'SCREENSAVER_END';
+            this.AL_START = 'AL_START';
+            this.AL_STOP = 'AL_STOP';
+            this.AL_STOPED = 'AL_STOPED';
+            this.RESET_VIEWS = 'RESET_VIEWS';
+            this.HIDE_VIEWS = 'HIDE_VIEWS';
+            this._registr = {};
             this.errors = '';
             this.warns = '';
             this.device = { device: 'kiosk1', ln: 'en' };
-            this.dispatcher = $('<div>');
+            this.events = $('<div>');
             this.settings = u_settings;
         }
+        Registry.prototype.register = function (name, cl) {
+            this._registr[name] = cl;
+        };
+
+        Registry.prototype.getClass = function (name) {
+            return this._registr[name];
+        };
+
         Registry.prototype.error = function (str) {
             this.errors += str + "\n";
         };
@@ -365,15 +485,7 @@ var uplight;
 
         Registry.prototype.setSettings = function (data) {
             this.settings = data;
-            this.dispatcher.triggerHandler(this.ON_SETTINGS, data);
-        };
-        Registry.prototype.setData = function (data) {
-            this.data = data;
-            this.dispatcher.triggerHandler(this.ON_DATA, data);
-        };
-
-        Registry.prototype.add = function (obj) {
-            this.all.push(obj);
+            this.events.triggerHandler(this.ON_SETTINGS, data);
         };
 
         Registry.getInstance = function () {
@@ -508,14 +620,14 @@ var uplight;
         FilterPage.prototype.onListClick = function (evt) {
             var el = $(evt.currentTarget).parent();
 
-            console.log(el);
+            // console.log(el);
             if (el.hasClass(SELECTED)) {
                 el.removeClass(SELECTED);
 
                 // el.children('.details').hide('fast');
                 this.selected = null;
             } else {
-                console.log(el.children('.details').length);
+                //  console.log(el.children('.details').length);
                 if (el.children('.details').length !== 0) {
                     //  el.children('.details').show('fast');
                 } else {
@@ -938,7 +1050,7 @@ var uplight;
             var cats = model.getCategories();
             var d1 = $.Deferred();
             if (!cats) {
-                model.events.on(model.READY, function () {
+                model.dispatcher.on(model.READY, function () {
                     cats = model.getCategories();
                     d1.resolve(cats);
                 });
@@ -1178,16 +1290,79 @@ var uplight;
     uplight.Transition = Transition;
 })(uplight || (uplight = {}));
 /**
+* Created by VladHome on 9/16/2015.
+*/
+/// <reference path="../Registry.ts" />
+var uplight;
+(function (uplight) {
+    var Relay = (function () {
+        function Relay(delay, count) {
+            var _this = this;
+            this.stamp = 0;
+            this.ping = 0;
+            if (isNaN(delay) || delay < 2)
+                delay = 2;
+            this.timer = (new Date()).getTime();
+            this.startTime = Math.round(this.timer / 1000);
+            this.interval = setInterval(function () {
+                return _this.relay();
+            }, delay * 1000);
+            this.count = 1000000;
+            if (count)
+                this.count = count;
+        }
+        Relay.prototype.relay = function () {
+            this.count--;
+            if (this.count < 0)
+                clearInterval(this.interval);
+            var self = this;
+            var now = (new Date()).getTime();
+            var timer = now - this.timer;
+            this.timer = now;
+            var out = {
+                stamp: this.stamp,
+                now: Math.round(now / 1000),
+                ping: this.ping,
+                timer: timer,
+                start: this.startTime
+            };
+
+            uplight.Registry.getInstance().connector.relay(out).done(function (res) {
+                self.ping = (new Date()).getTime() - now;
+                var vo;
+                try  {
+                    vo = JSON.parse(res);
+                } catch (e) {
+                    console.warn('relay doesnt work ' + res);
+                    return;
+                }
+
+                if (vo.success == 'success') {
+                    var stamp = Number(vo.result);
+
+                    if (self.stamp === 0)
+                        self.stamp = stamp;
+                    else if (self.stamp && self.stamp != stamp)
+                        window.location.reload();
+                }
+            });
+        };
+        return Relay;
+    })();
+    uplight.Relay = Relay;
+})(uplight || (uplight = {}));
+/**
 * Created by VladHome on 7/23/2015.
 */
 /// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var DetailsLarge = (function () {
-        function DetailsLarge(view) {
+        function DetailsLarge(el) {
             var _this = this;
-            this.view = view;
             // console.log(view);
+            var view = $(el);
+            this.view = view;
             this.$name = view.find('[data-id=name]:first');
             this.$unit = view.find('[data-id=unit]:first');
             this.$more = view.find('[data-id=more]:first');
@@ -1202,9 +1377,11 @@ var uplight;
 
             this.isVis = !view.hasClass(HIDE);
             view.find('[data-id=btnClose]').click(function () {
-                if (_this.onClose)
-                    _this.onClose();
+                var r = uplight.Registry.getInstance();
+                r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK);
             });
+
+            this.addListeners();
         }
         DetailsLarge.prototype.show = function () {
             if (!this.isVis) {
@@ -1218,6 +1395,25 @@ var uplight;
                 this.view.addClass(HIDE).hide();
                 this.isVis = false;
             }
+        };
+
+        DetailsLarge.prototype.addListeners = function () {
+            var _this = this;
+            var r = uplight.Registry.getInstance();
+            r.events.on(DetailsLarge.DETAILS_LARGE_SHOW, function (evt, id) {
+                return _this.showDetails(id);
+            });
+            r.events.on(DetailsLarge.DETAILS_LARGE_HIDE, function (evt) {
+                return _this.hide();
+            });
+            r.events.on(r.RESET_ALL, function (evt) {
+                return _this.hide();
+            });
+        };
+
+        DetailsLarge.prototype.showDetails = function (id) {
+            var dest = uplight.Registry.getInstance().model.getDestById(id);
+            this.setDestination(dest).render().show();
         };
 
         DetailsLarge.prototype.setDestination = function (vo) {
@@ -1276,6 +1472,9 @@ var uplight;
             console.log($(evt.currentTarget));
             this.$img.attr('src', $(evt.currentTarget).children('img').first().attr('src'));
         };
+        DetailsLarge.DETAILS_LARGE_HIDE = 'HIDE_DETAILS_LARGE';
+        DetailsLarge.DETAILS_LARGE_CLOSE_CLICK = 'DETAILS_LARGE_CLOSE_CLICK';
+        DetailsLarge.DETAILS_LARGE_SHOW = 'SHOW_DETAILS_LARGE';
         return DetailsLarge;
     })();
     uplight.DetailsLarge = DetailsLarge;
@@ -1290,6 +1489,7 @@ var uplight;
 /// <reference path="menu.ts" />
 /// <reference path="../view/Views.ts" />
 /// <reference path="../kiosk/registry.ts" />
+/// <reference path="../kiosk/utils/Relay.ts" />
 /// <reference path="../kiosk/search/DetailsLarge.ts" />
 var CLICK = 'mousedown';
 var TAP = 'tap';
@@ -1313,17 +1513,20 @@ var uplight;
             this.cache = {};
             var settings = u_settings;
             this.R = uplight.Registry.getInstance();
+            this.R.settings = settings;
             var conn = new uplight.Connector();
-            conn.who = 'mob';
-            conn.id = 0;
+            conn.id = 'mobile';
+
+            var rel = new uplight.Relay(5, 2);
+
             this.R.connector = conn;
 
             // this.R.connector.getSettings((data) => this.onSettings(data));
             this.R.model = new uplight.Model(conn, function (w) {
                 return _this.warn(w);
             });
-            console.log('Mobile controller');
 
+            // console.log('Mobile controller');
             this.menu = new uplight.Menu($('[data-ctr=Menu]:first'), conn, this.R.model);
             this.menu.onMenuON = function () {
                 _this.menu.hideSearch();
@@ -1347,24 +1550,14 @@ var uplight;
             this.transition = new uplight.Transition(this.content);
             this.frontPage = new uplight.FrontPage($('#FrontPage'));
 
-            this.detailsLarge = new uplight.DetailsLarge($('[data-ctr=DetailsLarge]:first'));
-            this.detailsLarge.hide();
-            this.detailsLarge.onClose = function () {
-                window.history.back();
-            };
             $(window).on('hashchange', function (evt) {
                 return _this.onHachChange();
             });
-
-            //document.location.hash = '#Menu';
             this.filterPage = new uplight.FilterPage($('[data-ctr=FilterPage]'));
-
-            // this.filterPage.onSelect=(vo)=>this.onListSelect(vo);
             setTimeout(function () {
                 return _this.onHachChange();
             }, 1000);
             this.content = $('#Content');
-
             this.gmap = new uplight.GoogleMap();
         }
         Mobile.prototype.error = function (str) {
@@ -1373,17 +1566,6 @@ var uplight;
 
         Mobile.prototype.warn = function (str) {
             this.warns += str + "\n";
-        };
-
-        Mobile.prototype.onListSelect = function (vo) {
-            console.log(vo);
-            if (vo.imgs)
-                window.location.hash = '#destination/' + vo.id;
-            else {
-                //var table='';
-                // if(vo.more && vo.more.length)table=this.detailsLarge.createTable(vo.more);
-                // this.filterPage.addDetails(vo,table);
-            }
         };
 
         Mobile.prototype.showView2 = function (newV) {
@@ -1403,27 +1585,15 @@ var uplight;
             });
         };
 
-        Mobile.prototype.showDestination = function (id) {
-            //
-            // this.filterPage.hide();
-        };
-
-        Mobile.prototype.showDetails = function (str) {
-        };
-
         Mobile.prototype.onHachChange = function () {
             var ar = document.location.hash.split('/');
             var hash = document.location.hash;
-            if (hash.indexOf('detailsshow') == 0) {
-            }
-
             console.log(ar[0]);
             uplight.Utils.hideImage();
 
             switch (ar[0]) {
                 case '#gmap':
                     this.showView(this.gmap.getView());
-                    this.detailsLarge.hide();
                     this.menu.hideAll();
                     this.R.connector.Stat('pg', 'gmap');
                     break;
@@ -1431,17 +1601,11 @@ var uplight;
                     var vo = this.R.model.getDestById(Number(ar[1]));
                     if (!vo)
                         break;
-                    this.detailsLarge.setDestination(vo);
-                    ;
-                    this.detailsLarge.render().show();
-
-                    // this.filterPage.hide();
                     this.R.connector.Stat('sr', vo.id + '');
                     break;
                 case '#category':
                     var v = this.filterPage.showCategory(Number(ar[1]));
                     this.showView(v);
-                    this.detailsLarge.hide();
                     this.menu.hideAll();
                     this.R.connector.Stat('ct', ar[1]);
                     break;
@@ -1450,17 +1614,12 @@ var uplight;
                     if (isNaN(num))
                         break;
                     this.showPage(num);
-
-                    // this.filterPage.hide();
-                    this.detailsLarge.hide();
-
                     this.menu.hideAll();
                     this.R.connector.Stat('pg', num + '');
                     break;
                 case '#SearchDirectories':
                     this.filterPage.showDefault();
                     this.showView(this.filterPage.getView());
-                    this.detailsLarge.hide();
                     this.menu.hideMenu();
                     this.menu.showSearch();
                     break;
@@ -1468,13 +1627,10 @@ var uplight;
                     break;
                 case '#logo':
                     this.showView(this.frontPage.getView());
-
                     break;
                 default:
                     break;
             }
-
-            return;
         };
 
         Mobile.prototype.showPage = function (id) {

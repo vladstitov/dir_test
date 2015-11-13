@@ -18,7 +18,11 @@ module uplight{
             var cats:VOCategory[]= Registry.getInstance().model.getCategories();
             if(cats)d2.resolve(cats);
             else this.R.model.dispatcher.on(this.R.model.READY,()=>{d2.resolve(this.R.model.getCategories());});
-            $.when(d1,d2).then((v1,v2)=>{ this.onData(JSON.parse(v1[0]),v2)});
+            $.when(d1,d2).then(()=>{
+                var pages:VOPage[] = JSON.parse(arguments[0][0]);
+                var cats:VOCategory[] = arguments[1];
+                this.onData(pages,cats);
+            });
             this.list = this.view.find('[data-id=list]');
             this.list.on(CLICK,'a',(evt)=>this.onMenuClick(evt))
         }

@@ -18,8 +18,10 @@ var uplight;
                 this.R.model.dispatcher.on(this.R.model.READY, function () {
                     d2.resolve(_this.R.model.getCategories());
                 });
-            $.when(d1, d2).then(function (v1, v2) {
-                _this.onData(JSON.parse(v1[0]), v2);
+            $.when(d1, d2).then(function () {
+                var pages = JSON.parse(arguments[0][0]);
+                var cats = arguments[1];
+                _this.onData(pages, cats);
             });
             this.list = this.view.find('[data-id=list]');
             this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });

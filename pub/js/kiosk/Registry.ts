@@ -19,7 +19,7 @@ module uplight {
     export class VOProps{
         id:number;
         label:string;
-        value:number|string;
+        value:string;
         type:string;
     }
 

@@ -1,3 +1,5 @@
+/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../typing/underscore.d.ts" />
 /// <reference path="../RegA.ts" />
 var uplight;
 (function (uplight) {
@@ -104,6 +106,12 @@ var uplight;
         return LabelEditor;
     })();
     uplight.LabelEditor = LabelEditor;
+    var VOLabel = (function () {
+        function VOLabel() {
+        }
+        return VOLabel;
+    })();
+    uplight.VOLabel = VOLabel;
     var LabelsManager = (function () {
         function LabelsManager(container) {
             var _this = this;
@@ -124,7 +132,7 @@ var uplight;
             this.view = $('#LabelsManager');
             this.btnAdd = this.view.find('[data-id=btnAdd]').click(function () { return _this.onAddClick(); });
             var table = $('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
-            table.append('<tr><th>index</th><th>Value</th><th>Edit</th></tr>');
+            table.append('<tr><th>Description</th><th>Value</th><th>Edit</th></tr>');
             this.list = $('<tbody>').on(CLICK, 'tr .fa-edit', function (evt) { return _this.onEditClick($(evt.currentTarget)); }).appendTo(table);
             this.editor = new LabelEditor();
             this.editor.onSave = function (data) { return _this.saveItem(data); };
@@ -181,8 +189,7 @@ var uplight;
             this.saveLabels();
         };
         LabelsManager.prototype.renderItem = function (item) {
-            var img = 0;
-            return '<tr title="' + item.description + '"  data-i="' + item.i + '" class="' + item.type + '" ><td class="index">' + item.index + '</td><td class="value">' + ((item.type == 'img') ? '<img src="' + item.value + '"/>' : item.value) + '</td><td><span class=" btn fa fa-edit"></span></td></tr>';
+            return '<tr  data-i="' + item.seq + '" class="' + item.type + '" ><td title="' + item.index + '">' + item.description + '</td><td class="value">' + ((item.type == 'img') ? '<img src="' + item.value + '"/>' : item.value) + '</td><td><span class=" btn fa fa-edit"></span></td></tr>';
         };
         LabelsManager.prototype.renderLabels = function () {
             var ar = this.data;
@@ -191,11 +198,7 @@ var uplight;
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                item.i = i;
-                //var ind = avail.indexOf(item.index);
-                //  if(ind!=-1)avail.splice(ind,1);
-                if (item.id > this.max)
-                    this.max = item.id;
+                item.seq = i;
                 out += this.renderItem(item);
             }
             this.list.html(out);

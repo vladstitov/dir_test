@@ -1,4 +1,7 @@
-﻿/// <reference path="../RegA.ts" />
+﻿/// <reference path="../../typing/jquery.d.ts" />
+/// <reference path="../../typing/underscore.d.ts" />
+/// <reference path="../RegA.ts" />
+
 module uplight{
     export class LabelEditor{
         view:JQuery;
@@ -126,11 +129,22 @@ module uplight{
         }
     }
 
+    export class VOLabel{
+    //{"index":"bg_1080","description":"Background","id":2,"type":"img","value":"images/assets/_1080.jpg","i":0},
+        
+        index:string;
+        description:string;
+        id:number;
+        type:string;
+        value:string;
+        seq:number;
+
+    }
     export class LabelsManager {
         view: JQuery;
        // private selected: JQuery;
         private list: JQuery;
-        private data:any[];
+        private data:VOLabel[];
         private btnAdd:JQuery;
         private max:number;
         R:RegA;
@@ -154,7 +168,7 @@ module uplight{
             this.view = $('#LabelsManager');
             this.btnAdd = this.view.find('[data-id=btnAdd]').click(()=>this.onAddClick());
             var table=$('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
-            table.append('<tr><th>index</th><th>Value</th><th>Edit</th></tr>');
+            table.append('<tr><th>Description</th><th>Value</th><th>Edit</th></tr>');
             this.list = $('<tbody>').on(CLICK, 'tr .fa-edit', (evt) => this.onEditClick($(evt.currentTarget))).appendTo(table);
            this.editor = new LabelEditor();
             this.editor.onSave = (data)=>this.saveItem(data);
@@ -217,22 +231,17 @@ module uplight{
             this.saveLabels();
         }
 
-        private renderItem(item:any):string{
-            var img=0;
-            return '<tr title="'+item.description+'"  data-i="'+item.i+'" class="'+item.type+'" ><td class="index">'+item.index+'</td><td class="value">'+((item.type=='img')?'<img src="'+item.value+'"/>':item.value)+'</td><td><span class=" btn fa fa-edit"></span></td></tr>';
+        private renderItem(item:VOLabel):string{
+            return '<tr  data-i="'+item.seq+'" class="'+item.type+'" ><td title="'+item.index+'">'+item.description+'</td><td class="value">'+((item.type=='img')?'<img src="'+item.value+'"/>':item.value)+'</td><td><span class=" btn fa fa-edit"></span></td></tr>';
         }
         private renderLabels():void{
-           var  ar = this.data;
-
+           var  ar:VOLabel[] = this.data;
            // var avail= this.available;
             this.max=0;
             var out='';
            for(var i=0,n=ar.length;i<n;i++){
                var item = ar[i];
-               item.i=i;
-               //var ind = avail.indexOf(item.index);
-             //  if(ind!=-1)avail.splice(ind,1);
-               if(item.id>this.max)this.max = item.id;
+               item.seq=i;
                out+= this.renderItem(item);
            }
             this.list.html(out);

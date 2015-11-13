@@ -1,7 +1,7 @@
 /**
  * Created by VladHome on 9/16/2015.
  */
-/// <reference path="../Kiosk.ts" />
+/// <reference path="../Registry.ts" />
 var uplight;
 (function (uplight) {
     var Relay = (function () {

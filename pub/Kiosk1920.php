@@ -74,7 +74,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
         color: inherit;
     }
     body{
-        background-image: url('<?= $labels['background']; ?>');
+        <?= isset($labels['bg_1920'])?'background-image:url("'.$labels['bg_1920'].'");':'' ?>
     }
     .mainbg{
         background-color: rgba(255,255,255,0.75);
