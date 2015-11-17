@@ -9,6 +9,7 @@ var HIDE = 'hide';
 var HIDDEN = 'hidden';
 var SELECTED = 'selected';
 var DISABLED = 'disabled';
+var OPEN = 'open';
 var uplight;
 (function (uplight) {
     var VOProps = (function () {
@@ -56,6 +57,9 @@ var uplight;
         Registry.prototype.setSettings = function (data) {
             this.settings = data;
             this.events.triggerHandler(this.ON_SETTINGS, data);
+        };
+        Registry.prototype.getSettings = function (index) {
+            return this.settings[index];
         };
         Registry.getInstance = function () {
             return Registry._instance;

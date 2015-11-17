@@ -54,7 +54,7 @@ var uplight;
             this.list.show();
         };
         DestinationsController.prototype.onBtnAddClick = function () {
-            var dest = new uplight.VODestination({ id: 0, cats: [], imgs: '' });
+            var dest = new uplight.VODestination({ id: 0, cats: [], imgs: '', tmb: null });
             this.detailsForm.setDestination(dest);
             this.detailsForm.render();
             this.list.hide();

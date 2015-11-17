@@ -18,6 +18,7 @@
 ///<reference path="screen/LabelsManager.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
+///<reference path="../gmap/GmapCtr.ts" />
 
 
 
@@ -138,7 +139,9 @@ module uplight {
                         this.labels = new LabelsManager(this.content);
                         this.content.show();
                         break;
-                    case '#PreviewKi':
+                    case '#GoogleMap':
+                        var gmap:GmapCtr = new GmapCtr(this.content)
+                        break;
                     default :
 
                         break

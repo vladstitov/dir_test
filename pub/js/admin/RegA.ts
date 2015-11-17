@@ -99,6 +99,16 @@ module uplight{
         message(msg:string):void{
 
         }
+
+        getSettings(index:string):any{
+            return this.settings[index];
+        }
+
+        saveSettings(index:string,obj:any):JQueryPromise<VOResult>{
+            this.settings[index]=obj;
+            return this.connector.saveSettings(JSON.stringify(this.settings));
+        }
+
         isSuper:boolean = false;
         model: DestinantionsModel;
         connector: Connector;

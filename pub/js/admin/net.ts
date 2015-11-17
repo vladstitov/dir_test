@@ -17,7 +17,6 @@ module uplight {
         }
 
 
-
         //////////////////////////Categories/////////////////////////////////////
         getCategories(): JQueryPromise<any> {
             return $.get(this.service, {a:'cats.get_all'}, 'application/json');
@@ -222,6 +221,10 @@ module uplight {
         saveData(data:string, filename:string):JQueryPromise<VOResult>{
             console.log('save data '+filename);
            return $.post(this.service + '?a=save_data&file_name='+filename,data);
+        }
+
+        saveSettings(data:string):JQueryPromise<VOResult>{
+            return $.post(this.service+'?a=save_settings', data);
         }
 
         getLabels():any {

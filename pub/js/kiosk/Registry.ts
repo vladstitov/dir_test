@@ -13,6 +13,8 @@ var HIDE: string = 'hide';
 var HIDDEN:string = 'hidden';
 var SELECTED: string = 'selected';
 var DISABLED: string = 'disabled';
+var OPEN:string='open';
+
 
 module uplight {
 
@@ -79,6 +81,9 @@ module uplight {
         setSettings(data:any):void{
             this.settings=data;
             this.events.triggerHandler(this.ON_SETTINGS,data);
+        }
+        getSettings(index:string):any{
+            return this.settings[index];
         }
 
         constructor(){

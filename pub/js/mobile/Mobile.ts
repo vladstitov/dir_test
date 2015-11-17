@@ -99,8 +99,8 @@ module uplight {
             $(window).on('hashchange', (evt) => this.onHachChange());
             this.filterPage = new FilterPage($('[data-ctr=FilterPage]'));
             setTimeout(()=>this.onHachChange(),1000);
-            this.content = $('#Content');
-            this.gmap = new GoogleMap();
+           // this.content = $('#Content');
+
         }
 
 
@@ -151,6 +151,7 @@ module uplight {
 
             switch (ar[0]) {
                 case '#gmap':
+                    if(!this.gmap) this.gmap = new GoogleMap(this.content);
                     this.showView(this.gmap.getView());
                     this.menu.hideAll();
                     this.R.connector.Stat('pg','gmap');

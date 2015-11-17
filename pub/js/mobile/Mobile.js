@@ -62,8 +62,7 @@ var uplight;
             $(window).on('hashchange', function (evt) { return _this.onHachChange(); });
             this.filterPage = new uplight.FilterPage($('[data-ctr=FilterPage]'));
             setTimeout(function () { return _this.onHachChange(); }, 1000);
-            this.content = $('#Content');
-            this.gmap = new uplight.GoogleMap();
+            // this.content = $('#Content');
         }
         Mobile.prototype.error = function (str) {
             this.errors += str + "\n";
@@ -94,6 +93,8 @@ var uplight;
             uplight.Utils.hideImage();
             switch (ar[0]) {
                 case '#gmap':
+                    if (!this.gmap)
+                        this.gmap = new uplight.GoogleMap(this.content);
                     this.showView(this.gmap.getView());
                     this.menu.hideAll();
                     this.R.connector.Stat('pg', 'gmap');

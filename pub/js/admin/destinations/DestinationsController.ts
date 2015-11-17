@@ -74,7 +74,7 @@ module uplight{
         }
 
        private onBtnAddClick(): void {
-                var dest: VODestination = new VODestination({id:0,cats:[],imgs:''});
+                var dest: VODestination = new VODestination({id:0,cats:[],imgs:'',tmb:null});
                 this.detailsForm.setDestination(dest);
            this.detailsForm.render();
            this.list.hide();

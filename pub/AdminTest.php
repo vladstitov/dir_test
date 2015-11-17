@@ -153,7 +153,8 @@ if(!isset($_SESSION['directories_user'])){
 <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <!---->
-
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUaQFpM8aGgiocMDRcPzH66FKx5rPH1q0"></script>
+<script type="text/javascript" src="js/gmap/GmapCtr.js"></script>
 <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 <script type="text/javascript" src="js/libs/nicEdit.js"></script>
 <script type="text/javascript" src="js/libs/Chart.js"></script>

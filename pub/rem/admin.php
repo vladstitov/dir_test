@@ -56,6 +56,10 @@ switch(array_shift($a)){
 	case 'upload_image':	
 		$result = utils()->uploadImage($_FILES["file"],$get['folder'],$get['prefix']);	
 	break;
+	
+	case 'save_settings':
+		$result = utils()->saveSettings(file_get_contents('php://input'));
+	break;	
 	case 'get_data':
 		$result = utils()->getData($get);
 	break;

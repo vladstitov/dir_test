@@ -76,6 +76,13 @@ var uplight;
         };
         RegA.prototype.message = function (msg) {
         };
+        RegA.prototype.getSettings = function (index) {
+            return this.settings[index];
+        };
+        RegA.prototype.saveSettings = function (index, obj) {
+            this.settings[index] = obj;
+            return this.connector.saveSettings(JSON.stringify(this.settings));
+        };
         RegA.getInstance = function () {
             return RegA._instance;
         };

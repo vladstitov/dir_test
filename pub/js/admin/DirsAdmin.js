@@ -17,6 +17,7 @@
 ///<reference path="screen/LabelsManager.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
+///<reference path="../gmap/GmapCtr.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -130,7 +131,9 @@ var uplight;
                     this.labels = new uplight.LabelsManager(this.content);
                     this.content.show();
                     break;
-                case '#PreviewKi':
+                case '#GoogleMap':
+                    var gmap = new uplight.GmapCtr(this.content);
+                    break;
                 default:
                     break;
             }
