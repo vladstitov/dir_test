@@ -61,9 +61,13 @@ module uplight {
             this.hideKiosk();
             this.hideModile();
                 switch (hash){
-                    case '#PreviewKi':
+                    case '#Kiosk1080':
                         this.content.hide();
-                      this.showKiosk();
+                      this.showKiosk(1080);
+                        break;
+                    case '#Kiosk1920':
+                        this.content.hide();
+                        this.showKiosk(1920);
                         break;
                     case '#PreviewMo':
                         this.content.hide();
@@ -250,9 +254,18 @@ module uplight {
 
 
         /*            Preview                */
-        private previewUrl:string ='Kiosk1080.php?id=0';
+        private previewUrl1080:string ='Kiosk1080.php?id=0';
+        private previewUrl:string;
+        private previewUrl1920:string ='Kiosk1920.php?id=1';
         private mobileUrl:string ='KioskMobile.php';
-        private showKiosk():void{
+        private showKiosk(width:number):void{
+            if(width == 1920){
+                this.previewUrl = this.previewUrl1920;
+                $('#Preview').addClass('k1920');
+            }else{
+                $('#Preview').removeClass('k1920');
+                this.previewUrl = this.previewUrl1080;
+            }
             $('#AdminPreviewKiosk').removeClass(HIDDEN);
             $('#AdminPreviewKiosk iframe:first').attr('src',this.previewUrl);
             this.isPreview=true;

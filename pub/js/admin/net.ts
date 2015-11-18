@@ -16,6 +16,10 @@ module uplight {
            return  $.post('rem/login.php', {credetials:'logout'});
         }
 
+        error(msg:string){
+            msg=(new Date()).toString()+'||'+msg;
+            $.post(this.service + '?log_error',msg);
+        }
 
         //////////////////////////Categories/////////////////////////////////////
         getCategories(): JQueryPromise<any> {

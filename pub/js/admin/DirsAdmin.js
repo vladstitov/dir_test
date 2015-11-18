@@ -24,7 +24,8 @@ var uplight;
         function Admin() {
             var _this = this;
             /*            Preview                */
-            this.previewUrl = 'Kiosk1080.php?id=0';
+            this.previewUrl1080 = 'Kiosk1080.php?id=0';
+            this.previewUrl1920 = 'Kiosk1920.php?id=1';
             this.mobileUrl = 'KioskMobile.php';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
@@ -70,9 +71,13 @@ var uplight;
             this.hideKiosk();
             this.hideModile();
             switch (hash) {
-                case '#PreviewKi':
+                case '#Kiosk1080':
                     this.content.hide();
-                    this.showKiosk();
+                    this.showKiosk(1080);
+                    break;
+                case '#Kiosk1920':
+                    this.content.hide();
+                    this.showKiosk(1920);
                     break;
                 case '#PreviewMo':
                     this.content.hide();
@@ -190,7 +195,15 @@ var uplight;
                 });
             }, 3000);
         };
-        Admin.prototype.showKiosk = function () {
+        Admin.prototype.showKiosk = function (width) {
+            if (width == 1920) {
+                this.previewUrl = this.previewUrl1920;
+                $('#Preview').addClass('k1920');
+            }
+            else {
+                $('#Preview').removeClass('k1920');
+                this.previewUrl = this.previewUrl1080;
+            }
             $('#AdminPreviewKiosk').removeClass(HIDDEN);
             $('#AdminPreviewKiosk iframe:first').attr('src', this.previewUrl);
             this.isPreview = true;

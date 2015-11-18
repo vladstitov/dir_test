@@ -8,8 +8,9 @@ define('MEDIA','media/');
 define('DETAILS_IMG','details/img/');
 define('PREFIX','../');
 define('PAGES','pages/');
+define('LOG','../../data/log/');
 
-
+$admin_email='uplight.ca@gmail.com';
 if(!isset($_SESSION['directories_user'])){
 	echo 'please login';	
 	exit;
@@ -28,13 +29,12 @@ $result = false;
 
 
 switch(array_shift($a)){
-	case 'test':
-		include 'cl/Statistics.php';
-		//$ctr= new Statistics();
-		//$ar=json_decode('[{"id":4,"type":"kiosk"},{"id":6,"type":"kiosk"}]');		
-		//$result = $ctr->getCount($ar,'-30 days','now');
-		//$result = $ctr->getCount($ar,0,'now');
-		
+	case 'log_error':
+		$result = new stdClass();
+		$result->success='success';
+		$txt=file_get_contents('php://input');
+		error_log($txt,3,LOG.'sdmin_error.txt');
+		if(mail($admin,'Error admin directories',$txt))	$result->result='emailed';	
 	break;
 		
 	case 'get_statistics':

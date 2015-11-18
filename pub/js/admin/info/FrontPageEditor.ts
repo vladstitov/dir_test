@@ -74,19 +74,22 @@ module uplight{
 
         }
 
-        private onSave(res):void{
+        private onSave(res:VOResult):void{
             console.log(res);
+            if(res.success) RegA.getInstance().msg('Page Saved',this.btnSave);
+            else {
+                RegA.getInstance().connector.error('FronPageEditor '+res.error+' '+res.result);
+                alert('Error was send to administarator');
+            }
         }
 
         private onSaveClicked():void{
             this.hideEdit();
-            if(confirm('You want to save Front page?')){
-
                 var url:string =RegA.getInstance().settings.front_page;
              var tmp =    this.list.children().detach();
                 RegA.getInstance().connector.savePage(url,this.editor.html()).done((res)=>this.onSave(res));
                 this.list.append(tmp);
-            }
+
 
         }
 

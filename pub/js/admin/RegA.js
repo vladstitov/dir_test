@@ -141,4 +141,4 @@ var uplight;
     })();
     uplight.VOStat = VOStat;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RegA.js.map
+//# sourceMappingURL=regA.js.map

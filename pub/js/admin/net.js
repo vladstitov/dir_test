@@ -12,6 +12,10 @@ var uplight;
         Connector.prototype.logout = function () {
             return $.post('rem/login.php', { credetials: 'logout' });
         };
+        Connector.prototype.error = function (msg) {
+            msg = (new Date()).toString() + '||' + msg;
+            $.post(this.service + '?log_error', msg);
+        };
         //////////////////////////Categories/////////////////////////////////////
         Connector.prototype.getCategories = function () {
             return $.get(this.service, { a: 'cats.get_all' }, 'application/json');

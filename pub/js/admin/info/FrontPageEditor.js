@@ -57,16 +57,20 @@ var uplight;
         };
         FrontPageEditor.prototype.onSave = function (res) {
             console.log(res);
+            if (res.success)
+                uplight.RegA.getInstance().msg('Page Saved', this.btnSave);
+            else {
+                uplight.RegA.getInstance().connector.error('FronPageEditor ' + res.error + ' ' + res.result);
+                alert('Error was send to administarator');
+            }
         };
         FrontPageEditor.prototype.onSaveClicked = function () {
             var _this = this;
             this.hideEdit();
-            if (confirm('You want to save Front page?')) {
-                var url = uplight.RegA.getInstance().settings.front_page;
-                var tmp = this.list.children().detach();
-                uplight.RegA.getInstance().connector.savePage(url, this.editor.html()).done(function (res) { return _this.onSave(res); });
-                this.list.append(tmp);
-            }
+            var url = uplight.RegA.getInstance().settings.front_page;
+            var tmp = this.list.children().detach();
+            uplight.RegA.getInstance().connector.savePage(url, this.editor.html()).done(function (res) { return _this.onSave(res); });
+            this.list.append(tmp);
         };
         FrontPageEditor.prototype.onPages = function (data) {
             console.log(data);

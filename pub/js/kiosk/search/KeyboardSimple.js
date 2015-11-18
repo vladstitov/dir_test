@@ -113,7 +113,7 @@ var uplight;
             this.timeout = setTimeout(function () {
                 uplight.Registry.getInstance().connector.Stat('kb', str);
             }, 1500);
-            this.input.focus();
+            // this.input.focus();
         };
         return SearchInput;
     })();
