@@ -1,16 +1,14 @@
 <section id="AdminPreviewKiosk" class="hidden">
     <div id="Preview" class="view">
+
         <style>
-            #Preview .table-bordered{
-                padding: 0.5em;
+            #Preview .panel{
                 width: 560px;
                 height: 1020px;
                 margin: auto;
                 left: 0;
                 right: 0;
-                text-align: center;
                 overflow: hidden;
-
             }
 
             #Preview iframe{
@@ -24,7 +22,7 @@
                 width: 1080px;
                 height: 1920px;
             }
-            #Preview.k1920 .table-bordered{
+            #Preview.k1920 .panel{
                 width: 980px;
                 height: 600px;
             }
@@ -34,10 +32,22 @@
             }
 
         </style>
-        <div class="table-bordered">
-            <a data-id="btnFullView"  class="btn pull-right"><span class="fa fa-external-link"></span><span> Open full view</span></a>
-            <h4>Kiosk view</h4>
-            <div class="viewport">
+
+        <div  class="panel panel-default">
+            <div class="tools">
+                <a data-id="btnFullView"  class="btn pull-right"><span class="fa fa-external-link"></span><span> Open kiosk</span></a>
+
+                <a class="btn" data-id="btnEditColor"><span class="fa fa-edit"></span> Edit Color theme </a>
+                <div data-id="editColorTools" class="inline" style="display: none">
+                    <select id="ThemeSelector">
+
+                    </select>
+                    <a class="btn" data-id="btnSave"><span class="fa fa-save"></span> Save </a>
+                </div>
+
+            </div>
+
+            <div class="panel-body">
                 <iframe src="" scrolling="no" frameborder="0">
 
 

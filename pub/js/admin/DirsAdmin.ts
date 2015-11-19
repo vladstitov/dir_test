@@ -21,6 +21,7 @@
 ///<reference path="../gmap/GmapCtr.ts" />
 
 
+declare var u_admin:any;
 
 module uplight {
     export class Admin {
@@ -190,6 +191,7 @@ module uplight {
 
             if(window.location.hash=='') window.location.hash='#Statistic';
 
+            this.initThemes();
         }
 
         private logout():void{
@@ -253,11 +255,60 @@ module uplight {
         }
 
 
-        /*            Preview                */
-        private previewUrl1080:string ='Kiosk1080.php?id=0';
+        /*            Preview
+                   *
+                    * */
+
+
+        saveTheme():void{
+            var css:string =  $('#ThemeSelector').val();
+            this.R.saveSettings('theme',css);
+        }
+
+        private isEditColor:boolean;
+        initThemes():void{
+
+            $('#AdminPreviewKiosk [data-id=btnEditColor]:first').click(()=>{
+                if(this.isEditColor){
+                    this.isEditColor = false;
+                    $('#AdminPreviewKiosk [data-id=editColorTools]:first').hide();
+                }else{
+                    this.isEditColor = true;
+                    $('#ThemeSelector').val(-1);
+                    $('#AdminPreviewKiosk [data-id=editColorTools]:first').removeClass('hide').show();
+                }
+            });
+
+            var themes:any[] = u_admin.themes;
+            var ar = themes;
+            var out='';
+            for(var i=0,n=ar.length;i<n;i++){
+                out+='<option value="'+ar[i].css+'">'+ ar[i].label+'</option>';
+            }
+            $('#ThemeSelector').html(out).change(()=>{
+                this.loadTheme($('#ThemeSelector').val());
+            })
+
+            $('#AdminPreviewKiosk [data-id=btnSave]:first').click(()=>{
+                    this.R.saveSettings('theme',this.theme).done((res:VOResult)=>{
+                        if(res.success){
+                            this.R.msg('Thema saved',$('#AdminPreviewKiosk [data-id=btnSave]:first'));
+                        }
+                    });
+            });
+        }
+
+        private loadTheme(css:string):void{
+            this.theme = css;
+            $('#AdminPreviewKiosk iframe:first').attr('src',this.previewUrl+'&theme='+this.theme);
+        }
+
+        private theme:string='';
+        private previewUrl1080:string ='Kiosk1080.php?';
         private previewUrl:string;
-        private previewUrl1920:string ='Kiosk1920.php?id=1';
+        private previewUrl1920:string ='Kiosk1920.php?';
         private mobileUrl:string ='KioskMobile.php';
+
         private showKiosk(width:number):void{
             if(width == 1920){
                 this.previewUrl = this.previewUrl1920;
@@ -270,6 +321,7 @@ module uplight {
             $('#AdminPreviewKiosk iframe:first').attr('src',this.previewUrl);
             this.isPreview=true;
         }
+
         private hideKiosk():void{
             if(this.isPreview){
                 $('#AdminPreviewKiosk').addClass(HIDDEN);
@@ -279,6 +331,7 @@ module uplight {
         }
 
         /*         Mobile  preview     */
+
         isMobile:boolean;
         private showMobile(url?:string):void{
             this.isMobile = true;

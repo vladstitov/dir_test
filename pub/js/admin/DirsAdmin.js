@@ -23,9 +23,9 @@ var uplight;
     var Admin = (function () {
         function Admin() {
             var _this = this;
-            /*            Preview                */
-            this.previewUrl1080 = 'Kiosk1080.php?id=0';
-            this.previewUrl1920 = 'Kiosk1920.php?id=1';
+            this.theme = '';
+            this.previewUrl1080 = 'Kiosk1080.php?';
+            this.previewUrl1920 = 'Kiosk1920.php?';
             this.mobileUrl = 'KioskMobile.php';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
@@ -178,6 +178,7 @@ var uplight;
             });
             if (window.location.hash == '')
                 window.location.hash = '#Statistic';
+            this.initThemes();
         };
         Admin.prototype.logout = function () {
             this.R.connector.logout().done(function (res) {
@@ -194,6 +195,47 @@ var uplight;
                     msg.remove();
                 });
             }, 3000);
+        };
+        /*            Preview
+                   *
+                    * */
+        Admin.prototype.saveTheme = function () {
+            var css = $('#ThemeSelector').val();
+            this.R.saveSettings('theme', css);
+        };
+        Admin.prototype.initThemes = function () {
+            var _this = this;
+            $('#AdminPreviewKiosk [data-id=btnEditColor]:first').click(function () {
+                if (_this.isEditColor) {
+                    _this.isEditColor = false;
+                    $('#AdminPreviewKiosk [data-id=editColorTools]:first').hide();
+                }
+                else {
+                    _this.isEditColor = true;
+                    $('#ThemeSelector').val(-1);
+                    $('#AdminPreviewKiosk [data-id=editColorTools]:first').removeClass('hide').show();
+                }
+            });
+            var themes = u_admin.themes;
+            var ar = themes;
+            var out = '';
+            for (var i = 0, n = ar.length; i < n; i++) {
+                out += '<option value="' + ar[i].css + '">' + ar[i].label + '</option>';
+            }
+            $('#ThemeSelector').html(out).change(function () {
+                _this.loadTheme($('#ThemeSelector').val());
+            });
+            $('#AdminPreviewKiosk [data-id=btnSave]:first').click(function () {
+                _this.R.saveSettings('theme', _this.theme).done(function (res) {
+                    if (res.success) {
+                        _this.R.msg('Thema saved', $('#AdminPreviewKiosk [data-id=btnSave]:first'));
+                    }
+                });
+            });
+        };
+        Admin.prototype.loadTheme = function (css) {
+            this.theme = css;
+            $('#AdminPreviewKiosk iframe:first').attr('src', this.previewUrl + '&theme=' + this.theme);
         };
         Admin.prototype.showKiosk = function (width) {
             if (width == 1920) {

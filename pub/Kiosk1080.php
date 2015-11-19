@@ -14,9 +14,11 @@ if(isset($_GET['kiosk'])) {
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
-
-$theme = isset($settings->theme)?$settings->theme:'css/themeWhite.css';
 foreach($_GET as $key=>$val) $settings->$key=$val;
+
+//overwrite settings with get
+$theme = isset($settings->theme)?$settings->theme:'css/themeWhite.css';
+
 
 
 $l=file_get_contents(DATA.'/'.$settings->labels);

@@ -18,8 +18,10 @@ if(!isset($_SESSION['directories_user'])){
 
     <link href="js/lists/reset.css" rel="stylesheet" type="text/css"/>
 
-
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
+    <script>
+        var u_admin=<?= file_get_contents('../data/admin.json'); ?>
+    </script>
 
    <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
 
@@ -96,6 +98,7 @@ if(!isset($_SESSION['directories_user'])){
         }
 
     </style>
+
 </head>
 <body>
 <div id="adminHeader" >

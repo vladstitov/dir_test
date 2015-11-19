@@ -16,9 +16,11 @@ if(isset($_GET['kiosk'])) {
 
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
-$theme = isset($settings->theme)?$settings->theme:'css/themeWhite.css';
 
+//overwrite settings with get
 foreach($_GET as $key=>$val) $settings->$key=$val;
+
+$theme = isset($settings->theme)?$settings->theme:'css/themeWhite.css';
 
 
 $l=file_get_contents(DATA.'/'.$settings->labels);
@@ -56,7 +58,6 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <script src="js/libs/underscore-min.js"></script>
     <script src="js/libs/svgjs.js"></script>
     <script type="text/javascript">
-
     </script>
 
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
