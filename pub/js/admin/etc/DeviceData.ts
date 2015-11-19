@@ -75,7 +75,7 @@ module uplight{
             var lastTime:string =obj.now? new Date(obj.now*1000).toLocaleString():'';
             return '<tr>' +
                 '<td>'+obj.name+'</td>' +
-                '<td><a target="_blank" href="'+obj.template+'?kiosk='+obj.id+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
+                '<td><a target="_blank" href="'+obj.template+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
                 '<td><span title="'+statusStr+'" class="status fa '+cl+'" style="color:'+color+'">&nbsp</span></td>' +
                 '<td>'+obj.ip+'</td>' +
                 '<td>'+obj.ping+'</td>' +
