@@ -15,6 +15,7 @@ if(isset($_GET['kiosk'])) {
 if(isset($_GET['settings'])) $sett_file=$_GET['settings'].'.json';
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
 
+$theme = isset($settings->theme)?$settings->theme:'css/themeWhite.css';
 foreach($_GET as $key=>$val) $settings->$key=$val;
 
 
@@ -48,7 +49,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
-    <link href="css/brandBlack.css" rel="stylesheet" />
+    <link href="<?= $theme; ?>" rel="stylesheet" />
    
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 

@@ -111,7 +111,6 @@ module uplight{
             }else{
                 if(str.length==0) str=txt.toUpperCase();
                 else  str+=txt;
-
             }
 
 

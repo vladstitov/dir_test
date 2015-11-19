@@ -156,13 +156,7 @@ a:active{
 
     min-height: 95px;
 }
-#list-main ul>li:active{
-   /* -webkit-filter: brightness(105%);*/
-    background-image: none;
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-}
+
 #list-main ul>li.selected{
     box-shadow: 0 0 5px yellow;
 }
