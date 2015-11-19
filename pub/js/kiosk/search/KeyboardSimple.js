@@ -98,16 +98,18 @@ var uplight;
         };
         SearchInput.prototype.onKeyPressed = function (txt) {
             var str = this.data;
-            if (str.length == 0)
-                str = txt.toUpperCase();
-            else if (txt == 'del') {
+            if (txt == 'del') {
                 if (str.length > 1)
                     str = str.substr(0, str.length - 1);
                 else
                     str = '';
             }
-            else
-                str += txt;
+            else {
+                if (str.length == 0)
+                    str = txt.toUpperCase();
+                else
+                    str += txt;
+            }
             this.setText(str);
             clearTimeout(this.timeout);
             this.timeout = setTimeout(function () {
