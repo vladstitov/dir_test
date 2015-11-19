@@ -41,12 +41,14 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Kiosk 1080">
     <meta name="author" content="Vlad">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<title>Kiosk</title>
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
     <link href="css/kiosk1080.css" rel="stylesheet" />
+    <link href="css/brandBlack.css" rel="stylesheet" />
    
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
@@ -204,7 +206,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                                 }
                             </style>
                             <!-- <span class="fa fa-search"></span>-->
-                            <input type="text" class="Plastic031 pull-right" />
+                            <input type="text" class="input-text pull-right" />
                             <span class="fa fa-times-circle"  data-id="btnClear"></span>
                         </div>
                     </div>
@@ -226,8 +228,6 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     #btnSearch{
                         font-size:100px;
                         padding:20px;
-                        color:white;
-                        background-color:red;
                     }
 
                     #MenuList{
@@ -313,13 +313,13 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
             </div>
             <hr/>
             <h3 class="text-center">
-                <a id="btnShowMenu" class="Plastic031">
+                <a id="btnShowMenu" class="brand-color">
                 <?= isset($labels['topages'])?$labels['topages']:'&nbsp;'; ?>
                 </a>
             </h3>
         </section>
         <section class="col-sm-3">
-            <div  data-id="btnClose" class="btn pull-right Plastic031"><span class="fa fa-close"></span></div>
+            <div  data-id="btnClose" class="btn pull-right btn-close"><span class="fa fa-close"></span></div>
             <div id="keywords" data-ctr="uplight.Keywords">
                 <h3 class="text-center">
                     <?= isset($labels['keywords'])?$labels['keywords']:'Keywords'; ?>

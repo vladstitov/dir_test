@@ -53,7 +53,7 @@ module uplight{
             return out+'</div>';
         }
         private itemRenderer(item: string): string {
-            var cl = 'Plastic031';
+            var cl = '';
             if(item=='SPACE') cl+=' space';
             if(item == '&nbsp;')cl+=' back fa fa-caret-square-o-left';
             return '<div class="kb-key btn '+cl+'"><span>' + item + '</span></div>';

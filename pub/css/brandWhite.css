@@ -1,0 +1,17 @@
+
+.input-text,.btn-close,.kb-key,.brand-color,.details-bg,.btn-main,.btn-menu{
+    background-color: #ebebeb;
+    /* border-color: #000000;
+     border-width: 1px;*/
+    background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+    background-image: -o-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+    background-image: -ms-linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 99%, rgba(235, 235, 235, 1) 100%);
+}
+
+
+#btnSearch{
+    color: white;
+    background-color: red;
+}

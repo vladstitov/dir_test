@@ -38,7 +38,7 @@ module uplight{
             var out='<ul class="nano-content">';
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                out+='<li class="item Plastic031"><a data-i="'+i+'"><span class="'+item.icon+'"></span> <span> '+(item.name || item.label)+'</span></a></li>';
+                out+='<li class="item btn-menu"><a data-i="'+i+'"><span class="'+item.icon+'"></span> <span> '+(item.name || item.label)+'</span></a></li>';
             }
             out+='</ul>'
             this.list.html(out);
@@ -103,7 +103,7 @@ module uplight{
             var out='<ul class="nano-content">';
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                out+='<li class="item Plastic031"><a data-i="'+i+'">'+item.name+'</a></li>';
+                out+='<li class="item btn-menu"><a data-i="'+i+'">'+item.name+'</a></li>';
             }
             out+='</ul>'
             this.list.html(out);

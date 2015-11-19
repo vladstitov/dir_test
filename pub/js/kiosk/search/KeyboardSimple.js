@@ -44,7 +44,7 @@ var uplight;
             return out + '</div>';
         };
         Keyboard.prototype.itemRenderer = function (item) {
-            var cl = 'Plastic031';
+            var cl = '';
             if (item == 'SPACE')
                 cl += ' space';
             if (item == '&nbsp;')

@@ -30,7 +30,7 @@ module uplight{
 
         constructor(private model:DestModel){
             //this.viewStr = '<li class="item Plastic031" data-id="'+model.id+'" data-more="'+model.haveMore+'">'+this.renderVoStr(model.vo,model.haveMore)+'</li>';
-            this.$view = $('<li>').addClass('item Plastic031').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
+            this.$view = $('<li>').addClass('item btn-main').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
             this.$kw=this.$view.find('.kws:first');
         }
 

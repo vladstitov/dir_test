@@ -41,7 +41,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Kiosk 1080">
+    <meta name="description" content="Kiosk 1920">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta name="author" content="Vlad">
 	<title>Kiosk</title>
     <link href="js/lists/reset.css" rel="stylesheet" />
@@ -49,6 +50,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
     <link href="css/kiosk1920.css" rel="stylesheet" />
+    <link href="css/brandBlack.css" rel="stylesheet" />
    
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 
