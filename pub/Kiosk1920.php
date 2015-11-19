@@ -48,13 +48,10 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 	<title>Kiosk</title>
     <link href="js/lists/reset.css" rel="stylesheet" />
     <link href="js/libs/bootstrap.css" rel="stylesheet" />
-    <link href="css/lightblue.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
     <link href="css/kiosk1920.css" rel="stylesheet" />
     <link href="<?= $theme; ?>" rel="stylesheet" />
-   
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
-
     <script src="js/libs/jquery-2.1.0.min.js"></script>
     <script src="js/libs/underscore-min.js"></script>
     <script src="js/libs/svgjs.js"></script>
@@ -96,7 +93,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 <div id="History" class="hidden"></div>
 
 <div id="container">
-    <section id="u-header" class="main-color view-port">
+    <section id="u-header" class="banner-color view-port">
 
             <div id="brand-logo" >
                 <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>

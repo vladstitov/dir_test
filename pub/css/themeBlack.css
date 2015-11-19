@@ -47,3 +47,13 @@ color: white;
 #list-main ul>li:active{
     background: rgb(125,126,125);
 }
+.banner-color{
+    background-color: #b1f5c9;
+    border-color: #5588bf;
+    border-width: 1px;
+    background-image: linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
+    background-image: -moz-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
+    background-image: -webkit-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
+    background-image: -o-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
+    background-image: -ms-linear-gradient(rgba(240, 247, 255, 1) 0%, rgba(192, 210, 235, 1) 50%, rgba(179, 203, 235, 1) 50%, rgba(134, 169, 218, 1) 98%, rgba(132, 168, 217, 1) 100%);
+}
