@@ -301,6 +301,8 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 height: 200px;
                 overflow-y: auto;
                 overflow-x: hidden;
+                width: 220px;
+                margin-left: -10px;
             }
             #Categories ul>li{
                 font-size: 16px;
@@ -313,11 +315,13 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 display: inline-block;
                 width: 16px;
                 height: 16px;
+
             }
 
             #Categories li>.check{
                 display:inline-block;
                 width: 20px;
+                color:#9d9d9d;
             }
 
         </style>
