@@ -326,15 +326,7 @@ display: inline-block;
     display: block;
     width: 100%;
 }
-/*.detailsL{
-    width:650px;
-    height: 1024px;
-    position: absolute;
-    margin: auto;
-    left: 0;
-   right: 0;
-    top:230px
-}*/
+
 .detailsL>.fa-close{
     position: absolute;
     bottom: -15px;
@@ -398,19 +390,6 @@ display: inline-block;
 
 }
 /* END  Details Large */
-
-
-
-
-#Categories{
-
-}
-#Categories li>div{
-    display: inline-block;
-
-
-}
-
 
 
 #Screensaver{

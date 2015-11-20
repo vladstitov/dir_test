@@ -297,6 +297,28 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 /*  border-bottom: thin #f8f8f8 solid;*/
 
             }
+            #Categories>.list{
+                height: 200px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            #Categories ul>li{
+                font-size: 16px;
+                width: 100%;
+                text-align: left;
+                /*  line-height:25px;*/
+            }
+
+            #Categories li .icon{
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+            }
+
+            #Categories li>.check{
+                display:inline-block;
+                width: 20px;
+            }
         </style>
         <section class="col-sm-3">
             <div id="Categories" data-ctr="uplight.CategoriesCheck">
@@ -304,6 +326,9 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 <h3>
                     <?= isset($labels['categories'])?$labels['categories']:'Categories'; ?>
                 </h3>
+                <div class="list">
+
+                </div>
 
             </div>
         </section>

@@ -25,6 +25,8 @@
     /*z-index: 100;*/
 }
 
+
+
 #u-header>div{
     display: inline-block;
 }
@@ -375,22 +377,6 @@ display: inline-block;
 
 }
 /* END  Details Large */
-
-
-
-
-
-
-
-#Categories{
-
-}
-#Categories li>div{
-    display: inline-block;
-
-
-}
-
 
 
 #Screensaver{

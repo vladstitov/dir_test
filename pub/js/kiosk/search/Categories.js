@@ -9,13 +9,13 @@ var uplight;
             var _this = this;
             this.view = $(el);
             this.R = uplight.Registry.getInstance();
-            this.list = $('<ul>').appendTo(this.view);
+            this.list = this.view.find('.list:first');
             this.R.model.dispatcher.on(this.R.model.READY, function () { return _this.onDataReady(); });
             this.addListeners();
         }
         CategoriesCheck.prototype.addListeners = function () {
             var _this = this;
-            this.list.on(CLICK, 'input', function (evt) { return _this.onListChanged($(evt.currentTarget)); });
+            this.list.on(CLICK, 'li', function (evt) { return _this.onListChanged(evt); });
             this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
         };
         CategoriesCheck.prototype.reset = function () {
@@ -39,30 +39,38 @@ var uplight;
             }
         };
         CategoriesCheck.prototype.onListChanged = function (evt) {
-            var id = Number(evt.data('id'));
+            var el = $(evt.currentTarget);
+            var id = Number(el.data('id'));
             if (isNaN(id))
                 return;
-            if (evt.prop('checked'))
-                this.addCategory(id);
-            else
+            if (Number(el.data('checked')) == 1) {
+                el.data('checked', 0);
                 this.removeCategory(id);
+                el.find('.check').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+            else {
+                el.data('checked', 1);
+                this.addCategory(id);
+                el.find('.check').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }
         };
         CategoriesCheck.prototype.onDataReady = function () {
             this.data = this.R.model.getCategories();
             this.render();
         };
         CategoriesCheck.prototype.renderItem = function (vo, i) {
-            return '<li><div><input type="checkbox" data-id="' + vo.id + '" checked="true" /></div><div class="icon ' + vo.icon + '"></div> <div class="name">' + vo.label + '</div></li>';
+            return '<li data-checked="1" data-id="' + vo.id + '" class="btn" ><span class="check fa fa-check-square-o" data-id="' + vo.id + '" ></span><span class="icon ' + vo.icon + '"></span> <span class="name">' + vo.label + '</span></label></li>';
         };
         CategoriesCheck.prototype.render = function () {
             console.log('render');
             var ar = this.data;
-            var out = '';
+            var out = '<ul>';
             var idis = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += this.renderItem(ar[i], i);
                 idis.push(ar[i].id);
             }
+            out += '</ul>';
             this.selected = idis;
             this.list.html(out);
         };
