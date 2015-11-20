@@ -319,6 +319,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                 display:inline-block;
                 width: 20px;
             }
+
         </style>
         <section class="col-sm-3">
             <div id="Categories" data-ctr="uplight.CategoriesCheck">
