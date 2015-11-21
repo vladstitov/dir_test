@@ -14,7 +14,6 @@ module uplight{
         }
     }
    export class TopSearches{
-
         constructor(private view:JQuery,search:any[][],keywords:any[][]){
 
             var kws:VoRate[]= this.parseData(keywords);

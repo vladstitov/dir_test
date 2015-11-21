@@ -36,7 +36,6 @@ module uplight{
             var cats =  res.categories;
             var dests = res.destinations;
 
-
           //  console.log(res);
 
             var categ:CategoriesChart  = new CategoriesChart($('#CategoriesChart'),cats,this.colors);

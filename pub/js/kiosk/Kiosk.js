@@ -52,9 +52,9 @@ var uplight;
             this.R = r;
             r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
             r.events.on(r.KIOSK_SHOW_MENU, null, function (evt) { return _this.showMenu(); });
-            this.R.events.on(uplight.Keyboard.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
+            this.R.events.on(this.R.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
             this.R.events.on(uplight.InfoPagesModel.PAGE_SELECED, function (evt, page) {
-                _this.R.events.triggerHandler(uplight.Keyboard.KEYBOARD_HIDE);
+                _this.R.events.triggerHandler(_this.R.KEYBOARD_HIDE);
                 _this.showPages();
             });
             this.R.events.on(r.CATEGORY_SELECTED, function (evt, cat) {
@@ -72,12 +72,12 @@ var uplight;
             // $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
             // $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
             // this.searchResult = new SearchResult($('#SearchResult'));
-            r.events.on(uplight.SearchResult.SEARCH_RESULT_SELECT, function (evt, id) {
+            r.events.on(this.R.SEARCH_RESULT_SELECT, function (evt, id) {
                 var dest = _this.R.model.getDestById(id);
                 if (dest.imgs)
                     r.events.triggerHandler(uplight.DetailsLarge.DETAILS_LARGE_SHOW, id); // this.details.setDestination(dest).render().show();
                 else
-                    r.events.triggerHandler(uplight.SearchResult.SEARCH_RESULT_SHOW_DESTINATION, id); //this.searchResult.showDestination(dest);
+                    r.events.triggerHandler(_this.R.SEARCH_RESULT_SHOW_DESTINATION, id); //this.searchResult.showDestination(dest);
                 console.log(dest);
             });
             /*

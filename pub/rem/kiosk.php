@@ -64,7 +64,14 @@ switch(array_shift($a)){
 			echo file_exists($fn)?file_get_contents($fn):'NO';
 		}			      
 	break;	
-	
+	case 'get_keywords':
+		$db = new PDO('sqlite:'.DATA.'statistics.db');
+		$res=$db->query('SELECT value FROM keywords ORDER BY rate DESC LIMIT 100')->fetchAll(PDO::FETCH_NUM);
+		$out = array();
+		foreach($res as $val) $out[]=$val[0];
+		echo json_encode($out);
+	break;
+	/*
 	case 'get_categories':
 		include_once('cl/DbConnector.php');
 		$con= new DbConnector();
@@ -73,7 +80,7 @@ switch(array_shift($a)){
 		//header('Content-type: application/json'); 
 			      
 	break;	
-		
+		*/
 	case 'get_dests':
 	include 'cl/DbConnector.php';	
 		$con=new DbConnector();

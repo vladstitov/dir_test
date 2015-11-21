@@ -5,8 +5,8 @@
 
 module uplight {
     export class SearchResult {
-        static SEARCH_RESULT_SELECT:string = 'SEARCH_RESULT_SELECT';
-        static SEARCH_RESULT_SHOW_DESTINATION:string = 'SEARCH_RESULT_SHOW_DESTINATION';
+       // static SEARCH_RESULT_SELECT:string = 'SEARCH_RESULT_SELECT';
+       /// static SEARCH_RESULT_SHOW_DESTINATION:string = 'SEARCH_RESULT_SHOW_DESTINATION';
         private data:DestModel[];
         model:Model
         result:DestModel[];
@@ -50,12 +50,12 @@ module uplight {
 
         addListeners():void{
             this.R.events.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
-            this.R.events.on(Keyboard.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
+            this.R.events.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
             this.R.events.on(this.R.RESET_ALL,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
             this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
             this.R.events.on(this.R.CATEGORY_SELECTED,(evt,catid)=>this.onCategorySelected(catid));
-            this.R.events.on( SearchResult.SEARCH_RESULT_SHOW_DESTINATION,(evt,id)=>this.showDestination(id));
+            this.R.events.on( this.R.SEARCH_RESULT_SHOW_DESTINATION,(evt,id)=>this.showDestination(id));
            // console.log('listeners');
         }
 
@@ -90,7 +90,7 @@ module uplight {
             if(this.selected)  this.selected.removeClass(SELECTED);
             this.selectedIndex = el.index();
             this.selected = el.addClass(SELECTED);
-            this.R.events.triggerHandler( SearchResult.SEARCH_RESULT_SELECT,id);
+            this.R.events.triggerHandler( this.R.SEARCH_RESULT_SELECT,id);
             //if(this.onSelect )this.onSelect(id);
            this.R.connector.Stat('sr',id.toString());
 

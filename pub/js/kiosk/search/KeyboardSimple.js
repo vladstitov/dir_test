@@ -28,7 +28,7 @@ var uplight;
             else if (txt == 'space') {
                 txt = ' ';
             }
-            this.R.events.triggerHandler(Keyboard.KEY_PRESSED, txt);
+            this.R.events.triggerHandler(this.R.KEY_PRESSED, txt);
         };
         Keyboard.prototype.parseKeys = function (ar) {
             var out = '<div class="row1">';
@@ -51,10 +51,6 @@ var uplight;
                 cl += ' back fa fa-caret-square-o-left';
             return '<div class="kb-key btn ' + cl + '"><span>' + item + '</span></div>';
         };
-        Keyboard.KEY_PRESSED = 'KEY_PRESSED';
-        Keyboard.SEARCH_CHANGED = 'SEARCH_CHANGED';
-        Keyboard.KEYBOARD_SHOW = 'KEYBOARD_SHOW';
-        Keyboard.KEYBOARD_HIDE = 'KEYBOARD_HIDE';
         return Keyboard;
     })();
     uplight.Keyboard = Keyboard;
@@ -74,7 +70,7 @@ var uplight;
         SearchInput.prototype.addListeners = function () {
             var _this = this;
             this.btnClear.on(CLICK, function () { return _this.onClearClick(); });
-            this.R.events.on(Keyboard.KEY_PRESSED, function (evt, txt) {
+            this.R.events.on(this.R.KEY_PRESSED, function (evt, txt) {
                 _this.onKeyPressed(txt);
             });
             this.R.events.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
@@ -84,8 +80,13 @@ var uplight;
         };
         SearchInput.prototype.onKeyword = function (str) {
             //this.isKw=true
-            this.R.connector.Stat('kw', str);
-            this.setText(str);
+            if (this.data == str) {
+                this.setText('');
+            }
+            else {
+                this.R.connector.Stat('kw', str);
+                this.setText(str);
+            }
         };
         SearchInput.prototype.onClearClick = function () {
             this.setText('');
@@ -93,8 +94,9 @@ var uplight;
         SearchInput.prototype.setText = function (txt) {
             this.data = txt;
             this.input.val(this.data);
-            console.log(Keyboard.SEARCH_CHANGED, this.data);
-            this.R.events.triggerHandler(Keyboard.SEARCH_CHANGED, this.data);
+            console.log();
+            //  console.log(this.R.SEARCH_CHANGED,this.data);
+            this.R.events.triggerHandler(this.R.SEARCH_CHANGED, this.data);
         };
         SearchInput.prototype.onKeyPressed = function (txt) {
             var str = this.data;

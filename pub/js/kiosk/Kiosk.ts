@@ -107,10 +107,10 @@ module uplight {
 
            r.events.on(r.KIOSK_SHOW_MENU,null,(evt)=>this.showMenu());
 
-           this.R.events.on(Keyboard.KEYBOARD_SHOW,()=>this.showSearchResult());
+           this.R.events.on(this.R.KEYBOARD_SHOW,()=>this.showSearchResult());
 
            this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,page)=>{
-               this.R.events.triggerHandler(Keyboard.KEYBOARD_HIDE);
+               this.R.events.triggerHandler(this.R.KEYBOARD_HIDE);
                this.showPages();
 
            })
@@ -135,10 +135,10 @@ module uplight {
 
 
         // this.searchResult = new SearchResult($('#SearchResult'));
-           r.events.on( SearchResult.SEARCH_RESULT_SELECT,(evt,id)=>{
+           r.events.on( this.R.SEARCH_RESULT_SELECT,(evt,id)=>{
                var dest:VODestination = this.R.model.getDestById(id);
                if(dest.imgs)r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_SHOW,id)// this.details.setDestination(dest).render().show();
-               else r.events.triggerHandler( SearchResult.SEARCH_RESULT_SHOW_DESTINATION,id)//this.searchResult.showDestination(dest);
+               else r.events.triggerHandler( this.R.SEARCH_RESULT_SHOW_DESTINATION,id)//this.searchResult.showDestination(dest);
                console.log(dest);
            })
 /*

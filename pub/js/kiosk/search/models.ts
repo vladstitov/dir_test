@@ -53,7 +53,7 @@ module uplight{
         private _dataid: {};
         private cache: {};
 
-        private keywords:any;
+        private keywords:string[];
         getDestById(id: number): VODestination {
            return this.destInd[id];
         }
@@ -136,17 +136,21 @@ module uplight{
         private makeDests(ar:any[]):void{
             var out:VODestination[]=[];
             var ind:any[] =[];
-            var kws:any={};
+            var kws:string[]=[];
             for(var i=0,n=ar.length;i<n;i++){
                 if(!ar[i].name) continue;
                 if(typeof ar[i].cats === 'string' &&  ar[i].cats.length) ar[i].cats=ar[i].cats.split(',').map(Number);
                 var dest:VODestination = new VODestination(ar[i]);
                 ind[dest.id] = dest;
                 if(dest.kws && dest.kws.length){
-                    dest.kws.split(',').forEach(function(val){
-                        if(!kws[val])kws[val]=[];
-                        kws[val].push(dest.id);
+                    var kwsN:string[]=[]
+                    dest.kws.split(',').forEach(function(val:string){
+                        val = val.trim();
+                        kwsN.push(val)
+                        if(val && kws.indexOf(val)===-1)kws.push(val);
+                       // kws[val].push(dest.id);
                     })
+                    dest.kws=kwsN.join(',');
                 }
 
                out.push(dest);

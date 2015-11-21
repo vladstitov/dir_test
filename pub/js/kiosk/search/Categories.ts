@@ -3,8 +3,6 @@
  */
     /// <reference path="../Registry.ts" />
 module uplight{
-
-
     export class CategoriesCheck{
 
         private list:JQuery

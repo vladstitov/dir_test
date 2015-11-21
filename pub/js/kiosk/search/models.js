@@ -105,7 +105,7 @@ var uplight;
         Model.prototype.makeDests = function (ar) {
             var out = [];
             var ind = [];
-            var kws = {};
+            var kws = [];
             for (var i = 0, n = ar.length; i < n; i++) {
                 if (!ar[i].name)
                     continue;
@@ -114,11 +114,15 @@ var uplight;
                 var dest = new VODestination(ar[i]);
                 ind[dest.id] = dest;
                 if (dest.kws && dest.kws.length) {
+                    var kwsN = [];
                     dest.kws.split(',').forEach(function (val) {
-                        if (!kws[val])
-                            kws[val] = [];
-                        kws[val].push(dest.id);
+                        val = val.trim();
+                        kwsN.push(val);
+                        if (val && kws.indexOf(val) === -1)
+                            kws.push(val);
+                        // kws[val].push(dest.id);
                     });
+                    dest.kws = kwsN.join(',');
                 }
                 out.push(dest);
             }

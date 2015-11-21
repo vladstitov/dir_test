@@ -31,8 +31,8 @@ module uplight{
            this.view = $(el);
            this.btnClose = this.view.find('[data-id=btnClose]:first').click(()=>this.hide());
             this.R=Registry.getInstance();
-           this.R.events.on(Keyboard.KEYBOARD_SHOW,(evt)=>this.show());
-           this.R.events.on(Keyboard.KEYBOARD_HIDE,(evt)=>this.hide());
+           this.R.events.on(this.R.KEYBOARD_SHOW,(evt)=>this.show());
+           this.R.events.on(this.R.KEYBOARD_HIDE,(evt)=>this.hide());
            this.R.events.on(this.R.RESET_VIEWS,(evt)=>this.hide());
            this.R.events.on(this.R.HIDE_VIEWS,(evt)=>this.hide());
 
@@ -59,7 +59,7 @@ module uplight{
             this.R=Registry.getInstance();
             this.btnSearch = view.find('[data-id=btnSearch]:first').click(()=>{
                 console.log('search');
-               this.R.events.triggerHandler(Keyboard.KEYBOARD_SHOW);
+               this.R.events.triggerHandler(this.R.KEYBOARD_SHOW);
             });
 
         }

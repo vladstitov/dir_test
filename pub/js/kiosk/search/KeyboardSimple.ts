@@ -5,11 +5,11 @@
 
 module uplight{
     export class Keyboard {
-       static   KEY_PRESSED:string='KEY_PRESSED';
+     //  static   KEY_PRESSED:string='KEY_PRESSED';
 
-        static SEARCH_CHANGED:string='SEARCH_CHANGED';
-        static KEYBOARD_SHOW:string ='KEYBOARD_SHOW';
-        static KEYBOARD_HIDE:string ='KEYBOARD_HIDE';
+      //  static SEARCH_CHANGED:string='SEARCH_CHANGED';
+      //  static KEYBOARD_SHOW:string ='KEYBOARD_SHOW';
+      //  static KEYBOARD_HIDE:string ='KEYBOARD_HIDE';
            private keys:JQuery;
 
         view:JQuery
@@ -40,7 +40,7 @@ module uplight{
             }else if(txt=='space'){
                 txt=' ';
             }
-            this.R.events.triggerHandler(Keyboard.KEY_PRESSED,txt);
+            this.R.events.triggerHandler(this.R.KEY_PRESSED,txt);
         }
         private parseKeys(ar: string[]):string{
             var out: string = '<div class="row1">';
@@ -81,16 +81,22 @@ module uplight{
             this.input.val('');
             this.data='';
         }
+
         private addListeners():void{
             this.btnClear.on(CLICK,()=>this.onClearClick());
-            this.R.events.on(Keyboard.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
+            this.R.events.on(this.R.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
             this.R.events.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
             this.R.events.on(this.R.RESET_ALL,()=>this.reset());
         }
         private onKeyword(str:string):void{
             //this.isKw=true
-            this.R.connector.Stat('kw',str);
-            this.setText(str);
+            if(this.data ==str){
+                this.setText('');
+            }else{
+                this.R.connector.Stat('kw',str);
+                this.setText(str);
+            }
+
         }
         private onClearClick():void{
             this.setText('');
@@ -98,8 +104,9 @@ module uplight{
         private setText(txt:string):void{
             this.data=txt;
             this.input.val(this.data);
-            console.log(Keyboard.SEARCH_CHANGED,this.data);
-            this.R.events.triggerHandler(Keyboard.SEARCH_CHANGED,this.data);
+            console.log();
+          //  console.log(this.R.SEARCH_CHANGED,this.data);
+            this.R.events.triggerHandler(this.R.SEARCH_CHANGED,this.data);
         }
 
         private timeout:number

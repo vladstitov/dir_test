@@ -201,7 +201,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                                 #searchinput input{
                                     border-radius: 30px;
                                     font-size: 30px;
-                                    width: 200px;
+                                    width: 400px;
                                     border: none;
                                     padding: 20px 40px 20px 20px;
                                     margin-right: -20px;
@@ -298,7 +298,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
 
             }
             #Categories>.list{
-                height: 200px;
+                height: 250px;
                 overflow-y: auto;
                 overflow-x: hidden;
                 width: 220px;

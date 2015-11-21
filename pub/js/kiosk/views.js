@@ -25,8 +25,8 @@ var uplight;
             this.view = $(el);
             this.btnClose = this.view.find('[data-id=btnClose]:first').click(function () { return _this.hide(); });
             this.R = uplight.Registry.getInstance();
-            this.R.events.on(uplight.Keyboard.KEYBOARD_SHOW, function (evt) { return _this.show(); });
-            this.R.events.on(uplight.Keyboard.KEYBOARD_HIDE, function (evt) { return _this.hide(); });
+            this.R.events.on(this.R.KEYBOARD_SHOW, function (evt) { return _this.show(); });
+            this.R.events.on(this.R.KEYBOARD_HIDE, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.RESET_VIEWS, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.HIDE_VIEWS, function (evt) { return _this.hide(); });
         }
@@ -50,7 +50,7 @@ var uplight;
             this.R = uplight.Registry.getInstance();
             this.btnSearch = view.find('[data-id=btnSearch]:first').click(function () {
                 console.log('search');
-                _this.R.events.triggerHandler(uplight.Keyboard.KEYBOARD_SHOW);
+                _this.R.events.triggerHandler(_this.R.KEYBOARD_SHOW);
             });
         }
         return ButtonSearch;

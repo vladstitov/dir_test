@@ -6,13 +6,24 @@
 
 module uplight{
 
+    export class VORow{
+        col1:string;
+        col2:string;
+        constructor(row:string){
+        var ar:string[] = row.split('\t');
+            this.col1 = ar[0]||'&nbsp;';
+            this.col2=ar[1]||'&nbsp;';
+        }
+    }
     export class ButtonView{
         private $view:JQuery;
         private viewStr:string;
-        private $kw
-        private details:JQuery
+        private $kw;
+        private details:JQuery;
 
-        private $btnMore:JQuery
+        private $btnMore:JQuery;
+        private $txtMore:JQuery;
+        private $main:JQuery;
         show():void{
             this.$view.show();
         }
@@ -30,55 +41,85 @@ module uplight{
 
         constructor(private model:DestModel){
             //this.viewStr = '<li class="item Plastic031" data-id="'+model.id+'" data-more="'+model.haveMore+'">'+this.renderVoStr(model.vo,model.haveMore)+'</li>';
-            this.$view = $('<li>').addClass('item btn-main').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
-            this.$kw=this.$view.find('.kws:first');
-        }
 
+           // this.$view = $('<li>').addClass('item btn-main').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
+            this.$view = $('<li>').addClass('item btn-main').data('id',model.id).append(this.createMain());
+
+           // this.$kw=this.$view.find('.kws:first');
+        }
+///////////////////
+
+        createMain():JQuery{
+                this.$main = $('<div>').addClass('main');
+                this.$main.append(this.createFirstRow());
+                var icon ='<span class="icon '+this.model.vo.icon+'"></span>';
+                var name='<span class="name">'+this.model.vo.name+'</span>';
+                var unit='<span class="unit">'+this.model.vo.unit+'</span>';
+                this.$main.append('<div>'+icon+name+unit+'</div>');
+                this.$main.append(this.createLastRow());
+            return this.$main;
+        }
+        createFirstRow():JQuery{
+            this.$kw = $('<span></span>').addClass('kws');
+
+            return $('<div>').addClass('urow').append(this.$kw).append('<span class="unittype">unit</span>');
+        }
+        createLastRow():JQuery{
+            return $('<div>').addClass('urow').append(this.createBtnMore()).append('<spam>'+this.model.vo.info+'</spen>');
+        }
+        createBtnMore():JQuery{
+            if(this.model.haveMore){
+                this.$txtMore = $('<span>').text(' More...');
+                this.$btnMore= $('<a>').addClass('btn').append('<span class="fa fa-plus"></span>').append(this.$txtMore);
+            }else this.$btnMore= $('<a>').addClass('btn');
+
+            return this.$btnMore;
+        }
         showDetails():void{
-            if(!this.$btnMore){
-                this.$btnMore= this.$view.find('.more:first');
+            if(!this.details){
                 this.details = this.createDetails(this.model.vo)
                 this.$view.append(this.details);
             }
+            this.isDeatails = true;
             this.details.show('fast');
-            this.$btnMore.text('Less...');
+            this.$txtMore.text(' Less...');
         }
+        private isDeatails:boolean;
         hideDetails():void{
+            if(this.isDeatails){
+                this.isDeatails = false;
                 this.details.hide('fast');
-                this.$btnMore.text('More...');
-
+                this.$txtMore.text(' More...');
+            }
         }
-
-
+////////////////////
         showKW(str:string){
-
             this.$kw.text(str);
         }
+
         resetKW():void{
                 this.$kw.text('');
         }
 
+        private tableToObject(str:string):VORow[]{
+            var out:VORow[] = [];
+            var ar = str.split("\n");
+            for(var i=0,n=ar.length;i<n;i++)  out.push(new VORow(ar[i]));
+            return out;
+        }
+
         createDetails(vo:VODestination):JQuery{
-
-            var ar = vo.more.split("\n");
+            var ar = this.tableToObject(vo.more);//.split("\n");
             var out:string='<div class="more" ><table class="table">';
-
-            for(var i=0,n=ar.length;i<n;i++){
-                var item = ar[i].split('\t');
-                out+='<tr><td>'+(item[0]||'&nbsp;')+'</td><td>'+(item[1]||'&nbsp;')+'</td></tr>';
-            }
-
+            for(var i=0,n=ar.length;i<n;i++)  out+='<tr><td>'+ar[i].col1+'</td><td>'+ar[i].col2+'</td></tr>';
             out+='</table></div>';
-
             if(vo.tmb)out+='<div class="tmb"><img src="'+vo.tmb+'" /></div>';
-
-
             return $('<div>').addClass('details').html(out);
         }
 
-
+/*
         private renderVoStr(vo:VODestination,ismore:boolean):string{
-            var more =ismore?'<a class="btn"><span class="fa fa-plus"></span><span class="more"> More... </span></a>':'';
+            var more =ismore?'<a class="btn"><span class="fa fa-plus"></span><span class="more" data-id="txtMore"> More... </span></a>':'';
             var icon ='<span class="icon '+vo.icon+'"></span>';
             var name='<span class="name">'+vo.name+'</span>';
             var unit='<span class="unit">'+vo.unit+'</span>';
@@ -88,13 +129,15 @@ module uplight{
             var row1='<div class="urow">'+kws+utype+'</div>';
             var row2='<div class="urow">'+icon+name+unit+'</div>';
             var row3='<div class="urow">'+more+info+'</div>';
-            return '<div class="main" >'+row1+row2+row3+'</div>';
-        }
+            return ''+row1+row2+row3+'';
+        }*/
 
 
+/*
         private renderVo(vo:VODestination,ismore:boolean):JQuery{
-            return $('<div>').addClass('main').html( this.renderVoStr(vo,ismore));
-        }
+
+            return $('<div>').addClass('main').html(this.renderVoStr(vo,ismore));
+        }*/
 
     }
 
@@ -140,7 +183,6 @@ module uplight{
             }
         }
 
-
         getView(reset:boolean):JQuery{
             return this.view.getView(reset);
         }
@@ -148,13 +190,13 @@ module uplight{
        // getViewStr(reset:boolean):string{
            // return this.view.getViewStr(reset);
         //}
+
         private isHiiden:boolean;
 
         show():void{
             if(this.isHiiden){
                 this.isHiiden=false;
                 this.view.show();
-
             }
         }
 
@@ -162,7 +204,6 @@ module uplight{
             if(!this.isHiiden){
                 this.isHiiden=true;
                 this.view.hide();
-
             }
         }
 
@@ -205,6 +246,7 @@ module uplight{
             else  if(ind!==-1) out= 2;
             return out;
         }
+
         private tryUnit(pat:string):number{
             var out:number=0;
             var ind= this.unit.indexOf(pat);
@@ -244,6 +286,7 @@ module uplight{
                     out=3;
                 }
             }
+
             this.ind=out;
             return out;
         }
@@ -259,11 +302,12 @@ module uplight{
                 this.view.resetKW();
                 this.iskw = 0;
             }
-
         }
+
         hasCategory(num:number):boolean{
             return this.vo.cats.indexOf(num)!==-1;
         }
+
         setCats(cats:number[]):DestModel{
             this.cats=ar;
             var ar:number[] = this.vo.cats;
