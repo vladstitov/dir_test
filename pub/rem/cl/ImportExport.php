@@ -57,6 +57,12 @@ class ImportExport{
 		}
 	}
 		
+		private function trimWhites($str){
+			$ar = explode(',',$str);
+			$out=array();
+			foreach($ar as $v) $out[] = trim($v);
+			return implode(',',$out);
+	}
 		
 		private  function toArray($data){
 				$out=[];
@@ -64,13 +70,13 @@ class ImportExport{
 				(isset($v->uid)?$v->uid:''),
 				$v->name,
 				(isset($v->unit)?$v->unit:''),
-				(isset($v->cats)?$v->cats:''),
-				(isset($v->kws)?$v->kws:''),
+				(isset($v->cats)?$this->trimWhites($v->cats):''),
+				(isset($v->kws)?$this->trimWhites($v->kws):''),
 				(isset($v->meta)?$v->meta:''),
 				(isset($v->more)?$v->more:''),
 				(isset($v->info)?$v->info:''),
-				(isset($v->tmb)?$v->tmb:''),
-				(isset($v->imgs)?$v->imgs:'')
+				(isset($v->tmb)?trim($v->tmb):''),
+				(isset($v->imgs)?$this->trimWhites($v->imgs):'')
 				);
 				return $out;
 		}

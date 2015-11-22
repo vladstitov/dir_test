@@ -79,21 +79,22 @@ class Destinations{
 			 $out->result=$this->updateCatDests($post);
 			 
 			break;			
-			
+		/*	
 			case 'add':							
 			 $out->result=$this->addDests(json_decode(file_get_contents("php://input")));	
 			
 			break;
 			
 			case 'overwrite':						
-			 $out->result=$this->overwriteDests(json_decode(file_get_contents("php://input")));	
+			 $out->result=$this->overwriteDestsinations(json_decode(file_get_contents("php://input")));	
 			 include_once('Statistics.php');	
 			$ctr=new Statistics();
 			$ctr->moveStatistics();
 			sleep(5);
 			$ctr->createNewDatabase();
 					 
-			break;			
+			break;	
+*/			
 			case 'dest_image':
 				if(isset($get['id'])){
 						$id= $get['id'];
@@ -141,11 +142,16 @@ class Destinations{
 		foreach($data as $value) $this->con->execute(array($value['name'],$value['unit'],$value['cats'],$value['destid']));		
 		return $this->con-> commit();
 	}
-	*/
+	
+	
 	
 	private function insertDestinationsArray($data){
 		$this->con->beginTransaction('INSERT INTO destinations (uid,name,unit,cats,kws,meta,more,info,pgs) VALUES (?,?,?,?,?,?,?,?,?)');
-		foreach($data as $value) $this->con->execute(array($value[0],$value[1],$value[2],$value[3],$value[4],$value[5],$value[6],$value[7].$value[8]));
+		foreach($data as $value){
+				$cats = $this->trimWhites($value[3]);
+				$kws = $this->trimWhites($value[4]);				
+				$this->con->execute(array($value[0],$value[1],$value[2],$cats,$kws,$value[5],$value[6],$value[7].$value[8]));
+		}
 		return $this->con-> commit();		
 	}
 	private function overwriteDestsinations($data){
@@ -153,7 +159,7 @@ class Destinations{
 		$this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,tmb TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT)");
 		return $this->insertDestinationsArray($data);
 	}
-	
+	*/
 	public function normalizeKeywords(){
 					$res = $this->con->getAsArray('SELECT kws FROM destinations ');
 					
@@ -211,6 +217,12 @@ class Destinations{
 	}
 
 	
+	private function trimWhites($str){
+			$ar = explode(',',$str);
+			$out=array();
+			foreach($ar as $v) $out[] = trim($v);
+			return implode(',',$out);
+	}
 	
 		private function updateDestination($dest){
 				$out = new stdClass();
@@ -218,21 +230,26 @@ class Destinations{
 				$cats='';
 				$imgs='';
 				if(isset($dest->cats)){
-						if(is_string($dest->cats))$dest->cats = array($dest->cats);
-						if(array_search('0',$dest->cats) !==false)	array_splice($dest->cats,array_search('0',$dest->cats),1);											
-						$cats = implode(',',$dest->cats);
-				}
-				if(isset($dest->imgs)){
+							if(is_array($dest->cats)) $cats = implode(',',$dest->cats);
+							else $cats = $dest->cats;
+							// $cats = trim($cats,'0,');
+							  //$cats= $this->trimWhites($cats);
 							
-							$imgs = is_array($dest->imgs)?implode(',',$dest->imgs):$dest->imgs;
-				}				
+						//if(is_string($dest->cats))$dest->cats = array($dest->cats);
+						
+						//if(array_search('0',$dest->cats) !==false)	array_splice($dest->cats,array_search('0',$dest->cats),1);											
+						//$cats = implode(',',$dest->cats);
+				}
+				if(isset($dest->imgs))	$imgs = is_array($dest->imgs)?implode(',',$dest->imgs):$dest->imgs;
+					
 				if(!isset($dest->tmb))$dest->tmb='';
 				if(strlen($dest->more)<3)$dest->more='';
 				if(strlen($dest->tmb)<3)$dest->tmb='';	
 				if(strlen($dest->info)<3)$dest->info='';
-				if(strlen($dest->pgs)<3)$dest->pgs='';				
+				if(strlen($dest->pgs)<3)$dest->pgs='';
+				$kws=$this->trimWhites($dest->kws);				
 				
-				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$dest->kws,$dest->more,$dest->tmb,$dest->info,$dest->meta,$dest->pgs,$imgs);
+				$ar = array($dest->uid,$dest->name,$dest->unit,$cats,$kws,$dest->more,$dest->tmb,$dest->info,$dest->meta,$dest->pgs,$imgs);
 				$id=(int) $dest->id;
 				$res=false;
 				if($id){				
