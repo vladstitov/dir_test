@@ -8,16 +8,26 @@
     /// <reference path="KioskChart.ts" />
     /// <reference path="DeviceData.ts" />
 module uplight{
-    export class Statistics{
+    export class Statistics implements Module{
+        private ID:string = 'uplight.Statistics';
         R:RegA;
         private data:VOStat[];
        private colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
-        private fromTo:string
+        private fromTo:string;
+        private devices:Module;
         constructor(contauner:JQuery){
             this.R = RegA.getInstance();
+            this.R.current = this;
             contauner.load('htms/admin/Statistics.htm',()=>this.init());
         }
 
+        getName():string{
+            return this.ID;
+        }
+        destroy(){
+            this.devices.destroy();
+            this.R.current = null;
+        }
         private init():void{
            // var today = new Date()
           //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
@@ -28,7 +38,7 @@ module uplight{
             var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
             this.fromTo = 'from '+today.toDateString().substr(4) +' to '+priorDate.toDateString().substr(4);
             var kiosksChart:KiosksChart = new KiosksChart($('#KiosksChart'),this.colors,this.fromTo);
-            var devices:DevicesData = new DevicesData($('#DevicesData'),this.colors);
+            this.devices = new DevicesData($('#DevicesData'),this.colors);
 
         }
 

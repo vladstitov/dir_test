@@ -59,7 +59,10 @@ var CLICK: string = 'click';
 var HIDDEN:string='hidden';
 
 module uplight{
-
+    export interface Module{
+        destroy():void
+        getName():string;
+    }
     export class RegA {
         static SHOW_PREVIEW:string='SHOW_PREVIEW';
         static HIDE_PREVIEW:string='HIDE_PREVIEW';
@@ -84,6 +87,8 @@ module uplight{
             'show-menu':RegA.SHOW_MENU
         }
 
+        history:string[];
+        current:Module;
         confirm:Confirm;
         register(obj: any): void {
             this[obj.id]=obj

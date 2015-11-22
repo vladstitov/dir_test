@@ -1,6 +1,6 @@
 <?php
 include_once('DbConnector.php');
-include_once('cl/DbConnector.php');
+//include_once('cl/DbConnector.php');
 class Destinations{
     //var  $db;
 	var $con;
@@ -29,6 +29,11 @@ class Destinations{
 					if($res){
 							$out->success='success';
 							$out->msg='table destinations empty';
+							include_once('Statistics.php');	
+							$ctr=new Statistics();
+							$ctr->moveStatistics();
+							sleep(5);
+							$ctr->createNewDatabase();
 					}else{
 						$out->error='error';
 						$out->result=$this->con->errorInfo();
@@ -54,16 +59,21 @@ class Destinations{
 
 			case 'save':
 				$dest = json_decode(file_get_contents("php://input"));
-				return $this->updateDestination($dest);				
+				$res =$this->updateDestination($dest);
+				$this->normalizeKeywords();
+				return $res;				
 				break;
 			case 'delete':
-			$res=  $this->deleteDest((int)$get['destid']);
-
-			if($res) $out->result='success';
+			$res =  $this->deleteDest((int)$get['destid']);
+			if($res){
+				$out->result='success';
+				$this->normalizeKeywords();
+			}
 			else  {
 				$out->result='error';
 				$out->reason=$this->con->errorInfo();
 			}
+			
 			break;
 			case 'saveCatDests':			
 			 $out->result=$this->updateCatDests($post);
@@ -71,12 +81,18 @@ class Destinations{
 			break;			
 			
 			case 'add':							
-			 $out->result=$this->addDests(json_decode(file_get_contents("php://input")));			 
+			 $out->result=$this->addDests(json_decode(file_get_contents("php://input")));	
+			
 			break;
 			
-			case 'overwrite':
-						
-			 $out->result=$this->overwriteDests(json_decode(file_get_contents("php://input")));			 
+			case 'overwrite':						
+			 $out->result=$this->overwriteDests(json_decode(file_get_contents("php://input")));	
+			 include_once('Statistics.php');	
+			$ctr=new Statistics();
+			$ctr->moveStatistics();
+			sleep(5);
+			$ctr->createNewDatabase();
+					 
 			break;			
 			case 'dest_image':
 				if(isset($get['id'])){
@@ -134,10 +150,34 @@ class Destinations{
 	}
 	private function overwriteDestsinations($data){
 		$this->con->queryPure("DROP TABLE destinations");
-		$this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,tmb TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT,locations TEXT,labels TEXT)");
+		$this->con->queryPure("CREATE TABLE destinations (id INTEGER PRIMARY KEY,uid TEXT,name TEXT,unit TEXT,cats TEXT,kws TEXT,more TEXT,tmb TEXT,meta TEXT,info TEXT,pgs TEXT,imgs TEXT)");
 		return $this->insertDestinationsArray($data);
 	}
 	
+	public function normalizeKeywords(){
+					$res = $this->con->getAsArray('SELECT kws FROM destinations ');
+					
+					$kws=array();
+					foreach($res as $val) {
+							$kw=explode(',',$val[0]);
+							foreach($kw as $word){
+							$word = trim($word,' ');							
+							if(array_search($word,$kws)===FALSE)$kws[]=$word;
+							}
+					}
+					sleep(1);
+					include_once('Statistics.php');					
+					$stat = new Statistics();
+					$kwsStat = $stat->getKeywords();
+					$res=array();
+					foreach($kwsStat as $val)if(array_search($val[0],$kws)===FALSE){
+											if($stat->removeKeyword($val[0]))$res[] = $val[0];
+											else $res[]='ERROR '.$val[0].' '.json_encode($stat->getError());;
+											}
+					
+					return $res;				
+	
+	}
 	
 	private function cleanData(){
 				$result=$this->con ->getAllAsObj('SELECT * FROM destinations ORDER BY LOWER(name)');

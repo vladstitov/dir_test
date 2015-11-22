@@ -18,6 +18,9 @@ var OPEN:string='open';
 
 module uplight {
 
+    export interface Module{
+        destroy():void
+    }
     export class VOProps{
         id:number;
         label:string;
@@ -61,6 +64,8 @@ module uplight {
         settings: any;
         props:any;//_.Dictionary<VOProps>;
         static status:string;
+
+        current:string;
 
         isServer: boolean;
 

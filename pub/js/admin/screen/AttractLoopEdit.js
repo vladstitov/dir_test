@@ -7,8 +7,10 @@ var uplight;
     var AttractLoopEdit = (function () {
         function AttractLoopEdit(container) {
             var _this = this;
+            this.ID = 'uplight.AttractLoopEdit';
             this.settingsURL = 'settings.json';
             this.R = uplight.RegA.getInstance();
+            this.R.current = this;
             container.load('htms/admin/AttractLoopEdit.html', function () { return _this.init(); });
         }
         AttractLoopEdit.prototype.init = function () {
@@ -40,6 +42,11 @@ var uplight;
             this.preview.find('[data-id=btnClose]').click(function () { return _this.preview.hide(); });
             this.btnChangeType.click(function () { return _this.onChangeTypeClick(); });
             this.btnPreview.click(function () { return _this.showPeview(); });
+        };
+        AttractLoopEdit.prototype.destroy = function () {
+        };
+        AttractLoopEdit.prototype.getName = function () {
+            return this.ID;
         };
         AttractLoopEdit.prototype.onSelectTypeClose = function () {
             this.changeType.hide();

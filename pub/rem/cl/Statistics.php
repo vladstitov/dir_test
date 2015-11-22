@@ -1,4 +1,5 @@
 <?
+/*
 class Device{
 		var $type;
 		var $id;
@@ -7,6 +8,7 @@ class Device{
 			$this->id=$id;
 		}
 }
+*/
 class Statistics{
     var  $db;
 	var $con;
@@ -16,6 +18,12 @@ class Statistics{
 			$this->filename = DATA.'statistics.json';
 	}
 
+	
+	private function getDB(){	
+			if(!$this->db) $this->db = new PDO('sqlite:'.DATA.'statistics.db');
+			return $this->db;
+	}
+	
 	function getUsage($devices,$from,$to){
 				$ar = explode(',',$devices);				
 				$from=is_numeric($from)?(int)$from:strtotime($from);//1437096651492;
@@ -29,19 +37,59 @@ class Statistics{
 			}
 			return $out;
 			
-			$devs=array();
-			if(isset($get['kiosks'])) foreach(explode(',',$get['kiosks']) as $id) $devs[] = new Device('kiosk',$id);		
-			$from=isset($get['from'])?$get['from']:0;
-			$to = isset($get['to'])?$get['to']:time();
-			if(isset($get['web']))$devs[] = new Device('web',0);
-			return $this->getCount($devs,$from,$to);
-	
-	}
-	private function getDB(){	
-			if(!$this->db) $this->db = new PDO('sqlite:'.DATA.'statistics.db');
-			return $this->db;
 	}
 	
+	function moveStatistics(){
+	return 	rename(DATA.'statistics.db',DATA.'arch/statistics'.time().'.db');
+	}
+	function createNewDatabase(){
+	$steps=0;	
+		
+		$res = 	$this->getDB()->query('CREATE table categories (value INTEGER,rate INTEGER)');
+		if($res) $steps++;
+		$res = 	$this->getDB()->query('CREATE table destinations (value INTEGER,rate INTEGER)');
+		if($res) $steps++;
+		$res = 	$this->getDB()->query('CREATE table keywords (value INTEGER,rate INTEGER)');
+		if($res) $steps++;
+		$res = 	$this->getDB()->query('CREATE table pages (value INTEGER,rate INTEGER)');
+		if($res) $steps++;
+		$res = 	$this->getDB()->query('CREATE table search (value INTEGER,rate INTEGER)');
+		if($res) $steps++;
+		$res = 	$this->getDB()->query('CREATE table clicks (clicksid INTEGER PRIMARY KEY,stamp INTEGER, device TEXT, type TEXT)');
+		if($res) $steps++;
+	return $steps;
+			
+			
+	}	
+	
+	public function getKeywords(){	
+				return $this->getDB()->query('SELECT value FROM keywords ')->fetchAll(PDO::FETCH_NUM);					
+	}
+	public function removeKeyword($word){
+			return $this->getDB()->query("DELETE FROM keywords WHERE value=='$word'");
+	}
+	public function getError(){
+			return $this->getDB()->errorInfo();
+	}
+	function removeCategories(){
+			return $this->getDB()->query("DELETE FROM categories");
+	}
+	
+	function removeDestinations(){
+			
+			return $this->getDB()->query("DELETE FROM destinations");
+			
+	}
+	function getStatistics(){	
+				$out= new stdClass();
+				$out->destinations = $this->getDB()->query('SELECT * FROM destinations ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->keywords = $this->getDB()->query('SELECT * FROM keywords ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->search = $this->getDB()->query('SELECT * FROM search ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
+				$out->categories = $this->getDB()->query('SELECT * FROM categories')->fetchAll(PDO::FETCH_NUM);				
+				return $out;	
+	}
+	
+/*	
 	
 	function getCount($ar,$from,$to){	
 				$from=is_numeric($from)?(int)$from:strtotime($from);//1437096651492;
@@ -59,16 +107,6 @@ class Statistics{
 			return $ar;
 	
 	}
-	function getStatistics(){	
-				$out= new stdClass();
-				$out->destinations = $this->getDB()->query('SELECT * FROM destinations ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
-				$out->keywords = $this->getDB()->query('SELECT * FROM keywords ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
-				$out->search = $this->getDB()->query('SELECT * FROM search ORDER BY rate DESC LIMIT 20')->fetchAll(PDO::FETCH_NUM);
-				$out->categories = $this->getDB()->query('SELECT * FROM categories')->fetchAll(PDO::FETCH_NUM);				
-				return $out;	
-	}
-		
-	
 	private function addValue(&$ar,$str){
 				foreach($ar as $val) {
 					if($val->str == $str) return $val->val++;
@@ -153,6 +191,28 @@ class Statistics{
 				return file_put_contents($this->filename,json_encode($this->pub));
 	
 	}
+	function getUsage($devices,$from,$to){
+				$ar = explode(',',$devices);				
+				$from=is_numeric($from)?(int)$from:strtotime($from);//1437096651492;
+				$to=is_numeric($to)?(int)$to:strtotime($to);
+				$out=new stdClass();
+			foreach($ar as $device){
+				$clicks= array();				
+				$res = $this->getDB()->query("SELECT stamp FROM clicks WHERE (stamp BETWEEN $from AND $to) AND device='$device'");
+				if($res) foreach($res->fetchAll(PDO::FETCH_NUM) as $row) $clicks[] = $row[0];
+				$out->$device = $clicks;
+			}
+			return $out;
+			
+			$devs=array();
+			if(isset($get['kiosks'])) foreach(explode(',',$get['kiosks']) as $id) $devs[] = new Device('kiosk',$id);		
+			$from=isset($get['from'])?$get['from']:0;
+			$to = isset($get['to'])?$get['to']:time();
+			if(isset($get['web']))$devs[] = new Device('web',0);
+			return $this->getCount($devs,$from,$to);
+	
+	}
+	*/
 	
 
 }

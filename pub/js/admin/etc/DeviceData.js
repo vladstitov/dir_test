@@ -8,19 +8,26 @@
 var uplight;
 (function (uplight) {
     var DevicesData = (function () {
-        // private greenLite:JQuery;
         function DevicesData(view, colors) {
             //console.log('DevicesData');
             var _this = this;
             this.view = view;
             this.colors = colors;
+            this.ID = 'uplight.DevicesData';
+            this.R = uplight.RegA.getInstance();
             if (uplight.RegA.getInstance().props['timer'])
-                this.kioskTimer = uplight.RegA.getInstance().props['timer'].value;
+                this.kioskTimer = this.R.props['timer'].value;
             this.list = view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
-            setInterval(function () { return _this.loadData(); }, 10000);
+            this.timer = setInterval(function () { return _this.loadData(); }, 10000);
         }
+        DevicesData.prototype.getName = function () {
+            return this.ID;
+        };
+        DevicesData.prototype.destroy = function () {
+            clearInterval(this.timer);
+        };
         DevicesData.prototype.loadData = function () {
             var _this = this;
             this.list.find('.status').detach();

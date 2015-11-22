@@ -3,7 +3,8 @@
  */
     /// <reference path="../RegA.ts" />
 module uplight{
-    export class AttractLoopEdit{
+    export class AttractLoopEdit implements Module{
+        private ID:string = 'uplight.AttractLoopEdit';
         R:RegA
         view:JQuery;
         tools:JQuery;
@@ -38,6 +39,7 @@ module uplight{
 
         constructor(container:JQuery){
             this.R=RegA.getInstance();
+            this.R.current = this;
             container.load('htms/admin/AttractLoopEdit.html',()=>this.init());
         }
 
@@ -75,6 +77,12 @@ module uplight{
             this.btnPreview.click(()=>this.showPeview())
         }
 
+        destroy():void{
+
+        }
+        getName():string{
+            return this.ID;
+        }
         private onSelectTypeClose():void{
             this.changeType.hide();
             this.current.show();

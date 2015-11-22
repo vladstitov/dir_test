@@ -7,21 +7,34 @@
     /// <reference path="../../typing/underscore.d.ts" />
 module uplight{
 
-    export class DevicesData {
+    export class DevicesData implements Module {
         private data:VODevice[];
         private devices:DeviceModel[];
         private s_time:number;
         private list:JQuery;
         private kioskTimer:number;
+        private timer:number;
+        private ID:string ='uplight.DevicesData';
+
         // private greenLite:JQuery;
+
+        private R:RegA;
         constructor(private view:JQuery,private colors:string[]){
             //console.log('DevicesData');
 
-            if(RegA.getInstance().props['timer']) this.kioskTimer = RegA.getInstance().props['timer'].value;
+            this.R =  RegA.getInstance()
+            if(RegA.getInstance().props['timer']) this.kioskTimer =this.R.props['timer'].value;
             this.list = view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
-            setInterval(()=>this.loadData(),10000);
+           this.timer =  setInterval(()=>this.loadData(),10000);
+        }
+
+        getName():string{
+            return this.ID;
+        }
+        destroy():void{
+            clearInterval(this.timer);
         }
         private loadData():void{
             this.list.find('.status').detach();

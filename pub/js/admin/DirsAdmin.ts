@@ -63,8 +63,9 @@ module uplight {
             this.hideModile();
                 switch (hash){
                     case '#Kiosk1080':
+
                         this.content.hide();
-                      this.showKiosk(1080);
+                        this.showKiosk(1080);
                         break;
                     case '#Kiosk1920':
                         this.content.hide();
@@ -77,6 +78,7 @@ module uplight {
                     case '#Attract-L':
                         // this.showPreview();
 
+                        if(this.R.current)this.R.current.destroy();
                         // this.content.hide();
                         this.attractLoop = new AttractLoopEdit(this.content);
                         this.content.show();
@@ -86,7 +88,7 @@ module uplight {
 
                     case '#Statistic':
                         // this.showPreview();
-
+                        if(this.R.current)this.R.current.destroy();
                        // this.content.hide();
                         this.statistics = new Statistics(this.content);
                         this.content.show();
@@ -95,7 +97,7 @@ module uplight {
                         break;
                     case '#Info-Page':
                         // this.showPreview();
-
+                        if(this.R.current)this.R.current.destroy();
                         // this.content.hide();
                         this.infoPages = new InfoPagesManager(this.content);
                         this.content.show();
@@ -103,6 +105,7 @@ module uplight {
 
                         break;
                     case '#Front-Pag':
+                        if(this.R.current)this.R.current.destroy();
                        if(!this.frontPageEditor) this.frontPageEditor = new FrontPageEditor(this.content);
                         else{
                            this.content.children().detach();
@@ -114,37 +117,39 @@ module uplight {
 
                         break;
                     case '#Listing-V':
-
+                        if(this.R.current)this.R.current.destroy();
                         this.listing = new DestinationsController(this.content);
                         this.content.show();
                         break;
                     case '#Categorie':
                     case '#Edit-Cate':
-
+                        if(this.R.current)this.R.current.destroy();
                         this.categories = new CategoriesManager(this.content);
                         this.content.show();
                         break
                     case '#Category-':
-
+                        if(this.R.current)this.R.current.destroy();
                         this.categoryListing = new CategoryListing(this.content);
                         this.content.show();
                         break;
                     case '#Import-Ex':
-
+                        if(this.R.current)this.R.current.destroy();
                         this.importExport = new ImportExport(this.content);
                         break;
                     case '#Settings-':
+                        if(this.R.current)this.R.current.destroy();
                         this.settingsEdit = new SettingsEdit(this.content);
                         this.content.show();
                         break;
                     case '#Heading-S':
                     case '#Backgroun':
                     case '#Logo-Imag':
-
+                        if(this.R.current)this.R.current.destroy();
                         this.labels = new LabelsManager(this.content);
                         this.content.show();
                         break;
                     case '#GoogleMap':
+                        if(this.R.current)this.R.current.destroy();
                         var gmap:GmapCtr = new GmapCtr(this.content)
                         break;
                     default :

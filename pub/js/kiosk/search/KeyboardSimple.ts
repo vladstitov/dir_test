@@ -96,11 +96,12 @@ module uplight{
                 this.R.connector.Stat('kw',str);
                 this.setText(str);
             }
-
         }
+
         private onClearClick():void{
             this.setText('');
         }
+
         private setText(txt:string):void{
             this.data=txt;
             this.input.val(this.data);

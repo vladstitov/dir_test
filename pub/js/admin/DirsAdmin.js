@@ -85,23 +85,31 @@ var uplight;
                     break;
                 case '#Attract-L':
                     // this.showPreview();
+                    if (this.R.current)
+                        this.R.current.destroy();
                     // this.content.hide();
                     this.attractLoop = new uplight.AttractLoopEdit(this.content);
                     this.content.show();
                     break;
                 case '#Statistic':
                     // this.showPreview();
+                    if (this.R.current)
+                        this.R.current.destroy();
                     // this.content.hide();
                     this.statistics = new uplight.Statistics(this.content);
                     this.content.show();
                     break;
                 case '#Info-Page':
                     // this.showPreview();
+                    if (this.R.current)
+                        this.R.current.destroy();
                     // this.content.hide();
                     this.infoPages = new uplight.InfoPagesManager(this.content);
                     this.content.show();
                     break;
                 case '#Front-Pag':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     if (!this.frontPageEditor)
                         this.frontPageEditor = new uplight.FrontPageEditor(this.content);
                     else {
@@ -111,32 +119,46 @@ var uplight;
                     this.content.show();
                     break;
                 case '#Listing-V':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.listing = new uplight.DestinationsController(this.content);
                     this.content.show();
                     break;
                 case '#Categorie':
                 case '#Edit-Cate':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.categories = new uplight.CategoriesManager(this.content);
                     this.content.show();
                     break;
                 case '#Category-':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.categoryListing = new uplight.CategoryListing(this.content);
                     this.content.show();
                     break;
                 case '#Import-Ex':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.importExport = new uplight.ImportExport(this.content);
                     break;
                 case '#Settings-':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.settingsEdit = new uplight.SettingsEdit(this.content);
                     this.content.show();
                     break;
                 case '#Heading-S':
                 case '#Backgroun':
                 case '#Logo-Imag':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     this.labels = new uplight.LabelsManager(this.content);
                     this.content.show();
                     break;
                 case '#GoogleMap':
+                    if (this.R.current)
+                        this.R.current.destroy();
                     var gmap = new uplight.GmapCtr(this.content);
                     break;
                 default:
