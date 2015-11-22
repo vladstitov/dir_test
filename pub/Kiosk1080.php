@@ -233,8 +233,9 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     }
 
                     #MenuList{
-                        height: 200px;
-                        overflow: hidden;
+                        height: 230px;
+                        overflow-y:auto;
+
                     }
                     #MenuList  li.item {
                         border-radius: 20px;

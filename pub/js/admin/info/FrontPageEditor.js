@@ -56,7 +56,7 @@ var uplight;
         FrontPageEditor.prototype.onDelClicked = function () {
         };
         FrontPageEditor.prototype.onSave = function (res) {
-            console.log(res);
+            //  console.log(res);
             if (res.success)
                 uplight.RegA.getInstance().msg('Page Saved', this.btnSave);
             else {
@@ -73,7 +73,7 @@ var uplight;
             this.list.append(tmp);
         };
         FrontPageEditor.prototype.onPages = function (data) {
-            console.log(data);
+            // console.log(data);
             this.pages = JSON.parse(data);
             this.renderList();
         };
@@ -98,11 +98,13 @@ var uplight;
         FrontPageEditor.prototype.renderList = function () {
             var ar = this.pages;
             var out = '<a class="list-group-item"><span class="fa fa-search"></span> <span> Search Directory</span></a>';
+            out += '<div id="PagesListFront">';
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
                 item.seq = i + 1;
                 out += '<a class="list-group-item"><span class="' + item.icon + '"></span> <span> ' + item.name + '</span></a>';
             }
+            out += '</div>';
             this.list.html(out);
         };
         return FrontPageEditor;

@@ -75,7 +75,7 @@ module uplight{
         }
 
         private onSave(res:VOResult):void{
-            console.log(res);
+          //  console.log(res);
             if(res.success) RegA.getInstance().msg('Page Saved',this.btnSave);
             else {
                 RegA.getInstance().connector.error('FronPageEditor '+res.error+' '+res.result);
@@ -93,13 +93,12 @@ module uplight{
 
         }
 
-
-
         private onPages(data):void{
-            console.log(data);
+           // console.log(data);
             this.pages = JSON.parse(data);
             this.renderList();
         }
+
         private loadMenu():void{
             var url:string =RegA.getInstance().settings.pages;
             if(url)  RegA.getInstance().connector.getData(url).done((data)=>this.onPages(data));
@@ -122,11 +121,13 @@ module uplight{
         private renderList():void{
         var ar= this.pages;
             var out='<a class="list-group-item"><span class="fa fa-search"></span> <span> Search Directory</span></a>';
+            out+='<div id="PagesListFront">';
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
                 item.seq=i+1;
                 out+='<a class="list-group-item"><span class="'+item.icon+'"></span> <span> '+item.name+'</span></a>';
             }
+            out+='</div>';
             this.list.html(out);
 
         }

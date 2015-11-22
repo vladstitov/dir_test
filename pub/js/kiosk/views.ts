@@ -11,7 +11,7 @@ module uplight{
 
             $('#btnSearch').click(()=>r.events.triggerHandler(r.KIOSK_SHOW_SEARCH));
             $('#SearchView [data-id=btnClose]').click(function(){
-                console.log('close  '+r.KIOSK_SHOW_MENU);
+              //  console.log('close  '+r.KIOSK_SHOW_MENU);
                 Registry.getInstance().events.trigger(r.KIOSK_SHOW_MENU);
             });
            $('#btnShowMenu').click(()=>r.events.triggerHandler(r.KIOSK_SHOW_MENU));
@@ -29,12 +29,18 @@ module uplight{
        constructor(el:HTMLElement){
 
            this.view = $(el);
-           this.btnClose = this.view.find('[data-id=btnClose]:first').click(()=>this.hide());
-            this.R=Registry.getInstance();
+           this.R=Registry.getInstance();
+           this.btnClose = this.view.find('[data-id=btnClose]:first').click(()=>{
+               this.R.events.triggerHandler(this.R.KEYBOARD_HIDE);
+               this.R.events.triggerHandler(this.R.RESET_INPUT);
+           });
+
            this.R.events.on(this.R.KEYBOARD_SHOW,(evt)=>this.show());
            this.R.events.on(this.R.KEYBOARD_HIDE,(evt)=>this.hide());
            this.R.events.on(this.R.RESET_VIEWS,(evt)=>this.hide());
            this.R.events.on(this.R.HIDE_VIEWS,(evt)=>this.hide());
+           this.R.events.on(this.R.RESET_ALL,(evt)=>this.hide());
+
 
        }
 

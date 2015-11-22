@@ -27,7 +27,7 @@ var uplight;
         SearchResult.prototype.addListeners = function () {
             var _this = this;
             this.R.events.on(this.R.CATEGORIES_CHANGE, function (evt, cats) { return _this.onCategoriesChange(cats); });
-            this.R.events.on(this.R.SEARCH_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
+            this.R.events.on(this.R.INPUT_CHANGED, function (evt, pattern) { return _this.onSearchChange(pattern); });
             this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
             this.model.dispatcher.on(this.model.READY, function () { return _this.onDataReady(); });
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });

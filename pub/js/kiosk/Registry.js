@@ -27,7 +27,8 @@ var uplight;
             this.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
             this.KEYBOARD_SHOW = 'KEYBOARD_SHOW';
             this.KEYBOARD_HIDE = 'KEYBOARD_HIDE';
-            this.SEARCH_CHANGED = 'SEARCH_CHANGED';
+            this.INPUT_CHANGED = 'INPUT_CHANGED';
+            this.RESET_INPUT = 'RESET_INPUT';
             this.KEY_PRESSED = 'KEY_PRESSED';
             this.SEARCH_RESULT_SELECT = 'SEARCH_RESULT_SELECT';
             this.SEARCH_RESULT_SHOW_DESTINATION = 'SEARCH_RESULT_SHOW_DESTINATION';
@@ -75,4 +76,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

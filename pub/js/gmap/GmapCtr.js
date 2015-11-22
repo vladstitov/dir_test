@@ -44,12 +44,12 @@ var uplight;
             return this.ID;
         };
         GmapCtr.prototype.destroy = function () {
-            this.$lat = null;
-            this.$lng = null;
-            this.$zoom = null;
-            this.$btnSave = null;
-            google.maps.event.clearInstanceListeners(this.map);
-            this.map = null;
+            // this.$lat = null;
+            // this.$lng = null;
+            // this.$zoom = null;
+            //  this.$btnSave = null;
+            //google.maps.event.clearInstanceListeners(this.map);
+            // this.map = null;
         };
         GmapCtr.prototype.init = function () {
             var _this = this;

@@ -57,6 +57,7 @@ module uplight {
        }
        showMenu():void{
            //console.log('showMenu');
+           this.R.events.triggerHandler(this.R.RESET_INPUT);
            $('#toolsview').animate({scrollTop:'0'});
        }
 

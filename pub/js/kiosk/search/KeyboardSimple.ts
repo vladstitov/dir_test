@@ -61,9 +61,9 @@ module uplight{
     }
 
     export class SearchInput{
-        view:JQuery
+        view:JQuery;
         input:JQuery;
-        private btnClear:JQuery
+        private btnClear:JQuery;
         data:string;
         R:Registry;
         private isKw:boolean;
@@ -84,6 +84,8 @@ module uplight{
 
         private addListeners():void{
             this.btnClear.on(CLICK,()=>this.onClearClick());
+           // this.R.events.on(this.R.KEYBOARD_HIDE,()=>{this.setText('');});
+            this.R.events.on(this.R.RESET_INPUT,()=>{this.setText('');});
             this.R.events.on(this.R.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
             this.R.events.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
             this.R.events.on(this.R.RESET_ALL,()=>this.reset());
@@ -105,9 +107,9 @@ module uplight{
         private setText(txt:string):void{
             this.data=txt;
             this.input.val(this.data);
-            console.log();
+
           //  console.log(this.R.SEARCH_CHANGED,this.data);
-            this.R.events.triggerHandler(this.R.SEARCH_CHANGED,this.data);
+            this.R.events.triggerHandler(this.R.INPUT_CHANGED,this.data);
         }
 
         private timeout:number

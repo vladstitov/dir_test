@@ -50,7 +50,7 @@ module uplight {
 
         addListeners():void{
             this.R.events.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
-            this.R.events.on(this.R.SEARCH_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
+            this.R.events.on(this.R.INPUT_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
             this.R.events.on(this.R.RESET_ALL,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
             this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));

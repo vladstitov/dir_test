@@ -69,12 +69,12 @@ module uplight{
         }
         destroy():void{
 
-            this.$lat = null;
-            this.$lng = null;
-            this.$zoom = null;
-            this.$btnSave = null;
-            google.maps.event.clearInstanceListeners(this.map);
-            this.map = null;
+           // this.$lat = null;
+           // this.$lng = null;
+           // this.$zoom = null;
+          //  this.$btnSave = null;
+            //google.maps.event.clearInstanceListeners(this.map);
+           // this.map = null;
 
         }
         private init(){

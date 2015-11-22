@@ -42,7 +42,8 @@ module uplight {
         KEYBOARD_HIDE:string='KEYBOARD_HIDE';
 
 
-        SEARCH_CHANGED:string='SEARCH_CHANGED';
+        INPUT_CHANGED:string='INPUT_CHANGED';
+        RESET_INPUT:string='RESET_INPUT';
 
         KEY_PRESSED:string='KEY_PRESSED';
 

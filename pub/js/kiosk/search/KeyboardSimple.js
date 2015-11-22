@@ -70,6 +70,10 @@ var uplight;
         SearchInput.prototype.addListeners = function () {
             var _this = this;
             this.btnClear.on(CLICK, function () { return _this.onClearClick(); });
+            // this.R.events.on(this.R.KEYBOARD_HIDE,()=>{this.setText('');});
+            this.R.events.on(this.R.RESET_INPUT, function () {
+                _this.setText('');
+            });
             this.R.events.on(this.R.KEY_PRESSED, function (evt, txt) {
                 _this.onKeyPressed(txt);
             });
@@ -94,9 +98,8 @@ var uplight;
         SearchInput.prototype.setText = function (txt) {
             this.data = txt;
             this.input.val(this.data);
-            console.log();
             //  console.log(this.R.SEARCH_CHANGED,this.data);
-            this.R.events.triggerHandler(this.R.SEARCH_CHANGED, this.data);
+            this.R.events.triggerHandler(this.R.INPUT_CHANGED, this.data);
         };
         SearchInput.prototype.onKeyPressed = function (txt) {
             var str = this.data;

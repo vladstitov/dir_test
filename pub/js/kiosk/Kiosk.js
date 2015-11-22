@@ -120,6 +120,7 @@ var uplight;
         };
         Kiosk.prototype.showMenu = function () {
             //console.log('showMenu');
+            this.R.events.triggerHandler(this.R.RESET_INPUT);
             $('#toolsview').animate({ scrollTop: '0' });
         };
         Kiosk.prototype.showSearchResult = function () {

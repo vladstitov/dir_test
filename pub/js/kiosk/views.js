@@ -11,7 +11,7 @@ var uplight;
             var r = uplight.Registry.getInstance();
             $('#btnSearch').click(function () { return r.events.triggerHandler(r.KIOSK_SHOW_SEARCH); });
             $('#SearchView [data-id=btnClose]').click(function () {
-                console.log('close  ' + r.KIOSK_SHOW_MENU);
+                //  console.log('close  '+r.KIOSK_SHOW_MENU);
                 uplight.Registry.getInstance().events.trigger(r.KIOSK_SHOW_MENU);
             });
             $('#btnShowMenu').click(function () { return r.events.triggerHandler(r.KIOSK_SHOW_MENU); });
@@ -23,12 +23,16 @@ var uplight;
         function KeyboardView(el) {
             var _this = this;
             this.view = $(el);
-            this.btnClose = this.view.find('[data-id=btnClose]:first').click(function () { return _this.hide(); });
             this.R = uplight.Registry.getInstance();
+            this.btnClose = this.view.find('[data-id=btnClose]:first').click(function () {
+                _this.R.events.triggerHandler(_this.R.KEYBOARD_HIDE);
+                _this.R.events.triggerHandler(_this.R.RESET_INPUT);
+            });
             this.R.events.on(this.R.KEYBOARD_SHOW, function (evt) { return _this.show(); });
             this.R.events.on(this.R.KEYBOARD_HIDE, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.RESET_VIEWS, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.HIDE_VIEWS, function (evt) { return _this.hide(); });
+            this.R.events.on(this.R.RESET_ALL, function (evt) { return _this.hide(); });
         }
         KeyboardView.prototype.hide = function () {
             if (this.isVisible) {

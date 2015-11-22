@@ -278,7 +278,7 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     }
                 </style>
                 <!-- <span class="fa fa-search"></span>-->
-                <input type="text" class="Plastic031 pull-right" />
+                <input type="text" class="pull-right" />
                 <span class="fa fa-times-circle"  data-id="btnClear"></span>
             </div>
 
