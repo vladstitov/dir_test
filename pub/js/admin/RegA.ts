@@ -59,9 +59,12 @@ var CLICK: string = 'click';
 var HIDDEN:string='hidden';
 
 module uplight{
-    export interface Module{
+    export interface UModule{
         destroy():void
         getName():string;
+        appendTo(cont:JQuery):UModule
+        detach():void
+
     }
     export class RegA {
         static SHOW_PREVIEW:string='SHOW_PREVIEW';
@@ -88,7 +91,7 @@ module uplight{
         }
 
         history:string[];
-        current:Module;
+        current:UModule;
         confirm:Confirm;
         register(obj: any): void {
             this[obj.id]=obj

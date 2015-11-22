@@ -263,7 +263,7 @@ var uplight;
             this.listing = $('#InfoPagesListing');
             this.breadCrumbs = new uplight.BreadCrumbs(this.view.find('[data-ctr=BreadCrumbs]:first'));
             this.breadCrumbs.onCiick = function (url) {
-                console.log(url);
+                // console.log(url);
                 if (url == 'listing') {
                     _this.showListing();
                 }
@@ -327,9 +327,10 @@ var uplight;
             }
             this.iEditor.savePage();
             this.save().done(function (res) {
-                console.log(res);
+                //console.log(res);
                 if (res.success)
                     _this.R.msg('Data saved', _this.iEditor.btnSave);
+                _this.loadData();
             });
         };
         InfoPagesManager.prototype.onData = function (data) {

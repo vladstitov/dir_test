@@ -7,7 +7,7 @@
     /// <reference path="../../typing/underscore.d.ts" />
 module uplight{
 
-    export class DevicesData implements Module {
+    export class DevicesData implements UModule {
         private data:VODevice[];
         private devices:DeviceModel[];
         private s_time:number;
@@ -19,17 +19,24 @@ module uplight{
         // private greenLite:JQuery;
 
         private R:RegA;
-        constructor(private view:JQuery,private colors:string[]){
+        constructor(private $view:JQuery,private colors:string[]){
             //console.log('DevicesData');
 
             this.R =  RegA.getInstance()
             if(RegA.getInstance().props['timer']) this.kioskTimer =this.R.props['timer'].value;
-            this.list = view.find('[data-id=list]:first');
+            this.list = $view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
            this.timer =  setInterval(()=>this.loadData(),10000);
         }
 
+        detach():void{
+            this.$view.detach();
+        }
+        appendTo(cont:JQuery):UModule{
+            this.$view.appendTo(cont);
+            return this;
+        }
         getName():string{
             return this.ID;
         }

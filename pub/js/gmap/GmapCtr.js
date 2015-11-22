@@ -20,6 +20,7 @@ var uplight;
     var GmapCtr = (function () {
         function GmapCtr(container) {
             var _this = this;
+            this.ID = 'uplight.GmapCtr';
             this.key = 'AIzaSyAUaQFpM8aGgiocMDRcPzH66FKx5rPH1q0';
             this.center = '43.657816714886074, -79.376571';
             container.load('htms/admin/Gmap.htm', function () { return _this.init(); });
@@ -32,6 +33,24 @@ var uplight;
             this.lng = this.geo.lng;
             this.zoom = this.geo.zoom;
         }
+        GmapCtr.prototype.detach = function () {
+            this.$view.detach();
+        };
+        GmapCtr.prototype.appendTo = function (cont) {
+            this.$view.appendTo(cont);
+            return this;
+        };
+        GmapCtr.prototype.getName = function () {
+            return this.ID;
+        };
+        GmapCtr.prototype.destroy = function () {
+            this.$lat = null;
+            this.$lng = null;
+            this.$zoom = null;
+            this.$btnSave = null;
+            google.maps.event.clearInstanceListeners(this.map);
+            this.map = null;
+        };
         GmapCtr.prototype.init = function () {
             var _this = this;
             this.$gmap = $('#GoogleMap');
@@ -101,6 +120,7 @@ var uplight;
             map.setOptions({ styles: styles });
             this.handleInfoWindow();
             this.initPanorama(map);
+            this.map = map;
         };
         GmapCtr.prototype.initPanorama = function (map) {
             var _this = this;

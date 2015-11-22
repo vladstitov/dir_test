@@ -18,17 +18,24 @@ var uplight;
             this.R.current = this;
             contauner.load('htms/admin/Statistics.htm', function () { return _this.init(); });
         }
+        Statistics.prototype.detach = function () {
+            this.$view.detach();
+        };
+        Statistics.prototype.appendTo = function (cont) {
+            this.$view.appendTo(cont);
+            return this;
+        };
         Statistics.prototype.getName = function () {
             return this.ID;
         };
         Statistics.prototype.destroy = function () {
             this.devices.destroy();
-            this.R.current = null;
         };
         Statistics.prototype.init = function () {
+            var _this = this;
+            this.$view = $('#Statistics');
             // var today = new Date()
             //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
-            var _this = this;
             this.R.connector.getStatistics().done(function (res) { return _this.onData(res); });
             var today = new Date();
             var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);

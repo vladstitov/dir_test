@@ -3,10 +3,10 @@
  */
     /// <reference path="../RegA.ts" />
 module uplight{
-    export class AttractLoopEdit implements Module{
+    export class AttractLoopEdit implements UModule{
         private ID:string = 'uplight.AttractLoopEdit';
         R:RegA
-        view:JQuery;
+        $view:JQuery;
         tools:JQuery;
         private settings:any
         private admin:any;
@@ -45,7 +45,7 @@ module uplight{
 
         private init():void{
             var view:JQuery = $('#AttractLoopEdit');
-            this.view = view;
+            this.$view = view;
             this.tools= view.find('[data-id=tools]:first');
             //this.title=view.find('[data-id=title]:first');
             this.alView = view.find('[data-id=alView]:first');
@@ -76,7 +76,14 @@ module uplight{
             this.btnChangeType.click(()=>this.onChangeTypeClick());
             this.btnPreview.click(()=>this.showPeview())
         }
+        appendTo(cont:JQuery):UModule{
+            this.$view.appendTo(cont);
+            return this;
+        }
 
+        detach():void{
+            this.$view.detach();
+        }
         destroy():void{
 
         }

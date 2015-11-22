@@ -159,7 +159,8 @@ var uplight;
                 case '#GoogleMap':
                     if (this.R.current)
                         this.R.current.destroy();
-                    var gmap = new uplight.GmapCtr(this.content);
+                    this.R.current = new uplight.GmapCtr(this.content);
+                    this.content.show();
                     break;
                 default:
                     break;

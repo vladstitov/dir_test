@@ -8,20 +8,27 @@
 var uplight;
 (function (uplight) {
     var DevicesData = (function () {
-        function DevicesData(view, colors) {
+        function DevicesData($view, colors) {
             //console.log('DevicesData');
             var _this = this;
-            this.view = view;
+            this.$view = $view;
             this.colors = colors;
             this.ID = 'uplight.DevicesData';
             this.R = uplight.RegA.getInstance();
             if (uplight.RegA.getInstance().props['timer'])
                 this.kioskTimer = this.R.props['timer'].value;
-            this.list = view.find('[data-id=list]:first');
+            this.list = $view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
             this.timer = setInterval(function () { return _this.loadData(); }, 10000);
         }
+        DevicesData.prototype.detach = function () {
+            this.$view.detach();
+        };
+        DevicesData.prototype.appendTo = function (cont) {
+            this.$view.appendTo(cont);
+            return this;
+        };
         DevicesData.prototype.getName = function () {
             return this.ID;
         };

@@ -342,7 +342,7 @@ module uplight{
             this.listing = $('#InfoPagesListing')
             this.breadCrumbs = new BreadCrumbs(this.view.find('[data-ctr=BreadCrumbs]:first'))
             this.breadCrumbs.onCiick=(url)=>{
-                console.log(url);
+               // console.log(url);
                 if(url=='listing'){
                     this.showListing();
                 }
@@ -411,8 +411,9 @@ module uplight{
             }
             this.iEditor.savePage();
             this.save().done((res)=>{
-                console.log(res);
+                //console.log(res);
                 if(res.success) this.R.msg('Data saved',this.iEditor.btnSave);
+                this.loadData();
             });
         }
 

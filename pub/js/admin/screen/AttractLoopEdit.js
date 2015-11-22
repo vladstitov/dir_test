@@ -16,7 +16,7 @@ var uplight;
         AttractLoopEdit.prototype.init = function () {
             var _this = this;
             var view = $('#AttractLoopEdit');
-            this.view = view;
+            this.$view = view;
             this.tools = view.find('[data-id=tools]:first');
             //this.title=view.find('[data-id=title]:first');
             this.alView = view.find('[data-id=alView]:first');
@@ -42,6 +42,13 @@ var uplight;
             this.preview.find('[data-id=btnClose]').click(function () { return _this.preview.hide(); });
             this.btnChangeType.click(function () { return _this.onChangeTypeClick(); });
             this.btnPreview.click(function () { return _this.showPeview(); });
+        };
+        AttractLoopEdit.prototype.appendTo = function (cont) {
+            this.$view.appendTo(cont);
+            return this;
+        };
+        AttractLoopEdit.prototype.detach = function () {
+            this.$view.detach();
         };
         AttractLoopEdit.prototype.destroy = function () {
         };

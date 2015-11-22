@@ -150,7 +150,8 @@ module uplight {
                         break;
                     case '#GoogleMap':
                         if(this.R.current)this.R.current.destroy();
-                        var gmap:GmapCtr = new GmapCtr(this.content)
+                        this.R.current = new GmapCtr(this.content);
+                        this.content.show();
                         break;
                     default :
 

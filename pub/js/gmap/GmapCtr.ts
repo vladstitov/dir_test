@@ -17,8 +17,9 @@ module uplight{
     zoom:number;
         constructor(obj:any){for(var str in obj )this[str] = obj[str];}
     }
-    export class GmapCtr{
+    export class GmapCtr implements UModule{
 
+        private ID:string ='uplight.GmapCtr';
         private key:string='AIzaSyAUaQFpM8aGgiocMDRcPzH66FKx5rPH1q0';
         center:string='43.657816714886074, -79.376571';
         lat:number;
@@ -40,6 +41,7 @@ module uplight{
         private $view:JQuery;
         private $gmap:JQuery;
         private $gover:JQuery;
+        private map:google.maps.Map;
 
 
         constructor(container:JQuery){
@@ -51,6 +53,28 @@ module uplight{
             this.lat = this.geo.lat;
             this.lng = this.geo.lng;
             this.zoom = this.geo.zoom;
+
+        }
+
+        detach():void{
+            this.$view.detach();
+        }
+
+        appendTo(cont:JQuery):UModule{
+            this.$view.appendTo(cont);
+            return this;
+        }
+        getName():string{
+            return this.ID;
+        }
+        destroy():void{
+
+            this.$lat = null;
+            this.$lng = null;
+            this.$zoom = null;
+            this.$btnSave = null;
+            google.maps.event.clearInstanceListeners(this.map);
+            this.map = null;
 
         }
         private init(){
@@ -102,6 +126,8 @@ module uplight{
             }
             var map = new google.maps.Map(document.getElementById('GoogleMap'),opt);
 
+
+
             google.maps.event.addListener(map, 'click', (event)=> {
                 this.lat = event.latLng.lat();
                 this.$lat.text(this.lat);
@@ -140,6 +166,7 @@ module uplight{
             map.setOptions({styles: styles});
             this.handleInfoWindow();
             this.initPanorama(map);
+            this.map = map;
         }
 
         private striitViewTimer:number;

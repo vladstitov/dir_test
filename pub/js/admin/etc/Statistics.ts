@@ -8,27 +8,35 @@
     /// <reference path="KioskChart.ts" />
     /// <reference path="DeviceData.ts" />
 module uplight{
-    export class Statistics implements Module{
+    export class Statistics implements UModule{
         private ID:string = 'uplight.Statistics';
         R:RegA;
         private data:VOStat[];
+        private $view:JQuery;
        private colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
         private fromTo:string;
-        private devices:Module;
+        private devices:UModule;
         constructor(contauner:JQuery){
             this.R = RegA.getInstance();
             this.R.current = this;
             contauner.load('htms/admin/Statistics.htm',()=>this.init());
         }
 
+        detach():void{
+            this.$view.detach();
+        }
+        appendTo(cont:JQuery):UModule{
+            this.$view.appendTo(cont);
+            return this;
+        }
         getName():string{
             return this.ID;
         }
         destroy(){
             this.devices.destroy();
-            this.R.current = null;
         }
         private init():void{
+            this.$view=$('#Statistics');
            // var today = new Date()
           //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
 
