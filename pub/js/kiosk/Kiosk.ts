@@ -56,13 +56,13 @@ module uplight {
            this.showSearchResult();
        }
        showMenu():void{
-           console.log('showMenu');
+           //console.log('showMenu');
            $('#toolsview').animate({scrollTop:'0'});
        }
 
 
        showSearchResult():void{
-           console.log('showSearck');
+           //console.log('showSearck');
            $('#mainport').animate({scrollLeft:0});
        }
        showPages():void{
@@ -152,7 +152,11 @@ module uplight {
         //  console.log(r.props['timer']);
            if(r.props['timer'])  var relay:Relay = new Relay(r.props['timer'].value);
 
-            r.events.on(r.AL_START,function(){r.events.triggerHandler(r.RESET_ALL)});
+            r.events.on(r.AL_START,()=>{
+                this.showSearchResult();
+                this.showMenu();
+                r.events.triggerHandler(r.RESET_ALL);
+            });
 
 
          //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);

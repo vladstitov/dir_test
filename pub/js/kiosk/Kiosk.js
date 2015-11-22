@@ -90,6 +90,8 @@ var uplight;
             if (r.props['timer'])
                 var relay = new uplight.Relay(r.props['timer'].value);
             r.events.on(r.AL_START, function () {
+                _this.showSearchResult();
+                _this.showMenu();
                 r.events.triggerHandler(r.RESET_ALL);
             });
             //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
@@ -117,11 +119,11 @@ var uplight;
             this.showSearchResult();
         };
         Kiosk.prototype.showMenu = function () {
-            console.log('showMenu');
+            //console.log('showMenu');
             $('#toolsview').animate({ scrollTop: '0' });
         };
         Kiosk.prototype.showSearchResult = function () {
-            console.log('showSearck');
+            //console.log('showSearck');
             $('#mainport').animate({ scrollLeft: 0 });
         };
         Kiosk.prototype.showPages = function () {
