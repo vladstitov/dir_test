@@ -268,17 +268,18 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                         font-size: 30px;
                         color: #adadad;
                     }
-                    #searchinput input{
+                   /* #searchinput #textInput{
                         border-radius: 30px;
                         font-size: 30px;
                         width: 200px;
+                        height: 82px;
                         border: none;
                         padding: 20px 40px 20px 20px;
                         margin-right: -20px;
-                    }
+                    }*/
                 </style>
                 <!-- <span class="fa fa-search"></span>-->
-                <input type="text" class="pull-right" />
+                <div id="textInput" data-id="input" class="pull-right" ></div>
                 <span class="fa fa-times-circle"  data-id="btnClear"></span>
             </div>
 
@@ -287,13 +288,16 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                     top:10px;
                     right: 0;
                 }
-                #searchinput input {
+                #searchinput #textInput {
                     border-radius: 10px;
                     font-size: 30px;
                     width: 400px;
+                    height: 82px;
                     border: none;
                     padding: 5px 5px 5px 5px;
                     margin-right: -20px;
+                    text-align: left;
+                    background-color: white;
                 }
             </style>
         </div>

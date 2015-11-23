@@ -198,17 +198,18 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
                                     font-size: 30px;
                                     color: #adadad;
                                 }
-                                #searchinput input{
+                                #searchinput #textInput{
                                     border-radius: 30px;
                                     font-size: 30px;
                                     width: 400px;
+                                    height: 82px;
                                     border: none;
                                     padding: 20px 40px 20px 20px;
                                     margin-right: -20px;
                                 }
                             </style>
                             <!-- <span class="fa fa-search"></span>-->
-                            <input type="text" class="input-text pull-right" />
+                            <div id="textInput" data-id="input" class="input-text pull-right" ></div>
                             <span class="fa fa-times-circle"  data-id="btnClear"></span>
                         </div>
                     </div>

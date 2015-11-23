@@ -70,7 +70,7 @@ module uplight{
         constructor(el:HTMLElement){
             this.view=$(el);
             this.data='';
-            this.input = this.view.find('input');
+            this.input = this.view.find('[data-id=input]:first');
             this.R=Registry.getInstance();
             this.btnClear = this.view.find('[data-id=btnClear]:first');
             this.addListeners();
@@ -78,7 +78,7 @@ module uplight{
         }
 
         reset(){
-            this.input.val('');
+            this.input.text('');
             this.data='';
         }
 
@@ -106,7 +106,7 @@ module uplight{
 
         private setText(txt:string):void{
             this.data=txt;
-            this.input.val(this.data);
+            this.input.text(this.data);
 
           //  console.log(this.R.SEARCH_CHANGED,this.data);
             this.R.events.triggerHandler(this.R.INPUT_CHANGED,this.data);

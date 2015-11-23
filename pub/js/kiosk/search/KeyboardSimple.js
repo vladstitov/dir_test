@@ -58,13 +58,13 @@ var uplight;
         function SearchInput(el) {
             this.view = $(el);
             this.data = '';
-            this.input = this.view.find('input');
+            this.input = this.view.find('[data-id=input]:first');
             this.R = uplight.Registry.getInstance();
             this.btnClear = this.view.find('[data-id=btnClear]:first');
             this.addListeners();
         }
         SearchInput.prototype.reset = function () {
-            this.input.val('');
+            this.input.text('');
             this.data = '';
         };
         SearchInput.prototype.addListeners = function () {
@@ -97,7 +97,7 @@ var uplight;
         };
         SearchInput.prototype.setText = function (txt) {
             this.data = txt;
-            this.input.val(this.data);
+            this.input.text(this.data);
             //  console.log(this.R.SEARCH_CHANGED,this.data);
             this.R.events.triggerHandler(this.R.INPUT_CHANGED, this.data);
         };
