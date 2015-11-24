@@ -11,7 +11,8 @@ module uplight{
 
         private hash:string;
         constructor(private view:JQuery){
-            this.list=$('<ul>').addClass('breadcrumb').appendTo(view);
+            console.log(view);
+            this.list=$('<ul>').appendTo(view);
            this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
         }
 

@@ -5,7 +5,8 @@ var uplight;
         function BreadCrumbs(view) {
             var _this = this;
             this.view = view;
-            this.list = $('<ul>').addClass('breadcrumb').appendTo(view);
+            console.log(view);
+            this.list = $('<ul>').appendTo(view);
             this.list.on(CLICK, 'li', function (evt) { return _this.onListClick(evt); });
         }
         BreadCrumbs.prototype.addCrumb = function (url, text) {

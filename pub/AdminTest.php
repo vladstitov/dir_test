@@ -63,7 +63,6 @@ if(!isset($_SESSION['directories_user'])){
         #Message{
             position: relative;
             z-index: 100;
-
         }
         #Message>div{
             background-color:#FFEFD5;
@@ -83,19 +82,37 @@ if(!isset($_SESSION['directories_user'])){
         .disabled{
             opacity: 0.5;
         }
-        .breadcrumb li{
-            cursor: pointer;
+        .pagenav{
+            margin: 10px;
+        }
+        body>hr{
+            margin: 5px;
+        }
+        .page-heading>*{
+            display: inline-block;
         }
 
-        .breadcrumb li.active{
-            cursor: auto;
+        .pagenav>ul{
+            margin-left: 20px;
         }
-        .breadcrumb li.active:hover{
-            text-decoration: none;
-        }
-        .breadcrumb li:hover{
+
+        .pagenav>ul>li{
+            display: inline;
+            cursor: pointer;
             text-decoration: underline;
         }
+        .pagenav li.active{
+           cursor: auto;
+            text-decoration:none;
+        }
+
+        .pagenav>ul>li+li:before {
+            padding: 0 5px;
+            color: #ccc;
+            content: "/\00a0";
+        }
+
+
 
     </style>
 
@@ -113,6 +130,7 @@ if(!isset($_SESSION['directories_user'])){
 </div>
 <hr/>
     <div id="error"></div>
+
     <div id="content" class="">
     </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
@@ -199,7 +217,7 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/admin/etc/Statistics.js"></script>
 
 
-<script type="text/javascript" src="js/admin/etc/CreateKiosk.js"></script>
+<script type="text/javascript" src="js/admin/etc/KiosksManager.js"></script>
 
 <script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
 <script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>

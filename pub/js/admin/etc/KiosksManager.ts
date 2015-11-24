@@ -9,11 +9,11 @@
 
 module uplight{
 
-    export class CreateKiosk implements UModule{
+    export class KiosksManager implements UModule{
         private $view:JQuery;
-        private ID:string='uplight.CreateKiosk';
+        private ID:string='uplight.KiosksManager';
         constructor(container:JQuery){
-            this.$view= $('<div>').appendTo(container).load('htms/admin/CreateKiosk.htm',()=>this.init());
+            this.$view= $('<div>').appendTo(container).load('htms/admin/KiosksManager.htm',()=>this.init());
 
         }
 
