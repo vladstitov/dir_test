@@ -134,13 +134,6 @@ module uplight {
                 slider.detach();
 
             })
-
-
-
-
-
-
-
         }
 
         private onHachChange(): void { 
@@ -186,7 +179,7 @@ module uplight {
                     this.showView(this.frontPage.getView());
                     break;
                 default:
-                   // document.location.hash = '#Menu';
+                    this.showView(this.frontPage.getView());
                     break;
             }
 

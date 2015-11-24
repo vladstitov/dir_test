@@ -15,6 +15,7 @@
 ///<reference path="categories/CategoryListing.ts" />
 ///<reference path="etc/ImportExport.ts" />
 ///<reference path="etc/Statistics.ts" />
+///<reference path="etc/CreateKiosk.ts" />
 ///<reference path="screen/LabelsManager.ts" />
 ///<reference path="screen/SettingsEdit.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
@@ -62,6 +63,11 @@ module uplight {
             this.hideKiosk();
             this.hideModile();
                 switch (hash){
+                    case '#CreateKio':
+                        if(this.R.current)this.R.current.destroy();
+                        this.R.current = new CreateKiosk(this.content);
+                        break;
+
                     case '#Kiosk1080':
 
                         this.content.hide();

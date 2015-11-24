@@ -17,6 +17,9 @@ module uplight {
 
         public onData: Function;
 
+        get(url:string):JQueryPromise<string>{
+            return $.get(url);
+        }
 
         getKeywords():JQueryPromise<string>{
             return  $.get(this.service + 'get_keywords');

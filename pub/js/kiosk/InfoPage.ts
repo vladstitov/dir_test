@@ -18,7 +18,8 @@ module uplight {
             this.view =$('<div>').addClass('page');
             this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="'+this.icon+'"> </span> <span> '+this.name+'</span>');
             this.content = $('<div>').addClass('content').appendTo(this.view);
-            if(this.url) $.get(this.url).done((data)=>{ this.content.html(data);});
+
+            if(this.url)  Registry.getInstance().connector.get(this.url).done((data)=>{ this.content.html(data);});
         }
     }
 

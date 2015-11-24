@@ -12,6 +12,9 @@ var uplight;
             this.service = 'rem/kiosk.php?a=';
             this.serv = 'rem/kiosk.php';
         }
+        Connector.prototype.get = function (url) {
+            return $.get(url);
+        };
         Connector.prototype.getKeywords = function () {
             return $.get(this.service + 'get_keywords');
         };

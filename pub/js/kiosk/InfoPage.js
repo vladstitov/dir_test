@@ -13,7 +13,7 @@ var uplight;
             this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="' + this.icon + '"> </span> <span> ' + this.name + '</span>');
             this.content = $('<div>').addClass('content').appendTo(this.view);
             if (this.url)
-                $.get(this.url).done(function (data) {
+                uplight.Registry.getInstance().connector.get(this.url).done(function (data) {
                     _this.content.html(data);
                 });
         }

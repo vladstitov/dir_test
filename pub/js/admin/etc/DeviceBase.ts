@@ -1,6 +1,7 @@
 /**
  * Created by VladHome on 11/9/2015.
  */
+
     module uplight{
     export class VODevice{
         id:number;

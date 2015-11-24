@@ -113,7 +113,7 @@ if(!isset($_SESSION['directories_user'])){
 </div>
 <hr/>
     <div id="error"></div>
-    <div id="content" class="container">
+    <div id="content" class="">
     </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
 <?
@@ -198,6 +198,8 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/admin/etc/TopSearches.js"></script>
 <script type="text/javascript" src="js/admin/etc/Statistics.js"></script>
 
+
+<script type="text/javascript" src="js/admin/etc/CreateKiosk.js"></script>
 
 <script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
 <script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>

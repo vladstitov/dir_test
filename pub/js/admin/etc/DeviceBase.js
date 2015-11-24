@@ -1,12 +1,12 @@
+/**
+ * Created by VladHome on 11/9/2015.
+ */
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-/**
- * Created by VladHome on 11/9/2015.
- */
 var uplight;
 (function (uplight) {
     var VODevice = (function () {

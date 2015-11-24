@@ -131,6 +131,7 @@ var uplight;
                     this.showView(this.frontPage.getView());
                     break;
                 default:
+                    this.showView(this.frontPage.getView());
                     break;
             }
         };
