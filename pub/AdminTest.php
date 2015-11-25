@@ -39,6 +39,9 @@ if(!isset($_SESSION['directories_user'])){
 
         }
 
+        .ulist>ul>li.selected{
+            background-color: khaki;
+        }
         .abs{
             position:absolute;
         }
@@ -184,6 +187,7 @@ if(!isset($_SESSION['directories_user'])){
 
 <script src="js/admin/com/Utils.js"></script>
 <script type="text/javascript" src="js/admin/RegA.js"></script>
+<script type="text/javascript" src="js/admin/ModelBase.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>
 <script type="text/javascript" src="js/admin/models.js"></script>
 <script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>

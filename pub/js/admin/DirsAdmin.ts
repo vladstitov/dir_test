@@ -65,6 +65,7 @@ module uplight {
                 switch (hash){
                     case '#KiosksLis':
                         if(this.R.current)this.R.current.destroy();
+                        this.content.empty();
                         this.R.current = new KiosksManager(this.content);
                         break;
 
@@ -215,8 +216,10 @@ module uplight {
         constructor() {
             //  $.ajaxSetup({ cache: false });
             this.R = RegA.getInstance();
+            this.R.admin = u_admin;
             this.R.dispatcher=$({});
             this.R.connector = new Connector();
+
             this.R.connector.getData('settings.json').done((resp) => {
                 this.R.settings = JSON.parse(resp);
                 this.R.props = _.indexBy(this.R.settings.props,'id');

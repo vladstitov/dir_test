@@ -1,4 +1,5 @@
 ﻿///<reference path="DirsAdmin.ts" />
+///<reference path="ModelBase.ts" />
 declare class nicEditor {
     setPanel(id: string);
     addInstance(id: string);
@@ -123,6 +124,7 @@ module uplight{
         dispatcher:JQuery
         settings: any;
         props:any;
+        admin:any;
         settingsURL:string = 'settings.json';
         device: {} = { device: 'admin', ln: 'en' };
         private static _instance: RegA = new RegA();

@@ -4,14 +4,12 @@
 
     ///<reference path="../RegA"/>
 module uplight {
-    export class DevicesEdit{
 
-    }
     export class DevicesStats {
         R:RegA
         view:JQuery
        // data:any;
-        kiosks:VOKiosk[];
+        kiosks:VODevice[];
         templates:any[];
 
         btnRestart:JQuery
@@ -21,9 +19,9 @@ module uplight {
         private tiName:JQuery;
         private list:JQuery;
 
-        private selectedItem:VOKiosk;
+        private selectedItem:VODevice;
 
-        private filename:string ='kiosks.json';
+        private filename:string ='devices.json';
 
         private s_time:number;
         private connector:Connector
@@ -61,7 +59,7 @@ module uplight {
 
         private onSaveClick():void{
             if(!this.selectedItem) {
-                    var k= new VOKiosk({});
+                    var k= new VODevice({});
                var ar = this.kiosks;
                 var max=1;
                for(var i=0,n=ar.length;i<n;i++) if(ar[i].id>max) max=ar[i].id;
@@ -108,9 +106,9 @@ module uplight {
             var s_time=this.s_time;
             var ar =  this.data
             var out='';
-            var ks:VOKiosk[]=[];
+            var ks:VODevice[]=[];
             for(var i=0,n=ar.length;i<n;i++){
-                var k:VOKiosk = new VOKiosk(ar[i]);
+                var k:VODevice = new VODevice(ar[i]);
                 ks.push(k);
                 out+=this.createDevice(k,s_time);
             }
@@ -172,20 +170,20 @@ module uplight {
             }
         }
         private restartKiosks(ids:number[]):void{
-            var ar:VOKiosk[] = this.kiosks;
+            var ar:VODevice[] = this.kiosks;
             for(var i=ar.length-1;i>=0;i--){
                 if(ids.indexOf(ar[i].id)!==-1) ar[i].status='restart';
             }
             this.save();
         }
 
-       private getKioskById(id:number):VOKiosk{
+       private getKioskById(id:number):VODevice{
            var ar = this.kiosks;
            for(var i=0,n=ar.length;i<n;i++) if(ar[i].id==id) return ar[i] ;
            return null;
        }
         private deleteKiosks(ids:number[]):void{
-            var ar:VOKiosk[] = this.kiosks;
+            var ar:VODevice[] = this.kiosks;
             for(var i=ar.length-1;i>=0;i--){
                 if(ids.indexOf(ar[i].id)!==-1) ar.splice(i,1);
             }
@@ -194,7 +192,7 @@ module uplight {
         private getKioskNames(ar:number[]):string[]{
             var out=[];
             for(var i=0,n=ar.length;i<n;i++){
-                var k:VOKiosk = this.getKioskById(ar[i]);
+                var k:VODevice = this.getKioskById(ar[i]);
                 if(k)  out.push(k.name);
             }
             return out
@@ -221,7 +219,7 @@ module uplight {
 
         }
 
-        private createDevice(obj:VOKiosk,s_time:number):string{
+        private createDevice(obj:VODevice,s_time:number):string{
                // console.log(obj);
            var timer= (obj.timer/1000);
             timer+=timer*0.1;
@@ -257,19 +255,6 @@ module uplight {
 
     }
 
-    export class VOKiosk{
-         constructor(obj:any){for(var str in obj ) this[str] = obj[str];}
-         id:number;
-         name:string;
-         status:string;
-         S_time:number=0;
-         K_time:number=0;
-         ip:string='';
-         ping:number=0;
-         start_at:number=0;
-         timer:number=15000;
-         template:string;
 
-     }
 
 }

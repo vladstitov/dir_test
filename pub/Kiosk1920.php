@@ -6,7 +6,7 @@ $kiosk_id=0;
 $sett_file= 'settings.json';
 
 if(isset($_GET['kiosk'])) {
-		$kiosks = json_decode(file_get_contents(DATA.'/kiosks.json'));
+		$kiosks = json_decode(file_get_contents(DATA.'/devices.json'));
 		$kiosk_id=(int)$_GET['kiosk'];
 		foreach($kiosks as $kiosk) if($kiosk->id==$kiosk_id) break;
 		if($kiosk->id==$kiosk_id){

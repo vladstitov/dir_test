@@ -4,17 +4,11 @@
 ///<reference path="../RegA"/>
 var uplight;
 (function (uplight) {
-    var DevicesEdit = (function () {
-        function DevicesEdit() {
-        }
-        return DevicesEdit;
-    })();
-    uplight.DevicesEdit = DevicesEdit;
     var DevicesStats = (function () {
         function DevicesStats(container) {
             var _this = this;
             this.container = container;
-            this.filename = 'kiosks.json';
+            this.filename = 'devices.json';
             this.connector = uplight.RegA.getInstance().connector;
             this.R = uplight.RegA.getInstance();
             var p1 = this.connector.getData('admin.json').done(function (res) {
@@ -47,7 +41,7 @@ var uplight;
         };
         DevicesStats.prototype.onSaveClick = function () {
             if (!this.selectedItem) {
-                var k = new VOKiosk({});
+                var k = new uplight.VODevice({});
                 var ar = this.kiosks;
                 var max = 1;
                 for (var i = 0, n = ar.length; i < n; i++)
@@ -95,7 +89,7 @@ var uplight;
             var out = '';
             var ks = [];
             for (var i = 0, n = ar.length; i < n; i++) {
-                var k = new VOKiosk(ar[i]);
+                var k = new uplight.VODevice(ar[i]);
                 ks.push(k);
                 out += this.createDevice(k, s_time);
             }
@@ -211,19 +205,5 @@ var uplight;
         return DevicesStats;
     })();
     uplight.DevicesStats = DevicesStats;
-    var VOKiosk = (function () {
-        function VOKiosk(obj) {
-            this.S_time = 0;
-            this.K_time = 0;
-            this.ip = '';
-            this.ping = 0;
-            this.start_at = 0;
-            this.timer = 15000;
-            for (var str in obj)
-                this[str] = obj[str];
-        }
-        return VOKiosk;
-    })();
-    uplight.VOKiosk = VOKiosk;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=DevicesEdit.js.map

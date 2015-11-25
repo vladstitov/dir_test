@@ -30,6 +30,7 @@ var uplight;
             this.mobileUrl = 'KioskMobile.php';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
+            this.R.admin = u_admin;
             this.R.dispatcher = $({});
             this.R.connector = new uplight.Connector();
             this.R.connector.getData('settings.json').done(function (resp) {
@@ -75,6 +76,7 @@ var uplight;
                 case '#KiosksLis':
                     if (this.R.current)
                         this.R.current.destroy();
+                    this.content.empty();
                     this.R.current = new uplight.KiosksManager(this.content);
                     break;
                 case '#Kiosk1080':

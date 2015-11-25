@@ -1,4 +1,5 @@
 ///<reference path="DirsAdmin.ts" />
+///<reference path="ModelBase.ts" />
 /*
 var LISTVIEW: string = 'ListView';
 var DETAILSVIEV: string = 'DetailsView';
@@ -141,4 +142,4 @@ var uplight;
     })();
     uplight.VOStat = VOStat;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=regA.js.map
+//# sourceMappingURL=RegA.js.map

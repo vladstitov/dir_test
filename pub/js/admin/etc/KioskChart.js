@@ -152,7 +152,7 @@ var uplight;
             this.colors = colors;
             //  console.log(clicks);
             this.view.find('[data-id=fromto]:first').text(fromto);
-            uplight.RegA.getInstance().connector.getData('kiosks.json').done(function (res) { return _this.onKiosks(res); });
+            uplight.RegA.getInstance().connector.getData('devices.json').done(function (res) { return _this.onKiosks(res); });
         }
         KiosksChart.prototype.craeateTimeline = function () {
             var now = new Date();

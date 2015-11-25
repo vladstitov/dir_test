@@ -163,7 +163,7 @@ module uplight{
         constructor(private view:JQuery,private colors:string[],fromto:string){
             //  console.log(clicks);
             this.view.find('[data-id=fromto]:first').text(fromto);
-            RegA.getInstance().connector.getData('kiosks.json').done((res)=>this.onKiosks(res));
+            RegA.getInstance().connector.getData('devices.json').done((res)=>this.onKiosks(res));
         }
 
         private craeateTimeline():number[]{
