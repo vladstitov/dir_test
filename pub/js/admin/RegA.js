@@ -1,5 +1,4 @@
 ///<reference path="DirsAdmin.ts" />
-///<reference path="ModelBase.ts" />
 /*
 var LISTVIEW: string = 'ListView';
 var DETAILSVIEV: string = 'DetailsView';
@@ -64,7 +63,6 @@ var uplight;
                 'show-menu': RegA.SHOW_MENU
             };
             this.isSuper = false;
-            this.settingsURL = 'settings.json';
             this.device = { device: 'admin', ln: 'en' };
         }
         RegA.prototype.register = function (obj) {
@@ -98,6 +96,22 @@ var uplight;
         return RegA;
     })();
     uplight.RegA = RegA;
+    var VOTrack = (function () {
+        function VOTrack(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOTrack;
+    })();
+    uplight.VOTrack = VOTrack;
+    var VODevice = (function () {
+        function VODevice(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VODevice;
+    })();
+    uplight.VODevice = VODevice;
     var VOPage = (function () {
         function VOPage() {
             this.label = '';

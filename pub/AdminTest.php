@@ -187,11 +187,10 @@ if(!isset($_SESSION['directories_user'])){
 
 <script src="js/admin/com/Utils.js"></script>
 <script type="text/javascript" src="js/admin/RegA.js"></script>
-<script type="text/javascript" src="js/admin/ModelBase.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>
 <script type="text/javascript" src="js/admin/models.js"></script>
 <script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>
-<script type="text/javascript" src="js/admin/screen/SettingsEdit.js"></script>
+<script type="text/javascript" src="js/admin/screen/SettingsKiosks.js"></script>
 <!--<script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>-->
 <script type="text/javascript" src="js/admin/screen/AttractLoopEdit.js"></script>
 
@@ -214,7 +213,7 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/admin/etc/ImportExport.js"></script>
 
 
-<script type="text/javascript" src="js/admin/etc/DeviceBase.js"></script>
+
 <script type="text/javascript" src="js/admin/etc/DeviceData.js"></script>
 <script type="text/javascript" src="js/admin/etc/KioskChart.js"></script>
 <script type="text/javascript" src="js/admin/etc/TopSearches.js"></script>

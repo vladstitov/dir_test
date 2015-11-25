@@ -1,5 +1,5 @@
 ﻿///<reference path="DirsAdmin.ts" />
-///<reference path="ModelBase.ts" />
+
 declare class nicEditor {
     setPanel(id: string);
     addInstance(id: string);
@@ -125,13 +125,39 @@ module uplight{
         settings: any;
         props:any;
         admin:any;
-        settingsURL:string = 'settings.json';
         device: {} = { device: 'admin', ln: 'en' };
         private static _instance: RegA = new RegA();
         public static getInstance(): RegA {
             return RegA._instance;
         }
     }
+
+
+    export class VOTrack{
+        constructor(obj:any){for(var str in obj ) this[str] = obj[str];}
+        stamp:number;
+        now:number;
+        ping:number;
+        timer:number;
+        start:number;
+        a:string;
+        id:string;
+        s_time:number;
+        ip:string;
+    }
+
+    export class VODevice{
+        constructor(obj:any){for(var str in obj ) this[str] = obj[str];}
+        id:number;
+        name:string;
+        status:string;
+        template:string;
+        typeid:number;
+        type:string;
+        tymer:number;
+        maxdelay:number;
+    }
+
     export class VOPage {
         label: string='';
         enable: number;
@@ -139,8 +165,8 @@ module uplight{
         id: number;
         content:string;
         old_id:number;
-
     }
+
     export class VOCategory {
         constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
         id: number;

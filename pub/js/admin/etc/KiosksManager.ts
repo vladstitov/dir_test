@@ -8,16 +8,26 @@
 
 module uplight{
 
+    export class VOTemplate{
+        id:number;
+        url:string;
+        descr:string;
+        type:string;
+    }
+    export class VOKiosks{
+        timer:number;
+        maxdelay:number;
+        templates:VOTemplate[];
+        constructor(obj:any){  for (var str in obj) this[str] = obj[str];  }
+    }
+
     export class KiosksManager implements UModule{
-
-
 
         constructor(container:JQuery){
             this.$view= $('<div>').appendTo(container).load('htms/admin/KiosksManager.htm',()=>this.init());
-
-            this.admin = RegA.getInstance().admin;
+            this.kiosks = new VOKiosks(RegA.getInstance().admin.kiosks);
         }
-        private admin:any;
+       // private admin:any;
         private $view:JQuery;
         private ID:string='uplight.KiosksManager';
         private btnAdd:JQuery;
@@ -29,10 +39,11 @@ module uplight{
         private $list:JQuery;
         private $select:JQuery;
         private $editor:JQuery;
-        private $descr:JQuery;
+      //  private $descr:JQuery;
         private $name:JQuery;
         private $index:JQuery;
         private $title:JQuery
+        private kiosks:VOKiosks;
         detach():void{
             this.$view.detach();
         }
@@ -48,8 +59,6 @@ module uplight{
         }
 
         private init():void{
-
-            console.log('init kiosk list');
             this.btnAdd = this.$view.find('[data-id=btnAdd]:first').click(()=> this.onAddClicked());
             this.btnEdit = this.$view.find('[data-id=btnEdit]:first').click(()=> this.onEditClicked());
             this.btnDelete = this.$view.find('[data-id=btnDelete]').click(() => this.onDelClicked());
@@ -57,7 +66,7 @@ module uplight{
             this.btnClose = this.$view.find('[data-id=btnClose]').click(() => this.onCloseClicked());
             this.$list = this.$view.find('[data-id=list]:first').on(CLICK,'li',(evt) => this.onListClicked(evt));
             this.$select =  this.$view.find('[data-id=selectKisosk]:first').change(() => this.onSelectChanged());
-            this.$descr =  this.$view.find('[data-id=descr]:first')
+          //  this.$descr =  this.$view.find('[data-id=descr]:first')
             this.$editor = this.$view.find('[data-id=editor]:first');
             this.$index = this.$view.find('[data-id=kioskindex]:first');
             this.$name = this.$view.find('[data-id=kioskname]:first');
@@ -74,14 +83,14 @@ module uplight{
 
 
         private getKioskTypeById(id:number):any{
-            var ar = this.admin.kiosks
+            var ar = this.kiosks.templates;
             for(var i=0,n=ar.length;i<n;i++){
                if(ar[i].id==id) return ar[i];
             }
             return null;
         }
         private renderSelect():void{
-            var ar = this.admin.kiosks;
+            var ar:VOTemplate[] = this.kiosks.templates;
             var out:string='';
             for(var i=0,n=ar.length;i<n;i++){
                 out+='<option value="'+ar[i].id+'">'+ar[i].descr+'</option>';
@@ -106,17 +115,14 @@ module uplight{
             if(!this.selectedItem)return;
 
             if(this.selectedItem.id!==0){
-                this.$select.hide();
-                var type:any = this.getKioskTypeById(this.selectedItem.typeid)
-                this.$descr.text(type.descr);
-                this.$index.text('kiosk'+this.selectedItem.id);
+               this.$select.val(this.selectedItem.typeid);
+                this.$index.text(this.selectedItem.type+this.selectedItem.id);
                 this.$name.text(this.selectedItem.name);
                 this.$title.text('Edit kiosk');
             }else{
-                this.$select.show();
-                this.$descr.hide();
+                this.deselect();
                 this.max++;
-                this.$index.text('kiosk'+this.max);
+                this.$index.text(this.selectedItem.type+this.max);
                 this.$name.text('');
                 this.$title.text('Create kiosk');
             }
@@ -126,12 +132,15 @@ module uplight{
         }
         private $selected:JQuery;
 
+        private deselect():void{
+            if(this.$selected)this.$selected.removeClass(SELECTED);
+            this.$selected = null;
+        }
         private onListClicked(evt:JQueryEventObject):void{
             var $el = $(evt.currentTarget);
             var i:number =  Number($el.data('i'));
-            console.log(i);
             if(isNaN(i)) return;
-            if(this.$selected)this.$selected.removeClass(SELECTED);
+           this.deselect();
             this.$selected =  $el;
             this.$selected.addClass(SELECTED);
             var k:VODevice =  this.data[i];
@@ -139,7 +148,9 @@ module uplight{
         }
 
         private onAddClicked():void{
-            this.selectedItem =  new VODevice({id:0});
+            this.selectedItem =  new VODevice({id:0,type:'kiosk'});
+            this.selectedItem.tymer = this.kiosks.timer;
+            this.selectedItem.maxdelay = this.kiosks.maxdelay;
             this.showEditor();
         }
         private isEdit:boolean;
@@ -150,18 +161,18 @@ module uplight{
         }
 
         private onDelete():void{
+
             RegA.getInstance().confirm.hide();
             var ar = this.data
             for(var i=0,n=ar.length;i<n;i++){
                 if(ar[i].id == this.selectedItem.id) this.data.splice(i,1);
             }
-
+            this.selectedItem = null;
             this.save();
+
         }
         private onDelClicked():void{
             if(!this.selectedItem) return;
-
-
                 RegA.getInstance().confirm.show('Delete Device','You want to delete device: '+this.selectedItem.name+'?',()=>this.onDelete(),null);
         }
 
@@ -178,16 +189,13 @@ module uplight{
             RegA.getInstance().connector.saveData(JSON.stringify(this.data),'devices.json').done((data)=>this.onSave(data));
         }
         private onSaveClicked():void{
+            this.selectedItem.name=this.$name.text();
+            this.selectedItem.typeid = Number(this.$select.val());
+            var k:any = this.getKioskTypeById(this.selectedItem.typeid);
+            this.selectedItem.template=k.url+'?id='+this.$index.text();
 
-            if(this.selectedItem.id){
-                this.selectedItem.name=this.$name.text();
-            }else {
+            if(this.selectedItem.id===0){
                 this.selectedItem.id=this.max;
-                var k:any = this.getKioskTypeById(Number(this.$select.val()));
-                this.selectedItem.template=k.url+'?id=kiosk'+this.max;
-                this.selectedItem.typeid=k.id;
-                this.selectedItem.name=this.$name.text();
-                this.selectedItem.type='kiosk';
                 this.data.push(this.selectedItem);
             }
 
@@ -201,7 +209,6 @@ module uplight{
            var ar = JSON.parse(data);
             var out:VODevice[]=[];
            for(var i=0,n=ar.length;i<n;i++){
-               if(ar[i].type!=='kiosk') continue;
                var k:VODevice = new VODevice( ar[i]);
               out.push(k);
                var num:number = Number(k.id);
@@ -227,6 +234,7 @@ module uplight{
             var out='<ul>';
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
+                if(item.type !=='kiosk') continue;
                 var k:any= this.getKioskTypeById(item.typeid);
                 out+='<li data-i="'+i+'" class="list-group-item"></span> <span> '+item.name+'</span><span class="descr">'+k.descr+'</span><a target="_blank" href="'+item.template+'" class="pull-right"><span class="fa fa-external-link"></span></a></li>';
             }

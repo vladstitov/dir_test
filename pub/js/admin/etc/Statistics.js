@@ -3,7 +3,6 @@
  */
 ///<reference path="../../typing/chart.d.ts"/>
 /// <reference path="../DirsAdmin.ts" />
-/// <reference path="DeviceBase.ts" />
 /// <reference path="TopSearches.ts" />
 /// <reference path="KioskChart.ts" />
 /// <reference path="DeviceData.ts" />

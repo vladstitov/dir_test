@@ -21,7 +21,10 @@ class Utils{
 	}	
 	public function getData($get){
 			if(isset($get['file_name'])){
-				$file_name= DATA.$get['file_name'];			
+				$file_name = $get['file_name'];
+				$pos = strpos($file_name,'.json');
+				if($pos === false)$file_name=$file_name.'.json';			
+				$file_name= DATA.$file_name;			
 				if(file_exists($file_name)) return file_get_contents($file_name);			
 			}			
 			return 'ERROR';
@@ -41,19 +44,18 @@ class Utils{
 		return $out;
 	}
 	public function saveData($file_name,$data){
-		$out=new stdClass();				
-		$filename=DATA.$file_name;					
-		if(!file_exists($filename)) {
+		$out=new stdClass();
+		if(strpos($file_name,'.json') === false)$file_name=$file_name.'.json';			
+		if(!file_exists(DATA.$filename)) {
 					$out->error='hacker';
 					return $out;				
-		}
-		
-		rename($filename,DATA.'arch/'.time().$file_name);		
-		$res = file_put_contents($filename,$data);	
+		}						
+		rename(DATA.$filename,DATA.'arch/'.time().$file_name);	
+		$res = file_put_contents(DATA.$filename,$data);	
 			
 		if($res){
 			$out->success='success';
-			$out->result= $file_name;
+			$out->result= 'data saved';
 		} else $out->error='cant save file';
 		
 		return $out;

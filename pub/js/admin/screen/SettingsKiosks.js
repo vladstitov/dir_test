@@ -107,11 +107,12 @@ var uplight;
         return ValueEditor;
     })();
     uplight.ValueEditor = ValueEditor;
-    var SettingsEdit = (function () {
+    var SettingsKiosks = (function () {
         // data:VOItem[];
-        function SettingsEdit(container) {
+        function SettingsKiosks(container) {
             var _this = this;
             this.container = container;
+            this.dataid = 'settings_kiosks';
             // console.log('SettingsEdit');
             container.load('htms/admin/SettingsEdit.htm', function () {
                 setTimeout(function () {
@@ -120,7 +121,7 @@ var uplight;
             });
             this.R = uplight.RegA.getInstance();
         }
-        SettingsEdit.prototype.init = function () {
+        SettingsKiosks.prototype.init = function () {
             var _this = this;
             this.view = $('#SettingsEdit');
             var table = $('<table>').addClass('table').appendTo(this.view.find('[data-id=list]:first'));
@@ -128,7 +129,7 @@ var uplight;
             this.list = $('<tbody>').on(CLICK, '[data-id=btnEdit]', function (evt) { return _this.onEditClick(evt); }).appendTo(table);
             this.refreshData();
         };
-        SettingsEdit.prototype.onEditClick = function (evt) {
+        SettingsKiosks.prototype.onEditClick = function (evt) {
             var el = $(evt.currentTarget).parent().parent();
             var i = Number(el.data('i'));
             console.log(i);
@@ -137,7 +138,7 @@ var uplight;
             this.selectedIndex = i;
             this.openEditor();
         };
-        SettingsEdit.prototype.openEditor = function () {
+        SettingsKiosks.prototype.openEditor = function () {
             var _this = this;
             var item = this.data[this.selectedIndex];
             switch (item.type) {
@@ -161,22 +162,22 @@ var uplight;
             //this.lblIndex.text(this.selectedItem.label);
             this.editor.show();
         };
-        SettingsEdit.prototype.hideEditor = function () {
+        SettingsKiosks.prototype.hideEditor = function () {
             this.editor.hide();
         };
-        SettingsEdit.prototype.refreshData = function () {
+        SettingsKiosks.prototype.refreshData = function () {
             var _this = this;
-            this.R.connector.getData(this.R.settingsURL).done(function (res) {
+            this.R.connector.getData(this.dataid).done(function (res) {
                 _this.R.settings = JSON.parse(res);
                 _this.data = _this.R.settings.props;
                 _this.render();
             });
         };
-        SettingsEdit.prototype.renderItem = function (item, i) {
+        SettingsKiosks.prototype.renderItem = function (item, i) {
             var img = 0;
             return '<tr  data-id="' + item.id + '" data-i="' + i + '" class="' + item.type + '" ><td class="index">' + item.label + '</td><td class="value">' + item.value + '</td><td><span data-id="btnEdit" class=" btn fa fa-edit"></span></td></tr>';
         };
-        SettingsEdit.prototype.render = function () {
+        SettingsKiosks.prototype.render = function () {
             var ar = this.data;
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
@@ -185,19 +186,19 @@ var uplight;
             // console.log(out);
             this.list.html(out);
         };
-        SettingsEdit.prototype.save = function () {
+        SettingsKiosks.prototype.save = function () {
             var _this = this;
             var sett = this.R.settings;
             sett.props = this.data;
-            this.R.connector.saveData(JSON.stringify(sett), this.R.settingsURL).done(function (res) {
+            this.R.connector.saveData(JSON.stringify(sett), this.dataid).done(function (res) {
                 if (res.success) {
                     _this.R.msg('Data saved', _this.editor.btnSave);
                 }
                 _this.refreshData();
             });
         };
-        return SettingsEdit;
+        return SettingsKiosks;
     })();
-    uplight.SettingsEdit = SettingsEdit;
+    uplight.SettingsKiosks = SettingsKiosks;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=SettingsEdit.js.map
+//# sourceMappingURL=SettingsKiosks.js.map

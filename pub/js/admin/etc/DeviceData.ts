@@ -2,10 +2,23 @@
  * Created by VladHome on 11/9/2015.
  */
     /// <reference path="../RegA.ts" />
-    /// <reference path="DeviceBase.ts" />
     /// <reference path="../../typing/jquery.d.ts" />
     /// <reference path="../../typing/underscore.d.ts" />
 module uplight{
+
+    export class DeviceModel{
+       // status:number;
+        status:number;
+        track:VOTrack;
+       static s_time:number;
+        constructor(private dev:VODevice){
+            for(var str in dev) this[str] = dev[str];
+         //   var delta:number = (s_time-this.s_time);
+           // if(delta < timer)this.status=1;
+            //else this.status=0;
+        }
+    }
+
 
     export class DevicesData implements UModule {
         private data:VODevice[];
@@ -43,16 +56,24 @@ module uplight{
         destroy():void{
             clearInterval(this.timer);
         }
+
         private loadData():void{
             this.list.find('.status').detach();
-            RegA.getInstance().connector.getDevicesData().done((res)=>this.onKiosks(res));
+            RegA.getInstance().connector.getDevicesData().done((res)=>this.onDeviceData(res));
         }
-        private onKiosks(res:VOResult):void{
-            this.data=res.result;
-            this.s_time = Number(res.success);
+
+        private onDeviceData(res:VOResult):void{
+            var ar:any[] =res.result;
+            DeviceModel.s_time = Number(res.success);
+           var out:DeviceModel[]=[];
+            for(var i=0,n=ar.length;i<n;i++) out.push(new DeviceModel(ar[i]));
+
+
+          //  console.log(res);
+          //  this.s_time = Number(res.success);
             // console.log(this.data);
             // console.log(this.s_time);
-            this.render();
+           // this.render();
             // RegA.getInstance().connector.  getServerTime().done((res)=>{
             //  this.s_time = Number(res);
             //  this.render();
@@ -69,9 +90,9 @@ module uplight{
             var out='';
             var ks:DeviceModel[]=[];
             for(var i=0,n=ar.length;i<n;i++){
-                var k:DeviceModel = new DeviceModel(ar[i],s_time,kt);
-                ks.push(k);
-                out+=this.createDevice(k);
+              //  var k:DeviceModel = new DeviceModel(ar[i],s_time,kt);
+               // ks.push(k);
+               // out+=this.createDevice(k);
             }
             this.devices = ks;
             this.list.html(out) ;
@@ -90,8 +111,9 @@ module uplight{
             }
 
 
-
-            var stsrtTime:string= obj.start?new Date(obj.start*1000).toLocaleString():'';
+            return '';
+/*
+            var stsrtTime:string= obj.start?new Date(obj.start_at*1000).toLocaleString():'';
             var lastTime:string =obj.now? new Date(obj.now*1000).toLocaleString():'';
             return '<tr>' +
                 '<td>'+obj.name+'</td>' +
@@ -101,7 +123,7 @@ module uplight{
                 '<td>'+obj.ping+'</td>' +
                 '<td class="text-right">'+stsrtTime+'</td>' +
                 '<td class="text-right">'+lastTime+'</td>' +
-                '</tr>';
+                '</tr>';*/
 
 
         }

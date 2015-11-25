@@ -136,15 +136,16 @@ module uplight{
         }
     }
 
-    export class SettingsEdit{
+    export class SettingsKiosks{
         view:JQuery
         R:RegA;
         list:JQuery;
         editor:Editor;
         data:any[];
-        timeEditor:TimeEditor
+        timeEditor:TimeEditor;
         valueEditor:ValueEditor;
-        selectedIndex:number
+        selectedIndex:number;
+        dataid:string='settings_kiosks';
 
        // data:VOItem[];
 
@@ -204,7 +205,7 @@ module uplight{
         }
 
         private refreshData():void{
-            this.R.connector.getData(this.R.settingsURL).done((res:string)=>{
+            this.R.connector.getData(this.dataid).done((res:string)=>{
                 this.R.settings  = JSON.parse(res);
 
                 this.data = this.R.settings.props;
@@ -231,7 +232,7 @@ module uplight{
         private save():void{
             var sett= this.R.settings;
             sett.props= this.data;
-            this.R.connector.saveData( JSON.stringify(sett),this.R.settingsURL).done((res)=>{
+            this.R.connector.saveData( JSON.stringify(sett),this.dataid).done((res)=>{
                 if(res.success){
                     this.R.msg('Data saved',this.editor.btnSave);
                 }

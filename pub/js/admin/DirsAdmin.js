@@ -16,7 +16,7 @@
 ///<reference path="etc/Statistics.ts" />
 ///<reference path="etc/KiosksManager.ts" />
 ///<reference path="screen/LabelsManager.ts" />
-///<reference path="screen/SettingsEdit.ts" />
+///<reference path="screen/SettingsKiosks.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 ///<reference path="../gmap/GmapCtr.ts" />
 var uplight;
@@ -153,7 +153,7 @@ var uplight;
                 case '#Settings-':
                     if (this.R.current)
                         this.R.current.destroy();
-                    this.settingsEdit = new uplight.SettingsEdit(this.content);
+                    this.settingsKiosks = new uplight.SettingsKiosks(this.content);
                     this.content.show();
                     break;
                 case '#Heading-S':
