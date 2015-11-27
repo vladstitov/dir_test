@@ -86,6 +86,7 @@
     #AttractLoopEdit .inline>.form-control{
         display: inline;
     }
+
 </style>
 
     <div class="page-heading">
@@ -99,7 +100,7 @@
             <div class="panel panel-default">
                     <div class="panel-heading" data-id="tools">
 
-                        <a class="btn" data-id="btnPreview"><span class="fa fa-eye"></span> Preview</a>
+                       <!-- <a class="btn" data-id="btnPreview"><span class="fa fa-eye"></span> Preview</a>-->
                         <a class="btn" data-id="btnChangeType"><span class="fa fa-edit"></span> Change type</a>
                        <!-- <div  data-id="selectType" class="hidden inline">
                             <div class="inline">
@@ -115,7 +116,7 @@
 
 
                         </div>
-                    <div><input type="checkbox" checked="true" data-id="chkTC" disabled/> Include touch clip</div>
+                    <div><input type="checkbox" checked="true" data-id="chkTC" /> Include touch clip &nbsp;<button class="btn btn-primary hidden" data-id="btnSave">Save</button> </div>
 
 
                 </div>
@@ -160,7 +161,7 @@
 
 
 <div id="Template" class="hidden">
-    <div class="panel panel-default" data-ctr="GalleryList">
+    <div class="panel panel-default" data-ctr="GalleryPreview">
         <div class="panel-body">
             <a class="btn pull-right" data-id="btnEdit"><span class="fa fa-edit"></span> Edit</a>
             <h3 data-id="name"></h3>
@@ -177,7 +178,12 @@
         </div>
     </div>
 
-    <div data-ctr="GalleryAdmin">
+    <div data-ctr="GalleryEditor">
+        <style>
+            #AttractLoopEdit .list img.atten{
+                border: thin solid pink;
+            }
+        </style>
 
         <div data-id="editor" class="panel panel-default">
 
@@ -185,14 +191,14 @@
                 <a class="btn" data-id="btnAdd"><div data-id="viewUploadAdd" class="hidden relative"><div class="absolute"><input type="file" name="file" data-id="btnUploadAdd" /></div></div><span class="fa fa-plus"></span> Add </a>
                 <a class="btn" data-id="btnEdit"><div data-id="viewUploadEdit" class="hidden relative"><div class="absolute"><input type="file" name="file" data-id="btnUploadEdit" /></div></div><span class="fa fa-edit"></span> Replace </a>
                 <a class="btn" data-id="btnDelete"><span class="fa fa-minus"></span> Remove </a>
-                <a class="btn" data-id="btnPreview"><span class="fa fa-eye"></span> Preview</a>
-                <a class="btn" data-id="btnSave"><span class="fa fa-save"></span> Save </a>
+             <!--   <a class="btn" data-id="btnPreview"><span class="fa fa-eye"></span> Preview</a>
+                <a class="btn" data-id="btnSave"><span class="fa fa-save"></span> Save </a>-->
                 <a class="btn pull-right" data-id="btnClose"><span class="fa fa-close"></span></a>
             </div>
 
             <div class="items-body panel-body">
                 <div class="prop" data-id="props">
-                    <h3 data-id="name"></h3>
+                    <h3 data-id="title"></h3>
 
                     <table class="table">
                         <tbody data-id="prop-list">

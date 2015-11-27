@@ -35,7 +35,7 @@ module uplight{
         getView(reset:boolean):JQuery{
             return this.$view;
         }
-       // getViewStr(reset:boolean):string{
+       // getViewStr(resetMode:boolean):string{
          //   return this.viewStr;
         //}
 
@@ -187,8 +187,8 @@ module uplight{
             return this.view.getView(reset);
         }
 
-       // getViewStr(reset:boolean):string{
-           // return this.view.getViewStr(reset);
+       // getViewStr(resetMode:boolean):string{
+           // return this.view.getViewStr(resetMode);
         //}
 
         private isHiiden:boolean;

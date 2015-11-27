@@ -6,14 +6,14 @@
 /// <reference path="Gallery.ts" />
 var uplight;
 (function (uplight) {
-    var VOAL = (function () {
-        function VOAL(obj) {
+    var VOAttractLoop = (function () {
+        function VOAttractLoop(obj) {
             for (var str in obj)
                 this[str] = obj[str];
         }
-        return VOAL;
+        return VOAttractLoop;
     })();
-    uplight.VOAL = VOAL;
+    uplight.VOAttractLoop = VOAttractLoop;
     var AttractLoop = (function () {
         function AttractLoop(el) {
             var _this = this;

@@ -17,7 +17,7 @@ module uplight{
             this.list =$('<ul>').appendTo(this.view.find('[data-id=list]:first'));
             this.list.on(CLICK,'li',(evt)=>{this.onClick(evt.currentTarget)});
             this.R.model.dispatcher.on(this.R.model.READY,()=>this.onModelReady());
-            this.R.events.on(this.R.SEARCH_CHANGED,(evt,word)=>this.filter(word));
+            this.R.events.on(this.R.INPUT_CHANGED,(evt,word)=>this.filter(word));
         }
 
         private onKeywords(res:string):void{

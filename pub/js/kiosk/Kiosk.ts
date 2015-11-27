@@ -224,11 +224,11 @@ module uplight {
                case'#ScreenSaver':
                    window.location.reload();
                    /*
-                   this.details.reset();
-                   this.searchResult.reset();
-                   this.keyboard.reset();
-                   this.cateegories.reset();
-                   this.keywords.reset();
+                   this.details.resetMode();
+                   this.searchResult.resetMode();
+                   this.keyboard.resetMode();
+                   this.cateegories.resetMode();
+                   this.keywords.resetMode();
                    */
 
                    break

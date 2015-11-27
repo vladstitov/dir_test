@@ -14,7 +14,7 @@ var uplight;
                 _this.onClick(evt.currentTarget);
             });
             this.R.model.dispatcher.on(this.R.model.READY, function () { return _this.onModelReady(); });
-            this.R.events.on(this.R.SEARCH_CHANGED, function (evt, word) { return _this.filter(word); });
+            this.R.events.on(this.R.INPUT_CHANGED, function (evt, word) { return _this.filter(word); });
         }
         Keywords.prototype.onKeywords = function (res) {
             this.kwsRated = JSON.parse(res);

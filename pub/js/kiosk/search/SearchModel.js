@@ -15,7 +15,7 @@ var uplight;
     })();
     uplight.VORow = VORow;
     var ButtonView = (function () {
-        // getViewStr(reset:boolean):string{
+        // getViewStr(resetMode:boolean):string{
         //   return this.viewStr;
         //}
         function ButtonView(model) {

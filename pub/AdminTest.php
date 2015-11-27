@@ -189,7 +189,8 @@ if(!isset($_SESSION['directories_user'])){
 <script type="text/javascript" src="js/admin/RegA.js"></script>
 <script type="text/javascript" src="js/admin/net.js"></script>
 <script type="text/javascript" src="js/admin/models.js"></script>
-<script type="text/javascript" src="js/admin/com/GalleryAdmin.js"></script>
+<script type="text/javascript" src="js/admin/com/GalleryPreview.js"></script>
+<script type="text/javascript" src="js/admin/com/GalleryEditor.js"></script>
 <script type="text/javascript" src="js/admin/screen/SettingsKiosks.js"></script>
 <!--<script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>-->
 <script type="text/javascript" src="js/admin/screen/AttractLoopEdit.js"></script>

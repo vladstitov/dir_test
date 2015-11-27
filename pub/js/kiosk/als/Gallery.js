@@ -45,12 +45,11 @@ var uplight;
     uplight.Gallery = Gallery;
     var GalleryDisplay = (function () {
         function GalleryDisplay(url) {
-            var _this = this;
             this.current = -1;
             this.interval = 0;
             this.view = $('<div>');
             this.list = $('<div>').appendTo(this.view);
-            uplight.Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name=' + url).done(function (res) { return _this.onData(res); });
+            //  Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
             // Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
             // Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
         }
@@ -63,12 +62,11 @@ var uplight;
                 out.push(this.createImage(ar[i]));
             }
             this.galley = out;
-            this.props = data.props;
-            this.timeout = Number(this.props.delay);
-            if (isNaN(this.timeout))
-                this.timeout = 20;
-            this.view.addClass('x' + this.props.size);
-            this.start();
+            // this.props=data.props;
+            // this.timeout = Number(this.props.delay);
+            // if(isNaN(this.timeout))this.timeout=20;
+            // this.view.addClass('x'+this.props.size);
+            // this.start();
         };
         GalleryDisplay.prototype.goNext = function () {
             var _this = this;

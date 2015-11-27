@@ -165,7 +165,7 @@ module uplight {
             this.list.children().detach();
             var ul:JQuery=$('<ul>');
            // var out=''
-        // for(var i=0,n=ar.length;i<n;i++)out+=ar[i].getViewStr(reset)
+        // for(var i=0,n=ar.length;i<n;i++)out+=ar[i].getViewStr(resetMode)
             for(var i=0,n=ar.length;i<n;i++)ul.append(ar[i].getView(reset));
              this.list.append(ul);
         }

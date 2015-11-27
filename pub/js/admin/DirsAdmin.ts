@@ -4,7 +4,8 @@
 /// <reference path="models.ts" />
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="../typing/underscore.d.ts" />
-/// <reference path="com/GalleryAdmin.ts" />
+/// <reference path="com/GalleryPreview.ts" />
+/// <reference path="com/GalleryEditor.ts" />
 /// <reference path="com/Utils.ts" />
 ///<reference path="info/InfoPagesEditor.ts" />
 ///<reference path="info/FrontPageEditor.ts" />

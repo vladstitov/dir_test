@@ -20,7 +20,7 @@ module uplight{
           for(var i=0,n=ar.length;i<n;i++) ar[i].stop();;
       }
 
-    constructor(private vo:VOAL){
+    constructor(private vo:VOAttractLoop){
         this.galleries=[];
         this.view=$('<div>').addClass('gallery');
        if(vo.type=='gallery') {
@@ -49,7 +49,7 @@ module uplight{
 
         private data:any;
        private galley:JQuery[];
-       private props:VOAL;
+      // private al:VOAttractLoop;
        private timeout:number;
         private current=-1;
        private  interval:number=0;
@@ -59,7 +59,7 @@ module uplight{
         constructor(url:string){
             this.view = $('<div>');
             this.list=$('<div>').appendTo(this.view);
-            Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
+          //  Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
            // Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
            // Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
         }
@@ -73,11 +73,11 @@ module uplight{
                 out.push(this.createImage(ar[i]));
             }
             this.galley = out;
-            this.props=data.props;
-            this.timeout = Number(this.props.delay);
-            if(isNaN(this.timeout))this.timeout=20;
-            this.view.addClass('x'+this.props.size);
-            this.start();
+           // this.props=data.props;
+           // this.timeout = Number(this.props.delay);
+           // if(isNaN(this.timeout))this.timeout=20;
+           // this.view.addClass('x'+this.props.size);
+           // this.start();
         }
 
         private goNext():void{

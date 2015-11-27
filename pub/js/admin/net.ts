@@ -204,6 +204,7 @@ module uplight {
                 processData: false
             });
         }
+
         getServerTime():JQueryPromise<string>{
             return $.get(this.service + '?a=screen.get_server_time');
         }

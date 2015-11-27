@@ -6,7 +6,7 @@
     /// <reference path="Gallery.ts" />
 module uplight{
 
-    export class VOAL {
+    export class VOAttractLoop {
      constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
      id: number;
      name: string;
@@ -20,7 +20,7 @@ module uplight{
 
 
     export class AttractLoop{
-        al:VOAL;
+        al:VOAttractLoop;
         body:JQuery;
         private view:JQuery;
         private R:Registry;
@@ -92,7 +92,7 @@ module uplight{
         }
 
         loadAL():void{
-            var vo:VOAL = this.al;
+            var vo:VOAttractLoop = this.al;
             if(vo.type=='gallery' || vo.type=='gallery2'){
                     var gal:Gallery = new Gallery(vo);
                     this.cover.append(gal.getView());

@@ -132,7 +132,6 @@ var uplight;
         SettingsKiosks.prototype.onEditClick = function (evt) {
             var el = $(evt.currentTarget).parent().parent();
             var i = Number(el.data('i'));
-            console.log(i);
             if (isNaN(i))
                 return;
             this.selectedIndex = i;
@@ -140,7 +139,7 @@ var uplight;
         };
         SettingsKiosks.prototype.openEditor = function () {
             var _this = this;
-            var item = this.data[this.selectedIndex];
+            var item = this.props[this.selectedIndex];
             switch (item.type) {
                 case 'time':
                     if (!this.timeEditor)
@@ -156,7 +155,7 @@ var uplight;
             console.log(this.editor);
             this.editor.setData(item).render().show();
             this.editor.onSave = function (item) {
-                _this.data[_this.selectedIndex] = item;
+                _this.props[_this.selectedIndex] = item;
                 _this.save();
             };
             //this.lblIndex.text(this.selectedItem.label);
@@ -168,8 +167,8 @@ var uplight;
         SettingsKiosks.prototype.refreshData = function () {
             var _this = this;
             this.R.connector.getData(this.dataid).done(function (res) {
-                _this.R.settings = JSON.parse(res);
-                _this.data = _this.R.settings.props;
+                _this.data = JSON.parse(res);
+                _this.props = _this.data.props;
                 _this.render();
             });
         };
@@ -178,7 +177,7 @@ var uplight;
             return '<tr  data-id="' + item.id + '" data-i="' + i + '" class="' + item.type + '" ><td class="index">' + item.label + '</td><td class="value">' + item.value + '</td><td><span data-id="btnEdit" class=" btn fa fa-edit"></span></td></tr>';
         };
         SettingsKiosks.prototype.render = function () {
-            var ar = this.data;
+            var ar = this.props;
             var out = '';
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += this.renderItem(ar[i], i);
@@ -188,9 +187,9 @@ var uplight;
         };
         SettingsKiosks.prototype.save = function () {
             var _this = this;
-            var sett = this.R.settings;
-            sett.props = this.data;
-            this.R.connector.saveData(JSON.stringify(sett), this.dataid).done(function (res) {
+            this.data.props = this.props;
+            this.R.connector.saveData(JSON.stringify(this.data), this.dataid).done(function (res) {
+                //console.log(res);
                 if (res.success) {
                     _this.R.msg('Data saved', _this.editor.btnSave);
                 }

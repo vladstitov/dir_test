@@ -46,12 +46,12 @@ class Utils{
 	public function saveData($file_name,$data){
 		$out=new stdClass();
 		if(strpos($file_name,'.json') === false)$file_name=$file_name.'.json';			
-		if(!file_exists(DATA.$filename)) {
+		if(!file_exists(DATA.$file_name)) {
 					$out->error='hacker';
 					return $out;				
 		}						
-		rename(DATA.$filename,DATA.'arch/'.time().$file_name);	
-		$res = file_put_contents(DATA.$filename,$data);	
+		rename(DATA.$file_name,DATA.'arch/'.time().$file_name);	
+		$res = file_put_contents(DATA.$file_name,$data);	
 			
 		if($res){
 			$out->success='success';
@@ -77,6 +77,19 @@ class Utils{
 			
 		if ($file["error"] > 0){
 			$out->error= $file["error"];
+		switch ($file["error"]) {
+			case UPLOAD_ERR_OK:
+				$out->result = 'UPLOAD_ERR_OK';
+            break;
+			case UPLOAD_ERR_NO_FILE:
+				$out->result = 'UPLOAD_ERR_NO_FILE';            
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				$out->result = 'UPLOAD_ERR_INI_SIZE';
+			default:
+				$out->result = 'UNKNOWN_ERROR';
+		}
+			
 			return $out;
 		}
 		

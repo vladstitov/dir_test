@@ -50,6 +50,7 @@ var uplight;
 (function (uplight) {
     var RegA = (function () {
         function RegA() {
+            this.ATTRACTLOOP_EDIT = 'ATTRACTLOOP_EDIT';
             this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
             this.CATEGORY_NOTINLIS_CLOSE = 'CATEGORY_NOTINLIS_CLOSE';
             this.CATEGORY_ADD_SELECTED = 'CATEGORY_ADD_SELECTED';
@@ -65,6 +66,17 @@ var uplight;
             this.isSuper = false;
             this.device = { device: 'admin', ln: 'en' };
         }
+        RegA.prototype.wait = function () {
+            this.isBusy = true;
+            document.body.style.cursor = 'wait';
+        };
+        RegA.prototype.resetBusy = function () {
+            console.log('resetBusy');
+            if (this.isBusy) {
+                this.isBusy = false;
+                document.body.style.cursor = 'default';
+            }
+        };
         RegA.prototype.register = function (obj) {
             this[obj.id] = obj;
         };
@@ -141,19 +153,47 @@ var uplight;
         return VOItem;
     })();
     uplight.VOItem = VOItem;
-    var VOAL = (function () {
-        function VOAL(obj) {
+    var VOAttractLoop = (function () {
+        function VOAttractLoop(obj) {
             for (var str in obj)
                 this[str] = obj[str];
         }
-        return VOAL;
+        return VOAttractLoop;
     })();
-    uplight.VOAL = VOAL;
+    uplight.VOAttractLoop = VOAttractLoop;
     var VOStat = (function () {
         function VOStat() {
         }
         return VOStat;
     })();
     uplight.VOStat = VOStat;
+    var VOGallery = (function () {
+        function VOGallery(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOGallery;
+    })();
+    uplight.VOGallery = VOGallery;
+    var DataGallery = (function () {
+        function DataGallery() {
+        }
+        return DataGallery;
+    })();
+    uplight.DataGallery = DataGallery;
+    var ALProps = (function () {
+        function ALProps() {
+        }
+        return ALProps;
+    })();
+    uplight.ALProps = ALProps;
+    var AttractLoop = (function () {
+        function AttractLoop(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return AttractLoop;
+    })();
+    uplight.AttractLoop = AttractLoop;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=RegA.js.map

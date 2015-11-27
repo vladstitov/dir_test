@@ -76,6 +76,8 @@ module uplight{
         static SHOW_MENU:string='SHOW_MENU';
         static ITEM_SELECTED:string='ITEM_SELECTED';
 
+        ATTRACTLOOP_EDIT:string='ATTRACTLOOP_EDIT';
+
 
         CATEGORY_SELECTED:string='CATEGORY_SELECTED';
         CATEGORY_NOTINLIS_CLOSE='CATEGORY_NOTINLIS_CLOSE';
@@ -94,6 +96,21 @@ module uplight{
         history:string[];
         current:UModule;
         confirm:Confirm;
+        isBusy:boolean;
+        wait():void{
+            this.isBusy = true;
+            document.body.style.cursor='wait';
+        }
+        resetBusy(){
+            console.log('resetBusy');
+            if(this.isBusy){
+                this.isBusy = false;
+                document.body.style.cursor='default';
+            }
+
+        }
+
+
         register(obj: any): void {
             this[obj.id]=obj
         }
@@ -191,23 +208,68 @@ module uplight{
         type:string;
     }
 
-    export class VOAL {
+    export class VOAttractLoop {
         constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
         id: number;
         name: string;
-        src: string;
         data_url:string;
         delay:number;
-        size:number;
+        size:string;
         type:string;
-        TC:boolean
+        url:string;
+        comb:number[];
     }
 
     export class VOStat{
         type:string;
         val:string;
     }
+    export class VOGallery{
+        id:number;
+        urls:string;
+        typeid:number;
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
+    }
 
+    export class DataGallery{
+        gallery:string[];
+        props:ALProps;
+        template:VOAttractLoop;
 
+    }
+
+    export interface Preview{
+        type:string;
+        i:number;
+        getData():any
+        setData(data:any) :void
+        render():void;
+        appendTo(container:JQuery):void;
+        saveData(data:any):JQueryPromise<VOResult>;
+    }
+
+    export  interface ALEditor{
+        onSave:Function;
+        onClose:Function;
+        btnSave:JQuery
+        setData(data:any):void
+        getData():any;
+        render():void;
+        appendTo(container:JQuery):JQuery;
+        destroy():void;
+    }
+    export class ALProps{
+        id:number;
+        templateid:number;
+        url:string;
+        delay:number;
+    }
+    export class AttractLoop{
+        id:number;
+        TC:boolean;
+        type:string;
+        props:ALProps[];
+        constructor(obj:any){ for(var str in obj) this[str]=obj[str];}
+    }
 
 }

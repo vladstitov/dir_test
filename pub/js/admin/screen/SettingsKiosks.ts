@@ -141,7 +141,8 @@ module uplight{
         R:RegA;
         list:JQuery;
         editor:Editor;
-        data:any[];
+        data:any;
+        props:any[];
         timeEditor:TimeEditor;
         valueEditor:ValueEditor;
         selectedIndex:number;
@@ -167,15 +168,13 @@ module uplight{
         private onEditClick(evt:JQueryEventObject):void{
                 var el:JQuery=$(evt.currentTarget).parent().parent();
             var i:number = Number(el.data('i'));
-            console.log(i);
-
             if(isNaN(i)) return;
             this.selectedIndex = i;
             this.openEditor();
         }
 
         private openEditor():void{
-            var item= this.data[this.selectedIndex]
+            var item= this.props[this.selectedIndex];
             switch(item.type){
                 case 'time':
                     if(!this.timeEditor) this.timeEditor = new TimeEditor(this.view.find('[data-ctr=TimeEditor]:first'));
@@ -190,7 +189,7 @@ module uplight{
             console.log(this.editor);
             this.editor.setData(item).render().show();
             this.editor.onSave = (item)=>{
-                this.data[this.selectedIndex] = item;
+                this.props[this.selectedIndex] = item;
                 this.save();
             }
 
@@ -206,9 +205,8 @@ module uplight{
 
         private refreshData():void{
             this.R.connector.getData(this.dataid).done((res:string)=>{
-                this.R.settings  = JSON.parse(res);
-
-                this.data = this.R.settings.props;
+                this.data = JSON.parse(res);
+                this.props = this.data.props;
                 this.render();
             })
         }
@@ -219,7 +217,7 @@ module uplight{
         }
 
         private render():void{
-           var ar = this.data
+           var ar = this.props;
             var out='';
             for(var i=0,n=ar.length;i<n;i++){
                 out+= this.renderItem(ar[i],i);
@@ -230,9 +228,9 @@ module uplight{
         }
 
         private save():void{
-            var sett= this.R.settings;
-            sett.props= this.data;
-            this.R.connector.saveData( JSON.stringify(sett),this.dataid).done((res)=>{
+            this.data.props=this.props;
+            this.R.connector.saveData( JSON.stringify(this.data),this.dataid).done((res)=>{
+                //console.log(res);
                 if(res.success){
                     this.R.msg('Data saved',this.editor.btnSave);
                 }

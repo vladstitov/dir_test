@@ -1230,7 +1230,7 @@ var uplight;
             this.data_url = data_url;
             this.connector = uplight.RegA.getInstance().connector;
 
-            this.view = $('#Template [data-ctr=GalleryList]:first').clone();
+            this.view = $('#Template [data-ctr=GalleryPreview]:first').clone();
             this.list = $('<ul>').appendTo(this.view.find('.nano')).hide();
 
             this.btnShowImages = this.view.find('[data-id=btnShowImages]').click(function () {
@@ -1312,7 +1312,7 @@ var uplight;
         };
         return GalleryList;
     })();
-    uplight.GalleryList = GalleryList;
+    uplight.GalleryPreview = GalleryList;
 
     var GalleryAdmin = (function () {
         function GalleryAdmin(opt) {
@@ -5713,7 +5713,7 @@ var uplight;
             this.chkTC.prop(CHECKED, al.TC);
             this.alView.empty();
             if (al.type == 'gallery') {
-                this.currentEditor = new uplight.GalleryList(al.data_url);
+                this.currentEditor = new uplight.GalleryPreview(al.data_url);
                 this.currentEditor.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
@@ -5724,14 +5724,14 @@ var uplight;
                 this.alView.append(this.currentEditor.view);
             } else if (al.type == 'gallery2') {
                 var urls = al.data_url.split(',');
-                this.currentEditor = new uplight.GalleryList(urls[0]);
+                this.currentEditor = new uplight.GalleryPreview(urls[0]);
                 this.currentEditor.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
                 this.currentEditor.onEditExit = function () {
                     return _this.onEditExit();
                 };
-                this.currentEditor2 = new uplight.GalleryList(urls[1]);
+                this.currentEditor2 = new uplight.GalleryPreview(urls[1]);
                 this.currentEditor2.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
@@ -5851,7 +5851,7 @@ var uplight;
             this.selectedVOAL = al;
             this.editorView.empty();
             if (al.type == 'gallery') {
-                this.currentEditor = new uplight.GalleryList(al.data_url);
+                this.currentEditor = new uplight.GalleryPreview(al.data_url);
                 this.currentEditor.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
@@ -5862,14 +5862,14 @@ var uplight;
                 this.editorView.append(this.currentEditor.view);
             } else if (al.type == 'gallery2') {
                 var urls = al.data_url.split(',');
-                this.currentEditor = new uplight.GalleryList(urls[0]);
+                this.currentEditor = new uplight.GalleryPreview(urls[0]);
                 this.currentEditor.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
                 this.currentEditor.onEditExit = function () {
                     return _this.onEditExit();
                 };
-                this.currentEditor2 = new uplight.GalleryList(urls[1]);
+                this.currentEditor2 = new uplight.GalleryPreview(urls[1]);
                 this.currentEditor2.onEdit = function () {
                     return _this.onCurrentEdit();
                 };
