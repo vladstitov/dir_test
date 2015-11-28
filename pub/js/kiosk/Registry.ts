@@ -62,7 +62,7 @@ module uplight {
 
         RESET_VIEWS:string='RESET_VIEWS';
         HIDE_VIEWS:string='HIDE_VIEWS';
-        settings: any;
+       private settings: any;
         props:any;//_.Dictionary<VOProps>;
         static status:string;
 
@@ -94,8 +94,15 @@ module uplight {
         }
         public device: {} = { device: 'kiosk1', ln: 'en' };
 
+        setProps(data:any[]):void{
+            this.props = _.indexBy(data,'id');
+        }
+        getProp(str:string):any{
+            return this.props[str];
+        }
         setSettings(data:any):void{
             this.settings=data;
+            this.setProps(data.props);
             this.events.triggerHandler(this.ON_SETTINGS,data);
         }
         getSettings(index:string):any{

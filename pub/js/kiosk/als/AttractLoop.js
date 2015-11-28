@@ -3,39 +3,51 @@
  */
 /// <reference path="../Registry.ts" />
 /// <reference path="TouchClip.ts" />
-/// <reference path="Gallery.ts" />
+/// <reference path="GalleryDisplay.ts" />
 var uplight;
 (function (uplight) {
-    var VOAttractLoop = (function () {
-        function VOAttractLoop(obj) {
+    var ALProps = (function () {
+        function ALProps() {
+        }
+        return ALProps;
+    })();
+    uplight.ALProps = ALProps;
+    var ALoop = (function () {
+        function ALoop(obj) {
             for (var str in obj)
                 this[str] = obj[str];
         }
-        return VOAttractLoop;
+        return ALoop;
     })();
-    uplight.VOAttractLoop = VOAttractLoop;
+    uplight.ALoop = ALoop;
     var AttractLoop = (function () {
         function AttractLoop(el) {
             var _this = this;
             this.timeout = 60000;
             this.isActive = true;
+            console.log(el);
             this.R = uplight.Registry.getInstance();
             this.view = $(el);
             this.width = this.view.width();
-            var tt = Number(this.R.settings.ss_timeout);
-            if (isNaN(tt) || tt < 10)
-                tt = 10;
+            var tt = this.R.getProp('ss_timeout');
+            var timeout = 60;
+            if (tt)
+                timeout = Number(tt.value);
+            if (isNaN(timeout) || timeout < 10)
+                timeout = 60;
             this.timeout = tt * 1000;
-            this.al = this.R.settings.attract_loop;
+            this.al = new ALoop(this.R.getSettings('attract_loop'));
+            console.log(this.al);
             this.body = $(document);
             this.body.click(function () {
-                _this.hide();
+                _this.onStop();
                 _this.resetTimer();
             });
             this.cover = this.view.find('[data-id=cover]:first');
-            this.loadAL();
-            this.R.events.on(uplight.Registry.getInstance().AL_START, function () { return _this.start(); });
-            this.R.events.on(uplight.Registry.getInstance().AL_STOP, function () { return _this.stop(); });
+            this.initAL();
+            this.R.events.on(uplight.Registry.getInstance().AL_START, function () { return _this.onStart(); });
+            this.R.events.on(uplight.Registry.getInstance().AL_STOP, function () { return _this.onStop(); });
+            this.R.events.triggerHandler(this.R.AL_START);
         }
         AttractLoop.prototype.resetTimer = function () {
             clearTimeout(this.timer);
@@ -44,42 +56,35 @@ var uplight;
             }, this.timeout);
         };
         AttractLoop.prototype.hide = function () {
-            if (this.isActive) {
-                this.R.events.triggerHandler(this.R.AL_STOPED);
-                this.view.addClass(HIDDEN);
-                this.isActive = false;
-                this.tc.stop();
-                this.gallery.stop();
-            }
+            this.view.addClass(HIDDEN);
         };
-        AttractLoop.prototype.start = function () {
+        AttractLoop.prototype.onStart = function () {
             this.show();
-            this.tc.start();
-            this.gallery.start();
         };
         AttractLoop.prototype.show = function () {
-            if (!this.isActive) {
-                this.view.removeClass(HIDDEN);
-                this.isActive = true;
-                this.start();
+            this.isActive = true;
+            this.view.removeClass(HIDDEN);
+        };
+        AttractLoop.prototype.onStop = function () {
+            if (this.isActive) {
+                this.isActive = false;
+                this.hide();
             }
         };
-        AttractLoop.prototype.stop = function () {
-            this.hide();
-        };
-        AttractLoop.prototype.loadAL = function () {
+        AttractLoop.prototype.initAL = function () {
             var vo = this.al;
-            if (vo.type == 'gallery' || vo.type == 'gallery2') {
-                var gal = new uplight.Gallery(vo);
-                this.cover.append(gal.getView());
-                this.gallery = gal;
+            var ar = vo.props;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                var item = ar[i];
+                if (item.url.substr(0, 3) === 'gal') {
+                    var gal = new uplight.GalleryDisplay(item);
+                    gal.appendTo(this.cover);
+                }
             }
-            if (vo.TC)
+            if (vo.TC) {
                 var tc = new uplight.TouchClip(this.width);
-            this.cover.append(tc.view);
-            tc.start();
-            this.tc = tc;
-            //console.log(vo);
+                this.cover.append(tc.view);
+            }
         };
         return AttractLoop;
     })();

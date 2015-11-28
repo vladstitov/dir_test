@@ -41,7 +41,7 @@ var uplight;
             r.events = $('<div>');
             r.connector = new uplight.Connector();
             r.connector.id = u_settings.id;
-            r.settings = u_settings;
+            r.setSettings(u_settings);
             r.props = _.indexBy(u_settings.props, 'id');
             // console.log(u_settings);          // r.connector.who='kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });

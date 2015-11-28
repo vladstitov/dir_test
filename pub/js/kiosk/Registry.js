@@ -61,8 +61,15 @@ var uplight;
         Registry.prototype.warn = function (str) {
             this.warns += str + "\n";
         };
+        Registry.prototype.setProps = function (data) {
+            this.props = _.indexBy(data, 'id');
+        };
+        Registry.prototype.getProp = function (str) {
+            return this.props[str];
+        };
         Registry.prototype.setSettings = function (data) {
             this.settings = data;
+            this.setProps(data.props);
             this.events.triggerHandler(this.ON_SETTINGS, data);
         };
         Registry.prototype.getSettings = function (index) {

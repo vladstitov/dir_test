@@ -4,7 +4,7 @@
   /// <reference path="../Registry.ts" />
     /// <reference path="AttractLoop.ts" />
 module uplight{
-  export  class Gallery{
+ /* export  class Gallery{
     private view:JQuery
       private galleries:GalleryDisplay[];
       getView():JQuery{
@@ -20,16 +20,16 @@ module uplight{
           for(var i=0,n=ar.length;i<n;i++) ar[i].stop();;
       }
 
-    constructor(private vo:VOAttractLoop){
+    constructor(private vo:ALProps){
         this.galleries=[];
         this.view=$('<div>').addClass('gallery');
        if(vo.type=='gallery') {
-           var gal:GalleryDisplay = new GalleryDisplay(vo.data_url);
+           var gal:GalleryDisplay = new GalleryDisplay(vo.props[0].url);
            this.view.append(gal.view)
            this.galleries.push(gal)
        }
         else if(vo.type=='gallery2'){
-           var ar:string[] = this.vo.data_url.split(',')
+           var ar:string[] = this.vo.props[0].url.split(',')
            var gal:GalleryDisplay = new GalleryDisplay(ar[0]);
            this.galleries.push(gal)
            this.view.append(gal.view);
@@ -39,9 +39,10 @@ module uplight{
        }
 
     }
+  }
+*/
 
 
-}
     export class GalleryDisplay{
         private selector:string
         view:JQuery
@@ -56,7 +57,7 @@ module uplight{
         private prev:JQuery;
         private cur:JQuery;
 
-        constructor(url:string){
+        constructor(props:ALProps){
             this.view = $('<div>');
             this.list=$('<div>').appendTo(this.view);
           //  Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
@@ -64,6 +65,9 @@ module uplight{
            // Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
         }
 
+        appendTo(container:JQuery):void{
+            this.view.appendTo(container);
+        }
         private onData(res:string){
             var data = JSON.parse(res);
          //   console.log(data);
@@ -79,6 +83,7 @@ module uplight{
            // this.view.addClass('x'+this.props.size);
            // this.start();
         }
+
 
         private goNext():void{
          //   console.log('next');
