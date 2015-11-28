@@ -19,7 +19,7 @@ var uplight;
             return $.get(this.service + 'get_keywords');
         };
         Connector.prototype.getData = function (filename) {
-            return $.get(this.service + 'get_data&device=' + this.device + '&file_name=' + filename);
+            return $.get(this.service + 'get_data&device=' + this.device + '&index=' + filename);
         };
         Connector.prototype.getUpdates = function (stamp, callBack, onError) {
             $.get(this.service + 'get_updates&stamp=' + stamp).done(callBack).fail(onError);

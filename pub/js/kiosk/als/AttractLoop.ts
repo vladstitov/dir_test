@@ -33,7 +33,7 @@ module uplight{
         width:number;
 
         constructor(el:HTMLElement){
-            console.log(el);
+
             this.R=Registry.getInstance();
             this.view = $(el)
              this.width= this.view.width();
@@ -42,49 +42,55 @@ module uplight{
             var timeout:number = 60;
             if(tt)timeout = Number(tt.value);
             if(isNaN(timeout) || timeout<10) timeout=60;
-            this.timeout = tt*1000;
+            this.timeout = timeout*1000;
+
+            console.log(this.timeout);
 
 
             this.al = new ALoop(this.R.getSettings('attract_loop'));
-            console.log(this.al);
+           // console.log(this.al);
 
             this.body=$(document);
 
             this.body.click(()=>{
-                this.onStop();
+                this.stop();
                 this.resetTimer();
             })
 
             this.cover = this.view.find('[data-id=cover]:first');
            this.initAL();
-            this.R.events.on( Registry.getInstance().AL_START,()=>this.onStart());
-            this.R.events.on( Registry.getInstance().AL_STOP,()=>this.onStop());
-            this.R.events.triggerHandler(this.R.AL_START);
+            this.start();
+
         }
 
         private resetTimer():void{
             clearTimeout(this.timer);
-            this.timer = setTimeout(()=>{Registry.getInstance().events.triggerHandler(Registry.getInstance().AL_START)},this.timeout)
+            this.timer = setTimeout(()=>this.start(),this.timeout)
         }
 
-      private isActive=true;
+      private isActive;
 
         hide():void{
                 this.view.addClass(HIDDEN);
         }
 
-        private onStart():void{
-          this.show();
+        private start():void{
+            if(!this.isActive){
+                this.isActive = true;
+                this.show();
+                this.R.events.triggerHandler(Registry.getInstance().AL_START)
+            }
         }
 
         show():void{
+            console.log('show ');
             this.isActive = true;
             this.view.removeClass(HIDDEN);
-
         }
 
-        private onStop():void{
+        private stop():void{
             if(this.isActive){
+                this.R.events.triggerHandler(this.R.AL_STOP);
                 this.isActive =false;
                 this.hide();
             }
@@ -96,7 +102,7 @@ module uplight{
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
                 if(item.url.substr(0,3)==='gal'){
-                    var gal:GalleryDisplay = new GalleryDisplay(item);
+                    var gal:GalleryDisplay = new GalleryDisplay(item,i);
                     gal.appendTo(this.cover);
                 }
             }

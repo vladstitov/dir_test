@@ -80,11 +80,13 @@ include('KioskHeader.php');
            #Pages{
                overflow: hidden;
            }
+
             #Pages>div{
                 width:1480px;
                 height: 1077px;
                /* white-space: nowrap;*/
              }
+
            #Pages>div>div{
                float: left;
                white-space: normal;
@@ -93,8 +95,8 @@ include('KioskHeader.php');
                width:725px;
                height: 1077px;
                padding: 22px;
-
            }
+
            #Pages .page>.header{
                font-size: large;
                margin-bottom: 1em;
@@ -105,6 +107,11 @@ include('KioskHeader.php');
         </style>
         <div id="mainport" class="mainbg u-glow view-port-content">
             <section id="SearchResult" data-ctr="uplight.SearchResult">
+                <style>
+                    #SearchResult #list-main .details, table{
+                        color: inherit;
+                    }
+                </style>
                 <div class="col-sm-12">
                     <div id="list-header" >
                         <div id="list-header-main" >
@@ -334,6 +341,34 @@ include('KioskHeader.php');
 </div> <!--End of container-->
 
 <section id="AttractLoop" data-ctr="uplight.AttractLoop">
+    <style>
+        #AttractLoop {
+            position: absolute;
+            top: 170px;
+        }
+        #AttractLoop{
+            width: 1080px;
+            height: 1750px;
+        }
+        #AttractLoop .gal_650x1024 {
+            position: absolute;
+            margin: auto;
+            padding: 0;
+            left: 0;
+            right: 0;
+            top:200px;
+            width: 650px;
+            height: 1024px;
+            overflow: hidden;
+        }
+        #Touchclip{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 1080px;
+            height: 120px;
+        }
+    </style>
     <div  class="cover" data-id="cover">
     </div>
 

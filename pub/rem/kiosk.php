@@ -59,9 +59,11 @@ switch(array_shift($a)){
 	break;
 	case 'get_data':
 	
-		if(isset($get['file_name'])){
-					$fn=DATA.$get['file_name'];
-			echo file_exists($fn)?file_get_contents($fn):'NO';
+		if(isset($get['index'])){
+			$index= $get['index'];
+			if(strpos($index,'.json') === false)$index=$index.'.json';
+			$fn=DATA.$index;
+			echo file_exists($fn)?file_get_contents($fn):'NO'.$fn;
 		}			      
 	break;	
 	case 'get_keywords':

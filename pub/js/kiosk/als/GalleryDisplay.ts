@@ -4,65 +4,29 @@
   /// <reference path="../Registry.ts" />
     /// <reference path="AttractLoop.ts" />
 module uplight{
- /* export  class Gallery{
-    private view:JQuery
-      private galleries:GalleryDisplay[];
-      getView():JQuery{
-          return this.view;
-      }
-      start():void{
-            var ar = this.galleries
-            for(var i=0,n=ar.length;i<n;i++) ar[i].start();;
-
-      }
-      stop():void{
-          var ar = this.galleries
-          for(var i=0,n=ar.length;i<n;i++) ar[i].stop();;
-      }
-
-    constructor(private vo:ALProps){
-        this.galleries=[];
-        this.view=$('<div>').addClass('gallery');
-       if(vo.type=='gallery') {
-           var gal:GalleryDisplay = new GalleryDisplay(vo.props[0].url);
-           this.view.append(gal.view)
-           this.galleries.push(gal)
-       }
-        else if(vo.type=='gallery2'){
-           var ar:string[] = this.vo.props[0].url.split(',')
-           var gal:GalleryDisplay = new GalleryDisplay(ar[0]);
-           this.galleries.push(gal)
-           this.view.append(gal.view);
-           var gal2:GalleryDisplay = new GalleryDisplay(ar[1]);
-           this.view.append(gal2.view);
-           this.galleries.push(gal2)
-       }
-
-    }
-  }
-*/
-
 
     export class GalleryDisplay{
         private selector:string
         view:JQuery
-       private list:JQuery;
-
+        private list:JQuery;
         private data:any;
-       private galley:JQuery[];
-      // private al:VOAttractLoop;
-       private timeout:number;
+        private galley:JQuery[];
+        private timeout:number=20;
         private current=-1;
-       private  interval:number=0;
+        private  interval:number=0;
         private prev:JQuery;
         private cur:JQuery;
+        private isActive:boolean;
 
-        constructor(props:ALProps){
-            this.view = $('<div>');
+        constructor(private props:ALProps,i:number){
+            this.view = $('<div>').addClass(props.url+' gallery');
             this.list=$('<div>').appendTo(this.view);
-          //  Registry.getInstance().connector.get('rem/kiosk.php?a=get_data&file_name='+url).done((res)=>this.onData(res));
-           // Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
-           // Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
+            var delay:number = Number(props.delay);
+            if(isNaN(delay) || delay<5) delay = this.timeout;
+            this.timeout =  delay;
+            Registry.getInstance().events.on( Registry.getInstance().AL_START,()=>this.start());
+            Registry.getInstance().events.on( Registry.getInstance().AL_STOP,()=>this.stop());
+            Registry.getInstance().connector.getData(props.url).done((res)=>this.onData(res))
         }
 
         appendTo(container:JQuery):void{
@@ -70,23 +34,20 @@ module uplight{
         }
         private onData(res:string){
             var data = JSON.parse(res);
-         //   console.log(data);
-            var ar = data.gallery;
+            var ar = data;
             var out:JQuery[]=[];
             for(var i=0,n=ar.length;i<n;i++){
                 out.push(this.createImage(ar[i]));
             }
             this.galley = out;
-           // this.props=data.props;
-           // this.timeout = Number(this.props.delay);
-           // if(isNaN(this.timeout))this.timeout=20;
-           // this.view.addClass('x'+this.props.size);
-           // this.start();
+            this.current=-1;
+            this.goNext();
         }
 
 
         private goNext():void{
-         //   console.log('next');
+         console.log('next');
+            if(!this.isActive || !this.galley) return;
             this.current++;
             if(this.current>=this.galley.length) this.current=0;
           var next = this.galley[this.current];
@@ -117,11 +78,14 @@ module uplight{
         private createImage(url:string):JQuery{
             return $('<div>').addClass('item').html('<img src="'+url+'" />');
         }
+
         start():void{
+            this.isActive = true;
             if(this.interval===0) this.interval = setInterval(()=>{this.goNext()},this.timeout*1000);
             this.goNext();
         }
         stop():void{
+            this.isActive = false;
             clearInterval(this.interval);
             this.interval=0;
 

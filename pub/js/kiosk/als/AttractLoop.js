@@ -24,8 +24,6 @@ var uplight;
         function AttractLoop(el) {
             var _this = this;
             this.timeout = 60000;
-            this.isActive = true;
-            console.log(el);
             this.R = uplight.Registry.getInstance();
             this.view = $(el);
             this.width = this.view.width();
@@ -35,38 +33,42 @@ var uplight;
                 timeout = Number(tt.value);
             if (isNaN(timeout) || timeout < 10)
                 timeout = 60;
-            this.timeout = tt * 1000;
+            this.timeout = timeout * 1000;
+            console.log(this.timeout);
             this.al = new ALoop(this.R.getSettings('attract_loop'));
-            console.log(this.al);
+            // console.log(this.al);
             this.body = $(document);
             this.body.click(function () {
-                _this.onStop();
+                _this.stop();
                 _this.resetTimer();
             });
             this.cover = this.view.find('[data-id=cover]:first');
             this.initAL();
-            this.R.events.on(uplight.Registry.getInstance().AL_START, function () { return _this.onStart(); });
-            this.R.events.on(uplight.Registry.getInstance().AL_STOP, function () { return _this.onStop(); });
-            this.R.events.triggerHandler(this.R.AL_START);
+            this.start();
         }
         AttractLoop.prototype.resetTimer = function () {
+            var _this = this;
             clearTimeout(this.timer);
-            this.timer = setTimeout(function () {
-                uplight.Registry.getInstance().events.triggerHandler(uplight.Registry.getInstance().AL_START);
-            }, this.timeout);
+            this.timer = setTimeout(function () { return _this.start(); }, this.timeout);
         };
         AttractLoop.prototype.hide = function () {
             this.view.addClass(HIDDEN);
         };
-        AttractLoop.prototype.onStart = function () {
-            this.show();
+        AttractLoop.prototype.start = function () {
+            if (!this.isActive) {
+                this.isActive = true;
+                this.show();
+                this.R.events.triggerHandler(uplight.Registry.getInstance().AL_START);
+            }
         };
         AttractLoop.prototype.show = function () {
+            console.log('show ');
             this.isActive = true;
             this.view.removeClass(HIDDEN);
         };
-        AttractLoop.prototype.onStop = function () {
+        AttractLoop.prototype.stop = function () {
             if (this.isActive) {
+                this.R.events.triggerHandler(this.R.AL_STOP);
                 this.isActive = false;
                 this.hide();
             }
@@ -77,7 +79,7 @@ var uplight;
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
                 if (item.url.substr(0, 3) === 'gal') {
-                    var gal = new uplight.GalleryDisplay(item);
+                    var gal = new uplight.GalleryDisplay(item, i);
                     gal.appendTo(this.cover);
                 }
             }

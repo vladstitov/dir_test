@@ -25,7 +25,7 @@ module uplight {
             return  $.get(this.service + 'get_keywords');
         }
         getData(filename:string):JQueryPromise<string> {
-           return $.get(this.service + 'get_data&device=' + this.device+'&file_name='+filename);
+           return $.get(this.service + 'get_data&device=' + this.device+'&index='+filename);
 
         }
         getUpdates(stamp:number,callBack: Function, onError: Function): void {
