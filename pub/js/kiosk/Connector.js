@@ -11,6 +11,7 @@ var uplight;
         function Connector() {
             this.service = 'rem/kiosk.php?a=';
             this.serv = 'rem/kiosk.php';
+            this.id = uplight.Registry.getInstance().getSettings('id');
         }
         Connector.prototype.get = function (url) {
             return $.get(url);

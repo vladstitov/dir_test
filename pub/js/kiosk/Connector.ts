@@ -8,9 +8,12 @@ module uplight {
     }
 
     export class Connector {
+        constructor(){
+            this.id = Registry.getInstance().getSettings('id');
+        }
         private service = 'rem/kiosk.php?a=';
         private serv= 'rem/kiosk.php';
-        id:string;
+        private id:string;
        // who:string='kiosk';
         public device: string;
         public lang: string;

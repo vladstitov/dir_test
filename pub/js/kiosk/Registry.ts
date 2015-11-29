@@ -102,7 +102,7 @@ module uplight {
         }
         setSettings(data:any):void{
             this.settings=data;
-            this.setProps(data.props);
+            if(data.props)this.setProps(data.props);
             this.events.triggerHandler(this.ON_SETTINGS,data);
         }
         getSettings(index:string):any{

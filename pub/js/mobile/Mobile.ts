@@ -56,11 +56,10 @@ module uplight {
 
 
         constructor() {
-            var settings=u_settings;
             this.R = uplight.Registry.getInstance();
-            this.R.settings = settings;
+            this.R.setSettings(u_settings);
+            console.log(u_settings);
            var conn:uplight.Connector = new uplight.Connector();
-           conn.id = 'mobile';
 
             var rel:Relay = new Relay(5,2);
 

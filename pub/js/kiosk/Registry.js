@@ -69,7 +69,8 @@ var uplight;
         };
         Registry.prototype.setSettings = function (data) {
             this.settings = data;
-            this.setProps(data.props);
+            if (data.props)
+                this.setProps(data.props);
             this.events.triggerHandler(this.ON_SETTINGS, data);
         };
         Registry.prototype.getSettings = function (index) {
@@ -83,4 +84,4 @@ var uplight;
     })();
     uplight.Registry = Registry;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=Registry.js.map
+//# sourceMappingURL=registry.js.map
