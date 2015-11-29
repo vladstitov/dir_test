@@ -27,9 +27,18 @@ var uplight;
             this.url = 'https://www.google.com/maps/embed/v1/';
             this.type = 'view';
             container.load('htms/mobile/GoogleMapMobile.htm', function () { return _this.init(); });
-            this.geo = uplight.Registry.getInstance().getSettings('geo');
+            this.data = uplight.Registry.getInstance().getSettings('gpos');
+            this.geo = this.getGeoById(1);
             // this.view = this.createView();
         }
+        GoogleMap.prototype.getGeoById = function (id) {
+            var ar = this.data;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                if (ar[i].id === id)
+                    return ar[i];
+            }
+            return null;
+        };
         GoogleMap.prototype.onGetDirections = function () {
             if (this.isDirections)
                 this.closeDirections();
@@ -85,6 +94,11 @@ var uplight;
                     minZoom: 7
                 };
                 var map = new google.maps.Map(_this.gmap, opt);
+                _this.marker = new google.maps.Marker({
+                    position: map.getCenter(),
+                    map: map,
+                    title: ''
+                });
                 _this.directionsService = new google.maps.DirectionsService();
                 _this.directionsDisplay = new google.maps.DirectionsRenderer();
                 var myOptions = {
@@ -126,6 +140,7 @@ var uplight;
                                 txtDir += '<a> - ' + myRoute.legs[0].steps[i].instructions + "</a><br/>";
                             }
                             txtDir += '</div>';
+                            _this.marker.setMap(null);
                             _this.$txtDirextions.html(txtDir);
                         }
                     });

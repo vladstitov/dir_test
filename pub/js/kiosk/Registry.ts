@@ -123,6 +123,13 @@ module uplight {
 
     }
 
+    export class VOGeo{
+        id:number;
+        lat:number;
+        lng:number;
+        zoom:number;
+        constructor(obj:any){for(var str in obj )this[str] = obj[str];}
+    }
 
 
 

@@ -12,9 +12,10 @@ poi.park	poi.place_of_worship	poi.school	poi.sports_complex*/
 module uplight{
 
     export class VOGeo{
-    lat:number;
-    lng:number;
-    zoom:number;
+        id:number;
+        lat:number;
+        lng:number;
+        zoom:number;
         constructor(obj:any){for(var str in obj )this[str] = obj[str];}
     }
     export class GmapCtr implements UModule{
@@ -25,6 +26,7 @@ module uplight{
         lat:number;
         lng:number;
         zoom:number;
+        data:VOGeo[];
 
        private geo:VOGeo;
 
@@ -42,17 +44,13 @@ module uplight{
         private $gmap:JQuery;
         private $gover:JQuery;
         private map:google.maps.Map;
+        private R:RegA;
 
 
         constructor(container:JQuery){
-            container.load('htms/admin/Gmap.htm',()=>this.init())
-            var geo=RegA.getInstance().getSettings('geo');
-            console.log(geo);
-            if(!geo) geo = {lat:43.657816714886074,lng:-79.37558501958847,zoom:18};
-            this.geo = new VOGeo(geo);
-            this.lat = this.geo.lat;
-            this.lng = this.geo.lng;
-            this.zoom = this.geo.zoom;
+            container.load('htms/admin/Gmap.htm',()=>this.loadData());
+            this.R = RegA.getInstance();
+
 
         }
 
@@ -68,6 +66,7 @@ module uplight{
             return this.ID;
         }
         destroy():void{
+            this.R=null;
 
            // this.$lat = null;
            // this.$lng = null;
@@ -77,34 +76,49 @@ module uplight{
            // this.map = null;
 
         }
+        private loadData():void{
+            this.R.connector.getData('gpos').done((res)=>{
+
+                var ar =  JSON.parse(res);
+                var out:VOGeo[]=[]
+                for(var i=0,n=ar.length;i<n;i++){
+                    out.push(new VOGeo(ar[i]));
+                }
+
+                this.data= out;
+
+                this.init();
+            })
+        }
+        private getGeoById(id:number):VOGeo{
+            var ar = this.data;
+            for(var i=0,n=ar.length;i<n;i++){
+               if(ar[i].id==id) return ar[i];
+            }
+            return null;
+        }
+
         private init(){
             this.$gmap = $('#GoogleMap');
-        //    document.getElementById('GoogleMap').addEventListener('click',(evt:MouseEvent)=>{
-              // evt.stopImmediatePropagation();
-               // evt.stopPropagation();
-//evt.preventDefault();
-              //  console.log(evt);
-              // // var evt3:MouseEvent = new MouseEvent();
-
-
-               // var evt2 = new MouseEvent("click", evt);
-
-              //  console.log(evt);
-              //  document.getElementById('GoogleMap').dispatchEvent(evt2);
-          //  },false)
-         //   this.$gover=$('#GoogleMapOver').click((evt:JQueryEventObject)=>{
-             //   console.log(evt);
-              //  document.getElementById('GoogleMap').dispatchEvent(evt.originalEvent);
-              //  this.$gmap.trigger(evt);
-               // google.maps.event.trigger(map,'click',evt.originalEvent)
-          //  });
             this.$view =$('#GoogleMapCtr');
-            this.$lat = this.$view.find('[data-id=txtLat]:first').text(this.lat);
-            this.$lng = this.$view.find('[data-id=txtLng]:first').text(this.lng);
-            this.$zoom = this.$view.find('[data-id=txtZoom]:first').text(this.zoom);
+            this.$lat = this.$view.find('[data-id=txtLat]:first');
+            this.$lng = this.$view.find('[data-id=txtLng]:first');
+            this.$zoom = this.$view.find('[data-id=txtZoom]:first');
             this.$btnSave = this.$view.find('[data-id=btnSave]:first').click(()=>{
                 this.save();
-            })
+            });
+
+            this.geo = this.getGeoById(1);
+            this.lat = this.geo.lat;
+            this.lng = this.geo.lng;
+            this.zoom = this.geo.zoom;
+
+
+            this.$lat.text(this.lat);
+            this.$lng.text(this.lng);
+            this.$zoom.text(this.zoom);
+
+
             var opt:any = {
                 center: {lat: this.geo.lat, lng:this.geo.lng},
                 zoom: this.geo.zoom,
@@ -146,7 +160,7 @@ module uplight{
             this.marker = new google.maps.Marker({
                 position: map.getCenter(),
                 map: map,
-                title: 'Hello World!'
+                title: ''
             });
 
             var styles = [
@@ -223,7 +237,7 @@ module uplight{
             this.geo.lat= this.lat;
             this.geo.lng = this.lng;
             this.geo.zoom = this.zoom;
-            RegA.getInstance().saveSettings('geo',this.geo).done((res:VOResult)=>{
+            this.R.connector.saveData(JSON.stringify(this.data),'gpos').done((res:VOResult)=>{
                 if(res.success=='success')  RegA.getInstance().msg('Data saved',this.$btnSave.parent());
             });
 

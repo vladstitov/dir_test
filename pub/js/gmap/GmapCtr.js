@@ -23,15 +23,8 @@ var uplight;
             this.ID = 'uplight.GmapCtr';
             this.key = 'AIzaSyAUaQFpM8aGgiocMDRcPzH66FKx5rPH1q0';
             this.center = '43.657816714886074, -79.376571';
-            container.load('htms/admin/Gmap.htm', function () { return _this.init(); });
-            var geo = uplight.RegA.getInstance().getSettings('geo');
-            console.log(geo);
-            if (!geo)
-                geo = { lat: 43.657816714886074, lng: -79.37558501958847, zoom: 18 };
-            this.geo = new VOGeo(geo);
-            this.lat = this.geo.lat;
-            this.lng = this.geo.lng;
-            this.zoom = this.geo.zoom;
+            container.load('htms/admin/Gmap.htm', function () { return _this.loadData(); });
+            this.R = uplight.RegA.getInstance();
         }
         GmapCtr.prototype.detach = function () {
             this.$view.detach();
@@ -44,6 +37,7 @@ var uplight;
             return this.ID;
         };
         GmapCtr.prototype.destroy = function () {
+            this.R = null;
             // this.$lat = null;
             // this.$lng = null;
             // this.$zoom = null;
@@ -51,32 +45,43 @@ var uplight;
             //google.maps.event.clearInstanceListeners(this.map);
             // this.map = null;
         };
+        GmapCtr.prototype.loadData = function () {
+            var _this = this;
+            this.R.connector.getData('gpos').done(function (res) {
+                var ar = JSON.parse(res);
+                var out = [];
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    out.push(new VOGeo(ar[i]));
+                }
+                _this.data = out;
+                _this.init();
+            });
+        };
+        GmapCtr.prototype.getGeoById = function (id) {
+            var ar = this.data;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                if (ar[i].id == id)
+                    return ar[i];
+            }
+            return null;
+        };
         GmapCtr.prototype.init = function () {
             var _this = this;
             this.$gmap = $('#GoogleMap');
-            //    document.getElementById('GoogleMap').addEventListener('click',(evt:MouseEvent)=>{
-            // evt.stopImmediatePropagation();
-            // evt.stopPropagation();
-            //evt.preventDefault();
-            //  console.log(evt);
-            // // var evt3:MouseEvent = new MouseEvent();
-            // var evt2 = new MouseEvent("click", evt);
-            //  console.log(evt);
-            //  document.getElementById('GoogleMap').dispatchEvent(evt2);
-            //  },false)
-            //   this.$gover=$('#GoogleMapOver').click((evt:JQueryEventObject)=>{
-            //   console.log(evt);
-            //  document.getElementById('GoogleMap').dispatchEvent(evt.originalEvent);
-            //  this.$gmap.trigger(evt);
-            // google.maps.event.trigger(map,'click',evt.originalEvent)
-            //  });
             this.$view = $('#GoogleMapCtr');
-            this.$lat = this.$view.find('[data-id=txtLat]:first').text(this.lat);
-            this.$lng = this.$view.find('[data-id=txtLng]:first').text(this.lng);
-            this.$zoom = this.$view.find('[data-id=txtZoom]:first').text(this.zoom);
+            this.$lat = this.$view.find('[data-id=txtLat]:first');
+            this.$lng = this.$view.find('[data-id=txtLng]:first');
+            this.$zoom = this.$view.find('[data-id=txtZoom]:first');
             this.$btnSave = this.$view.find('[data-id=btnSave]:first').click(function () {
                 _this.save();
             });
+            this.geo = this.getGeoById(1);
+            this.lat = this.geo.lat;
+            this.lng = this.geo.lng;
+            this.zoom = this.geo.zoom;
+            this.$lat.text(this.lat);
+            this.$lng.text(this.lng);
+            this.$zoom.text(this.zoom);
             var opt = {
                 center: { lat: this.geo.lat, lng: this.geo.lng },
                 zoom: this.geo.zoom,
@@ -108,7 +113,7 @@ var uplight;
             this.marker = new google.maps.Marker({
                 position: map.getCenter(),
                 map: map,
-                title: 'Hello World!'
+                title: ''
             });
             var styles = [
                 {
@@ -171,7 +176,7 @@ var uplight;
             this.geo.lat = this.lat;
             this.geo.lng = this.lng;
             this.geo.zoom = this.zoom;
-            uplight.RegA.getInstance().saveSettings('geo', this.geo).done(function (res) {
+            this.R.connector.saveData(JSON.stringify(this.data), 'gpos').done(function (res) {
                 if (res.success == 'success')
                     uplight.RegA.getInstance().msg('Data saved', _this.$btnSave.parent());
             });

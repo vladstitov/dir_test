@@ -83,5 +83,13 @@ var uplight;
         return Registry;
     })();
     uplight.Registry = Registry;
+    var VOGeo = (function () {
+        function VOGeo(obj) {
+            for (var str in obj)
+                this[str] = obj[str];
+        }
+        return VOGeo;
+    })();
+    uplight.VOGeo = VOGeo;
 })(uplight || (uplight = {}));
 //# sourceMappingURL=registry.js.map

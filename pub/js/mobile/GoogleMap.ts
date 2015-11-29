@@ -38,12 +38,24 @@ module uplight{
         private $travalType:JQuery;
         private $btnClose:JQuery;
 
+        private marker:google.maps.Marker;
 
+        private data:VOGeo[];
 
+        getGeoById(id:number):VOGeo{
+            var ar = this.data;
+            for(var i=0,n=ar.length;i<n;i++){
+                if(ar[i].id===id) return ar[i];
+            }
+            return null;
+        }
         constructor(private container:JQuery){
             container.load('htms/mobile/GoogleMapMobile.htm',()=>this.init());
-           this.geo  = Registry.getInstance().getSettings('geo');
-           // this.view = this.createView();
+
+
+            this.data=Registry.getInstance().getSettings('gpos');
+            this.geo  = this.getGeoById(1);
+            // this.view = this.createView();
         }
 
 
@@ -79,8 +91,6 @@ module uplight{
 
             $('#btnTry').click(()=>{
 
-
-
             });
             this.view= $('#GoogleMapMobile');
 
@@ -115,6 +125,12 @@ module uplight{
                 }
 
                var map = new google.maps.Map(this.gmap,opt);
+
+                this.marker = new google.maps.Marker({
+                    position: map.getCenter(),
+                    map: map,
+                    title: ''
+                });
                 this.directionsService = new google.maps.DirectionsService();
                 this.directionsDisplay = new google.maps.DirectionsRenderer();
                 var myOptions = {
@@ -123,6 +139,7 @@ module uplight{
                 this.directionsDisplay.setMap(map);
                 google.maps.event.addListener(map, 'click', (event)=> {
                     if(!this.isDirections) return;
+
                     var lat = event.latLng.lat();
                     var lng=event.latLng.lng();
 
@@ -162,6 +179,7 @@ module uplight{
                            }
                             txtDir +='</div>';
 
+                            this.marker.setMap(null);
                            this.$txtDirextions.html(txtDir);
                         }
                     });
