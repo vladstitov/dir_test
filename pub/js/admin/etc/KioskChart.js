@@ -152,7 +152,7 @@ var uplight;
             this.colors = colors;
             //  console.log(clicks);
             this.view.find('[data-id=fromto]:first').text(fromto);
-            uplight.RegA.getInstance().connector.getData('devices.json').done(function (res) { return _this.onKiosks(res); });
+            uplight.RegA.getInstance().connector.getData('devices').done(function (res) { return _this.onDevices(res); });
         }
         KiosksChart.prototype.craeateTimeline = function () {
             var now = new Date();
@@ -227,7 +227,7 @@ var uplight;
             var ctx = canvas.get(0).getContext("2d");
             var myLineChart = new Chart(ctx).Line(data, this.getOptions());
         };
-        KiosksChart.prototype.onKiosks = function (res) {
+        KiosksChart.prototype.onDevices = function (res) {
             var _this = this;
             var ids = [];
             // var timeline:number[]=  this.craeateTimeline();
@@ -240,9 +240,9 @@ var uplight;
             var devices = {};
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                //  var id:string = 'kiosk'+item.id;
-                ids.push(item.id);
-                devices[item.id] = ar[i];
+                var index = item.type + item.id;
+                ids.push(index);
+                devices[index] = ar[i];
                 // var clicks:number[] = this.clicks[ar[i].id];
                 //if(!clicks) clicks=[];
                 //clicks = this.convertClicks(clicks);

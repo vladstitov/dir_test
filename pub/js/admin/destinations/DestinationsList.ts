@@ -64,11 +64,11 @@ module uplight {
                 '<th class="item-unit">Unit</th>' +
                 '<th class="item-categories">Categories</th>' +
                 '<th class="">Short Info</th>' +
-                '<th class="">Thumb</th>' +
+                '<th title="Thumbnail" class="">Thumb</th>' +
                 '<th class="">Info Table</th>' +
-                '<th class="">Images</th>' +
-                '<th class="">KWs</th>' +
-                '<th class="item-uid">UID</th>' +
+                '<th title="Amount of Images" class="">Images</th>' +
+                '<th title="Keywords amount" class="">KWs</th>' +
+                '<th title="Unique Identifier" class="item-uid">UID</th>' +
                 '</tr>');
             this.table = $('<table>').addClass('table table-striped').append(this.thead).appendTo(this.listContainer);
             this.list=$('<tbody>').appendTo(this.table);

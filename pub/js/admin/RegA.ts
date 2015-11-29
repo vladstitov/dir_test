@@ -126,6 +126,10 @@ module uplight{
 
         }
 
+        getProps(index:string):any{
+            return this.props[index];
+        }
+
         getSettings(index:string):any{
             return this.settings[index];
         }

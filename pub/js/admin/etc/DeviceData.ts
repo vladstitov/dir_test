@@ -7,15 +7,21 @@
 module uplight{
 
     export class DeviceModel{
-       // status:number;
-        status:number;
+       id:number;
+        status:number=0;
         track:VOTrack;
+        name:string;
+        template:string;
+        timer:number;
+        type:string;
        static s_time:number;
-        constructor(private dev:VODevice){
+        constructor(dev:VODevice){
             for(var str in dev) this[str] = dev[str];
-         //   var delta:number = (s_time-this.s_time);
-           // if(delta < timer)this.status=1;
-            //else this.status=0;
+            if(this.track){
+                var delta:number = (DeviceModel.s_time-this.track.s_time);
+                if(delta < (this.timer/1000))this.status=1;
+            }
+
         }
     }
 
@@ -36,7 +42,8 @@ module uplight{
             //console.log('DevicesData');
 
             this.R =  RegA.getInstance()
-            if(RegA.getInstance().props['timer']) this.kioskTimer =this.R.props['timer'].value;
+            var obj:any = RegA.getInstance().getProps['timer'];
+            if(obj) this.kioskTimer =obj.value;
             this.list = $view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
@@ -63,44 +70,27 @@ module uplight{
         }
 
         private onDeviceData(res:VOResult):void{
+           // console.log(res);
+
             var ar:any[] =res.result;
             DeviceModel.s_time = Number(res.success);
            var out:DeviceModel[]=[];
             for(var i=0,n=ar.length;i<n;i++) out.push(new DeviceModel(ar[i]));
-
-
-          //  console.log(res);
-          //  this.s_time = Number(res.success);
-            // console.log(this.data);
-            // console.log(this.s_time);
-           // this.render();
-            // RegA.getInstance().connector.  getServerTime().done((res)=>{
-            //  this.s_time = Number(res);
-            //  this.render();
-            //  });
-
-
+            this.devices = out;
+            this.render();
         }
 
         private render():void {
-            var kt:number = this.kioskTimer;
-            console.log(kt);
             var s_time=this.s_time;
-            var ar:VODevice[] =  this.data;
+            var ar:DeviceModel[] =  this.devices;
             var out='';
-            var ks:DeviceModel[]=[];
             for(var i=0,n=ar.length;i<n;i++){
-              //  var k:DeviceModel = new DeviceModel(ar[i],s_time,kt);
-               // ks.push(k);
-               // out+=this.createDevice(k);
+              out+=this.createDevice(ar[i]);
             }
-            this.devices = ks;
             this.list.html(out) ;
-
         }
 
         private createDevice(obj:DeviceModel):string{
-
             var color:string='#0F0';
             var statusStr='Working fine';
             var  cl ='fa-circle';
@@ -109,21 +99,27 @@ module uplight{
                 cl='fa-exclamation-triangle';
                 statusStr = 'Experienced delays';
             }
+            var stsrtTime:string='';
+            var lastTime:string='';
+            var ip:string ='';
+            var ping:string='';
+            if(obj.track){
+                stsrtTime = new Date(obj.track.start*1000).toLocaleString();
+                lastTime =  new Date(obj.track.now*1000).toLocaleString();
+                ip=obj.track.ip;
+                ping = obj.track.ping+' ';
+            }
 
 
-            return '';
-/*
-            var stsrtTime:string= obj.start?new Date(obj.start_at*1000).toLocaleString():'';
-            var lastTime:string =obj.now? new Date(obj.now*1000).toLocaleString():'';
             return '<tr>' +
                 '<td>'+obj.name+'</td>' +
                 '<td><a target="_blank" href="'+obj.template+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
                 '<td><span title="'+statusStr+'" class="status fa '+cl+'" style="color:'+color+'">&nbsp</span></td>' +
-                '<td>'+obj.ip+'</td>' +
-                '<td>'+obj.ping+'</td>' +
+                '<td>'+ip+'</td>' +
+                '<td>'+ping+'</td>' +
                 '<td class="text-right">'+stsrtTime+'</td>' +
                 '<td class="text-right">'+lastTime+'</td>' +
-                '</tr>';*/
+                '</tr>';
 
 
         }

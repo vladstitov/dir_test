@@ -8,12 +8,14 @@ var uplight;
 (function (uplight) {
     var DeviceModel = (function () {
         function DeviceModel(dev) {
-            this.dev = dev;
+            this.status = 0;
             for (var str in dev)
                 this[str] = dev[str];
-            //   var delta:number = (s_time-this.s_time);
-            // if(delta < timer)this.status=1;
-            //else this.status=0;
+            if (this.track) {
+                var delta = (DeviceModel.s_time - this.track.s_time);
+                if (delta < (this.timer / 1000))
+                    this.status = 1;
+            }
         }
         return DeviceModel;
     })();
@@ -26,8 +28,9 @@ var uplight;
             this.colors = colors;
             this.ID = 'uplight.DevicesData';
             this.R = uplight.RegA.getInstance();
-            if (uplight.RegA.getInstance().props['timer'])
-                this.kioskTimer = this.R.props['timer'].value;
+            var obj = uplight.RegA.getInstance().getProps['timer'];
+            if (obj)
+                this.kioskTimer = obj.value;
             this.list = $view.find('[data-id=list]:first');
             // this.greenLite=view.find('[data-view=greenLite]:first');
             this.loadData();
@@ -52,31 +55,22 @@ var uplight;
             uplight.RegA.getInstance().connector.getDevicesData().done(function (res) { return _this.onDeviceData(res); });
         };
         DevicesData.prototype.onDeviceData = function (res) {
+            // console.log(res);
             var ar = res.result;
             DeviceModel.s_time = Number(res.success);
             var out = [];
             for (var i = 0, n = ar.length; i < n; i++)
                 out.push(new DeviceModel(ar[i]));
-            //  console.log(res);
-            //  this.s_time = Number(res.success);
-            // console.log(this.data);
-            // console.log(this.s_time);
-            // this.render();
-            // RegA.getInstance().connector.  getServerTime().done((res)=>{
-            //  this.s_time = Number(res);
-            //  this.render();
-            //  });
+            this.devices = out;
+            this.render();
         };
         DevicesData.prototype.render = function () {
-            var kt = this.kioskTimer;
-            console.log(kt);
             var s_time = this.s_time;
-            var ar = this.data;
+            var ar = this.devices;
             var out = '';
-            var ks = [];
             for (var i = 0, n = ar.length; i < n; i++) {
+                out += this.createDevice(ar[i]);
             }
-            this.devices = ks;
             this.list.html(out);
         };
         DevicesData.prototype.createDevice = function (obj) {
@@ -88,19 +82,17 @@ var uplight;
                 cl = 'fa-exclamation-triangle';
                 statusStr = 'Experienced delays';
             }
-            return '';
-            /*
-                        var stsrtTime:string= obj.start?new Date(obj.start_at*1000).toLocaleString():'';
-                        var lastTime:string =obj.now? new Date(obj.now*1000).toLocaleString():'';
-                        return '<tr>' +
-                            '<td>'+obj.name+'</td>' +
-                            '<td><a target="_blank" href="'+obj.template+'&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
-                            '<td><span title="'+statusStr+'" class="status fa '+cl+'" style="color:'+color+'">&nbsp</span></td>' +
-                            '<td>'+obj.ip+'</td>' +
-                            '<td>'+obj.ping+'</td>' +
-                            '<td class="text-right">'+stsrtTime+'</td>' +
-                            '<td class="text-right">'+lastTime+'</td>' +
-                            '</tr>';*/
+            var stsrtTime = '';
+            var lastTime = '';
+            var ip = '';
+            var ping = '';
+            if (obj.track) {
+                stsrtTime = new Date(obj.track.start * 1000).toLocaleString();
+                lastTime = new Date(obj.track.now * 1000).toLocaleString();
+                ip = obj.track.ip;
+                ping = obj.track.ping + ' ';
+            }
+            return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + ip + '</td>' + '<td>' + ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
         };
         return DevicesData;
     })();

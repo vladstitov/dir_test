@@ -72,7 +72,7 @@ module uplight{
             this.$name = this.$view.find('[data-id=kioskname]:first');
             this.$title = this.$view.find('[data-id=title]:first');
 
-            this.renderSelect();
+            this.renderSelectKiosk();
             this.loadData();
         }
 
@@ -89,11 +89,11 @@ module uplight{
             }
             return null;
         }
-        private renderSelect():void{
+        private renderSelectKiosk():void{
             var ar:VOTemplate[] = this.kiosks.templates;
             var out:string='';
             for(var i=0,n=ar.length;i<n;i++){
-                out+='<option value="'+ar[i].id+'">'+ar[i].descr+'</option>';
+                if(ar[i].type==='kiosk')out+='<option value="'+ar[i].id+'">'+ar[i].descr+'</option>';
             }
             this.$select.html(out);
         }
@@ -188,6 +188,7 @@ module uplight{
         private save():void{
             RegA.getInstance().connector.saveData(JSON.stringify(this.data),'devices.json').done((data)=>this.onSave(data));
         }
+
         private onSaveClicked():void{
             this.selectedItem.name=this.$name.text();
             this.selectedItem.typeid = Number(this.$select.val());
@@ -210,9 +211,9 @@ module uplight{
             var out:VODevice[]=[];
            for(var i=0,n=ar.length;i<n;i++){
                var k:VODevice = new VODevice( ar[i]);
-              out.push(k);
                var num:number = Number(k.id);
                if(this.max<num) this.max=num;
+               out.push(k);
            }
             console.log(out);
 
@@ -224,9 +225,7 @@ module uplight{
         private max:number;
 
         private loadData():void{
-
             RegA.getInstance().connector.getData('devices.json').done((data)=>this.onData(data))
-
         }
 
         private renderList():void{

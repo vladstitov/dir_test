@@ -87,6 +87,9 @@ var uplight;
         };
         RegA.prototype.message = function (msg) {
         };
+        RegA.prototype.getProps = function (index) {
+            return this.props[index];
+        };
         RegA.prototype.getSettings = function (index) {
             return this.settings[index];
         };

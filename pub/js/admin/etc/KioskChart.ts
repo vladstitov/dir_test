@@ -163,7 +163,7 @@ module uplight{
         constructor(private view:JQuery,private colors:string[],fromto:string){
             //  console.log(clicks);
             this.view.find('[data-id=fromto]:first').text(fromto);
-            RegA.getInstance().connector.getData('devices.json').done((res)=>this.onKiosks(res));
+            RegA.getInstance().connector.getData('devices').done((res)=>this.onDevices(res));
         }
 
         private craeateTimeline():number[]{
@@ -255,7 +255,8 @@ module uplight{
 
 
         private devices:any;
-        private onKiosks(res):void{
+        private onDevices(res):void{
+
             var ids:string[]=[];
 
 
@@ -269,10 +270,11 @@ module uplight{
 
             var devices={};
             for(var i=0,n=ar.length;i<n;i++){
-                var item = ar[i];
-                //  var id:string = 'kiosk'+item.id;
-                ids.push(item.id);
-                devices[item.id] = ar[i];
+
+                var item:DeviceModel = ar[i];
+                 var index:string = item.type+item.id
+                ids.push(index);
+                devices[index] = ar[i];
 
                 // var clicks:number[] = this.clicks[ar[i].id];
                 //if(!clicks) clicks=[];

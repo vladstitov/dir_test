@@ -12,7 +12,7 @@ var uplight;
         function Statistics(contauner) {
             var _this = this;
             this.ID = 'uplight.Statistics';
-            this.colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
+            this.colors = ['#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A', '#9F9977', '#B2592D', '#BDC2C7', '#BC8777', ' #996398', '#839182', '#708EB3', '#BC749A'];
             this.R = uplight.RegA.getInstance();
             this.R.current = this;
             contauner.load('htms/admin/Statistics.htm', function () { return _this.init(); });
@@ -33,8 +33,6 @@ var uplight;
         Statistics.prototype.init = function () {
             var _this = this;
             this.$view = $('#Statistics');
-            // var today = new Date()
-            //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
             this.R.connector.getStatistics().done(function (res) { return _this.onData(res); });
             var today = new Date();
             var priorDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);

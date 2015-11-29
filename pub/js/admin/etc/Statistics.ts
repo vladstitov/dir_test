@@ -12,7 +12,7 @@ module uplight{
         R:RegA;
         private data:VOStat[];
         private $view:JQuery;
-       private colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
+       private colors:string[]=['#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A','#9F9977','#B2592D','#BDC2C7','#BC8777',' #996398','#839182','#708EB3','#BC749A'];
         private fromTo:string;
         private devices:UModule;
         constructor(contauner:JQuery){
@@ -36,9 +36,6 @@ module uplight{
         }
         private init():void{
             this.$view=$('#Statistics');
-           // var today = new Date()
-          //  var priorDate = new Date(today.getTime() - 30*24*60*60*1000);
-
            this.R.connector.getStatistics().done((res)=>this.onData(res));
 
             var today = new Date()

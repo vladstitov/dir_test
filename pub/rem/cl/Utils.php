@@ -5,7 +5,7 @@ class Utils{
 				$out = new stdClass();
 				$devices = json_decode($this->getData(array('file_name'=>'devices.json')));
 				foreach($devices  as $device){
-						$filename=DATA.'devs/track_'.$device->id.'.json';
+						$filename=DATA.'devs/track_'.$device->type.$device->id.'.json';
 						if(file_exists($filename))$device->track = json_decode(file_get_contents($filename));
 				}
 				$out->result = $devices;//  json_decode($this->getData(array('file_name'=>'devices.json')));
