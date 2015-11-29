@@ -359,10 +359,35 @@ include('KioskHeader.php');
 </div> <!--End of container-->
 
 <section id="AttractLoop" data-ctr="uplight.AttractLoop">
+    <style>
+        #AttractLoop {
+            position: absolute;
+            top: 170px;
+        }
+
+        #AttractLoop{
+            width: 1920px;
+            height: 910px;
+        }
+        #AttractLoop .gal_650x1024 {
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            width: 650px;
+            height: 1024px;
+            overflow: hidden;
+        }
+        #Touchclip {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 1920px;
+            height: 120px;
+        }
+    </style>
     <div  class="cover" data-id="cover">
     </div>
     <link href="css/AttractLoop.css" rel="stylesheet" />
-    <link href="css/AL_1920.css" rel="stylesheet" />
     <script src="js/kiosk/als/AttractLoop.js"></script>
     <script src="js/kiosk/als/ScreenSaver.js"></script>
     <script src="js/kiosk/als/TouchClip.js"></script>
