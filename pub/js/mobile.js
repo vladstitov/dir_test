@@ -452,7 +452,7 @@ var uplight;
             this.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
             this.ON_SETTINGS = 'ON_SETTINGS';
             this.ON_DATA = 'ON_DATA';
-            this.RESET_ALL = 'RESET_ALL';
+            this.RESET_ALL = 'TIMEOUT';
             this.SCREENSAVER_START = 'SCREENSAVER_START';
             this.SCREENSAVER_END = 'SCREENSAVER_END';
             this.AL_START = 'AL_START';
@@ -1406,7 +1406,7 @@ var uplight;
             r.events.on(DetailsLarge.DETAILS_LARGE_HIDE, function (evt) {
                 return _this.hide();
             });
-            r.events.on(r.RESET_ALL, function (evt) {
+            r.events.on(r.TIMEOUT, function (evt) {
                 return _this.hide();
             });
         };

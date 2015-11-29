@@ -10,7 +10,7 @@ var uplight;
             this.view = $(el);
             this.R = uplight.Registry.getInstance();
             var d2 = $.Deferred();
-            var d1 = uplight.Registry.getInstance().connector.getData('pages.json');
+            var d1 = uplight.Registry.getInstance().connector.getData('pages');
             var cats = uplight.Registry.getInstance().model.getCategories();
             if (cats)
                 d2.resolve(cats);
@@ -23,13 +23,17 @@ var uplight;
                 var cats = arguments[1];
                 _this.onData(pages, cats);
             });
-            this.list = this.view.find('[data-id=list]');
+            this.list = $('#MainMenuList'); // this.view.find('[data-id=list]');
             this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });
+            this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
         }
         MainMenu.prototype.onData = function (pages, categories) {
             var ar = [];
             this.data = ar.concat(pages).concat(categories);
             this.render();
+        };
+        MainMenu.prototype.reset = function () {
+            this.list.scrollTop(0);
         };
         MainMenu.prototype.render = function () {
             var ar = this.data;

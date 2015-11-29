@@ -11,14 +11,16 @@ var uplight;
             this.R = uplight.Registry.getInstance();
             this.list = this.view.find('.list:first');
             this.R.model.dispatcher.on(this.R.model.READY, function () { return _this.onDataReady(); });
+            this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
             this.addListeners();
         }
         CategoriesCheck.prototype.addListeners = function () {
             var _this = this;
             this.list.on(CLICK, 'li', function (evt) { return _this.onListChanged(evt); });
-            this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
+            this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
         };
         CategoriesCheck.prototype.reset = function () {
+            this.list.scrollTop(0);
             this.render();
         };
         CategoriesCheck.prototype.addCategory = function (id) {
@@ -33,7 +35,6 @@ var uplight;
             var ind = this.selected.indexOf(id);
             if (ind !== -1) {
                 this.selected.splice(ind, 1);
-                //console.log(this.selected);
                 this.R.connector.Stat('cm', id.toString());
                 this.R.events.triggerHandler(this.R.CATEGORIES_CHANGE, [this.selected]);
             }
@@ -62,7 +63,6 @@ var uplight;
             return '<li data-checked="1" data-id="' + vo.id + '" class="btn" ><span class="check fa fa-check-square-o" data-id="' + vo.id + '" ></span><span class="icon ' + vo.icon + '"></span> <span class="name">' + vo.label + '</span></label></li>';
         };
         CategoriesCheck.prototype.render = function () {
-            console.log('render');
             var ar = this.data;
             var out = '<ul>';
             var idis = [];

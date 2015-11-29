@@ -6,6 +6,7 @@
     color: #333333;
     background-color: #ffffff;
 }
+
 .cover{
     position: absolute;
     top: 0;
@@ -14,6 +15,7 @@
     height: 100%;
     background-color: rgba(0,0,0,0.5);
 }
+
 #u-header {
     display: block;
     height: 170px;
@@ -33,12 +35,8 @@
 #brand-logo{
     position: absolute;
     left: 30px;
-   /* margin-top: 25px;*/
-
     height: 100%;
     display: table-cell;
-
-
 }
 
 #Pages .page-container{
@@ -124,11 +122,6 @@
 #Pages{
     overflow: hidden;
 }
-#Pages>div{
-    width:1480px;
-    height: 1077px;
-    /* white-space: nowrap;*/
-}
 
 .fullscreen{
     position:fixed;
@@ -169,16 +162,11 @@
     vertical-align:middle;
 }
 
-
-
-#list-main{
-    width:99%;
-    height: 880px;
-    overflow-y: scroll;
+#SearchResult #list-scroll .details, table{
+    color: inherit;
 }
 
-
-#list-main li{
+#list-scroll li{
     border-radius: 20px;
     margin: 12px 5px 12px 5px;
     padding: 12px;
@@ -187,32 +175,13 @@
     min-height: 95px;
 }
 
-#list-main ul>li.selected{
+#list-scroll ul>li.selected{
     box-shadow: 0 0 5px yellow;
 }
-/*#list-main li>.main{
-    position: relative;
-    display: table;
-    width: 100%;
-    height: 102px;
-}*/
-/*#list-main li>div>div{
-    vertical-align: middle;
-    display: inline;
-    display: table-cell;
-    vertical-align: middle;
-    padding-top: 10px;
-}*/
 
-/*#list-main li .urow>div{
-    display: inline-block;
-}*/
-#list-main li>div.details{
+#list-scroll li>div.details{
     display: none;
 }
-/*#list-main li.selected>div.details{
-    display:block;
-}*/
 
 
 .fa-briefcase{
@@ -221,7 +190,10 @@
 .fa-user{
     color: green;
 }
-#list-main li .icon{
+#list-scroll li .urow{
+    min-height: 1em;
+}
+#list-scroll li .icon{
     width: 25px;
     font-size: 25px;
    /* padding-left: 12px;*/
@@ -229,47 +201,31 @@
     margin-right: 0.5em;
 }
 
-/*#list-main li .main>.urow>.more{
-  /!*  width: 18px;
-    text-align: center;
-    color: #666;
-    padding-right: 5px;*!/
-
-    margin-left: 1em;
-    margin-right: 1em;
-
-}*/
-#list-main li .name{
-font-size: 25px;
+#list-scroll li .name{
+    font-size: 25px;
    /* padding-left: 12px;*/
 }
-#list-main li .unit{
+#list-scroll li .unit{
     font-size: 25px;
-/*position: relative;
-    right: 15px;
-    text-align:right;
-    font-size: 22px;*/
-    float: right;
-
+   float: right;
 }
-#list-main li .unittype{
-   /* position: absolute;
-    right: 20px;
-    top: 14px;*/
-    float: right;
-    margin-right: 5px;
+#list-scroll li .unittype{
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+  float: right;
+    margin-top: -7px;
+    margin-right: 10px;
 }
-#list-main li .kws{
-  /*  position: absolute;
-    right: 60px;
-    bottom: 5px;*/
+#list-scroll li .kws{
+    margin-top: -7px;
     color: #ff0000;
-height: 1em;
+    height: 1em;
     width: 100px;
     margin-left: 100px;
 
 }
-#list-main li .info{
+#list-scroll li .info{
 /*position: absolute;
     left: 60px;
     bottom: 5px;*/

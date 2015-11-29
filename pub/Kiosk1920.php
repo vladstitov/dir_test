@@ -2,6 +2,7 @@
 include('KioskHeader.php');
 ?>
     <!--<script src="js/kiosk/Kiosk.js"></script>-->
+<!--<link href="css/kiosk1920.css" rel="stylesheet" />-->
 <style>
     body{
         width: 1920px;
@@ -111,6 +112,66 @@ include('KioskHeader.php');
                margin-bottom: 1em;
            }
 
+           #u-header #brand-name{
+               font-size: 50px;
+               top: 45px;
+               left:180px;
+               width: 1500px;
+               position: absolute;
+               /* white-space: nowrap;*/
+           }
+
+           #mainport>section{
+               display: inline-block;
+               width:725px;
+               vertical-align: top;
+           }
+           #Pages{
+               overflow: hidden;
+           }
+           #Pages>div{
+               width:1480px;
+               height: 725px;
+               /* white-space: nowrap;*/
+           }
+           #Pages>div>div{
+               float: left;
+               white-space: normal;
+               /*display: inline-block;*/
+               /* vertical-align: top;*/
+               width:725px;
+               height: 726px;
+               padding: 22px;
+
+           }
+           .k1080{
+               display: none;
+           }
+
+           #list-scroll{
+               width:99%;
+               height: 680px;
+               overflow-y: scroll;
+           }
+
+           #mainview{
+               top: 250px;
+               width: 725px;
+               height: 740px;
+               left:100px;
+           }
+
+           #mainport, #cover>.detailsL {
+               position: absolute;
+               width:100%;
+               height: 100%;
+               left: 0;
+               right: 0;
+               margin: auto;
+               overflow: hidden;
+               white-space: nowrap;
+           }
+
         </style>
         <div id="mainport" class="mainbg view-port-content">
             <section id="SearchResult" data-id="searchResult" data-ctr="uplight.SearchResult">
@@ -123,9 +184,8 @@ include('KioskHeader.php');
                 </div>
                 <hr style="margin-bottom: 0"/>
                 <div  class="col-lg-12">
-                    <div id="list-main">
-                        <div class="nano-content" data-id="list">
-                        </div>
+                    <div id="list-scroll">
+
                     </div>
                 </div>
                 <hr style="margin-top: 0"/>
@@ -209,15 +269,6 @@ include('KioskHeader.php');
                         font-size: 30px;
                         color: #adadad;
                     }
-                   /* #searchinput #textInput{
-                        border-radius: 30px;
-                        font-size: 30px;
-                        width: 200px;
-                        height: 82px;
-                        border: none;
-                        padding: 20px 40px 20px 20px;
-                        margin-right: -20px;
-                    }*/
                 </style>
                 <!-- <span class="fa fa-search"></span>-->
                 <div id="textInput" data-id="input" class="pull-right" ></div>
@@ -248,33 +299,39 @@ include('KioskHeader.php');
         <div id="Keyboard" data-ctr="uplight.Keyboard" class="text-center">
         </div>
     </section>
+
         <section id="view3" class="mainbg">
             <style>
                 #view3{
                     position: absolute;
                     top: 300px;
                     right: 215px;
-                    padding: 20px;
+                    padding: 0 5px 20px 5px;
                 }
             </style>
             <div id="MainMenu" data-ctr="uplight.MainMenu">
                 <style>
-                    #MainMenu>.nano{
+                    #MainMenuList{
                         width: 400px;
                         height: 300px;
                         overflow-y: scroll;
                         overflow-x: hidden;
+                        padding-left: 10px;
                     }
-                    #MainMenu li.item {
+
+                    #MainMenuList li.item {
                         border-radius: 20px;
                         margin: 12px 0 12px 0;
                         padding: 12px;
                         width: 98%;
                         font-size: 30px;
                     }
+                    #MainMenuList li:active{
+                        transform: scale(1.05);
+                    }
                 </style>
                 <h2 class="text-center">Menu</h2>
-                <div data-id="list" class="nano">
+                <div id="MainMenuList" data-id="list">
 
                 </div>
 

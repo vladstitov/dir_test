@@ -25,12 +25,12 @@ module uplight {
 
         //onSelect:Function;
         header:JQuery;
-        private HEADER:string
+        private HEADER:string;
         constructor(private el:HTMLElement){
             this.view = $(el);
             this.R=Registry.getInstance();
             this.model= Registry.getInstance().model;
-            this.list=this.view.find('[data-id=list]:first');
+            this.list=$('#list-scroll');
             this.addListeners();
             this.cache={};
             this.mainport = $('#mainport');
@@ -44,14 +44,13 @@ module uplight {
         reset():void{
             this.result = this.data;
             this.render(true);
-
-           // this.hideDetails();
+            this.list.scrollTop(0);
         }
 
         addListeners():void{
             this.R.events.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
             this.R.events.on(this.R.INPUT_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
-            this.R.events.on(this.R.RESET_ALL,()=>this.reset());
+            this.R.events.on(this.R.TIMEOUT,()=>this.reset());
             this.model.dispatcher.on(this.model.READY,()=>this.onDataReady());
             this.list.on(CLICK,'li',(evt)=>this.onListClick(evt));
             this.R.events.on(this.R.CATEGORY_SELECTED,(evt,catid)=>this.onCategorySelected(catid));
@@ -159,14 +158,16 @@ module uplight {
         }
 
         private render(reset:boolean):void{
+            console.log('reset '+reset);
             if(this.selected)  this.selected.removeClass(SELECTED);
             this.selectedIndex=-1
             var ar:DestModel[] = this.result;
             this.list.children().detach();
             var ul:JQuery=$('<ul>');
-           // var out=''
-        // for(var i=0,n=ar.length;i<n;i++)out+=ar[i].getViewStr(resetMode)
-            for(var i=0,n=ar.length;i<n;i++)ul.append(ar[i].getView(reset));
+            for(var i=0,n=ar.length;i<n;i++){
+
+                ar[i].appendTo(ul,reset);
+            }
              this.list.append(ul);
         }
 

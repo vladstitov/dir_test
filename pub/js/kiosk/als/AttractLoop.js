@@ -26,31 +26,16 @@ var uplight;
             this.timeout = 60000;
             this.R = uplight.Registry.getInstance();
             this.view = $(el);
-            this.width = this.view.width();
-            var tt = this.R.getProp('ss_timeout');
-            var timeout = 60;
-            if (tt)
-                timeout = Number(tt.value);
-            if (isNaN(timeout) || timeout < 10)
-                timeout = 60;
-            this.timeout = timeout * 1000;
-            console.log(this.timeout);
-            this.al = new ALoop(this.R.getSettings('attract_loop'));
-            // console.log(this.al);
-            this.body = $(document);
-            this.body.click(function () {
+            this.view.on(CLICK, function () {
                 _this.stop();
-                _this.resetTimer();
             });
+            this.width = this.view.width();
+            this.al = new ALoop(this.R.getSettings('attract_loop'));
             this.cover = this.view.find('[data-id=cover]:first');
             this.initAL();
             this.start();
+            this.R.events.on(this.R.TIMEOUT, function () { return _this.start(); });
         }
-        AttractLoop.prototype.resetTimer = function () {
-            var _this = this;
-            clearTimeout(this.timer);
-            this.timer = setTimeout(function () { return _this.start(); }, this.timeout);
-        };
         AttractLoop.prototype.hide = function () {
             this.view.addClass(HIDDEN);
         };
@@ -62,7 +47,6 @@ var uplight;
             }
         };
         AttractLoop.prototype.show = function () {
-            console.log('show ');
             this.isActive = true;
             this.view.removeClass(HIDDEN);
         };

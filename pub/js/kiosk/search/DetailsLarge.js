@@ -43,7 +43,7 @@ var uplight;
             var r = uplight.Registry.getInstance();
             r.events.on(DetailsLarge.DETAILS_LARGE_SHOW, function (evt, id) { return _this.showDetails(id); });
             r.events.on(DetailsLarge.DETAILS_LARGE_HIDE, function (evt) { return _this.hide(); });
-            r.events.on(r.RESET_ALL, function (evt) { return _this.hide(); });
+            r.events.on(r.TIMEOUT, function (evt) { return _this.hide(); });
         };
         DetailsLarge.prototype.showDetails = function (id) {
             var dest = uplight.Registry.getInstance().model.getDestById(id);

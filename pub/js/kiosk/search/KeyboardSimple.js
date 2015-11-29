@@ -80,7 +80,7 @@ var uplight;
             this.R.events.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
                 _this.onKeyword(txt);
             });
-            this.R.events.on(this.R.RESET_ALL, function () { return _this.reset(); });
+            this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
         };
         SearchInput.prototype.onKeyword = function (str) {
             //this.isKw=true

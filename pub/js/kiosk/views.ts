@@ -39,7 +39,7 @@ module uplight{
            this.R.events.on(this.R.KEYBOARD_HIDE,(evt)=>this.hide());
            this.R.events.on(this.R.RESET_VIEWS,(evt)=>this.hide());
            this.R.events.on(this.R.HIDE_VIEWS,(evt)=>this.hide());
-           this.R.events.on(this.R.RESET_ALL,(evt)=>this.hide());
+           this.R.events.on(this.R.TIMEOUT,(evt)=>this.hide());
 
 
        }

@@ -35,7 +35,6 @@ foreach($lbs as $label) $labels[$label->index] = $label->value;
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/kiosk.css" rel="stylesheet" />
-    <link href="css/kiosk1080.css" rel="stylesheet" />
     <link href="<?= $theme; ?>" rel="stylesheet" />
    
     <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>

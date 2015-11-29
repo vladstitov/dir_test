@@ -3,7 +3,6 @@
  */
     /// <reference path="Kiosk.ts" />
 module uplight{
-
     export  class MainMenu{
         onSelect:Function;
         private list:JQuery;
@@ -14,7 +13,7 @@ module uplight{
             this.view = $(el);
             this.R=Registry.getInstance();
             var d2 = $.Deferred();
-            var d1 = Registry.getInstance().connector.getData('pages.json');
+            var d1 = Registry.getInstance().connector.getData('pages');
             var cats:VOCategory[]= Registry.getInstance().model.getCategories();
             if(cats)d2.resolve(cats);
             else this.R.model.dispatcher.on(this.R.model.READY,()=>{d2.resolve(this.R.model.getCategories());});
@@ -23,8 +22,10 @@ module uplight{
                 var cats:VOCategory[] = arguments[1];
                 this.onData(pages,cats);
             });
-            this.list = this.view.find('[data-id=list]');
-            this.list.on(CLICK,'a',(evt)=>this.onMenuClick(evt))
+            this.list = $('#MainMenuList');// this.view.find('[data-id=list]');
+            this.list.on(CLICK,'a',(evt)=>this.onMenuClick(evt));
+            this.R.events.on(this.R.TIMEOUT,()=>this.reset());
+
         }
 
         private onData(pages:VOPage[],categories:VOCategory[]):void{
@@ -33,6 +34,9 @@ module uplight{
             this.render();
         }
 
+        reset():void{
+            this.list.scrollTop(0)
+        }
         render():void{
             var ar = this.data
             var out='<ul class="nano-content">';

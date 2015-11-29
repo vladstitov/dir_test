@@ -1,6 +1,7 @@
 ﻿<?
 include('KioskHeader.php');
 ?>
+<link href="css/kiosk1080.css" rel="stylesheet" />
     <style>
     .hide{
         display: none;
@@ -16,6 +17,18 @@ include('KioskHeader.php');
         width: 1080px;
         height: 1920px;
         overflow: hidden;
+    }
+
+    #container{
+        width: 1080px;
+        height: 1920px;
+        position: absolute;
+    }
+
+    #mainview{
+        position: absolute;
+        top: 400px;
+        width: 100%;
     }
 
 
@@ -48,50 +61,15 @@ include('KioskHeader.php');
 
     <section id="mainview" class="view-port">
         <style>
-           #mainport, #cover>.detailsL {
-                position: absolute;
-                width:725px;
-                height: 1077px;
-                left: 0;
-                right: 0;
-                margin: auto;
-                overflow: hidden;
-               white-space: nowrap;
-            }
-
-           #mainport>section{
-               display: inline-block;
-               width:725px;
-               height: 1077px;
-               vertical-align: top;
-
-           }
-
-           /* #mainport .view-port{
-                position: absolute;
-                width: 90%;
-                height: 95%;
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                margin: auto;
-            }*/
-           #Pages{
-               overflow: hidden;
-           }
 
             #Pages>div{
                 width:1480px;
                 height: 1077px;
-               /* white-space: nowrap;*/
              }
 
            #Pages>div>div{
                float: left;
                white-space: normal;
-               /*display: inline-block;*/
-              /* vertical-align: top;*/
                width:725px;
                height: 1077px;
                padding: 22px;
@@ -107,11 +85,7 @@ include('KioskHeader.php');
         </style>
         <div id="mainport" class="mainbg u-glow view-port-content">
             <section id="SearchResult" data-ctr="uplight.SearchResult">
-                <style>
-                    #SearchResult #list-main .details, table{
-                        color: inherit;
-                    }
-                </style>
+
                 <div class="col-sm-12">
                     <div id="list-header" >
                         <div id="list-header-main" >
@@ -121,7 +95,7 @@ include('KioskHeader.php');
                 </div>
                 <hr style="margin-bottom: 0"/>
                 <div  class="col-lg-12">
-                    <div id="list-main">
+                    <div id="list-scroll">
                         <div class="nano-content" data-id="list">
                         </div>
                     </div>

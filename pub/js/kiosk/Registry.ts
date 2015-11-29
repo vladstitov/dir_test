@@ -52,7 +52,7 @@ module uplight {
 
         ON_SETTINGS:string='ON_SETTINGS';
         ON_DATA:string='ON_DATA';
-        RESET_ALL:string='RESET_ALL';
+        TIMEOUT:string='TIMEOUT';
 
         SCREENSAVER_START: string = 'SCREENSAVER_START';
         SCREENSAVER_END: string = 'SCREENSAVER_END';
@@ -63,7 +63,7 @@ module uplight {
         RESET_VIEWS:string='RESET_VIEWS';
         HIDE_VIEWS:string='HIDE_VIEWS';
        private settings: any;
-        props:any;//_.Dictionary<VOProps>;
+       private props:any;//_.Dictionary<VOProps>;
         static status:string;
 
         current:string;
@@ -94,7 +94,7 @@ module uplight {
         }
         public device: {} = { device: 'kiosk1', ln: 'en' };
 
-        setProps(data:any[]):void{
+        private setProps(data:any[]):void{
             this.props = _.indexBy(data,'id');
         }
         getProp(str:string):any{

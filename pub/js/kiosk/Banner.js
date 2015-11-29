@@ -4,12 +4,11 @@ var uplight;
     var Banner = (function () {
         function Banner() {
             this.R = uplight.Registry.getInstance();
-            var sett = this.R.settings;
             this.view = $('#Banner');
-            this.loadImage(sett.header.logo);
+            // this.loadImage(sett.header.logo);
             this.addWeather();
             this.addClock();
-            $('Header').text(sett.header);
+            // $('Header').text(sett.header);
         }
         Banner.prototype.loadImage = function (url) {
             this.imgBanner = $('<img src="' + url + '" />').prependTo(this.view);
@@ -67,7 +66,7 @@ var uplight;
         function Weather() {
             var _this = this;
             this.R = uplight.Registry.getInstance();
-            this.url = this.R.settings.weather.url;
+            this.url = this.R.getSettings('weather_url');
             this.view = $('<div id="Weather"></div>');
             this.image = $('<img align="left" />').appendTo(this.view);
             this.text = $('<span></span>').appendTo(this.view);

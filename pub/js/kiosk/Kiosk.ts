@@ -9,14 +9,13 @@
 /// <reference path="search/SearchModel.ts" />
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
-/// <reference path="als/Gallery.ts" />
+/// <reference path="als/GalleryDisplay.ts" />
 /// <reference path="search/models.ts" />
 /// <reference path="../typing/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
 
 
 /// <reference path="arch/KeyboardView.ts" />
-/// <reference path="search/Keyboard.ts" />
 /// <reference path="search/SearchResult.ts" />
 /// <reference path="Registry.ts" />
 /// <reference path="search/models.ts" />
@@ -33,14 +32,24 @@ declare var u_settings:any;
 module uplight {
    export class Kiosk {
        private R: Registry;
-       private timeout:number
+       private timeout:number;
+       private timeoutVal:number;
 
       // private isAL:boolean=true;
+
 
        private onMouseDown(evt:MouseEvent):void{
          // if(this.attractLoop.hide()) window.location.href='#kiosk';
 
+           console.log('mouse down');
 
+            clearTimeout( this.timeout);
+           this.timeout = setTimeout(()=>{
+               console.log(this.R.TIMEOUT+this.timeoutVal);
+               this.showSearchResult();
+               this.showMenu();
+              this.R.events.triggerHandler(this.R.TIMEOUT);
+           }, this.timeoutVal)
            if(this.isBlocked){
                evt.preventDefault();
                evt.stopPropagation();
@@ -82,24 +91,26 @@ module uplight {
        }
 
        constructor() {
-           console.log('kiodk');
+
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
            var r:Registry = Registry.getInstance();
            r.events = $('<div>');
            r.connector = new Connector();
            r.connector.id=u_settings.id;
            r.setSettings(u_settings);
-           r.props = _.indexBy(u_settings.props,'id');
+
            // console.log(u_settings);          // r.connector.who='kiosk';
            r.model = new Model(r.connector,(w)=>this.warn(w));
-           u_settings.props.forEach(function(val){
-               u_settings[val.id] = val.value;
-           })
+
+           var obj = r.getSettings('timeout');
+           console.log(obj);
+           var timeout:number
+           if(obj) timeout=Number(obj.value);
+           if(isNaN(timeout) || timeout<10)timeout= 60;
 
 
 
-
-
+           this.timeoutVal = timeout*1000;
 
            this.setControllers();
            this.R=r;
@@ -119,53 +130,20 @@ module uplight {
                this.showSearchResult();
            })
 
-          // var timeout:Timeout = new Timeout(u_settings.ss_timeout);
-          // timeout.onTimeout=(num)=>{
-           //    console.log('timeout '+num);
-             //  window.location.href='#timeout'
-          // }
-
            r.events.on(DetailsLarge.DETAILS_LARGE_CLOSE_CLICK,(evt)=>{
                r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_HIDE);
            });
 
-
-          // $('#btnSearch').click(()=>this.showSearch());
-          // $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
-          // $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
-
-
-        // this.searchResult = new SearchResult($('#SearchResult'));
            r.events.on( this.R.SEARCH_RESULT_SELECT,(evt,id)=>{
                var dest:VODestination = this.R.model.getDestById(id);
                if(dest.imgs)r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_SHOW,id)// this.details.setDestination(dest).render().show();
                else r.events.triggerHandler( this.R.SEARCH_RESULT_SHOW_DESTINATION,id)//this.searchResult.showDestination(dest);
                console.log(dest);
            })
-/*
-
-           this.searchResult.onSelect = (id)=>{
-
-           }
-*/
 
 
-        //  console.log(r.props['timer']);
-           if(r.props['timer'])  var relay:Relay = new Relay(r.props['timer'].value);
-
-            r.events.on(r.AL_START,()=>{
-                this.showSearchResult();
-                this.showMenu();
-                r.events.triggerHandler(r.RESET_ALL);
-            });
-
-
-         //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
-          // this.attractLoop.show();
-          // setTimeout(()=>{ DestModel.events.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
-          // Registry.getInstance().connector.Log('kiosk started succesguly');
-         // Registry.getInstance().connector.Error('kiosk started succesguly');
-
+            var tmr:any  = r.getProp('timer');
+           if(tmr)  var relay:Relay = new Relay(tmr.value);
        }
        setControllers():void{
            var stringToFunction = function(str) {
@@ -176,7 +154,7 @@ module uplight {
                return  fn;
            };
 
-           var r:Registry= Registry.getInstance();
+           var r:Registry = Registry.getInstance();
 
            $('[data-ctr]').each(function(ind,el){
                var str=$(el).data('ctr');

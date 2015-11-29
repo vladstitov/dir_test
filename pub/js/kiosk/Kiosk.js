@@ -9,12 +9,11 @@
 /// <reference path="search/SearchModel.ts" />
 /// <reference path="als/TouchClip.ts" />
 /// <reference path="als/AttractLoop.ts" />
-/// <reference path="als/Gallery.ts" />
+/// <reference path="als/GalleryDisplay.ts" />
 /// <reference path="search/models.ts" />
 /// <reference path="../typing/greensock.d.ts" />
 /// <reference path="../typing/jquery.d.ts" />
 /// <reference path="arch/KeyboardView.ts" />
-/// <reference path="search/Keyboard.ts" />
 /// <reference path="search/SearchResult.ts" />
 /// <reference path="Registry.ts" />
 /// <reference path="search/models.ts" />
@@ -35,19 +34,22 @@ var uplight;
             // }
             this.errors = '';
             this.warns = '';
-            console.log('kiodk');
             document.addEventListener('mousedown', function (evt) { return _this.onMouseDown(evt); }, true);
             var r = uplight.Registry.getInstance();
             r.events = $('<div>');
             r.connector = new uplight.Connector();
             r.connector.id = u_settings.id;
             r.setSettings(u_settings);
-            r.props = _.indexBy(u_settings.props, 'id');
             // console.log(u_settings);          // r.connector.who='kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
-            u_settings.props.forEach(function (val) {
-                u_settings[val.id] = val.value;
-            });
+            var obj = r.getSettings('timeout');
+            console.log(obj);
+            var timeout;
+            if (obj)
+                timeout = Number(obj.value);
+            if (isNaN(timeout) || timeout < 10)
+                timeout = 60;
+            this.timeoutVal = timeout * 1000;
             this.setControllers();
             this.R = r;
             r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
@@ -60,18 +62,9 @@ var uplight;
             this.R.events.on(r.CATEGORY_SELECTED, function (evt, cat) {
                 _this.showSearchResult();
             });
-            // var timeout:Timeout = new Timeout(u_settings.ss_timeout);
-            // timeout.onTimeout=(num)=>{
-            //    console.log('timeout '+num);
-            //  window.location.href='#timeout'
-            // }
             r.events.on(uplight.DetailsLarge.DETAILS_LARGE_CLOSE_CLICK, function (evt) {
                 r.events.triggerHandler(uplight.DetailsLarge.DETAILS_LARGE_HIDE);
             });
-            // $('#btnSearch').click(()=>this.showSearch());
-            // $('#SearchView [data-id=btnClose]').click(()=>this.showMenu())
-            // $('#SearchView [data-id=btnShowMenu]').click(()=>this.showMenu())
-            // this.searchResult = new SearchResult($('#SearchResult'));
             r.events.on(this.R.SEARCH_RESULT_SELECT, function (evt, id) {
                 var dest = _this.R.model.getDestById(id);
                 if (dest.imgs)
@@ -80,30 +73,22 @@ var uplight;
                     r.events.triggerHandler(_this.R.SEARCH_RESULT_SHOW_DESTINATION, id); //this.searchResult.showDestination(dest);
                 console.log(dest);
             });
-            /*
-            
-                       this.searchResult.onSelect = (id)=>{
-            
-                       }
-            */
-            //  console.log(r.props['timer']);
-            if (r.props['timer'])
-                var relay = new uplight.Relay(r.props['timer'].value);
-            r.events.on(r.AL_START, function () {
-                _this.showSearchResult();
-                _this.showMenu();
-                r.events.triggerHandler(r.RESET_ALL);
-            });
-            //  this.attractLoop = new AttractLoop($('#AttractLoop'),u_settings.attract_loop);
-            // this.attractLoop.show();
-            // setTimeout(()=>{ DestModel.events.triggerHandler(DestModel.DETAILS_LARGE,document.location.hash.split('/')[1]),2000});
-            // Registry.getInstance().connector.Log('kiosk started succesguly');
-            // Registry.getInstance().connector.Error('kiosk started succesguly');
+            var tmr = r.getProp('timer');
+            if (tmr)
+                var relay = new uplight.Relay(tmr.value);
         }
         // private isAL:boolean=true;
         Kiosk.prototype.onMouseDown = function (evt) {
             // if(this.attractLoop.hide()) window.location.href='#kiosk';
             var _this = this;
+            console.log('mouse down');
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(function () {
+                console.log(_this.R.TIMEOUT + _this.timeoutVal);
+                _this.showSearchResult();
+                _this.showMenu();
+                _this.R.events.triggerHandler(_this.R.TIMEOUT);
+            }, this.timeoutVal);
             if (this.isBlocked) {
                 evt.preventDefault();
                 evt.stopPropagation();

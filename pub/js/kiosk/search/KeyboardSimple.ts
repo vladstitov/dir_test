@@ -88,7 +88,7 @@ module uplight{
             this.R.events.on(this.R.RESET_INPUT,()=>{this.setText('');});
             this.R.events.on(this.R.KEY_PRESSED,(evt,txt)=>{this.onKeyPressed(txt)});
             this.R.events.on(this.R.KEYWORD_PRESSED,(evt,txt)=>{this.onKeyword(txt)});
-            this.R.events.on(this.R.RESET_ALL,()=>this.reset());
+            this.R.events.on(this.R.TIMEOUT,()=>this.reset());
         }
         private onKeyword(str:string):void{
             //this.isKw=true

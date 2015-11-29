@@ -15,15 +15,9 @@ var uplight;
     })();
     uplight.VORow = VORow;
     var ButtonView = (function () {
-        // getViewStr(resetMode:boolean):string{
-        //   return this.viewStr;
-        //}
         function ButtonView(model) {
-            //this.viewStr = '<li class="item Plastic031" data-id="'+model.id+'" data-more="'+model.haveMore+'">'+this.renderVoStr(model.vo,model.haveMore)+'</li>';
             this.model = model;
-            // this.$view = $('<li>').addClass('item btn-main').data('id',model.id).append(this.renderVo(model.vo,model.haveMore));
             this.$view = $('<li>').addClass('item btn-main').data('id', model.id).append(this.createMain());
-            // this.$kw=this.$view.find('.kws:first');
         }
         ButtonView.prototype.show = function () {
             this.$view.show();
@@ -31,17 +25,19 @@ var uplight;
         ButtonView.prototype.hide = function () {
             this.$view.hide();
         };
-        ButtonView.prototype.getView = function (reset) {
-            return this.$view;
+        ButtonView.prototype.appendTo = function (container) {
+            this.$view.appendTo(container);
         };
-        ///////////////////
+        ButtonView.prototype.reset = function () {
+            this.details.hide();
+        };
         ButtonView.prototype.createMain = function () {
             this.$main = $('<div>').addClass('main');
             this.$main.append(this.createFirstRow());
             var icon = '<span class="icon ' + this.model.vo.icon + '"></span>';
             var name = '<span class="name">' + this.model.vo.name + '</span>';
             var unit = '<span class="unit">' + this.model.vo.unit + '</span>';
-            this.$main.append('<div>' + icon + name + unit + '</div>');
+            this.$main.append('<div class="urow">' + icon + name + unit + '</div>');
             this.$main.append(this.createLastRow());
             return this.$main;
         };
@@ -66,16 +62,12 @@ var uplight;
                 this.details = this.createDetails(this.model.vo);
                 this.$view.append(this.details);
             }
-            this.isDeatails = true;
             this.details.show('fast');
             this.$txtMore.text(' Less...');
         };
         ButtonView.prototype.hideDetails = function () {
-            if (this.isDeatails) {
-                this.isDeatails = false;
-                this.details.hide('fast');
-                this.$txtMore.text(' More...');
-            }
+            this.details.hide('fast');
+            this.$txtMore.text(' More...');
         };
         ////////////////////
         ButtonView.prototype.showKW = function (str) {
@@ -124,8 +116,10 @@ var uplight;
                 el.children('.details').show('fast');
             }
         };
-        DestModel.prototype.getView = function (reset) {
-            return this.view.getView(reset);
+        DestModel.prototype.appendTo = function (container, reset) {
+            if (reset)
+                this.reset();
+            this.view.appendTo(container);
         };
         DestModel.prototype.show = function () {
             if (this.isHiiden) {
@@ -140,9 +134,12 @@ var uplight;
             }
         };
         DestModel.prototype.reset = function () {
-            this.hideDetails();
+            if (this.isDetails) {
+                this.isDetails = false;
+                this.view.reset();
+            }
             this.clearKeyword();
-            //this.show();
+            return this;
         };
         DestModel.prototype.togleDetails = function () {
             if (this.haveMore) {
@@ -155,6 +152,7 @@ var uplight;
             return false;
         };
         DestModel.prototype.showDetails = function () {
+            console.log('showDetails ');
             if (!this.isDetails) {
                 this.view.showDetails();
                 this.isDetails = true;
@@ -162,6 +160,7 @@ var uplight;
         };
         DestModel.prototype.hideDetails = function () {
             if (this.isDetails) {
+                console.log('hideDetails ');
                 this.isDetails = false;
                 this.view.hideDetails();
             }
@@ -224,12 +223,12 @@ var uplight;
         DestModel.prototype.showKeyword = function (str) {
             console.log(this.vo.name + '  showKeyword  ' + str);
             this.view.showKW(str);
-            this.iskw = 1;
+            this.iskw = true;
         };
         DestModel.prototype.clearKeyword = function () {
             if (this.iskw) {
                 this.view.resetKW();
-                this.iskw = 0;
+                this.iskw = false;
             }
         };
         DestModel.prototype.hasCategory = function (num) {

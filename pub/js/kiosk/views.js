@@ -32,7 +32,7 @@ var uplight;
             this.R.events.on(this.R.KEYBOARD_HIDE, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.RESET_VIEWS, function (evt) { return _this.hide(); });
             this.R.events.on(this.R.HIDE_VIEWS, function (evt) { return _this.hide(); });
-            this.R.events.on(this.R.RESET_ALL, function (evt) { return _this.hide(); });
+            this.R.events.on(this.R.TIMEOUT, function (evt) { return _this.hide(); });
         }
         KeyboardView.prototype.hide = function () {
             if (this.isVisible) {

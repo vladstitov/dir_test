@@ -35,55 +35,39 @@ module uplight{
         constructor(el:HTMLElement){
 
             this.R=Registry.getInstance();
-            this.view = $(el)
+            this.view = $(el);
+            this.view.on(CLICK,()=>{
+                this.stop();
+            })
              this.width= this.view.width();
 
-            var tt:any= this.R.getProp('ss_timeout');
-            var timeout:number = 60;
-            if(tt)timeout = Number(tt.value);
-            if(isNaN(timeout) || timeout<10) timeout=60;
-            this.timeout = timeout*1000;
-
-            console.log(this.timeout);
-
-
             this.al = new ALoop(this.R.getSettings('attract_loop'));
-           // console.log(this.al);
 
-            this.body=$(document);
 
-            this.body.click(()=>{
-                this.stop();
-                this.resetTimer();
-            })
+
+
 
             this.cover = this.view.find('[data-id=cover]:first');
            this.initAL();
             this.start();
+            this.R.events.on(this.R.TIMEOUT,()=>this.start());
 
         }
 
-        private resetTimer():void{
-            clearTimeout(this.timer);
-            this.timer = setTimeout(()=>this.start(),this.timeout)
-        }
 
       private isActive;
-
-        hide():void{
+        private hide():void{
                 this.view.addClass(HIDDEN);
         }
-
         private start():void{
-            if(!this.isActive){
+            if(!this.isActive) {
                 this.isActive = true;
                 this.show();
-                this.R.events.triggerHandler(Registry.getInstance().AL_START)
+                this.R.events.triggerHandler(Registry.getInstance().AL_START);
             }
         }
 
-        show():void{
-            console.log('show ');
+        private show():void{
             this.isActive = true;
             this.view.removeClass(HIDDEN);
         }

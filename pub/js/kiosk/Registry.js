@@ -34,7 +34,7 @@ var uplight;
             this.SEARCH_RESULT_SHOW_DESTINATION = 'SEARCH_RESULT_SHOW_DESTINATION';
             this.ON_SETTINGS = 'ON_SETTINGS';
             this.ON_DATA = 'ON_DATA';
-            this.RESET_ALL = 'RESET_ALL';
+            this.TIMEOUT = 'TIMEOUT';
             this.SCREENSAVER_START = 'SCREENSAVER_START';
             this.SCREENSAVER_END = 'SCREENSAVER_END';
             this.AL_START = 'AL_START';

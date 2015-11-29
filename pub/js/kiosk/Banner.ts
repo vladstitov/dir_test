@@ -25,12 +25,12 @@ module uplight {
         private imgBanner: JQuery;
         constructor() {           
             this.R = Registry.getInstance();
-            var sett:any=this.R.settings
+
             this.view = $('#Banner');
-            this.loadImage(sett.header.logo);
+           // this.loadImage(sett.header.logo);
             this.addWeather();
             this.addClock();
-            $('Header').text(sett.header);           
+           // $('Header').text(sett.header);
         }
     }
 
@@ -81,7 +81,7 @@ module uplight {
         private R:Registry;
         constructor() {
             this.R = Registry.getInstance();
-            this.url = this.R.settings.weather.url;
+            this.url = this.R.getSettings('weather_url');
             this.view = $('<div id="Weather"></div>');
             this.image = $('<img align="left" />').appendTo(this.view);
             this.text = $('<span></span>').appendTo(this.view);

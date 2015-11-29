@@ -4,11 +4,9 @@
     /// <reference path="../Registry.ts" />
 module uplight{
     export class CategoriesCheck{
-
         private list:JQuery
-        R:Registry
-
-        view:JQuery
+        R:Registry;
+        view:JQuery;
         private data:VOCategory[];
 
         private selected:number[];
@@ -17,16 +15,17 @@ module uplight{
             this.R=Registry.getInstance();
             this.list=this.view.find('.list:first');
             this.R.model.dispatcher.on(this.R.model.READY,()=>this.onDataReady());
-
+            this.R.events.on(this.R.TIMEOUT,()=>this.reset());
             this.addListeners();
 
         }
         private addListeners():void{
             this.list.on(CLICK,'li',(evt)=>this.onListChanged(evt));
-            this.R.events.on(this.R.RESET_ALL,()=>this.reset());
+            this.R.events.on(this.R.TIMEOUT,()=>this.reset());
         }
 
         reset():void{
+            this.list.scrollTop(0);
             this.render();
         }
         private addCategory(id:number):void{
@@ -41,7 +40,6 @@ module uplight{
             var ind= this.selected.indexOf(id);
             if(ind!==-1){
                 this.selected.splice(ind,1);
-                //console.log(this.selected);
                 this.R.connector.Stat('cm',id.toString());
                 this.R.events.triggerHandler(this.R.CATEGORIES_CHANGE,[this.selected]);
             }
@@ -55,7 +53,6 @@ module uplight{
             if(Number(el.data('checked'))==1){
                 el.data('checked',0);
                 this.removeCategory(id);
-
                 el.find('.check').removeClass('fa-check-square-o').addClass('fa-square-o');
             }else{
                 el.data('checked',1);
@@ -73,7 +70,6 @@ module uplight{
 
         }
         private render():void{
-            console.log('render');
             var ar = this.data;
             var out='<ul>'
             var idis:number[]=[];
