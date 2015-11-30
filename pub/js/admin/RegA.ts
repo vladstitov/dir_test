@@ -130,13 +130,17 @@ module uplight{
             return this.props[index];
         }
 
+        setSettings(sett:any):void{
+            this.settings=sett;
+            this.props = _.indexBy(sett.props,'id');
+        }
         getSettings(index:string):any{
             return this.settings[index];
         }
 
         saveSettings(index:string,obj:any):JQueryPromise<VOResult>{
             this.settings[index]=obj;
-            return this.connector.saveSettings(JSON.stringify(this.settings));
+            return this.connector.saveData(JSON.stringify(this.settings),'settings_kiosks');
         }
 
         isSuper:boolean = false;

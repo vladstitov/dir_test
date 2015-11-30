@@ -102,6 +102,7 @@ module uplight{
         }
         R:RegA;
         constructor(){
+           console.log('labels manager');
 
             this.R = RegA.getInstance();
             this.view= $('#LabelEditor');

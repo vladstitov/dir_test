@@ -347,7 +347,7 @@ include('KioskHeader.php');
     </div>
 
     <link href="css/AttractLoop.css" rel="stylesheet" />
-    <link href="css/AL_1080.css" rel="stylesheet" />
+   <!-- <link href="css/AL_1080.css" rel="stylesheet" />-->
     <script src="js/kiosk/als/AttractLoop.js"></script>
     <script src="js/kiosk/als/ScreenSaver.js"></script>
     <script src="js/kiosk/als/TouchClip.js"></script>

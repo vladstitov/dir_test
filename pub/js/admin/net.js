@@ -185,9 +185,6 @@ var uplight;
             console.log('save data ' + filename);
             return $.post(this.service + '?a=save_data&file_name=' + filename, data);
         };
-        Connector.prototype.saveSettings = function (data) {
-            return $.post(this.service + '?a=save_settings', data);
-        };
         Connector.prototype.getLabels = function () {
             return $.get(this.service + '?a=screen.get_labels', 'application/json');
         };

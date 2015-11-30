@@ -7,11 +7,20 @@ var uplight;
     var FrontPageEditor = (function () {
         function FrontPageEditor(container) {
             var _this = this;
+            this.NAME = 'uplight.FrontFageeditor';
             container.load('htms/admin/FrontPageEditor.htm', function () { return _this.init(); });
         }
+        FrontPageEditor.prototype.destroy = function () {
+        };
+        FrontPageEditor.prototype.getName = function () {
+            return this.NAME;
+        };
+        FrontPageEditor.prototype.detach = function () {
+            this.view.detach();
+        };
         FrontPageEditor.prototype.appendTo = function (container) {
             container.append(this.view);
-            this.reloadPage();
+            return this;
         };
         FrontPageEditor.prototype.init = function () {
             var _this = this;
@@ -40,6 +49,7 @@ var uplight;
             this.editor.attr('contenteditable', false);
         };
         FrontPageEditor.prototype.onEditClicked = function () {
+            //   console.log('onEditClicked');
             if (!this.nicEdit) {
                 this.nicEdit = new nicEditor({ fullPanel: true });
                 this.nicEdit.setPanel('NicPanelPage');

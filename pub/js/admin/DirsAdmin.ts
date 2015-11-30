@@ -114,11 +114,10 @@ module uplight {
                         break;
                     case '#Front-Pag':
                         if(this.R.current)this.R.current.destroy();
-                       if(!this.frontPageEditor) this.frontPageEditor = new FrontPageEditor(this.content);
-                        else{
-                           this.content.children().detach();
+                       this.frontPageEditor = new FrontPageEditor(this.content);
+
                            this.frontPageEditor.appendTo(this.content);
-                       }
+
 
                         this.content.show();
                         // this.restartKiosks.restart();
@@ -221,9 +220,10 @@ module uplight {
             this.R.dispatcher=$({});
             this.R.connector = new Connector();
 
-            this.R.connector.getData('settings.json').done((resp) => {
-                this.R.settings = JSON.parse(resp);
-                this.R.props = _.indexBy(this.R.settings.props,'id');
+          this.R.connector.getData('settings_kiosks.json').done((resp) => {
+
+              this.R.setSettings(JSON.parse(resp));
+               // this.R.props =
                 this.init();
                 //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });

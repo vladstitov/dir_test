@@ -10,6 +10,7 @@ module uplight{
     export class IconsLibrary{
 
         iconsLibrary:JQuery;
+       // $iconsList:JQuery;
         iconPreview:JQuery;
         icon:JQuery;
         view:JQuery
@@ -18,9 +19,9 @@ module uplight{
         onSelect:Function;
         constructor(view:JQuery ){
             this.view = view;
-            this.iconsLibrary = $('<div>').appendTo(view);
+            this.iconsLibrary = $('<div>').addClass('list').appendTo(view);
             this.R = RegA.getInstance();
-            this.R.connector.getIcons().done((data)=>this.onIconsLoaded(data));
+            this.R.connector.getData('fa-icons').done((data)=>this.onIconsLoaded(data));
             this.iconPreview=$('<div>').addClass('abs preview').appendTo(this.view);
             this.view.find('[data-id=btnCloseL]:first').click(()=>this.hide());
         }
@@ -48,19 +49,13 @@ module uplight{
 
         }
 
-        private renderIconsTopic(topic):string{
-            var out='<div class="topic"><h3>'+topic[0]+'</h3><div class="list">';;
-            var ar = topic;
-            for(var i=1,n=ar.length;i<n;i++){
-                out+='<div class="fa fa-'+ ar[i]+'" ></div>';
-            }
-            return out+'</div></div>';
+        private renderIconsTopic(name:string):string{
+                return '<div class="fa fa-'+ name+'" ></div>';
         }
 
         private onIconsLoaded(data):void{
-            var topics
             var out='';
-            var ar = data;
+            var ar = JSON.parse(data);
             for(var i=0,n=ar.length;i<n;i++){
                 out+=this.renderIconsTopic(ar[i]);
             }

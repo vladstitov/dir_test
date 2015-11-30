@@ -228,9 +228,7 @@ module uplight {
            return $.post(this.service + '?a=save_data&file_name='+filename,data);
         }
 
-        saveSettings(data:string):JQueryPromise<VOResult>{
-            return $.post(this.service+'?a=save_settings', data);
-        }
+
 
         getLabels():any {
             return $.get(this.service + '?a=screen.get_labels','application/json');

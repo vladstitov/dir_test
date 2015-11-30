@@ -16,6 +16,7 @@ module uplight{
         private iconsLibrary:JQuery;
         private btnEditIcon:JQuery;
         private btnBlankIcon:JQuery;
+        private $iconsList:JQuery;
 
         private iconPreview:JQuery;
 
@@ -34,6 +35,7 @@ module uplight{
             this.chkEnable = view.find('[data-id=chkEnable]:first').on('click',()=>this.onCheckClick());
             this.icon = view.find('[data-id=icon]:first');
             this.iconsLibrary = view.find('[data-id=iconsLibrary]:first');
+            this.$iconsList = this.iconsLibrary.find('.list:first');
             this.btnEditIcon =  view.find('[data-id=btnEditIcon]:first');
             this.btnClose = view.find('[data-id=btnClose]');
             this.btnSave = view.find('[data-id=save]:first');
@@ -55,7 +57,7 @@ module uplight{
             this.iconsLibrary.parent().hide();
             this.btnEditIcon.on(CLICK,()=>this.onEditIconClick());
             this.icon.parent().on(CLICK,()=>this.onEditIconClick());
-            this.R.connector.getIcons().done((data)=>this.onIconsLoaded(data));
+            this.R.connector.getData('fa-icons').done((data)=>this.onIconsLoaded(data));
             this.iconPreview=$('<div>').addClass('abs preview').appendTo(this.iconsLibrary.parent());
 
             this.btnClose.on(CLICK,()=>{
@@ -83,23 +85,25 @@ module uplight{
             this.view.show();
 
         }
-        private renderIconsTopic(topic):string{
-            var out='<div class="topic"><h3>'+topic[0]+'</h3><div class="list">';;
-            var ar = topic;
-            for(var i=1,n=ar.length;i<n;i++){
-               out+='<div class="fa fa-'+ ar[i]+'" ></div>';
-            }
-            return out+'</div></div>';
+        private renderIconsTopic(name):string{
+            //var out='<div class="topic"><h3>'+topic[0]+'</h3><div class="list">';;
+            //var ar = topic;
+            //for(var i=1,n=ar.length;i<n;i++){
+              // out+='<div class="fa fa-'+ ar[i]+'" ></div>';
+           // }
+            //return out+'</div></div>';
+            return '<div class="fa fa-'+ name+'" ></div>';
         }
-        private onIconsLoaded(data):void{
-            var topics
-            var out='';
-            var ar = data;
+        private onIconsLoaded(data:string):void{
+           var out='';
+            var ar = JSON.parse(data);
+            console.log(data);
             for(var i=0,n=ar.length;i<n;i++){
                out+=this.renderIconsTopic(ar[i]);
             }
 
-            this.iconsLibrary.html(out);
+
+            this.$iconsList.html(out);
             this.iconsLibrary.on(CLICK,'.fa',(evt)=>this.onIcionLibraryClick($(evt.currentTarget)))
             this.iconsLibrary.on(MOUSE_OVER,'.fa',(evt)=>this.onIcionLibraryOver($(evt.currentTarget)))
             this.iconPreview.on(MOUSE_OUT,'.fa',(evt)=>this.onIcionLibraryOut($(evt.currentTarget)))

@@ -29,20 +29,7 @@ class Utils{
 			}			
 			return 'ERROR';
 	}
-		
-	public function saveSettings($dataStr){
-		$out= new stdClass();
-		$filename=DATA.'settings.json';
-		if(file_exists($filename)){
-				copy($filename,DATA.'/bk/'.date('j-m-y_h-i-s').'settings.json');
-				$out->result = file_put_contents($filename,$dataStr);
-				if($out->result)$out->success='success';				
-				else $out->error='cant save file';	
-				
-		}else $out->error='error saving data in settings';
-		
-		return $out;
-	}
+			
 	public function saveData($file_name,$data){
 		$out=new stdClass();
 		if(strpos($file_name,'.json') === false)$file_name=$file_name.'.json';			

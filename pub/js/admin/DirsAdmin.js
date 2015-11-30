@@ -34,9 +34,9 @@ var uplight;
             this.R.admin = u_admin;
             this.R.dispatcher = $({});
             this.R.connector = new uplight.Connector();
-            this.R.connector.getData('settings.json').done(function (resp) {
-                _this.R.settings = JSON.parse(resp);
-                _this.R.props = _.indexBy(_this.R.settings.props, 'id');
+            this.R.connector.getData('settings_kiosks.json').done(function (resp) {
+                _this.R.setSettings(JSON.parse(resp));
+                // this.R.props =
                 _this.init();
                 //this.R.vo.events.on(this.R.vo.READY,()=>this.test());
             });
@@ -119,12 +119,8 @@ var uplight;
                 case '#Front-Pag':
                     if (this.R.current)
                         this.R.current.destroy();
-                    if (!this.frontPageEditor)
-                        this.frontPageEditor = new uplight.FrontPageEditor(this.content);
-                    else {
-                        this.content.children().detach();
-                        this.frontPageEditor.appendTo(this.content);
-                    }
+                    this.frontPageEditor = new uplight.FrontPageEditor(this.content);
+                    this.frontPageEditor.appendTo(this.content);
                     this.content.show();
                     break;
                 case '#Listing-V':

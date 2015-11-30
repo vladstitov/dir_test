@@ -3,8 +3,9 @@
  */
     ///<reference path="../DirsAdmin.ts" />
 module uplight{
-    export class FrontPageEditor{
+    export class FrontPageEditor implements UModule{
 
+        private NAME:string='uplight.FrontFageeditor'
         view:JQuery;
         list:JQuery;
         menu:JQuery;
@@ -16,14 +17,22 @@ module uplight{
         btnSave:JQuery;
         pages:any[];
         private nicEdit:nicEditor
+        destroy():void{
 
-        appendTo(container:JQuery):void{
+        }
+        getName():string{
+            return this.NAME;
+        }
+
+        detach():void{
+            this.view.detach();
+        }
+        appendTo(container:JQuery):UModule{
             container.append(this.view);
-            this.reloadPage();
+            return this;
         }
         constructor(container:JQuery){
             container.load('htms/admin/FrontPageEditor.htm',()=>this.init());
-
         }
 
         private init():void{
@@ -57,6 +66,7 @@ module uplight{
         }
         private isEdit:boolean;
         private onEditClicked():void{
+         //   console.log('onEditClicked');
             if(!this.nicEdit){
                 this.nicEdit = new nicEditor({ fullPanel: true });
                 this.nicEdit.setPanel('NicPanelPage');

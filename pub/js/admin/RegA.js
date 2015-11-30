@@ -90,12 +90,16 @@ var uplight;
         RegA.prototype.getProps = function (index) {
             return this.props[index];
         };
+        RegA.prototype.setSettings = function (sett) {
+            this.settings = sett;
+            this.props = _.indexBy(sett.props, 'id');
+        };
         RegA.prototype.getSettings = function (index) {
             return this.settings[index];
         };
         RegA.prototype.saveSettings = function (index, obj) {
             this.settings[index] = obj;
-            return this.connector.saveSettings(JSON.stringify(this.settings));
+            return this.connector.saveData(JSON.stringify(this.settings), 'settings_kiosks');
         };
         RegA.getInstance = function () {
             return RegA._instance;
@@ -199,4 +203,4 @@ var uplight;
     })();
     uplight.AttractLoop = AttractLoop;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RegA.js.map
+//# sourceMappingURL=rega.js.map

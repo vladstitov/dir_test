@@ -10,9 +10,9 @@ var uplight;
         function IconsLibrary(view) {
             var _this = this;
             this.view = view;
-            this.iconsLibrary = $('<div>').appendTo(view);
+            this.iconsLibrary = $('<div>').addClass('list').appendTo(view);
             this.R = uplight.RegA.getInstance();
-            this.R.connector.getIcons().done(function (data) { return _this.onIconsLoaded(data); });
+            this.R.connector.getData('fa-icons').done(function (data) { return _this.onIconsLoaded(data); });
             this.iconPreview = $('<div>').addClass('abs preview').appendTo(this.view);
             this.view.find('[data-id=btnCloseL]:first').click(function () { return _this.hide(); });
         }
@@ -35,20 +35,13 @@ var uplight;
             else
                 this.show();
         };
-        IconsLibrary.prototype.renderIconsTopic = function (topic) {
-            var out = '<div class="topic"><h3>' + topic[0] + '</h3><div class="list">';
-            ;
-            var ar = topic;
-            for (var i = 1, n = ar.length; i < n; i++) {
-                out += '<div class="fa fa-' + ar[i] + '" ></div>';
-            }
-            return out + '</div></div>';
+        IconsLibrary.prototype.renderIconsTopic = function (name) {
+            return '<div class="fa fa-' + name + '" ></div>';
         };
         IconsLibrary.prototype.onIconsLoaded = function (data) {
             var _this = this;
-            var topics;
             var out = '';
-            var ar = data;
+            var ar = JSON.parse(data);
             for (var i = 0, n = ar.length; i < n; i++) {
                 out += this.renderIconsTopic(ar[i]);
             }

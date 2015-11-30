@@ -6,6 +6,7 @@ var uplight;
     var LabelEditor = (function () {
         function LabelEditor() {
             var _this = this;
+            console.log('labels manager');
             this.R = uplight.RegA.getInstance();
             this.view = $('#LabelEditor');
             this.select = this.view.find('[data-id=select]:first').change(function () { return _this.onSelectChange(); });
