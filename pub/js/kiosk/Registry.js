@@ -92,4 +92,4 @@ var uplight;
     })();
     uplight.VOGeo = VOGeo;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

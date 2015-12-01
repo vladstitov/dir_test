@@ -71,7 +71,8 @@ include('KioskHeader.php');
                float: left;
                white-space: normal;
                width:725px;
-               height: 1077px;
+               height: 1070px;
+               overflow-y: auto;
                padding: 22px;
            }
 

@@ -37,9 +37,8 @@ var uplight;
             document.addEventListener('mousedown', function (evt) { return _this.onMouseDown(evt); }, true);
             var r = uplight.Registry.getInstance();
             r.events = $('<div>');
-            r.connector = new uplight.Connector();
-            r.connector.id = u_settings.id;
             r.setSettings(u_settings);
+            r.connector = new uplight.Connector();
             // console.log(u_settings);          // r.connector.who='kiosk';
             r.model = new uplight.Model(r.connector, function (w) { return _this.warn(w); });
             var obj = r.getSettings('timeout');
@@ -55,7 +54,7 @@ var uplight;
             r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
             r.events.on(r.KIOSK_SHOW_MENU, null, function (evt) { return _this.showMenu(); });
             this.R.events.on(this.R.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
-            this.R.events.on(uplight.InfoPagesModel.PAGE_SELECED, function (evt, page) {
+            this.R.events.on(uplight.InfoPagesModel.PAGE_SELECED, function (evt, pageid) {
                 _this.R.events.triggerHandler(_this.R.KEYBOARD_HIDE);
                 _this.showPages();
             });
@@ -76,6 +75,8 @@ var uplight;
             var tmr = r.getProp('timer');
             if (tmr)
                 var relay = new uplight.Relay(tmr.value);
+            //window.addEventListener("hashchange",()=>this.onHachChange(), false);
+            setTimeout(function () { return _this.onHachChange(); }, 1000);
         }
         // private isAL:boolean=true;
         Kiosk.prototype.onMouseDown = function (evt) {
@@ -148,18 +149,12 @@ var uplight;
             this.isBlocked = false;
         };
         Kiosk.prototype.onHachChange = function () {
-            var _this = this;
             var h = document.location.hash;
-            if (this.isBlocked) {
-                document.location.hash = h;
-                return;
-            }
-            this.prevHash = h;
-            this.isBlocked = true;
-            setTimeout(function () { return _this.unblock(); }, 500);
             var hash = h.split('/');
             switch (hash[0]) {
-                case '#category':
+                case '#page':
+                    var pageid = Number(hash[1]);
+                    this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, pageid);
                     break;
                 case '#dest':
                     break;

@@ -71,7 +71,7 @@ var uplight;
                 return;
             var item = this.dataInd[id];
             if (!item) {
-                console.log('Error cant find page with id' + id);
+                console.log('Error cant find page with id ' + id);
                 return;
             }
             this.current = id;

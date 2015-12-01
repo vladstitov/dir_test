@@ -95,10 +95,8 @@ module uplight {
            document.addEventListener('mousedown',(evt)=>this.onMouseDown(evt),true);
            var r:Registry = Registry.getInstance();
            r.events = $('<div>');
-           r.connector = new Connector();
-           r.connector.id=u_settings.id;
            r.setSettings(u_settings);
-
+           r.connector = new Connector();
            // console.log(u_settings);          // r.connector.who='kiosk';
            r.model = new Model(r.connector,(w)=>this.warn(w));
 
@@ -107,8 +105,6 @@ module uplight {
            var timeout:number
            if(obj) timeout=Number(obj.value);
            if(isNaN(timeout) || timeout<10)timeout= 60;
-
-
 
            this.timeoutVal = timeout*1000;
 
@@ -121,7 +117,7 @@ module uplight {
 
            this.R.events.on(this.R.KEYBOARD_SHOW,()=>this.showSearchResult());
 
-           this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,page)=>{
+           this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,pageid)=>{
                this.R.events.triggerHandler(this.R.KEYBOARD_HIDE);
                this.showPages();
 
@@ -139,11 +135,14 @@ module uplight {
                if(dest.imgs)r.events.triggerHandler(DetailsLarge.DETAILS_LARGE_SHOW,id)// this.details.setDestination(dest).render().show();
                else r.events.triggerHandler( this.R.SEARCH_RESULT_SHOW_DESTINATION,id)//this.searchResult.showDestination(dest);
                console.log(dest);
-           })
-
-
+           });
             var tmr:any  = r.getProp('timer');
            if(tmr)  var relay:Relay = new Relay(tmr.value);
+
+
+           //window.addEventListener("hashchange",()=>this.onHachChange(), false);
+          setTimeout(()=>this.onHachChange(),1000);
+
        }
        setControllers():void{
            var stringToFunction = function(str) {
@@ -178,17 +177,11 @@ module uplight {
 
        private onHachChange(): void {
            var h:string = document.location.hash;
-           if (this.isBlocked) {
-               document.location.hash = h;
-               return;
-           }
-           this.prevHash = h;
-           this.isBlocked = true;
-           setTimeout(() => this.unblock(), 500);
-           
            var hash: string[] = h.split('/');
            switch (hash[0]) {
-               case '#category':
+               case '#page':
+                   var pageid:number = Number(hash[1])
+                   this.R.events.triggerHandler(InfoPagesModel.PAGE_SELECED,pageid);
                  //  this.keyboardView.hideKeyboard();
                   // var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));
                   // this.maiView.showView(this.searchResult.getListByCategory(cat));
