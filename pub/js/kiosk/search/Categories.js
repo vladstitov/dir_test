@@ -46,11 +46,13 @@ var uplight;
                 return;
             if (Number(el.data('checked')) == 1) {
                 el.data('checked', 0);
+                console.log('removing category ' + id);
                 this.removeCategory(id);
                 el.find('.check').removeClass('fa-check-square-o').addClass('fa-square-o');
             }
             else {
                 el.data('checked', 1);
+                console.log('adding  category ' + id);
                 this.addCategory(id);
                 el.find('.check').removeClass('fa-square-o').addClass('fa-check-square-o');
             }
@@ -61,6 +63,7 @@ var uplight;
         };
         CategoriesCheck.prototype.renderItem = function (vo, i) {
             return '<li data-checked="1" data-id="' + vo.id + '" class="btn" ><span class="check fa fa-check-square-o" data-id="' + vo.id + '" ></span><span class="icon ' + vo.icon + '"></span> <span class="name">' + vo.label + '</span></label></li>';
+            //  return '<li data-checked="1" data-id="'+vo.id+'" class="btn" ><span class="id">'+vo.id+'</span><span class="check fa fa-check-square-o" data-id="'+vo.id+'" ></span><span class="icon '+vo.icon+'"></span> <span class="name">'+vo.label+'</span></label></li>';
         };
         CategoriesCheck.prototype.render = function () {
             var ar = this.data;

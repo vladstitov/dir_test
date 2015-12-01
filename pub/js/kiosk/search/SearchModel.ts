@@ -24,6 +24,11 @@ module uplight{
         private $btnMore:JQuery;
         private $txtMore:JQuery;
         private $main:JQuery;
+       // private $cats:JQuery;
+
+       // setCats(str:string):void{
+         //   this.$cats.text(str);
+        //}
         show():void{
             this.$view.show();
         }
@@ -47,6 +52,7 @@ module uplight{
         createMain():JQuery{
                 this.$main = $('<div>').addClass('main');
                 this.$main.append(this.createFirstRow());
+          //  this.$cats=$('<div>').addClass('cats').appendTo(this.$main);
                 var icon ='<span class="icon '+this.model.vo.icon+'"></span>';
                 var name='<span class="name">'+this.model.vo.name+'</span>';
                 var unit='<span class="unit">'+this.model.vo.unit+'</span>';
@@ -136,6 +142,7 @@ module uplight{
            if(vo.more || vo.tmb || vo.imgs || vo.pgs)this.haveMore = true;
             this.view = new ButtonView(this);
 
+            //this.view.setCats(vo.cats.toString())
             this.name=' '+vo.name.toLowerCase();
             this.unit=' '+vo.unit.toLowerCase();
             this.kws=','+vo.kws;
@@ -259,7 +266,7 @@ module uplight{
         }
 
         showKeyword(str:string):void{
-           console.log(this.vo.name+'  showKeyword  '   + str);
+          // console.log(this.vo.name+'  showKeyword  '   + str);
             this.view.showKW(str)
             this.iskw = true;
         }

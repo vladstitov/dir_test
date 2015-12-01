@@ -1,4 +1,11 @@
-﻿body {
+﻿
+li>.main.cats{
+    position: absolute;
+    left: 0;
+    top:0;
+}
+
+body {
     width:100%;
     font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;

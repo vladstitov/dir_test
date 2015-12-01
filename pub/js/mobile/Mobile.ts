@@ -58,7 +58,6 @@ module uplight {
         constructor() {
             this.R = uplight.Registry.getInstance();
             this.R.setSettings(u_settings);
-            console.log(u_settings);
            var conn:uplight.Connector = new uplight.Connector();
 
             var rel:Relay = new Relay(5,2);
@@ -91,6 +90,8 @@ module uplight {
 
 
             this.content=$('#Content');
+            if(this.R.getSettings('preview')) this.content.addClass('preview');
+
             this.transition = new Transition(this.content);
             this.frontPage = new FrontPage($('#FrontPage'));
 

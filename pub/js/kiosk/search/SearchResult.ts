@@ -58,7 +58,6 @@ module uplight {
            // console.log('listeners');
         }
 
-
         private onCategorySelected(catid:number){
             var cat:VOCategory = this.model.getCategoryById(catid);
             this.header.html('<span class="'+cat.icon+'"> </span> <span>'+cat.label+'</span>');
@@ -122,9 +121,15 @@ module uplight {
         private onSearchChange(pattern:string):void{
             this.currentPattern = pattern.toLowerCase();
           //  console.log(pattern);
-            if(pattern.length) this.result = this.filterSearch();
-            else this.result = this.data;
-            this.render(false);
+            if(pattern.length){
+                this.result = this.filterSearch();
+                this.render(false);
+            }
+            else{
+                this.result = this.data;
+                this.render(true);
+            }
+
             this.header.text(this.HEADER);
         }
 
@@ -147,7 +152,7 @@ module uplight {
 
         private onCategoriesChange(cats:number[]):void{
             this.currentCats=cats;
-           // console.log(cats);
+           console.log(cats);
             this.filterCats(cats);
         }
 

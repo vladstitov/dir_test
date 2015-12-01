@@ -31,7 +31,6 @@ var uplight;
             this.cache = {};
             this.R = uplight.Registry.getInstance();
             this.R.setSettings(u_settings);
-            console.log(u_settings);
             var conn = new uplight.Connector();
             var rel = new uplight.Relay(5, 2);
             this.R.connector = conn;
@@ -56,6 +55,8 @@ var uplight;
             };
             //  this.searchResult = new SearchResult('#Results');
             this.content = $('#Content');
+            if (this.R.getSettings('preview'))
+                this.content.addClass('preview');
             this.transition = new uplight.Transition(this.content);
             this.frontPage = new uplight.FrontPage($('#FrontPage'));
             $(window).on('hashchange', function (evt) { return _this.onHachChange(); });

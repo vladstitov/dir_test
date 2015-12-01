@@ -61,12 +61,11 @@ var uplight;
             this.data = out;
             this.dataInd = _.indexBy(out, 'id');
         };
-        InfoPagesModel.prototype._showPage = function (i) {
-        };
         InfoPagesModel.prototype.showPage = function (id) {
             var _this = this;
             if (this.inTrans)
                 return;
+            console.log('showing page ' + id);
             if (id == this.current)
                 return;
             var item = this.dataInd[id];

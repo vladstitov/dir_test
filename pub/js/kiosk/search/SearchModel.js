@@ -19,6 +19,10 @@ var uplight;
             this.model = model;
             this.$view = $('<li>').addClass('item btn-main').data('id', model.id).append(this.createMain());
         }
+        // private $cats:JQuery;
+        // setCats(str:string):void{
+        //   this.$cats.text(str);
+        //}
         ButtonView.prototype.show = function () {
             this.$view.show();
         };
@@ -34,6 +38,7 @@ var uplight;
         ButtonView.prototype.createMain = function () {
             this.$main = $('<div>').addClass('main');
             this.$main.append(this.createFirstRow());
+            //  this.$cats=$('<div>').addClass('cats').appendTo(this.$main);
             var icon = '<span class="icon ' + this.model.vo.icon + '"></span>';
             var name = '<span class="name">' + this.model.vo.name + '</span>';
             var unit = '<span class="unit">' + this.model.vo.unit + '</span>';
@@ -106,6 +111,7 @@ var uplight;
             if (vo.more || vo.tmb || vo.imgs || vo.pgs)
                 this.haveMore = true;
             this.view = new ButtonView(this);
+            //this.view.setCats(vo.cats.toString())
             this.name = ' ' + vo.name.toLowerCase();
             this.unit = ' ' + vo.unit.toLowerCase();
             this.kws = ',' + vo.kws;
@@ -221,7 +227,7 @@ var uplight;
             return out;
         };
         DestModel.prototype.showKeyword = function (str) {
-            console.log(this.vo.name + '  showKeyword  ' + str);
+            // console.log(this.vo.name+'  showKeyword  '   + str);
             this.view.showKW(str);
             this.iskw = true;
         };

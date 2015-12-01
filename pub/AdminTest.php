@@ -1,9 +1,13 @@
 ﻿<?
 session_start();
+define('DATA','../data');
 if(!isset($_SESSION['directories_user'])){
 	 echo file_get_contents('DirLogin.html');
 	  exit;
 }
+
+$settings = json_decode(file_get_contents(DATA.'/settings_kiosks.json'));
+$theme = $settings->theme;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +21,11 @@ if(!isset($_SESSION['directories_user'])){
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <link href="js/lists/reset.css" rel="stylesheet" type="text/css"/>
-
+    <link href="<?= $theme; ?>" rel="stylesheet" />
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
     <script>
         var u_admin=<?= file_get_contents('../data/admin.json'); ?>
+
     </script>
 
    <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
@@ -29,6 +34,10 @@ if(!isset($_SESSION['directories_user'])){
 <title>Interactive Directories Admin</title>
 
     <style>
+        #PageBody .page-container {
+            padding: 20px;
+            border-radius: 10px;
+        }
         .umsg{
             position: absolute;
             z-index: 2000;

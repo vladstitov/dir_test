@@ -271,12 +271,26 @@ var nicEditor = myClass.extend({
 	},
 
 	addInstance : function(e,o) {
+		var id=e;
+		var cont =$('#'+id);
+		this.container = cont;
+		cont.on('click',function(evt){
+			if(cont.prop('contenteditable')){
+				cont.find('.sel-img').removeClass('sel-img');
+				var el = $(evt.target);
+				if(el.is('img'))el.addClass('sel-img');
+			}
+
+		});
 		e = this.checkReplace(extElm(e));
 		if( e.contentEditable || !!window.opera ) {
 			var newInstance = new nicEditorInstance(e,o,this);
 		} else {
 			var newInstance = new nicEditorIFrameInstance(e,o,this);
 		}
+		//console.log(e);
+
+
 		this.nicInstances.push(newInstance);
 		return this;
 	},
@@ -1317,79 +1331,7 @@ var nicEditorBgColorButton = nicEditorColorButton.extend({
 
 nicEditors.registerPlugin(nicPlugin,nicColorOptions);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-/*
-var nicImageOptions = {
-	buttons : {
-		'image' : {name : 'Add Image', type : 'nicImageButton', tags : ['IMG']}
-	}
-	
-};
-
-
-var nicImageButton = nicEditorAdvancedButton.extend({	
-	addPane : function() {
-		this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
-		this.addForm({
-			'' : {type : 'title', txt : 'Add/Edit Image'},
-			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '150px'}},
-			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100px'}},
-			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}}
-		},this.im);
-	},
-	
-	submit : function(e) {
-		var src = this.inputs['src'].value;
-		if(src == "" || src == "http://") {
-			alert("You must enter a Image URL to insert");
-			return false;
-		}
-		this.removePane();
-
-		if(!this.im) {
-			var tmp = 'javascript:nicImTemp();';
-			this.ne.nicCommand("insertImage",tmp);
-			this.im = this.findElm('IMG','src',tmp);
-		}
-		if(this.im) {
-			this.im.setAttributes({
-				src : this.inputs['src'].value,
-				alt : this.inputs['alt'].value,
-				align : this.inputs['align'].value
-			});
-		}
-	}
-});
-
-nicEditors.registerPlugin(nicPlugin, nicImageOptions);
-
-*/
-/*
-var nicSaveOptions = {
-	buttons : {
-		'save' : {name : __('Save this content'), type : 'nicEditorSaveButton'}
-	}
-};
-
-
-var nicEditorSaveButton = nicEditorButton.extend({
-	init : function() {
-		if(!this.ne.options.onSave) {
-			this.margin.setStyle({'display' : 'none'});
-		}
-	},
-	mouseClick : function() {
-		var onSave = this.ne.options.onSave;
-		var selectedInstance = this.ne.selectedInstance;
-		onSave(selectedInstance.getContent(), selectedInstance.elm.id, selectedInstance);
-	}
-});
-
-nicEditors.registerPlugin(nicPlugin,nicSaveOptions);
-
-*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var nicUploadOptions = {
@@ -1404,17 +1346,19 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 	nicURI : 'rem/convert.php',
   	errorText : 'Failed to upload image',
 	addPane : function() {
-    if(typeof window.FormData === "undefined") {
-      return this.onError("Image uploads are not supported in this browser, use IE 10+, Chrome, Firefox, or Safari instead.");
-    }
-    this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
+		var title = 'Insert an Image';
 
-    var container = new myElement('div').setStyle({ padding: '10px' }).appendTo(this.pane.pane);
-		new myElement('div').setStyle({ fontSize: '14px', fontWeight : 'bold', paddingBottom: '5px' }).setContent('Insert an Image').appendTo(container);		
-		this.form = new myElement('form').appendTo(container);
-		this.fileInput = new myElement('input').setAttributes({ 'type': 'file', 'name': 'file' }).appendTo(this.form);
-		this.fileInput.onchange = this.uploadFile.closure(this);
-       // this.progress = new myElement('progress').setStyle({ width : '100%', display: 'none' }).setAttributes('max', 100).appendTo(container);
+		if(this.ne.container.find('.sel-img').length){
+			title ='Replace an Image';
+		}
+
+			this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
+			var container = new myElement('div').setStyle({ padding: '10px' }).appendTo(this.pane.pane);
+				new myElement('div').setStyle({ fontSize: '14px', fontWeight : 'bold', paddingBottom: '5px' }).setContent(title).appendTo(container);
+				this.form = new myElement('form').appendTo(container);
+				this.fileInput = new myElement('input').setAttributes({ 'type': 'file', 'name': 'file' }).appendTo(this.form);
+				this.fileInput.onchange = this.uploadFile.closure(this);
+			   // this.progress = new myElement('progress').setStyle({ width : '100%', display: 'none' }).setAttributes('max', 100).appendTo(container);
 
    
 	},
@@ -1443,24 +1387,22 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
     xhr.send(fd);
     
   },
-/*
-  setProgress : function(percent) {
-    this.progress.setStyle({ display: 'block' });
-    if(percent < .98) {
-      this.progress.value = percent;
-    } else {
-      this.progress.removeAttribute('value');
-    }
-  },
-*/
   onUploaded : function(image) {
     this.removePane();
    // var src = options.links.original;
    // if(!this.im) {
-      this.ne.selectedInstance.restoreRng();
-      var tmp = 'javascript:nicImTemp();';
-      this.ne.nicCommand("insertImage", image);
-      this.im = this.findElm('IMG','src', image);
+
+	  if(this.ne.container.find('.sel-img').length){
+		  title ='Replace an Image';
+		  this.ne.container.find('.sel-img').attr('src',image);
+	  }else{
+		  this.ne.selectedInstance.restoreRng();
+		  var tmp = 'javascript:nicImTemp();';
+		  this.ne.nicCommand("insertImage", image);
+		  this.im = this.findElm('IMG','src', image);
+	  }
+
+
    // }
 /*
     var w = parseInt(this.ne.selectedInstance.elm.getStyle('width'));

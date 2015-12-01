@@ -28,7 +28,7 @@ var uplight;
             this.theme = '';
             this.previewUrl1080 = 'Kiosk1080.php?';
             this.previewUrl1920 = 'Kiosk1920.php?';
-            this.mobileUrl = 'KioskMobile.php';
+            this.mobileUrl = 'KioskMobile.php?preview=true';
             //  $.ajaxSetup({ cache: false });
             this.R = uplight.RegA.getInstance();
             this.R.admin = u_admin;

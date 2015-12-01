@@ -77,14 +77,13 @@ module uplight {
 */
         current:number=-1
 
-        private _showPage(i:number):void{
 
-        }
 
         inTrans:boolean
 
         showPage(id:number):void{
             if(this.inTrans)return;
+            console.log('showing page '+id);
             if(id==this.current) return
             var item:VOPage=this.dataInd[id];
             if(!item){

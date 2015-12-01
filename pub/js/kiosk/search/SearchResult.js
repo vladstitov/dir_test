@@ -91,11 +91,14 @@ var uplight;
         SearchResult.prototype.onSearchChange = function (pattern) {
             this.currentPattern = pattern.toLowerCase();
             //  console.log(pattern);
-            if (pattern.length)
+            if (pattern.length) {
                 this.result = this.filterSearch();
-            else
+                this.render(false);
+            }
+            else {
                 this.result = this.data;
-            this.render(false);
+                this.render(true);
+            }
             this.header.text(this.HEADER);
         };
         SearchResult.prototype.filterSearch = function () {
@@ -118,7 +121,7 @@ var uplight;
         };
         SearchResult.prototype.onCategoriesChange = function (cats) {
             this.currentCats = cats;
-            // console.log(cats);
+            console.log(cats);
             this.filterCats(cats);
         };
         SearchResult.prototype.filterCats = function (cats) {

@@ -323,7 +323,7 @@ module uplight {
         private previewUrl1080:string ='Kiosk1080.php?';
         private previewUrl:string;
         private previewUrl1920:string ='Kiosk1920.php?';
-        private mobileUrl:string ='KioskMobile.php';
+        private mobileUrl:string ='KioskMobile.php?preview=true';
 
         private showKiosk(width:number):void{
             if(width == 1920){
