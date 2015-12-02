@@ -59,6 +59,7 @@ var uplight;
                 this.content.addClass('preview');
             this.transition = new uplight.Transition(this.content);
             this.frontPage = new uplight.FrontPage($('#FrontPage'));
+            this.currentView = this.frontPage.getView();
             $(window).on('hashchange', function (evt) { return _this.onHachChange(); });
             this.filterPage = new uplight.FilterPage($('[data-ctr=FilterPage]'));
             setTimeout(function () { return _this.onHachChange(); }, 1000);
@@ -128,11 +129,15 @@ var uplight;
                 case '#Menu':
                     this.menu.showMenu();
                     break;
+                case '#MenuClose':
+                    this.menu.hideMenu();
+                    break;
                 case '#logo':
                     this.showView(this.frontPage.getView());
                     break;
                 default:
                     this.menu.showMenu();
+                    this.showView(this.frontPage.getView());
                     break;
             }
         };
@@ -143,6 +148,9 @@ var uplight;
                     this.transition.showView(ar[i].url);
         };
         Mobile.prototype.showView = function (view) {
+            if (this.currentView == view)
+                return;
+            this.currentView = view;
             this.transition.showView(view);
         };
         return Mobile;

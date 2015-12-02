@@ -94,6 +94,7 @@ module uplight {
 
             this.transition = new Transition(this.content);
             this.frontPage = new FrontPage($('#FrontPage'));
+            this.currentView =this.frontPage.getView();
 
 
             $(window).on('hashchange', (evt) => this.onHachChange());
@@ -176,12 +177,16 @@ module uplight {
                 case '#Menu':
                     this.menu.showMenu();
                     break;
+                case '#MenuClose':
+                    this.menu.hideMenu();
+                    break;
                 case '#logo':
                     this.showView(this.frontPage.getView());
                     break;
                 default:
                     this.menu.showMenu();
-                   // this.showView(this.frontPage.getView());
+
+                   this.showView(this.frontPage.getView());
                     break;
             }
 
@@ -193,7 +198,10 @@ module uplight {
             for(var i=0,n=ar.length;i<n;i++)  if( ar[i].id==id)  this.transition.showView(ar[i].url);
         }
 
+        private currentView:JQuery
         private showView(view:JQuery):void{
+            if(this.currentView ==view) return;
+            this.currentView = view;
             this.transition.showView(view);
 
         }

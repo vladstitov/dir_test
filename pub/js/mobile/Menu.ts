@@ -24,9 +24,11 @@ module uplight {
         timeoutMenu:number;
         showMenu():void{
             if(this.isHiddenMenu){
+
                 clearTimeout(this.timeoutMenu);
                 this.isHiddenMenu = false;
                 this.menu.removeClass('closed');
+
                 this.timeoutMenu = setTimeout(()=>{
                     if(this.onMenuON)this.onMenuON();
                 },500);
@@ -50,14 +52,21 @@ module uplight {
         }
 
         toggleMenu():void{
-            if(this.isHiddenMenu)this.showMenu();
-            else this.hideMenu();
+            if(this.isHiddenMenu){
+                window.location.hash='#Menu';
+            }
+            else{
+                window.location.hash='#MenuClose';
+            }
+        }
+        private onCloseClick():void{
+            window.location.hash='#MenuClose';
         }
         private R:Registry
         constructor(private view:JQuery,private conn:uplight.Connector,private model:uplight.Model) {
             this.R= Registry.getInstance();
             this.menu=$('#Menu');
-            this.menu.find('[data-id=btnClose]').click(()=>this.hideMenu());
+            this.menu.find('[data-id=btnClose]').click(()=>this.onCloseClick());
             this.listP = this.view.find( '[data-id=listP]:first');
             this.listC = this.view.find( '[data-id=listC]:first');
             this.content = this.view.find('[data-id=content]:first');

@@ -9,7 +9,7 @@ var uplight;
             this.model = model;
             this.R = uplight.Registry.getInstance();
             this.menu = $('#Menu');
-            this.menu.find('[data-id=btnClose]').click(function () { return _this.hideMenu(); });
+            this.menu.find('[data-id=btnClose]').click(function () { return _this.onCloseClick(); });
             this.listP = this.view.find('[data-id=listP]:first');
             this.listC = this.view.find('[data-id=listC]:first');
             this.content = this.view.find('[data-id=content]:first');
@@ -90,10 +90,15 @@ var uplight;
             }
         };
         Menu.prototype.toggleMenu = function () {
-            if (this.isHiddenMenu)
-                this.showMenu();
-            else
-                this.hideMenu();
+            if (this.isHiddenMenu) {
+                window.location.hash = '#Menu';
+            }
+            else {
+                window.location.hash = '#MenuClose';
+            }
+        };
+        Menu.prototype.onCloseClick = function () {
+            window.location.hash = '#MenuClose';
         };
         Menu.prototype.hideSearch = function () {
             if (this.isSearch) {
@@ -132,4 +137,4 @@ var uplight;
     })();
     uplight.Menu = Menu;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=Menu.js.map
+//# sourceMappingURL=menu.js.map
