@@ -8,6 +8,7 @@ var uplight;
         function FrontPageEditor(container) {
             var _this = this;
             this.NAME = 'uplight.FrontFageeditor';
+            this.R = uplight.RegA.getInstance();
             container.load('htms/admin/FrontPageEditor.htm', function () { return _this.init(); });
         }
         FrontPageEditor.prototype.destroy = function () {
@@ -40,6 +41,17 @@ var uplight;
                 this.btnSave.addClass(HIDDEN);
             }
             this.reloadPage();
+            this.loadLabels();
+        };
+        FrontPageEditor.prototype.loadLabels = function () {
+            this.R.connector.getData('labels').done(function (res) {
+                console.log(res);
+                var ar = JSON.parse(res);
+                for (var i = 0, n = ar.length; i < n; i++) {
+                    if (ar[i].index == 'bg_mobile')
+                        $('#PageBody').css('background-image', 'url(' + ar[i].value + ')');
+                }
+            });
         };
         FrontPageEditor.prototype.onAddClicked = function () {
         };
@@ -78,23 +90,20 @@ var uplight;
             var _this = this;
             this.hideEdit();
             var url = uplight.RegA.getInstance().settings.front_page;
-            var tmp = this.list.children().detach();
+            //   var tmp =    this.list.children().detach();
             uplight.RegA.getInstance().connector.savePage(url, this.editor.html()).done(function (res) { return _this.onSave(res); });
-            this.list.append(tmp);
+            // this.list.append(tmp);
         };
         FrontPageEditor.prototype.onPages = function (data) {
             // console.log(data);
             this.pages = JSON.parse(data);
-            this.renderList();
+            // this.renderList();
         };
-        FrontPageEditor.prototype.loadMenu = function () {
-            var _this = this;
-            var url = uplight.RegA.getInstance().settings.pages;
-            if (url)
-                uplight.RegA.getInstance().connector.getData(url).done(function (data) { return _this.onPages(data); });
-            else
-                this.renderList();
-        };
+        /*  private loadMenu():void{
+              var url:string =RegA.getInstance().settings.pages;
+              if(url)  RegA.getInstance().connector.getData(url).done((data)=>this.onPages(data));
+              else this.renderList();
+          }*/
         FrontPageEditor.prototype.reloadPage = function () {
             var _this = this;
             uplight.RegA.getInstance().connector.getPage(uplight.RegA.getInstance().settings.front_page).done(function (data) { return _this.onContent(data); });
@@ -102,20 +111,8 @@ var uplight;
         FrontPageEditor.prototype.onContent = function (data) {
             this.editor.html(data);
             this.menu = this.editor.find('[data-id=menu]:first');
-            this.list = this.menu.find('[data-id=list]:first');
-            this.loadMenu();
-        };
-        FrontPageEditor.prototype.renderList = function () {
-            var ar = this.pages;
-            var out = '<a class="list-group-item"><span class="fa fa-search"></span> <span> Search Directory</span></a>';
-            out += '<div id="PagesListFront">';
-            for (var i = 0, n = ar.length; i < n; i++) {
-                var item = ar[i];
-                item.seq = i + 1;
-                out += '<a class="list-group-item"><span class="' + item.icon + '"></span> <span> ' + item.name + '</span></a>';
-            }
-            out += '</div>';
-            this.list.html(out);
+            //this.list= this.menu.find('[data-id=list]:first');
+            // this.loadMenu();
         };
         return FrontPageEditor;
     })();

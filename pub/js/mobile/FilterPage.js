@@ -17,7 +17,7 @@ var uplight;
             this.list.on(CLICK, 'img', function (evt) { return _this._onImageClick(evt); });
             this.cache = { ' ': 'Please type in feild' };
             this.tiFilter = view.find('[data-id=tiFilter]:first');
-            this.catTitle = view.find('[data-id=catTitle]:first').hide();
+            this.catTitle = view.find('[data-id=catTitle]:first');
             view.find('[data-id=btnClear]:first').click(function () {
                 _this.input.val('');
                 _this.renderAll();
@@ -41,7 +41,7 @@ var uplight;
             this.data = uplight.Registry.getInstance().model.getData();
             this.input.val('');
             this.tiFilter.show();
-            this.catTitle.text('').hide();
+            this.catTitle.text('All Categories');
             this.renderAll();
             // this.show();
             this.input.focus();

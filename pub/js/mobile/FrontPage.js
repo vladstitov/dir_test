@@ -7,10 +7,9 @@ var uplight;
     var FrontPage = (function () {
         function FrontPage(view) {
             this.view = view;
-            view.addClass('container');
             this.list = view.find('[data-id=list]:first');
             this.pages = u_pages;
-            this.renderList();
+            // this.renderList();
         }
         FrontPage.prototype.hide = function () {
             this.view.hide();

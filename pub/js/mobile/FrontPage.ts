@@ -19,11 +19,9 @@ module uplight{
         private list:JQuery
         constructor(public view:JQuery){
 
-            view.addClass('container');
-
             this.list= view.find('[data-id=list]:first');
             this.pages = u_pages;
-            this.renderList();
+           // this.renderList();
         }
 
         private init():void{

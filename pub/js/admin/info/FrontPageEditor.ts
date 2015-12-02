@@ -7,7 +7,7 @@ module uplight{
 
         private NAME:string='uplight.FrontFageeditor'
         view:JQuery;
-        list:JQuery;
+      //  list:JQuery;
         menu:JQuery;
         editor:JQuery;
 
@@ -16,7 +16,8 @@ module uplight{
         btnDelete:JQuery;
         btnSave:JQuery;
         pages:any[];
-        private nicEdit:nicEditor
+        private nicEdit:nicEditor;
+        private  R:RegA;
         destroy():void{
 
         }
@@ -32,6 +33,7 @@ module uplight{
             return this;
         }
         constructor(container:JQuery){
+            this.R=RegA.getInstance();
             container.load('htms/admin/FrontPageEditor.htm',()=>this.init());
         }
 
@@ -44,6 +46,7 @@ module uplight{
             this.editor = this.view.find('[data-id=editor]:first');
 
 
+
             if(RegA.getInstance().settings.front_page){
                 this.btnAdd.addClass(HIDDEN);
                 this.btnDelete.addClass(HIDDEN);
@@ -54,8 +57,18 @@ module uplight{
                 this.btnSave.addClass(HIDDEN);
             }
             this.reloadPage();
+            this.loadLabels();
         }
 
+        private loadLabels():void{
+            this.R.connector.getData('labels').done((res)=>{
+                console.log(res);
+                var ar = JSON.parse(res);
+                for(var i=0,n=ar.length;i<n;i++){
+                  if(ar[i].index=='bg_mobile') $('#PageBody').css('background-image','url('+ar[i].value+')') ;
+                }
+            })
+        }
         private onAddClicked():void{
 
         }
@@ -96,9 +109,9 @@ module uplight{
         private onSaveClicked():void{
             this.hideEdit();
                 var url:string =RegA.getInstance().settings.front_page;
-             var tmp =    this.list.children().detach();
+          //   var tmp =    this.list.children().detach();
                 RegA.getInstance().connector.savePage(url,this.editor.html()).done((res)=>this.onSave(res));
-                this.list.append(tmp);
+               // this.list.append(tmp);
 
 
         }
@@ -106,14 +119,14 @@ module uplight{
         private onPages(data):void{
            // console.log(data);
             this.pages = JSON.parse(data);
-            this.renderList();
+           // this.renderList();
         }
 
-        private loadMenu():void{
+      /*  private loadMenu():void{
             var url:string =RegA.getInstance().settings.pages;
             if(url)  RegA.getInstance().connector.getData(url).done((data)=>this.onPages(data));
             else this.renderList();
-        }
+        }*/
 
         private reloadPage():void{
             RegA.getInstance().connector.getPage(RegA.getInstance().settings.front_page).done((data)=>this.onContent(data))
@@ -121,14 +134,13 @@ module uplight{
         }
 
         private onContent(data:string):void{
-
             this.editor.html(data)
            this.menu=this.editor.find('[data-id=menu]:first');
-           this.list= this.menu.find('[data-id=list]:first');
-          this.loadMenu();
+           //this.list= this.menu.find('[data-id=list]:first');
+         // this.loadMenu();
         }
 
-        private renderList():void{
+     /*   private renderList():void{
         var ar= this.pages;
             var out='<a class="list-group-item"><span class="fa fa-search"></span> <span> Search Directory</span></a>';
             out+='<div id="PagesListFront">';
@@ -140,7 +152,7 @@ module uplight{
             out+='</div>';
             this.list.html(out);
 
-        }
+        }*/
 
     }
 }

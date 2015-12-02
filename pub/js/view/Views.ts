@@ -33,14 +33,35 @@ module uplight{
             slot.detach();
         }
 
-      showView(newV:JQuery):JQuery{
-            var cont:JQuery= this.view;
-            var old:JQuery = cont.children().first();
-            cont.children().detach();
-            var w:number = cont.width();
+        showView(newV:JQuery):JQuery{
+            this.showView5(newV);
+            return;
+            if(jQuery.type(newV)=='string'){
+                newV =$('<div>').load(newV,function(){
+                    newV.removeClass('in');
 
-          var slot1=$('<div>').addClass('slot').width(w).css('float','left').append(old);
-          var slot2=$('<div>').addClass('slot').width(w).css('float','left');
+                    //ready1= true;
+                    //if(ready2)this.reArrange(cont,slot2);
+                });
+            }
+            var old:JQuery = this.view.children();
+            console.log(newV);
+            newV.removeClass('out');
+            newV.addClass('in');
+            newV.appendTo(this.view);
+            old.addClass('out');
+
+            return old;
+        }
+
+      showView5(newV:JQuery):JQuery{
+            var cont:JQuery= this.view;
+          var w:number = cont.width();
+          var old:JQuery = cont.children();
+          var slot1=$('<div>').addClass('slot sl1').width(w).css('float','left').append(old);
+          var slot2=$('<div>').addClass('slot sl2').width(w).css('float','left');
+
+
 
           var ready1:boolean;
           var ready2:boolean;
@@ -54,16 +75,24 @@ module uplight{
          }
             //console.log(w);
            // var slider:JQuery=$('<div>').width(w*2+30).append(old).append(newV).appendTo(cont);
-          var slider:JQuery=$('<div>').width(w*2+30).append(slot1).append(slot2).appendTo(cont);
+          var wind:JQuery = $('<div>').addClass('wind').appendTo(cont).width(w).css('overflow','auto');
+          var slider:JQuery=$('<div>').width(w*2+30).append(slot1).append(slot2).appendTo(wind);
+
             setTimeout(()=>{
-                cont.animate({scrollLeft:w},()=>{
-                    slot1.detach();
-                    slot2.appendTo(cont);
-                    slot2.css('width','auto');
-                    slider.detach();
-                    cont.scrollLeft(0);
+                wind.animate({scrollLeft:w},()=>{
+                   // slot1.detach();
+                    //slot2.appendTo(cont);
+                   // slot2.css('width','auto');
+                    //slider.detach();
+                   // cont.scrollLeft(0);
                     ready2= true;
-                    if(ready1)this.reArrange(cont,slot2);
+                    if(ready1){
+                        wind.detach();
+                        cont.append(slot2.children());
+
+                       // this.reArrange(cont,slot2);
+                    }
+
 
                 });
             },50)

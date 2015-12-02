@@ -53,7 +53,9 @@ module uplight {
             if(this.isHiddenMenu)this.showMenu();
             else this.hideMenu();
         }
+        private R:Registry
         constructor(private view:JQuery,private conn:uplight.Connector,private model:uplight.Model) {
+            this.R= Registry.getInstance();
             this.menu=$('#Menu');
             this.menu.find('[data-id=btnClose]').click(()=>this.hideMenu());
             this.listP = this.view.find( '[data-id=listP]:first');
@@ -73,6 +75,10 @@ module uplight {
                 var out: string = '';
                 var ar = cats
                 for (var i = 0, n = ar.length; i < n; i++)  for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#category/'+ar[i].id+'/'+ar[i].label+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+
+
+
+
                 this.listC.html(out);
                })
 
@@ -81,8 +87,11 @@ module uplight {
               // console.log(res);
              var out='';
               var ar = u_pages
-            console.log(u_pages);
+
               for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#page/'+ar[i].id+'/'+ar[i].name+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].name + '</a>';
+            var pos:VOGeo = this.R.getSettings('googlemap');
+
+            if(pos) out+= '<a class="u-brand list-group-item" href="#gmap"><span class="fa fa-map-marker"></span> Google map directions</a>';
                this.listP.html(out);
 
          //  });

@@ -7,6 +7,7 @@ var uplight;
             this.view = view;
             this.conn = conn;
             this.model = model;
+            this.R = uplight.Registry.getInstance();
             this.menu = $('#Menu');
             this.menu.find('[data-id=btnClose]').click(function () { return _this.hideMenu(); });
             this.listP = this.view.find('[data-id=listP]:first');
@@ -36,9 +37,11 @@ var uplight;
             // console.log(res);
             var out = '';
             var ar = u_pages;
-            console.log(u_pages);
             for (var i = 0, n = ar.length; i < n; i++)
                 out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].name + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].name + '</a>';
+            var pos = this.R.getSettings('googlemap');
+            if (pos)
+                out += '<a class="u-brand list-group-item" href="#gmap"><span class="fa fa-map-marker"></span> Google map directions</a>';
             this.listP.html(out);
             //  });
             //
@@ -129,4 +132,4 @@ var uplight;
     })();
     uplight.Menu = Menu;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=menu.js.map
+//# sourceMappingURL=Menu.js.map

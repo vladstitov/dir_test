@@ -38,6 +38,9 @@ $theme = $settings->theme;
             padding: 20px;
             border-radius: 10px;
         }
+        #PageBody img.sel-img{
+            border: thin solid khaki;
+        }
         .umsg{
             position: absolute;
             z-index: 2000;

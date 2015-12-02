@@ -27,7 +27,7 @@ var uplight;
             this.url = 'https://www.google.com/maps/embed/v1/';
             this.type = 'view';
             container.load('htms/mobile/GoogleMapMobile.htm', function () { return _this.init(); });
-            this.data = uplight.Registry.getInstance().getSettings('gpos');
+            this.data = uplight.Registry.getInstance().getSettings('googlemap');
             this.geo = this.getGeoById(1);
             // this.view = this.createView();
         }

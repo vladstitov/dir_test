@@ -174,12 +174,14 @@ module uplight {
                     this.menu.showSearch();
                     break;
                 case '#Menu':
+                    this.menu.showMenu();
                     break;
                 case '#logo':
                     this.showView(this.frontPage.getView());
                     break;
                 default:
-                    this.showView(this.frontPage.getView());
+                    this.menu.showMenu();
+                   // this.showView(this.frontPage.getView());
                     break;
             }
 

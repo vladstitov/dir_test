@@ -51,9 +51,7 @@ module uplight{
         }
         constructor(private container:JQuery){
             container.load('htms/mobile/GoogleMapMobile.htm',()=>this.init());
-
-
-            this.data=Registry.getInstance().getSettings('gpos');
+            this.data=Registry.getInstance().getSettings('googlemap');
             this.geo  = this.getGeoById(1);
             // this.view = this.createView();
         }

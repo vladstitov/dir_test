@@ -142,7 +142,6 @@ module uplight{
         content:JQuery
         constructor(private view:JQuery){
             this.R=RegA.getInstance();
-
             view.find('[data-id=btnCloseT]:first:first').click(()=>this.hide());
 
             this.editor = new nicEditor({ fullPanel: true });

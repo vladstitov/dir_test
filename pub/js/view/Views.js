@@ -25,13 +25,29 @@ var uplight;
             slot.detach();
         };
         Transition.prototype.showView = function (newV) {
-            var _this = this;
+            this.showView5(newV);
+            return;
+            if (jQuery.type(newV) == 'string') {
+                newV = $('<div>').load(newV, function () {
+                    newV.removeClass('in');
+                    //ready1= true;
+                    //if(ready2)this.reArrange(cont,slot2);
+                });
+            }
+            var old = this.view.children();
+            console.log(newV);
+            newV.removeClass('out');
+            newV.addClass('in');
+            newV.appendTo(this.view);
+            old.addClass('out');
+            return old;
+        };
+        Transition.prototype.showView5 = function (newV) {
             var cont = this.view;
-            var old = cont.children().first();
-            cont.children().detach();
             var w = cont.width();
-            var slot1 = $('<div>').addClass('slot').width(w).css('float', 'left').append(old);
-            var slot2 = $('<div>').addClass('slot').width(w).css('float', 'left');
+            var old = cont.children();
+            var slot1 = $('<div>').addClass('slot sl1').width(w).css('float', 'left').append(old);
+            var slot2 = $('<div>').addClass('slot sl2').width(w).css('float', 'left');
             var ready1;
             var ready2;
             if (jQuery.type(newV) == 'string')
@@ -46,17 +62,20 @@ var uplight;
             }
             //console.log(w);
             // var slider:JQuery=$('<div>').width(w*2+30).append(old).append(newV).appendTo(cont);
-            var slider = $('<div>').width(w * 2 + 30).append(slot1).append(slot2).appendTo(cont);
+            var wind = $('<div>').addClass('wind').appendTo(cont).width(w).css('overflow', 'auto');
+            var slider = $('<div>').width(w * 2 + 30).append(slot1).append(slot2).appendTo(wind);
             setTimeout(function () {
-                cont.animate({ scrollLeft: w }, function () {
-                    slot1.detach();
-                    slot2.appendTo(cont);
-                    slot2.css('width', 'auto');
-                    slider.detach();
-                    cont.scrollLeft(0);
+                wind.animate({ scrollLeft: w }, function () {
+                    // slot1.detach();
+                    //slot2.appendTo(cont);
+                    // slot2.css('width','auto');
+                    //slider.detach();
+                    // cont.scrollLeft(0);
                     ready2 = true;
-                    if (ready1)
-                        _this.reArrange(cont, slot2);
+                    if (ready1) {
+                        wind.detach();
+                        cont.append(slot2.children());
+                    }
                 });
             }, 50);
             return slot2;
