@@ -1,5 +1,5 @@
 <?php
-define('DATA','../../data/');
+define('DATA','../data/');
 session_start();
 
 $get=$_GET;
