@@ -3,19 +3,19 @@ class DbConnector{
     var  $dbpdo;
 	var $stmt;
 	var $file = 'directories.db';
-	var $folder ='../../data/';
-	var $arch ='../../data/arch/';
+	//var $folder ='../data/';
+	var $arch ='../data/arch/';
 
 
 	public function backup(){
 			$date = date("m-d-y");
-			return copy($this->folder.$this->file,$this->arch.$date.$this->file);
+			return copy(DATA.$this->file,DATA.'arch/'.$date.$this->file);
 
 	}
 
 
 	public function db(){
-			if(!$this->dbpdo)$this->dbpdo=new PDO('sqlite:'.$this->folder.$this->file);
+			if(!$this->dbpdo)$this->dbpdo=new PDO('sqlite:'.DATA.$this->file);
 		return $this->dbpdo;
 	}
 

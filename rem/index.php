@@ -17,7 +17,7 @@ switch(array_shift($a)){
 	case 'get_menu':
 		$out->result='success';
 		$out->type='menu';
-		$xml=simplexml_load_file('../data/menu.xml');
+		$xml=simplexml_load_file('data/menu.xml');
 		$items=array();
 		foreach($xml->children() as $node){
 			$item=new stdClass();
@@ -31,7 +31,7 @@ switch(array_shift($a)){
 		break;
 	case 'get_settings':
 		header('Content-type: application/json');
-		$out->data=json_decode(file_get_contents('../data/d1920.json'));
+		$out->data=json_decode(file_get_contents('data/d1920.json'));
 		$out->result='success';
 		$out->type='settings';
 		$result=json_encode($out);

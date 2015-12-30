@@ -1,5 +1,5 @@
 <?php
-define('DATA','../../data');
+define('DATA','../data');
 session_start();
 if(isset($_POST['credetials'])){
 	$cred = $_POST['credetials'];
@@ -24,7 +24,7 @@ if(isset($_POST['credetials'])){
 		if($res){
 			$_SESSION['directories_user']=$res->username;
 			$_SESSION['directories_role']=$res->role;
-			$_SESSION['directories_folder']=$res->folder;			
+			//$_SESSION['directories_folder']=$res->folder;
 			$out->success='loggedin';
 			if(!file_exists(DATA.'/bk'))  mkdir(DATA.'/bk', 0777, true);
 			copy($filename,DATA.'/bk/'.date('j-m-y_h-i-s').'_'.$res->usersid.'.db');

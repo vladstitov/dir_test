@@ -1,6 +1,6 @@
 ﻿<?php
 session_start();
-define('DATA','../data');
+define('DATA','data');
 $kiosk_id=0;
 $sett_file= 'settings_kiosks.json';
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));

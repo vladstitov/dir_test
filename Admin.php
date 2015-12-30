@@ -1,9 +1,13 @@
 ﻿<?
 session_start();
+define('DATA','data');
 if(!isset($_SESSION['directories_user'])){
 	 echo file_get_contents('DirLogin.html');
 	  exit;
 }
+
+$settings = json_decode(file_get_contents(DATA.'/settings_kiosks.json'));
+$theme = $settings->theme;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,9 +21,12 @@ if(!isset($_SESSION['directories_user'])){
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <link href="js/lists/reset.css" rel="stylesheet" type="text/css"/>
-
-
+    <link href="<?= $theme; ?>" rel="stylesheet" />
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
+    <script>
+        var u_admin=<?= file_get_contents(DATA.'/admin.json'); ?>
+
+    </script>
 
    <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
 
@@ -27,6 +34,13 @@ if(!isset($_SESSION['directories_user'])){
 <title>Interactive Directories Admin</title>
 
     <style>
+        #PageBody .page-container {
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #PageBody img.sel-img{
+            border: thin solid khaki;
+        }
         .umsg{
             position: absolute;
             z-index: 2000;
@@ -37,6 +51,9 @@ if(!isset($_SESSION['directories_user'])){
 
         }
 
+        .ulist>ul>li.selected{
+            background-color: khaki;
+        }
         .abs{
             position:absolute;
         }
@@ -61,7 +78,6 @@ if(!isset($_SESSION['directories_user'])){
         #Message{
             position: relative;
             z-index: 100;
-
         }
         #Message>div{
             background-color:#FFEFD5;
@@ -81,21 +97,40 @@ if(!isset($_SESSION['directories_user'])){
         .disabled{
             opacity: 0.5;
         }
-        .breadcrumb li{
-            cursor: pointer;
+        .pagenav{
+            margin: 10px;
+        }
+        body>hr{
+            margin: 5px;
+        }
+        .page-heading>*{
+            display: inline-block;
         }
 
-        .breadcrumb li.active{
-            cursor: auto;
+        .pagenav>ul{
+            margin-left: 20px;
         }
-        .breadcrumb li.active:hover{
-            text-decoration: none;
-        }
-        .breadcrumb li:hover{
+
+        .pagenav>ul>li{
+            display: inline;
+            cursor: pointer;
             text-decoration: underline;
         }
+        .pagenav li.active{
+           cursor: auto;
+            text-decoration:none;
+        }
+
+        .pagenav>ul>li+li:before {
+            padding: 0 5px;
+            color: #ccc;
+            content: "/\00a0";
+        }
+
+
 
     </style>
+
 </head>
 <body>
 <div id="adminHeader" >
@@ -110,7 +145,8 @@ if(!isset($_SESSION['directories_user'])){
 </div>
 <hr/>
     <div id="error"></div>
-    <div id="content" class="container">
+
+    <div id="content" class="">
     </div>
 <!-------------------------pREVIEW kIOSK----------------------------------------------------------------------->
 <?
@@ -153,15 +189,59 @@ if(!isset($_SESSION['directories_user'])){
 <link href="js/libs/font-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="js/libs/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <!---->
-
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUaQFpM8aGgiocMDRcPzH66FKx5rPH1q0"></script>
+<script type="text/javascript" src="js/gmap/GmapCtr.js"></script>
 <script type="text/javascript" src="js/libs/underscore-min.js"></script>
 <script type="text/javascript" src="js/libs/nicEdit.js"></script>
 <script type="text/javascript" src="js/libs/Chart.js"></script>
 <!--<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->
 <!---->
 
+<script src="js/admin/com/Utils.js"></script>
+<script type="text/javascript" src="js/admin/RegA.js"></script>
+<script type="text/javascript" src="js/admin/net.js"></script>
+<script type="text/javascript" src="js/admin/models.js"></script>
+<script type="text/javascript" src="js/admin/com/GalleryPreview.js"></script>
+<script type="text/javascript" src="js/admin/com/GalleryEditor.js"></script>
+<script type="text/javascript" src="js/admin/screen/SettingsKiosks.js"></script>
+<!--<script type="text/javascript" src="js/admin/screen/RestartKiosk.js"></script>-->
+<script type="text/javascript" src="js/admin/screen/AttractLoopEdit.js"></script>
 
-<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoryForm.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoryListing.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoryList.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoryInListing.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoriesList.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoryNotListing.js"></script>
+<script type="text/javascript" src="js/admin/categories/CategoriesManager.js"></script>
+
+<script type="text/javascript" src="js/admin/screen/LabelsManager.js"></script>
+
+<script type="text/javascript" src="js/admin/destinations/DestinationsList.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsCategory.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsForm.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DestinationsController.js"></script>
+<script type="text/javascript" src="js/admin/destinations/DetailsImages.js"></script>
+
+<script type="text/javascript" src="js/admin/etc/ImportExport.js"></script>
+
+
+
+<script type="text/javascript" src="js/admin/etc/DeviceData.js"></script>
+<script type="text/javascript" src="js/admin/etc/KioskChart.js"></script>
+<script type="text/javascript" src="js/admin/etc/TopSearches.js"></script>
+<script type="text/javascript" src="js/admin/etc/Statistics.js"></script>
+
+
+<script type="text/javascript" src="js/admin/etc/KiosksManager.js"></script>
+
+<script type="text/javascript" src="js/admin/info/InfoPagesEditor.js"></script>
+<script type="text/javascript" src="js/admin/info/FrontPageEditor.js"></script>
+
+<script type="text/javascript" src="js/admin/views/Menu.js"></script>
+<script type="text/javascript" src="js/admin/views/Navigation.js"></script>
+
+<script type="text/javascript" src="js/admin/DirsAdmin.js"></script>
 
 
     </body>
