@@ -1,5 +1,6 @@
 <?
 session_start();
+require 'cl/MyDB.php';
 class Restore{
 	function process($a){
 		switch (array_shift($a)) {
@@ -27,7 +28,7 @@ class Restore{
 		if(!$email) {
 			return 'ERROR,No email';
 		}
-		$db =  new MyConnector(0);
+		$db =  new MyDB();
 		$sql='SELECT username,password FROM users WHERE email=?';
 		$res = $db->queryA($sql, array($email));
 		if($res && count($res)){
@@ -47,20 +48,22 @@ class Restore{
 		if(!$email) {
 			return 'ERROR,No email';
 		}
-		$db =  new MyConnector(0);
+		$db =  new MyDB();
 
 		$sql='SELECT username FROM users WHERE email=?';
+
 		$res = $db->queryA($sql, array($email));
 		if($res && count($res)){
-			$res = $res[0];		
-			$index = $res['username'];		
-			$username = $this->getValue($index,$db);			
+			$res = $res[0];
+			$username = $res['username'];
+			//$username = $this->getValue($index,$db);
 			if(!$username) return 'ERROR,no_value_for,'.$email;
 			$to= $email;
 			 $subject= 'Username restore ';
 			 $message ='Your username is: '.$username;
 			 $headers = 'From: admin@front-desk.ca' . "\r\n" . 'Reply-To: admin@front-desk.ca' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-			mail($to, $subject, $message,$headers);	
+			if($_SERVER['SERVER_NAME']!=='localhost')	mail($to, $subject, $message,$headers);
+
 				
 				$out->success='username_sent_to';
 				$out->result=$email;	
@@ -81,21 +84,24 @@ class Restore{
 			return 'ERROR,No email';
 		}
 		$out=new stdClass();
-		$usernameS = md5($username);
-		$db =  new MyConnector(0);
-		$sql='SELECT pass,email FROM users WHERE username=?';
-		$res = $db->queryA($sql, array($usernameS));		
+
+		$db =  new MyDB();
+		$sql='SELECT password,email FROM users WHERE username=?';
+		$res = $db->queryA($sql, array($username));
+
+		//return $username;//$db->getRows('SELECT * FROM users');
+
 		if($res && count($res)){
 			$res= $res[0];
-			$pass = $res['pass'];
+			$password = $res['password'];
 			$email = $res['email'];		
-			$password = $this->getValue($pass,$db);//$db->getField("SELECT value FROM extra WHERE index='$pass'");
+			//$password = $this->getValue($pass,$db);//$db->getField("SELECT value FROM extra WHERE index='$pass'");
 			if(!$password) return 'ERROR,no_value_for,'.$username;
 			$to= $email;
 			 $subject= 'Password restore for '.$username;
 			 $message ='Your password is: '.$password;
 			 $headers = 'From: admin@front-desk.ca' . "\r\n" . 'Reply-To: admin@front-desk.ca' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-				mail($to, $subject, $message,$headers);
+			if($_SERVER['SERVER_NAME']!=='localhost') mail($to, $subject, $message,$headers);
 
 				$out->success='password_sent_to';				
 				$out->result=$email.$password;
@@ -110,7 +116,7 @@ class Restore{
 	}
 
 	private function getUserId(){
-		return Login::getId();
+		return '';
 	}
 	function log($log){
 		error_log("\r\n ".date("Y-m-d H:i:s").'  '.$log,3,'../logs/restore_'.$this->getUserId().'.log');

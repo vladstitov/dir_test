@@ -4,6 +4,7 @@
 ///<reference path='typing/jquery.d.ts' />
 ///<reference path='typing/underscore.d.ts' />
 ///<reference path='Utils.ts' />
+///<reference path='Forms.ts' />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }

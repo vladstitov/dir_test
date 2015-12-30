@@ -28,9 +28,11 @@
 
        <script type="text/javascript">
 		      require(['js/Utils'],function(){
-		         require(['js/RestorePassowrd'],function(){
-		           var login = new uplight.RestorePassowrd($('#RestoreUsername'),'login.restore.email_username','RestoreUsername');
-		            });
+                  require(['js/Forms'],function(){
+                         require(['js/RestorePassowrd'],function(){
+                           var login = new uplight.RestorePassowrd($('#RestoreUsername'),'Restore,restore.email_username','RestoreUsername');
+                            });
+                  });
 		        })
     </script>
 </div>
