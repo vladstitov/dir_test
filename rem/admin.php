@@ -1,5 +1,4 @@
 <?
-error_reporting(E_ALL);
 session_start();
 define('DATA','../data/');
 define('IMG','images/');
@@ -9,7 +8,6 @@ define('DETAILS_IMG','details/img/');
 define('PREFIX','../');
 define('PAGES','pages/');
 define('LOG','../log/');
-
 $admin_email='uplight.ca@gmail.com';
 if(!isset($_SESSION['directories_user'])){
 	echo 'please login';	
@@ -25,8 +23,7 @@ if(!isset($get['a'])) {
 	exit;
 }
 $a=explode('.',$get['a']);
-$result = false;
-
+$result = 0;
 
 switch(array_shift($a)){
 	case 'log_error':
@@ -109,7 +106,7 @@ switch(array_shift($a)){
 }
 
 
-if($result!==false){
+if($result){
 	if(is_string($result)) echo($result);
 	else{
 		header('Content-type: application/json');

@@ -11,10 +11,8 @@ var uplight;
             this.list = view.find('[data-id=list]:first');
             this.list.on(CLICK, 'a', function (evt) { return _this.onItemClick(evt); });
             this.view = view;
-            view.find('[data-id=btnCancel]:first').click(function () {
-                if (_this.onCancel)
-                    _this.onCancel();
-            });
+            view.find('[data-id=btnCancel]:first').click(function () { if (_this.onCancel)
+                _this.onCancel(); });
             view.find('[data-id=btnClose]:first').click(function () {
                 console.log('close');
                 if (_this.onClose)

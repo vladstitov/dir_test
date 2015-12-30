@@ -105,5 +105,9 @@ module uplight{
                 else  this.ind['password'].type='password';
             })
         }
+        onComplete(res:VOResult):void{
+
+            if(res.success=='loggedin')window.location.href=res.result;
+        }
     }
 }

@@ -29,9 +29,7 @@ var uplight;
             this.lblInfo = this.view.find('[data-id=lblInfo]:first');
             this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
                 _this.btnSave.prop('disabled', true);
-                setTimeout(function () {
-                    _this.btnSave.prop('disabled', false);
-                }, 3000);
+                setTimeout(function () { _this.btnSave.prop('disabled', false); }, 3000);
                 if (_this.onSave)
                     _this.onSave(_this.current);
             });
@@ -75,9 +73,7 @@ var uplight;
             });
             this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
                 _this.btnSave.prop('disabled', true);
-                setTimeout(function () {
-                    _this.btnSave.prop('disabled', false);
-                }, 3000);
+                setTimeout(function () { _this.btnSave.prop('disabled', false); }, 3000);
                 _this.current.value = _this.tiValue.val();
                 if (_this.onSave)
                     _this.onSave(_this.current);
@@ -114,11 +110,7 @@ var uplight;
             this.container = container;
             this.dataid = 'settings_kiosks';
             // console.log('SettingsEdit');
-            container.load('htms/admin/SettingsEdit.htm', function () {
-                setTimeout(function () {
-                    _this.init();
-                }, 50);
-            });
+            container.load('htms/admin/SettingsEdit.htm', function () { setTimeout(function () { _this.init(); }, 50); });
             this.R = uplight.RegA.getInstance();
         }
         SettingsKiosks.prototype.init = function () {

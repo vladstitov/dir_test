@@ -22,7 +22,7 @@ class Login{
 
 				//$_SESSION['directories_folder']=$res->folder;
 				$out->success = 'loggedin';
-				$out->result='index';
+				$out->result='Admin';
 				return $out;
 			}
 			$out->error = 'wrong';
@@ -40,11 +40,22 @@ class Login{
 if(isset($_GET['a'])){
 	$a= explode('.',$_GET['a']);
 	$res=0;
-	if(array_shift($a)==='login'){
-		require('cl/MyDB.php');
-		$login = new Login();
-		$res = $login->process($a);
+	switch(array_shift($a)){
+		case 'login':
+			require('cl/MyDB.php');
+			$login = new Login();
+			$res = $login->process($a);
+			break;
+		case 'logout':
+			$_SESSION['directories_user']=0;
+			$_SESSION['directories_role'] = 0;
+			$_SESSION['directories_user_id']=0;
+			$res = new stdClass();
+			$res->success='logout';
+			$res->result='Login';
+			break;
 	}
+
 	if($res){
 		echo is_string($res)?$res:json_encode($res);
 	}

@@ -13,16 +13,12 @@ var uplight;
             this.haveChanges = true;
             this.view = form;
             this.R = uplight.RegA.getInstance();
-            this.view.find('[data-id=btnClose]').click(function () {
-                if (_this.onClose)
-                    _this.onClose();
-            });
+            this.view.find('[data-id=btnClose]').click(function () { if (_this.onClose)
+                _this.onClose(); });
             this.btnSave = this.view.find('[data-id=btnSave]').click(function () {
                 var btn = _this.btnSave;
                 btn.prop('disabled', true);
-                setTimeout(function () {
-                    btn.prop('disabled', false);
-                }, 1500);
+                setTimeout(function () { btn.prop('disabled', false); }, 1500);
                 if (_this.onSave)
                     _this.onSave();
             });

@@ -43,9 +43,7 @@ var uplight;
         DestinationsController.prototype.onDrop = function () {
             var _this = this;
             if (confirm('You want to delete whole table tenats?'))
-                this.R.connector.dropTable('tenants').done(function () {
-                    _this.R.model.refreshData();
-                });
+                this.R.connector.dropTable('tenants').done(function () { _this.R.model.refreshData(); });
         };
         DestinationsController.prototype.hideForm = function () {
             this.breacrumb.clear();

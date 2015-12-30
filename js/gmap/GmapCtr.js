@@ -120,7 +120,13 @@ var uplight;
                     featureType: 'poi',
                     elementType: "labels" /*,
                     stylers: [ { visibility: 'off' }]*/
-                }
+                } /*,{
+                    featureType: ' poi.business',
+                    stylers: [ { visibility: 'off' }]
+                }*/ /*,
+                { featureType: 'poi.business',
+                    stylers: [ { visibility: 'off' }]
+                }*/
             ];
             map.setOptions({ styles: styles });
             this.handleInfoWindow();
@@ -139,9 +145,7 @@ var uplight;
             google.maps.event.addListener(streetView, 'visible_changed', function () {
                 clearTimeout(_this.striitViewTimer);
                 if (streetView.visible)
-                    setTimeout(function () {
-                        streetView.setVisible(false);
-                    }, 20000);
+                    setTimeout(function () { streetView.setVisible(false); }, 20000);
             });
         };
         GmapCtr.prototype.handleInfoWindow = function () {

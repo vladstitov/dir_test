@@ -97,6 +97,7 @@ var uplight;
         };
         DetailsCategory.prototype.renderCats = function (cats, selected) {
             var out = '';
+            // out += '<li ' +( selected?'class="selected" >':'>')+ cats[i].label + '<input class="unit" type="checkbox" value="' + cats[i].catid + '" ' + (selected?'checked="true"':'')+'/></li>';
             for (var i = 0, n = cats.length; i < n; i++) {
                 out += '<div><input type="checkbox" value="' + cats[i].id + '" ' + (selected ? 'checked="true"' : '') + '/><label>' + cats[i].label + '</label></div>';
             }

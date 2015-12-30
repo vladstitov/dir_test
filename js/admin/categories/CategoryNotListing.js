@@ -31,9 +31,7 @@ var uplight;
             listitems.sort(function (a, b) {
                 return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
             });
-            $.each(listitems, function (idx, itm) {
-                mylist.append(itm);
-            });
+            $.each(listitems, function (idx, itm) { mylist.append(itm); });
             return listitems.length;
         };
         CategoryNotListing.prototype.onRemoved = function (elms) {

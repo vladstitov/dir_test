@@ -36,7 +36,18 @@ var uplight;
         DestinationsList.prototype.init = function () {
             var _this = this;
             this.listContainer = this.view.find('.nano:first');
-            this.thead = $('<thead>').html('<tr class="item-header">' + '<th class="item-id">id</th>' + '<th class="item-name">Name</th>' + '<th class="item-unit">Unit</th>' + '<th class="item-categories">Categories</th>' + '<th class="">Short Info</th>' + '<th title="Thumbnail" class="">Thumb</th>' + '<th class="">Info Table</th>' + '<th title="Amount of Images" class="">Images</th>' + '<th title="Keywords amount" class="">KWs</th>' + '<th title="Unique Identifier" class="item-uid">UID</th>' + '</tr>');
+            this.thead = $('<thead>').html('<tr class="item-header">' +
+                '<th class="item-id">id</th>' +
+                '<th class="item-name">Name</th>' +
+                '<th class="item-unit">Unit</th>' +
+                '<th class="item-categories">Categories</th>' +
+                '<th class="">Short Info</th>' +
+                '<th title="Thumbnail" class="">Thumb</th>' +
+                '<th class="">Info Table</th>' +
+                '<th title="Amount of Images" class="">Images</th>' +
+                '<th title="Keywords amount" class="">KWs</th>' +
+                '<th title="Unique Identifier" class="item-uid">UID</th>' +
+                '</tr>');
             this.table = $('<table>').addClass('table table-striped').append(this.thead).appendTo(this.listContainer);
             this.list = $('<tbody>').appendTo(this.table);
             // this.listContainer =$('<div>').addClass('list-container').append(this.list).appendTo(this.table);
@@ -77,7 +88,18 @@ var uplight;
             this.dispatcher.triggerHandler(this.SELECTED, dest);
         };
         DestinationsList.prototype.renderItem = function (item, i) {
-            return '<tr class="item" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="name">' + item.name + '</td>' + '<td class="unit">' + item.unit + '</td>' + '<td class="cats">' + (item.catsStr ? item.catsStr.join(', ') : '&nbsp') + '</td>' + '<td class="small"><div>' + item.info + '</div></td>' + '<td class="tmb">' + (item.tmb ? '<img src="' + item.tmb + '" />' : '') + '</td>' + '<td class="more"><div>' + item.more + '</div></td>' + '<td class="imgs">' + (item.imgs ? (item.imgs.split(',').length + '') : '&nbsp') + '</td>' + '<td class="kws">' + (item.kws ? (item.kws.split(',').length + '') : '&nbsp') + '</td>' + '<td title="' + item.uid + '" class="uid">' + (item.uid || '&nbsp') + '</td>' + '</tr>';
+            return '<tr class="item" data-i="' + i + '" data-id="' + item.id + '" >' +
+                '<td class="id">' + item.id + '</td>' +
+                '<td class="name">' + item.name + '</td>' +
+                '<td class="unit">' + item.unit + '</td>' +
+                '<td class="cats">' + (item.catsStr ? item.catsStr.join(', ') : '&nbsp') + '</td>' +
+                '<td class="small"><div>' + item.info + '</div></td>' +
+                '<td class="tmb">' + (item.tmb ? '<img src="' + item.tmb + '" />' : '') + '</td>' +
+                '<td class="more"><div>' + item.more + '</div></td>' +
+                '<td class="imgs">' + (item.imgs ? (item.imgs.split(',').length + '') : '&nbsp') + '</td>' +
+                '<td class="kws">' + (item.kws ? (item.kws.split(',').length + '') : '&nbsp') + '</td>' +
+                '<td title="' + item.uid + '" class="uid">' + (item.uid || '&nbsp') + '</td>' +
+                '</tr>';
         };
         DestinationsList.prototype.renderDestinations = function () {
             this.selectedEl = null;

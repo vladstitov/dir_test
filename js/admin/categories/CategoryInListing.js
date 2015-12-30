@@ -16,9 +16,7 @@ var uplight;
             this.R.dispatcher.on(this.R.CATEGORY_ADD_SELECTED, function (evt, elms) { return _this.onAddSelected(elms); });
             this.total = view.find('[data-id=total]:first');
             this.btnDel = view.find('[data-id=btnDel]').on(CLICK, function () { return _this.onDelClicked(); });
-            this.btnReset = view.find('[data-id=btnReset]').on(CLICK, function () {
-                _this.R.dispatcher.triggerHandler(_this.R.CATEGORY_REST);
-            });
+            this.btnReset = view.find('[data-id=btnReset]').on(CLICK, function () { _this.R.dispatcher.triggerHandler(_this.R.CATEGORY_REST); });
         }
         CategoryInListing.prototype.onDelClicked = function () {
             var _this = this;
@@ -80,9 +78,7 @@ var uplight;
             listitems.sort(function (a, b) {
                 return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
             });
-            $.each(listitems, function (idx, itm) {
-                mylist.append(itm);
-            });
+            $.each(listitems, function (idx, itm) { mylist.append(itm); });
             return listitems.length;
         };
         return CategoryInListing;

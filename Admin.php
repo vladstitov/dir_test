@@ -1,10 +1,12 @@
 ﻿<?
 session_start();
 define('DATA','data');
-if(!isset($_SESSION['directories_user'])){
-	 echo file_get_contents('DirLogin.html');
-	  exit;
+if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']===0){
+	  header("Location: Login");
+       die();
 }
+$cfg = 0;
+if(file_exists(DATA.'/config.json')) $cfg = json_decode(file_get_contents(DATA.'/config.json'));
 
 $settings = json_decode(file_get_contents(DATA.'/settings_kiosks.json'));
 $theme = $settings->theme;
@@ -24,8 +26,8 @@ $theme = $settings->theme;
     <link href="<?= $theme; ?>" rel="stylesheet" />
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
     <script>
-        var u_admin=<?= file_get_contents(DATA.'/admin.json'); ?>
-
+        var u_admin=<?= file_get_contents(DATA.'/admin.json'); ?>;
+        var u_cfg=<?= $cfg?json_encode($cfg):0; ?>;
     </script>
 
    <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->

@@ -124,9 +124,7 @@ var uplight;
                 return;
             var btn = this.btnSave;
             btn.prop('disabled', true);
-            setTimeout(function () {
-                btn.prop('disabled', false);
-            }, 1500);
+            setTimeout(function () { btn.prop('disabled', false); }, 1500);
             this.R.model.saveCategory(vo).done(function (res) { return _this.onSaveResult(res); });
         };
         CategoryForm.prototype.onCategorySelected = function (cat) {

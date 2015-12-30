@@ -176,6 +176,7 @@ var uplight;
         };
         KiosksChart.prototype.convertClicks = function (ar) {
             var out = [];
+            // console.log(ar);
             for (var i = 0, n = ar.length; i < n; i++) {
                 var date = new Date(ar[i] * 1000);
                 var day = date.getDate();

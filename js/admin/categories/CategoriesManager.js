@@ -9,9 +9,7 @@ var uplight;
             this.R = uplight.RegA.getInstance();
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('htms/admin/CategoriesManager.htm', function () {
-                _this.init();
-            });
+            container.load('htms/admin/CategoriesManager.htm', function () { _this.init(); });
         }
         CategoriesManager.prototype.show = function () {
             this.isVisible = true;
@@ -31,9 +29,7 @@ var uplight;
                 _this.show();
             };
             this.list = new uplight.CategoriesList($('#CategoriesList'));
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
-                _this.onModelChanged();
-            });
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () { _this.onModelChanged(); });
             this.btnAdd = $('#CategoriesView [data-id=btnAdd]:first').on(CLICK, function () { return _this.onAddClicked(); });
             this.btnEdit = $('#CategoriesView [data-id=btnEdit]:first').on(CLICK, function () { return _this.onEditClicked(); });
             this.btnDel = $('#CategoriesView [data-id=btnDel]').on(CLICK, function () { return _this.onDelClicked(); });

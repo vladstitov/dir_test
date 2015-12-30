@@ -16,9 +16,7 @@ var uplight;
             table.append(this.list);
             this.listView = $('#CategoriesList-container');
             this.R = uplight.RegA.getInstance();
-            this.R.model.dispatcher.on(this.R.model.CHANGE, function () {
-                _this.onModelChanged();
-            });
+            this.R.model.dispatcher.on(this.R.model.CHANGE, function () { _this.onModelChanged(); });
             if (this.R.model.getCategories())
                 this.renderList();
             this.list.on(CLICK, 'tr', function (evt) { return _this.onClick($(evt.currentTarget)); });
@@ -73,7 +71,14 @@ var uplight;
             if (item.dests)
                 total = item.dests.length;
             //if (this.isChange) return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" contentEditable="true">' + item.label + '</div></li>';
-            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' + '<td class="id">' + item.id + '</td>' + '<td class="icon"><span class="' + item.icon + '"></td>' + '<td >' + item.label + '</td>' + '<td >' + item.sort + '</td>' + '<td ><span class="' + enbl + '"></span></td>' + '<td >' + total + '</td>' + '</tr>';
+            return '<tr  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" >' +
+                '<td class="id">' + item.id + '</td>' +
+                '<td class="icon"><span class="' + item.icon + '"></td>' +
+                '<td >' + item.label + '</td>' +
+                '<td >' + item.sort + '</td>' +
+                '<td ><span class="' + enbl + '"></span></td>' +
+                '<td >' + total + '</td>' +
+                '</tr>';
             // return '<li class="uplight" data-id="' + item.catid + '"    ><div class="catname ' + (item.enable == 1 ? '' : ' disabled') + '" >' + item.label + '</div></li>';
         };
         return CategoriesList;

@@ -13,9 +13,7 @@ var uplight;
             var that = this;
             if (!this.R.model)
                 this.R.model = new uplight.DestinantionsModel();
-            container.load('htms/admin/CategoryListing.htm', function () {
-                that.init();
-            });
+            container.load('htms/admin/CategoryListing.htm', function () { that.init(); });
         }
         CategoryListing.prototype.init = function () {
             var _this = this;
@@ -51,9 +49,7 @@ var uplight;
             var _this = this;
             var btn = this.btnSave;
             btn.prop('disabled', true);
-            setTimeout(function () {
-                btn.prop('disabled', false);
-            }, 1500);
+            setTimeout(function () { btn.prop('disabled', false); }, 1500);
             var ids = this.inListing.getAllIds();
             var catid = this.inListing.getCatId();
             this.R.model.saveCategoryListing(catid, ids, function (res) { return _this.onSave(res); });

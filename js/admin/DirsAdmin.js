@@ -99,6 +99,7 @@ var uplight;
                     // this.content.hide();
                     this.attractLoop = new uplight.AttractLoopEdit(this.content);
                     this.content.show();
+                    // this.restartKiosks.restart();
                     break;
                 case '#Statistic':
                     // this.showPreview();
@@ -107,6 +108,7 @@ var uplight;
                     // this.content.hide();
                     this.statistics = new uplight.Statistics(this.content);
                     this.content.show();
+                    // this.restartKiosks.restart();
                     break;
                 case '#Info-Page':
                     // this.showPreview();
@@ -115,6 +117,7 @@ var uplight;
                     // this.content.hide();
                     this.infoPages = new uplight.InfoPagesManager(this.content);
                     this.content.show();
+                    // this.restartKiosks.restart();
                     break;
                 case '#Front-Pag':
                     if (this.R.current)
@@ -122,6 +125,7 @@ var uplight;
                     this.frontPageEditor = new uplight.FrontPageEditor(this.content);
                     this.frontPageEditor.appendTo(this.content);
                     this.content.show();
+                    // this.restartKiosks.restart();
                     break;
                 case '#Listing-V':
                     if (this.R.current)
@@ -187,9 +191,7 @@ var uplight;
             this.content = $('#content');
             this.message = $('<div>').attr('id', 'Message');
             this.messageText = $('<div>').appendTo(this.message);
-            this.btnFullView = this.preview.find('[data-id=btnFullView]').click(function () {
-                window.open(_this.previewUrl, "_blank");
-            });
+            this.btnFullView = this.preview.find('[data-id=btnFullView]').click(function () { window.open(_this.previewUrl, "_blank"); });
             $('#btnRestartKiosks').click(function () {
                 _this.R.confirm.show('Restart Kiosks', 'You want to restart kiosks?', function () {
                     _this.R.connector.restartKiosks().done(function (res) {
@@ -199,9 +201,7 @@ var uplight;
                         }
                         else
                             _this.R.msg('Server Error', $('#btnRestartKiosks'));
-                    }).fail(function () {
-                        alert('Communication error');
-                    });
+                    }).fail(function () { alert('Communication error'); });
                 });
             });
             if (window.location.hash == '')
@@ -209,8 +209,12 @@ var uplight;
             this.initThemes();
         };
         Admin.prototype.logout = function () {
-            this.R.connector.logout().done(function (res) {
-                window.location.reload();
+            $.get('rem/login.php?a=logout').done(function (r) {
+                var res = JSON.parse(r);
+                if (res.success == 'logout')
+                    window.location.href = res.result;
+                else
+                    window.location.reload();
                 console.log(res);
             });
         };

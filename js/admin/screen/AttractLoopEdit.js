@@ -276,9 +276,7 @@ var uplight;
         ChangeType.prototype.onSaveClick = function () {
             var _this = this;
             var btn = this.btnSave.addClass(DISABLED);
-            setTimeout(function () {
-                _this.btnSave.removeClass(DISABLED);
-            }, 1000);
+            setTimeout(function () { _this.btnSave.removeClass(DISABLED); }, 1000);
             if (this.onSave)
                 this.onSave(this.selectedItem);
         };

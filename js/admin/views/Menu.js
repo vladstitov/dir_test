@@ -18,9 +18,7 @@ var uplight;
             view.find('[data-id=btnMenu]:first').on(CLICK, function () {
                 _this.toggle();
             });
-            this.content.find('[data-id=btnClose]').click(function () {
-                _this.content.addClass('closed');
-            });
+            this.content.find('[data-id=btnClose]').click(function () { _this.content.addClass('closed'); });
         };
         AdminMenu.prototype.toggle = function () {
             if (this.content.hasClass('closed'))

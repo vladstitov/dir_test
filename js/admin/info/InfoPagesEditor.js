@@ -138,9 +138,7 @@ var uplight;
                 _this.btnSave.prop('disabled', true);
                 _this.iconsLibrary.hide();
                 _this.textEditor.saveClicked();
-                setTimeout(function () {
-                    _this.btnSave.prop('disabled', false);
-                }, 3000);
+                setTimeout(function () { _this.btnSave.prop('disabled', false); }, 3000);
                 if (_this.onSave)
                     _this.onSave();
             });

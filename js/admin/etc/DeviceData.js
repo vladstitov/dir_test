@@ -92,7 +92,15 @@ var uplight;
                 ip = obj.track.ip;
                 ping = obj.track.ping + ' ';
             }
-            return '<tr>' + '<td>' + obj.name + '</td>' + '<td><a target="_blank" href="' + obj.template + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' + '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' + '<td>' + ip + '</td>' + '<td>' + ping + '</td>' + '<td class="text-right">' + stsrtTime + '</td>' + '<td class="text-right">' + lastTime + '</td>' + '</tr>';
+            return '<tr>' +
+                '<td>' + obj.name + '</td>' +
+                '<td><a target="_blank" href="' + obj.template + '&mode=preview" ><span class="fa fa-external-link"></span></a></td>' +
+                '<td><span title="' + statusStr + '" class="status fa ' + cl + '" style="color:' + color + '">&nbsp</span></td>' +
+                '<td>' + ip + '</td>' +
+                '<td>' + ping + '</td>' +
+                '<td class="text-right">' + stsrtTime + '</td>' +
+                '<td class="text-right">' + lastTime + '</td>' +
+                '</tr>';
         };
         return DevicesData;
     })();

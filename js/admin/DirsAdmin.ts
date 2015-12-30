@@ -208,8 +208,10 @@ module uplight {
         }
 
         private logout():void{
-            this.R.connector.logout().done((res)=>{
-                window.location.reload();
+            $.get('rem/login.php?a=logout').done((r)=>{
+                var res:VOResult = JSON.parse(r);
+                if(res.success=='logout')window.location.href = res.result;
+               else  window.location.reload();
                 console.log(res);
                 });
         }

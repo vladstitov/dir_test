@@ -6,9 +6,7 @@ var uplight;
             var _this = this;
             this.headers = ['UID', 'Name', 'Unit', 'Info', 'Categories', 'Keywords', 'Table', 'Meta', 'Thumbnail', 'Images'];
             this.R = uplight.RegA.getInstance();
-            container.load('htms/admin/ImportExport.htm', function () {
-                _this.init();
-            });
+            container.load('htms/admin/ImportExport.htm', function () { _this.init(); });
         }
         ImportExport.prototype.init = function () {
             var _this = this;
@@ -71,7 +69,8 @@ var uplight;
             return '<thead><th>' + this.headers.join('</th><th>') + '</th></thead><tbody>';
         };
         ImportExport.prototype.renderItem = function (item, i, cats) {
-            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + cats + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.meta + '</td><td>' + item.tmb + '</td><td>' + item.imgs + '</td></tr>';
+            return '<tr data-i="' + i + '"><td>' + item.uid + '</td><td>' + item.name + '</td><td>' + item.unit + '</td><td>' + item.info + '</td><td>' + cats
+                + '</td><td>' + item.kws + '</td><td>' + item.more + '</td><td>' + item.meta + '</td><td>' + item.tmb + '</td><td>' + item.imgs + '</td></tr>';
         };
         /* private onDataComplete(ar:any[]): void {
                  this._data = ar;

@@ -35,7 +35,8 @@ var uplight;
             this.view.show('fast');
         };
         CategoryList.prototype.renderItem = function (item, i) {
-            return '<li  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" ><span class="' + item.icon + '"></span> <span class="name">' + item.label + '</span></li>';
+            return '<li  class="item ' + (item.enable == 1 ? '' : ' disabled') + '" data-i="' + i + '" data-id="' + item.id + '" ><span class="' + item.icon + '"></span> <span class="name">' + item.label +
+                '</span></li>';
         };
         CategoryList.prototype.onItemClick = function (el) {
             var i = el.data('i');

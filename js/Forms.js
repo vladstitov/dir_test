@@ -116,6 +116,10 @@ var uplight;
                     _this.ind['password'].type = 'password';
             });
         };
+        LoginForm.prototype.onComplete = function (res) {
+            if (res.success == 'loggedin')
+                window.location.href = res.result;
+        };
         return LoginForm;
     })(SimpleForm);
     uplight.LoginForm = LoginForm;
