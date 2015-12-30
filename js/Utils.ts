@@ -64,6 +64,11 @@ module uplight{
             return this.log(obj,url);
 
         }
+        emailError(obj):JQueryPromise<string>{
+            var url='?a=EMAIL';
+            return this.log(obj,url);
+
+        }
 
     }
 

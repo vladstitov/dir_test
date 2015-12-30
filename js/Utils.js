@@ -73,6 +73,10 @@ var uplight;
             var url = '?a=ERROR';
             return this.log(obj, url);
         };
+        Connector.prototype.emailError = function (obj) {
+            var url = '?a=EMAIL';
+            return this.log(obj, url);
+        };
         return Connector;
     })();
     uplight.Connector = Connector;
