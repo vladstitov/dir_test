@@ -27,7 +27,10 @@ $theme = $settings->theme;
     <script type="text/javascript" src="js/libs/jquery-2.1.0.min.js"></script>
     <script>
         var u_admin=<?= file_get_contents(DATA.'/admin.json'); ?>;
-        var u_cfg=<?= $cfg?json_encode($cfg):0; ?>;
+        <? echo 'var u_cfg='.($cfg?json_encode($cfg):0).';';
+        echo $_SESSION['directories_user'].$_SESSION['directories_user_id'];
+
+        ?>;
     </script>
 
    <!-- <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>-->

@@ -14,6 +14,10 @@ class TableEditor{
         switch($a[0]){
             case 'get_all':
                 $res = $this->db->getRows('SELECT '.$this->select.' FROM '.$this->table.$this->where);
+                if(!$res){
+                    $res= new stdClass();
+                    $res->success='nodata';
+                }
                 return $res;
                 break;
             case 'update':
