@@ -28,7 +28,7 @@ $theme = $settings->theme;
     <script>
         var u_admin=<?= file_get_contents(DATA.'/admin.json'); ?>;
         <? echo 'var u_cfg='.($cfg?json_encode($cfg):0).';';
-        echo $_SESSION['directories_user'].$_SESSION['directories_user_id'];
+        echo 'var U_id="'.$_SESSION['directories_user'].$_SESSION['directories_user_id'].'";';
 
         ?>;
     </script>
