@@ -20,6 +20,7 @@
 ///<reference path="screen/SettingsKiosks.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 ///<reference path="../gmap/GmapCtr.ts" />
+///<reference path="AdminsManage.ts" />
 var uplight;
 (function (uplight) {
     var Admin = (function () {
@@ -169,6 +170,14 @@ var uplight;
                     if (this.R.current)
                         this.R.current.destroy();
                     this.R.current = new uplight.GmapCtr(this.content);
+                    this.content.show();
+                    break;
+                case '#AdminsMan':
+                    this.content.trigger('DESTROY');
+                    this.content.empty();
+                    if (this.R.current)
+                        this.R.current.destroy();
+                    var admins = new uplight.AdminsManage(this.content);
                     this.content.show();
                     break;
                 default:

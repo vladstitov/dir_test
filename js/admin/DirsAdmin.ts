@@ -21,6 +21,7 @@
 ///<reference path="screen/SettingsKiosks.ts" />
 ///<reference path="screen/AttractLoopEdit.ts" />
 ///<reference path="../gmap/GmapCtr.ts" />
+///<reference path="AdminsManage.ts" />
 
 
 declare var u_admin:any;
@@ -160,6 +161,14 @@ module uplight {
                         this.R.current = new GmapCtr(this.content);
                         this.content.show();
                         break;
+                    case '#AdminsMan':
+                        this.content.trigger('DESTROY');
+                        this.content.empty();
+                        if(this.R.current)this.R.current.destroy();
+                        var admins = new AdminsManage(this.content);
+                        this.content.show();
+
+                        break;
                     default :
 
                         break
@@ -171,6 +180,8 @@ module uplight {
         btnFullView:JQuery;
         message:JQuery;
         messageText:JQuery;
+
+
         private init(): void {
             this.navigatiom = new Navigation($('#AdminNav'));
             this.R.confirm = new Confirm($('#Confirm'));

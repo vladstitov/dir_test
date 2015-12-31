@@ -5,20 +5,19 @@
     ///<reference path='typing/underscore.d.ts' />
     ///<reference path='Utils.ts' />
 
+
 module uplight{
     export class SimpleForm extends DisplayObject{
-
+        constructor(public $view,service:string,name?:string){
+            super($view,name);
+          this.conn =   new Connect(service,name);
+        }
         inputs:HTMLInputElement[];
         ind:_.Dictionary<HTMLInputElement>;
         $submit:JQuery;
-        conn:Connector;
+        conn:Connect;
         message:string='Form error';
-        constructor(public $view,service:string,name?:string){
-            super($view,name);
-            var ar:string[] = service.split(',');
-            if(ar.length===2)  this.conn = new Connector(ar[1],name,ar[0]);
-            else this.conn = new Connector(ar[0],name);
-        }
+        currentItem:any;
         init(){
             this. $view.find( "form" ).submit(function( evt ) { evt.preventDefault(); });
             var ar:HTMLInputElement[]=[];
@@ -35,6 +34,21 @@ module uplight{
         onInit():void{
 
         }
+
+        setTitle(title:string){
+                this.$view.find('[data-id=title]').text(title);
+        }
+
+        setData(data:any):void{
+            for(var str in data) if(this.ind[str]) this.ind[str].value = data[str];
+            this.currentItem = data;
+        }
+        clear(){
+            var ar = this.inputs
+            for(var i=0,n=ar.length;i<n;i++){
+                ar[i].value='';
+            }
+        }
         onSubmitClick():void{
             var valid = true;
             var ar = this.inputs;
@@ -44,6 +58,7 @@ module uplight{
                 if(ar[i].type=='checkbox') data[ar[i].name]=ar[i].checked;
                 else data[ar[i].name]=ar[i].value;
             }
+
             if(valid){
                 var btn:JQuery = this.$submit.prop('disabled',true);
                 setTimeout(function(){
@@ -65,16 +80,20 @@ module uplight{
             else this.onError(res)
         }
 
-        onRespond(s:string):void{
+        onRespond(s:any):void{
             var res:VOResult;
-            try{
-                res = JSON.parse(s);
-            }catch (e){
-                this.showMessage('Communication Error logged on server <br/> We will contact you soon');
-                this.conn.logError('EMAIL'+this.name+this.conn.service+'  '+s);
-                //  console.log(s);
-                return;
-            }
+           // console.log(s);
+            if(typeof s=='string'){
+                try{
+                    res = JSON.parse(s);
+                }catch (e){
+                    this.showMessage('Communication Error logged on server <br/> We will contact you soon');
+                    this.conn.logError('EMAIL'+this.name+this.conn.service+'  '+s);
+                    //  console.log(s);
+                    return;
+                }
+            }else res=s
+
             if(res) this.onResult(res);
         }
         send(obj){
@@ -82,7 +101,10 @@ module uplight{
         }
 
         onSubmit(data:any){
-            this.send(data);
+            if(this.currentItem){
+                for(var str in data)this.currentItem[str]=data[str];
+                this.send(this.currentItem);
+            }else  this.send(data);
         }
         timeout:number;
         showMessage(str:string){
@@ -93,6 +115,18 @@ module uplight{
 
 
     }
+    export class ModalForm extends SimpleForm{
+        constructor($view,service,name){
+            super($view,service,name);
+           var btn =  this.$view.find('[data-id=btnClose]').click(()=>this.onCloseClick());
+
+        }
+        onCloseClick():void{
+            this.hide();
+        }
+
+    }
+
 
     export class LoginForm extends SimpleForm{
         constructor(public $view,service:string,name?:string){

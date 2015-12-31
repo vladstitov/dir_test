@@ -28,16 +28,25 @@ module uplight{
         message:string;
     }
 
+    export class UItem{
+        ind:string;
+        val:string;
+        lbl:string;
+    }
 
-    export class Connector{
+    export class Connect{
         service:string = 'rem/index.php';
         logger:string = 'rem/logger.php';
         action:string;
         id:string;
-        constructor(action?:string,id?:string,service?:string ){
-            if(action)this.action= action;
-            if(service)this.service = 'rem/'+service+'.php';
+        constructor(service:string,id?:string ){
+            var ar:string[] = service.split(',');
+            if(ar.length==2){
+                this.service = 'rem/'+ar[0]+'.php';
+                this.action= ar[1];
+            }else this.action = ar[0];
             if(id)this.id=id;
+           // console.log('Connect service:'+service+' action: '+action);
 
         }
         post(obj:any,url?:string):JQueryPromise<string>{
@@ -45,8 +54,9 @@ module uplight{
             return  $.post(this.service+this.makeUrl(url),obj);
         }
         private makeUrl(url:string):string{
-            if(url)  url='?a='+url;
-            else  url='?a='+this.action;
+            if(!url) url='?a='+this.action;
+            else if(this.action)  url='?a='+this.action+'.'+url;
+            else  url='?a='+url;
             if(this.id)url+='&id='+this.id;
             return url;
         }
@@ -73,7 +83,6 @@ module uplight{
     }
 
    export class Registry{
-       static connector:Connector;
        static data:any;
        static settings:any;
    }
@@ -119,14 +128,6 @@ module uplight{
             this.onRemoved();
             return this;
         }
-        setData(data:any):DisplayObject{
-            this.data= data;
-            return this;
-        }
-        getData():any{
-            return this.data;
-        }
-
 
     }
 

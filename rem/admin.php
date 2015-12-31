@@ -72,6 +72,13 @@ switch(array_shift($a)){
 		if(!isset($get['url'])) die('ERROR 1');
 		$result = file_get_contents(PREFIX.$get['url']);
 	break;
+	case 'users':
+		include 'cl/TableEditor.php';
+		$ctr = new TableEditor('users');
+		$ctr->where =  " WHERE role IS NOT 'test'";
+		$ctr->defaultVals = array('role'=>'admin');
+		$result = $ctr->process($a);
+		break;
 	
 	
 	// LARGE Classes here

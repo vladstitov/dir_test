@@ -18,7 +18,7 @@ class Login{
 				$res=$res[0];
 				$_SESSION['directories_user'] = $res['username'];
 				$_SESSION['directories_role'] = $res['role'];
-				$_SESSION['directories_user_id'] = $res['usersid'];
+				$_SESSION['directories_user_id'] = $res['id'];
 
 				//$_SESSION['directories_folder']=$res->folder;
 				$out->success = 'loggedin';

@@ -15,6 +15,9 @@ class MyDB{
 		return $this->filename;
 	}
 
+	function delete($sql){
+		return $this->db->query($sql);
+	}
 	function getRows($sql){
 		$res = $this->db->query($sql);
 		if($res) return $res->fetchAll(PDO::FETCH_ASSOC);
@@ -56,11 +59,7 @@ class MyDB{
 	function getNextAsSoc($result){
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
-	function updateRow($sql,$ar){
-		$stmt = $this->db->prepare($sql);
-		if($stmt) return  $stmt->execute($ar);
-		return	0;
-	}
+
 	function beginTransaction($sql){
 		$this->db->beginTransaction();
 		$this->stmt=$this->db->prepare($sql);
@@ -75,6 +74,12 @@ class MyDB{
 	}
 	function errorInfo(){
 		return $this->db->errorInfo();
+	}
+
+	function updateRow($sql,$ar){
+		$stmt = $this->db->prepare($sql);
+		$res = $stmt->execute($ar);
+		return $res;
 	}
 
 	function insertRow($sql,$ar){

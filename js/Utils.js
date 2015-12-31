@@ -34,52 +34,64 @@ var uplight;
         return VOResult;
     })();
     uplight.VOResult = VOResult;
-    var Connector = (function () {
-        function Connector(action, id, service) {
+    var UItem = (function () {
+        function UItem() {
+        }
+        return UItem;
+    })();
+    uplight.UItem = UItem;
+    var Connect = (function () {
+        function Connect(service, id) {
             this.service = 'rem/index.php';
             this.logger = 'rem/logger.php';
-            if (action)
-                this.action = action;
-            if (service)
-                this.service = 'rem/' + service + '.php';
+            var ar = service.split(',');
+            if (ar.length == 2) {
+                this.service = 'rem/' + ar[0] + '.php';
+                this.action = ar[1];
+            }
+            else
+                this.action = ar[0];
             if (id)
                 this.id = id;
+            // console.log('Connect service:'+service+' action: '+action);
         }
-        Connector.prototype.post = function (obj, url) {
+        Connect.prototype.post = function (obj, url) {
             if (typeof obj == 'object')
                 obj = JSON.stringify(obj);
             return $.post(this.service + this.makeUrl(url), obj);
         };
-        Connector.prototype.makeUrl = function (url) {
-            if (url)
-                url = '?a=' + url;
-            else
+        Connect.prototype.makeUrl = function (url) {
+            if (!url)
                 url = '?a=' + this.action;
+            else if (this.action)
+                url = '?a=' + this.action + '.' + url;
+            else
+                url = '?a=' + url;
             if (this.id)
                 url += '&id=' + this.id;
             return url;
         };
-        Connector.prototype.get = function (url) {
+        Connect.prototype.get = function (url) {
             return $.get(this.service + this.makeUrl(url));
         };
-        Connector.prototype.log = function (obj, url) {
+        Connect.prototype.log = function (obj, url) {
             if (typeof obj == 'object')
                 obj = JSON.stringify(obj);
             if (!url)
                 url = '?a=LOG';
             return $.post(this.logger + this.makeUrl(url), obj);
         };
-        Connector.prototype.logError = function (obj) {
+        Connect.prototype.logError = function (obj) {
             var url = '?a=ERROR';
             return this.log(obj, url);
         };
-        Connector.prototype.emailError = function (obj) {
+        Connect.prototype.emailError = function (obj) {
             var url = '?a=EMAIL';
             return this.log(obj, url);
         };
-        return Connector;
+        return Connect;
     })();
-    uplight.Connector = Connector;
+    uplight.Connect = Connect;
     var Registry = (function () {
         function Registry() {
         }
@@ -121,13 +133,6 @@ var uplight;
             this.$view.detach();
             this.onRemoved();
             return this;
-        };
-        DisplayObject.prototype.setData = function (data) {
-            this.data = data;
-            return this;
-        };
-        DisplayObject.prototype.getData = function () {
-            return this.data;
         };
         return DisplayObject;
     })();

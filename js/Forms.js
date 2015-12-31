@@ -17,11 +17,7 @@ var uplight;
             _super.call(this, $view, name);
             this.$view = $view;
             this.message = 'Form error';
-            var ar = service.split(',');
-            if (ar.length === 2)
-                this.conn = new uplight.Connector(ar[1], name, ar[0]);
-            else
-                this.conn = new uplight.Connector(ar[0], name);
+            this.conn = new uplight.Connect(service, name);
         }
         SimpleForm.prototype.init = function () {
             var _this = this;
@@ -38,6 +34,21 @@ var uplight;
             this.onInit();
         };
         SimpleForm.prototype.onInit = function () {
+        };
+        SimpleForm.prototype.setTitle = function (title) {
+            this.$view.find('[data-id=title]').text(title);
+        };
+        SimpleForm.prototype.setData = function (data) {
+            for (var str in data)
+                if (this.ind[str])
+                    this.ind[str].value = data[str];
+            this.currentItem = data;
+        };
+        SimpleForm.prototype.clear = function () {
+            var ar = this.inputs;
+            for (var i = 0, n = ar.length; i < n; i++) {
+                ar[i].value = '';
+            }
         };
         SimpleForm.prototype.onSubmitClick = function () {
             var valid = true;
@@ -74,15 +85,20 @@ var uplight;
         };
         SimpleForm.prototype.onRespond = function (s) {
             var res;
-            try {
-                res = JSON.parse(s);
+            // console.log(s);
+            if (typeof s == 'string') {
+                try {
+                    res = JSON.parse(s);
+                }
+                catch (e) {
+                    this.showMessage('Communication Error logged on server <br/> We will contact you soon');
+                    this.conn.logError('EMAIL' + this.name + this.conn.service + '  ' + s);
+                    //  console.log(s);
+                    return;
+                }
             }
-            catch (e) {
-                this.showMessage('Communication Error logged on server <br/> We will contact you soon');
-                this.conn.logError('EMAIL' + this.name + this.conn.service + '  ' + s);
-                //  console.log(s);
-                return;
-            }
+            else
+                res = s;
             if (res)
                 this.onResult(res);
         };
@@ -91,7 +107,13 @@ var uplight;
             this.conn.post(obj).done(function (s) { return _this.onRespond(s); });
         };
         SimpleForm.prototype.onSubmit = function (data) {
-            this.send(data);
+            if (this.currentItem) {
+                for (var str in data)
+                    this.currentItem[str] = data[str];
+                this.send(this.currentItem);
+            }
+            else
+                this.send(data);
         };
         SimpleForm.prototype.showMessage = function (str) {
             var msg = this.$view.find('[data-id=message]').html(str).removeClass('hidden').fadeIn();
@@ -101,6 +123,19 @@ var uplight;
         return SimpleForm;
     })(uplight.DisplayObject);
     uplight.SimpleForm = SimpleForm;
+    var ModalForm = (function (_super) {
+        __extends(ModalForm, _super);
+        function ModalForm($view, service, name) {
+            var _this = this;
+            _super.call(this, $view, service, name);
+            var btn = this.$view.find('[data-id=btnClose]').click(function () { return _this.onCloseClick(); });
+        }
+        ModalForm.prototype.onCloseClick = function () {
+            this.hide();
+        };
+        return ModalForm;
+    })(SimpleForm);
+    uplight.ModalForm = ModalForm;
     var LoginForm = (function (_super) {
         __extends(LoginForm, _super);
         function LoginForm($view, service, name) {

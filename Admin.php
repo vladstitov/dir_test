@@ -136,7 +136,7 @@ $theme = $settings->theme;
 </head>
 <body>
 <div id="adminHeader" >
-    <h4 ><span>Interactive Directory Admin Panel </span>
+    <h4 >Interactive Directory Admin Panel </span>
 
         <a id="btnLogout" data-id="btnLogout" class="btn pull-right"><span class="fa fa-user-times"></span> LogOut</a>
         <button id="btnRestartKiosks" class="btn btn-warning pull-right">Restart Kiosks</button>
@@ -244,6 +244,12 @@ $theme = $settings->theme;
 <script type="text/javascript" src="js/admin/views/Navigation.js"></script>
 
 <script type="text/javascript" src="js/admin/DirsAdmin.js"></script>
+
+<script type="text/javascript" src="js/Utils.js"></script>
+<script type="text/javascript" src="js/Lists.js"></script>
+<script type="text/javascript" src="js/Forms.js"></script>
+<script type="text/javascript" src="js/admin/AdminsManage.js"></script>
+
 
 
     </body>
