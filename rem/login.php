@@ -13,7 +13,7 @@ class Login{
 
 		if ($username && $password) {
 			$db = new MyDB();
-			$sql = "SELECT * FROM users.sql WHERE username=? AND password=?";
+			$sql = "SELECT * FROM users WHERE username=? AND password=?";
 			$res = $db->queryA($sql, array($username, $password));
 			if ($res && count($res)) {
 				$res=$res[0];

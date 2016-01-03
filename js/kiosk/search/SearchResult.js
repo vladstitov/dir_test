@@ -54,7 +54,7 @@ var uplight;
             console.log(evt.currentTarget);
             var el = $(evt.currentTarget);
             console.log(el.data());
-            var id = el.data('id');
+            var id = Number(el.data('id'));
             if (isNaN(Number(id)) || !this.dataInd[id])
                 return;
             if (this.selected)

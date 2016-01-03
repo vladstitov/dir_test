@@ -56,6 +56,7 @@ module uplight{
         }
 
         private showHideCategories():void {
+            console.log(this.catsVisible)
             if (this.catsVisible) this.hideEditCategories();
             else {
                 this.editCategories();
@@ -95,7 +96,8 @@ module uplight{
         }
 
         private editCategories():void {
-            if (!this.current.cats){
+         //   console.log('editCategories '+this.current.cats ,this.current);
+            if (!this.current.cats || this.current.cats.length ===0){
                 this.current.cats =[];
                 this.renderAllCats();
                 return;
@@ -116,6 +118,7 @@ module uplight{
         }
 
         private renderAllCats():void{
+           // console.log('renderAllCats   ', this.R.model.getCategories());
             this.categoriesAll.html(this.renderCats(this.R.model.getCategories(),false));
         }
         private renderCats(cats:VOCategory[], selected:boolean):string {

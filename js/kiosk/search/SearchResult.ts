@@ -46,7 +46,6 @@ module uplight {
             this.render(true);
             this.list.scrollTop(0);
         }
-
         addListeners():void{
             this.R.events.on(this.R.CATEGORIES_CHANGE,(evt,cats:number[])=>this.onCategoriesChange(cats))
             this.R.events.on(this.R.INPUT_CHANGED,(evt,pattern:string)=>this.onSearchChange(pattern))
@@ -82,7 +81,7 @@ module uplight {
             var el:JQuery = $(evt.currentTarget);
 
             console.log(el.data());
-            var id:number = el.data('id');
+            var id:number = Number(el.data('id'));
             if(isNaN(Number(id)) || !this.dataInd[id]) return;
 
             if(this.selected)  this.selected.removeClass(SELECTED);

@@ -81,4 +81,4 @@ var uplight;
     })();
     uplight.MainView = MainView;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=MainView.js.map
+//# sourceMappingURL=mainview.js.map

@@ -38,6 +38,7 @@ var uplight;
             this.catsVisible = true;
         };
         DetailsCategory.prototype.showHideCategories = function () {
+            console.log(this.catsVisible);
             if (this.catsVisible)
                 this.hideEditCategories();
             else {
@@ -73,7 +74,8 @@ var uplight;
                 this.removeCategory(cat);
         };
         DetailsCategory.prototype.editCategories = function () {
-            if (!this.current.cats) {
+            //   console.log('editCategories '+this.current.cats ,this.current);
+            if (!this.current.cats || this.current.cats.length === 0) {
                 this.current.cats = [];
                 this.renderAllCats();
                 return;
@@ -93,6 +95,7 @@ var uplight;
             this.categoriesAll.html(out);
         };
         DetailsCategory.prototype.renderAllCats = function () {
+            // console.log('renderAllCats   ', this.R.model.getCategories());
             this.categoriesAll.html(this.renderCats(this.R.model.getCategories(), false));
         };
         DetailsCategory.prototype.renderCats = function (cats, selected) {

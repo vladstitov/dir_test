@@ -13,7 +13,8 @@ class Utils{
 	}
 
 	public function restartKiosks($get){
-				error_log('restart: '.date("Y-m-d H:i:s")."/r/n", 3, DATA.'restart.log');
+				$vars = json_encode($get);
+				error_log('restart: '.date("Y-m-d H:i:s")."  $vars  /r/n", 3, DATA.'devs/restart.log');
 				$out=new stdClass();
 				$out->success='success';
 				return $out;				
