@@ -16,7 +16,7 @@ include('KioskHeader.php');
     body{
         width: 1080px;
         height: 1920px;
-       /* overflow: hidden;*/
+        overflow: hidden;
     }
 
     #container{
