@@ -135,7 +135,7 @@ var uplight;
                     this.mode = '';
                 }
                 else if (this.mode === 'update') {
-                    var i = this.selected.data('i');
+                    var i = Number(this.selected.data('i'));
                     this.data[i] = res.result;
                     this.selectedItem = this.data[i];
                     this.render();
@@ -154,7 +154,7 @@ var uplight;
             if (files.length) {
                 var form = new FormData();
                 form.append('file', files[0]);
-                this.R.connector.uploadDestinationImage(form, this.current.uid).done(function (res) { return _this.onUploadResult(res); });
+                this.R.connector.uploadImage(form, 'details', 'gal_' + this.current.uid).done(function (res) { return _this.onUploadResult(res); });
             }
         };
         DetailsImages.prototype.onDeleteClick = function () {

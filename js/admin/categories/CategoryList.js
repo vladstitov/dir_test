@@ -39,7 +39,7 @@ var uplight;
                 '</span></li>';
         };
         CategoryList.prototype.onItemClick = function (el) {
-            var i = el.data('i');
+            var i = Number(el.data('i'));
             if (isNaN(i))
                 return;
             var item = this.data[i];

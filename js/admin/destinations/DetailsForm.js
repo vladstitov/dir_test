@@ -133,7 +133,7 @@ var uplight;
             if (files.length) {
                 var form = new FormData();
                 form.append('file', files[0]);
-                this.R.connector.uploadDestinationImage(form, this.current.uid).done(function (res) { return _this.onUploadTumb(res); });
+                this.R.connector.uploadImage(form, 'details', 'tmb_' + this.current.uid).done(function (res) { return _this.onUploadTumb(res); });
             }
         };
         DetailsForm.prototype.showDetailsView = function () {

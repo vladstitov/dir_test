@@ -176,7 +176,7 @@ module uplight{
                     this.list.append(item);
                     this.mode='';
                 }else if( this.mode==='update'){
-                    var i:number = this.selected.data('i');
+                    var i:number = Number(this.selected.data('i'));
                     this.data[i]=res.result;
                     this.selectedItem=this.data[i];
 
@@ -197,7 +197,8 @@ module uplight{
             if(files.length){
                 var form:FormData = new FormData();
                 form.append('file',files[0])
-                this.R.connector.uploadDestinationImage(form,this.current.uid).done((res:VOResult)=>this.onUploadResult(res))
+                this.R.connector.uploadImage(form,'details','gal_'+this.current.uid).done((res:VOResult)=>this.onUploadResult(res));
+             //   this.R.connector.uploadDestinationImage(form,this.current.uid).done((res:VOResult)=>this.onUploadResult(res))
 
             }
 

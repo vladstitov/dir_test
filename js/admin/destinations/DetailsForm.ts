@@ -193,8 +193,8 @@ module uplight {
             var files:FileList = input.files;
             if(files.length){
                 var form:FormData = new FormData();
-                form.append('file',files[0])
-                this.R.connector.uploadDestinationImage(form,this.current.uid).done((res:VOResult)=>this.onUploadTumb(res))
+                form.append('file',files[0]);
+                this.R.connector.uploadImage(form,'details','tmb_'+this.current.uid).done((res:VOResult)=>this.onUploadTumb(res))
 
             }
         }

@@ -278,7 +278,7 @@ var uplight;
             this.loadData();
         };
         InfoPagesManager.prototype.onListClick = function (evt) {
-            var i = $(evt.currentTarget).data('i');
+            var i = Number($(evt.currentTarget).data('i'));
             if (isNaN(i))
                 return;
             if (this.selected)

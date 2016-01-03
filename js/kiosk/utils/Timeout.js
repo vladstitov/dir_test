@@ -18,10 +18,8 @@ var uplight;
         Timeout.prototype.startTimer = function () {
             var _this = this;
             clearTimeout(this.timer);
-            this.timer = setTimeout(function () {
-                if (_this.onTimeout)
-                    _this.onTimeout(_this.timeout);
-            }, this.timeout * 1000);
+            this.timer = setTimeout(function () { if (_this.onTimeout)
+                _this.onTimeout(_this.timeout); }, this.timeout * 1000);
         };
         return Timeout;
     })();

@@ -1,4 +1,5 @@
 <?php
+require_once ('inv.php');
 session_start();
 $opt=$_GET;
 $data=$_POST;

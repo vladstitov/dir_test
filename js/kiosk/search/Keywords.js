@@ -10,9 +10,7 @@ var uplight;
             this.view = $(el);
             this.R = uplight.Registry.getInstance();
             this.list = $('<ul>').appendTo(this.view.find('[data-id=list]:first'));
-            this.list.on(CLICK, 'li', function (evt) {
-                _this.onClick(evt.currentTarget);
-            });
+            this.list.on(CLICK, 'li', function (evt) { _this.onClick(evt.currentTarget); });
             this.R.model.dispatcher.on(this.R.model.READY, function () { return _this.onModelReady(); });
             this.R.events.on(this.R.INPUT_CHANGED, function (evt, word) { return _this.filter(word); });
         }

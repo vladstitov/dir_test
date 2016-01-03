@@ -35,7 +35,7 @@ var uplight;
             this.R.admin = u_admin;
             this.R.dispatcher = $({});
             this.R.connector = new uplight.Connector();
-            this.R.connector.getData('settings_kiosks.json').done(function (resp) {
+            this.R.connector.getData('settings.json').done(function (resp) {
                 _this.R.setSettings(JSON.parse(resp));
                 // this.R.props =
                 _this.init();

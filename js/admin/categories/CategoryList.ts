@@ -51,7 +51,7 @@ module uplight{
                   '</span></li>';
           }
           private onItemClick(el:JQuery):void{
-              var i:number = el.data('i');
+              var i:number = Number(el.data('i'));
               if(isNaN(i)) return;
               var item:VOCategory  = this.data[i];
 

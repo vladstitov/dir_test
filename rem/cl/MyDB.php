@@ -2,17 +2,11 @@
 class MyDB{
 	var  $db;
 	var $stmt;
-	var $filename;
-	function MyDB(){
-		$filename= '../data/directories.db';
-		if(file_exists($filename)){
-			$this->db = new PDO('sqlite:'.$filename);
-			$this->filename=$filename;
-		}
-	}
 
-	function getFilename(){
-		return $this->filename;
+	function MyDB(){
+		if(file_exists(DATABASE)){
+			$this->db = new PDO('sqlite:'.DATABASE);
+		}
 	}
 
 	function delete($sql){

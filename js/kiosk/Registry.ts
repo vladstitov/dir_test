@@ -37,6 +37,9 @@ module uplight {
         CATEGORIES_CHANGE:string='CATEGORIES_CHANGE';
         CATEGORY_SELECTED:string='CATEGORY_SELECTED';
 
+        PAGE_SELECED:string ='PAGE_SELECED';
+        PAGES_0:string='PAGES_0';
+
         KEYWORD_PRESSED:string='KEYWORD_PRESSED';
         KEYBOARD_SHOW:string='KEYBOARD_SHOW';
         KEYBOARD_HIDE:string='KEYBOARD_HIDE';

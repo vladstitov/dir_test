@@ -36,7 +36,7 @@ var uplight;
             this.total.text(this.sortList());
         };
         CategoryInListing.prototype.onListClick = function (el) {
-            var id = el.data('id');
+            var id = Number(el.data('id'));
             if (isNaN(id))
                 return;
             el.toggleClass(SELECTED);

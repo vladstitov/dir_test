@@ -113,9 +113,9 @@ module uplight {
 
       }
       private onUpDownClicked(evt: JQueryEventObject): void {
-          var btn:string = $(evt.currentTarget).data('id');
+          var btn:string = $(evt.currentTarget).data('id').toString();
           var num:number = Number(this.pageSort.text());
-          var max:number = this.pageSort.data('max');
+          var max:number = Number(this.pageSort.data('max'));
           if (btn == 'btnUp' && num < max) this.pageSort.text((++num).toString());
           if (btn == 'btnDown' && num > 1)this.pageSort.text((--num).toString());
       }
@@ -124,7 +124,7 @@ module uplight {
 
       private onUpDown2Clicked(evt: JQueryEventObject): void {
           evt.stopPropagation();
-          var btn:string = $(evt.currentTarget).data('id');
+          var btn:string = $(evt.currentTarget).data('id').toString();
 
           if (btn == 'btnUp' && this.selected.prev().is('li'))    this.selected.insertBefore(this.selected.prev());
           else if (btn == 'btnDown' && this.selected.next().is('li')) this.selected.insertAfter(this.selected.next());
@@ -294,7 +294,7 @@ module uplight {
           var n:number =this.list.children('p:last').index();
 console.log(n);
           for(var i=1;i<n;i++){
-              ar.push(this.list.children().eq(i).data('id'));
+              ar.push(Number(this.list.children().eq(i).data('id')));
           }
          // this.list.children().each(function (i, el) {
            //   if(i<max)  ar.push($(el).data('id'));
@@ -437,7 +437,7 @@ console.log(n);
       private onItemClick(evt: MouseEvent): void {
           if (this.isEdit) return;
           var sel: JQuery = $(evt.currentTarget);
-          var id:number= sel.data('id');
+          var id:number= Number(sel.data('id'));
           if(isNaN(id)) return;
           this.selectedItem = this.getItemById(id);
           if (!this.selectedItem) return;

@@ -13,9 +13,7 @@ var uplight;
             this.header = $('<div>').addClass('header').appendTo(this.view).html('<span class="' + this.icon + '"> </span> <span> ' + this.name + '</span>');
             this.content = $('<div>').addClass('content').appendTo(this.view);
             if (this.url)
-                uplight.Registry.getInstance().connector.get(this.url).done(function (data) {
-                    _this.content.html(data);
-                });
+                uplight.Registry.getInstance().connector.get(this.url).done(function (data) { _this.content.html(data); });
         }
         return VOPage;
     })();
@@ -42,12 +40,11 @@ var uplight;
             }
     */
             this.current = -1;
+            console.log('InfoPagesModel');
             this.view = $(el);
             this.R = uplight.Registry.getInstance();
-            this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
-            this.R.events.on(InfoPagesModel.PAGE_SELECED, function (evt, pageid) {
-                _this.showPage(pageid);
-            });
+            this.R.connector.getData('pages').done(function (data) { return _this.onData(data); });
+            this.R.events.on(this.R.PAGE_SELECED, function (evt, pageid) { _this.showPage(pageid); });
             this.view.css('overfow', 'hidden');
             this.width = this.view.width();
             this.list = $('<div>').appendTo(this.view);

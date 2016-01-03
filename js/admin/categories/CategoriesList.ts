@@ -4,7 +4,6 @@
     ///<reference path="../RegA.ts" />
 module uplight{
     export class CategoriesList{
-
         view:JQuery
         list:JQuery
         listView:JQuery;
@@ -40,7 +39,7 @@ module uplight{
         }
 
         private onClick(el:JQuery){
-            var i = el.data('i');
+            var i:number = Number( el.data('i'));
             if(isNaN(i)) return
             var cat = this.data[i];
             if(cat){

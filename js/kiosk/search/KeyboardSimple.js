@@ -16,9 +16,7 @@ var uplight;
         }
         Keyboard.prototype.addListeners = function () {
             var _this = this;
-            this.keys.on(CLICK, '.kb-key', function (evt) {
-                _this.onKeyClick($(evt.currentTarget));
-            });
+            this.keys.on(CLICK, '.kb-key', function (evt) { _this.onKeyClick($(evt.currentTarget)); });
         };
         Keyboard.prototype.onKeyClick = function (el) {
             var txt = el.text().toLowerCase();
@@ -71,15 +69,9 @@ var uplight;
             var _this = this;
             this.btnClear.on(CLICK, function () { return _this.onClearClick(); });
             // this.R.events.on(this.R.KEYBOARD_HIDE,()=>{this.setText('');});
-            this.R.events.on(this.R.RESET_INPUT, function () {
-                _this.setText('');
-            });
-            this.R.events.on(this.R.KEY_PRESSED, function (evt, txt) {
-                _this.onKeyPressed(txt);
-            });
-            this.R.events.on(this.R.KEYWORD_PRESSED, function (evt, txt) {
-                _this.onKeyword(txt);
-            });
+            this.R.events.on(this.R.RESET_INPUT, function () { _this.setText(''); });
+            this.R.events.on(this.R.KEY_PRESSED, function (evt, txt) { _this.onKeyPressed(txt); });
+            this.R.events.on(this.R.KEYWORD_PRESSED, function (evt, txt) { _this.onKeyword(txt); });
             this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
         };
         SearchInput.prototype.onKeyword = function (str) {
@@ -117,9 +109,7 @@ var uplight;
             }
             this.setText(str);
             clearTimeout(this.timeout);
-            this.timeout = setTimeout(function () {
-                uplight.Registry.getInstance().connector.Stat('kb', str);
-            }, 1500);
+            this.timeout = setTimeout(function () { uplight.Registry.getInstance().connector.Stat('kb', str); }, 1500);
             // this.input.focus();
         };
         return SearchInput;

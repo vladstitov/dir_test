@@ -28,12 +28,13 @@ var uplight;
         return Utils;
     })();
     uplight.Utils = Utils;
-    var VOResult = (function () {
-        function VOResult() {
-        }
-        return VOResult;
-    })();
-    uplight.VOResult = VOResult;
+    /*  export class VOResult{
+          success:string;
+          error:string;
+          result:string;
+          message:string;
+      }
+  */
     var UItem = (function () {
         function UItem() {
         }

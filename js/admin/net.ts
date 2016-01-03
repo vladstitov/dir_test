@@ -193,9 +193,9 @@ module uplight {
 
         
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
-        uploadImage(form: FormData, folder:string,prefix:string): JQueryPromise<VOResult> {
+        uploadImage(form: FormData, topic:string,type:string): JQueryPromise<VOResult> {
             return  $.ajax({
-                url: this.service+'?a=upload_image&folder='+folder+'&prefix='+prefix,  //Server script to process data
+                url: this.service+'?a=upload_image&folder='+topic+'&prefix='+type,  //Server script to process data
                 type: 'POST',
                 dataType: 'json',
                 data: form,

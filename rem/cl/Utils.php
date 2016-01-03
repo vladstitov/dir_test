@@ -1,9 +1,8 @@
 <?
 class Utils{
-	
 	public function getDevicesData(){
 				$out = new stdClass();
-				$devices = json_decode($this->getData(array('file_name'=>'devices.json')));
+				$devices = json_decode($this->getData('devices'));
 				foreach($devices  as $device){
 						$filename=DATA.'devs/track_'.$device->type.$device->id.'.json';
 						if(file_exists($filename))$device->track = json_decode(file_get_contents($filename));
@@ -19,14 +18,9 @@ class Utils{
 				$out->success='success';
 				return $out;				
 	}	
-	public function getData($get){
-			if(isset($get['file_name'])){
-				$file_name = $get['file_name'];
-				$pos = strpos($file_name,'.json');
-				if($pos === false)$file_name=$file_name.'.json';			
-				$file_name= DATA.$file_name;			
-				if(file_exists($file_name)) return file_get_contents($file_name);			
-			}			
+	public function getData($file_name){
+				$file_name= DATA.$file_name.(strpos($file_name,'.json')?'':'.json');
+				if(file_exists($file_name)) return file_get_contents($file_name);
 			return 'ERROR';
 	}
 			
@@ -37,7 +31,7 @@ class Utils{
 					$out->error='hacker';
 					return $out;				
 		}						
-		rename(DATA.$file_name,DATA.'arch/'.time().$file_name);	
+		rename(DATA.$file_name,DATA.'arch/'.time().$file_name);
 		$res = file_put_contents(DATA.$file_name,$data);	
 			
 		if($res){
@@ -50,7 +44,7 @@ class Utils{
 	
 	public function savePage($file_name,$data){
 		$out=new stdClass();
-		$res = file_put_contents('../'.$file_name,$data);	
+		$res = file_put_contents($file_name,$data);
 		if($res){
 			$out->success='file saved';
 			$out->result= $file_name;
@@ -59,7 +53,9 @@ class Utils{
 		return $out;
 	}
 
-	public function uploadImage($file,$folder,$prefix){
+
+
+	public function uploadImage($file,$topic,$type){
 			$out=new stdClass();
 			
 		if ($file["error"] > 0){
@@ -80,13 +76,13 @@ class Utils{
 			return $out;
 		}
 		
-		if (!file_exists('../'.IMG.$folder)) mkdir('../'.IMG.$folder, 0777, true);
+		if (!file_exists(REM.MEDIA.$topic)) mkdir(REM.MEDIA.$topic, 0755, true);
+
+		$filename = MEDIA.$topic.'/'.$type.'_'.$file["name"];
 		
-		$filename = $folder.'/'.$prefix.'_'.$file["name"];
-		
-		if(move_uploaded_file($file["tmp_name"],'../'.IMG.$filename)){
+		if(move_uploaded_file($file["tmp_name"],REM.$filename)){
 			$out->success='success';
-			$out->result=IMG.$filename;
+			$out->result=$filename;
 		}		
 		return $out;
 		

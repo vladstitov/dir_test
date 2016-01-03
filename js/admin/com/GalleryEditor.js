@@ -186,7 +186,7 @@ var uplight;
             this.resetMode();
             if (!this.selected)
                 return;
-            var i = this.selected.data('i');
+            var i = Number(this.selected.data('i'));
             if (isNaN(i))
                 return;
             if (confirm('You want to remove selected image from list?')) {
@@ -204,7 +204,7 @@ var uplight;
             this.resetMode();
             this.resetSelected();
             var $el = $(evt.currentTarget);
-            var i = $el.data('i');
+            var i = Number($el.data('i'));
             if (isNaN(i))
                 return;
             $el.addClass(SELECTED);

@@ -1,4 +1,5 @@
 <?
+require_once ('inv.php');
 if(isset($_GET['a'])){
     $a= explode('.',$_GET['a']);
     $id='';
@@ -9,13 +10,13 @@ if(isset($_GET['a'])){
 
     switch(array_shift($a)){
         case 'LOG':
-          $res =  error_log($msg,3,'log_'.date('m-d-Y').'.log');
+          $res =  error_log($msg,3,LOG.'log_'.date('m-d-Y').'.log');
             break;
         case 'ERROR':
-            $res =   error_log($msg,3,'error_'.date('m-d-Y').'.log');
+            $res =   error_log($msg,3,LOG.'error_'.date('m-d-Y').'.log');
             break;
         case 'EMAIL':
-            $res =   error_log($msg,1,'admin@front-desk.ca');
+            $res =   error_log($msg,1,ADMIN_EMAIL);
             break;
     }
 }

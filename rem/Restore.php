@@ -1,6 +1,7 @@
 <?
-session_start();
+require_once ('inv.php');
 require 'cl/MyDB.php';
+session_start();
 class Restore{
 	function process($a){
 		switch (array_shift($a)) {
@@ -29,7 +30,7 @@ class Restore{
 			return 'ERROR,No email';
 		}
 		$db =  new MyDB();
-		$sql='SELECT username,password FROM users WHERE email=?';
+		$sql='SELECT username,password FROM users.sql WHERE email=?';
 		$res = $db->queryA($sql, array($email));
 		if($res && count($res)){
 			$user = $res[username];
@@ -50,7 +51,7 @@ class Restore{
 		}
 		$db =  new MyDB();
 
-		$sql='SELECT username FROM users WHERE email=?';
+		$sql='SELECT username FROM users.sql WHERE email=?';
 
 		$res = $db->queryA($sql, array($email));
 		if($res && count($res)){
@@ -86,10 +87,10 @@ class Restore{
 		$out=new stdClass();
 
 		$db =  new MyDB();
-		$sql='SELECT password,email FROM users WHERE username=?';
+		$sql='SELECT password,email FROM users.sql WHERE username=?';
 		$res = $db->queryA($sql, array($username));
 
-		//return $username;//$db->getRows('SELECT * FROM users');
+		//return $username;//$db->getRows('SELECT * FROM users.sql');
 
 		if($res && count($res)){
 			$res= $res[0];

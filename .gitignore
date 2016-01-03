@@ -2,3 +2,5 @@
 data
 /data/statistics.db
 /logs/*.log
+/media-test
+/data-test

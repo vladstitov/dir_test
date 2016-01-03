@@ -52,7 +52,7 @@ var uplight;
                 var file = files[0];
                 var form = new FormData();
                 form.append('file', file);
-                this.R.connector.uploadImage(form, 'assets', '').done(function (res) {
+                this.R.connector.uploadImage(form, 'assets', 'lbl').done(function (res) {
                     console.log(res);
                     if (res.success)
                         _this.imgValue.attr('src', res.result);

@@ -67,9 +67,7 @@ var uplight;
             var _this = this;
             this.isActive = true;
             if (this.interval === 0)
-                this.interval = setInterval(function () {
-                    _this.goNext();
-                }, this.timeout * 1000);
+                this.interval = setInterval(function () { _this.goNext(); }, this.timeout * 1000);
             this.goNext();
         };
         GalleryDisplay.prototype.stop = function () {

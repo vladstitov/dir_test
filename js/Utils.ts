@@ -21,13 +21,13 @@ module uplight{
    }
 
 
-    export class VOResult{
+  /*  export class VOResult{
         success:string;
         error:string;
         result:string;
         message:string;
     }
-
+*/
     export class UItem{
         ind:string;
         val:string;

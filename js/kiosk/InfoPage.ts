@@ -40,10 +40,12 @@ module uplight {
         private view:JQuery
 
         constructor(el:HTMLElement) {
+       console.log('InfoPagesModel')
+
             this.view = $(el);
             this.R=Registry.getInstance();
-            this.R.connector.getData('pages.json').done((data)=>this.onData(data));
-            this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,pageid)=>{this.showPage(pageid)});
+            this.R.connector.getData('pages').done((data)=>this.onData(data));
+            this.R.events.on(this.R.PAGE_SELECED,(evt,pageid)=>{this.showPage(pageid)});
             this.view.css('overfow','hidden');
             this.width = this.view.width();
             this.list=$('<div>').appendTo(this.view);

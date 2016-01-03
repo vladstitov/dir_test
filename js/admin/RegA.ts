@@ -207,6 +207,7 @@ module uplight{
         result:any;
         success:string;
         error:string;
+        message:string;
     }
     export class VOItem {
         constructor(obj:any){ for(var str in obj) this[str]=obj[str];}

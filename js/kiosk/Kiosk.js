@@ -53,8 +53,12 @@ var uplight;
             this.R = r;
             r.events.on(r.KIOSK_SHOW_SEARCH, function () { return _this.showSearch(); });
             r.events.on(r.KIOSK_SHOW_MENU, null, function (evt) { return _this.showMenu(); });
+            r.events.on(r.PAGES_0, null, function (evt) {
+                _this.showSearch();
+                _this.showMenu = function () { };
+            });
             this.R.events.on(this.R.KEYBOARD_SHOW, function () { return _this.showSearchResult(); });
-            this.R.events.on(uplight.InfoPagesModel.PAGE_SELECED, function (evt, pageid) {
+            this.R.events.on(this.R.PAGE_SELECED, function (evt, pageid) {
                 _this.R.events.triggerHandler(_this.R.KEYBOARD_HIDE);
                 _this.showPages();
             });
@@ -134,7 +138,7 @@ var uplight;
             };
             var r = uplight.Registry.getInstance();
             $('[data-ctr]').each(function (ind, el) {
-                var str = $(el).data('ctr');
+                var str = String($(el).data('ctr'));
                 var MyClass = stringToFunction(str);
                 if (MyClass) {
                     r.register(str, MyClass);
@@ -155,11 +159,24 @@ var uplight;
                 case '#page':
                     var pageid = Number(hash[1]);
                     this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, pageid);
+                    //  this.keyboardView.hideKeyboard();
+                    // var cat: VOItem = this.menu.getCategoryById(Number(hash[1]));
+                    // this.maiView.showView(this.searchResult.getListByCategory(cat));
                     break;
                 case '#dest':
+                    //  this.dest.showDest(Number(hash[1]));
+                    //  this.keyboardView.hideKeyboard();
+                    //  this.maiView.showView(this.details.getDetailsById(Number(hash[1])));
                     break;
                 case '#ScreenSaver':
                     window.location.reload();
+                    /*
+                    this.details.resetMode();
+                    this.searchResult.resetMode();
+                    this.keyboard.resetMode();
+                    this.cateegories.resetMode();
+                    this.keywords.resetMode();
+                    */
                     break;
             }
         };

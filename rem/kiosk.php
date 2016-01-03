@@ -1,5 +1,5 @@
 <?php
-define('DATA','../data/');
+require_once ('inv.php');
 session_start();
 
 $get=$_GET;
@@ -130,7 +130,7 @@ function trackDevice($get){
 		$dev['s_time']=time();
 		$dev['ip'] = $_SERVER['REMOTE_ADDR'];			
 		file_put_contents($file_name,json_encode($dev));					
-		$out->result = filemtime(DATA.'restart.log');			
+		$out->result = file_exists(DATA.'devs/restart.log')?filemtime(DATA.'devs/restart.log'):10000;
 		return $out;		
 }
 

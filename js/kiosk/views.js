@@ -15,6 +15,7 @@ var uplight;
                 uplight.Registry.getInstance().events.trigger(r.KIOSK_SHOW_MENU);
             });
             $('#btnShowMenu').click(function () { return r.events.triggerHandler(r.KIOSK_SHOW_MENU); });
+            r.events.on(r.PAGES_0, null, function () { $('#btnShowMenu').hide(); });
         }
         return LowPanelController;
     })();

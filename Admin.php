@@ -8,7 +8,7 @@ if(!isset($_SESSION['directories_user']) || $_SESSION['directories_user']===0){
 $cfg = 0;
 if(file_exists(DATA.'/config.json')) $cfg = json_decode(file_get_contents(DATA.'/config.json'));
 
-$settings = json_decode(file_get_contents(DATA.'/settings_kiosks.json'));
+$settings = json_decode(file_get_contents(DATA.'/settings.json'));
 $theme = $settings->theme;
 ?>
 <!DOCTYPE html>

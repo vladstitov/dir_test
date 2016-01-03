@@ -24,6 +24,8 @@ var uplight;
             this.KIOSK_SHOW_SEARCH = 'KIOSK_SHOW_SEARCH';
             this.CATEGORIES_CHANGE = 'CATEGORIES_CHANGE';
             this.CATEGORY_SELECTED = 'CATEGORY_SELECTED';
+            this.PAGE_SELECED = 'PAGE_SELECED';
+            this.PAGES_0 = 'PAGES_0';
             this.KEYWORD_PRESSED = 'KEYWORD_PRESSED';
             this.KEYBOARD_SHOW = 'KEYBOARD_SHOW';
             this.KEYBOARD_HIDE = 'KEYBOARD_HIDE';
@@ -92,4 +94,4 @@ var uplight;
     })();
     uplight.VOGeo = VOGeo;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=registry.js.map
+//# sourceMappingURL=Registry.js.map

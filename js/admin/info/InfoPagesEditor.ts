@@ -367,7 +367,7 @@ module uplight{
 
 
         private onListClick(evt:JQueryEventObject):void{
-                var i:number = $(evt.currentTarget).data('i');
+                var i:number = Number($(evt.currentTarget).data('i'));
             if(isNaN(i)) return;
             if(this.selected) this.selected.removeClass(SELECTED);
             this.selected = $(evt.currentTarget);

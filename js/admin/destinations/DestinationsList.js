@@ -116,7 +116,7 @@ var uplight;
         };
         DestinationsList.prototype.selectElement = function (el) {
             console.log('selecting ' + el.offset().top);
-            var i = el.data('i');
+            var i = Number(el.data('i'));
             if (isNaN(i))
                 return 0;
             if (this.selectedEl)

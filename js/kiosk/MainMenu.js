@@ -15,12 +15,10 @@ var uplight;
             if (cats)
                 d2.resolve(cats);
             else
-                this.R.model.dispatcher.on(this.R.model.READY, function () {
-                    d2.resolve(_this.R.model.getCategories());
-                });
-            $.when(d1, d2).then(function () {
-                var pages = JSON.parse(arguments[0][0]);
-                var cats = arguments[1];
+                this.R.model.dispatcher.on(this.R.model.READY, function () { d2.resolve(_this.R.model.getCategories()); });
+            $.when(d1, d2).then(function (pgs, cts) {
+                var pages = JSON.parse(pgs[0]);
+                var cats = cts;
                 _this.onData(pages, cats);
             });
             this.list = $('#MainMenuList'); // this.view.find('[data-id=list]');
@@ -56,7 +54,7 @@ var uplight;
             if (!item)
                 return;
             if (item.url)
-                this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, item.id);
+                this.R.events.triggerHandler(this.R.PAGE_SELECED, item.id);
             else
                 this.R.events.triggerHandler(this.R.CATEGORY_SELECTED, item.id);
             if (this.onSelect)
@@ -70,14 +68,14 @@ var uplight;
             var _this = this;
             this.view = $(el);
             this.R = uplight.Registry.getInstance();
-            this.R.connector.getData('pages.json').done(function (data) { return _this.onData(data); });
+            this.R.connector.getData('pages').done(function (data) { return _this.onData(data); });
             this.list = this.view.find('[data-id=list]');
             this.list.on(CLICK, 'a', function (evt) { return _this.onMenuClick(evt); });
         }
         PagesMenu.prototype.onMenuClick = function (evt) {
             // console.log(evt);
             evt.preventDefault();
-            var i = $(evt.currentTarget).data('i');
+            var i = Number($(evt.currentTarget).data('i'));
             //  console.log(i);
             if (isNaN(i))
                 return;
@@ -87,14 +85,30 @@ var uplight;
             // this.pages.showPage(i);
             if (this.onSelect)
                 this.onSelect(item);
-            this.R.events.triggerHandler(uplight.InfoPagesModel.PAGE_SELECED, item.id);
+            this.R.events.triggerHandler(this.R.PAGE_SELECED, item.id);
+        };
+        PagesMenu.prototype.removeDisabled = function (ar) {
+            var out = [];
+            for (var i = 0, n = ar.length; i < n; i++)
+                if (ar[i].enabled)
+                    out.push(new uplight.VOPage(ar[i]));
+            return out;
         };
         PagesMenu.prototype.onData = function (res) {
-            // console.log(res);
-            this.data = JSON.parse(res);
-            // this.pages = new InfoPagesModel($('[data-id=Pages]:first'));
-            // this.pages.setData(this.data);
-            this.render();
+            var ar = JSON.parse(res);
+            var out = [];
+            for (var i = 0, n = ar.length; i < n; i++)
+                out.push(new uplight.VOPage(ar[i]));
+            out = this.removeDisabled(out);
+            if (!out.length) {
+                this.R.events.triggerHandler(this.R.PAGES_0);
+            }
+            else {
+                this.data = _.sortBy(out, 'seq');
+                // this.pages = new InfoPagesModel($('[data-id=Pages]:first'));
+                // this.pages.setData(this.data);
+                this.render();
+            }
         };
         PagesMenu.prototype.render = function () {
             var ar = this.data;

@@ -4,6 +4,7 @@
     ///<reference path='typing/jquery.d.ts' />
     ///<reference path='typing/underscore.d.ts' />
     ///<reference path='Utils.ts' />
+    ///<reference path='admin/net.ts' />
 
 
 module uplight{

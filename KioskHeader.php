@@ -2,7 +2,8 @@
 session_start();
 define('DATA','data');
 $kiosk_id=0;
-$sett_file= 'settings_kiosks.json';
+$id=0;
+$sett_file= 'settings.json';
 $settings = json_decode(file_get_contents(DATA.'/'.$sett_file));
 if(isset($settings->attract_loop)){
     $settings->attract_loop = json_decode(file_get_contents(DATA.'/'.$settings->attract_loop));

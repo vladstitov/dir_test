@@ -47,7 +47,7 @@ module uplight {
            this.timeout = setTimeout(()=>{
                console.log(this.R.TIMEOUT+this.timeoutVal);
                this.showSearchResult();
-               this.showMenu();
+             this.showMenu();
               this.R.events.triggerHandler(this.R.TIMEOUT);
            }, this.timeoutVal)
            if(this.isBlocked){
@@ -113,15 +113,22 @@ module uplight {
 
            r.events.on(r.KIOSK_SHOW_SEARCH,()=>this.showSearch());
 
+
            r.events.on(r.KIOSK_SHOW_MENU,null,(evt)=>this.showMenu());
+           r.events.on(r.PAGES_0,null,(evt)=>{
+               this.showSearch();
+               this.showMenu = function(){};
+
+           });
+
 
            this.R.events.on(this.R.KEYBOARD_SHOW,()=>this.showSearchResult());
 
-           this.R.events.on(InfoPagesModel.PAGE_SELECED,(evt,pageid)=>{
-               this.R.events.triggerHandler(this.R.KEYBOARD_HIDE);
-               this.showPages();
-
+           this.R.events.on(this.R.PAGE_SELECED,(evt,pageid)=>{
+             this.R.events.triggerHandler(this.R.KEYBOARD_HIDE);
+              this.showPages();
            })
+
            this.R.events.on(r.CATEGORY_SELECTED,(evt,cat)=>{
                this.showSearchResult();
            })
@@ -156,7 +163,7 @@ module uplight {
            var r:Registry = Registry.getInstance();
 
            $('[data-ctr]').each(function(ind,el){
-               var str=$(el).data('ctr');
+               var str=String($(el).data('ctr'));
                var MyClass = stringToFunction(str);
                if(MyClass) {
                    r.register(str,MyClass);

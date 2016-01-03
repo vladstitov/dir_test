@@ -1,14 +1,6 @@
 <?
+require_once ('inv.php');
 session_start();
-define('DATA','../data/');
-define('IMG','images/');
-define('DETAILS','details/');
-define('MEDIA','media/');
-define('DETAILS_IMG','details/img/');
-define('PREFIX','../');
-define('PAGES','pages/');
-define('LOG','../log/');
-$admin_email='uplight.ca@gmail.com';
 if(!isset($_SESSION['directories_user'])){
 	echo 'please login';	
 	exit;
@@ -58,7 +50,7 @@ switch(array_shift($a)){
 		$result = utils()->saveSettings(file_get_contents('php://input'));
 	break;	
 	case 'get_data':
-		$result = utils()->getData($get);
+		$result = isset($get['file_name'])? utils()->getData($get['file_name']):' hello';
 	break;
 	case 'save_data':	
 		if(!isset($get['file_name'])) die('ERROR 1');
@@ -66,11 +58,11 @@ switch(array_shift($a)){
 	break;	
 	case 'save_page':
 		if(!isset($get['url'])) die('ERROR 1');
-		$result = utils()->savePage($get['url'],file_get_contents('php://input'));		
+		$result = utils()->savePage(REM.$get['url'],file_get_contents('php://input'));
 	break;
 	case 'get_page':
 		if(!isset($get['url'])) die('ERROR 1');
-		$result = file_get_contents(PREFIX.$get['url']);
+		$result = file_get_contents(REM.$get['url']);
 	break;
 	case 'users':
 		include 'cl/TableEditor.php';
@@ -112,14 +104,12 @@ switch(array_shift($a)){
 	break;	
 }
 
+if(is_string($result)) echo($result);
+else{
+	header('Content-type: application/json');
+	echo json_encode($result);
+}
 
-if($result){
-	if(is_string($result)) echo($result);
-	else{
-		header('Content-type: application/json');
-		echo json_encode($result);
-	}
-}else echo'no result no errors';
 
 
 function utils(){

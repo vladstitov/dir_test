@@ -15,7 +15,7 @@ module uplight {
         private serv= 'rem/kiosk.php';
         private id:string;
        // who:string='kiosk';
-        public device: string;
+       public device: string;
         public lang: string;
 
         public onData: Function;

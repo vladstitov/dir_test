@@ -28,7 +28,7 @@ var uplight;
                 this.selectElementById(this.selectedItem.id);
         };
         CategoriesList.prototype.onClick = function (el) {
-            var i = el.data('i');
+            var i = Number(el.data('i'));
             if (isNaN(i))
                 return;
             var cat = this.data[i];

@@ -186,8 +186,7 @@ module uplight{
         private striitViewTimer:number;
         initPanorama(map):void{
             var streetView:google.maps.StreetViewPanorama = map.getStreetView();
-            streetView.setOptions(
-                {
+            streetView.setOptions( {
                     clickToGo:false,
                     linksControl:false,
                     fullScreenControl: false,

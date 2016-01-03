@@ -231,7 +231,7 @@ module uplight{
             if(this.R.isBusy) return;
             this.resetMode();
             if(!this.selected) return;
-            var i:number = this.selected.data('i');
+            var i:number = Number(this.selected.data('i'));
             if(isNaN(i)) return;
             if(confirm('You want to remove selected image from list?')){
                 this.gallery.splice(i,1);
@@ -252,7 +252,7 @@ module uplight{
             this.resetMode();
             this.resetSelected();
             var $el = $(evt.currentTarget);
-            var i:number = $el.data('i');
+            var i:number = Number($el.data('i'));
             if(isNaN(i)) return;
             $el.addClass(SELECTED);
             this.selected=$el;

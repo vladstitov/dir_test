@@ -45,7 +45,7 @@ module uplight{
             this.total.text(this.sortList());
         }
         private onListClick(el:JQuery):void{
-            var id=el.data('id');
+            var id:number= Number(el.data('id'));
             if(isNaN(id)) return;
             el.toggleClass(SELECTED);
 

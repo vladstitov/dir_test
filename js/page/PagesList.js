@@ -53,9 +53,9 @@ var uplight;
         PagesList.prototype.addPage = function (p) {
         };
         PagesList.prototype.onUpDownClicked = function (evt) {
-            var btn = $(evt.currentTarget).data('id');
+            var btn = $(evt.currentTarget).data('id').toString();
             var num = Number(this.pageSort.text());
-            var max = this.pageSort.data('max');
+            var max = Number(this.pageSort.data('max'));
             if (btn == 'btnUp' && num < max)
                 this.pageSort.text((++num).toString());
             if (btn == 'btnDown' && num > 1)
@@ -64,7 +64,7 @@ var uplight;
         PagesList.prototype.onUpDown2Clicked = function (evt) {
             var _this = this;
             evt.stopPropagation();
-            var btn = $(evt.currentTarget).data('id');
+            var btn = $(evt.currentTarget).data('id').toString();
             if (btn == 'btnUp' && this.selected.prev().is('li'))
                 this.selected.insertBefore(this.selected.prev());
             else if (btn == 'btnDown' && this.selected.next().is('li'))
@@ -233,7 +233,7 @@ var uplight;
             var n = this.list.children('p:last').index();
             console.log(n);
             for (var i = 1; i < n; i++) {
-                ar.push(this.list.children().eq(i).data('id'));
+                ar.push(Number(this.list.children().eq(i).data('id')));
             }
             // this.list.children().each(function (i, el) {
             //   if(i<max)  ar.push($(el).data('id'));
@@ -373,7 +373,7 @@ var uplight;
             if (this.isEdit)
                 return;
             var sel = $(evt.currentTarget);
-            var id = sel.data('id');
+            var id = Number(sel.data('id'));
             if (isNaN(id))
                 return;
             this.selectedItem = this.getItemById(id);

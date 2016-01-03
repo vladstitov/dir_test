@@ -155,9 +155,9 @@ var uplight;
             return $.get(this.service + '?a=dests.get_dests'); //.done(callBack);;
         };
         ///////////////////////////////////////////////////////SCREEN/////////////////////////////////////////////
-        Connector.prototype.uploadImage = function (form, folder, prefix) {
+        Connector.prototype.uploadImage = function (form, topic, type) {
             return $.ajax({
-                url: this.service + '?a=upload_image&folder=' + folder + '&prefix=' + prefix,
+                url: this.service + '?a=upload_image&folder=' + topic + '&prefix=' + type,
                 type: 'POST',
                 dataType: 'json',
                 data: form,

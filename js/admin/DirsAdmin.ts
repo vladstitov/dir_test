@@ -233,7 +233,9 @@ module uplight {
             this.R.dispatcher=$({});
             this.R.connector = new Connector();
 
-          this.R.connector.getData('settings_kiosks.json').done((resp) => {
+
+
+          this.R.connector.getData('settings.json').done((resp) => {
 
               this.R.setSettings(JSON.parse(resp));
                // this.R.props =

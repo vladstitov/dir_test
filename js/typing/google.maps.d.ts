@@ -1517,9 +1517,10 @@ declare module google.maps {
         addressControl?: boolean;
         addressControlOptions?: StreetViewAddressControlOptions;
         clickToGo?: boolean;
-        disableDefaultUi?: boolean;
+        disableDefaultUI?: boolean;
         disableDoubleClickZoom?: boolean;
         enableCloseButton?: boolean;
+        fullScreenControl:boolean;
         imageDateControl?: boolean;
         linksControl?: boolean;
         panControl?: boolean;

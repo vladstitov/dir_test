@@ -166,7 +166,7 @@ module uplight {
 
         private selectElement(el:JQuery):number{
             console.log('selecting '+el.offset().top);
-            var i:number = el.data('i');
+            var i:number = Number(el.data('i'));
             if (isNaN(i)) return 0;
             if(this.selectedEl)this.selectedEl.removeClass('selected');
             el.addClass('selected');

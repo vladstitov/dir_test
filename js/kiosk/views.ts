@@ -15,6 +15,7 @@ module uplight{
                 Registry.getInstance().events.trigger(r.KIOSK_SHOW_MENU);
             });
            $('#btnShowMenu').click(()=>r.events.triggerHandler(r.KIOSK_SHOW_MENU));
+            r.events.on(r.PAGES_0,null,()=>{$('#btnShowMenu').hide();})
 
         }
     }
