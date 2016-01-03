@@ -97,17 +97,13 @@ var uplight;
                 if (el.children('.details').length !== 0) {
                 }
                 else {
-                    var vo = uplight.Registry.getInstance().model.getDestById(el.data('id'));
+                    var vo = uplight.Registry.getInstance().model.getDestById(Number(el.data('id')));
                     if (vo)
                         this.addDetails(vo, el);
                 }
                 clearTimeout(this.statTimeout);
-                this.statTimeout = setTimeout(function () {
-                    uplight.Registry.getInstance().connector.Stat('sr', el.data('id'));
-                }, 2000);
-                setTimeout(function () {
-                    el.addClass(SELECTED);
-                }, 100);
+                this.statTimeout = setTimeout(function () { uplight.Registry.getInstance().connector.Stat('sr', String(el.data('id'))); }, 2000);
+                setTimeout(function () { el.addClass(SELECTED); }, 100);
                 this.selected = el;
             }
         };
@@ -137,9 +133,7 @@ var uplight;
                 else
                     this.renderList(str);
                 clearTimeout(this.statTimeout);
-                this.statTimeout = setTimeout(function () {
-                    uplight.Registry.getInstance().connector.Stat('kb', str);
-                }, 2000);
+                this.statTimeout = setTimeout(function () { uplight.Registry.getInstance().connector.Stat('kb', str); }, 2000);
             }
         };
         FilterPage.prototype.makeCats = function () {

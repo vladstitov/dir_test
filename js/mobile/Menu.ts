@@ -44,6 +44,7 @@ module uplight {
         }
 
         hideMenu():void{
+
             if(!this.isHiddenMenu) {
                 clearTimeout(this.timeoutMenu);
                 this.isHiddenMenu = true;
@@ -80,10 +81,10 @@ module uplight {
 
             }else d1.resolve(cats);
             $.when(d1).then((cats)=>{
-                 // console.log(cats);
+                console.log(cats);
                 var out: string = '';
                 var ar = cats
-                for (var i = 0, n = ar.length; i < n; i++)  for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#category/'+ar[i].id+'/'+ar[i].label+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
+                for (var i = 0, n = ar.length; i < n; i++)if(ar[i].enable)  out+= '<a class="u-brand list-group-item" href="#category/'+ar[i].id+'/'+ar[i].label+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].label + '</a>';
 
 
 
@@ -95,9 +96,9 @@ module uplight {
          //  var p0 =   conn.getPages().done((res)=>{
               // console.log(res);
              var out='';
-              var ar = u_pages
+              var ar = u_pages;
 
-              for(var i=0,n=ar.length;i<n;i++) out+= '<a class="u-brand list-group-item" href="#page/'+ar[i].id+'/'+ar[i].name+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].name + '</a>';
+              for(var i=0,n=ar.length;i<n;i++)if(ar[i].enabled) out+= '<a class="u-brand list-group-item" href="#page/'+ar[i].id+'/'+ar[i].name+'"><span class="'+ar[i].icon+'"></span> ' + ar[i].name + '</a>';
             var pos:VOGeo = this.R.getSettings('googlemap');
 
             if(pos) out+= '<a class="u-brand list-group-item" href="#gmap"><span class="fa fa-map-marker"></span> Google map directions</a>';

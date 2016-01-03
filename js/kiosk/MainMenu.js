@@ -26,6 +26,8 @@ var uplight;
             this.R.events.on(this.R.TIMEOUT, function () { return _this.reset(); });
         }
         MainMenu.prototype.onData = function (pages, categories) {
+            pages = _.sortBy(pages, 'seq');
+            categories = _.sortBy(categories, 'seq');
             var ar = [];
             this.data = ar.concat(pages).concat(categories);
             this.render();
@@ -38,7 +40,8 @@ var uplight;
             var out = '<ul class="nano-content">';
             for (var i = 0, n = ar.length; i < n; i++) {
                 var item = ar[i];
-                out += '<li class="item btn-menu"><a data-i="' + i + '"><span class="' + item.icon + '"></span> <span> ' + (item.name || item.label) + '</span></a></li>';
+                if (item.enable || item.enabled)
+                    out += '<li class="item btn-menu"><a data-i="' + i + '"><span class="' + item.icon + '"></span> <span> ' + (item.name || item.label) + '</span></a></li>';
             }
             out += '</ul>';
             this.list.html(out);

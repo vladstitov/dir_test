@@ -25,11 +25,11 @@ var uplight;
             else
                 d1.resolve(cats);
             $.when(d1).then(function (cats) {
-                // console.log(cats);
+                console.log(cats);
                 var out = '';
                 var ar = cats;
                 for (var i = 0, n = ar.length; i < n; i++)
-                    for (var i = 0, n = ar.length; i < n; i++)
+                    if (ar[i].enable)
                         out += '<a class="u-brand list-group-item" href="#category/' + ar[i].id + '/' + ar[i].label + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].label + '</a>';
                 _this.listC.html(out);
             });
@@ -38,7 +38,8 @@ var uplight;
             var out = '';
             var ar = u_pages;
             for (var i = 0, n = ar.length; i < n; i++)
-                out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].name + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].name + '</a>';
+                if (ar[i].enabled)
+                    out += '<a class="u-brand list-group-item" href="#page/' + ar[i].id + '/' + ar[i].name + '"><span class="' + ar[i].icon + '"></span> ' + ar[i].name + '</a>';
             var pos = this.R.getSettings('googlemap');
             if (pos)
                 out += '<a class="u-brand list-group-item" href="#gmap"><span class="fa fa-map-marker"></span> Google map directions</a>';
@@ -137,4 +138,4 @@ var uplight;
     })();
     uplight.Menu = Menu;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=menu.js.map
+//# sourceMappingURL=Menu.js.map

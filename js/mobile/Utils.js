@@ -18,9 +18,7 @@ var uplight;
             $('#ImageView').fadeIn();
             $('#ImageView img').attr('src', src);
             if (!Utils.isImageInit) {
-                $('#ImageView').click(function () {
-                    Utils.hideImage();
-                });
+                $('#ImageView').click(function () { Utils.hideImage(); });
                 Utils.isImageInit = true;
             }
         };

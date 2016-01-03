@@ -94,4 +94,4 @@ var uplight;
     })();
     uplight.VOGeo = VOGeo;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=Registry.js.map
+//# sourceMappingURL=registry.js.map

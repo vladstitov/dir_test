@@ -19,6 +19,7 @@ module uplight{
             else this.R.model.dispatcher.on(this.R.model.READY,()=>{d2.resolve(this.R.model.getCategories());});
             $.when(d1,d2).then((pgs,cts)=>{
                 var pages:VOPage[] = JSON.parse(pgs[0]);
+
                 var cats:VOCategory[] = cts;
                 this.onData(pages,cats);
             });
@@ -29,6 +30,9 @@ module uplight{
         }
 
         private onData(pages:VOPage[],categories:VOCategory[]):void{
+
+            pages = _.sortBy(pages,'seq');
+            categories = _.sortBy(categories,'seq');
             var ar:any[]=[]
             this.data =ar.concat(pages).concat(categories);
             this.render();
@@ -42,7 +46,7 @@ module uplight{
             var out='<ul class="nano-content">';
             for(var i=0,n=ar.length;i<n;i++){
                 var item = ar[i];
-                out+='<li class="item btn-menu"><a data-i="'+i+'"><span class="'+item.icon+'"></span> <span> '+(item.name || item.label)+'</span></a></li>';
+                if(item.enable || item.enabled)out+='<li class="item btn-menu"><a data-i="'+i+'"><span class="'+item.icon+'"></span> <span> '+(item.name || item.label)+'</span></a></li>';
             }
             out+='</ul>'
             this.list.html(out);

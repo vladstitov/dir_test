@@ -154,12 +154,12 @@ module uplight {
                 if(el.children('.details').length !==0){
                //  el.children('.details').show('fast');
                 }else{
-                    var vo:VODestination = Registry.getInstance().model.getDestById(el.data('id'));
+                    var vo:VODestination = Registry.getInstance().model.getDestById(Number(el.data('id')));
                     if(vo) this.addDetails(vo,el);
                  //  el.children('.details').show('fast');
                 }
                 clearTimeout(this.statTimeout)
-                this.statTimeout = setTimeout(()=>{ Registry.getInstance().connector.Stat('sr',el.data('id'));},2000);
+                this.statTimeout = setTimeout(()=>{ Registry.getInstance().connector.Stat('sr',String(el.data('id')));},2000);
                 setTimeout(function(){el.addClass(SELECTED);},100)
                 this.selected = el;
 
