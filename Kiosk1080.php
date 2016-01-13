@@ -23,6 +23,8 @@ include('KioskHeader.php');
         width: 1080px;
         height: 1920px;
         position: absolute;
+        top:0;
+        left:0;
     }
 
     #mainview{
@@ -45,7 +47,7 @@ include('KioskHeader.php');
                 <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>
             </div>
             <div id="brand-name" >
-                   <?= isset($labels['header'])?$labels['header']:''; ?>
+                   <?= isset($labels['kiosk_header'])?$labels['kiosk_header']:''; ?>
             </div>
             <div id="brand-more">
                 <div id="Clock" data-ctr="uplight.Clock">

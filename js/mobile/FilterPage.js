@@ -170,4 +170,4 @@ var uplight;
     })();
     uplight.FilterPage = FilterPage;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=filterpage.js.map
+//# sourceMappingURL=FilterPage.js.map

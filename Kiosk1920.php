@@ -27,6 +27,8 @@ include('KioskHeader.php');
         width: 1920px;
         height: 1080px;
         overflow: hidden;
+        top:0;
+        left: 0;
     }
 
 </style>
@@ -42,7 +44,7 @@ include('KioskHeader.php');
                 <?= isset($labels['logo'])?'<img src="'.$labels['logo'].'" />':''; ?>
             </div>
             <div id="brand-name" >
-                   <?= isset($labels['header'])?$labels['header']:''; ?>
+                   <?= isset($labels['kiosk_header'])?$labels['kiosk_header']:''; ?>
             </div>
             <div id="brand-more">
                 <div id="Clock" data-ctr="uplight.Clock">
@@ -284,7 +286,7 @@ include('KioskHeader.php');
                     border-radius: 10px;
                     font-size: 30px;
                     width: 400px;
-                    height: 82px;
+                    height: 42px;
                     border: none;
                     padding: 5px 5px 5px 5px;
                     margin-right: -20px;
