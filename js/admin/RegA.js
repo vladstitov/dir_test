@@ -203,4 +203,4 @@ var uplight;
     })();
     uplight.AttractLoop = AttractLoop;
 })(uplight || (uplight = {}));
-//# sourceMappingURL=RegA.js.map
+//# sourceMappingURL=regA.js.map

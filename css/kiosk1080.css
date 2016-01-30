@@ -1,17 +1,34 @@
-﻿
+﻿body{
+    width: 1080px;
+    height: 1840px;
+   overflow: hidden;
+}
+
+#container{
+    width: 1080px;
+    height: 1840px;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#mainview{
+    position: absolute;
+    top: 400px;
+    width: 100%;
+}
+
+
 #list-scroll{
     width:99%;
     height: 880px;
     overflow-y: scroll;
 }
 
-
 #list-scroll li{
     border-radius: 20px;
     margin: 12px 5px 12px 5px;
     padding: 12px;
-
-
     min-height: 95px;
 }
 
@@ -98,7 +115,7 @@ display: inline-block;
 #sideview{
     position: absolute;
     width: 100%;
-    bottom: 50px;
+    bottom: 0px;
     height: 365px;
 }
 #sideview>hr:first-child{
@@ -112,4 +129,15 @@ display: inline-block;
     width: 100%;
     bottom: 0;
     margin: 0;
+}
+
+#mainport, #cover>.detailsL {
+    position: absolute;
+    width:725px;
+    height: 1030px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+    white-space: nowrap;
 }

@@ -59,26 +59,24 @@ module uplight {
 
 
         private onHashChange(){
-            var hash:string= window.location.hash.substr(0,10);
+            var hash:string= window.location.hash;
+            if(!hash) return;
+            var ar:string[] = hash.split('/');
             console.log(hash);
          //  if(hash!=='#PreviewKi') this.hidePreview();
             this.hideKiosk();
             this.hideModile();
-                switch (hash){
+            var ctr:string = ar[0].substr(0,10);
+                switch (ctr){
                     case '#KiosksLis':
                         if(this.R.current)this.R.current.destroy();
                         this.content.empty();
                         this.R.current = new KiosksManager(this.content);
                         break;
 
-                    case '#Kiosk1080':
-
+                    case '#Preview':
                         this.content.hide();
-                        this.showKiosk(1080);
-                        break;
-                    case '#Kiosk1920':
-                        this.content.hide();
-                        this.showKiosk(1920);
+                        this.showKiosk(ar[1]);
                         break;
                     case '#PreviewMo':
                         this.content.hide();
@@ -340,8 +338,8 @@ module uplight {
         private previewUrl1920:string ='Kiosk1920.php?';
         private mobileUrl:string ='KioskMobile.php?preview=true';
 
-        private showKiosk(width:number):void{
-            if(width == 1920){
+        private showKiosk(width:string):void{
+            if(width == '1920'){
                 this.previewUrl = this.previewUrl1920;
                 $('#Preview').addClass('k1920');
             }else{

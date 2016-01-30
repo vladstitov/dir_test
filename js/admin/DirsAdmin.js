@@ -69,25 +69,25 @@ var uplight;
             this.newindow.close();
         };
         Admin.prototype.onHashChange = function () {
-            var hash = window.location.hash.substr(0, 10);
+            var hash = window.location.hash;
+            if (!hash)
+                return;
+            var ar = hash.split('/');
             console.log(hash);
             //  if(hash!=='#PreviewKi') this.hidePreview();
             this.hideKiosk();
             this.hideModile();
-            switch (hash) {
+            var ctr = ar[0].substr(0, 10);
+            switch (ctr) {
                 case '#KiosksLis':
                     if (this.R.current)
                         this.R.current.destroy();
                     this.content.empty();
                     this.R.current = new uplight.KiosksManager(this.content);
                     break;
-                case '#Kiosk1080':
+                case '#Preview':
                     this.content.hide();
-                    this.showKiosk(1080);
-                    break;
-                case '#Kiosk1920':
-                    this.content.hide();
-                    this.showKiosk(1920);
+                    this.showKiosk(ar[1]);
                     break;
                 case '#PreviewMo':
                     this.content.hide();
@@ -279,7 +279,7 @@ var uplight;
             $('#AdminPreviewKiosk iframe:first').attr('src', this.previewUrl + '&theme=' + this.theme);
         };
         Admin.prototype.showKiosk = function (width) {
-            if (width == 1920) {
+            if (width == '1920') {
                 this.previewUrl = this.previewUrl1920;
                 $('#Preview').addClass('k1920');
             }

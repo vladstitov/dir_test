@@ -103,6 +103,9 @@
         #FilterPage .fa{
             width: 14px;
         }
+        #FilterPage hr{
+            margin: 0;
+        }
         /*
                                 #FilterPage a.selected>.details{
                                     display: block;
@@ -122,13 +125,19 @@
 
         </div>-->
 
-    <div class="row">
-        <h2 data-id="catTitle" class="col-sm-12"></h2>
 
-        <div class="col-sm-12">
-            <span> <small> ( <span class="fa fa-angle-double-left" style="font-size: larger; font-weight: 900;"></span> More info available )</small></span>
-            <span class="pull-right"><strong>Unit</strong></span>
+
+        <div class="row">
+           <div class="hr"></div>
+            <div class="title">
+                <span class="fa fa-angle-left"></span>
+                <span data-id="catTitle"></span>
+                <span class="pull-right">Unit</span>
+            </div>
+            <div class="hr"></div>
         </div>
+    <div class="row space">
+
     </div>
 
     <div class="row">
@@ -139,6 +148,7 @@
             </nav>
 
         </div>
+
     </div>
 
 

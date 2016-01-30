@@ -397,16 +397,7 @@ display: inline-block;
   /!*  background-color: rgba(30,30,30,0.5);*!/
 }*/
 
-#mainport, #cover>.detailsL {
-    position: absolute;
-    width:725px;
-    height: 1077px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    overflow: hidden;
-    white-space: nowrap;
-}
+
 #sideview>hr:first-child{
     position: absolute;
     width: 100%;

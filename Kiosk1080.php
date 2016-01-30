@@ -13,25 +13,6 @@ include('KioskHeader.php');
     body{
         <?= isset($labels['bg_1080'])?'background-image:url("'.$labels['bg_1080'].'");':'' ?>
     }
-    body{
-        width: 1080px;
-        height: 1920px;
-        overflow: hidden;
-    }
-
-    #container{
-        width: 1080px;
-        height: 1920px;
-        position: absolute;
-        top:0;
-        left:0;
-    }
-
-    #mainview{
-        position: absolute;
-        top: 400px;
-        width: 100%;
-    }
 
 
 </style>
@@ -295,11 +276,6 @@ include('KioskHeader.php');
         </div>
         <hr/>
     </section>
-
-    <section id="footer">
-        <?= isset($labels['footer'])?$labels['footer']:''; ?>
-    </section>
-
     <style>
         #DetailsLarge>.modal-dialog{
             width: 730px;
